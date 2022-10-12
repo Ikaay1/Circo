@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
-import { store } from "../app/store";
+import { store } from "../redux/app/store";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "../constants/theme";
 
