@@ -3,7 +3,8 @@ import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 //colors
 const colors = {
   clique: {
-    base: "blue",
+    base: "#8758FF",
+    black: "#131311",
   },
 };
 
