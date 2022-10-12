@@ -56,7 +56,7 @@ const Signup = () => {
             justifyContent='space-between'
             alignItems={'center'}
         >
-            <Box width='600px' height='960px'>
+            <Box width='640px' height='960px'>
                 <Image
                     height='100%'
                     src='/assets/auth-image.png'
