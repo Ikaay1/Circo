@@ -26,6 +26,9 @@ function Header() {
       bg={"clique.black"}
       px="50px"
       py="20px"
+      h="10vh"
+      minH={"10vh"}
+      maxH={"10vh"}
     >
       {/* First div  */}
       <Box w="300px" maxH="32px">
