@@ -29,37 +29,40 @@ function Header() {
       h="10vh"
       minH={"10vh"}
       maxH={"10vh"}
+      w="100%"
     >
       {/* First div  */}
-      <Box w="300px" maxH="32px">
+      <Box w="200px" maxW="200px" minW="200px">
         <Image alt="clique logo" h="100%" src="/clique-logo.png" />
       </Box>
 
       {/* Second div */}
       <Flex
-        px="20px"
         w="full"
+        px="30px"
         alignItems={"center"}
         justifyContent={"space-between"}
       >
         <InputGroup w={searchWidth} transition="all 1s ease">
           <InputLeftElement px="20px" pointerEvents="none">
-            <Icon fontSize={"20px"} color="white" as={AiOutlineSearch} />
+            <Icon fontSize={"20px"} color="clique.white" as={AiOutlineSearch} />
           </InputLeftElement>
           <Input
-            bg="#1D1D1C"
+            bg="clique.inputBg"
             onFocus={() => setSearchWidth("500px")}
             onBlur={() => setSearchWidth("300px")}
             _focus={{
               boxShadow: "none",
-              border: " 3px solid #424242",
+              border: " 3px solid ",
+              borderColor: "clique.inputBorder",
             }}
-            border={" 3px solid #424242"}
+            border={" 3px solid "}
+            borderColor={"clique.inputBorder"}
             rounded="full"
             type="tel"
             fontFamily={"Poppins"}
             _placeholder={{
-              color: "#fff",
+              color: "clique.white",
             }}
             placeholder="search"
           />
@@ -69,12 +72,12 @@ function Header() {
             alignItems={"center"}
             justifyContent="center"
             p="3px"
-            bg="#323232"
+            bg="clique.grey"
             rounded="full"
           >
             <Avatar
               p="0"
-              bg="#323232"
+              bg="clique.grey"
               icon={<Icon fontSize={"xl"} as={MdOutlineNotificationsNone} />}
               size="sm"
             >
@@ -82,7 +85,7 @@ function Header() {
                 bg="clique.base"
                 top={"0"}
                 right={"5px"}
-                boxSize="10px"
+                boxSize="12px"
                 border="none"
                 fontSize={"8px"}
               >

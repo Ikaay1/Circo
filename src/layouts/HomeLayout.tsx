@@ -1,12 +1,20 @@
-import Header from "@/components/widgets/Header";
-import { Box } from "@chakra-ui/react";
+import Header from "@components/widgets/Header";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { IHomeLayoutProps } from "types";
 
 function HomeLayout({ children }: IHomeLayoutProps) {
   return (
-    <Box>
+    <Box
+      maxH="100vh"
+      maxW={"100vw"}
+      w="100vw"
+      h="100vh"
+      overflowY={"hidden"}
+      bg={useColorModeValue("clique.white", "clique.primaryBg")}
+    >
       <Header />
+      {children}
     </Box>
   );
 }
