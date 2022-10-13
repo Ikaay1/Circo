@@ -11,6 +11,7 @@ const colors = {
     inputBorder: "#424242",
     grey: "#323232",
     whiteGrey: "rgba(255, 255, 255, 0.7)",
+    darkGrey: "#aaaaaa",
   },
 };
 
