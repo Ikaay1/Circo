@@ -34,7 +34,7 @@ function Index() {
           webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
         },
         "&::-webkit-scrollbar-thumb": {
-          bg: "#323232",
+          bg: "clique.grey",
           outline: "none",
         },
       }}

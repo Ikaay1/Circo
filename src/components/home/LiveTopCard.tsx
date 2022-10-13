@@ -15,10 +15,10 @@ function LiveTopCard() {
           left: 0,
           width: "6px",
           height: "25px",
-          background: "#892CDC",
+          background: "clique.base",
           borderRightRadius: "4px",
         }}
-        color={"white"}
+        color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}

@@ -11,7 +11,7 @@ function HomeLayout({ children }: IHomeLayoutProps) {
       w="100vw"
       h="100vh"
       overflowY={"hidden"}
-      bg={useColorModeValue("white", "#171717")}
+      bg={useColorModeValue("clique.white", "clique.primaryBg")}
     >
       <Header />
       {children}

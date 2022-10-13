@@ -45,22 +45,24 @@ function Header() {
       >
         <InputGroup w={searchWidth} transition="all 1s ease">
           <InputLeftElement px="20px" pointerEvents="none">
-            <Icon fontSize={"20px"} color="white" as={AiOutlineSearch} />
+            <Icon fontSize={"20px"} color="clique.white" as={AiOutlineSearch} />
           </InputLeftElement>
           <Input
-            bg="#1D1D1C"
+            bg="clique.inputBg"
             onFocus={() => setSearchWidth("500px")}
             onBlur={() => setSearchWidth("300px")}
             _focus={{
               boxShadow: "none",
-              border: " 3px solid #424242",
+              border: " 3px solid ",
+              borderColor: "clique.inputBorder",
             }}
-            border={" 3px solid #424242"}
+            border={" 3px solid "}
+            borderColor={"clique.inputBorder"}
             rounded="full"
             type="tel"
             fontFamily={"Poppins"}
             _placeholder={{
-              color: "#fff",
+              color: "clique.white",
             }}
             placeholder="search"
           />
@@ -70,12 +72,12 @@ function Header() {
             alignItems={"center"}
             justifyContent="center"
             p="3px"
-            bg="#323232"
+            bg="clique.grey"
             rounded="full"
           >
             <Avatar
               p="0"
-              bg="#323232"
+              bg="clique.grey"
               icon={<Icon fontSize={"xl"} as={MdOutlineNotificationsNone} />}
               size="sm"
             >

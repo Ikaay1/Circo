@@ -23,7 +23,7 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
         left: 0,
         width: "6px",
         height: "25px",
-        background: "#892CDC",
+        background: "clique.base",
         borderRightRadius: "4px",
         boxShadow: "10px 0px 18px #892CDC",
       }}
@@ -34,7 +34,7 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
           color: "clique.base",
         }}
         transition={"all 0.2s ease-in-out"}
-        color={path === "/" + name ? "clique.base" : "rgba(255, 255, 255, 0.7)"}
+        color={path === "/" + name ? "clique.base" : "clique.whiteGrey"}
         alignItems={"center"}
       >
         <Icon as={icon} mr="15px" />

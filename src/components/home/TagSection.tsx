@@ -7,7 +7,7 @@ function TagSection() {
       py="10px"
       position={"sticky"}
       top="0"
-      bg="#171717"
+      bg="clique.primaryBg"
       alignItems={"center"}
       maxW="100%"
     >
@@ -26,12 +26,12 @@ function TagSection() {
       <Button
         variant="ghost"
         rounded={"full"}
-        bg="#434343"
+        bg="clique.grey"
         fontFamily={"Poppins"}
         size={"sm"}
         fontWeight={400}
         px="20px"
-        color={"white"}
+        color={"clique.white"}
       >
         Entertainment
       </Button>
