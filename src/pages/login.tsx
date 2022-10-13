@@ -86,7 +86,7 @@ const Login = () => {
                                         {name}
                                     </Text>
                                     <Text
-                                        font-size='20px'
+                                        fontSize='20px'
                                         color='#FFFFFF'
                                         position='absolute'
                                         left={'4.5%'}
