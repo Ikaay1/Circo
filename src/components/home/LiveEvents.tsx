@@ -1,5 +1,6 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Divider, Text } from "@chakra-ui/react";
 import React from "react";
+import EventModal from "./EventModal";
 
 function LiveEvents() {
   return (
@@ -27,7 +28,21 @@ function LiveEvents() {
           outline: "none",
         },
       }}
-    ></Box>
+    >
+      <Text
+        textAlign={"center"}
+        fontFamily={"Poppins"}
+        fontWeight={500}
+        textTransform={"capitalize"}
+        fontSize="20px"
+      >
+        Live Events
+      </Text>{" "}
+      <Box px="50px" py="5px">
+        <Divider />
+      </Box>
+      <EventModal />
+    </Box>
   );
 }
 

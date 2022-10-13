@@ -9,7 +9,7 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
 
   return (
     <Flex
-      mt="10px"
+      mt="5px"
       cursor={"pointer"}
       onClick={() => router.push(`/${name}`)}
       h="40px"
