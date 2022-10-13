@@ -5,7 +5,7 @@ import {
 	changePasswordInputData,
 	controlInput,
 	signUpInputData,
-} from '@/constantsutils';
+} from '@/constants/utils';
 import { Box, Image, Text } from '@chakra-ui/react';
 
 import { ShowAuthHeader, ShowAuthImage, SocialMedia } from './login';
