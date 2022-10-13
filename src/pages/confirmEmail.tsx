@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { controlInput, signUpInputData } from '@/constantsutils';
+import { controlInput, signUpInputData } from '@constants/utils';
 import { Box, Image, Text } from '@chakra-ui/react';
 
 import { ShowAuthHeader, ShowAuthImage } from './login';
