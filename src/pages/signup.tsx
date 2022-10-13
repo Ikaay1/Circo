@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { controlInput, signUpInputData } from '@/constantsutils';
 import { Box, Image, Text } from '@chakra-ui/react';
 
-import { SocialMedia } from './login';
+import { ShowAuthHeader, ShowAuthImage, SocialMedia } from './login';
 
 const Signup = () => {
     const [firstName, setFirstName] = useState('');
@@ -56,13 +56,7 @@ const Signup = () => {
             justifyContent='space-between'
             alignItems={'center'}
         >
-            <Box width='640px' height='960px'>
-                <Image
-                    height='100%'
-                    src='/assets/auth-image.png'
-                    alt='auth-image'
-                />
-            </Box>
+            <ShowAuthImage height='900px' />
             <Box width={'700px'} marginTop='2rem'>
                 <Box
                     padding={'1rem'}
@@ -70,20 +64,10 @@ const Signup = () => {
                     height={'100%'}
                     margin='0 auto'
                 >
-                    <Box>
-                        <Text
-                            fontWeight='600'
-                            fontSize='36px'
-                            textAlign='center'
-                            letterSpacing='-0.02em'
-                            color='FFFFFF'
-                        >
-                            Sign Up
-                        </Text>
-                        <Text color='#A1A1A1' textAlign='center'>
-                            Connect to more Cliques today!
-                        </Text>
-                    </Box>
+                    <ShowAuthHeader
+                        header='Sign Up'
+                        detail='Connect to more Cliques today!'
+                    />
                     <form
                         onSubmit={(e) => e.preventDefault()}
                         className='login-form'

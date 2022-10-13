@@ -68,3 +68,23 @@ export const controlInput = (
 };
 
 export const socialMediaIconsData = ['google', 'apple', 'facebook'];
+
+export const changePasswordInputData: {
+    key: string;
+    name: string;
+    placeholder: string;
+    inputName: string;
+}[] = [
+    {
+        key: '1',
+        name: 'New password',
+        placeholder: '************************',
+        inputName: 'password',
+    },
+    {
+        key: '2',
+        name: 'Confirm new password',
+        placeholder: 'ChelseaChampions2021UCL!',
+        inputName: 'confirmPassword',
+    },
+];

@@ -35,13 +35,7 @@ const Login = () => {
             justifyContent='space-between'
             alignItems={'center'}
         >
-            <Box width='640px' height='800px'>
-                <Image
-                    height='100%'
-                    src='/assets/auth-image.png'
-                    alt='auth-image'
-                />
-            </Box>
+            <ShowAuthImage height='800px' />
             <Box width={'700px'} marginTop='2rem'>
                 <Box
                     padding={'1rem'}
@@ -49,20 +43,10 @@ const Login = () => {
                     height={'100%'}
                     margin='0 auto'
                 >
-                    <Box>
-                        <Text
-                            fontWeight='600'
-                            fontSize='36px'
-                            textAlign='center'
-                            letterSpacing='-0.02em'
-                            color='FFFFFF'
-                        >
-                            Login
-                        </Text>
-                        <Text color='#A1A1A1' textAlign='center'>
-                            Welcome, join the Clique!
-                        </Text>
-                    </Box>
+                    <ShowAuthHeader
+                        header='Login'
+                        detail='Welcome, join the Clique!'
+                    />
                     <form
                         onSubmit={(e) => e.preventDefault()}
                         className='login-form'
@@ -212,6 +196,44 @@ export const SocialMedia = ({
                     </Link>
                 </span>
             </Box>
+        </Box>
+    );
+};
+
+export const ShowAuthImage = ({height}: {height: string}) => {
+    return (
+        <Box width='640px' height={height}>
+            <Image
+                height='100%'
+                src='/assets/auth-image.png'
+                alt='auth-image'
+                objectFit={'cover'}
+            />
+        </Box>
+    );
+};
+
+export const ShowAuthHeader = ({
+    header,
+    detail,
+}: {
+    header: string;
+    detail: string;
+}) => {
+    return (
+        <Box>
+            <Text
+                fontWeight='600'
+                fontSize='36px'
+                textAlign='center'
+                letterSpacing='-0.02em'
+                color='FFFFFF'
+            >
+                {header}
+            </Text>
+            <Text color='#A1A1A1' textAlign='center'>
+                {detail}
+            </Text>
         </Box>
     );
 };
