@@ -29,16 +29,17 @@ function Header() {
       h="10vh"
       minH={"10vh"}
       maxH={"10vh"}
+      w="100%"
     >
       {/* First div  */}
-      <Box w="300px" maxH="32px">
+      <Box w="200px" maxW="200px" minW="200px">
         <Image alt="clique logo" h="100%" src="/clique-logo.png" />
       </Box>
 
       {/* Second div */}
       <Flex
-        px="20px"
         w="full"
+        px="30px"
         alignItems={"center"}
         justifyContent={"space-between"}
       >
@@ -82,7 +83,7 @@ function Header() {
                 bg="clique.base"
                 top={"0"}
                 right={"5px"}
-                boxSize="10px"
+                boxSize="12px"
                 border="none"
                 fontSize={"8px"}
               >
