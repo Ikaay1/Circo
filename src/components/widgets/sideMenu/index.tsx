@@ -1,16 +1,9 @@
 import { Box, Divider, Flex, Icon, Link, Text } from "@chakra-ui/react";
-import ChannelIcon from "@icons/ChannelIcon";
-import DiscoverIcon from "@icons/DiscoverIcon";
-import HomeIcon from "@icons/HomeIcon";
-import LiveIcon from "@icons/LiveIcon";
-import ProfileIcon from "@icons/ProfileIcon";
-import SettingsIcon from "@icons/SettingsIcon";
-import TrendingIcon from "@icons/TrendingIcon";
-import WalletIcon from "@icons/WalletIcon";
 import React from "react";
 import EachMenu from "./EachMenu";
 import EachSubscribe from "./EachSubscribe";
 import { HiOutlineLogout } from "react-icons/hi";
+import { menu, subcribees } from "@constants/utils";
 
 function Index() {
   return (
@@ -101,49 +94,3 @@ function Index() {
 }
 
 export default Index;
-
-const menu = [
-  {
-    name: "home",
-    icon: HomeIcon,
-  },
-  {
-    name: "discover",
-    icon: DiscoverIcon,
-  },
-  {
-    name: "trending",
-    icon: TrendingIcon,
-  },
-  {
-    name: "profile",
-    icon: ProfileIcon,
-  },
-  {
-    name: "wallet",
-    icon: WalletIcon,
-  },
-  {
-    name: "Live Events",
-    icon: LiveIcon,
-  },
-  {
-    name: "Your channel",
-    icon: ChannelIcon,
-  },
-  {
-    name: "settings",
-    icon: SettingsIcon,
-  },
-];
-
-const subcribees = [
-  {
-    name: "burnaboy",
-    imgUrl: "https://bit.ly/prosper-baba",
-  },
-  {
-    name: "burnaboy",
-    imgUrl: "https://bit.ly/prosper-baba",
-  },
-];
