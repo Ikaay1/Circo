@@ -41,7 +41,9 @@ function LiveEvents() {
       <Box px="50px" py="5px">
         <Divider />
       </Box>
-      <EventModal />
+      <EventModal imgUrl="/eventFlyer.png" />
+      <EventModal imgUrl="/eventFlyer2.png" />
+      <EventModal imgUrl="/eventFlyer.png" />
     </Box>
   );
 }

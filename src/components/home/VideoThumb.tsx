@@ -3,11 +3,11 @@ import React from "react";
 
 function VideoThumb({ imgUrl }: { imgUrl: string }) {
   return (
-    <Box cursor={"pointer"} w="300px" maxW="300px">
+    <Box cursor={"pointer"}>
       <Image
-        w="300px"
-        h="200px"
-        maxW="300px"
+        w={{ lg: "220px", mlg: "280px" }}
+        h={{ lg: "130px", mlg: "180px" }}
+        maxW="280px"
         maxH="200px"
         alt="video thumbnail"
         src={imgUrl}

@@ -10,7 +10,7 @@ function HomeLayout({ children }: IHomeLayoutProps) {
       maxW={"100vw"}
       w="100vw"
       h="100vh"
-      overflowY={"hidden"}
+      // overflowY={"hidden"}
       bg={useColorModeValue("clique.white", "clique.primaryBg")}
     >
       <Header />
