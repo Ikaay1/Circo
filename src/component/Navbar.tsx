@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
@@ -21,19 +22,19 @@ const Navbar = () => {
                     color='#FFFFFF'
                 >
                     <Image src='/assets/clique-logo.png' alt='clique-logo' />
-                    CLIQUE
+                    <Link href='/'>CLIQUE</Link>
                 </Box>
                 <Text
                     display={{base: 'none', lg: 'block'}}
                     letterSpacing='0.5px'
                     color='#FFFFFF'
                 >
-                    About
+                    <Link href='/about'>About</Link>
                 </Text>
             </Box>
             <Box display={{base: 'none', lg: 'flex'}} alignItems='center'>
                 <Text letterSpacing='0.5px' color='#FFFFFF'>
-                    Login
+                    <Link href='/login'>Login</Link>
                 </Text>
                 <Text
                     marginLeft={'3rem'}
@@ -45,7 +46,7 @@ const Navbar = () => {
                     justifyContent='center'
                     alignItems='center'
                 >
-                    Sign Up For Free
+                    <Link href='signup'>Sign Up For Free</Link>
                 </Text>
             </Box>
             <Box display={{lg: 'none'}}>
@@ -56,3 +57,22 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+export const CliqueLogo = () => {
+    return (
+        <Box
+            display={'flex'}
+            alignItems='center'
+            fontWeight={{lg: '700'}}
+            fontSize='22.6935px'
+            letterSpacing='0.709173px'
+            color='#FFFFFF'
+            position={'absolute'}
+            top='4%'
+            left='5%'
+        >
+            <Image src='/assets/clique-logo.png' alt='clique-logo' />
+            <Link href='/'>CLIQUE</Link>
+        </Box>
+    );
+};
