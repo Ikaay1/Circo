@@ -1,9 +1,9 @@
 import '../styles/globals.css';
 
+import Layout from 'component/Layout';
 import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 
-import Layout from '@/componentsLayout';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 
 import theme from '../constants/theme';

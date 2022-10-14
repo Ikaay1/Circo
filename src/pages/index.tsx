@@ -1,6 +1,6 @@
+import Navbar from 'component/Navbar';
 import Link from 'next/link';
 
-import Navbar from '@/componentsNavbar';
 import { Box, Image, Text } from '@chakra-ui/react';
 
 import {

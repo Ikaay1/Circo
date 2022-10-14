@@ -1,7 +1,6 @@
-import Link from 'next/link';
+import { CliqueLogo } from 'component/Navbar';
 import React, { useEffect, useState } from 'react';
 
-import { CliqueLogo } from '@/componentsNavbar';
 import { changePasswordInputData, controlInput } from '@/constantsconstants';
 import { Box, Image, Text } from '@chakra-ui/react';
 
