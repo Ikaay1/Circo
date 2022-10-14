@@ -1,3 +1,4 @@
+import { CliqueLogo } from 'component/Navbar';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -27,6 +28,7 @@ const ConfirmEmail = () => {
             justifyContent='space-between'
             alignItems={'center'}
         >
+            <CliqueLogo />
             <ShowAuthImage height='800px' />
             <Box width={'700px'} marginTop='2rem'>
                 <Box
@@ -61,17 +63,17 @@ const ConfirmEmail = () => {
                                 left={'4.5%'}
                                 fontSize='12px'
                                 color='#FFFFFF'
-                                className='placeholder'
+                                className='placeholder small'
                             >
                                 Email
                             </Text>
                             <Text
-                                fontSize='20px'
+                                fontSize='16px'
                                 color='#FFFFFF'
                                 position='absolute'
                                 left={'4.5%'}
                                 bottom='20%'
-                                className='placeholder'
+                                className='placeholder big'
                             >
                                 Tonyclark24@gmail.com
                             </Text>

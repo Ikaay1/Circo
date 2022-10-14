@@ -30,17 +30,17 @@ export const signUpInputData: (
           inputName?: undefined;
       }
 )[] = [
-    {key: '1', name: 'first name', placeholder: 'Tony', inputName: 'firstName'},
-    {key: '2', name: 'last name', placeholder: 'Clark', inputName: 'lastName'},
+    {key: '1', name: 'First name', placeholder: 'Tony', inputName: 'firstName'},
+    {key: '2', name: 'Last name', placeholder: 'Clark', inputName: 'lastName'},
     {
         key: '3',
-        name: 'username',
+        name: 'Username',
         placeholder: '@kngjames',
         inputName: 'userName',
     },
     {
         key: '4',
-        name: 'email',
+        name: 'Email',
         placeholder: 'tonyclark24@gmail.com',
         inputName: 'email',
     },
@@ -138,5 +138,51 @@ export const cliquePlatformData2: {
         name: 'Upload & Organize',
         detail: 'Clique has a very smooth and easy platfom for creator to create, upload and for users to follow and keep track. This platform is the best thing after sliced bread.',
         image: 'upload',
+    },
+];
+
+export const walletData: {
+    key: string;
+    time: string;
+    image: string;
+    amount: string;
+}[] = [
+    {
+        key: '1',
+        time: '8 hour',
+        amount: '₦20,000.00',
+        image: 'arrow-up',
+    },
+    {
+        key: '2',
+        time: '1 hour',
+        amount: "₦83,200.00'",
+        image: 'arrow-up',
+    },
+    {
+        key: '3',
+        time: '4 hour',
+        amount: '₦8,100.00',
+        image: 'arrow-down',
+    },
+];
+
+export const helpGrowData: {
+    key: string;
+    header: string;
+    image: string;
+    bigImage: string;
+}[] = [
+    {
+        key: '1',
+        header: 'Increase your earning',
+        image: 'microphone',
+        bigImage: 'big-microphone',
+    },
+    {
+        key: '2',
+        header: 'Optimized for growth',
+        image: 'movie-action',
+        bigImage: 'big-movie-action',
     },
 ];

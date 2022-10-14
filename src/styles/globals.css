@@ -27,13 +27,28 @@ body {
     outline: none;
 }
 
-.input:focus ~ .placeholder,
-.input:active ~ .placeholder {
+.placeholder.small {
+    transition: all 0.15s ease;
+}
+
+.input:focus ~ .placeholder.big,
+.input:active ~ .placeholder.big {
     display: none;
 }
 
-.placeholder.inactive {
+.input:focus ~ .placeholder.small,
+.input:active ~ .placeholder.small {
+    transform: translateY(-12px);
+    background-color: #1a202c;
+}
+
+.placeholder.big.inactive {
     display: none;
+}
+
+.placeholder.small.inactive {
+    transform: translateY(-12px);
+    background-color: #1a202c;
 }
 
 .remember {
