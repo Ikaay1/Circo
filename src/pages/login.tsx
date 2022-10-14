@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { controlInput, loginInputData } from '@constants/utils';
 import { Box, Image, Text } from '@chakra-ui/react';
-
-import { socialMediaIconsData } from '@constants/utils';
+import {
+	controlInput,
+	loginInputData,
+	socialMediaIconsData,
+} from '@constants/constants';
 
 const Login = () => {
     const [userName, setUserName] = useState('');

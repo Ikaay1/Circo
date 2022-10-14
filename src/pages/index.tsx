@@ -2,7 +2,10 @@ import Navbar from 'component/Navbar';
 
 import { Box, Image, Text, useColorModeValue } from '@chakra-ui/react';
 
-import { cliquePlatformData1, cliquePlatformData2 } from '../constants/utils';
+import {
+	cliquePlatformData1,
+	cliquePlatformData2,
+} from '../constants/constants';
 
 import type {NextPage} from 'next';
 const Home: NextPage = () => {
