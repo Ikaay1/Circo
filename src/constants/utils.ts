@@ -135,6 +135,52 @@ export const cliquePlatformData2: {
     },
 ];
 
+export const walletData: {
+    key: string;
+    time: string;
+    image: string;
+    amount: string;
+}[] = [
+    {
+        key: '1',
+        time: '8 hour',
+        amount: '₦20,000.00',
+        image: 'arrow-up',
+    },
+    {
+        key: '2',
+        time: '1 hour',
+        amount: "₦83,200.00'",
+        image: 'arrow-up',
+    },
+    {
+        key: '3',
+        time: '4 hour',
+        amount: '₦8,100.00',
+        image: 'arrow-down',
+    },
+];
+
+export const helpGrowData: {
+    key: string;
+    header: string;
+    image: string;
+    bigImage: string;
+}[] = [
+    {
+        key: '1',
+        header: 'Increase your earning',
+        image: 'microphone',
+        bigImage: 'big-microphone',
+    },
+    {
+        key: '2',
+        header: 'Optimized for growth',
+        image: 'movie-action',
+        bigImage: 'big-movie-action',
+    },
+];
+
 export const menu: {
     name: string;
     icon: any;
