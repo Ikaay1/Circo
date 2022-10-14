@@ -1,6 +1,6 @@
-import Navbar from 'component/Navbar';
 import Link from 'next/link';
 
+import Navbar from '@/componentsNavbar';
 import { Box, Image, Text } from '@chakra-ui/react';
 
 import {
@@ -8,7 +8,7 @@ import {
 	cliquePlatformData2,
 	helpGrowData,
 	walletData,
-} from '../constants/utils';
+} from '../constants/constants';
 
 import type {NextPage} from 'next';
 const Home: NextPage = () => {
