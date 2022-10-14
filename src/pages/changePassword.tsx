@@ -1,8 +1,8 @@
 import { CliqueLogo } from 'component/Navbar';
 import React, { useEffect, useState } from 'react';
 
-import { changePasswordInputData, controlInput } from '@/constantsconstants';
 import { Box, Image, Text } from '@chakra-ui/react';
+import { changePasswordInputData, controlInput } from '@constants/constants';
 
 import { ShowAuthHeader, ShowAuthImage, SocialMedia } from './login';
 

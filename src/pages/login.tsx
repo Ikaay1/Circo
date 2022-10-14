@@ -2,10 +2,13 @@ import { CliqueLogo } from 'component/Navbar';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { controlInput, loginInputData } from '@/constantsconstants';
 import { Box, Image, Text } from '@chakra-ui/react';
 
-import { socialMediaIconsData } from '../constants/constants';
+import {
+	controlInput,
+	loginInputData,
+	socialMediaIconsData,
+} from '../constants/constants';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
