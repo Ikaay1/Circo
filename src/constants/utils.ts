@@ -61,6 +61,21 @@ export const signUpInputData: (
     },
 ];
 
+export const controlInput = (
+    num1: number,
+    num2: number,
+    isActive: boolean,
+    texts: NodeListOf<HTMLParagraphElement>,
+) => {
+    if (!isActive) {
+        texts[num1].classList.add('inactive');
+        texts[num2].classList.add('inactive');
+    } else {
+        texts[num1].classList.remove('inactive');
+        texts[num2].classList.remove('inactive');
+    }
+};
+
 export const socialMediaIconsData = ['google', 'apple', 'facebook'];
 
 export const changePasswordInputData: {
