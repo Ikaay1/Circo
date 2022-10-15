@@ -8,7 +8,7 @@ import {
 	cliquePlatformData2,
 	helpGrowData,
 	walletData,
-} from '../constants/constants';
+} from '@constants/utils';
 
 import type {NextPage} from 'next';
 const Home: NextPage = () => {
