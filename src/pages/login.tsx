@@ -1,10 +1,14 @@
+import { CliqueLogo } from 'component/Navbar';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { controlInput, loginInputData } from '@constants/utils';
 import { Box, Image, Text } from '@chakra-ui/react';
 
-import { socialMediaIconsData } from '@constants/utils';
+import {
+	controlInput,
+	loginInputData,
+	socialMediaIconsData,
+} from '@constants/utils';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
@@ -35,6 +39,7 @@ const Login = () => {
             justifyContent='space-between'
             alignItems={'center'}
         >
+            <CliqueLogo />
             <ShowAuthImage height='800px' />
             <Box width={'700px'} marginTop='2rem'>
                 <Box
@@ -81,17 +86,17 @@ const Login = () => {
                                         left={'4.5%'}
                                         fontSize='12px'
                                         color='#FFFFFF'
-                                        className='placeholder'
+                                        className='placeholder small'
                                     >
                                         {name}
                                     </Text>
                                     <Text
-                                        fontSize='20px'
+                                        fontSize='16px'
                                         color='#FFFFFF'
                                         position='absolute'
                                         left={'4.5%'}
                                         bottom='20%'
-                                        className='placeholder'
+                                        className='placeholder big'
                                     >
                                         {name}
                                     </Text>
@@ -157,28 +162,26 @@ export const SocialMedia = ({
                 justifyContent={'center'}
             >
                 {socialMediaIconsData.map((iconData) => (
-                    <div key={iconData}>
-                        <Box
-                            width='77px'
-                            height='77px'
-                            background='#292927'
-                            boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
-                            borderRadius='42px'
-                            display={'flex'}
-                            justifyContent='center'
-                            alignItems={'center'}
-                            marginRight={
-                                iconData !== 'facebook' ? '2.5rem' : ''
-                            }
-                        >
-                            <Image
-                                src={`/assets/${iconData}.png`}
-                                alt={`${iconData} icon`}
-                                width={'47px'}
-                                height={'47px'}
-                            />
-                        </Box>
-                    </div>
+                    <Box
+                        width='77px'
+                        height='77px'
+                        background='#292927'
+                        boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
+                        borderRadius='42px'
+                        display={'flex'}
+                        justifyContent='center'
+                        alignItems={'center'}
+                        marginRight={iconData !== 'facebook' ? '2.5rem' : ''}
+                        cursor='pointer'
+                        key={iconData}
+                    >
+                        <Image
+                            src={`/assets/${iconData}.png`}
+                            alt={`${iconData} icon`}
+                            width={'47px'}
+                            height={'47px'}
+                        />
+                    </Box>
                 ))}
             </Box>
             <Box

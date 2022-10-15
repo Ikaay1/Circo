@@ -1,8 +1,9 @@
+import { CliqueLogo } from 'component/Navbar';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { controlInput, signUpInputData } from '@constants/utils';
 import { Box, Image, Text } from '@chakra-ui/react';
+import { controlInput, signUpInputData } from '@constants/utils';
 
 import { ShowAuthHeader, ShowAuthImage, SocialMedia } from './login';
 
@@ -56,6 +57,7 @@ const Signup = () => {
             justifyContent='space-between'
             alignItems={'center'}
         >
+            <CliqueLogo />
             <ShowAuthImage height='900px' />
             <Box width={'700px'} marginTop='2rem'>
                 <Box
@@ -128,17 +130,17 @@ const Signup = () => {
                                             left={'4.5%'}
                                             fontSize='12px'
                                             color='#FFFFFF'
-                                            className='placeholder'
+                                            className='placeholder small'
                                         >
                                             {name}
                                         </Text>
                                         <Text
-                                            fontSize='20px'
+                                            fontSize='16px'
                                             color='#FFFFFF'
                                             position='absolute'
                                             left={'4.5%'}
                                             bottom='20%'
-                                            className='placeholder'
+                                            className='placeholder big'
                                         >
                                             {placeholder}
                                         </Text>
