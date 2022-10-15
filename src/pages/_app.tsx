@@ -1,17 +1,33 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "../styles/globals.css";
 
-import Layout from "component/Layout";
+import Layout from "layouts/Layout";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
-
+import Router from "next/router";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-
-import theme from "../constants/theme";
+import theme from "@constants/theme";
 import { store } from "../redux/app/store";
-
 import type { AppProps } from "next/app";
+const NProgress = require("nprogress");
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
+
+  useEffect(() => {
+    NProgress.configure({ showSpinner: false });
+    Router.events.on("routeChangeStart", (url: any) => {
+      NProgress.start();
+    });
+    Router.events.on("routeChangeComplete", (url: any) => {
+      NProgress.done();
+    });
+
+    Router.events.on("routeChangeError", (url: any) => {
+      NProgress.done();
+    });
+  }, [Router]);
+
   useEffect(() => {
     setShowChild(true);
   }, []);
