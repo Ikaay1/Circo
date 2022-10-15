@@ -8,7 +8,7 @@ import {
 	controlInput,
 	loginInputData,
 	socialMediaIconsData,
-} from '../constants/constants';
+} from '@constants/utils';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
