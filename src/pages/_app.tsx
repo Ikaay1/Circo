@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import Router from "next/router";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-import NProgress from "nprogress";
 import theme from "@constants/theme";
 import { store } from "../redux/app/store";
-
 import type { AppProps } from "next/app";
+const NProgress = require("nprogress");
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
 
