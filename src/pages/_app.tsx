@@ -16,8 +16,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
-    //change the color of the progress bar
-    NProgress.configure({ background: "red" });
     Router.events.on("routeChangeStart", (url: any) => {
       NProgress.start();
     });
