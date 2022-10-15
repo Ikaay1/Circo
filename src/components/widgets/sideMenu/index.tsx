@@ -2,7 +2,7 @@ import React from 'react';
 import { HiOutlineLogout } from 'react-icons/hi';
 
 import { Box, Divider, Flex, Icon, Link, Text } from '@chakra-ui/react';
-import { menu, subcribees } from '@constants/utilities';
+import { menu, subcribees } from '@constants/utils';
 
 import EachMenu from './EachMenu';
 import EachSubscribe from './EachSubscribe';
