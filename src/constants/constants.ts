@@ -186,3 +186,10 @@ export const helpGrowData: {
         bigImage: 'big-movie-action',
     },
 ];
+
+export const famousCreatorsImageData: string[] = [
+    'celeb1',
+    'celeb2',
+    'celeb3',
+    'celeb4',
+];
