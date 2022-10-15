@@ -12,6 +12,7 @@ const colors = {
     grey: "#323232",
     whiteGrey: "rgba(255, 255, 255, 0.7)",
     darkGrey: "#aaaaaa",
+    lightGrey: "#434343",
   },
 };
 
@@ -21,6 +22,7 @@ const breakpoints = {
   sm: "400px",
   md: "700px",
   lg: "1100px",
+  mlg: "1440px",
   xl: "1700px",
 };
 

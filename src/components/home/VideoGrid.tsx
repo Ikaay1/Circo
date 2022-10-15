@@ -13,6 +13,9 @@ function VideoGrid() {
     >
       <VideoThumb imgUrl="/videoImg.png" />
       <VideoThumb imgUrl="/videoImg2.png" />
+      <VideoThumb imgUrl="/videoImg3.png" />{" "}
+      <VideoThumb imgUrl="/videoImg.png" />
+      <VideoThumb imgUrl="/videoImg2.png" />
       <VideoThumb imgUrl="/videoImg3.png" />
     </SimpleGrid>
   );
