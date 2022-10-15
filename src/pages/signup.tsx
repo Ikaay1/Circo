@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import { Box, Image, Text } from '@chakra-ui/react';
-import { controlInput, signUpInputData } from '@constants/constants';
+import { controlInput, signUpInputData } from '@constants/utils';
 
 import { ShowAuthHeader, ShowAuthImage, SocialMedia } from './login';
 
