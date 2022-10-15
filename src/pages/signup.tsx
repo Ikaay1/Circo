@@ -1,4 +1,4 @@
-import { CliqueLogo } from 'component/Navbar';
+import { CliqueLogo } from '@components/landing/Navbar';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
