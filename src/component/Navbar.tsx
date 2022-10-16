@@ -1,10 +1,19 @@
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { Dispatch, SetStateAction } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import { Box, Image, Text } from '@chakra-ui/react';
 
-const Navbar = () => {
+const Navbar = ({
+    showSideBar,
+    setShowSideBar,
+}: {
+    showSideBar: boolean;
+    setShowSideBar: Dispatch<SetStateAction<boolean>>;
+}) => {
+    const router = useRouter();
+    console.log(showSideBar);
     return (
         <Box
             display='flex'
@@ -45,11 +54,13 @@ const Navbar = () => {
                     display={'flex'}
                     justifyContent='center'
                     alignItems='center'
+                    cursor={'pointer'}
+                    onClick={() => router.push('/signup')}
                 >
                     <Link href='signup'>Sign Up For Free</Link>
                 </Text>
             </Box>
-            <Box display={{lg: 'none'}}>
+            <Box display={{lg: 'none'}} onClick={() => setShowSideBar(true)}>
                 <AiOutlineMenu style={{width: '29px', height: '55px'}} />
             </Box>
         </Box>

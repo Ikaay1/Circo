@@ -193,3 +193,61 @@ export const famousCreatorsImageData: string[] = [
     'celeb3',
     'celeb4',
 ];
+
+export const contactInfoData: {
+    image: string;
+    detail: string;
+}[] = [
+    {
+        image: 'location',
+        detail: '2715 Ash Dr. San Jose, Ikoyi Link Bridge 83475',
+    },
+    {
+        image: 'call',
+        detail: '(234) 81 5678 2341',
+    },
+    {
+        image: 'message',
+        detail: 'info@clique.co',
+    },
+];
+
+export const footerOthersData: {
+    key: string;
+    detail: string;
+}[] = [
+    {
+        key: '1',
+        detail: 'FAQs',
+    },
+    {
+        key: '2',
+        detail: 'Privacy Policy',
+    },
+    {
+        key: '3',
+        detail: 'Terms and Conditions',
+    },
+];
+
+export const sideBarData: {
+    key: string;
+    detail: string;
+}[] = [
+    {
+        key: '0',
+        detail: 'About',
+    },
+    {
+        key: '1',
+        detail: 'FAQs',
+    },
+    {
+        key: '2',
+        detail: 'Privacy Policy',
+    },
+    {
+        key: '3',
+        detail: 'Terms and Conditions',
+    },
+];

@@ -1,25 +1,36 @@
-import Navbar from 'component/Navbar';
+import Navbar, { CliqueLogo } from 'component/Navbar';
+import Sidebar from 'component/Sidebar';
 import Link from 'next/link';
+import { useState } from 'react';
+// @ts-ignore
+import Fade from 'react-reveal/Fade';
 
 import { Box, Image, Text } from '@chakra-ui/react';
 
 import {
 	cliquePlatformData1,
 	cliquePlatformData2,
+	contactInfoData,
 	famousCreatorsImageData,
+	footerOthersData,
 	helpGrowData,
 	walletData,
 } from '../constants/constants';
 
 import type {NextPage} from 'next';
 const Home: NextPage = () => {
+    const [showSideBar, setShowSideBar] = useState<boolean>(false);
+
     return (
-        <Box>
+        <Box overflowX={'hidden'}>
             <Box
                 marginTop={{base: '2.5rem', sm: '3.5rem', lg: '1.8rem'}}
                 px={{base: '1rem', sm: '2rem', lg: '5rem'}}
             >
-                <Navbar />
+                <Navbar
+                    setShowSideBar={setShowSideBar}
+                    showSideBar={showSideBar}
+                />
             </Box>
             <Box pb={'2.5rem'} px={{base: '1rem', sm: '2rem', lg: '5rem'}}>
                 <Box
@@ -28,11 +39,7 @@ const Home: NextPage = () => {
                     justifyContent={{lg: 'space-between', xl: 'space-around'}}
                     alignItems={{lg: 'center'}}
                 >
-                    <Box
-                        // border={'1px solid red'}
-                        w={{lg: '682px'}}
-                        h={{lg: '100%'}}
-                    >
+                    <Box w={{lg: '682px'}} h={{lg: '100%'}}>
                         <Text
                             fontWeight={{base: '600', lg: '700'}}
                             fontSize={{base: '36px', lg: '48px'}}
@@ -350,7 +357,7 @@ const Home: NextPage = () => {
                                     lg: '683px',
                                 }}
                                 order={{lg: i === 1 ? '-1' : '1'}}
-                                // border='1px solid red'
+                                //
                             >
                                 <Image
                                     src={`/assets/${image}.png`}
@@ -695,6 +702,202 @@ const Home: NextPage = () => {
                     ></Box>
                 </Box>
             </Box>
+            <Box
+                px={{base: '1rem', sm: '2rem', lg: '5rem'}}
+                pt={{base: '2rem', sm: '3rem', lg: '4rem'}}
+                pb={'2rem'}
+                bg='#F6EFFC'
+            >
+                <Box
+                    display={{lg: 'flex'}}
+                    justifyContent={{lg: 'space-between'}}
+                >
+                    <Box>
+                        <Box
+                            display={'flex'}
+                            alignItems='center'
+                            fontWeight={'700'}
+                            fontSize={{base: '16.0124px', lg: '22.6935px'}}
+                            letterSpacing={{
+                                base: '0.500386px',
+                                lg: '0.709173px',
+                            }}
+                            color='#000000'
+                        >
+                            <Image
+                                src='/assets/clique-logo.png'
+                                alt='clique-logo'
+                                w={{base: '32.02px', lg: '45.39px'}}
+                                h={{base: '36.16px', lg: '51.24px'}}
+                            />
+                            <Link href='/'>CLIQUE</Link>
+                        </Box>
+                        <Text
+                            fontSize={{base: '14px', lg: '20px'}}
+                            lineHeight={{base: '20px', lg: '150%'}}
+                            color='#141516'
+                            mt={{base: '.85rem'}}
+                            w={{base: '180px'}}
+                        >
+                            Streaming and Video platform
+                        </Text>
+                        <Box display={'flex'} mt={{base: '.85rem'}}>
+                            <Image
+                                marginRight={'2rem'}
+                                src='/assets/instagram.png'
+                                alt=''
+                            />
+                            <Image src='/assets/fb.png' alt='' />
+                        </Box>
+                    </Box>
+                    <Box mt={{base: '3.8rem', lg: '0'}}>
+                        <Box>
+                            <Text
+                                fontWeight='600'
+                                fontSize={{base: '18px', lg: '24px'}}
+                                lineHeight={{base: '22px', lg: '29px'}}
+                                textAlign='justify'
+                                color='#141516'
+                            >
+                                Contact Info
+                            </Text>
+                            <Box>
+                                {contactInfoData.map(({image, detail}) => (
+                                    <Box
+                                        display={'flex'}
+                                        mt='1.2rem'
+                                        key={image}
+                                    >
+                                        <Image
+                                            src={`/assets/${image}.png`}
+                                            //
+                                            mr='1.2rem'
+                                            alt=''
+                                            h={{base: '100%'}}
+                                        />
+                                        <Text
+                                            fontSize={{
+                                                base: '14px',
+                                                lg: '16px',
+                                            }}
+                                            fontWeight={{lg: '500'}}
+                                            lineHeight={{
+                                                base: '20px',
+                                                lg: '150%',
+                                            }}
+                                            color='#141516'
+                                            w={{base: '180px'}}
+                                        >
+                                            {detail}
+                                        </Text>
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
+
+                        <Box
+                            mt={{lg: '3.5rem'}}
+                            display={{base: 'none', lg: 'block'}}
+                        >
+                            <Text
+                                fontWeight='600'
+                                fontSize={{base: '18px', lg: '24px'}}
+                                lineHeight={{base: '22px', lg: '29px'}}
+                                textAlign='justify'
+                                color='#141516'
+                            >
+                                Others
+                            </Text>
+                            <Box>
+                                {footerOthersData.map(({key, detail}) => (
+                                    <Box display={'flex'} mt='1.2rem' key={key}>
+                                        <Text
+                                            fontSize={{
+                                                base: '14px',
+                                                lg: '16px',
+                                            }}
+                                            fontWeight={{lg: '500'}}
+                                            lineHeight={{
+                                                base: '20px',
+                                                lg: '150%',
+                                            }}
+                                            color='#141516'
+                                            w={{base: '180px'}}
+                                        >
+                                            {detail}
+                                        </Text>
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box mt={{base: '3.4rem', lg: '0'}} w={{lg: '704px'}}>
+                        <Text
+                            fontWeight='600'
+                            fontSize={{base: '18px', lg: '24px'}}
+                            lineHeight={{base: '22px', lg: '29px'}}
+                            textAlign='justify'
+                            color='#141516'
+                        >
+                            Get in touch
+                        </Text>
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <input
+                                type='text'
+                                placeholder='Your name'
+                                required={true}
+                                className='contact-input'
+                            />
+                            <input
+                                type='text'
+                                placeholder='Your email'
+                                required={true}
+                                className='contact-input'
+                            />
+                            <textarea
+                                cols={30}
+                                rows={10}
+                                placeholder='Your message'
+                                required={true}
+                            ></textarea>
+                            <Box
+                                display={'flex'}
+                                justifyContent={{
+                                    base: 'center',
+                                    sm: 'flex-start',
+                                    lg: 'flex-end',
+                                }}
+                                className={'button-container'}
+                                mt={{base: '.7rem'}}
+                            >
+                                <button type='submit'>send message</button>
+                            </Box>
+                        </form>
+                    </Box>
+                </Box>
+                <Box
+                    fontWeight='500'
+                    fontSize={{base: '14px', lg: '16px'}}
+                    lineHeight='150%'
+                    color='#141516'
+                    mt={{base: '4rem'}}
+                >
+                    <Box
+                        height={{lg: '1px'}}
+                        backgroundColor='#C9C9C9'
+                        display={{base: 'none', lg: 'block'}}
+                    ></Box>
+                    <Text textAlign={'center'} mt={{lg: '1.5rem'}}>
+                        ©2022 Clique Ltd, All rights reserved
+                    </Text>
+                </Box>
+            </Box>
+            {/* <Fade right when={showSideBar}> */}
+            <Sidebar
+                setShowSideBar={setShowSideBar}
+                showSideBar={showSideBar}
+            />
+            {/* </Fade> */}
         </Box>
     );
 };

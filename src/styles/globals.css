@@ -80,6 +80,64 @@ body {
     color: #ffffff;
 }
 
+.contact-input,
+.contact-input ~ textarea {
+    width: 290px;
+    height: 55px;
+    background: #171717;
+    border-radius: 10px;
+    padding-left: 1rem;
+    margin-top: 0.65rem;
+    display: block;
+}
+
+.contact-input ~ textarea {
+    height: 139px;
+    overflow-y: scroll;
+    padding-top: 1.5rem;
+}
+
+.contact-input ~ textarea + .button-container > button {
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+    background: #892cdc;
+    border-radius: 30px;
+    width: 162px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.contact-input:first-child {
+    margin-top: 1.3rem;
+}
+
+@media screen and (min-width: 400px) {
+    .contact-input,
+    .contact-input ~ textarea {
+        width: 340px;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .contact-input,
+    .contact-input ~ textarea {
+        width: 703px;
+        height: 55px;
+        border-radius: 13px;
+    }
+
+    .contact-input ~ textarea {
+        height: 120px;
+        overflow-y: scroll;
+        padding-top: 0.9rem;
+    }
+
+    .contact-input ~ textarea + .button-container > button {
+        width: 221px;
+    }
+}
+
 /* @media (prefers-color-scheme: dark) {
     html {
         color-scheme: dark;
