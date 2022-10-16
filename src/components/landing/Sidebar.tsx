@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React, { Dispatch, SetStateAction } from 'react';
 
-import { sideBarData } from '@/constantsconstants';
 import { Box, Image, Text } from '@chakra-ui/react';
+import { sideBarData } from '@constants/utils';
 
 const Sidebar = ({
     showSideBar,

@@ -2,8 +2,9 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/constants*": ["constants/*"],
-      "@/components*": ["components/*"]
+      "@constants/*": ["constants/*"],
+      "@components/*": ["components/*"],
+      "@icons/*": ["assets/icons/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

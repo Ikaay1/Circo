@@ -1,41 +1,55 @@
-import '../styles/globals.css';
+/* eslint-disable react-hooks/exhaustive-deps */
+import "../styles/globals.css";
 
-import Layout from 'component/Layout';
-import { useEffect, useState } from 'react';
-import { Provider } from 'react-redux';
+import Layout from "layouts/Layout";
+import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import Router from "next/router";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import theme from "@constants/theme";
+import { store } from "../redux/app/store";
+import type { AppProps } from "next/app";
+const NProgress = require("nprogress");
 
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+function MyApp({ Component, pageProps }: AppProps) {
+  const [showChild, setShowChild] = useState(false);
 
-import theme from '../constants/theme';
-import { store } from '../redux/app/store';
+  useEffect(() => {
+    NProgress.configure({ showSpinner: false });
+    Router.events.on("routeChangeStart", (url: any) => {
+      NProgress.start();
+    });
+    Router.events.on("routeChangeComplete", (url: any) => {
+      NProgress.done();
+    });
 
-import type {AppProps} from 'next/app';
-function MyApp({Component, pageProps}: AppProps) {
-    const [showChild, setShowChild] = useState(false);
-    useEffect(() => {
-        setShowChild(true);
-    }, []);
+    Router.events.on("routeChangeError", (url: any) => {
+      NProgress.done();
+    });
+  }, [Router]);
 
-    if (!showChild) {
-        return null;
-    }
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
 
-    if (typeof window === 'undefined') {
-        return <></>;
-    }
+  if (!showChild) {
+    return null;
+  }
 
-    return (
-        <Provider store={store}>
-            <ChakraProvider theme={theme}>
-                <ColorModeScript
-                    initialColorMode={theme.config.initialColorMode}
-                />
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </ChakraProvider>
-        </Provider>
-    );
+  if (typeof window === "undefined") {
+    return <></>;
+  }
+
+  return (
+    <Provider store={store}>
+      <ChakraProvider theme={theme}>
+        <Layout>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </Provider>
+  );
 }
 
 export default MyApp;

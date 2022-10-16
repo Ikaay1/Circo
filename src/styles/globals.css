@@ -1,83 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 .login-form {
-    margin-top: 4.5rem;
+  margin-top: 4.5rem;
 }
 
 .input {
-    height: 100%;
-    background: #232323;
-    border-radius: 15px;
-    width: 100%;
-    padding-left: 1.3rem;
-    outline: none;
+  height: 100%;
+  background: #232323;
+  border-radius: 15px;
+  width: 100%;
+  padding-left: 1.3rem;
+  outline: none;
 }
 
 .placeholder.small {
-    transition: all 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .input:focus ~ .placeholder.big,
 .input:active ~ .placeholder.big {
-    display: none;
+  display: none;
 }
 
 .input:focus ~ .placeholder.small,
 .input:active ~ .placeholder.small {
-    transform: translateY(-12px);
-    background-color: #1a202c;
+  transform: translateY(-12px);
+  background-color: #1a202c;
 }
 
 .placeholder.big.inactive {
-    display: none;
+  display: none;
 }
 
 .placeholder.small.inactive {
-    transform: translateY(-12px);
-    background-color: #1a202c;
+  transform: translateY(-12px);
+  background-color: #1a202c;
 }
 
 .remember {
-    font-weight: 400;
-    font-size: 12px;
-    color: #a1a1a1;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-top: 0.2rem;
+  font-weight: 400;
+  font-size: 12px;
+  color: #a1a1a1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 0.2rem;
 }
 
 .remember > input {
-    margin-right: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 .login-submit {
-    background: #892cdc;
-    border-radius: 50px;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 4rem;
-    font-weight: 500;
-    font-size: 26px;
-    letter-spacing: -0.02em;
-    color: #ffffff;
+  background: #892cdc;
+  border-radius: 50px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
 .contact-input,
@@ -147,3 +147,7 @@ body {
         background: black;
     }
 } */
+
+#nprogress .bar {
+  background: #892cdc !important;
+}

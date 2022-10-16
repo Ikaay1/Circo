@@ -1,12 +1,11 @@
-import Navbar, { CliqueLogo } from 'component/Navbar';
-import Sidebar from 'component/Sidebar';
 import Link from 'next/link';
 import { useState } from 'react';
 // @ts-ignore
 import Fade from 'react-reveal/Fade';
 
 import { Box, Image, Text } from '@chakra-ui/react';
-
+import Navbar from '@components/landing/Navbar';
+import Sidebar from '@components/landing/Sidebar';
 import {
 	cliquePlatformData1,
 	cliquePlatformData2,
@@ -15,7 +14,7 @@ import {
 	footerOthersData,
 	helpGrowData,
 	walletData,
-} from '../constants/constants';
+} from '@constants/utils';
 
 import type {NextPage} from 'next';
 const Home: NextPage = () => {

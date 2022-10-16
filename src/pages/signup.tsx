@@ -1,9 +1,9 @@
-import { CliqueLogo } from 'component/Navbar';
+import { CliqueLogo } from '@components/landing/Navbar';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { controlInput, signUpInputData } from '@/constantsconstants';
 import { Box, Image, Text } from '@chakra-ui/react';
+import { controlInput, signUpInputData } from '@constants/utils';
 
 import { ShowAuthHeader, ShowAuthImage, SocialMedia } from './login';
 
