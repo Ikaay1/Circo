@@ -27,10 +27,7 @@ const Home: NextPage = () => {
                 marginTop={{base: '2.5rem', sm: '3.5rem', lg: '1.8rem'}}
                 px={{base: '1rem', sm: '2rem', lg: '5rem'}}
             >
-                <Navbar
-                    setShowSideBar={setShowSideBar}
-                    showSideBar={showSideBar}
-                />
+                <Navbar setShowSideBar={setShowSideBar} />
             </Box>
             <Box pb={'2.5rem'} px={{base: '1rem', sm: '2rem', lg: '5rem'}}>
                 <Box
@@ -892,12 +889,10 @@ const Home: NextPage = () => {
                     </Text>
                 </Box>
             </Box>
-            {/* <Fade right when={showSideBar}> */}
             <Sidebar
                 setShowSideBar={setShowSideBar}
                 showSideBar={showSideBar}
             />
-            {/* </Fade> */}
         </Box>
     );
 };

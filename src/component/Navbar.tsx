@@ -6,10 +6,8 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { Box, Image, Text } from '@chakra-ui/react';
 
 const Navbar = ({
-    showSideBar,
     setShowSideBar,
 }: {
-    showSideBar: boolean;
     setShowSideBar: Dispatch<SetStateAction<boolean>>;
 }) => {
     const router = useRouter();
