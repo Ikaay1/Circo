@@ -13,7 +13,6 @@ const Navbar = ({
     setShowSideBar: Dispatch<SetStateAction<boolean>>;
 }) => {
     const router = useRouter();
-    console.log(showSideBar);
     return (
         <Box
             display='flex'
