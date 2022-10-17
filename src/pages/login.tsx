@@ -49,6 +49,7 @@ const Login = () => {
     console.log(res);
     if (res.data) {
       router.push("/home");
+      localStorage.setItem("token", res.data?.token);
     } else if (res.error) {
       toast.error(res?.error?.data?.message);
     } else {

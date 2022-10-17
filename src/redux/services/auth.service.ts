@@ -17,7 +17,28 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+
+    // pre signup
+    preSignup: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `pre-signup`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
+
+    // signup
+    signup: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `login`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, usePreSignupMutation, useSignupMutation } =
+  authApi;
