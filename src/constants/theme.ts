@@ -15,6 +15,7 @@ const colors = {
     lightGrey: "#434343",
     ashGrey: "#1C1C1C",
     blackGrey: "#232323",
+    text: "#a1a1a1",
   },
 };
 

@@ -17,7 +17,10 @@ import { BiLike, BiDislike } from "react-icons/bi";
 import { BsPauseFill, BsFillPlayFill, BsFullscreen } from "react-icons/bs";
 import PrevIcon from "@icons/PrevIcon";
 import NextIcon from "@icons/NextIcon";
-const { Player, ControlBar } = require("video-react");
+import { MdFullscreenExit } from "react-icons/md";
+import VideoOptionMenu from "./VideoOptionMenu";
+import GiftModal from "./GiftModal";
+const { Player, ControlBar, BigPlayButton } = require("video-react");
 
 function VideoPlayer() {
   const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
@@ -39,7 +42,6 @@ function VideoPlayer() {
       });
     }
   }, []);
-
   return (
     <Flex
       pos={"relative"}
@@ -68,6 +70,7 @@ function VideoPlayer() {
             autoHide={false}
             disableDefaultControls={true}
           ></ControlBar>
+          <BigPlayButton position="center" />
         </Player>
       </Box>
 
@@ -218,16 +221,30 @@ function VideoPlayer() {
           </GridItem>
           <GridItem colSpan={2} justifySelf="end">
             <Flex alignItems="center" h="100%">
-              <Icon
-                fontSize="20px"
-                cursor={"pointer"}
-                onClick={() => {
-                  setIsFullScreen(!isFullScreen);
-                  const video: any = document.getElementById("video");
-                  video.requestFullscreen();
-                }}
-                as={BsFullscreen}
-              />
+              <GiftModal />
+              <VideoOptionMenu player={playerRef} />
+              {!isFullScreen ? (
+                <Icon
+                  fontSize="20px"
+                  cursor={"pointer"}
+                  onClick={() => {
+                    setIsFullScreen(!isFullScreen);
+                    const video: any = document.getElementById("video");
+                    video.requestFullscreen();
+                  }}
+                  as={BsFullscreen}
+                />
+              ) : (
+                <Icon
+                  fontSize="20px"
+                  cursor={"pointer"}
+                  onClick={() => {
+                    setIsFullScreen(!isFullScreen);
+                    document.exitFullscreen();
+                  }}
+                  as={MdFullscreenExit}
+                />
+              )}
             </Flex>
           </GridItem>
         </Grid>
