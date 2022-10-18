@@ -4,6 +4,7 @@ import HomeLayout from "layouts/HomeLayout";
 import React from "react";
 import LiveEvents from "@components/home/LiveEvents";
 import TrendingBox from "@components/trending/TrendingBox";
+import PopularBox from "@components/trending/PopularBox";
 
 function Index() {
   return (
@@ -37,7 +38,7 @@ function Index() {
         >
           <HStack h="100%" minH="100%" spacing={"20px"}>
             <TrendingBox />
-            <Box minW={"30%"} maxW="30%" h="100%" bg="red"></Box>
+            <PopularBox />
           </HStack>
         </Box>
         <LiveEvents />
