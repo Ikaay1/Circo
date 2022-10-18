@@ -151,3 +151,6 @@ body {
 #nprogress .bar {
   background: #892cdc !important;
 }
+.my-class {
+  display: none !important;
+}
