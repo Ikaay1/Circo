@@ -1,9 +1,11 @@
 import { Avatar, Box, Flex, Image, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 
-function VideoThumb({ imgUrl }: { imgUrl: string }) {
+function VideoThumb({ imgUrl, id }: { imgUrl: string; id: string }) {
+  const router = useRouter();
   return (
-    <Box cursor={"pointer"}>
+    <Box cursor={"pointer"} onClick={() => router.push(`player/${id}`)}>
       <Image
         w={{ lg: "220px", mlg: "280px" }}
         h={{ lg: "130px", mlg: "180px" }}

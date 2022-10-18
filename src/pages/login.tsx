@@ -1,16 +1,21 @@
 import { CliqueLogo } from "@components/landing/Navbar";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
-import { Box, Image, Text } from "@chakra-ui/react";
+import toast from "react-hot-toast";
+import { Box, Button, Image, Text, Toast } from "@chakra-ui/react";
 
 import {
   controlInput,
   loginInputData,
   socialMediaIconsData,
 } from "@constants/utils";
+import { useLoginMutation } from "redux/services/auth.service";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const [login, loginStatus] = useLoginMutation();
+  const router = useRouter();
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,6 +38,25 @@ const Login = () => {
     }
   }, [userName, password]);
 
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    const data = {
+      userNameOrEmail: userName,
+      password: password,
+    };
+    const res: any = await login(data);
+
+    console.log(res);
+    if (res.data) {
+      router.push("/home");
+      localStorage.setItem("token", res.data?.token);
+    } else if (res.error) {
+      toast.error(res?.error?.data?.message);
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
+
   return (
     <Box display={"flex"} justifyContent="space-between" alignItems={"center"}>
       <CliqueLogo />
@@ -40,7 +64,7 @@ const Login = () => {
       <Box width={"700px"} marginTop="2rem">
         <Box padding={"1rem"} width="450px" height={"100%"} margin="0 auto">
           <ShowAuthHeader header="Login" detail="Welcome, join the Clique!" />
-          <form onSubmit={(e) => e.preventDefault()} className="login-form">
+          <form onSubmit={handleLogin} className="login-form">
             {loginInputData.map(({ name, image, key }) => (
               <div key={key}>
                 <Box position="relative" height="57px" marginTop={"1.5rem"}>
@@ -90,16 +114,32 @@ const Login = () => {
             ))}
             <Box display={"flex"} justifyContent={"space-between"}>
               <label className="remember">
-                <input type="checkbox" required={true} name="" />
+                <input type="checkbox" name="" />
                 Remember me?
               </label>
               <Text cursor="pointer" fontSize="12px" color="#BA1A1A">
                 Forgot Password
               </Text>
             </Box>
-            <button type="submit" className="login-submit">
+
+            <Button
+              type="submit"
+              background="#892cdc"
+              borderRadius="50px"
+              width="100%;"
+              height="60px;"
+              display="flex;"
+              alignItems="center"
+              justifyContent="center"
+              marginTop="4rem"
+              fontWeight="500"
+              fontSize="26px"
+              letterSpacing="-0.02em;"
+              color="#ffffff "
+              isLoading={loginStatus.isLoading}
+            >
               Login
-            </button>
+            </Button>
           </form>
           <SocialMedia haveAccount={"Don't have an account?"} login={false} />
         </Box>
