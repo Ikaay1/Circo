@@ -11,14 +11,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-// import ReactPlayer from "react-player";
 import moment from "moment";
 import { GoUnmute, GoMute } from "react-icons/go";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { BsPauseFill, BsFillPlayFill, BsFullscreen } from "react-icons/bs";
 import PrevIcon from "@icons/PrevIcon";
 import NextIcon from "@icons/NextIcon";
-import { Player, ControlBar } from "video-react";
+const { Player, ControlBar } = require("video-react");
 
 function VideoPlayer() {
   const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
