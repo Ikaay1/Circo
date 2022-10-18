@@ -17,10 +17,10 @@ import { BsBroadcast } from "react-icons/bs";
 import { MdAddCircleOutline, MdOutlineNotificationsNone } from "react-icons/md";
 
 type Props = {
-  upload:()=>void;
+  upload?: () => void;
 };
 
-function Header({upload}: Props) {
+function Header({ upload }: Props) {
   const [searchWidth, setSearchWidth] = React.useState("300px");
 
   return (

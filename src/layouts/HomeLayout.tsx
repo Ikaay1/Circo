@@ -6,7 +6,6 @@ import { IHomeLayoutProps } from "types";
 function HomeLayout({ children, upload, toggleView }: IHomeLayoutProps) {
   return (
     <Box
-      // maxH="100vh"
       maxH={toggleView ? "" : "100vh"}
       maxW={"100vw"}
       w="100vw"
