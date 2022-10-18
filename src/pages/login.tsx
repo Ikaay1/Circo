@@ -2,9 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useAppDispatch } from 'redux/app/hooks';
 import { useLoginMutation } from 'redux/services/auth.service';
+import { setCredentials } from 'redux/slices/authSlice';
 
-import { Box, Button, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Image, Text, Toast } from '@chakra-ui/react';
 import { CliqueLogo } from '@components/landing/Navbar';
 import {
 	controlInput,
@@ -15,6 +17,7 @@ import {
 const Login = () => {
     const [login, loginStatus] = useLoginMutation();
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -46,8 +49,14 @@ const Login = () => {
         };
         const res: any = await login(data);
 
-        console.log(res);
         if (res.data) {
+            console.log(res.data);
+
+            dispatch(
+                setCredentials({
+                    payload: res?.data,
+                }),
+            );
             router.push('/home');
             localStorage.setItem('token', res.data?.token);
         } else if (res.error) {
