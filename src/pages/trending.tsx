@@ -1,11 +1,9 @@
 import SideMenu from "@components/widgets/sideMenu";
-import { Box, Divider, Flex } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import HomeLayout from "layouts/HomeLayout";
 import React from "react";
-import LiveTopCard from "@components/home/LiveTopCard";
-import TagSection from "@components/home/TagSection";
-import VideoGrid from "@components/home/VideoGrid";
 import LiveEvents from "@components/home/LiveEvents";
+import TrendingBox from "@components/trending/TrendingBox";
 
 function Index() {
   return (
@@ -14,8 +12,10 @@ function Index() {
         <SideMenu />
         <Box
           maxH={"90vh"}
+          minH={"90vh"}
           pb="50px"
           px="30px"
+          pt="30px"
           maxW={"calc(100vw - 500px)"}
           minW={"calc(100vw - 500px)"}
           overflowY={"scroll"}
@@ -34,7 +34,12 @@ function Index() {
               outline: "none",
             },
           }}
-        ></Box>
+        >
+          <HStack h="100%" minH="100%" spacing={"20px"}>
+            <TrendingBox />
+            <Box minW={"30%"} maxW="30%" h="100%" bg="red"></Box>
+          </HStack>
+        </Box>
         <LiveEvents />
       </Flex>
     </HomeLayout>
