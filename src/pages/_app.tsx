@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "../styles/globals.css";
-
+import { PersistGate } from "redux-persist/integration/react";
 import Layout from "layouts/Layout";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import Router from "next/router";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "@constants/theme";
-import { store } from "../redux/app/store";
+import { persistor, store } from "../redux/app/store";
 import type { AppProps } from "next/app";
+import { Toaster } from "react-hot-toast";
 const NProgress = require("nprogress");
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -42,12 +43,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <Layout>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <Component {...pageProps} />
-        </Layout>
-      </ChakraProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ChakraProvider theme={theme}>
+          <Layout>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <Component {...pageProps} />
+            <Toaster />
+          </Layout>
+        </ChakraProvider>
+      </PersistGate>
     </Provider>
   );
 }
