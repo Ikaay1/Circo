@@ -1,13 +1,14 @@
 import { Box, Divider, Text } from "@chakra-ui/react";
 import React from "react";
-import EventModal from "./EventModal";
+import EachComment from "./EachComment";
 
-function LiveEvents() {
+function CommentSection() {
   return (
     <Box
-      w="250px"
-      maxW="250px"
-      minW="250px"
+      w="400px"
+      maxW="400px"
+      p="20px"
+      minW="400px"
       bg="clique.black"
       h="90vh"
       minH="90vh"
@@ -30,22 +31,22 @@ function LiveEvents() {
       }}
     >
       <Text
-        textAlign={"center"}
+        textAlign={"left"}
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="20px"
       >
-        Live Events
+        Comments
       </Text>
-      <Box px="50px" py="5px">
-        <Divider />
-      </Box>
-      <EventModal imgUrl="/eventFlyer.png" />
-      <EventModal imgUrl="/eventFlyer2.png" />
-      <EventModal imgUrl="/eventFlyer.png" />
+
+      <EachComment />
+      <EachComment />
+      <EachComment />
+      <EachComment />
+      <EachComment />
     </Box>
   );
 }
 
-export default LiveEvents;
+export default CommentSection;

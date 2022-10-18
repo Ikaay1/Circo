@@ -318,4 +318,30 @@ export const subcribees: {
     },
 ];
 
+export const videoDetails = [
+    {
+        title: 'Title',
+        details: 'NAT GEO WILD DOCUMENTARY',
+    },
+    {
+        title: 'Description',
+        details:
+            'This is a documentation based on the life and times of NAT GEO  WILD. This documentation shows you how they started, theirchallenges and how they have been able to overcome and become the  best discovery channel to learn about all classes of animals.',
+    },
+];
+
+export const selectArr = [
+    {
+        placeholder: 'Choose Category',
+        options: ['Option'],
+    },
+    {
+        placeholder: 'Age Range',
+        options: ['Option'],
+    },
+    {
+        placeholder: 'Visibility',
+        options: ['Option'],
+    },
+];
 export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
