@@ -9,6 +9,7 @@ import {
   Box,
   FormControl,
   Checkbox,
+  Flex,
 } from "@chakra-ui/react";
 import CliqueGiftIcon from "@icons/CliqueGiftIcon";
 import { Field, Form, Formik } from "formik";
@@ -25,7 +26,7 @@ function GiftModal() {
         cursor={"pointer"}
         as={CliqueGiftIcon}
       />
-      <Modal isOpen={isOpen} isCentered onClose={onClose}>
+      <Modal size={"xl"} isOpen={isOpen} isCentered onClose={onClose}>
         <ModalOverlay />
         <ModalContent m="0" p="40px" rounded={"20px"} bg="clique.primaryBg">
           <Text
@@ -83,19 +84,22 @@ function GiftModal() {
                     icon="/gift1.svg"
                     id="4"
                   />
-                  <Button
-                    mt={"20px"}
-                    w="full"
-                    size="lg"
-                    bg="clique.base"
-                    color="clique.white"
-                    rounded={"full"}
-                    colorScheme="purple"
-                    isLoading={props.isSubmitting}
-                    type="submit"
-                  >
-                    Pay from wallet
-                  </Button>
+                  <Flex justifyContent={"center"}>
+                    <Button
+                      mt={"30px"}
+                      w="70%"
+                      size="lg"
+                      bg="clique.base"
+                      color="clique.white"
+                      rounded={"full"}
+                      fontWeight={400}
+                      colorScheme="purple"
+                      isLoading={props.isSubmitting}
+                      type="submit"
+                    >
+                      Pay from wallet
+                    </Button>
+                  </Flex>
                 </Form>
               )}
             </Formik>
