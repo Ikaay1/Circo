@@ -23,6 +23,7 @@ function TrendingBox() {
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="25px"
+        lineHeight={"1"}
       >
         Trending
       </Text>
