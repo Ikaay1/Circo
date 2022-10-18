@@ -11,6 +11,7 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
+import UploadModal from "@components/upload/UploadModal";
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsBroadcast } from "react-icons/bs";
@@ -126,17 +127,7 @@ function Header({ upload }: Props) {
         >
           Go live
         </Button>
-        <Button
-          rightIcon={<Icon fontSize={"lg"} as={MdAddCircleOutline} />}
-          variant="ghost"
-          rounded={"full"}
-          bg="clique.base"
-          fontFamily={"Poppins"}
-          size={"sm"}
-          onClick={upload}
-        >
-          Upload
-        </Button>
+        <UploadModal />
       </HStack>
     </Flex>
   );
