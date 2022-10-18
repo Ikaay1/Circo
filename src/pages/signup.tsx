@@ -9,11 +9,12 @@ import {
   useSignupMutation,
 } from "redux/services/auth.service";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const Signup = () => {
   const [preSignup, preSignupStatus] = usePreSignupMutation();
   const [signup, signUpStatus] = useSignupMutation();
-
+  const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
@@ -60,6 +61,7 @@ const Signup = () => {
 
   const handlePreSignup = async (e: any) => {
     e.preventDefault();
+
     const allData = {
       firstName: firstName,
       lastName: lastName,
@@ -67,6 +69,7 @@ const Signup = () => {
       email: email,
       password: password,
     };
+
     const data = {
       firstName: firstName,
       email: email,
@@ -76,6 +79,11 @@ const Signup = () => {
     console.log(res);
     if (res.data) {
       // redirect to otp page and pass all data
+      router.push(
+        `/otp?data=${JSON.stringify(allData)}&hascode=${JSON.stringify(
+          res.data
+        )}`
+      );
     } else if (res.error) {
       toast.error(res?.error?.data?.message);
     }

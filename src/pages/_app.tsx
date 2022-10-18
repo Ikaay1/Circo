@@ -42,14 +42,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <Provider store={store}> 
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <Layout>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <Component {...pageProps} />
             <Toaster />
           </Layout>
-        </ChakraProvider> 
+        </ChakraProvider>
+      </PersistGate>
     </Provider>
   );
 }

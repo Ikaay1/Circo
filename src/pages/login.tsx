@@ -11,10 +11,13 @@ import {
 } from "@constants/utils";
 import { useLoginMutation } from "redux/services/auth.service";
 import { useRouter } from "next/router";
+import { useAppDispatch } from "redux/app/hooks";
+import { setCredentials } from "redux/slices/authSlice";
 
 const Login = () => {
   const [login, loginStatus] = useLoginMutation();
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -46,8 +49,14 @@ const Login = () => {
     };
     const res: any = await login(data);
 
-    console.log(res);
     if (res.data) {
+      console.log(res.data);
+
+      dispatch(
+        setCredentials({
+          payload: res?.data,
+        })
+      );
       router.push("/home");
       localStorage.setItem("token", res.data?.token);
     } else if (res.error) {
