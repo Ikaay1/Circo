@@ -11,9 +11,19 @@ import {
   REGISTER,
 } from "redux-persist";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import userReducer from "redux/slices/authSlice";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
+    userReducer: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -24,6 +34,7 @@ export const store = configureStore({
     }).concat([authApi.middleware]),
 });
 
+setupListeners(store.dispatch);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -33,5 +44,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-setupListeners(store.dispatch);
 export const persistor = persistStore(store);
