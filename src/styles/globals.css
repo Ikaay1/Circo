@@ -151,7 +151,9 @@ body {
 #nprogress .bar {
   background: #892cdc !important;
 }
-
+.my-class {
+  display: none !important;
+}
 .no-wrap {
   white-space: nowrap;
 }

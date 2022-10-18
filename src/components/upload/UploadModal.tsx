@@ -13,21 +13,13 @@ import UploadIcon from "@icons/UploadIcon";
 import React, { ChangeEvent, useRef } from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 
-type Props = {
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
-  handleChoose: () => void;
-  handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  inputRef: HTMLInputElement | any;
-};
-
 function UploadModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleClick = () => {};
   const [source, setSource] = React.useState<File | undefined>();
   const [download, setDownload] = React.useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | any>();
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) {
       return;
