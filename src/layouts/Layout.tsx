@@ -1,13 +1,12 @@
 import Head from "next/head";
 import React from "react";
-
 import { Box } from "@chakra-ui/react";
-
+import "video-react/dist/video-react.css";
 const Layout = ({ children }: { children: any }) => {
   return (
     <Box>
       <Head>
-        <title>Clique</title> 
+        <title>Clique</title>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"

@@ -20,6 +20,7 @@ const colors = {
     primaryBlue:"#3D8EC9",
     ashGrey: "#1C1C1C",
     blackGrey: "#232323",
+    text: "#a1a1a1",
   },
 };
 
