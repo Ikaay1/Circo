@@ -37,7 +37,7 @@ function LiveEvents() {
         fontSize="20px"
       >
         Live Events
-      </Text>{" "}
+      </Text>
       <Box px="50px" py="5px">
         <Divider />
       </Box>
