@@ -13,6 +13,11 @@ const colors = {
     whiteGrey: "rgba(255, 255, 255, 0.7)",
     darkGrey: "#aaaaaa",
     lightGrey: "#434343",
+    secondaryGrey1: "#232323",
+    secondaryGrey2: "#A1A1A1",
+    secondaryGrey: "#434343",
+    tertiary: "#3088D9",
+    primaryBlue:"#3D8EC9"
   },
 };
 

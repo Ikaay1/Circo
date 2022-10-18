@@ -16,7 +16,11 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { BsBroadcast } from "react-icons/bs";
 import { MdAddCircleOutline, MdOutlineNotificationsNone } from "react-icons/md";
 
-function Header() {
+type Props = {
+  upload:()=>void;
+};
+
+function Header({upload}: Props) {
   const [searchWidth, setSearchWidth] = React.useState("300px");
 
   return (
@@ -129,6 +133,7 @@ function Header() {
           bg="clique.base"
           fontFamily={"Poppins"}
           size={"sm"}
+          onClick={upload}
         >
           Upload
         </Button>
