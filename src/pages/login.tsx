@@ -1,18 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAppDispatch } from 'redux/app/hooks';
 import { useLoginMutation } from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
-import { Box, Button, Image, Text, Toast } from '@chakra-ui/react';
+import { Box, Button, Image, Text } from '@chakra-ui/react';
 import { CliqueLogo } from '@components/landing/Navbar';
-import {
-	controlInput,
-	loginInputData,
-	socialMediaIconsData,
-} from '@constants/utils';
+import { loginInputData, socialMediaIconsData } from '@constants/utils';
+
+import { LoginDataInterface } from '../constants/interface';
 
 const Login = () => {
     const [login, loginStatus] = useLoginMutation();
@@ -21,49 +19,34 @@ const Login = () => {
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-
-    useEffect(() => {
-        const inputs: NodeListOf<HTMLInputElement> =
-            document.querySelectorAll('.input');
-        const texts: NodeListOf<HTMLParagraphElement> =
-            document.querySelectorAll('.placeholder');
-        if (inputs[0].value) {
-            controlInput(0, 1, false, texts);
-        }
-        if (inputs[1].value) {
-            controlInput(2, 3, false, texts);
-        }
-        if (inputs[0].value === '') {
-            controlInput(0, 1, true, texts);
-        }
-        if (inputs[1].value === '') {
-            controlInput(2, 3, true, texts);
-        }
-    }, [userName, password]);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async (e: any) => {
         e.preventDefault();
-        const data = {
+        const userData = {
             userNameOrEmail: userName,
             password: password,
         };
-        const res: any = await login(data);
+        const res: LoginDataInterface = await login(userData);
 
-        if (res.data) {
-            console.log(res.data);
-
+        if ('data' in res) {
             dispatch(
                 setCredentials({
-                    payload: res?.data,
+                    payload: res?.data.data,
                 }),
             );
             router.push('/home');
-            localStorage.setItem('token', res.data?.token);
+            // localStorage.setItem('token', res.data?.token);
         } else if (res.error) {
+            //@ts-ignore
             toast.error(res?.error?.data?.message);
         } else {
             toast.error('Something went wrong');
         }
+    };
+
+    const handleShowPassword = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
     return (
@@ -107,8 +90,15 @@ const Login = () => {
                                                       )
                                         }
                                         className='input'
-                                        type={image ? 'password' : 'text'}
+                                        type={
+                                            image
+                                                ? showPassword
+                                                    ? 'text'
+                                                    : 'password'
+                                                : 'text'
+                                        }
                                         required={true}
+                                        placeholder={name}
                                     />
                                     <Text
                                         position='absolute'
@@ -120,16 +110,6 @@ const Login = () => {
                                     >
                                         {name}
                                     </Text>
-                                    <Text
-                                        fontSize='16px'
-                                        color='#FFFFFF'
-                                        position='absolute'
-                                        left={'4.5%'}
-                                        bottom='20%'
-                                        className='placeholder big'
-                                    >
-                                        {name}
-                                    </Text>
                                     {image && (
                                         <Image
                                             position='absolute'
@@ -138,6 +118,7 @@ const Login = () => {
                                             src={image}
                                             cursor={'pointer'}
                                             alt='show password'
+                                            onClick={handleShowPassword}
                                         />
                                     )}
                                 </Box>
