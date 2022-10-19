@@ -11,6 +11,8 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
+import UploadModal from "@components/upload/UploadModal";
+import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsBroadcast } from "react-icons/bs";
@@ -22,6 +24,7 @@ type Props = {
 
 function Header({ upload }: Props) {
   const [searchWidth, setSearchWidth] = React.useState("300px");
+  const router = useRouter();
 
   return (
     <Flex
@@ -36,7 +39,13 @@ function Header({ upload }: Props) {
       w="100%"
     >
       {/* First div  */}
-      <Box w="200px" maxW="200px" minW="200px">
+      <Box
+        w="200px"
+        cursor={"pointer"}
+        onClick={() => router.push("/home")}
+        maxW="200px"
+        minW="200px"
+      >
         <Image alt="clique logo" h="100%" src="/clique-logo.png" />
       </Box>
 
@@ -126,17 +135,7 @@ function Header({ upload }: Props) {
         >
           Go live
         </Button>
-        <Button
-          rightIcon={<Icon fontSize={"lg"} as={MdAddCircleOutline} />}
-          variant="ghost"
-          rounded={"full"}
-          bg="clique.base"
-          fontFamily={"Poppins"}
-          size={"sm"}
-          onClick={upload}
-        >
-          Upload
-        </Button>
+        <UploadModal />
       </HStack>
     </Flex>
   );

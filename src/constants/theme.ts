@@ -20,6 +20,11 @@ const colors = {
         primaryBlue: '#3D8EC9',
         ashGrey: '#1C1C1C',
         blackGrey: '#232323',
+        text: '#a1a1a1',
+        brown: '#6B5653',
+        yellow: '#DDF936',
+        progressBg: '#6B6B6B',
+        lightBase: '#B880EA',
         dark: '1A202C',
     },
 };

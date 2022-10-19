@@ -14,13 +14,19 @@ import {
 import { selectArr, videoDetails } from "@constants/utils";
 import AddIcon from "@icons/AddIcon";
 import CopyIcon from "@icons/CopyIcon";
+import { useState } from "react";
 import DetailCard from "./DetailCard";
 
 type Props = {
-  src: File | undefined;
+  url: string;
+  name: string;
 };
-function UploadPage({ src }: Props) {
-  const url = URL.createObjectURL(src as File);
+function UploadPage({ url, name }: Props) {
+  const [state, setState] = useState({
+    title: "",
+    description: "",
+  });
+  console.log(state)
   return (
     <Flex gap={3} pl="5" pr="12">
       <Box w="20%" maxW="20%" minW="20%" pt="4" pr="2">
@@ -58,7 +64,15 @@ function UploadPage({ src }: Props) {
                 <DetailCard
                   key={each.title}
                   title={each.title}
-                  details={each.details}
+                  input={each.input}
+                  value={state.title}
+                  valueArea={state.description}
+                  handleInputChange={(event) =>
+                    setState({ ...state, title: event?.target?.value })
+                  }
+                  handleInputChangeArea={(event) =>
+                    setState({ ...state, description: event?.target?.value })
+                  }
                 />
               );
             })}
@@ -150,7 +164,7 @@ function UploadPage({ src }: Props) {
             <Box mt="8">
               <Text fontSize={"0.75rem"}>File name</Text>
               <Text mt="2" fontSize={"0.75rem"}>
-                {src?.name}
+                {name}
               </Text>
             </Box>
           </Box>
