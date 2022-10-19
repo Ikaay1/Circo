@@ -58,7 +58,7 @@ function UploadPage({ url, name }: Props) {
           <Text fontSize="1.75rem">Video details</Text>
 
           <VStack align="stretch" mt={4}>
-            {videoDetails.map((each) => {
+            {videoDetails.map((each: any) => {
               return (
                 <DetailCard
                   key={each.title}

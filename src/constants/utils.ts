@@ -327,6 +327,12 @@ export const subcribees: {
 export const videoDetails = [
   {
     title: "Title",
+    details: "NAT GEO WILD DOCUMENTARY",
+  },
+  {
+    title: "Description",
+    details:
+      "This is a documentation based on the life and times of NAT GEO  WILD. This documentation shows you how they started, theirchallenges and how they have been able to overcome and become the  best discovery channel to learn about all classes of animals.",
     input: true,
   },
   {
@@ -350,3 +356,29 @@ export const selectArr = [
   },
 ];
 export const baseUrl: string = "https://clique-backend-dev.onrender.com/";
+
+export const scrollBarStyle = {
+  "&::-webkit-scrollbar": {
+    width: "8px",
+    rounded: "full",
+  },
+  "&::-webkit-scrollbar-track": {
+    boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+    webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    bg: "clique.primaryBg",
+    outline: "none",
+  },
+};
+
+export const purpleBoxStyle = {
+  content: '""',
+  position: "absolute",
+  top: "50%",
+  transform: "translateY(-50%)",
+  left: 0,
+  width: "6px",
+  height: "25px",
+  borderRightRadius: "4px",
+};

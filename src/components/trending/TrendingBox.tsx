@@ -1,5 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
+import { purpleBoxStyle } from "@constants/utils";
 import React from "react";
+import TrendCard from "./TrendCard";
 
 function TrendingBox() {
   return (
@@ -7,17 +9,7 @@ function TrendingBox() {
       <Text
         position={"relative"}
         pl="20px"
-        _before={{
-          content: '""',
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          left: 0,
-          width: "6px",
-          height: "25px",
-          background: "clique.base",
-          borderRightRadius: "4px",
-        }}
+        _before={{ ...purpleBoxStyle, background: "clique.lightBase" }}
         color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={500}
@@ -27,6 +19,10 @@ function TrendingBox() {
       >
         Trending
       </Text>
+
+      <TrendCard position="01" />
+      <TrendCard position="02" />
+      <TrendCard position="03" />
     </Box>
   );
 }
