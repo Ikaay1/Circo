@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Icon, Image, Text } from '@chakra-ui/react';
 import { CliqueLogo } from '@components/landing/Navbar';
 import { changePasswordInputData } from '@constants/utils';
+import PasswordIcon from '@icons/PasswordIcon';
 
 import { ShowAuthHeader, ShowAuthImage } from './login';
 
@@ -91,17 +92,17 @@ const ChangePassword = () => {
                                         >
                                             {name}
                                         </Text>
-                                        <Image
+                                        <Box
                                             position='absolute'
                                             right={'4.5%'}
                                             bottom='26%'
-                                            src='/assets/Password-lock.png'
                                             cursor={'pointer'}
-                                            alt='show password'
                                             onClick={() =>
                                                 handleShowPassword(Number(i))
                                             }
-                                        />
+                                        >
+                                            <Icon as={PasswordIcon} />
+                                        </Box>
                                     </Box>
                                 </div>
                             ),
