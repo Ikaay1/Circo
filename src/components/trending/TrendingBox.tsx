@@ -22,6 +22,7 @@ function TrendingBox() {
 
       <TrendCard position="01" />
       <TrendCard position="02" />
+      <TrendCard position="03" />
     </Box>
   );
 }

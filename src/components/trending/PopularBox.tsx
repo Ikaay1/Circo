@@ -60,7 +60,8 @@ function PopularBox() {
         bgRepeat={"no-repeat"}
         rounded={"20px"}
         px="30px"
-        py="40px"
+        pt="40px"
+        pb="65px"
         mt="30px"
       >
         <SearchProgressBar />

@@ -24,7 +24,7 @@ function Index() {
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          <HStack h="100%" minH="100%" spacing={"20px"}>
+          <HStack minH="100%" spacing={"20px"}>
             <TrendingBox />
             <PopularBox />
           </HStack>
