@@ -10,31 +10,32 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import UploadIcon from "@icons/UploadIcon";
+import { useRouter } from "next/router";
 import React, { ChangeEvent, useRef } from "react";
 import { MdAddCircleOutline } from "react-icons/md";
+import { useAppDispatch } from "redux/app/hooks";
+import { setSources } from "redux/slices/uploadSlice";
 
 function UploadModal() {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleClick = () => {};
-  const [source, setSource] = React.useState<File | undefined>();
-  const [download, setDownload] = React.useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | any>();
-
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) {
       return;
     }
     const file = event.target.files[0];
-    setSource(file);
+    const name = file?.name;
+    const url = URL.createObjectURL(file);
     onClose();
-    setDownload(true);
+    dispatch(setSources({ url, name }));
+    router.push("/upload");
   };
-
   const handleChoose = () => {
     inputRef.current.click();
   };
 
-  let base;
   return (
     <>
       <Button
