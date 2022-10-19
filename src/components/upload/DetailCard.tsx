@@ -1,12 +1,23 @@
-import { Box, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Input, Text, Textarea } from "@chakra-ui/react";
+import React, { ChangeEvent} from "react";
 
 type Props = {
   title: string;
-  details: string;
+  input: boolean;
+  value: string;
+  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChangeArea: (event: ChangeEvent<HTMLTextAreaElement> ) => void;
+  valueArea: string;
 };
 
-export default function DetailCard({ title, details }: Props) {
+export default function DetailCard({
+  title,
+  input,
+  value,
+  handleInputChange,
+  valueArea,
+  handleInputChangeArea
+}: Props) {
   return (
     <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
       <Text
@@ -17,7 +28,15 @@ export default function DetailCard({ title, details }: Props) {
       >
         {title}
       </Text>
-      <Text fontWeight="400" fontSize={"0.75rem"}>{details}</Text>
+      {input ? (
+        <Input variant="filled" value={value} onChange={handleInputChange} />
+      ) : (
+        <Textarea
+          variant="filled"
+          value={valueArea}
+          onChange={handleInputChangeArea}
+        />
+      )}
     </Box>
   );
 }

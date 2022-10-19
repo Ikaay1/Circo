@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import userReducer from "redux/slices/authSlice";
+import uploadReducer from "redux/slices/uploadSlice";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
@@ -21,10 +22,13 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, userReducer);
 
+const uploadPersit = persistReducer(persistConfig, uploadReducer);
+
 export const store = configureStore({
   reducer: {
     userReducer: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
+    upload: uploadPersit,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
