@@ -7,11 +7,12 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
   const router = useRouter();
   const path = router.pathname;
 
+  const hrefName = name.replace(/\s/g, "").toLowerCase();
   return (
     <Flex
       mt="5px"
       cursor={"pointer"}
-      onClick={() => router.push(`/${name}`)}
+      onClick={() => router.push(`/${hrefName}`)}
       h="40px"
       position={"relative"}
       _before={{
@@ -34,7 +35,7 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
           color: "clique.base",
         }}
         transition={"all 0.2s ease-in-out"}
-        color={path === "/" + name ? "clique.base" : "clique.whiteGrey"}
+        color={path === "/" + hrefName ? "clique.base" : "clique.whiteGrey"}
         alignItems={"center"}
       >
         <Icon as={icon} mr="15px" />

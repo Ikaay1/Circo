@@ -1,4 +1,5 @@
 import { Avatar, Box, Flex, Icon, Text } from "@chakra-ui/react";
+import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import React from "react";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { VscReport } from "react-icons/vsc";
@@ -7,27 +8,14 @@ import ReportModal from "./ReportModal";
 function EachComment() {
   return (
     <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
-      <Flex
-        mr="10px"
-        alignItems={"center"}
-        justifyContent="center"
-        p="2px"
-        w="40px"
-        h="40px"
-        maxH="40px"
-        maxW="40px"
-        border={"2px solid"}
+      <AvataWithSpace
+        name="Prosper Otemuyiwa"
+        url="https://bit.ly/prosper-baba"
+        mr="20px"
+        size="40px"
+        borderThickness="2px"
         borderColor="clique.base"
-        rounded="full"
-      >
-        <Avatar
-          p="0"
-          m="0"
-          size="sm"
-          name="Prosper Otemuyiwa"
-          src="https://bit.ly/prosper-baba"
-        />
-      </Flex>
+      />
       <Box>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Text
