@@ -1,26 +1,13 @@
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Box, Image, Text } from '@chakra-ui/react';
 import { CliqueLogo } from '@components/landing/Navbar';
-import { controlInput } from '@constants/utils';
 
 import { ShowAuthHeader, ShowAuthImage } from './login';
 
 const ConfirmEmail = () => {
     const [email, setEmail] = useState('');
-
-    useEffect(() => {
-        const input: HTMLInputElement = document.querySelector('.input')!;
-        const texts: NodeListOf<HTMLParagraphElement> =
-            document.querySelectorAll('.placeholder')!;
-        if (input.value) {
-            controlInput(0, 1, false, texts);
-        }
-        if (input.value === '') {
-            controlInput(0, 1, true, texts);
-        }
-    }, [email]);
 
     return (
         <Box
@@ -56,6 +43,7 @@ const ConfirmEmail = () => {
                                 className='input'
                                 type={'text'}
                                 required={true}
+                                placeholder='Tonyclark24@gmail.com'
                             />
                             <Text
                                 position='absolute'
@@ -66,16 +54,6 @@ const ConfirmEmail = () => {
                                 className='placeholder small'
                             >
                                 Email
-                            </Text>
-                            <Text
-                                fontSize='16px'
-                                color='#FFFFFF'
-                                position='absolute'
-                                left={'4.5%'}
-                                bottom='20%'
-                                className='placeholder big'
-                            >
-                                Tonyclark24@gmail.com
                             </Text>
                         </Box>
                         <Text
