@@ -1,5 +1,8 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { purpleBoxStyle } from "@constants/utils";
 import React from "react";
+import CreatorAvatarBox from "./CreatorAvatarBox";
+import SearchProgressBar from "./SearchProgressBar";
 
 function PopularBox() {
   return (
@@ -7,17 +10,7 @@ function PopularBox() {
       <Text
         position={"relative"}
         pl="20px"
-        _before={{
-          content: '""',
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          left: 0,
-          width: "6px",
-          height: "25px",
-          background: "clique.base",
-          borderRightRadius: "4px",
-        }}
+        _before={{ ...purpleBoxStyle, background: "clique.lightBase" }}
         color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={500}
@@ -28,21 +21,28 @@ function PopularBox() {
         Popular Creators
       </Text>
 
+      <SimpleGrid
+        h="220px"
+        bg="clique.white"
+        spacingX={"10px"}
+        columns={3}
+        rounded={"20px"}
+        p="20px"
+        mt="30px"
+      >
+        <CreatorAvatarBox />
+        <CreatorAvatarBox />
+        <CreatorAvatarBox />
+        <CreatorAvatarBox />
+        <CreatorAvatarBox />
+        <CreatorAvatarBox />
+      </SimpleGrid>
+
       <Text
-        mt="50px"
+        mt="30px"
         position={"relative"}
         pl="20px"
-        _before={{
-          content: '""',
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          left: 0,
-          width: "6px",
-          height: "25px",
-          background: "clique.base",
-          borderRightRadius: "4px",
-        }}
+        _before={{ ...purpleBoxStyle, background: "clique.lightBase" }}
         color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={500}
@@ -52,6 +52,25 @@ function PopularBox() {
       >
         Top Searches
       </Text>
+
+      <Box
+        bgImage={"/assets/searchbg.png"}
+        bgPosition={"center"}
+        bgSize={"cover"}
+        bgRepeat={"no-repeat"}
+        rounded={"20px"}
+        px="30px"
+        py="40px"
+        mt="30px"
+      >
+        <SearchProgressBar />
+        <SearchProgressBar />
+        <SearchProgressBar />
+        <SearchProgressBar />
+        <SearchProgressBar />
+        <SearchProgressBar />
+        <SearchProgressBar />
+      </Box>
     </Box>
   );
 }

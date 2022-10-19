@@ -1,12 +1,12 @@
 import SideMenu from "@components/widgets/sideMenu";
-import { Box, Divider, Flex } from "@chakra-ui/react";
+import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import HomeLayout from "layouts/HomeLayout";
 import React from "react";
 import LiveTopCard from "@components/home/LiveTopCard";
 import TagSection from "@components/home/TagSection";
 import VideoGrid from "@components/home/VideoGrid";
 import LiveEvents from "@components/home/LiveEvents";
-import { scrollBarStyle } from "@constants/utils";
+import { purpleBoxStyle, scrollBarStyle } from "@constants/utils";
 
 function Index() {
   return (
@@ -17,18 +17,26 @@ function Index() {
           maxH={"90vh"}
           pb="50px"
           px="30px"
-          maxW={"calc(100vw - 500px)"}
+          maxW={"calc(100vw - 250px)"}
           overflowY={"scroll"}
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          <LiveTopCard />
-          <Divider />
-          <TagSection />
-          <Divider />
-          <VideoGrid />
+          <Text
+            py="20px"
+            position={"relative"}
+            pl="20px"
+            _before={{ ...purpleBoxStyle, background: "clique.base" }}
+            color={"clique.white"}
+            fontFamily={"Poppins"}
+            fontWeight={500}
+            textTransform={"capitalize"}
+            fontSize="25px"
+            lineHeight={"1"}
+          >
+            Live Events
+          </Text>
         </Box>
-        <LiveEvents />
       </Flex>
     </HomeLayout>
   );
