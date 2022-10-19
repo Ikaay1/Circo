@@ -48,19 +48,13 @@ body {
     display: block;
 }
 
-input::placeholder {
+.input::placeholder {
     color: white;
-    opacity: 1; /* Firefox */
+    opacity: 1;
 }
 
-:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: white;
-}
-
-::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: white;
+.input:focus::placeholder {
+    color: transparent;
 }
 
 .placeholder.big.inactive {
@@ -175,5 +169,5 @@ input::placeholder {
 }
 
 .no-wrap {
-  white-space: nowrap;
+    white-space: nowrap;
 }

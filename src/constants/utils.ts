@@ -1,4 +1,5 @@
 import ChannelIcon from '@icons/ChannelIcon';
+import ContentIcon from '@icons/ContentIcon';
 import DiscoverIcon from '@icons/DiscoverIcon';
 import HomeIcon from '@icons/HomeIcon';
 import LiveIcon from '@icons/LiveIcon';
@@ -345,3 +346,50 @@ export const selectArr = [
     },
 ];
 export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
+
+export const profileMenu: {
+    name: string;
+    route: string;
+    icon: any;
+}[] = [
+    {
+        name: 'Content',
+        route: 'content',
+        icon: ContentIcon,
+    },
+    {
+        name: 'Edit Profile Details',
+        route: 'edit',
+        icon: DiscoverIcon,
+    },
+];
+
+export const profileNav: {
+    title: string;
+    name: string;
+}[] = [
+    {title: 'Paid Live', name: 'paid'},
+    {title: 'Playlists', name: 'play'},
+    {title: 'Saved Videos', name: 'saved'},
+];
+
+export const playListData = [
+    {
+        bigImage: 'tiger',
+        noOfVideos: '43',
+        smallImage: 'uploader',
+        name: 'NAT GEO COMPILATIONS',
+    },
+    {
+        bigImage: 'flower',
+        noOfVideos: '76',
+        smallImage: 'flowersmall',
+        name: 'Plant Cultivation Practices',
+    },
+    {
+        bigImage: 'food',
+        noOfVideos: '6',
+        smallImage: 'foodsmall',
+        name: 'Food Network',
+    },
+];

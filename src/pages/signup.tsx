@@ -97,7 +97,7 @@ const Signup = () => {
                                     className='input'
                                     type={'text'}
                                     required={true}
-                                    placeholder='Tony'
+                                    placeholder='Firstname'
                                 />
                                 <Text
                                     position='absolute'
@@ -107,7 +107,7 @@ const Signup = () => {
                                     color='#FFFFFF'
                                     className='placeholder small'
                                 >
-                                    First name
+                                    Firstname
                                 </Text>
                             </Box>
                             <Box width='48%' height='57px' position='relative'>
@@ -119,7 +119,7 @@ const Signup = () => {
                                     className='input'
                                     type={'text'}
                                     required={true}
-                                    placeholder='Clark'
+                                    placeholder='Lastname'
                                 />
                                 <Text
                                     position='absolute'
@@ -129,7 +129,7 @@ const Signup = () => {
                                     color='#FFFFFF'
                                     className='placeholder small'
                                 >
-                                    Last name
+                                    Lastname
                                 </Text>
                             </Box>
                         </Box>
@@ -187,7 +187,7 @@ const Signup = () => {
                                                     ? true
                                                     : false
                                             }
-                                            placeholder={placeholder}
+                                            placeholder={name}
                                         />
                                         <Text
                                             position='absolute'

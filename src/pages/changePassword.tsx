@@ -79,7 +79,7 @@ const ChangePassword = () => {
                                                     : 'password'
                                             }
                                             required={true}
-                                            placeholder={placeholder}
+                                            placeholder={name}
                                         />
                                         <Text
                                             position='absolute'

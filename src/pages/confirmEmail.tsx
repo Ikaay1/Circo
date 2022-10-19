@@ -43,7 +43,7 @@ const ConfirmEmail = () => {
                                 className='input'
                                 type={'text'}
                                 required={true}
-                                placeholder='Tonyclark24@gmail.com'
+                                placeholder='Email'
                             />
                             <Text
                                 position='absolute'
