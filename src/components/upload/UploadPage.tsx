@@ -26,6 +26,7 @@ function UploadPage({ url, name }: Props) {
     title: "",
     description: "",
   });
+  console.log(state)
   return (
     <Flex gap={3} pl="5" pr="12">
       <Box w="20%" maxW="20%" minW="20%" pt="4" pr="2">
@@ -58,7 +59,7 @@ function UploadPage({ url, name }: Props) {
           <Text fontSize="1.75rem">Video details</Text>
 
           <VStack align="stretch" mt={4}>
-            {videoDetails.map((each: any) => {
+            {videoDetails.map((each) => {
               return (
                 <DetailCard
                   key={each.title}
