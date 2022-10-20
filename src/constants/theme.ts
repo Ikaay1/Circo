@@ -26,6 +26,8 @@ const colors = {
         progressBg: '#6B6B6B',
         lightBase: '#B880EA',
         dark: '1A202C',
+        green: '#22C55E',
+        red: '#D52B2B',
     },
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Box, Text } from '@chakra-ui/react';
+import VideoGrid from '@components/home/VideoGrid';
 import { profileNav } from '@constants/utils';
 
 import Playlists from './Playlists';
@@ -32,9 +33,27 @@ const Contents = () => {
                     </Text>
                 ))}
             </Box>
-            <Box mt={'2.5rem'}>
-                <Playlists />
-            </Box>
+
+            {route === 'play' && (
+                <Box mt={'2.5rem'}>
+                    <Playlists />
+                </Box>
+            )}
+
+            {route === 'saved' && (
+                <Box mt={'2.3rem'}>
+                    <VideoGrid
+                        columns={4}
+                        width={'100%'}
+                        videos={[
+                            'videoImage',
+                            'videoImage1',
+                            'videoImage2',
+                            'videoImage3',
+                        ]}
+                    />
+                </Box>
+            )}
         </>
     );
 };

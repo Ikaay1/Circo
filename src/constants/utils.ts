@@ -418,3 +418,29 @@ export const purpleBoxStyle = {
     height: '25px',
     borderRightRadius: '4px',
 };
+
+export const editInputData = [
+    {name: 'First name', sideContent: 'Edit'},
+    {name: 'Last name', sideContent: 'Edit'},
+    {
+        name: 'Username',
+        sideContent: '(Username can only be changed 2 times a year)',
+    },
+    {name: 'Email', sideContent: 'Edit'},
+    {name: 'Password', sideContent: 'Edit'},
+    {name: 'Date of Birth', sideContent: 'Edit'},
+];
+
+export const subscriptionsData = [
+    {name: 'Kint Klarton Brown', status: 'active'},
+    {name: 'Naomi Cambel', status: 'active'},
+    {name: 'Black Lives Matter', status: 'active'},
+    {name: 'Sarah Banks', status: 'notActive'},
+    {name: 'Jennifer Ugochi', status: 'active'},
+    {name: 'Lanre Kolade', status: 'active'},
+    {name: 'Chiamaka Okoye', status: 'notActive'},
+    {name: 'Mirabelle Odes', status: 'notActive'},
+    {name: 'Chimamanda Nneka', status: 'active'},
+    {name: 'Isioma Violet', status: 'active'},
+    {name: 'Dara Omolara', status: 'active'},
+];
