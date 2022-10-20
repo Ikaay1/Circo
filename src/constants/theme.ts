@@ -26,7 +26,8 @@ const colors = {
     progressBg: "#6B6B6B",
     lightBase: "#B880EA",
     danger: "#BA1A1A",
-    success:"#22C55E"
+    success: "#22C55E",
+    dark: "1A202C",
   },
 };
 
@@ -44,6 +45,24 @@ const breakpoints = {
 const config: ThemeConfig = {
   initialColorMode: "dark",
   useSystemColorMode: false,
+};
+
+//font sizes
+const fontSizes = {
+  //50px
+  big: "3.125",
+  //30px
+  bigHead: "1.875rem",
+  //25px
+  head: "1.563rem",
+  //20px
+  smHead: "1.25rem",
+  //16px
+  subHead: "1rem",
+  //14px
+  smSubHead: "0.875rem",
+  //8px
+  xs: "0.5rem",
 };
 
 const components = {
@@ -78,6 +97,12 @@ const components = {
   },
 };
 
-const theme = extendTheme({ colors, config, breakpoints, components });
+const theme = extendTheme({
+  colors,
+  config,
+  breakpoints,
+  components,
+  fontSizes,
+});
 
 export default theme;

@@ -353,6 +353,7 @@ const Home: NextPage = () => {
                                     lg: '683px',
                                 }}
                                 order={{lg: i === 1 ? '-1' : '1'}}
+                                mr={{lg: i === 1 ? '1.5rem' : '0rem'}}
                                 //
                             >
                                 <Image

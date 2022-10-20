@@ -75,7 +75,7 @@ const Referral = () => {
                                 className='input'
                                 type={'text'}
                                 required={true}
-                                placeholder='DD7Y47'
+                                placeholder='OTP'
                             />
                             <Text
                                 position='absolute'

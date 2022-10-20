@@ -6,10 +6,11 @@ import { useAppDispatch } from 'redux/app/hooks';
 import { useLoginMutation } from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
-import { Box, Button, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Icon, Image, Text } from '@chakra-ui/react';
 import { CliqueLogo } from '@components/landing/Navbar';
 import { loginInputData, socialMediaIconsData } from '@constants/utils';
 
+import PasswordIcon from '../assets/icons/PasswordIcon';
 import { LoginDataInterface } from '../constants/interface';
 
 const Login = () => {
@@ -111,15 +112,15 @@ const Login = () => {
                                         {name}
                                     </Text>
                                     {image && (
-                                        <Image
+                                        <Box
                                             position='absolute'
                                             right={'4.5%'}
                                             bottom='26%'
-                                            src={image}
                                             cursor={'pointer'}
-                                            alt='show password'
                                             onClick={handleShowPassword}
-                                        />
+                                        >
+                                            <Icon as={PasswordIcon} />
+                                        </Box>
                                     )}
                                 </Box>
                             </div>

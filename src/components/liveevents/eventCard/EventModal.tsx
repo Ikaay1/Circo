@@ -15,18 +15,14 @@ import {
 import { Formik, Form, Field } from "formik";
 import React from "react";
 import { VscReport } from "react-icons/vsc";
-function ReportModal() {
+import Card from "./EventCard";
+
+function EventModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Icon
-        onClick={onOpen}
-        cursor={"pointer"}
-        mr="40px"
-        fontSize="18px"
-        as={VscReport}
-        color="clique.white"
-      />
+      <Card onOpen={onOpen} />
+
       <Modal
         isCentered
         onClose={onClose}
@@ -249,4 +245,4 @@ function ReportModal() {
   );
 }
 
-export default ReportModal;
+export default EventModal;
