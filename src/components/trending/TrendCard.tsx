@@ -14,7 +14,7 @@ function TrendCard({ position }: { position: string }) {
       _before={{
         content: `"${position}"`,
         position: "absolute",
-        fontSize: "50px",
+        fontSize: "big",
         left: "-20px",
         top: "-35px",
         color: "clique.lightBase",
@@ -44,7 +44,7 @@ function TrendCard({ position }: { position: string }) {
           <Box>
             <Text
               fontFamily={"Poppins"}
-              fontSize="14px"
+              fontSize="smSubHead"
               color={"clique.lightGrey"}
             >
               Emma
@@ -55,7 +55,7 @@ function TrendCard({ position }: { position: string }) {
                 color={"clique.lightGrey"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"14px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.2"}
                 mr="10px"
               >
@@ -79,7 +79,7 @@ function TrendCard({ position }: { position: string }) {
                 color={"clique.lightGrey"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"14px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
                 3 days ago
@@ -94,12 +94,16 @@ function TrendCard({ position }: { position: string }) {
           fontFamily={"Poppins"}
           fontWeight={700}
           textTransform={"capitalize"}
-          fontSize="25px"
+          fontSize="head"
         >
           Eniola korty eo
         </Text>
 
-        <Text fontFamily={"Poppins"} fontSize="14px" color={"clique.lightGrey"}>
+        <Text
+          fontFamily={"Poppins"}
+          fontSize="smSubHead"
+          color={"clique.lightGrey"}
+        >
           My journey so far has been amazing thanks to you guys. I’m ALMOST
           there
         </Text>

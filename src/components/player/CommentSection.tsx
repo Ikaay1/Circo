@@ -35,7 +35,7 @@ function CommentSection() {
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
-        fontSize="20px"
+        fontSize="smHead"
       >
         Comments
       </Text>

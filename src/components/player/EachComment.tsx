@@ -23,7 +23,7 @@ function EachComment() {
             color={"clique.white"}
             fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={"16px"}
+            fontSize={"subHead"}
             lineHeight={"1.2"}
           >
             Emmanuel N.
@@ -33,7 +33,7 @@ function EachComment() {
             color={"clique.darkGrey"}
             fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={"14px"}
+            fontSize={"smSubHead"}
             lineHeight={"1.2"}
           >
             2hrs ago
@@ -45,7 +45,7 @@ function EachComment() {
           color={"clique.white"}
           fontFamily={"Poppins"}
           fontWeight={400}
-          fontSize={"12px"}
+          fontSize={"smSubHead"}
           lineHeight={"1.3"}
         >
           This video is good and it’s it good and i’m out of comment because i
@@ -59,7 +59,7 @@ function EachComment() {
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"12px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
                 12
@@ -70,14 +70,14 @@ function EachComment() {
               <Icon
                 color="clique.white"
                 mr="5px"
-                fontSize="20px"
+                fontSize="smHead"
                 as={BiDislike}
               />
               <Text
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"12px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
                 12

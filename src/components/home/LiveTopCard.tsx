@@ -13,6 +13,7 @@ function LiveTopCard() {
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
+        fontSize={"subHead"}
       >
         Live
       </Text>

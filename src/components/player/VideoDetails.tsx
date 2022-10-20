@@ -9,7 +9,7 @@ function VideoDetails() {
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
-        fontSize="20px"
+        fontSize="smHead"
       >
         I be Boss wey dey do giveaway - Dj Caleb
       </Text>
@@ -38,7 +38,7 @@ function VideoDetails() {
               color={"clique.white"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"16px"}
+              fontSize="subHead"
               lineHeight={"1.2"}
             >
               Engr. Caleb
@@ -49,7 +49,7 @@ function VideoDetails() {
               color={"clique.darkGrey"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"14px"}
+              fontSize="smSubHead"
               lineHeight={"1.2"}
             >
               6M subcribers
@@ -66,7 +66,7 @@ function VideoDetails() {
         color={"clique.darkGrey"}
         fontFamily={"Poppins"}
         fontWeight={400}
-        fontSize={"14px"}
+        fontSize="smSubHead"
         lineHeight={"1.2"}
       >
         Video Description
@@ -76,7 +76,7 @@ function VideoDetails() {
         color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={400}
-        fontSize={"14px"}
+        fontSize="smSubHead"
         lineHeight={"1.5"}
         w="70%"
       >

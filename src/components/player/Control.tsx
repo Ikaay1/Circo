@@ -31,7 +31,7 @@ function Control({
             color={"clique.white"}
             fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={"14px"}
+            fontSize={"smSubHead"}
             lineHeight={"1"}
             mr="30px"
           >
@@ -40,14 +40,14 @@ function Control({
           </Text>
           {!isMuted ? (
             <Icon
-              fontSize="20px"
+              fontSize="smHead"
               cursor={"pointer"}
               onClick={() => setIsMuted(!isMuted)}
               as={GoUnmute}
             />
           ) : (
             <Icon
-              fontSize="20px"
+              fontSize="smHead"
               cursor={"pointer"}
               onClick={() => setIsMuted(!isMuted)}
               as={GoMute}
@@ -60,12 +60,12 @@ function Control({
               cursor={"pointer"}
               alignItems={"center"}
             >
-              <Icon color="clique.white" mr="5px" fontSize="25px" as={BiLike} />
+              <Icon color="clique.white" mr="5px" fontSize="head" as={BiLike} />
               <Text
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"12px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
                 12
@@ -82,14 +82,14 @@ function Control({
               <Icon
                 color="clique.white"
                 mr="5px"
-                fontSize="25px"
+                fontSize=" head"
                 as={BiDislike}
               />
               <Text
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"12px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
                 12
@@ -100,7 +100,7 @@ function Control({
       </GridItem>
       <GridItem colSpan={3} justifySelf="center">
         <Flex alignItems="center">
-          <Icon fontSize="30px" cursor="pointer" as={PrevIcon} />
+          <Icon fontSize="bigHead" cursor="pointer" as={PrevIcon} />
           {!isPlay ? (
             <Icon
               fontSize="35px"
@@ -118,7 +118,7 @@ function Control({
             />
           ) : (
             <Icon
-              fontSize="35px"
+              fontSize="bigHead"
               cursor="pointer"
               as={BsFillPlayFill}
               onClick={
@@ -141,7 +141,7 @@ function Control({
           <VideoOptionMenu player={playerRef} />
           {!isFullScreen ? (
             <Icon
-              fontSize="20px"
+              fontSize="smHead"
               cursor={"pointer"}
               onClick={() => {
                 setIsFullScreen(!isFullScreen);
@@ -152,7 +152,7 @@ function Control({
             />
           ) : (
             <Icon
-              fontSize="20px"
+              fontSize="smHead"
               cursor={"pointer"}
               onClick={() => {
                 setIsFullScreen(!isFullScreen);

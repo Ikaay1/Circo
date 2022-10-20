@@ -51,7 +51,7 @@ function EventModal({ imgUrl }: any) {
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={500}
-                fontSize={"14px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.3"}
                 mr="5px"
               >
@@ -61,7 +61,7 @@ function EventModal({ imgUrl }: any) {
                 color={"clique.base"}
                 fontFamily={"Poppins"}
                 fontWeight={500}
-                fontSize={"14px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.3"}
                 mr="5px"
               >
@@ -72,7 +72,7 @@ function EventModal({ imgUrl }: any) {
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"12px"}
+                fontSize={"smSubHead"}
                 lineHeight={"1.3"}
                 mr="5px"
               >
@@ -93,7 +93,7 @@ function EventModal({ imgUrl }: any) {
                   color={"clique.white"}
                   fontFamily={"Poppins"}
                   fontWeight={400}
-                  fontSize={"12px"}
+                  fontSize={"smSubHead"}
                   lineHeight={"1.3"}
                   mr="5px"
                 >

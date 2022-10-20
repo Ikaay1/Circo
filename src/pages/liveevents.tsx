@@ -31,7 +31,7 @@ function Index() {
             fontFamily={"Poppins"}
             fontWeight={500}
             textTransform={"capitalize"}
-            fontSize="25px"
+            fontSize="head"
             lineHeight={"1"}
           >
             Live Events

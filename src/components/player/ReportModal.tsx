@@ -53,7 +53,7 @@ function ReportModal() {
               fontFamily={"Poppins"}
               fontWeight={500}
               textTransform={"capitalize"}
-              fontSize="20px"
+              fontSize="smHead"
             >
               Report
             </Text>
@@ -62,7 +62,7 @@ function ReportModal() {
               color={"clique.white"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"14px"}
+              fontSize={" smSubHead"}
               lineHeight={"1.3"}
             >
               Why are you reporting this?
@@ -72,7 +72,7 @@ function ReportModal() {
               color={"clique.white"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"14px"}
+              fontSize={"smSubHead"}
               lineHeight={"1.5"}
             >
               Your report is anonymous, feel free to click all related issues as
@@ -104,7 +104,7 @@ function ReportModal() {
                             color={"clique.white"}
                             fontFamily={"Poppins"}
                             fontWeight={400}
-                            fontSize={"14px"}
+                            fontSize={"smSubHead"}
                             lineHeight={"1"}
                           >
                             It’s spam
@@ -125,7 +125,7 @@ function ReportModal() {
                             color={"clique.white"}
                             fontFamily={"Poppins"}
                             fontWeight={400}
-                            fontSize={"14px"}
+                            fontSize={"smSubHead"}
                             lineHeight={"1"}
                           >
                             Nudity or sexual activity
@@ -148,7 +148,7 @@ function ReportModal() {
                             color={"clique.white"}
                             fontFamily={"Poppins"}
                             fontWeight={400}
-                            fontSize={"14px"}
+                            fontSize={"smSubHead"}
                             lineHeight={"1"}
                           >
                             I just don’t like it
@@ -171,7 +171,7 @@ function ReportModal() {
                             color={"clique.white"}
                             fontFamily={"Poppins"}
                             fontWeight={400}
-                            fontSize={"14px"}
+                            fontSize={"smSubHead"}
                             lineHeight={"1"}
                           >
                             Hate speech or symbols
@@ -194,7 +194,7 @@ function ReportModal() {
                             color={"clique.white"}
                             fontFamily={"Poppins"}
                             fontWeight={400}
-                            fontSize={"14px"}
+                            fontSize={"smSubHead"}
                             lineHeight={"1"}
                           >
                             Viloence or dangerous organisations
@@ -217,7 +217,7 @@ function ReportModal() {
                             color={"clique.white"}
                             fontFamily={"Poppins"}
                             fontWeight={400}
-                            fontSize={"14px"}
+                            fontSize={"smSubHead"}
                             lineHeight={"1"}
                           >
                             Bullying or harassment

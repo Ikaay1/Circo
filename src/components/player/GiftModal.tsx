@@ -22,7 +22,7 @@ function GiftModal() {
     <>
       <Icon
         onClick={onOpen}
-        fontSize="28px"
+        fontSize="bigHead"
         cursor={"pointer"}
         as={CliqueGiftIcon}
       />
@@ -33,7 +33,7 @@ function GiftModal() {
             color={"clique.white"}
             fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={"14px"}
+            fontSize={"smSubHead"}
             lineHeight={"1"}
             textAlign="center"
           >
