@@ -25,6 +25,8 @@ const colors = {
     yellow: "#DDF936",
     progressBg: "#6B6B6B",
     lightBase: "#B880EA",
+    danger: "#BA1A1A",
+    success:"#22C55E"
   },
 };
 

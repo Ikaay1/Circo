@@ -11,6 +11,7 @@ import {
   VStack,
   Link,
 } from "@chakra-ui/react";
+import Btn from "@components/Button/btn";
 import { selectArr, videoDetails } from "@constants/utils";
 import AddIcon from "@icons/AddIcon";
 import CopyIcon from "@icons/CopyIcon";
@@ -26,7 +27,6 @@ function UploadPage({ url, name }: Props) {
     title: "",
     description: "",
   });
-  console.log(state)
   return (
     <Flex gap={3} pl="5" pr="12">
       <Box w="20%" maxW="20%" minW="20%" pt="4" pr="2">
@@ -169,10 +169,7 @@ function UploadPage({ url, name }: Props) {
             </Box>
           </Box>
         </Box>
-
-        <Button bg="clique.base" py="5" borderRadius={"50px"} maxW="100%">
-          Upload
-        </Button>
+        <Btn text="upload" ></Btn>
       </Flex>
     </Flex>
   );
