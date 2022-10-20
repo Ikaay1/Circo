@@ -6,7 +6,7 @@ import UploadPlaylistIcon from '@icons/UploadPlaylistIcon';
 
 const NewPlaylist = () => {
     return (
-        <Box bg='clique.black' w='420px' p='1rem'>
+        <Box p='1rem'>
             <Box>
                 <Text
                     fontWeight='500'

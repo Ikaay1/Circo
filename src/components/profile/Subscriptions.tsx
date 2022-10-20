@@ -5,7 +5,7 @@ import { subscriptionsData } from '@constants/utils';
 
 const Subscriptions = () => {
     return (
-        <Box bg='clique.black' w='420px' p='1rem' pb='2.5rem'>
+        <Box p='1rem' pb='2.5rem'>
             <Text
                 fontWeight='500'
                 fontSize='22px'

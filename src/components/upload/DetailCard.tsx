@@ -29,12 +29,13 @@ export default function DetailCard({
         {title}
       </Text>
       {input ? (
-        <Input variant="filled" value={value} onChange={handleInputChange} />
+        <Input variant="filled" value={value} onChange={handleInputChange} bg="clique.secondaryGrey1"/>
       ) : (
         <Textarea
           variant="filled"
           value={valueArea}
           onChange={handleInputChangeArea}
+          bg="clique.secondaryGrey1"
         />
       )}
     </Box>

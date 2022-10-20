@@ -16,7 +16,7 @@ function CreatorAvatarBox() {
       <Text
         mt="5px"
         fontFamily={"Poppins"}
-        fontSize="14px"
+        fontSize="smSubHead"
         color={"clique.lightGrey"}
       >
         Emma

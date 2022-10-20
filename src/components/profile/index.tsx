@@ -1,7 +1,15 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Image,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	Text,
+	useDisclosure,
+} from '@chakra-ui/react';
 import { scrollBarStyle } from '@constants/utils';
 
 import Contents from './Contents';
@@ -9,6 +17,7 @@ import EditProfile from './EditProfile';
 import Subscriptions from './Subscriptions';
 
 const Index = () => {
+    const {isOpen, onOpen, onClose} = useDisclosure();
     const router = useRouter();
     return (
         <Box
@@ -65,6 +74,10 @@ const Index = () => {
                                 textDecorationLine='underline'
                                 color='clique.secondaryGrey2'
                                 textAlign={'center'}
+                                onClick={() => {
+                                    onOpen();
+                                }}
+                                cursor='pointer'
                             >
                                 SUBSCRIPTIONS
                             </Text>
@@ -79,12 +92,33 @@ const Index = () => {
                 </Box>
             )}
 
+            <Modal
+                isCentered
+                onClose={onClose}
+                isOpen={isOpen}
+                motionPreset='slideInRight'
+                scrollBehavior='inside'
+            >
+                <ModalOverlay />
+                <ModalContent
+                    maxW='400px'
+                    w='400px'
+                    bottom='0'
+                    minH='100vh'
+                    overflowY={'scroll'}
+                    sx={scrollBarStyle}
+                    m='0'
+                    py='30px'
+                    position={'absolute'}
+                    right={0}
+                    bg='clique.black'
+                >
+                    <Subscriptions />
+                </ModalContent>
+            </Modal>
             {/* <Box position={'absolute'} top='0' right='0'>
-                <NewPlaylist />
-            </Box> */}
-            <Box position={'absolute'} top='0' right='0'>
                 <Subscriptions />
-            </Box>
+            </Box> */}
 
             {router.query.name === 'edit' && (
                 <Box mt={'8.5rem'} px='1.35rem'>

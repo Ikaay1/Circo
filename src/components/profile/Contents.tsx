@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-import { Box, Text } from '@chakra-ui/react';
+import { Box, SimpleGrid, TabPanels, Tabs, Text } from '@chakra-ui/react';
 import VideoGrid from '@components/home/VideoGrid';
+import EventModal from '@components/liveevents/eventCard/EventModal';
+import CliqueTabPanel from '@components/widgets/CliqueTabPanel';
 import { profileNav } from '@constants/utils';
 
 import Playlists from './Playlists';
@@ -33,6 +35,31 @@ const Contents = () => {
                     </Text>
                 ))}
             </Box>
+
+            {route === 'paid' && (
+                <Box mt={'1.5rem'}>
+                    <Tabs
+                        variant={'unstyled'}
+                        minW='full'
+                        fontFamily='Poppins'
+                        color={'clique.white'}
+                    >
+                        <TabPanels>
+                            <CliqueTabPanel>
+                                <SimpleGrid
+                                    columns={{base: 3, lg: 4, mlg: 4, xl: 5}}
+                                    spacing='30px'
+                                >
+                                    <EventModal width={true} />
+                                    <EventModal width={true} />
+                                    <EventModal width={true} />
+                                    <EventModal width={true} />
+                                </SimpleGrid>
+                            </CliqueTabPanel>
+                        </TabPanels>
+                    </Tabs>
+                </Box>
+            )}
 
             {route === 'play' && (
                 <Box mt={'2.5rem'}>

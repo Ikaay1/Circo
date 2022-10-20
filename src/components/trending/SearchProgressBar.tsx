@@ -5,10 +5,10 @@ function SearchProgressBar() {
   return (
     <Box mb="15px">
       <Flex justifyContent={"space-between"}>
-        <Text fontSize={"14px"} fontFamily={"Poppins"}>
+        <Text fontSize={"smSubHead"} fontFamily={"Poppins"}>
           Title
         </Text>
-        <Text fontFamily={"Poppins"} fontSize={"12px"}>
+        <Text fontFamily={"Poppins"} fontSize={"smSubHead"}>
           20000
         </Text>
       </Flex>

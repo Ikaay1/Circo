@@ -28,6 +28,8 @@ const colors = {
         dark: '1A202C',
         green: '#22C55E',
         red: '#D52B2B',
+        blurColor:
+            'linear-gradient(92.83deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)',
     },
 };
 
@@ -45,6 +47,24 @@ const breakpoints = {
 const config: ThemeConfig = {
     initialColorMode: 'dark',
     useSystemColorMode: false,
+};
+
+//font sizes
+const fontSizes = {
+    //50px
+    big: '3.125',
+    //30px
+    bigHead: '1.875rem',
+    //25px
+    head: '1.563rem',
+    //20px
+    smHead: '1.25rem',
+    //16px
+    subHead: '1rem',
+    //14px
+    smSubHead: '0.875rem',
+    //8px
+    xs: '0.5rem',
 };
 
 const components = {
@@ -79,6 +99,12 @@ const components = {
     },
 };
 
-const theme = extendTheme({colors, config, breakpoints, components});
+const theme = extendTheme({
+    colors,
+    config,
+    breakpoints,
+    components,
+    fontSizes,
+});
 
 export default theme;

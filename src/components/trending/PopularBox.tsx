@@ -15,7 +15,7 @@ function PopularBox() {
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
-        fontSize="25px"
+        fontSize="head"
         lineHeight={"1"}
       >
         Popular Creators
@@ -47,7 +47,7 @@ function PopularBox() {
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
-        fontSize="25px"
+        fontSize="head"
         lineHeight={"1"}
       >
         Top Searches
