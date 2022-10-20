@@ -26,6 +26,8 @@ const colors = {
     progressBg: "#6B6B6B",
     lightBase: "#B880EA",
     dark: "1A202C",
+    blurColor:
+      "linear-gradient(92.83deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
   },
 };
 
