@@ -11,7 +11,7 @@ import {
   VStack,
   Link,
 } from "@chakra-ui/react";
-import Btn from "@components/Button/btn";
+import Btn from "@components/Button/Btn";
 import { selectArr, videoDetails } from "@constants/utils";
 import AddIcon from "@icons/AddIcon";
 import CopyIcon from "@icons/CopyIcon";

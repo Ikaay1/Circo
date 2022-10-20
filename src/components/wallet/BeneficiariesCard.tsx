@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Flex, Icon, Text } from "@chakra-ui/react";
-import Btn from "@components/Button/btn";
+import Btn from "@components/Button/Btn";
 import tickSquare from "@icons/UploadIcon copy";
 import React from "react";
 

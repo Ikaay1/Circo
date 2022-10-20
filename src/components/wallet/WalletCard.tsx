@@ -7,7 +7,7 @@ import {
   Grid,
   Button,
 } from "@chakra-ui/react";
-import Btn from "@components/Button/btn";
+import Btn from "@components/Button/Btn";
 import React from "react";
 
 type Props = {
