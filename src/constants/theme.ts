@@ -25,6 +25,8 @@ const colors = {
     yellow: "#DDF936",
     progressBg: "#6B6B6B",
     lightBase: "#B880EA",
+    danger: "#BA1A1A",
+    success: "#22C55E",
     dark: "1A202C",
     blurColor:
       "linear-gradient(92.83deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
@@ -49,13 +51,20 @@ const config: ThemeConfig = {
 
 //font sizes
 const fontSizes = {
-  big: "50px",
-  bigHead: "30px",
-  head: "25px",
-  smHead: "20px",
-  subHead: "16px",
-  smSubHead: "14px",
-  xs: "8px",
+  //50px
+  big: "3.125",
+  //30px
+  bigHead: "1.875rem",
+  //25px
+  head: "1.563rem",
+  //20px
+  smHead: "1.25rem",
+  //16px
+  subHead: "1rem",
+  //14px
+  smSubHead: "0.875rem",
+  //8px
+  xs: "0.5rem",
 };
 
 const components = {
