@@ -39,7 +39,11 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
           color: "clique.base",
         }}
         transition={"all 0.2s ease-in-out"}
-        color={path === "/" + name ? "clique.base" : "clique.whiteGrey"}
+        color={
+          path === "/" + name.replace(/\s/g, "").toLowerCase()
+            ? "clique.base"
+            : "clique.whiteGrey"
+        }
         alignItems={"center"}
       >
         <Icon as={icon} mr="15px" />
