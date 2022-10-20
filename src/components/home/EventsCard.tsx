@@ -24,7 +24,7 @@ function EventsCard({ onOpen, imgUrl }: any) {
           color={"clique.white"}
           fontFamily={"Poppins"}
           fontWeight={400}
-          fontSize={"12px"}
+          fontSize={"smSubHead"}
           lineHeight={"1.2"}
           mr="5px"
         >
@@ -59,7 +59,7 @@ function EventsCard({ onOpen, imgUrl }: any) {
           color={"clique.white"}
           fontFamily={"Poppins"}
           fontWeight={400}
-          fontSize={"12px"}
+          fontSize={"smSubHead"}
           lineHeight={"1.2"}
         >
           12th Dec
@@ -71,7 +71,7 @@ function EventsCard({ onOpen, imgUrl }: any) {
           color={"clique.white"}
           fontFamily={"Poppins"}
           fontWeight={400}
-          fontSize={"12px"}
+          fontSize={"smSubHead"}
           lineHeight={"1.2"}
         >
           7pm

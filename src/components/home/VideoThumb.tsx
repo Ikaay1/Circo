@@ -30,7 +30,7 @@ function VideoThumb({ imgUrl, id }: { imgUrl: string; id: string }) {
             color={"clique.white"}
             fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={"16px"}
+            fontSize="subHead"
             lineHeight={"1.2"}
           >
             What’s New in the 2023 Volkswagen Arteon, the pro’s and cons of our
@@ -43,7 +43,7 @@ function VideoThumb({ imgUrl, id }: { imgUrl: string; id: string }) {
             color={"clique.darkGrey"}
             fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={"14px"}
+            fontSize="smSubHead"
             lineHeight={"1.2"}
           >
             @wenotch
@@ -54,7 +54,7 @@ function VideoThumb({ imgUrl, id }: { imgUrl: string; id: string }) {
               color={"clique.darkGrey"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"14px"}
+              fontSize="smSubHead"
               lineHeight={"1.2"}
               mr="10px"
             >
@@ -78,7 +78,7 @@ function VideoThumb({ imgUrl, id }: { imgUrl: string; id: string }) {
               color={"clique.darkGrey"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"14px"}
+              fontSize="smSubHead"
               lineHeight={"1.2"}
             >
               3 days ago

@@ -84,7 +84,7 @@ function Index() {
           fontFamily={"Poppins"}
           fontWeight={400}
           textTransform={"capitalize"}
-          fontSize={"14px"}
+          fontSize={"smSubHead"}
         >
           logout
         </Text>

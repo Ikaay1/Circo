@@ -7,11 +7,12 @@ import TagSection from "@components/home/TagSection";
 import VideoGrid from "@components/home/VideoGrid";
 import LiveEvents from "@components/home/LiveEvents";
 import { purpleBoxStyle, scrollBarStyle } from "@constants/utils";
+import EventTabs from "@components/liveevents/EventTabs";
 
 function Index() {
   return (
     <HomeLayout>
-      <Flex>
+      <Flex w="full">
         <SideMenu />
         <Box
           maxH={"90vh"}
@@ -31,11 +32,12 @@ function Index() {
             fontFamily={"Poppins"}
             fontWeight={500}
             textTransform={"capitalize"}
-            fontSize="25px"
+            fontSize="head"
             lineHeight={"1"}
           >
             Live Events
           </Text>
+          <EventTabs />
         </Box>
       </Flex>
     </HomeLayout>

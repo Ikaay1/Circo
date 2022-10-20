@@ -58,7 +58,11 @@ function Header({ upload }: Props) {
       >
         <InputGroup w={searchWidth} transition="all 1s ease">
           <InputLeftElement px="20px" pointerEvents="none">
-            <Icon fontSize={"20px"} color="clique.white" as={AiOutlineSearch} />
+            <Icon
+              fontSize={"smHead"}
+              color="clique.white"
+              as={AiOutlineSearch}
+            />
           </InputLeftElement>
           <Input
             bg="clique.inputBg"
@@ -100,7 +104,7 @@ function Header({ upload }: Props) {
                 right={"5px"}
                 boxSize="12px"
                 border="none"
-                fontSize={"8px"}
+                fontSize={"xs"}
               >
                 3
               </AvatarBadge>
