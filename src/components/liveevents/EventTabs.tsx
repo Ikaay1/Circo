@@ -20,14 +20,44 @@ function EventTabs() {
       fontFamily="Poppins"
       color={"clique.white"}
     >
-      <TabList>
+      <TabList position={"sticky"} top="0" bg="clique.primaryBg" py="10px">
         <CliqueTab>Unpaid Events</CliqueTab>
         <CliqueTab>Paid Events</CliqueTab>
         <CliqueTab>Ongoing Events</CliqueTab>
       </TabList>
       <TabPanels>
         <CliqueTabPanel>
-          <SimpleGrid columns={4}>
+          <SimpleGrid
+            columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+            spacing="30px"
+          >
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+          </SimpleGrid>
+        </CliqueTabPanel>
+        <CliqueTabPanel>
+          <SimpleGrid
+            columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+            spacing="30px"
+          >
+            <EventModal />
+            <EventModal />
+          </SimpleGrid>
+        </CliqueTabPanel>
+        <CliqueTabPanel>
+          <SimpleGrid
+            columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+            spacing="30px"
+          >
             <EventModal />
           </SimpleGrid>
         </CliqueTabPanel>

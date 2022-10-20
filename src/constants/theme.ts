@@ -28,6 +28,8 @@ const colors = {
     danger: "#BA1A1A",
     success: "#22C55E",
     dark: "1A202C",
+    blurColor:
+      "linear-gradient(92.83deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
   },
 };
 
