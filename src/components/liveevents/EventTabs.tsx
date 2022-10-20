@@ -20,7 +20,7 @@ function EventTabs() {
       fontFamily="Poppins"
       color={"clique.white"}
     >
-      <TabList>
+      <TabList position={"sticky"} top="0" bg="clique.primaryBg" py="10px">
         <CliqueTab>Unpaid Events</CliqueTab>
         <CliqueTab>Paid Events</CliqueTab>
         <CliqueTab>Ongoing Events</CliqueTab>
@@ -31,6 +31,13 @@ function EventTabs() {
             columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
             spacing="30px"
           >
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
+            <EventModal />
             <EventModal />
             <EventModal />
             <EventModal />
