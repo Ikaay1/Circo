@@ -1,24 +1,18 @@
 import {
   Box,
-  Divider,
-  Text,
-  Flex,
-  GridItem,
-  Grid,
-  Button,
+  Divider, Flex, Grid, GridItem, Text
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
-import React from "react";
 
 type Props = {
-  onClick: ()=>void;
+  onClick: () => void;
 };
 
-export default function WalletCard({onClick}: Props) {
+export default function WalletCard({ onClick }: Props) {
   return (
     <Box bg="clique.black" borderRadius="xl" p="5">
       <Box>
-        <Text fontSize={"1.25rem"} mb="2">
+        <Text fontSize={"smHead"} mb="2">
           Wallet
         </Text>
       </Box>
@@ -26,11 +20,11 @@ export default function WalletCard({onClick}: Props) {
       <Grid templateColumns="repeat(5, 1fr)" gap={10}>
         <GridItem colSpan={3}>
           <Flex flexDirection="column" justifyContent="space-between">
-            <Text color="clique.text" fontSize={"0.7rem"} mb="7">
+            <Text color="clique.text" fontSize={"smSubHead"} mb="7">
               Balance
             </Text>
 
-            <Text fontSize={"1.563rem"} mb="7" fontWeight={600}>
+            <Text fontSize={"head"} mb="4" fontWeight={600}>
               ₦3,600,800.00
             </Text>
             <Btn
@@ -43,13 +37,13 @@ export default function WalletCard({onClick}: Props) {
 
         <GridItem colSpan={1}>
           <Flex flexDirection="column" justifyContent="space-between">
-            <Text color="clique.text" fontSize={"0.7rem"} mb="7">
+            <Text color="clique.text" fontSize={"smSubHead"} mb="7">
               Total flow
             </Text>
-            <Text fontSize={"1rem"} mb="5" fontWeight={400}>
+            <Text fontSize={"subHead"} mb="8" fontWeight={400}>
               ₦13,567,900.00
             </Text>
-            <Text fontSize={"0.625rem"} color="clique.text">
+            <Text fontSize={"xs"} color="clique.text">
               This is the total amount of money that has come into your wallet
             </Text>
           </Flex>
@@ -57,13 +51,13 @@ export default function WalletCard({onClick}: Props) {
 
         <GridItem colSpan={1}>
           <Flex flexDirection="column" justifyContent="space-between">
-            <Text color="clique.text" fontSize={"0.7rem"} mb="7">
+            <Text color="clique.text" fontSize={"smSubHead"} mb="7">
               Total Outflow
             </Text>
-            <Text fontSize={"1rem"} mb="5" fontWeight={400}>
+            <Text fontSize={"subHead"} mb="8" fontWeight={400}>
               ₦9,967,100.00
             </Text>
-            <Text fontSize={"0.625rem"} color="clique.text">
+            <Text fontSize={"xs"} color="clique.text">
               This is the total amount of money that has gone out of your wallet
             </Text>
           </Flex>

@@ -1,20 +1,9 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-  useDisclosure,
-  Input,
-  Text,
   Box,
-  Flex,
+  Flex, Input, Modal, ModalBody, ModalContent,
+  ModalHeader, ModalOverlay, Text
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
-import React from "react";
 
 type Props = {
   isOpen: boolean;
@@ -32,7 +21,7 @@ function AddMoneyModal({ isOpen, onClose }: Props) {
         pt="3"
         pb="10"
       >
-        <ModalHeader alignSelf="center" mb="7" fontSize={"1rem"}>
+        <ModalHeader alignSelf="center" mb="7" fontSize={"subHead"}>
           How much will you like to Add?
         </ModalHeader>
 
@@ -47,7 +36,7 @@ function AddMoneyModal({ isOpen, onClose }: Props) {
               mb="10"
             >
               <Text
-                fontSize={"0.875rem"}
+                fontSize={"smSubHead"}
                 fontWeight="400"
                 color={"clique.secondaryGrey2"}
               >

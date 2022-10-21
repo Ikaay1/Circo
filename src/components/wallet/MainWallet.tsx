@@ -4,14 +4,15 @@ import WalletCard from "./WalletCard";
 import TransactionHistory from "./TransactionHistory";
 
 type Props = {
-  onClick:()=>void;
+  onClick: () => void;
+  onSort: () => void;
 };
 
-function MainWallet({onClick}: Props) {
+function MainWallet({ onClick, onSort }: Props) {
   return (
-    <Flex pt="7" flexDirection="column" gap="5" >
-      <WalletCard onClick={onClick}/>
-      <TransactionHistory />
+    <Flex pt="7" flexDirection="column" gap="5">
+      <WalletCard onClick={onClick} />
+      <TransactionHistory onClick={onSort} />
     </Flex>
   );
 }

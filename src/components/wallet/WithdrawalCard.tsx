@@ -1,63 +1,58 @@
 import {
   Box,
   Divider,
-  Table,
-  Tbody,
-  Td,
-  Th,
+  Table, TableContainer, Tbody,
+  Td, Text, Th,
   Thead,
-  Tr,
-  Text,
-  TableContainer,
+  Tr
 } from "@chakra-ui/react";
-import React from "react";
 
 type Props = {};
 
 function WithdrawalCard({}: Props) {
   return (
     <Box bg="clique.black" borderRadius="xl" py="7" mb="5" px="5">
-      <Text fontSize={"1.25rem"} mb="2">
+      <Text fontSize={"smHead"} mb="2">
         Withdrawal
       </Text>
       <Divider mb="1" />
 
-      <Text fontSize={"0.7rem"} mb="2">
+      <Text fontSize={"xsl"} mb="2">
         Recent withdrawal history{" "}
       </Text>
       <TableContainer>
-      <Table variant="unstyled" size="sm" fontSize="10px">
-        <Thead>
-          <Tr color="clique.text">
-            <Th fontSize="0.7rem" textTransform={"none"} pl="0">
-              Name
-            </Th>
-            <Th fontSize="0.7rem" textTransform={"none"}>
-              Amount
-            </Th>
-            <Th fontSize="0.7rem" textTransform={"none"}>
-              Bank
-            </Th>
-          </Tr>
-        </Thead>
-        <Tbody className="no-wrap">
-          {withdrawalHistory.map((each, i) => {
-            return (
-              <Tr key={i} fontSize="0.813rem">
-                <Td fontSize="0.7rem" pl="0">
-                  {each.name}
-                </Td>
-                <Td isNumeric fontSize="0.7rem">
-                  {each.amount}
-                </Td>
-                <Td fontSize="0.7rem">{each.bank}</Td>
-              </Tr>
-            );
-          })}
-        </Tbody>
-      </Table>
+        <Table variant="unstyled" size="sm" fontSize="10px">
+          <Thead>
+            <Tr color="clique.text">
+              <Th fontSize="xsl" textTransform={"none"} pl="0">
+                Name
+              </Th>
+              <Th fontSize="xsl" textTransform={"none"}>
+                Amount
+              </Th>
+              <Th fontSize="xsl" textTransform={"none"}>
+                Bank
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody className="no-wrap">
+            {withdrawalHistory.map((each, i) => {
+              return (
+                <Tr key={i}>
+                  <Td fontSize="xsl" pl="0">
+                    {each.name}
+                  </Td>
+                  <Td isNumeric fontSize="xsl">
+                    {each.amount}
+                  </Td>
+                  <Td fontSize="xsl">{each.bank}</Td>
+                </Tr>
+              );
+            })}
+          </Tbody>
+        </Table>
       </TableContainer>
-      <Text color="clique.danger" fontSize="0.7rem" textAlign="center" mt="3">
+      <Text color="clique.danger" fontSize="xsl" textAlign="center" mt="3">
         Note: Withdrawal is automated by Clique and is sent to your added
         beneficiary account on the 25th of every month.
       </Text>

@@ -1,20 +1,14 @@
-import React from "react";
-import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import SideMenu from "@components/widgets/sideMenu";
 
-import HomeLayout from "layouts/HomeLayout";
+import AddMoneyModal from "@components/wallet/AddMoneyModal";
 import Beneficiaries from "@components/wallet/Beneficiaries";
+import BeneficiaryModal from "@components/wallet/BeneficiaryModal";
 import MainWallet from "@components/wallet/MainWallet";
 import { scrollBarStyle } from "@constants/utils";
-import AddMoneyModal from "@components/wallet/AddMoneyModal";
-import BeneficiaryModal from "@components/wallet/BeneficiaryModal";
+import HomeLayout from "layouts/HomeLayout";
+import SortModal from "@components/wallet/SortModal";
+import TransactionRecieptModal from "@components/wallet/TransactionRecieptModal";
 
 type Props = {};
 
@@ -25,6 +19,20 @@ function Wallet({}: Props) {
     onOpen: isBeneOnOpen,
     onClose: isBeneOnClose,
   } = useDisclosure();
+
+  const {
+    isOpen: isSortIsOpen,
+    onOpen: isSortOnOpen,
+    onClose: isSortOnClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isReceiptIsOpen,
+    onOpen: isReceiptOnOpen,
+    onClose: isReceiptOnClose,
+  } = useDisclosure();
+
+  const hasBeneficiary = true;
 
   return (
     <HomeLayout>
@@ -39,7 +47,7 @@ function Wallet({}: Props) {
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          <MainWallet onClick={onOpen} />
+          <MainWallet onClick={onOpen} onSort={isSortOnOpen} />
         </Box>
         <Box
           maxH={"90vh"}
@@ -51,11 +59,23 @@ function Wallet({}: Props) {
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          <Beneficiaries onClick={isBeneOnOpen} />
+          <Beneficiaries
+            onClick={isBeneOnOpen}
+            hasBeneficiary={hasBeneficiary}
+          />
         </Box>
       </Flex>
       <AddMoneyModal isOpen={isOpen} onClose={onClose} />
-      <BeneficiaryModal isOpen={isBeneIsOpen} onClose={isBeneOnClose} />
+      <BeneficiaryModal
+        isOpen={isBeneIsOpen}
+        onClose={isBeneOnClose}
+        type={hasBeneficiary ? "change" : "add"}
+      />
+      <SortModal isOpen={isSortIsOpen} onClose={isSortOnClose} />
+      <TransactionRecieptModal
+        isOpen={isReceiptIsOpen}
+        onClose={isReceiptOnClose}
+      />
     </HomeLayout>
   );
 }
