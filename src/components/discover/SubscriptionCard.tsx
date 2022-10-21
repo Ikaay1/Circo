@@ -11,7 +11,8 @@ function SubscriptionCard() {
       cursor={"pointer"}
       minW="420px"
       mr="20px"
-      onClick={() => setIsHover(!isHover)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
     >
       {!isHover ? <SubscribeBody /> : <SubcribeOverLay isHover={isHover} />}
     </Flex>
