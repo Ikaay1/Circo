@@ -69,7 +69,7 @@ function UploadModal() {
                 textAlign={"center"}
                 fontFamily={"Poppins"}
                 fontWeight={500}
-                fontSize="20px"
+                fontSize="smHead"
                 mb="14"
                 mt="14"
               >

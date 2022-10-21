@@ -1,16 +1,16 @@
-import { Box, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box } from "@chakra-ui/react";
 import BeneficiariesCard from "./BeneficiariesCard";
 import WithdrawalCard from "./WithdrawalCard";
 
 type Props = {
   onClick:()=>void
+  hasBeneficiary:boolean
 };
 
-function Beneficiaries({onClick}: Props) {
+function Beneficiaries({onClick, hasBeneficiary}: Props) {
   return (
     <Box pr="2" pt="6">
-      <BeneficiariesCard onClick={onClick}/>
+      <BeneficiariesCard onClick={onClick} hasBeneficiary={hasBeneficiary}/>
       <WithdrawalCard />
     </Box>
   );

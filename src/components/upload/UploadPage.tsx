@@ -30,7 +30,7 @@ function UploadPage({ url, name }: Props) {
   return (
     <Flex gap={3} pl="5" pr="12">
       <Box w="20%" maxW="20%" minW="20%" pt="4" pr="2">
-        <Text fontSize={"1.25rem"} mb="5">
+        <Text fontSize={"smHead"} mb="5">
           Your video look
         </Text>
         <Box borderRadius={"10px"} overflow="hidden">
@@ -38,14 +38,14 @@ function UploadPage({ url, name }: Props) {
         </Box>
         <Text
           fontWeight={600}
-          fontSize="0.813rem"
+          fontSize="smSubHead"
           mb="3"
           className="no-wrap"
           mt="4"
         >
           NAT GEO WILD DOCUMENTARY
         </Text>
-        <Text fontSize="0.688rem">
+        <Text fontSize="xsl">
           This is a documentation based on the life and times of NAT GEO WILD.
           This documentation shows you how they started, their challenges and
           how they have been able to overcome and
@@ -56,7 +56,7 @@ function UploadPage({ url, name }: Props) {
       <Flex width="50%">
         <Divider orientation="vertical" bg="clique.secondaryGrey" mr="4" />
         <Box pt="2" pb="5">
-          <Text fontSize="1.75rem">Video details</Text>
+          <Text fontSize="head">Video details</Text>
 
           <VStack align="stretch" mt={4}>
             {videoDetails.map((each) => {
@@ -78,8 +78,8 @@ function UploadPage({ url, name }: Props) {
             })}
           </VStack>
           <Box mt="7" mb="4">
-            <Text fontSize="0.75rem">Thumbnail</Text>
-            <Text fontSize="0.625rem" color="clique.secondaryGrey2" mb="2">
+            <Text fontSize="smSubHead">Thumbnail</Text>
+            <Text fontSize="xsl" color="clique.secondaryGrey2" mb="2">
               Select or upload a picture that shows what is your video
             </Text>
             <Flex gap="2">
@@ -95,7 +95,7 @@ function UploadPage({ url, name }: Props) {
                 style={{ borderStyle: "dashed" }}
               >
                 <Icon as={AddIcon} />
-                <Text fontSize="0.75rem">Upload Thumbnail</Text>
+                <Text fontSize="smSubHead">Upload Thumbnail</Text>
               </Flex>
 
               <Box
@@ -108,7 +108,7 @@ function UploadPage({ url, name }: Props) {
               </Box>
             </Flex>
           </Box>
-          <Text fontSize={"1rem"} mb="4">
+          <Text fontSize={"subHead"} mb="4">
             Other Parameters
           </Text>
 
@@ -169,7 +169,7 @@ function UploadPage({ url, name }: Props) {
             </Box>
           </Box>
         </Box>
-        <Btn text="upload" ></Btn>
+        <Btn text="upload"></Btn>
       </Flex>
     </Flex>
   );

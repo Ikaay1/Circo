@@ -8,11 +8,17 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
   bg?: string;
   width?: string;
+  size?: string;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
 }
 
 const Btn = forwardRef(
   (
     {
+      leftIcon,
+      rightIcon,
+      size,
       width,
       bg,
       text,
@@ -27,7 +33,7 @@ const Btn = forwardRef(
       <>
         <Button
           {...props}
-          borderRadius="50px"
+          borderRadius={`${borderRadius ? borderRadius : "50px"}`}
           bg={`${bg ? bg : "clique.base"}`}
           py={`${py ? py : "3"}`}
           maxW="100%"

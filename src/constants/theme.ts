@@ -52,7 +52,7 @@ const config: ThemeConfig = {
 //font sizes
 const fontSizes = {
   //50px
-  big: "3.125",
+  big: "3.125rem",
   //30px
   bigHead: "1.875rem",
   //25px
@@ -63,6 +63,8 @@ const fontSizes = {
   subHead: "1rem",
   //14px
   smSubHead: "0.875rem",
+  //11px
+  xsl: "0.688rem",
   //8px
   xs: "0.5rem",
 };
