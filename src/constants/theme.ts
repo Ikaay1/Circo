@@ -25,9 +25,10 @@ const colors = {
     yellow: "#DDF936",
     progressBg: "#6B6B6B",
     lightBase: "#B880EA",
-    danger: "#BA1A1A",
-    success: "#22C55E",
     dark: "1A202C",
+    green: "#22C55E",
+    greenYellow: "#81D6CE",
+    red: "#D52B2B",
     blurColor:
       "linear-gradient(92.83deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
   },

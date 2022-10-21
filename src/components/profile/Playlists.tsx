@@ -1,12 +1,23 @@
 import React from 'react';
 
-import { Box, Icon, Image, Text } from '@chakra-ui/react';
-import { playListData } from '@constants/utils';
+import {
+	Box,
+	Icon,
+	Image,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	Text,
+	useDisclosure,
+} from '@chakra-ui/react';
+import { playListData, scrollBarStyle } from '@constants/utils';
 import AddPlaylistIcon from '@icons/AddPlaylistIcon';
 
 import VideoIcon from '../../assets/icons/VideoIcon';
+import NewPlaylist from './NewPlaylist';
 
 const Playlists = () => {
+    const {isOpen, onOpen, onClose} = useDisclosure();
     return (
         <>
             <Text
@@ -16,7 +27,14 @@ const Playlists = () => {
                 lineHeight='32px'
                 color='clique.white'
             >
-                New Playlist <Icon as={AddPlaylistIcon} />
+                New Playlist{' '}
+                <Box
+                    onClick={() => {
+                        onOpen();
+                    }}
+                >
+                    <Icon as={AddPlaylistIcon} />
+                </Box>
             </Text>
             <Box mt={'2.5rem'} display='flex' justifyContent={'space-between'}>
                 {playListData.map(
@@ -83,6 +101,31 @@ const Playlists = () => {
                     ),
                 )}
             </Box>
+
+            <Modal
+                isCentered
+                onClose={onClose}
+                isOpen={isOpen}
+                motionPreset='slideInRight'
+                scrollBehavior='inside'
+            >
+                <ModalOverlay />
+                <ModalContent
+                    maxW='400px'
+                    w='400px'
+                    bottom='0'
+                    minH='100vh'
+                    overflowY={'scroll'}
+                    sx={scrollBarStyle}
+                    m='0'
+                    py='30px'
+                    position={'absolute'}
+                    right={0}
+                    bg='clique.black'
+                >
+                    <NewPlaylist />
+                </ModalContent>
+            </Modal>
         </>
     );
 };
