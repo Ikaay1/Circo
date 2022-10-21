@@ -1,7 +1,8 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
+import AuthButton from '@components/auth/AuthButton';
+import AuthInput from '@components/auth/AuthInput';
 import { CliqueLogo } from '@components/landing/Navbar';
 
 import { ShowAuthHeader, ShowAuthImage } from './login';
@@ -37,40 +38,21 @@ const ConfirmEmail = () => {
                             height='57px'
                             marginTop={'.5rem'}
                         >
-                            <input
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className='input'
-                                type={'text'}
-                                required={true}
-                                placeholder='Email'
+                            <AuthInput
+                                name={'Email'}
+                                theState={email}
+                                setTheState={setEmail}
                             />
-                            <Text
-                                position='absolute'
-                                top='6%'
-                                left={'4.5%'}
-                                fontSize='12px'
-                                color='#FFFFFF'
-                                className='placeholder small'
-                            >
-                                Email
-                            </Text>
                         </Box>
                         <Text
-                            color='#A1A1A1'
+                            color='clique.secondaryGrey2'
                             textAlign='center'
                             marginTop='5.5rem'
                         >
                             You will receive an email with a link to verify your
                             account then, you can change your password
                         </Text>
-                        <button
-                            type='submit'
-                            className='login-submit'
-                            style={{marginTop: '.8rem'}}
-                        >
-                            Change Password
-                        </button>
+                        <AuthButton {...{marginTop: '.8rem'}} name='Next' />
                     </form>
                 </Box>
             </Box>

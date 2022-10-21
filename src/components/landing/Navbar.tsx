@@ -23,9 +23,9 @@ const Navbar = ({
                     alignItems='center'
                     marginRight={{lg: '5.5rem'}}
                     fontWeight={{lg: '700'}}
-                    fontSize='22.6935px'
+                    fontSize='smHead2'
                     letterSpacing='0.709173px'
-                    color='#FFFFFF'
+                    color='clique.white'
                 >
                     <Image src='/assets/clique-logo.png' alt='clique-logo' />
                     <Link href='/'>CLIQUE</Link>
@@ -33,18 +33,18 @@ const Navbar = ({
                 <Text
                     display={{base: 'none', lg: 'block'}}
                     letterSpacing='0.5px'
-                    color='#FFFFFF'
+                    color='clique.white'
                 >
                     <Link href='/about'>About</Link>
                 </Text>
             </Box>
             <Box display={{base: 'none', lg: 'flex'}} alignItems='center'>
-                <Text letterSpacing='0.5px' color='#FFFFFF'>
+                <Text letterSpacing='0.5px' color='clique.white'>
                     <Link href='/login'>Login</Link>
                 </Text>
                 <Text
                     marginLeft={'3rem'}
-                    background='#892CDC'
+                    background='clique.purple'
                     borderRadius='30px'
                     w='221px'
                     h='50px'
@@ -72,9 +72,9 @@ export const CliqueLogo = () => {
             display={'flex'}
             alignItems='center'
             fontWeight={{lg: '700'}}
-            fontSize='22.6935px'
+            fontSize='smHead2'
             letterSpacing='0.709173px'
-            color='#FFFFFF'
+            color='clique.white'
             position={'absolute'}
             top='4%'
             left='5%'

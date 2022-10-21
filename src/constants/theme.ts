@@ -30,6 +30,15 @@ const colors = {
         red: '#D52B2B',
         blurColor:
             'linear-gradient(92.83deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)',
+        secondaryRed: '#BA1A1A',
+        purple: '#892cdc',
+        secondaryGrey4: '#292927',
+        black2: '#141516',
+        black3: '#000000',
+        black4: '#1E1E1E',
+        secondaryGrey5: '#C9C9C9',
+        red2: '#FF0000',
+        black5: '#1D1D1D',
     },
 };
 
@@ -52,7 +61,7 @@ const config: ThemeConfig = {
 //font sizes
 const fontSizes = {
     //50px
-    big: '3.125',
+    big: '3.125rem',
     //30px
     bigHead: '1.875rem',
     //25px
@@ -65,6 +74,24 @@ const fontSizes = {
     smSubHead: '0.875rem',
     //8px
     xs: '0.5rem',
+    //12px
+    sm: '12px',
+    //36px
+    medium: '36px',
+    //48px
+    big2: '48px',
+    //18px
+    sm2: '18px',
+    //40px
+    big3: '40px',
+    //6.5px
+    xs2: '6.5px',
+    //59px
+    xl: '59px',
+    //22.5px
+    smHead2: '22.5px',
+    //10px
+    sm3: '10px',
 };
 
 const components = {

@@ -7,10 +7,11 @@ import {
 	useSignupMutation,
 } from 'redux/services/auth.service';
 
-import { Box, Button, Icon, Image, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
+import AuthButton from '@components/auth/AuthButton';
+import AuthInput from '@components/auth/AuthInput';
 import { CliqueLogo } from '@components/landing/Navbar';
 import { signUpInputData } from '@constants/utils';
-import PasswordIcon from '@icons/PasswordIcon';
 
 import { SignUpDataInterface } from '../constants/interface';
 import { ShowAuthHeader, ShowAuthImage, SocialMedia } from './login';
@@ -104,8 +105,8 @@ const Signup = () => {
                                     position='absolute'
                                     top='6%'
                                     left={'4.5%'}
-                                    fontSize='12px'
-                                    color='#FFFFFF'
+                                    fontSize='sm'
+                                    color='clique.white'
                                     className='placeholder small'
                                 >
                                     Firstname
@@ -126,8 +127,8 @@ const Signup = () => {
                                     position='absolute'
                                     top='6%'
                                     left={'4.5%'}
-                                    fontSize='12px'
-                                    color='#FFFFFF'
+                                    fontSize='sm'
+                                    color='clique.white'
                                     className='placeholder small'
                                 >
                                     Lastname
@@ -135,15 +136,20 @@ const Signup = () => {
                             </Box>
                         </Box>
                         {signUpInputData.map(
-                            ({name, image, key, placeholder, inputName}) => (
+                            ({name, image, key, inputName}) => (
                                 <div key={key}>
                                     <Box
                                         position='relative'
                                         height='57px'
                                         marginTop={'.5rem'}
                                     >
-                                        <input
-                                            value={
+                                        <AuthInput
+                                            image={image}
+                                            name={name}
+                                            handleShowPassword={
+                                                handleShowPassword
+                                            }
+                                            theState={
                                                 image
                                                     ? password
                                                     : inputName ===
@@ -153,64 +159,19 @@ const Signup = () => {
                                                     ? userName
                                                     : email
                                             }
-                                            onChange={
+                                            setTheState={
                                                 image
-                                                    ? (e) =>
-                                                          setPassword(
-                                                              e.target.value,
-                                                          )
+                                                    ? setPassword
                                                     : inputName ===
                                                       'referralCode'
-                                                    ? (e) =>
-                                                          setReferralCode(
-                                                              e.target.value,
-                                                          )
+                                                    ? setReferralCode
                                                     : inputName === 'email'
-                                                    ? (e) =>
-                                                          setEmail(
-                                                              e.target.value,
-                                                          )
-                                                    : (e) =>
-                                                          setUserName(
-                                                              e.target.value,
-                                                          )
+                                                    ? setEmail
+                                                    : setUserName
                                             }
-                                            className='input'
-                                            type={
-                                                image
-                                                    ? showPassword
-                                                        ? 'text'
-                                                        : 'password'
-                                                    : 'text'
-                                            }
-                                            required={
-                                                inputName !== 'referralCode'
-                                                    ? true
-                                                    : false
-                                            }
-                                            placeholder={name}
+                                            showPassword={showPassword}
+                                            email={inputName === 'email'}
                                         />
-                                        <Text
-                                            position='absolute'
-                                            top='6%'
-                                            left={'4.5%'}
-                                            fontSize='12px'
-                                            color='#FFFFFF'
-                                            className='placeholder small'
-                                        >
-                                            {name}
-                                        </Text>
-                                        {image && (
-                                            <Box
-                                                position='absolute'
-                                                right={'4.5%'}
-                                                bottom='26%'
-                                                cursor={'pointer'}
-                                                onClick={handleShowPassword}
-                                            >
-                                                <Icon as={PasswordIcon} />
-                                            </Box>
-                                        )}
                                     </Box>
                                 </div>
                             ),
@@ -242,25 +203,11 @@ const Signup = () => {
                                 </span>
                             </label>
                         </Box>
-
-                        <Button
-                            type='submit'
-                            background='#892cdc'
-                            borderRadius='50px'
-                            width='100%;'
-                            height='60px;'
-                            display='flex;'
-                            alignItems='center'
-                            justifyContent='center'
-                            fontWeight='500'
-                            fontSize='26px'
-                            letterSpacing='-0.02em'
-                            color='#ffffff '
-                            marginTop='1.2rem'
-                            isLoading={preSignupStatus.isLoading}
-                        >
-                            Sign Up
-                        </Button>
+                        <AuthButton
+                            status={preSignupStatus}
+                            {...{marginTop: '1.2rem'}}
+                            name='Sign Up'
+                        />
                     </form>
                     <SocialMedia
                         haveAccount={'Already have an account?'}

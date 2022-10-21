@@ -8,6 +8,9 @@ import SettingsIcon from '@icons/SettingsIcon';
 import TrendingIcon from '@icons/TrendingIcon';
 import WalletIcon from '@icons/WalletIcon';
 
+import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
+import { MenuData } from './interface';
+
 export const loginInputData: (
     | {
           key: string;
@@ -28,14 +31,12 @@ export const signUpInputData: (
     | {
           key: string;
           name: string;
-          placeholder: string;
           inputName: string;
           image?: undefined;
       }
     | {
           key: string;
           name: string;
-          placeholder: string;
           image: string;
           inputName?: undefined;
       }
@@ -43,26 +44,22 @@ export const signUpInputData: (
     {
         key: '1',
         name: 'Username',
-        placeholder: '@kngjames',
         inputName: 'userName',
     },
     {
         key: '2',
         name: 'Email',
-        placeholder: 'tonyclark24@gmail.com',
         inputName: 'email',
     },
     {
         key: '3',
         name: 'Password',
-        placeholder: 'Tony1234',
         image: '/assets/Password-lock.png',
     },
 
     {
         key: '4',
         name: 'Referral Code (Optional)',
-        placeholder: 'D5Y77U',
         inputName: 'referralCode',
     },
 ];
@@ -87,19 +84,16 @@ export const socialMediaIconsData = ['google', 'apple', 'facebook'];
 export const changePasswordInputData: {
     key: string;
     name: string;
-    placeholder: string;
     inputName: string;
 }[] = [
     {
         key: '1',
         name: 'New password',
-        placeholder: '************************',
         inputName: 'password',
     },
     {
         key: '2',
         name: 'Confirm new password',
-        placeholder: 'ChelseaChampions2021UCL!',
         inputName: 'confirmPassword',
     },
 ];
@@ -390,6 +384,12 @@ export const playListData = [
         smallImage: 'foodsmall',
         name: 'Food Network',
     },
+    {
+        bigImage: 'ayarmix',
+        noOfVideos: '25',
+        smallImage: 'ayarstar',
+        name: 'Ayra Star Mix',
+    },
 ];
 export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
 
@@ -443,4 +443,31 @@ export const subscriptionsData = [
     {name: 'Chimamanda Nneka', status: 'active'},
     {name: 'Isioma Violet', status: 'active'},
     {name: 'Dara Omolara', status: 'active'},
+];
+
+export const channelMenu: MenuData[] = [
+    {
+        name: 'Content',
+        route: 'content',
+        icon: ContentIcon,
+    },
+    {
+        name: 'Edit Channel Details',
+        route: 'edit',
+        icon: DiscoverIcon,
+    },
+    {
+        name: 'Channel Analytics',
+        route: 'analytics',
+        icon: AnalyticsIcon,
+    },
+];
+
+export const channelNav: {
+    title: string;
+    name: string;
+}[] = [
+    {title: 'Uploads', name: 'upload'},
+    {title: 'Live Recordings', name: 'live'},
+    {title: 'Playlists', name: 'playlist'},
 ];

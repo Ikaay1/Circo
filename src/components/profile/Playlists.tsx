@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import {
@@ -16,34 +17,42 @@ import AddPlaylistIcon from '@icons/AddPlaylistIcon';
 import VideoIcon from '../../assets/icons/VideoIcon';
 import NewPlaylist from './NewPlaylist';
 
-const Playlists = () => {
+const Playlists = ({newPlaylist}: {newPlaylist: boolean}) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
+    const router = useRouter();
     return (
         <>
-            <Text
-                display='flex'
-                alignItems={'center'}
-                fontSize='24px'
-                lineHeight='32px'
-                color='clique.white'
-            >
-                New Playlist{' '}
-                <Box
-                    onClick={() => {
-                        onOpen();
-                    }}
+            {newPlaylist && (
+                <Text
+                    display='flex'
+                    alignItems={'center'}
+                    fontSize='head'
+                    lineHeight='32px'
+                    color='clique.white'
                 >
-                    <Icon as={AddPlaylistIcon} />
-                </Box>
-            </Text>
-            <Box mt={'2.5rem'} display='flex' justifyContent={'space-between'}>
+                    New Playlist{' '}
+                    <Box
+                        onClick={() => {
+                            onOpen();
+                        }}
+                    >
+                        <Icon as={AddPlaylistIcon} />
+                    </Box>
+                </Text>
+            )}
+
+            <Box mt={'2.5rem'} display='flex' gap='28px'>
                 {playListData.map(
                     ({bigImage, smallImage, name, noOfVideos}) => (
                         <Box key={bigImage}>
                             <Box
-                                w={{lg: '325px', xl: '363px'}}
-                                h={{lg: '210px', xl: '226px'}}
+                                w={{lg: '235px', xl: '310px'}}
+                                h={{lg: '180px', xl: '220px'}}
                                 position={'relative'}
+                                cursor={'pointer'}
+                                onClick={() =>
+                                    router.push('/profile/1/content/playlist')
+                                }
                             >
                                 <Image
                                     w='100%'
@@ -69,7 +78,7 @@ const Playlists = () => {
                                     <Icon as={VideoIcon} />
                                     <Text
                                         textAlign={'center'}
-                                        fontSize='14px'
+                                        fontSize='smSubHead'
                                         lineHeight='20px'
                                         color='clique.white'
                                     >
@@ -81,10 +90,10 @@ const Playlists = () => {
                                 display={'flex'}
                                 alignItems='center'
                                 fontWeight='600'
-                                fontSize='18px'
+                                fontSize='subHead'
                                 lineHeight='17px'
                                 letterSpacing='-0.05em'
-                                color='#FFFFFF'
+                                color='clique.white'
                                 mt='.7rem'
                             >
                                 <Image
@@ -93,6 +102,7 @@ const Playlists = () => {
                                     w='34px'
                                     h='34px'
                                     borderRadius='50%'
+                                    objectFit={'cover'}
                                     alt=''
                                 />
                                 {name}

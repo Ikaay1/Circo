@@ -28,3 +28,9 @@ export type LoginDataInterface =
 export type SignUpDataInterface =
     | {data: SignUpUserInterface}
     | {error: FetchBaseQueryError | SerializedError};
+
+export interface MenuData {
+    name: string;
+    route: string;
+    icon: any;
+}
