@@ -1,10 +1,17 @@
+import AccountIcon from '@icons/AccountIcon';
 import ChannelIcon from '@icons/ChannelIcon';
+import CommunityGuidIcon from '@icons/CommunityGuidIcon';
 import ContentIcon from '@icons/ContentIcon';
+import CopyRightIcon from '@icons/CopyRightIcon';
 import DiscoverIcon from '@icons/DiscoverIcon';
+import FaqIcon from '@icons/FaqIcon';
 import HomeIcon from '@icons/HomeIcon';
 import LiveIcon from '@icons/LiveIcon';
+import NotificationSetIcon from '@icons/NotificationSetIcon';
+import PrivacyPolicyIcon from '@icons/PrivacyPolicyIcon';
 import ProfileIcon from '@icons/ProfileIcon';
 import SettingsIcon from '@icons/SettingsIcon';
+import TermsServiceIcon from '@icons/TermsServiceIcon';
 import TrendingIcon from '@icons/TrendingIcon';
 import WalletIcon from '@icons/WalletIcon';
 
@@ -443,6 +450,44 @@ export const subscriptionsData = [
     {name: 'Chimamanda Nneka', status: 'active'},
     {name: 'Isioma Violet', status: 'active'},
     {name: 'Dara Omolara', status: 'active'},
+];
+
+export const settingsMenu = [
+    {
+        name: 'Account',
+        route: 'account',
+        icon: AccountIcon,
+    },
+    {
+        name: 'Notification Settings',
+        route: 'notification',
+        icon: NotificationSetIcon,
+    },
+    {
+        name: 'Copyright Policy',
+        route: 'copyright',
+        icon: CopyRightIcon,
+    },
+    {
+        name: 'Terms Of Services',
+        route: 'terms',
+        icon: TermsServiceIcon,
+    },
+    {
+        name: 'Community Guidelines',
+        route: 'guidlines',
+        icon: CommunityGuidIcon,
+    },
+    {
+        name: 'Privacy Policy',
+        route: 'privacy',
+        icon: PrivacyPolicyIcon,
+    },
+    {
+        name: 'FAQs',
+        route: 'faqs',
+        icon: FaqIcon,
+    },
 ];
 
 export const channelMenu: MenuData[] = [

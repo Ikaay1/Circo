@@ -9,6 +9,7 @@ function AvataWithSpace({
   ml,
   borderColor,
   borderThickness,
+  avatarSize,
 }: {
   url: string;
   name: string;
@@ -17,6 +18,7 @@ function AvataWithSpace({
   ml?: string;
   borderColor?: string;
   borderThickness: string;
+  avatarSize?: string;
 }) {
   return (
     <Flex
@@ -33,7 +35,15 @@ function AvataWithSpace({
       borderColor={borderColor}
       rounded="full"
     >
-      <Avatar p="0" m="0" size="sm" name={name} src={url} />
+      <Avatar
+        p="0"
+        m="0"
+        w={avatarSize}
+        h={avatarSize}
+        size="sm"
+        name={name}
+        src={url}
+      />
     </Flex>
   );
 }

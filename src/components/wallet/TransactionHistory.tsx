@@ -2,23 +2,26 @@ import {
   Box,
   Divider,
   Flex,
-  Icon,
-  Stack,
-  Text,
-  VStack,
+  Icon, Text,
+  VStack
 } from "@chakra-ui/react";
 import SortIcon from "@icons/SortIcon";
-import React from "react";
 import HistoryCard from "./HistoryCard";
 
-type Props = {};
+type Props = {
+  onClick: () => void;
+};
 
 const TransactionHistory = (props: Props) => {
   return (
     <Box bg="clique.black" borderRadius="xl" p="5">
       <Flex justifyContent={"space-between"} pb="4">
-        <Text fontSize={"1rem"}>Recent Transaction History</Text>
-        <Icon as={SortIcon} />
+        <Text fontSize={"subHead"}>Recent Transaction History</Text>
+        <Icon
+          as={SortIcon}
+          onClick={props.onClick}
+          sx={{ cursor: "pointer" }}
+        />
       </Flex>
       <Divider mb="2"></Divider>
       <VStack spacing={1} align="stretch">

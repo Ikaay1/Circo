@@ -92,6 +92,8 @@ const fontSizes = {
     smHead2: '22.5px',
     //10px
     sm3: '10px',
+    //11px
+    xsl: '0.688rem',
 };
 
 const components = {
