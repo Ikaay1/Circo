@@ -10,7 +10,7 @@ const SideMenu = () => {
     return (
         <Box
             pt={{lg: '5rem'}}
-            height='100vh'
+            height='100%'
             borderRight={'1px solid rgba(255, 255, 255, 0.1)'}
         >
             {profileMenu.map(({name, icon, route}, i) => (

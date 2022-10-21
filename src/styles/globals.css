@@ -61,12 +61,6 @@ body {
     display: none;
 }
 
-.placeholder.small.inactive {
-    transform: translateY(-12px);
-    background-color: #1a202c;
-    display: block;
-}
-
 .remember {
     font-weight: 400;
     font-size: 12px;
@@ -126,6 +120,23 @@ body {
 
 .contact-input:first-child {
     margin-top: 1.3rem;
+}
+
+.playlist {
+    width: 100%;
+    height: 195px;
+    background: #232323;
+    border-radius: 10px;
+    padding-left: 1.4rem;
+    padding-top: 0.9rem;
+    outline: none;
+}
+
+.edit-profile-input:focus ~ .edit-profile-placeholder,
+.edit-profile-input:active ~ .edit-profile-placeholder {
+    z-index: 2;
+    transform: translateY(-12px);
+    background-color: #1a202c;
 }
 
 @media screen and (min-width: 400px) {
