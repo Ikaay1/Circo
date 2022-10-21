@@ -2,9 +2,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Box, Icon } from '@chakra-ui/react';
-import { profileMenu } from '@constants/utils';
 
-const SideMenu = () => {
+import { MenuData } from '../../constants/interface';
+
+const SideMenu = ({menu}: {menu: MenuData[]}) => {
     const router = useRouter();
 
     return (
@@ -13,7 +14,7 @@ const SideMenu = () => {
             height='100%'
             borderRight={'1px solid rgba(255, 255, 255, 0.1)'}
         >
-            {profileMenu.map(({name, icon, route}, i) => (
+            {menu.map(({name, icon, route}, i) => (
                 <Box
                     key={name}
                     _before={{
@@ -36,17 +37,25 @@ const SideMenu = () => {
                         color: 'clique.base',
                     }}
                     transition={'all 0.2s ease-in-out'}
-                    onClick={() => router.push('/profile/1/' + route)}
+                    onClick={() =>
+                        router.push(
+                            router.asPath.split('/')[1] === 'channel'
+                                ? '/channel/1/' + route
+                                : '/profile/1/' + route,
+                        )
+                    }
                     ml={router.query.name === route ? '0rem' : '2.475rem'}
-                    mb={i !== 0 ? '0rem' : '2.5rem'}
+                    mb={i === menu.length - 1 ? '0rem' : '2.5rem'}
                     cursor={'pointer'}
                     fontWeight='500'
-                    fontSize='12px'
+                    fontSize='sm'
                     lineHeight='16px'
                     alignItems='center'
                     letterSpacing='0.5px'
                 >
-                    <Icon as={icon} mr='15px' />
+                    <Box mr='15px'>
+                        <Icon as={icon} />
+                    </Box>
                     {name}
                 </Box>
             ))}

@@ -4,7 +4,9 @@ import { toast } from 'react-hot-toast';
 import { useSignupMutation } from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
-import { Box, Button, Image, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import AuthButton from '@components/auth/AuthButton';
+import AuthInput from '@components/auth/AuthInput';
 import { CliqueLogo } from '@components/landing/Navbar';
 import { LoginDataInterface } from '@constants/interface';
 
@@ -69,43 +71,17 @@ const Referral = () => {
                             height='57px'
                             marginTop={'.5rem'}
                         >
-                            <input
-                                value={otp}
-                                onChange={(e) => setOtp(e.target.value)}
-                                className='input'
-                                type={'text'}
-                                required={true}
-                                placeholder='OTP'
+                            <AuthInput
+                                name={'OTP'}
+                                theState={otp}
+                                setTheState={setOtp}
                             />
-                            <Text
-                                position='absolute'
-                                top='6%'
-                                left={'4.5%'}
-                                fontSize='12px'
-                                color='#FFFFFF'
-                                className='placeholder small'
-                            >
-                                OTP
-                            </Text>
                         </Box>
-                        <Button
-                            type='submit'
-                            background='#892cdc'
-                            borderRadius='50px'
-                            width='100%;'
-                            height='60px;'
-                            display='flex;'
-                            alignItems='center'
-                            justifyContent='center'
-                            marginTop='6.5rem'
-                            fontWeight='500'
-                            fontSize='26px'
-                            letterSpacing='-0.02em;'
-                            color='#ffffff '
-                            isLoading={signUpStatus.isLoading}
-                        >
-                            Next
-                        </Button>
+                        <AuthButton
+                            status={signUpStatus}
+                            {...{marginTop: '6.5rem'}}
+                            name='Next'
+                        />
                     </form>
                 </Box>
             </Box>

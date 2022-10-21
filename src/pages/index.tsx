@@ -38,18 +38,18 @@ const Home: NextPage = () => {
                     <Box w={{lg: '682px'}} h={{lg: '100%'}}>
                         <Text
                             fontWeight={{base: '600', lg: '700'}}
-                            fontSize={{base: '36px', lg: '48px'}}
+                            fontSize={{base: 'medium', lg: 'big2'}}
                             lineHeight={{base: '44px', lg: '110%'}}
                             letterSpacing={{base: '-0.02em', lg: '-0.5px'}}
-                            color='#FFFFFF'
+                            color='clique.white'
                         >
                             Deliver exclusive content to more people in real
                             time.
                         </Text>
                         <Text
-                            fontSize={{base: '14px', lg: '20px'}}
+                            fontSize={{base: 'smSubHead', lg: 'smHead'}}
                             lineHeight={{base: '20px', lg: '30px'}}
-                            color='#FFFFFF'
+                            color='clique.white'
                             marginTop={{base: '.75rem', lg: '1.25rem'}}
                             letterSpacing='0.5px'
                         >
@@ -65,7 +65,7 @@ const Home: NextPage = () => {
                         >
                             <Text
                                 marginRight={'1.3rem'}
-                                background='#892CDC'
+                                background='clique.purple'
                                 borderRadius='30px'
                                 w='221px'
                                 h='50px'
@@ -79,7 +79,7 @@ const Home: NextPage = () => {
                             </Text>
                             <Text
                                 marginRight={'1.7rem'}
-                                background='#171717'
+                                background='clique.primaryBg'
                                 borderRadius='30px'
                                 w='220px'
                                 h='50px'
@@ -132,7 +132,7 @@ const Home: NextPage = () => {
                         <Box
                             width={{base: '34.53px', lg: '72px'}}
                             height={{base: '14.39px', lg: '30px'}}
-                            background='#FFFFFF'
+                            background='clique.white'
                             boxShadow='0px 2.3976px 10.0699px 4.79521px rgba(0, 0, 0, 0.25)'
                             borderRadius='7.19281px'
                             display={'flex'}
@@ -146,13 +146,13 @@ const Home: NextPage = () => {
                                 mr={'.25rem'}
                                 width={{base: '2.88px', lg: '6px'}}
                                 height={{base: '2.88px', lg: '6px'}}
-                                background='#FF0000'
+                                background='clique.red2'
                                 borderRadius={'50%'}
                             ></Box>
                             <Text
                                 fontFamily='Mitr'
-                                fontSize={{base: '7.67233px', lg: '16px'}}
-                                color='#141516'
+                                fontSize={{base: 'xs', lg: 'subHead'}}
+                                color='clique.black2'
                             >
                                 Live
                             </Text>
@@ -200,20 +200,20 @@ const Home: NextPage = () => {
             >
                 <Text
                     fontWeight={{base: '600', lg: '700'}}
-                    fontSize={{base: '20px', lg: '48px'}}
-                    color='#000000'
+                    fontSize={{base: 'smHead', lg: 'big2'}}
+                    color='clique.black3'
                     textAlign={'center'}
                 >
-                    One-Clique-Platfrom
+                    One-Clique-Platform
                 </Text>
                 <Text
-                    fontSize='14px'
-                    lineHeight='21px'
+                    fontSize={{base: 'smSubHead', lg: 'smHead'}}
+                    lineHeight={{base: '21px', lg: '35.5px'}}
                     textAlign='center'
-                    color='#000000'
+                    color='clique.black3'
                     mt={'.9rem'}
                 >
-                    You take care of your contnet choice, and we’ll take care of
+                    You take care of your content choice, and we’ll take care of
                     the rest.
                 </Text>
                 <Box>
@@ -226,12 +226,12 @@ const Home: NextPage = () => {
                         }}
                     >
                         {cliquePlatformData1.map(
-                            ({key, name, detail, image}) => (
+                            ({key, name, detail, image}, i) => (
                                 <Box mt={'2.8rem'} w={{lg: '387px'}} key={key}>
                                     <Box
                                         fontWeight='600'
-                                        fontSize='18px'
-                                        color='#141516'
+                                        fontSize='sm2'
+                                        color='clique.black2'
                                         display={'flex'}
                                         alignItems='center'
                                     >
@@ -243,10 +243,13 @@ const Home: NextPage = () => {
                                         {name}
                                     </Box>
                                     <Text
-                                        fontWeight='400'
-                                        fontSize={{base: '12px'}}
-                                        lineHeight={{base: '20px', lg: '150%'}}
-                                        color='#141516'
+                                        fontSize={{base: 'sm', lg: 'smSubHead'}}
+                                        lineHeight={{base: '20px', lg: '24px'}}
+                                        color='clique.black2'
+                                        pr={{
+                                            lg: i !== 2 ? '1rem' : '0rem',
+                                            sm: '0rem',
+                                        }}
                                         mt={{lg: '.5rem'}}
                                     >
                                         {detail}
@@ -264,12 +267,12 @@ const Home: NextPage = () => {
                         }}
                     >
                         {cliquePlatformData2.map(
-                            ({key, name, detail, image}) => (
+                            ({key, name, detail, image}, i) => (
                                 <Box mt={'2.8rem'} w={{lg: '400px'}} key={key}>
                                     <Box
                                         fontWeight='600'
-                                        fontSize='18px'
-                                        color='#141516'
+                                        fontSize='sm2'
+                                        color='clique.black2'
                                         display={'flex'}
                                         alignItems='center'
                                     >
@@ -281,10 +284,13 @@ const Home: NextPage = () => {
                                         {name}
                                     </Box>
                                     <Text
-                                        fontWeight='400'
-                                        fontSize={{base: '12px'}}
-                                        lineHeight={{base: '20px', lg: '150%'}}
-                                        color='#141516'
+                                        fontSize={{base: 'sm', lg: 'smSubHead'}}
+                                        lineHeight={{base: '20px', lg: '24px'}}
+                                        color='clique.black2'
+                                        pr={{
+                                            lg: i !== 2 ? '1rem' : '0rem',
+                                            sm: '0rem',
+                                        }}
                                         mt={{lg: '.5rem'}}
                                     >
                                         {detail}
@@ -302,11 +308,11 @@ const Home: NextPage = () => {
             >
                 <Text
                     fontWeight={{base: '600', lg: '700'}}
-                    fontSize={{base: '20px', lg: '48px'}}
+                    fontSize={{base: 'smHead', lg: 'big2'}}
                     lineHeight='36px'
                     textAlign='center'
                     letterSpacing='-0.02em'
-                    color='#FFFFFF'
+                    color='clique.white'
                 >
                     We help you grow
                 </Text>
@@ -324,17 +330,17 @@ const Home: NextPage = () => {
                                 h={{lg: '100%'}}
                             >
                                 <Text
-                                    fontSize={{base: '18px', lg: '40px'}}
+                                    fontSize={{base: 'sm2', lg: 'big3'}}
                                     lineHeight={{base: '28px', lg: '49px'}}
-                                    color='#FFFFFF'
+                                    color='clique.white'
                                     fontWeight={{lg: '600'}}
                                 >
                                     {header}
                                 </Text>
                                 <Text
-                                    fontSize={{base: '12px', lg: '20px'}}
+                                    fontSize={{base: 'sm', lg: 'smHead'}}
                                     lineHeight={{base: '20px', lg: '150%'}}
-                                    color='#FFFFFF'
+                                    color='clique.white'
                                     mt={{base: '.45rem', lg: '.75'}}
                                 >
                                     Your content is your craft and we know this.
@@ -384,7 +390,7 @@ const Home: NextPage = () => {
                                     <Box
                                         w={{base: '185px', lg: '422px'}}
                                         p={{base: '.5rem', lg: '1.1rem'}}
-                                        background='#1D1D1D'
+                                        background='clique.black5'
                                         borderRadius='8.1807px'
                                         position={'absolute'}
                                         top='-15%'
@@ -395,7 +401,7 @@ const Home: NextPage = () => {
                                                 <Box
                                                     display={'flex'}
                                                     justifyContent='space-between'
-                                                    background='#232323'
+                                                    background='clique.blackGrey'
                                                     borderRadius='4.09035px'
                                                     p={{
                                                         base: '.3rem',
@@ -449,14 +455,14 @@ const Home: NextPage = () => {
 
                                                         <Text
                                                             fontSize={{
-                                                                base: '6.5px',
-                                                                lg: '12px',
+                                                                base: 'xs2',
+                                                                lg: 'sm',
                                                             }}
                                                             lineHeight={{
                                                                 base: '8px',
                                                                 lg: '20px',
                                                             }}
-                                                            color='#FFFFFF'
+                                                            color='clique.white'
                                                         >
                                                             {i !== 2
                                                                 ? 'Clique Wallet credited with'
@@ -477,14 +483,14 @@ const Home: NextPage = () => {
                                                     </Box>
                                                     <Text
                                                         fontSize={{
-                                                            base: '6.5px',
-                                                            lg: '12px',
+                                                            base: 'xs2',
+                                                            lg: 'sm',
                                                         }}
                                                         lineHeight={{
                                                             base: '8px',
                                                             lg: '20px',
                                                         }}
-                                                        color='#FFFFFF'
+                                                        color='clique.white'
                                                     >
                                                         {time}
                                                     </Text>
@@ -496,32 +502,6 @@ const Home: NextPage = () => {
                             </Box>
                         </Box>
                     ))}
-
-                    {/* <Box mt={'4.5rem'}>
-                        <Text fontSize='18px' lineHeight='28px' color='#FFFFFF'>
-                            Increase your earning
-                        </Text>
-                        <Text
-                            fontSize='12px'
-                            lineHeight='20px'
-                            color='#FFFFFF'
-                            mt='.45rem'
-                        >
-                            Your content is your craft and we know this. Hence,
-                            we have created this platform to help you monitize
-                            your craft. With each subscriber paying you, and
-                            tickets selling for each of your live events, you
-                            earning will surly increase!
-                        </Text>
-                    </Box>
-                    <Box mt='5rem' position={'relative'}>
-                        <Image
-                            src='/assets/microphone.png'
-                            alt='microphone'
-                            w='320px'
-                            m={'0 auto'}
-                        />
-                    </Box> */}
                 </Box>
             </Box>
             <Box
@@ -531,19 +511,19 @@ const Home: NextPage = () => {
             >
                 <Text
                     fontWeight='600'
-                    fontSize={{base: '20px', lg: '48px'}}
-                    lineHeight={{base: '36px', lg: '59px'}}
+                    fontSize={{base: 'smHead', lg: 'big2'}}
+                    lineHeight={{base: 'medium', lg: 'xl'}}
                     textAlign='center'
                     letterSpacing='-0.02em'
-                    color='#FFFFFF'
+                    color='clique.white'
                 >
                     Become that Creative you desire
                 </Text>
                 <Text
-                    fontSize={{base: '14px', lg: '20px'}}
+                    fontSize={{base: 'smSubHead', lg: 'smHead'}}
                     lineHeight={{base: '129%', lg: '150%'}}
                     textAlign='center'
-                    color='#FFFFFF'
+                    color='clique.white'
                     mt='.5rem'
                 >
                     Channel your inner Pikaso and start creating content to be
@@ -620,27 +600,27 @@ const Home: NextPage = () => {
             >
                 <Text
                     fontWeight='600'
-                    fontSize='20px'
+                    fontSize='smHead'
                     lineHeight='36px'
                     textAlign='center'
                     letterSpacing='-0.02em'
-                    color='#1E1E1E'
+                    color='clique.black4'
                     display={{lg: 'none'}}
                 >
                     Become that Creative you desire
                 </Text>
                 <Text
                     fontWeight='700'
-                    fontSize='48px'
+                    fontSize='big2'
                     lineHeight='59px'
                     textAlign='center'
-                    color='#141516'
+                    color='clique.black2'
                     display={{base: 'none', lg: 'block'}}
                 >
                     Famous Creators on our platform
                 </Text>
                 <Text
-                    fontSize={{base: '14px', lg: '20px'}}
+                    fontSize={{base: 'smSubHead', lg: 'smHead'}}
                     lineHeight={{base: '129%', lg: '150%'}}
                     textAlign='center'
                     color={{base: '#000000', lg: '#141516'}}
@@ -653,7 +633,7 @@ const Home: NextPage = () => {
                         height={{base: '80px', lg: '264px'}}
                         borderRadius={'40%'}
                         zIndex='99999'
-                        backgroundColor={'white'}
+                        backgroundColor={'clique.white'}
                     ></Box>
                     <Box
                         position={'absolute'}
@@ -692,7 +672,7 @@ const Home: NextPage = () => {
                         height={{base: '80px', lg: '264px'}}
                         borderRadius={'40%'}
                         // zIndex='5'
-                        backgroundColor={'white'}
+                        backgroundColor={'clique.white'}
                         position='absolute'
                         bottom={{base: '-170px', lg: '-601px'}}
                         w='100%'
@@ -714,12 +694,12 @@ const Home: NextPage = () => {
                             display={'flex'}
                             alignItems='center'
                             fontWeight={'700'}
-                            fontSize={{base: '16.0124px', lg: '22.6935px'}}
+                            fontSize={{base: 'subHead', lg: 'smHead2'}}
                             letterSpacing={{
                                 base: '0.500386px',
                                 lg: '0.709173px',
                             }}
-                            color='#000000'
+                            color='clique.black3'
                         >
                             <Image
                                 src='/assets/clique-logo.png'
@@ -730,9 +710,9 @@ const Home: NextPage = () => {
                             <Link href='/'>CLIQUE</Link>
                         </Box>
                         <Text
-                            fontSize={{base: '14px', lg: '20px'}}
+                            fontSize={{base: 'smSubHead', lg: 'smHead'}}
                             lineHeight={{base: '20px', lg: '150%'}}
-                            color='#141516'
+                            color='clique.black2'
                             mt={{base: '.85rem'}}
                             w={{base: '180px'}}
                         >
@@ -751,10 +731,10 @@ const Home: NextPage = () => {
                         <Box>
                             <Text
                                 fontWeight='600'
-                                fontSize={{base: '18px', lg: '24px'}}
-                                lineHeight={{base: '22px', lg: '29px'}}
+                                fontSize={{base: 'sm2', lg: 'head'}}
+                                lineHeight={{base: 'smHead2', lg: 'bigHead'}}
                                 textAlign='justify'
-                                color='#141516'
+                                color='clique.black2'
                             >
                                 Contact Info
                             </Text>
@@ -774,15 +754,15 @@ const Home: NextPage = () => {
                                         />
                                         <Text
                                             fontSize={{
-                                                base: '14px',
-                                                lg: '16px',
+                                                base: 'smSubHead',
+                                                lg: 'subHead',
                                             }}
                                             fontWeight={{lg: '500'}}
                                             lineHeight={{
                                                 base: '20px',
                                                 lg: '150%',
                                             }}
-                                            color='#141516'
+                                            color='clique.black2'
                                             w={{base: '180px'}}
                                         >
                                             {detail}
@@ -798,10 +778,10 @@ const Home: NextPage = () => {
                         >
                             <Text
                                 fontWeight='600'
-                                fontSize={{base: '18px', lg: '24px'}}
+                                fontSize={{base: 'sm2', lg: 'head'}}
                                 lineHeight={{base: '22px', lg: '29px'}}
                                 textAlign='justify'
-                                color='#141516'
+                                color='clique.black2'
                             >
                                 Others
                             </Text>
@@ -810,15 +790,15 @@ const Home: NextPage = () => {
                                     <Box display={'flex'} mt='1.2rem' key={key}>
                                         <Text
                                             fontSize={{
-                                                base: '14px',
-                                                lg: '16px',
+                                                base: 'smSubHead',
+                                                lg: 'subHead',
                                             }}
                                             fontWeight={{lg: '500'}}
                                             lineHeight={{
                                                 base: '20px',
                                                 lg: '150%',
                                             }}
-                                            color='#141516'
+                                            color='clique.black2'
                                             w={{base: '180px'}}
                                         >
                                             {detail}
@@ -831,10 +811,10 @@ const Home: NextPage = () => {
                     <Box mt={{base: '3.4rem', lg: '0'}} w={{lg: '704px'}}>
                         <Text
                             fontWeight='600'
-                            fontSize={{base: '18px', lg: '24px'}}
+                            fontSize={{base: 'sm2', lg: 'head'}}
                             lineHeight={{base: '22px', lg: '29px'}}
                             textAlign='justify'
-                            color='#141516'
+                            color='clique.black2'
                         >
                             Get in touch
                         </Text>
@@ -874,14 +854,14 @@ const Home: NextPage = () => {
                 </Box>
                 <Box
                     fontWeight='500'
-                    fontSize={{base: '14px', lg: '16px'}}
+                    fontSize={{base: 'smSubHead', lg: 'subHead'}}
                     lineHeight='150%'
-                    color='#141516'
+                    color='clique.black2'
                     mt={{base: '4rem'}}
                 >
                     <Box
                         height={{lg: '1px'}}
-                        backgroundColor='#C9C9C9'
+                        backgroundColor='clique.secondaryGrey5'
                         display={{base: 'none', lg: 'block'}}
                     ></Box>
                     <Text textAlign={'center'} mt={{lg: '1.5rem'}}>
@@ -918,12 +898,12 @@ const DownloadButtons = ({
                     lg: '275.58',
                 }}
                 height={{base: height, lg: '73px'}}
-                background='#FFFFFF'
+                background='clique.white'
                 borderRadius={{base: '10.7285px', lg: '18.25px'}}
-                fontSize={{base: '10.7285px', lg: '18.25'}}
+                fontSize={{base: 'sm3', lg: 'sm2'}}
                 lineHeight={{base: '21px', lg: '36px'}}
                 textAlign='center'
-                color='#000000'
+                color='clique.black3'
                 display={'flex'}
                 justifyContent='center'
                 alignItems='center'
@@ -950,11 +930,11 @@ const DownloadButtons = ({
                     lg: '275.58',
                 }}
                 height={{base: height, lg: '73px'}}
-                background='#000000'
+                background='clique.black3'
                 borderRadius={{base: '10.7285px', lg: '18.25px'}}
-                fontSize={{base: '10.7285px', lg: '18.25'}}
+                fontSize={{base: 'sm3', lg: 'sm2'}}
                 textAlign='center'
-                color='#FFFFFF'
+                color='clique.white'
                 display={'flex'}
                 justifyContent='center'
                 alignItems='center'

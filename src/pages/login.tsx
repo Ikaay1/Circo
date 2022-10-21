@@ -6,11 +6,12 @@ import { useAppDispatch } from 'redux/app/hooks';
 import { useLoginMutation } from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
-import { Box, Button, Icon, Image, Text } from '@chakra-ui/react';
+import { Box, Image, Text } from '@chakra-ui/react';
+import AuthButton from '@components/auth/AuthButton';
+import AuthInput from '@components/auth/AuthInput';
 import { CliqueLogo } from '@components/landing/Navbar';
 import { loginInputData, socialMediaIconsData } from '@constants/utils';
 
-import PasswordIcon from '../assets/icons/PasswordIcon';
 import { LoginDataInterface } from '../constants/interface';
 
 const Login = () => {
@@ -77,51 +78,16 @@ const Login = () => {
                                     height='57px'
                                     marginTop={'1.5rem'}
                                 >
-                                    <input
-                                        value={image ? password : userName}
-                                        onChange={
-                                            image
-                                                ? (e) =>
-                                                      setPassword(
-                                                          e.target.value,
-                                                      )
-                                                : (e) =>
-                                                      setUserName(
-                                                          e.target.value,
-                                                      )
+                                    <AuthInput
+                                        image={image}
+                                        name={name}
+                                        handleShowPassword={handleShowPassword}
+                                        theState={image ? password : userName}
+                                        setTheState={
+                                            image ? setPassword : setUserName
                                         }
-                                        className='input'
-                                        type={
-                                            image
-                                                ? showPassword
-                                                    ? 'text'
-                                                    : 'password'
-                                                : 'text'
-                                        }
-                                        required={true}
-                                        placeholder={name}
+                                        showPassword={showPassword}
                                     />
-                                    <Text
-                                        position='absolute'
-                                        top='6%'
-                                        left={'4.5%'}
-                                        fontSize='12px'
-                                        color='#FFFFFF'
-                                        className='placeholder small'
-                                    >
-                                        {name}
-                                    </Text>
-                                    {image && (
-                                        <Box
-                                            position='absolute'
-                                            right={'4.5%'}
-                                            bottom='26%'
-                                            cursor={'pointer'}
-                                            onClick={handleShowPassword}
-                                        >
-                                            <Icon as={PasswordIcon} />
-                                        </Box>
-                                    )}
                                 </Box>
                             </div>
                         ))}
@@ -132,31 +98,17 @@ const Login = () => {
                             </label>
                             <Text
                                 cursor='pointer'
-                                fontSize='12px'
-                                color='#BA1A1A'
+                                fontSize='sm'
+                                color='clique.secondaryRed'
                             >
                                 Forgot Password
                             </Text>
                         </Box>
-
-                        <Button
-                            type='submit'
-                            background='#892cdc'
-                            borderRadius='50px'
-                            width='100%;'
-                            height='60px;'
-                            display='flex;'
-                            alignItems='center'
-                            justifyContent='center'
-                            marginTop='4rem'
-                            fontWeight='500'
-                            fontSize='26px'
-                            letterSpacing='-0.02em;'
-                            color='#ffffff '
-                            isLoading={loginStatus.isLoading}
-                        >
-                            Login
-                        </Button>
+                        <AuthButton
+                            status={loginStatus}
+                            {...{marginTop: '4rem'}}
+                            name='Login'
+                        />
                     </form>
                     <SocialMedia
                         haveAccount={"Don't have an account?"}
@@ -189,7 +141,7 @@ export const SocialMedia = ({
                     <Box
                         width='77px'
                         height='77px'
-                        background='#292927'
+                        background='clique.secondaryGrey4'
                         boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
                         borderRadius='42px'
                         display={'flex'}
@@ -209,8 +161,8 @@ export const SocialMedia = ({
                 ))}
             </Box>
             <Box
-                fontSize='18px'
-                color='#FFFFFF'
+                fontSize='sm2'
+                color='clique.white'
                 textAlign={'center'}
                 marginTop={'1.7rem'}
             >
@@ -251,14 +203,14 @@ export const ShowAuthHeader = ({
         <Box>
             <Text
                 fontWeight='600'
-                fontSize='36px'
+                fontSize='medium'
                 textAlign='center'
                 letterSpacing='-0.02em'
-                color='FFFFFF'
+                color='clique.white'
             >
                 {header}
             </Text>
-            <Text color='#A1A1A1' textAlign='center'>
+            <Text color='clique.secondaryGrey2' textAlign='center'>
                 {detail}
             </Text>
         </Box>

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Box, Icon, Text } from '@chakra-ui/react';
+import TextArea from '@components/channel/TextArea';
 import AddnewIcon from '@icons/AddnewIcon';
 import UploadPlaylistIcon from '@icons/UploadPlaylistIcon';
 
@@ -10,7 +11,7 @@ const NewPlaylist = () => {
             <Box>
                 <Text
                     fontWeight='500'
-                    fontSize='22px'
+                    fontSize='smHead2'
                     lineHeight='36px'
                     letterSpacing='-0.02em'
                     color='clique.white'
@@ -50,7 +51,7 @@ const NewPlaylist = () => {
             <Box mt='1.1rem'>
                 <Text
                     fontWeight='500'
-                    fontSize='22px'
+                    fontSize='smHead2'
                     lineHeight='36px'
                     letterSpacing='-0.02em'
                     color='clique.secondaryGrey2'
@@ -59,12 +60,16 @@ const NewPlaylist = () => {
                     Playlist Name
                 </Text>
                 <Box mt='1rem'>
-                    <textarea
+                    <TextArea
                         placeholder='Playlist description'
-                        className='playlist'
-                        cols={30}
-                        rows={10}
-                    ></textarea>
+                        width='100%'
+                        height='195px'
+                        background='#232323'
+                        borderRadius='10px'
+                        paddingLeft='1.4rem'
+                        paddingTop='0.9rem'
+                        outline='none'
+                    />
                 </Box>
             </Box>
             <Box display={'flex'} mt='1.7rem'>
@@ -72,7 +77,7 @@ const NewPlaylist = () => {
                     <Icon as={AddnewIcon} />
                 </Box>
                 <Text
-                    fontSize='17px'
+                    fontSize='subHead'
                     lineHeight='32px'
                     color='clique.secondaryGrey2'
                 >
@@ -80,16 +85,16 @@ const NewPlaylist = () => {
                 </Text>
             </Box>
             <Box
-                background='#892CDC'
+                background='clique.purple'
                 borderRadius='50px'
                 fontWeight='500'
-                fontSize='22px'
+                fontSize='smHead2'
                 lineHeight='36px'
                 display='flex'
                 alignItems='center'
                 justifyContent={'center'}
                 letterSpacing='-0.02em'
-                color='#FFFFFF'
+                color='clique.white'
                 w='100%'
                 h='65px'
                 mt='1.5rem'
