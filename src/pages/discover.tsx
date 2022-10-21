@@ -5,6 +5,7 @@ import React from "react";
 import { purpleBoxStyle, scrollBarStyle } from "@constants/utils";
 import LiveEvents from "@components/home/LiveEvents";
 import DiscoverBox from "@components/discover/DiscoverBox";
+import SubscriptionCard from "@components/discover/SubscriptionCard";
 
 function Index() {
   return (
@@ -30,13 +31,31 @@ function Index() {
             fontFamily={"Poppins"}
             fontWeight={500}
             textTransform={"capitalize"}
-            fontSize="head"
+            fontSize="subHead"
             lineHeight={"1"}
           >
             Discover
           </Text>
-
-          <DiscoverBox />
+          <DiscoverBox />{" "}
+          <Text
+            py="40px"
+            position={"relative"}
+            pl="20px"
+            _before={{ ...purpleBoxStyle, background: "clique.base" }}
+            color={"clique.white"}
+            fontFamily={"Poppins"}
+            fontWeight={500}
+            textTransform={"capitalize"}
+            fontSize="subHead"
+            lineHeight={"1"}
+          >
+            Suggested Subscriptions
+          </Text>
+          <Flex overflowX={"scroll"} sx={scrollBarStyle}>
+            <SubscriptionCard />
+            <SubscriptionCard />
+            <SubscriptionCard />
+          </Flex>
         </Box>
         <LiveEvents />
       </Flex>
