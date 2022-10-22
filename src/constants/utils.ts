@@ -516,3 +516,32 @@ export const channelNav: {
     {title: 'Live Recordings', name: 'live'},
     {title: 'Playlists', name: 'playlist'},
 ];
+
+export const shareData: string[] = [
+    'whatsapp',
+    'ig',
+    'tiktok',
+    'figma',
+    'github',
+    'twitter',
+];
+
+export const chartData: string[] = ['analytics1', 'analytics2', 'analytics3'];
+
+export const analyticsData: {
+    text1: string;
+    text2: string;
+}[] = [
+    {
+        text1: 'Total Number of Likes',
+        text2: '21,678,009',
+    },
+    {
+        text1: 'Total Number of Shares',
+        text2: '638,935',
+    },
+    {
+        text1: 'Total Number of Live Stream Views',
+        text2: '1,975,935',
+    },
+];

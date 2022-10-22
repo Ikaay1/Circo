@@ -10,8 +10,10 @@ import {
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
+import Analytics from '@components/channel/Analytics';
 import ChannelContents from '@components/channel/ChannelContents';
 import EditChannel from '@components/channel/EditChannel';
+import ShareModal from '@components/channel/ShareModal';
 import Contents from '@components/profile/Contents';
 import { scrollBarStyle } from '@constants/utils';
 
@@ -39,7 +41,12 @@ const Index = () => {
                 />
                 <Box
                     position={'absolute'}
-                    bottom={router.query.name === 'content' ? '-100%' : '-52%'}
+                    bottom={
+                        router.query.name === 'content' ||
+                        router.query.name === 'analytics'
+                            ? '-100%'
+                            : '-52%'
+                    }
                     left={'50%'}
                     transform='translateX(-50%)'
                 >
@@ -51,7 +58,8 @@ const Index = () => {
                         h='120px'
                         w='120px'
                     />
-                    {router.query.name === 'content' && (
+                    {(router.query.name === 'content' ||
+                        router.query.name === 'analytics') && (
                         <>
                             <Text
                                 fontWeight='600'
@@ -91,29 +99,11 @@ const Index = () => {
 
             {router.asPath.split('/')[1] === 'channel' &&
                 router.query.name !== 'edit' && (
-                    <Box w='40%' mt={'1.4rem'} ml='1rem'>
-                        <Text
-                            fontWeight='600'
-                            fontSize='subHead'
-                            lineHeight='24px'
-                            color='clique.secondaryGrey2'
-                        >
-                            Bio
-                        </Text>
-                        <Text
-                            fontWeight='400'
-                            fontSize='smSubHead'
-                            lineHeight='24px'
-                            color='clique.secondaryGrey2'
-                            pr='1rem'
-                        >
-                            I am Ayra Star, a music artist with the best selling
-                            album on Apple Music, and Spotify, titled “19 and
-                            Undagelous”. I have toured 47 countries doing music
-                            tours in cities likes LA, NYC, Texas, Toronto and
-                            many more.
-                        </Text>
-                    </Box>
+                    <ShareModal
+                        showSubscribe={
+                            router.query.name === 'analytics' ? false : true
+                        }
+                    />
                 )}
 
             {router.query.name === 'content' &&
@@ -154,9 +144,6 @@ const Index = () => {
                     <Subscriptions />
                 </ModalContent>
             </Modal>
-            {/* <Box position={'absolute'} top='0' right='0'>
-                <Subscriptions />
-            </Box> */}
 
             {router.query.name === 'edit' &&
                 router.asPath.split('/')[1] === 'profile' && (
@@ -171,6 +158,12 @@ const Index = () => {
                         <EditChannel />
                     </Box>
                 )}
+
+            {router.query.name === 'analytics' && (
+                <Box mt={'6rem'} px='1.35rem'>
+                    <Analytics />
+                </Box>
+            )}
         </Box>
     );
 };

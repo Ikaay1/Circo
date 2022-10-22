@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from '@chakra-ui/react';
 
-const AuthButton = ({status, name, ...props}: any) => {
+const AuthButton = ({status, name, fontSize, ...props}: any) => {
     return (
         <Button
             type='submit'
@@ -14,7 +14,7 @@ const AuthButton = ({status, name, ...props}: any) => {
             alignItems='center'
             justifyContent='center'
             fontWeight='500'
-            fontSize='head'
+            fontSize={fontSize ? fontSize : 'head'}
             letterSpacing='-0.02em;'
             color='clique.white'
             style={props}
