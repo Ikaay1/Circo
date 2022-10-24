@@ -94,6 +94,7 @@ const fontSizes = {
     sm3: '10px',
     //11px
     xsl: '0.688rem',
+    
 };
 
 const components = {
