@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { settingsMenu } from "@constants/utils";
-import router from "next/router";
-import path from "path";
 
 type Props = {
   click: (route: string) => void;
