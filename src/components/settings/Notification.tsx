@@ -4,7 +4,7 @@ import SimpleSwitch from "./SimpleSwitch";
 import { TbCopy } from "react-icons/tb";
 
 type Props = {
-  onClick: (code:string) => void;
+  onClick: (code: string) => void;
 };
 
 const Notification = (props: Props) => {
@@ -45,7 +45,8 @@ const Notification = (props: Props) => {
           Referral
         </Text>
         <Text fontSize={"subHead"} mb="6">
-          Refer a friend and earn #1000!
+          Refer a friend and earn{" "}
+          <span style={{ color:"#8758FF" }}>#1000!</span>
         </Text>
         <Text color="clique.text" fontSize={"xsl"}>
           Referral Code
