@@ -22,7 +22,7 @@ const EditChannel = () => {
                         </Text>
 
                         <TextArea
-                            w='42%'
+                            w='53%'
                             h='150px'
                             color='clique.secondaryGrey2'
                         />
