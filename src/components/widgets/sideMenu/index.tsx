@@ -88,7 +88,7 @@ function Index() {
         >
           logout
         </Text>
-        <Icon fontSize={"xl"} as={HiOutlineLogout} />
+        <Icon fontSize={"head"} as={HiOutlineLogout} />
       </Flex>
     </Box>
   );
