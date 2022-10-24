@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Input, Text } from '@chakra-ui/react';
 
-const ChannelInput = ({name, ...props}: any) => {
+const ChannelInput = ({name, value, autoFocus, placeholder, ...props}: any) => {
     return (
         <>
             <Input
@@ -16,8 +16,10 @@ const ChannelInput = ({name, ...props}: any) => {
                 fontSize='sm2'
                 color='clique.white'
                 focusBorderColor='rgb(225, 225 ,225, 0.2)'
+                autoFocus={false}
                 style={props}
                 className='edit-profile-input'
+                value={value ? value : ''}
             />
             <Text
                 position='absolute'
