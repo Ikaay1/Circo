@@ -20,6 +20,7 @@ import NewPlaylist from './NewPlaylist';
 const Playlists = ({newPlaylist}: {newPlaylist: boolean}) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const router = useRouter();
+    console.log(router);
     return (
         <>
             {newPlaylist && (
@@ -50,8 +51,16 @@ const Playlists = ({newPlaylist}: {newPlaylist: boolean}) => {
                                 h={{lg: '180px', xl: '220px'}}
                                 position={'relative'}
                                 cursor={'pointer'}
-                                onClick={() =>
-                                    router.push('/profile/1/content/playlist')
+                                onClick={
+                                    router.asPath.split('/')[1] === 'profile'
+                                        ? () =>
+                                              router.push(
+                                                  '/profile/1/content/playlist',
+                                              )
+                                        : () =>
+                                              router.push(
+                                                  '/channel/1/content/playlist',
+                                              )
                                 }
                             >
                                 <Image
