@@ -2,7 +2,7 @@ import { Icon } from "@chakra-ui/react";
 import React from "react";
 
 const NotificationSetIcon = () => (
-  <Icon viewBox="0 0 24 24" width={"1.3em"} height={"1.3em"}>
+  <Icon viewBox="0 0 24 24" width={"1.3em"} height={"1.3em"} >
     <svg
       width="24"
       height="24"

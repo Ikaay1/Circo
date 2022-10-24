@@ -1,13 +1,16 @@
+import Common from "./Common";
 
-
-import React from 'react'
-
-type Props = {}
+type Props = {};
 
 function CommunityGuidlines({}: Props) {
   return (
-    <div>CommunityGuidlines</div>
-  )
+    <Common
+      title="Community Guidelines"
+      subTitle="  Cliques community guidelines has been set to keep it’s users saftey."
+      main="Review Cliques"
+      highlight="Community Guidelines"
+    />
+  );
 }
 
-export default CommunityGuidlines
+export default CommunityGuidlines;

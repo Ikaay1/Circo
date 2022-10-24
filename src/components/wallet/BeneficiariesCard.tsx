@@ -9,7 +9,7 @@ type Props = {
 
 function BeneficiariesCard({ onClick, hasBeneficiary }: Props) {
   return (
-    <Box py="7" mb="5" bg="clique.black" borderRadius="xl" px="6">
+    <Box pt="7" pb="5" mb="5" bg="clique.black" borderRadius="xl" px="6">
       <Text fontSize={"smHead"} mb="2">
         Beneficiaries
       </Text>

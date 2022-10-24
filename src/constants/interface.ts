@@ -28,3 +28,12 @@ export type LoginDataInterface =
 export type SignUpDataInterface =
     | {data: SignUpUserInterface}
     | {error: FetchBaseQueryError | SerializedError};
+
+
+  export   type ReceiptInfo = {
+        duration: string;
+        name: string;
+        description: string;
+        date: string;
+        reference: string;
+      };

@@ -1,13 +1,16 @@
+import Common from "./Common";
 
-
-import React from 'react'
-
-type Props = {}
+type Props = {};
 
 function TermsService({}: Props) {
   return (
-    <div>TermsService</div>
-  )
+    <Common
+      title="Terms of Service"
+      subTitle="Cliques tersm of service has been set to keep it’s users saftey."
+      main="Review Cliques"
+      highlight="Terms of Service"
+    />
+  );
 }
 
-export default TermsService
+export default TermsService;

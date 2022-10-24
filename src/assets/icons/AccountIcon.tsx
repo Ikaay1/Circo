@@ -2,7 +2,7 @@ import { Icon } from "@chakra-ui/react";
 import React from "react";
 
 const AccountIcon = () => (
-  <Icon viewBox="0 0 30 30" width={"1.3em"} height={"1.3em"}>
+  <Icon viewBox="0 0 30 30" width={"1.3em"} height={"1.3em"} >
     <svg
       width="30"
       height="30"
