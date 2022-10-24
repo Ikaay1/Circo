@@ -1,5 +1,6 @@
 import {
-  Box, Flex,
+  Box,
+  Flex,
   Icon,
   Input,
   Modal,
@@ -8,7 +9,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 import TapIcon from "@icons/TapIcon";

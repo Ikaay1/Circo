@@ -1,7 +1,5 @@
-import {
-  Avatar, Box,
-  Divider, Flex, Link, Text
-} from "@chakra-ui/react";
+import { Avatar, Box, Divider, Flex, Link, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 type Props = {};
 
@@ -18,16 +16,20 @@ function Account({}: Props) {
         You are signed in to clique as
         <span style={{ color: "#3088D9" }}> sparksdclark@gmail.com</span>
       </Text>
-      <Link
-        color="clique.red"
-        fontSize={"smSubHead"}
-        _hover={{ textDecoration: "none" }}
-      >
-        Delete acount
-      </Link>
+
+      <NextLink href="/channel/1/edit" passHref>
+        <Link
+          color="clique.red"
+          fontSize={"smSubHead"}
+          _hover={{ textDecoration: "none" }}
+        >
+          Delete acount
+        </Link>
+      </NextLink>
+
       <Divider mt="1.5" mb="3"></Divider>
       <Text fontSize={"smSubHead"} mb="3">
-        Your Clqiue Channel
+        Your Clique Channel
       </Text>
       <Text fontSize={"subHead"} mb="3.5">
         This is your public presence on Clique. You need your own channel to
@@ -42,30 +44,37 @@ function Account({}: Props) {
         />
 
         <Flex flexDirection={"column"} ml="5" pt="3.5" fontSize={"smSubHead"}>
-          <Link
-            color="clique.tertiary"
-            mb="2"
-            _hover={{ textDecoration: "none" }}
-          >
-            Guru Maraji
-          </Link>
-          <Link
-            mb="2"
-            color="clique.tertiary"
-            _hover={{ textDecoration: "none" }}
-          >
-            Create your channel
-          </Link>
-          <Link
-            mb="2"
-            color="clique.tertiary"
-            _hover={{ textDecoration: "none" }}
-          >
-            Channel status and settings
-          </Link>
-          <Link color="clique.red" mb="2" _hover={{ textDecoration: "none" }}>
-            Delete acount
-          </Link>
+            <Text
+              mb="2"
+            >
+              Guru Maraji
+            </Text>
+
+          <NextLink href="" passHref>
+            <Link
+              mb="2"
+              color="clique.tertiary"
+              _hover={{ textDecoration: "none" }}
+            >
+              Create your channel
+            </Link>
+          </NextLink>
+
+          <NextLink href="/channel/1/edit" passHref>
+            <Link
+              mb="2"
+              color="clique.tertiary"
+              _hover={{ textDecoration: "none" }}
+            >
+              Channel status and settings
+            </Link>
+          </NextLink>
+
+          <NextLink href="/channel/1/edit" passHref>
+            <Link color="clique.red" mb="2" _hover={{ textDecoration: "none" }}>
+              Delete acount
+            </Link>
+          </NextLink>
         </Flex>
       </Flex>
 
@@ -77,9 +86,12 @@ function Account({}: Props) {
         Channels you are subscribed to show on your feed and you have access to
         their videos and live shows.
       </Text>
-      <Link color="clique.tertiary" _hover={{ textDecoration: "none" }}>
-        View subscriptions
-      </Link>
+
+      <NextLink href="" passHref>
+        <Link color="clique.tertiary" _hover={{ textDecoration: "none" }}>
+          View subscriptions
+        </Link>
+      </NextLink>
     </Box>
   );
 }

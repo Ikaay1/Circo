@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import { MouseEventHandler } from "react";
 import BeneficiariesCard from "./BeneficiariesCard";
 import WithdrawalCard from "./WithdrawalCard";
 
