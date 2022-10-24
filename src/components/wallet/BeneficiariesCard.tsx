@@ -22,7 +22,7 @@ function BeneficiariesCard({ onClick, hasBeneficiary }: Props) {
           align="center"
           mb="7"
         >
-          <Icon as={tickSquare} mr="3" fontSize={"xl"}></Icon>
+          <Icon as={tickSquare} mr="3" fontSize={"l"}></Icon>
 
           <Box>
             <Text fontSize={"smSubHead"}>Tony Kent Clark</Text>

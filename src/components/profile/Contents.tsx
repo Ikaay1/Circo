@@ -63,7 +63,7 @@ const Contents = () => {
 
             {route === 'play' && (
                 <Box mt={'2.5rem'}>
-                    <Playlists />
+                    <Playlists newPlaylist={true} />
                 </Box>
             )}
 

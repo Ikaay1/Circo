@@ -10,15 +10,20 @@ import {
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
+import Analytics from '@components/channel/Analytics';
+import ChannelContents from '@components/channel/ChannelContents';
+import EditChannel from '@components/channel/EditChannel';
+import ShareModal from '@components/channel/ShareModal';
+import Contents from '@components/profile/Contents';
 import { scrollBarStyle } from '@constants/utils';
 
-import Contents from './Contents';
 import EditProfile from './EditProfile';
 import Subscriptions from './Subscriptions';
 
 const Index = () => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const router = useRouter();
+    console.log(router);
     return (
         <Box
             height={'100%'}
@@ -36,7 +41,12 @@ const Index = () => {
                 />
                 <Box
                     position={'absolute'}
-                    bottom={router.query.name === 'content' ? '-100%' : '-52%'}
+                    bottom={
+                        router.query.name === 'content' ||
+                        router.query.name === 'analytics'
+                            ? '-100%'
+                            : '-52%'
+                    }
                     left={'50%'}
                     transform='translateX(-50%)'
                 >
@@ -48,11 +58,12 @@ const Index = () => {
                         h='120px'
                         w='120px'
                     />
-                    {router.query.name === 'content' && (
+                    {(router.query.name === 'content' ||
+                        router.query.name === 'analytics') && (
                         <>
                             <Text
                                 fontWeight='600'
-                                fontSize='24px'
+                                fontSize='head'
                                 lineHeight='32px'
                                 color='clique.white'
                                 textAlign={'center'}
@@ -60,7 +71,7 @@ const Index = () => {
                                 Ayra Star
                             </Text>
                             <Text
-                                fontSize='16px'
+                                fontSize='subHead'
                                 lineHeight='24px'
                                 color='clique.secondaryGrey2'
                                 textAlign={'center'}
@@ -69,7 +80,7 @@ const Index = () => {
                             </Text>
                             <Text
                                 fontWeight='500'
-                                fontSize='16px'
+                                fontSize='subHead'
                                 lineHeight='24px'
                                 textDecorationLine='underline'
                                 color='clique.secondaryGrey2'
@@ -86,11 +97,28 @@ const Index = () => {
                 </Box>
             </Box>
 
-            {router.query.name === 'content' && (
-                <Box mt={'15rem'} px='1.35rem'>
-                    <Contents />
-                </Box>
-            )}
+            {router.asPath.split('/')[1] === 'channel' &&
+                router.query.name !== 'edit' && (
+                    <ShareModal
+                        showSubscribe={
+                            router.query.name === 'analytics' ? false : true
+                        }
+                    />
+                )}
+
+            {router.query.name === 'content' &&
+                router.asPath.split('/')[1] === 'profile' && (
+                    <Box mt={'15rem'} px='1.35rem'>
+                        <Contents />
+                    </Box>
+                )}
+
+            {router.query.name === 'content' &&
+                router.asPath.split('/')[1] === 'channel' && (
+                    <Box mt={'6rem'} px='1.35rem'>
+                        <ChannelContents />
+                    </Box>
+                )}
 
             <Modal
                 isCentered
@@ -116,13 +144,24 @@ const Index = () => {
                     <Subscriptions />
                 </ModalContent>
             </Modal>
-            {/* <Box position={'absolute'} top='0' right='0'>
-                <Subscriptions />
-            </Box> */}
 
-            {router.query.name === 'edit' && (
-                <Box mt={'8.5rem'} px='1.35rem'>
-                    <EditProfile />
+            {router.query.name === 'edit' &&
+                router.asPath.split('/')[1] === 'profile' && (
+                    <Box mt={'8.5rem'} px='1.35rem'>
+                        <EditProfile />
+                    </Box>
+                )}
+
+            {router.query.name === 'edit' &&
+                router.asPath.split('/')[1] === 'channel' && (
+                    <Box mt={'1.4rem'} px='1.35rem'>
+                        <EditChannel />
+                    </Box>
+                )}
+
+            {router.query.name === 'analytics' && (
+                <Box mt={'6rem'} px='1.35rem'>
+                    <Analytics />
                 </Box>
             )}
         </Box>

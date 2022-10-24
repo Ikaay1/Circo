@@ -7,21 +7,27 @@ import HomeIcon from "@icons/HomeIcon";
 function EachMenu({ name, icon }: { name: string; icon: any }) {
   const router = useRouter();
   const path = router.pathname;
+  console.log(name);
 
   return (
     <Flex
       mt="5px"
       cursor={"pointer"}
       onClick={
-        name !== "profile"
-          ? () => router.push(`/${name.replace(/\s/g, "").toLowerCase()}`)
-          : () => router.push(`/${name}/1/content`)
+        name === "profile"
+          ? () => router.push(`/${name}/1/content`)
+          : name === "Your channel"
+          ? () => router.push(`/channel/1/content`)
+          : () => router.push(`/${name.replace(/\s/g, "").toLowerCase()}`)
       }
       h="40px"
       position={"relative"}
       _before={{
         content: '""',
-        display: path === "/" + name ? "block" : "none",
+        display:
+          path === "/" + name.replace(/\s/g, "").toLowerCase()
+            ? "block"
+            : "none",
         position: "absolute",
         top: "50%",
         transform: "translateY(-50%)",

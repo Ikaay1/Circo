@@ -8,7 +8,7 @@ const Subscriptions = () => {
         <Box p='1rem' pb='2.5rem'>
             <Text
                 fontWeight='500'
-                fontSize='22px'
+                fontSize='smHead2'
                 lineHeight='36px'
                 letterSpacing='-0.02em'
                 color='clique.white'
@@ -36,7 +36,7 @@ const Subscriptions = () => {
                                 alt=''
                             />
                             <Text
-                                fontSize='16.4167px'
+                                fontSize='subHead'
                                 lineHeight='31px'
                                 color='clique.white'
                             >
@@ -44,7 +44,7 @@ const Subscriptions = () => {
                             </Text>
                         </Box>
                         <Text
-                            fontSize='12.0365px'
+                            fontSize='sm'
                             lineHeight='26px'
                             color={
                                 status === 'active'

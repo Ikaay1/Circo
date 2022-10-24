@@ -31,12 +31,12 @@ const Sidebar = ({
                     display={'flex'}
                     alignItems='center'
                     fontWeight={'700'}
-                    fontSize={{base: '16.0124px', lg: '22.6935px'}}
+                    fontSize={{base: 'subHead', lg: 'smHead2'}}
                     letterSpacing={{
                         base: '0.500386px',
                         lg: '0.709173px',
                     }}
-                    color='#FFFFFF'
+                    color='clique.white'
                 >
                     <Image
                         src='/assets/clique-logo.png'
@@ -57,9 +57,9 @@ const Sidebar = ({
                 {sideBarData.map(({key, detail}) => (
                     <Text
                         key={key}
-                        fontSize='20px'
+                        fontSize='smHead'
                         lineHeight='28px'
-                        color='#FFFFFF'
+                        color='clique.white'
                         mt={'1.45rem'}
                     >
                         {detail}

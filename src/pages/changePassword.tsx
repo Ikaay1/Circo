@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-import { Box, Icon, Image, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import AuthButton from '@components/auth/AuthButton';
+import AuthInput from '@components/auth/AuthInput';
 import { CliqueLogo } from '@components/landing/Navbar';
 import { changePasswordInputData } from '@constants/utils';
-import PasswordIcon from '@icons/PasswordIcon';
 
 import { ShowAuthHeader, ShowAuthImage } from './login';
 
@@ -45,75 +46,41 @@ const ChangePassword = () => {
                         className='login-form'
                     >
                         {changePasswordInputData.map(
-                            ({name, key, placeholder, inputName}, i) => (
+                            ({name, key, inputName}, i) => (
                                 <div key={key}>
                                     <Box
                                         position='relative'
                                         height='57px'
                                         marginTop={'.5rem'}
                                     >
-                                        <input
-                                            value={
+                                        <AuthInput
+                                            image={true}
+                                            name={name}
+                                            handleShowPassword={() =>
+                                                handleShowPassword(i)
+                                            }
+                                            theState={
                                                 inputName === 'password'
                                                     ? password
                                                     : confirmPassword
                                             }
-                                            onChange={
+                                            setTheState={
                                                 inputName === 'password'
-                                                    ? (e) =>
-                                                          setPassword(
-                                                              e.target.value,
-                                                          )
-                                                    : (e) =>
-                                                          setConfirmPassword(
-                                                              e.target.value,
-                                                          )
+                                                    ? setPassword
+                                                    : setConfirmPassword
                                             }
-                                            className='input'
-                                            type={
-                                                i === 0
-                                                    ? showPassword0
-                                                        ? 'text'
-                                                        : 'password'
-                                                    : showPassword1
-                                                    ? 'text'
-                                                    : 'password'
-                                            }
-                                            required={true}
-                                            placeholder={name}
+                                            showPassword0={showPassword0}
+                                            showPassword1={showPassword1}
+                                            i={i + 1}
                                         />
-                                        <Text
-                                            position='absolute'
-                                            top='6%'
-                                            left={'4.5%'}
-                                            fontSize='12px'
-                                            color='#FFFFFF'
-                                            className='placeholder small'
-                                        >
-                                            {name}
-                                        </Text>
-                                        <Box
-                                            position='absolute'
-                                            right={'4.5%'}
-                                            bottom='26%'
-                                            cursor={'pointer'}
-                                            onClick={() =>
-                                                handleShowPassword(Number(i))
-                                            }
-                                        >
-                                            <Icon as={PasswordIcon} />
-                                        </Box>
                                     </Box>
                                 </div>
                             ),
                         )}
-                        <button
-                            type='submit'
-                            className='login-submit'
-                            style={{marginTop: '4.7rem'}}
-                        >
-                            Change Password
-                        </button>
+                        <AuthButton
+                            {...{marginTop: '4.7rem'}}
+                            name='Change Password'
+                        />
                     </form>
                 </Box>
             </Box>
