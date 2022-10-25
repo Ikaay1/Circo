@@ -21,7 +21,6 @@ import NewPlaylist from './NewPlaylist';
 const Playlists = ({newPlaylist}: {newPlaylist: boolean}) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const router = useRouter();
-    console.log(router);
     return (
         <>
             {newPlaylist && (

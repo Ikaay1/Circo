@@ -23,7 +23,6 @@ import Subscriptions from './Subscriptions';
 const Index = () => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const router = useRouter();
-    console.log(router);
     return (
         <Box
             height={'100%'}

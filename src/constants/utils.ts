@@ -82,21 +82,6 @@ export const signUpInputData: (
     },
 ];
 
-// export const controlInput = (
-//     num1: number,
-//     num2: number,
-//     isActive: boolean,
-//     texts: NodeListOf<HTMLParagraphElement>,
-// ) => {
-//     if (!isActive) {
-//         texts[num1].classList.add('inactive');
-//         texts[num2].classList.add('inactive');
-//     } else {
-//         texts[num1].classList.remove('inactive');
-//         texts[num2].classList.remove('inactive');
-//     }
-// };
-
 export const socialMediaIconsData = ['google', 'apple', 'facebook'];
 
 export const changePasswordInputData: {
@@ -607,13 +592,9 @@ export const data = {
     datasets: [
         {
             label: '',
-            data: [0, 100, 20, 300, 400],
+            data: [0, 400],
             borderColor: 'rgb(137, 44, 220)',
             backgroundColor: 'rgba(137, 44, 220, 0.5)',
         },
     ],
 };
-
-// export function App() {
-//   return <Line options={options} data={data} />;
-// }

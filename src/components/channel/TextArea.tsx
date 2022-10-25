@@ -3,8 +3,6 @@ import React from 'react';
 import { Textarea } from '@chakra-ui/react';
 
 const TextArea = ({w, h, color, placeholder, ...props}: any) => {
-    console.log(props);
-
     return (
         <Textarea
             w={w}
