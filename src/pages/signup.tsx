@@ -31,16 +31,16 @@ const Signup = () => {
         e.preventDefault();
 
         const allData = {
-            firstName: firstName,
-            lastName: lastName,
-            userName: userName,
-            email: email.toLowerCase(),
-            password: password,
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+            userName: userName.trim(),
+            email: email.toLowerCase().trim(),
+            password: password.trim(),
         };
 
         const data = {
-            firstName: firstName,
-            email: email.toLowerCase(),
+            firstName: firstName.trim(),
+            email: email.toLowerCase().trim(),
         };
 
         const res: SignUpDataInterface = await preSignup(data);

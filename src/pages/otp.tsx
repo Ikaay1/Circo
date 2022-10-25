@@ -26,7 +26,7 @@ const Referral = () => {
         const hashedOtp = JSON.parse(localStorage.getItem('hashedOtp')!);
         const userData = {
             ...allData,
-            otp_code: otp,
+            otp_code: otp.trim(),
             otp_hash: `${hashedOtp}`,
             social: 'NULL',
         };

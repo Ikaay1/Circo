@@ -27,13 +27,13 @@ const Login = () => {
         e.preventDefault();
         let userNameDetail;
         if (userName.includes('@')) {
-            userNameDetail = userName.toLowerCase();
+            userNameDetail = userName.toLowerCase().trim();
         } else {
-            userNameDetail = userName;
+            userNameDetail = userName.trim();
         }
         const userData = {
             userNameOrEmail: userNameDetail,
-            password: password,
+            password: password.trim(),
         };
         const res: LoginDataInterface = await login(userData);
 
