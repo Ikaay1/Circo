@@ -39,6 +39,8 @@ const colors = {
         secondaryGrey5: '#C9C9C9',
         red2: '#FF0000',
         black5: '#1D1D1D',
+        wine: 'rgba(195, 46, 46, 0.3)',
+        lightGreen: 'rgba(133, 191, 154, 0.3)',
     },
 };
 
@@ -94,7 +96,6 @@ const fontSizes = {
     sm3: '10px',
     //11px
     xsl: '0.688rem',
-    
 };
 
 const components = {
