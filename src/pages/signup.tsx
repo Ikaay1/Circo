@@ -34,13 +34,13 @@ const Signup = () => {
             firstName: firstName,
             lastName: lastName,
             userName: userName,
-            email: email,
+            email: email.toLowerCase(),
             password: password,
         };
 
         const data = {
             firstName: firstName,
-            email: email,
+            email: email.toLowerCase(),
         };
 
         const res: SignUpDataInterface = await preSignup(data);
@@ -171,6 +171,9 @@ const Signup = () => {
                                             }
                                             showPassword={showPassword}
                                             email={inputName === 'email'}
+                                            referral={
+                                                inputName === 'referralCode'
+                                            }
                                         />
                                     </Box>
                                 </div>

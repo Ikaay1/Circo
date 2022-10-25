@@ -62,8 +62,8 @@ const Referral = () => {
                     margin='0 auto'
                 >
                     <ShowAuthHeader
-                        header='Referral Code'
-                        detail='were you referred by someone? paste the referral code.'
+                        header='Enter OTP'
+                        detail='Enter the OTP sent to your email address'
                     />
                     <form onSubmit={handleSignUp} className='login-form'>
                         <Box
