@@ -36,7 +36,6 @@ const SideMenu = ({menu}: {menu: MenuData[]}) => {
                     _hover={{
                         color: 'clique.base',
                     }}
-                    transition={'all 0.2s ease-in-out'}
                     onClick={() =>
                         router.push(
                             router.asPath.split('/')[1] === 'channel'

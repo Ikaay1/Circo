@@ -29,7 +29,6 @@ const Contents = () => {
                         cursor={'pointer'}
                         key={'name'}
                         onClick={() => setRoute(name)}
-                        transition='all .8s ease'
                     >
                         {title}
                     </Text>

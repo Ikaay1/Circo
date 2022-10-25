@@ -8,6 +8,7 @@ import {
 	Modal,
 	ModalContent,
 	ModalOverlay,
+	SimpleGrid,
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
@@ -42,13 +43,21 @@ const Playlists = ({newPlaylist}: {newPlaylist: boolean}) => {
                 </Text>
             )}
 
-            <Box mt={'2.5rem'} display='flex' gap='28px'>
+            <SimpleGrid
+                autoColumns={'300px'}
+                mt='20px'
+                columns={4}
+                w={'100%'}
+                spacing={'30px'}
+            >
                 {playListData.map(
                     ({bigImage, smallImage, name, noOfVideos}) => (
                         <Box key={bigImage}>
                             <Box
-                                w={{lg: '235px', xl: '310px'}}
-                                h={{lg: '180px', xl: '220px'}}
+                                w={{lg: '235px', mlg: '280px'}}
+                                h={{lg: '130px', mlg: '180px'}}
+                                maxW='280px'
+                                maxH='200px'
                                 position={'relative'}
                                 cursor={'pointer'}
                                 onClick={
@@ -119,7 +128,7 @@ const Playlists = ({newPlaylist}: {newPlaylist: boolean}) => {
                         </Box>
                     ),
                 )}
-            </Box>
+            </SimpleGrid>
 
             <Modal
                 isCentered
