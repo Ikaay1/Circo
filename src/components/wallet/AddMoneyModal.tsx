@@ -1,7 +1,13 @@
 import {
   Box,
-  Flex, Input, Modal, ModalBody, ModalContent,
-  ModalHeader, ModalOverlay, Text
+  Flex,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 

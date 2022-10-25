@@ -1,4 +1,30 @@
-import { extendTheme, ThemeConfig } from '@chakra-ui/react';
+import { switchAnatomy } from '@chakra-ui/anatomy';
+import {
+	createMultiStyleConfigHelpers,
+	extendTheme,
+	ThemeConfig,
+} from '@chakra-ui/react';
+
+const {definePartsStyle, defineMultiStyleConfig} =
+    createMultiStyleConfigHelpers(switchAnatomy.keys);
+
+const baseStyle = definePartsStyle({
+    // define the part you're going to style
+    container: {
+        // ...
+    },
+    thumb: {
+        bg: 'clique.mixedBase',
+    },
+    track: {
+        bg: 'clique.secondaryGrey1',
+        _checked: {
+            bg: 'gray.100',
+        },
+    },
+});
+
+const switchTheme = defineMultiStyleConfig({baseStyle});
 
 //colors
 const colors = {
@@ -41,6 +67,7 @@ const colors = {
         black5: '#1D1D1D',
         wine: 'rgba(195, 46, 46, 0.3)',
         lightGreen: 'rgba(133, 191, 154, 0.3)',
+        mixedBase: 'linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)',
     },
 };
 
@@ -128,6 +155,7 @@ const components = {
             },
         },
     },
+    Switch: switchTheme,
 };
 
 const theme = extendTheme({

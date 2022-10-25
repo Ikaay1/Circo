@@ -1,8 +1,12 @@
 import {
   Box,
   Divider,
-  Table, TableContainer, Tbody,
-  Td, Text, Th,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Text,
+  Th,
   Thead,
   Tr
 } from "@chakra-ui/react";
@@ -52,7 +56,7 @@ function WithdrawalCard({}: Props) {
           </Tbody>
         </Table>
       </TableContainer>
-      <Text color="clique.danger" fontSize="xsl" textAlign="center" mt="3">
+      <Text color="clique.red" fontSize="xsl" textAlign="center" mt="3">
         Note: Withdrawal is automated by Clique and is sent to your added
         beneficiary account on the 25th of every month.
       </Text>

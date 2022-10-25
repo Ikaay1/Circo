@@ -1,13 +1,16 @@
+import Common from "./Common";
 
-
-import React from 'react'
-
-type Props = {}
+type Props = {};
 
 function PrivacyPolicy({}: Props) {
   return (
-    <div>PrivacyPolicy</div>
-  )
+    <Common
+      title="Privacy Policy"
+      subTitle="Cliques privacy guideliness has been set to keep it’s users saftey."
+      main="Review Cliques"
+      highlight="Privacy Policy"
+    />
+  );
 }
 
-export default PrivacyPolicy
+export default PrivacyPolicy;

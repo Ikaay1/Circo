@@ -9,11 +9,15 @@ import { scrollBarStyle } from "@constants/utils";
 import HomeLayout from "layouts/HomeLayout";
 import SortModal from "@components/wallet/SortModal";
 import TransactionRecieptModal from "@components/wallet/TransactionRecieptModal";
+import { ReceiptInfo } from "@constants/interface";
+import { useState } from "react";
 
 type Props = {};
 
 function Wallet({}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
+
   const {
     isOpen: isBeneIsOpen,
     onOpen: isBeneOnOpen,
@@ -32,6 +36,10 @@ function Wallet({}: Props) {
     onClose: isReceiptOnClose,
   } = useDisclosure();
 
+  const handleClick = (info: ReceiptInfo) => {
+    setModalInfo(info);
+    isReceiptOnOpen();
+  };
   const hasBeneficiary = true;
 
   return (
@@ -47,7 +55,11 @@ function Wallet({}: Props) {
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          <MainWallet onClick={onOpen} onSort={isSortOnOpen} />
+          <MainWallet
+            onClick={onOpen}
+            onSort={isSortOnOpen}
+            click={(info) => handleClick(info)}
+          />
         </Box>
         <Box
           maxH={"90vh"}
@@ -75,6 +87,7 @@ function Wallet({}: Props) {
       <TransactionRecieptModal
         isOpen={isReceiptIsOpen}
         onClose={isReceiptOnClose}
+        info={modalInfo as ReceiptInfo}
       />
     </HomeLayout>
   );
