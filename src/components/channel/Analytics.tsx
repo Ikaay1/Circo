@@ -1,4 +1,3 @@
-import { Chart as ChartJS } from 'chart.js';
 import React from 'react';
 //@ts-ignore
 import { Line } from 'react-chartjs-2';
@@ -7,10 +6,6 @@ import { Box, Icon, Text } from '@chakra-ui/react';
 import { analyticsData, chartData, data, options } from '@constants/utils';
 import FallIcon from '@icons/FallIcon';
 import UpIcon from '@icons/UpIcon';
-
-ChartJS.defaults.font = {
-    family: 'Poppins',
-};
 
 const Analytics = () => {
     return (
