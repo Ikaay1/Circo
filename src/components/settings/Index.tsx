@@ -11,16 +11,17 @@ import TermsService from "./TermsService";
 
 export type SettingsProps = {
   current: string;
+  onClick: (code: string) => void;
 };
 
-function Index({ current }: SettingsProps) {
+function Index({ current, onClick }: SettingsProps) {
   let active;
   switch (current) {
     case "account":
       active = <Account />;
       break;
     case "notification":
-      active = <Notification />;
+      active = <Notification onClick={onClick} />;
       break;
     case "copyright":
       active = <CopyrightPolicy />;
@@ -41,7 +42,7 @@ function Index({ current }: SettingsProps) {
       active = null;
   }
   return (
-    <Box height={"100%"} overflowY="scroll" sx={scrollBarStyle}>
+    <Box>
       <Box
         borderBottom={"1px solid #232323"}
         height="12vh"
@@ -51,7 +52,15 @@ function Index({ current }: SettingsProps) {
       >
         <Text>Settings</Text>
       </Box>
-      <Box pl="223px">{active}</Box>
+      <Box
+        pl="170px"
+        pr="12"
+        height={"100%"}
+        overflowY="scroll"
+        sx={scrollBarStyle}
+      >
+        {active}
+      </Box>
     </Box>
   );
 }

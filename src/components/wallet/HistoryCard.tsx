@@ -1,13 +1,16 @@
 import { Flex, Icon, Text } from "@chakra-ui/react";
 import DownwardIcon from "@icons/DownwardIcon";
 import UpwardIcon from "@icons/UpwardIcon";
+import { MouseEventHandler } from "react";
 
 type Props = {
   credit: boolean;
   amount: string;
+  duration:string;
+  onClick: () => void;
 };
 
-function HistoryCard({ credit, amount }: Props) {
+function HistoryCard({ credit, amount, onClick,duration }: Props) {
   const iconArg = credit ? UpwardIcon : DownwardIcon;
   return (
     <Flex
@@ -17,6 +20,8 @@ function HistoryCard({ credit, amount }: Props) {
       bg="clique.secondaryGrey1"
       px="4"
       py="3"
+      onClick={onClick}
+      cursor="pointer"
     >
       <Flex align={"center"}>
         <Icon as={iconArg} fontSize="3xl" mr="2" />
@@ -28,7 +33,7 @@ function HistoryCard({ credit, amount }: Props) {
           </span>
         </Text>
       </Flex>
-      <Text fontSize={"smSubHead"}>1 hour</Text>
+      <Text fontSize={"smSubHead"}>{duration}</Text>
     </Flex>
   );
 }

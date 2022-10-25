@@ -1,6 +1,15 @@
 import {
-  Box, Button, Flex, Icon, Input, Modal, ModalBody, ModalContent,
-  ModalHeader, ModalOverlay, Select, Text
+  Box,
+  Flex,
+  Icon,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Text,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 import TapIcon from "@icons/TapIcon";
@@ -27,17 +36,14 @@ function BeneficiaryModal({ isOpen, onClose, type }: Props) {
         </ModalHeader>
         <ModalBody>
           <Flex flexDirection={"column"}>
-            <Button
+            <Btn
               size="lg"
               py="12"
               borderRadius="16px"
               leftIcon={<Icon as={TapIcon} color="white" />}
-              bg="clique.base"
-            >
-              <Text fontSize={"smSubHead"}>
-                Tap to receieve OTP in your mail
-              </Text>
-            </Button>
+              text="Tap to receieve OTP in your mail"
+              fontSize={"smSubHead"}
+            />
 
             <Box
               bg="clique.secondaryGrey1"

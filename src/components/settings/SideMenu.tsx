@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { settingsMenu } from "@constants/utils";
-import router from "next/router";
-import path from "path";
 
 type Props = {
   click: (route: string) => void;
@@ -22,6 +20,9 @@ const SideMenu = ({ click }: Props) => {
       borderRight={"1px solid rgba(255, 255, 255, 0.1)"}
       minW="250px"
       height="100%"
+      h="90vh"
+      minH="90vh"
+      maxH="90vh"
     >
       {settingsMenu.map(({ name, icon, route }, i) => (
         <Flex
@@ -54,7 +55,7 @@ const SideMenu = ({ click }: Props) => {
             color={state === route ? "clique.base" : "clique.whiteGrey"}
             alignItems={"center"}
           >
-            <Icon as={icon} fontSize="l"/>
+            <Icon as={icon} fontSize="l" />
             <Text fontSize="xsl" fontFamily={"Poppins"} fontWeight={500} pl="5">
               {name}
             </Text>

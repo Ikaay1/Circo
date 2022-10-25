@@ -1,13 +1,26 @@
-import React, { useState } from "react";
-
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, useDisclosure, useClipboard, useToast } from "@chakra-ui/react";
+import Index from "@components/settings/Index";
 import SideMenu from "@components/settings/SideMenu";
-import Index, { SettingsProps } from "@components/settings/Index";
 import Header from "@components/widgets/Header";
+import { scrollBarStyle } from "@constants/utils";
 
 const Settings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, setState] = useState<string>("account");
+  const [code, setCode] = useState<string>("D657Y85");
+  const { hasCopied, onCopy } = useClipboard(code as string);
+  const toast = useToast();
+  const handleCopied = (code: string) => {
+    setCode(code);
+    onCopy();
+    toast({
+      title: "Copied",
+      description: "copied to your clipboard!",
+      status: "success",
+      duration: 1000,
+    });
+  };
 
   return (
     <Box>
@@ -16,8 +29,19 @@ const Settings = () => {
         <Box flex="1" h="100%">
           <SideMenu click={(route) => setState(route)} />
         </Box>
-        <Box flex="4.4" h="100%">
-          <Index current={state as string} />
+        <Box
+          flex="4.4"
+          h="100%"
+          maxH={"90vh"}
+          pb="12"
+          overflowY={"scroll"}
+          overflowX={"hidden"}
+          sx={scrollBarStyle}
+        >
+          <Index
+            current={state as string}
+            onClick={(code) => handleCopied(code)}
+          />
         </Box>
       </Box>
     </Box>

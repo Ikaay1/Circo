@@ -1,18 +1,19 @@
-import React from "react";
-import { Box, Flex } from "@chakra-ui/react";
-import WalletCard from "./WalletCard";
+import { Flex } from "@chakra-ui/react";
+import { ReceiptInfo } from "@constants/interface";
 import TransactionHistory from "./TransactionHistory";
+import WalletCard from "./WalletCard";
 
 type Props = {
   onClick: () => void;
+  click: (info: ReceiptInfo) => void;
   onSort: () => void;
 };
 
-function MainWallet({ onClick, onSort }: Props) {
+function MainWallet({ onClick, onSort, click }: Props) {
   return (
     <Flex pt="7" flexDirection="column" gap="5">
       <WalletCard onClick={onClick} />
-      <TransactionHistory onClick={onSort} />
+      <TransactionHistory onClick={onSort} click={(info) => click(info)} />
     </Flex>
   );
 }

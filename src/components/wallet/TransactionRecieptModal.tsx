@@ -1,24 +1,25 @@
 import {
   Flex,
-  Icon, Modal,
+  Icon,
+  Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
-  ModalOverlay,
   Spacer,
-  Text
+  Text,
 } from "@chakra-ui/react";
+import { ReceiptInfo } from "@constants/interface";
 import UpwardIcon from "@icons/UpwardIcon";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  info: ReceiptInfo;
 };
 
-function TransactionRecieptModal({ isOpen, onClose }: Props) {
+function TransactionRecieptModal({ isOpen, onClose, info }: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size={"md"}>
-      <ModalOverlay />
       <ModalContent
         bg="clique.black"
         borderColor="clique.black"
@@ -51,7 +52,7 @@ function TransactionRecieptModal({ isOpen, onClose }: Props) {
               <Icon as={UpwardIcon} fontSize="5xl" />
               <Spacer />
               <Text fontSize={"xsl"} fontWeight="400" color={"clique.white"}>
-                8 hour
+                {info?.duration}
               </Text>
             </Flex>
             <Flex justifyContent={"space-between"} mb="2">
@@ -68,7 +69,7 @@ function TransactionRecieptModal({ isOpen, onClose }: Props) {
                 fontWeight="400"
                 color={"clique.white"}
               >
-                Emmanuel Edward
+                {info?.name}
               </Text>
             </Flex>
             <Flex justifyContent={"space-between"} mb="2">
@@ -84,7 +85,7 @@ function TransactionRecieptModal({ isOpen, onClose }: Props) {
                 fontWeight="400"
                 color={"clique.white"}
               >
-                Subscription to TheDoreenTube
+                {info?.description}
               </Text>
             </Flex>
             <Flex justifyContent={"space-between"} mb="2">
@@ -100,7 +101,7 @@ function TransactionRecieptModal({ isOpen, onClose }: Props) {
                 fontWeight="400"
                 color={"clique.white"}
               >
-                8/19/2022
+                {info?.date}
               </Text>
             </Flex>
             <Flex justifyContent={"space-between"}>
@@ -116,7 +117,7 @@ function TransactionRecieptModal({ isOpen, onClose }: Props) {
                 fontWeight="400"
                 color={"clique.white"}
               >
-                7EB8ENEE0J8E0EHEE0
+                {info?.reference}
               </Text>
             </Flex>
           </Flex>
