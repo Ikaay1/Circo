@@ -14,6 +14,7 @@ const AuthInput = ({
     email,
     i,
     setTheState,
+    referral,
 }: any) => {
     return (
         <>
@@ -38,7 +39,7 @@ const AuthInput = ({
                         ? 'text'
                         : 'password'
                 }
-                required={true}
+                required={referral ? false : true}
                 placeholder={name}
             />
             <Text

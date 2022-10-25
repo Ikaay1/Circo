@@ -25,9 +25,15 @@ const Login = () => {
 
     const handleLogin = async (e: any) => {
         e.preventDefault();
+        let userNameDetail;
+        if (userName.includes('@')) {
+            userNameDetail = userName.toLowerCase().trim();
+        } else {
+            userNameDetail = userName.trim();
+        }
         const userData = {
-            userNameOrEmail: userName,
-            password: password,
+            userNameOrEmail: userNameDetail,
+            password: password.trim(),
         };
         const res: LoginDataInterface = await login(userData);
 
