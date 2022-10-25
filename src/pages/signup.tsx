@@ -44,7 +44,6 @@ const Signup = () => {
         };
 
         const res: SignUpDataInterface = await preSignup(data);
-        console.log(res);
         if ('data' in res) {
             // redirect to otp page and pass all data
             localStorage.setItem(
