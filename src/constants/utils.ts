@@ -1,3 +1,14 @@
+import {
+	CategoryScale,
+	Chart as ChartJS,
+	Legend,
+	LinearScale,
+	LineElement,
+	PointElement,
+	Title,
+	Tooltip,
+} from 'chart.js';
+
 import AccountIcon from '@icons/AccountIcon';
 import ChannelIcon from '@icons/ChannelIcon';
 import CommunityGuidIcon from '@icons/CommunityGuidIcon';
@@ -526,7 +537,31 @@ export const shareData: string[] = [
     'twitter',
 ];
 
-export const chartData: string[] = ['analytics1', 'analytics2', 'analytics3'];
+export const chartData: {
+    name: string;
+    amount: string;
+    detail: string;
+    increase: boolean;
+}[] = [
+    {
+        name: 'Subscribers',
+        amount: '13,241',
+        detail: 'Daily subscribers insight',
+        increase: false,
+    },
+    {
+        name: 'Visitor',
+        amount: '9,334',
+        detail: 'Daily Visitors insight',
+        increase: true,
+    },
+    {
+        name: 'Returning Visitor',
+        amount: '4,107',
+        detail: 'Daily Returning Visitors insight',
+        increase: true,
+    },
+];
 
 export const analyticsData: {
     text1: string;
@@ -545,3 +580,40 @@ export const analyticsData: {
         text2: '1,975,935',
     },
 ];
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+);
+
+export const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top' as const,
+        },
+    },
+};
+
+const labels = ['January', 'July'];
+
+export const data = {
+    labels,
+    datasets: [
+        {
+            label: '',
+            data: [0, 100, 20, 300, 400],
+            borderColor: 'rgb(137, 44, 220)',
+            backgroundColor: 'rgba(137, 44, 220, 0.5)',
+        },
+    ],
+};
+
+// export function App() {
+//   return <Line options={options} data={data} />;
+// }
