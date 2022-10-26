@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Box, Image, Text } from '@chakra-ui/react';
@@ -6,13 +7,22 @@ import ProfileDetails from '@components/channel/ProfileDetails';
 import PlaylistList from './PlaylistList';
 
 const PlaylistDetails = () => {
+    const router = useRouter();
     return (
         <Box display={'flex'} px='1.4rem' py='2rem' gap='25px'>
             <Box flex='1.6'>
-                <Box>
-                    <ProfileDetails />
-                </Box>
-                <Box marginTop={'3rem'}>
+                {router.asPath === '/channel/1/content/playlist' && (
+                    <Box>
+                        <ProfileDetails />
+                    </Box>
+                )}
+                <Box
+                    marginTop={
+                        router.asPath === '/channel/1/content/playlist'
+                            ? '3rem'
+                            : '0rem'
+                    }
+                >
                     <Image
                         src='/assets/pinkstar.png'
                         w='100%'
