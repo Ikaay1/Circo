@@ -16,11 +16,13 @@ function VideoThumb({
 }) {
   const router = useRouter();
   return (
-    <Box cursor={"pointer"} onClick={() => router.push(`/player/${id}`)}>
+    <Box
+      cursor={"pointer"}
+      w="full"
+      onClick={() => router.push(`/player/${id}`)}
+    >
       <Box
         bg="Red"
-        minW={thumbWidth}
-        maxW={thumbWidth}
         h={{ lg: "130px", mlg: "180px" }}
         bgImage={`url(${imgUrl})`}
         bgSize="cover"
@@ -42,7 +44,6 @@ function VideoThumb({
         />
         <Box>
           <Text
-            w={{ lg: "220px", mlg: "280px", xl: "full" }}
             noOfLines={2}
             color={"clique.white"}
             fontFamily={"Poppins"}
