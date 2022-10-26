@@ -1,33 +1,34 @@
 import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-} from "chart.js";
+	CategoryScale,
+	Chart as ChartJS,
+	Legend,
+	LinearScale,
+	LineElement,
+	PointElement,
+	Title,
+	Tooltip,
+} from 'chart.js';
 
-import AccountIcon from "@icons/AccountIcon";
-import ChannelIcon from "@icons/ChannelIcon";
-import CommunityGuidIcon from "@icons/CommunityGuidIcon";
-import ContentIcon from "@icons/ContentIcon";
-import CopyRightIcon from "@icons/CopyRightIcon";
-import DiscoverIcon from "@icons/DiscoverIcon";
-import FaqIcon from "@icons/FaqIcon";
-import HomeIcon from "@icons/HomeIcon";
-import LiveIcon from "@icons/LiveIcon";
-import NotificationSetIcon from "@icons/NotificationSetIcon";
-import PrivacyPolicyIcon from "@icons/PrivacyPolicyIcon";
-import ProfileIcon from "@icons/ProfileIcon";
-import SettingsIcon from "@icons/SettingsIcon";
-import TermsServiceIcon from "@icons/TermsServiceIcon";
-import TrendingIcon from "@icons/TrendingIcon";
-import WalletIcon from "@icons/WalletIcon";
+import AccountIcon from '@icons/AccountIcon';
+import ChannelIcon from '@icons/ChannelIcon';
+import CommunityGuidIcon from '@icons/CommunityGuidIcon';
+import ContentIcon from '@icons/ContentIcon';
+import CopyRightIcon from '@icons/CopyRightIcon';
+import DiscoverIcon from '@icons/DiscoverIcon';
+import EditIcon from '@icons/EditIcon';
+import FaqIcon from '@icons/FaqIcon';
+import HomeIcon from '@icons/HomeIcon';
+import LiveIcon from '@icons/LiveIcon';
+import NotificationSetIcon from '@icons/NotificationSetIcon';
+import PrivacyPolicyIcon from '@icons/PrivacyPolicyIcon';
+import ProfileIcon from '@icons/ProfileIcon';
+import SettingsIcon from '@icons/SettingsIcon';
+import TermsServiceIcon from '@icons/TermsServiceIcon';
+import TrendingIcon from '@icons/TrendingIcon';
+import WalletIcon from '@icons/WalletIcon';
 
-import AnalyticsIcon from "../assets/icons/AnalyticsIcon";
-import { MenuData } from "./interface";
+import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
+import { MenuData } from './interface';
 
 export const loginInputData: (
   | {
