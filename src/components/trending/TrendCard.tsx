@@ -17,7 +17,7 @@ function TrendCard({ position }: { position: string }) {
         fontSize: "big",
         left: "-20px",
         top: "-35px",
-        color: "clique.lightBase",
+        color: "clique.base",
         fontWeight: 500,
       }}
       alignItems={"center"}

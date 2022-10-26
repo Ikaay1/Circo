@@ -10,7 +10,7 @@ function PopularBox() {
       <Text
         position={"relative"}
         pl="20px"
-        _before={{ ...purpleBoxStyle, background: "clique.lightBase" }}
+        _before={purpleBoxStyle}
         color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={500}
@@ -42,7 +42,7 @@ function PopularBox() {
         mt="30px"
         position={"relative"}
         pl="20px"
-        _before={{ ...purpleBoxStyle, background: "clique.lightBase" }}
+        _before={purpleBoxStyle}
         color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={500}
