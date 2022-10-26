@@ -10,7 +10,7 @@ function EachSubscribe({ name, imgUrl }: { name: string; imgUrl: string }) {
     <Flex pl="50px" mt="15px" alignItems={"center"}>
       <Avatar size={"sm"} src={imgUrl} mr="10px" />
       <Text
-        color={path === "/" + name ? "clique.base" : "clique.white"}
+        color={path === "/" + name ? "clique.base" : "clique.whiteGrey"}
         fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
