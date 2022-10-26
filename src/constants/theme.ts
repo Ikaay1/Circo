@@ -77,7 +77,7 @@ const breakpoints = {
     sm: '400px',
     md: '700px',
     lg: '1100px',
-    mlg: '1440px',
+    mlg: '1430px',
     xl: '1700px',
 };
 

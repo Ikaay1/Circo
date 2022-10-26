@@ -28,6 +28,7 @@ function Index() {
           <TagSection />
           <Divider />
           <VideoGrid
+            thumbWidth={{ lg: "220px", mlg: "280px", xl: "full" }}
             width={"calc(100vw - 560px)"}
             videos={["videoImg", "videoImg2", "videoImg3"]}
           />

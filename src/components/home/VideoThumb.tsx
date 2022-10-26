@@ -7,22 +7,25 @@ function VideoThumb({
   imgUrl,
   id,
   length,
+  thumbWidth,
 }: {
   imgUrl: string;
   id: string;
   length: number;
+  thumbWidth: { base: string; lg: string; mlg: string; xl: string };
 }) {
   const router = useRouter();
   return (
     <Box cursor={"pointer"} onClick={() => router.push(`/player/${id}`)}>
-      <Image
-        w={{ lg: "220px", mlg: "280px" , xl: "full"}}
+      <Box
+        bg="Red"
+        minW={thumbWidth}
+        maxW={thumbWidth}
         h={{ lg: "130px", mlg: "180px" }}
-        maxW="280px"
-        maxH="200px"
-        alt="video thumbnail"
-        src={imgUrl}
-        borderRadius={"10px"}
+        bgImage={`url(${imgUrl})`}
+        bgSize="cover"
+        bgPosition="center"
+        rounded={"10px"}
       />
 
       <Flex mt="15px">
@@ -39,6 +42,7 @@ function VideoThumb({
         />
         <Box>
           <Text
+            w={{ lg: "220px", mlg: "280px", xl: "full" }}
             noOfLines={2}
             color={"clique.white"}
             fontFamily={"Poppins"}

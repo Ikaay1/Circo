@@ -4,11 +4,18 @@ import { SimpleGrid } from "@chakra-ui/react";
 
 import VideoThumb from "./VideoThumb";
 
-function VideoGrid({ width, videos }: { width: string; videos: string[] }) {
+function VideoGrid({
+  width,
+  videos,
+  thumbWidth,
+}: {
+  width: string;
+  videos: string[];
+  thumbWidth?: any;
+}) {
   return (
     <SimpleGrid
       columns={{ base: 1, lg: 3, mlg: 3, xl: 4 }}
-      //   autoColumns={"300px"}
       mt="20px"
       w={width}
       spacing={"30px"}
@@ -19,6 +26,7 @@ function VideoGrid({ width, videos }: { width: string; videos: string[] }) {
           imgUrl={`/${video}.png`}
           key={video}
           length={videos.length}
+          thumbWidth={thumbWidth}
         />
       ))}
     </SimpleGrid>
