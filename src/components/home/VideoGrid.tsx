@@ -1,36 +1,36 @@
-import React from 'react';
+import React from "react";
 
-import { SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from "@chakra-ui/react";
 
-import VideoThumb from './VideoThumb';
+import VideoThumb from "./VideoThumb";
 
 function VideoGrid({
-    columns,
-    width,
-    videos,
+  width,
+  videos,
+  thumbWidth,
 }: {
-    columns: number;
-    width: string;
-    videos: string[];
+  width: string;
+  videos: string[];
+  thumbWidth?: any;
 }) {
-    return (
-        <SimpleGrid
-            autoColumns={'300px'}
-            mt='20px'
-            columns={columns}
-            w={width}
-            spacing={'30px'}
-        >
-            {[...videos, ...videos].map((video, i) => (
-                <VideoThumb
-                    id={`${i + 1}`}
-                    imgUrl={`/${video}.png`}
-                    key={video}
-                    length={videos.length}
-                />
-            ))}
-        </SimpleGrid>
-    );
+  return (
+    <SimpleGrid
+      columns={{ base: 1, lg: 3, mlg: 3, xl: 4 }}
+      mt="20px"
+      w={width}
+      spacing={"30px"}
+    >
+      {[...videos, ...videos].map((video, i) => (
+        <VideoThumb
+          id={`${i + 1}`}
+          imgUrl={`/${video}.png`}
+          key={video}
+          length={videos.length}
+          thumbWidth={thumbWidth}
+        />
+      ))}
+    </SimpleGrid>
+  );
 }
 
 export default VideoGrid;

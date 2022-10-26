@@ -9,17 +9,17 @@ import { channelMenu, scrollBarStyle } from '@constants/utils';
 const Playlist = () => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     return (
-        <Box bg={useColorModeValue('clique.white', 'clique.primaryBg')}>
-            <Header upload={onOpen} />
-            <Box h={{lg: '90vh'}} display='flex'>
-                <Box flex='1' h='100%'>
-                    <SideMenu menu={channelMenu} />
-                </Box>
-                <Box flex='5.5' h='100%' overflowY='scroll' sx={scrollBarStyle}>
-                    <PlaylistDetails />
-                </Box>
-            </Box>
+      <Box bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}>
+        <Header upload={onOpen} />
+        <Box h={{ lg: "90vh" }} display="flex">
+          <Box flex="1" h="100%">
+            <SideMenu menu={channelMenu} />
+          </Box>
+          <Box flex="5.5" h="100%" overflowY="scroll" sx={scrollBarStyle}>
+            <PlaylistDetails />
+          </Box>
         </Box>
+      </Box>
     );
 };
 
