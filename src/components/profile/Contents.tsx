@@ -44,10 +44,10 @@ const Contents = () => {
                   columns={{ base: 3, lg: 4, mlg: 4, xl: 5 }}
                   spacing="30px"
                 >
-                  <EventModal width={true} />
-                  <EventModal width={true} />
-                  <EventModal width={true} />
-                  <EventModal width={true} />
+                  <EventModal />
+                  <EventModal />
+                  <EventModal />
+                  <EventModal />
                 </SimpleGrid>
               </CliqueTabPanel>
             </TabPanels>

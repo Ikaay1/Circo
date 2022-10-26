@@ -2,11 +2,11 @@ import React from "react";
 
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-function EventCard({ onOpen, width }: { onOpen: () => void; width?: boolean }) {
+function EventCard({ onOpen }: { onOpen: () => void }) {
   return (
     <Flex
       rounded={"10px"}
-      alignItems="flex-end" 
+      alignItems="flex-end"
       h={{ lg: "180px", mlg: "200px" }}
       bg="clique.lightGrey"
       bgImage={"url(/eventFlyer.png)"}
