@@ -28,7 +28,14 @@ function TrendCard({ position }: { position: string }) {
       h="220px"
       bg="clique.white"
     >
-      <Image w="50%" mr="30px" src="/assets/kortyvid.png" alt="kortyvid" />
+      <Box minW="50%" pr="40px">
+        <Image
+          maxH={"100%"}
+          mr="30px"
+          src="/assets/kortyvid.png"
+          alt="kortyvid"
+        />
+      </Box>
 
       <Box w="50%">
         <Flex>
