@@ -7,7 +7,7 @@ import { channelMenu } from '@constants/utils';
 const Profile = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   return (
-    <Box bg={useColorModeValue('clique.white', 'clique.primaryBg')}>
+    <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
       <Header upload={onOpen} />
       <Box h={{lg: '90vh'}} display='flex'>
         <Box flex='1.3' h='100%'>

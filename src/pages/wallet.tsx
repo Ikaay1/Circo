@@ -49,7 +49,8 @@ function Wallet({}: Props) {
         <Box
           maxH={"90vh"}
           pb="50px"
-          px="2"
+          px={"2"}
+          pl={{ xl: "100px" }}
           maxW="50%"
           overflowY={"scroll"}
           overflowX={"hidden"}
@@ -65,7 +66,7 @@ function Wallet({}: Props) {
           maxH={"90vh"}
           pb="40px"
           px="2"
-          pr="5"
+          pr={{ xl: "100px" }}
           maxW="50%"
           overflowY={"scroll"}
           overflowX={"hidden"}

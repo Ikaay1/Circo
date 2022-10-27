@@ -423,6 +423,7 @@ export const purpleBoxStyle = {
   position: 'absolute',
   top: '50%',
   transform: 'translateY(-50%)',
+  bg: 'clique.base',
   left: 0,
   width: '6px',
   height: '25px',
@@ -502,7 +503,7 @@ export const channelMenu: MenuData[] = [
   {
     name: 'Edit Channel Details',
     route: 'edit',
-    icon: EditIcon,
+    icon: DiscoverIcon,
   },
   {
     name: 'Channel Analytics',
