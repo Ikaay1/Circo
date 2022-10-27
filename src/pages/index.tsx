@@ -1,7 +1,6 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
-// @ts-ignore
-import Fade from "react-reveal/Fade";
 
 import { Box, Image, Text } from "@chakra-ui/react";
 import Navbar from "@components/landing/Navbar";
@@ -19,6 +18,7 @@ import {
 import type { NextPage } from "next";
 const Home: NextPage = () => {
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
+  const router = useRouter();
 
   return (
     <Box overflowX={"hidden"}>
@@ -65,30 +65,17 @@ const Home: NextPage = () => {
                 marginRight={"1.3rem"}
                 background="clique.purple"
                 borderRadius="30px"
-                w="221px"
+                w="326px"
                 h="50px"
                 display="flex"
                 justifyContent={"center"}
                 alignItems={"center"}
                 fontWeight="500"
                 letterSpacing="0.5px"
+                cursor="pointer"
+                onClick={() => router.push("/signup")}
               >
-                <Link href="/signup">Sign Up For Free</Link>
-              </Text>
-              <Text
-                marginRight={"1.7rem"}
-                background="clique.primaryBg"
-                borderRadius="30px"
-                w="220px"
-                h="50px"
-                display="flex"
-                justifyContent={"center"}
-                alignItems={"center"}
-                fontWeight="500"
-                letterSpacing="0.5px"
-                border={"1px solid white"}
-              >
-                <Link href="/login">Login</Link>
+                <Link href="/signup">Get Started</Link>
               </Text>
             </Box>
             <Box

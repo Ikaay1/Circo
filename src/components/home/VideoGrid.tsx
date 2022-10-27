@@ -27,6 +27,7 @@ function VideoGrid({
           key={video}
           length={videos.length}
           thumbWidth={thumbWidth}
+          isSubscribed={i % 2 === 0}
         />
       ))}
     </SimpleGrid>

@@ -1,20 +1,20 @@
-import { Box, useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import Index from "@components/profile";
-import SideMenu from "@components/profile/SideMenu";
-import Header from "@components/widgets/Header";
+import { Box, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import Index from '@components/profile';
+import SideMenu from '@components/profile/SideMenu';
+import Header from '@components/widgets/Header';
 
-import { profileMenu } from "../../../../constants/utils";
+import { profileMenu } from '../../../../constants/utils';
 
 const Profile = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {isOpen, onOpen, onClose} = useDisclosure();
   return (
-    <Box bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}>
+    <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
       <Header upload={onOpen} />
-      <Box h={{ lg: "90vh" }} display="flex">
-        <Box flex="1" h="100%">
+      <Box h={{lg: '90vh'}} display='flex'>
+        <Box flex='1.3' h='100%'>
           <SideMenu menu={profileMenu} />
         </Box>
-        <Box flex="5.5" h="100%">
+        <Box flex='5.5' h='100%'>
           <Index />
         </Box>
       </Box>
