@@ -1,19 +1,22 @@
 import { Box, Divider, Text } from "@chakra-ui/react";
 import React from "react";
 import EachComment from "./EachComment";
+import NewComment from "./NewComment";
 
 function CommentSection() {
   return (
     <Box
+      pos={"relative"}
       w="400px"
       maxW="400px"
-      p="20px"
+      px="20px"
+      pb="80px"
       minW="400px"
       bg="clique.black"
       h="90vh"
       minH="90vh"
       maxH="90vh"
-      py={"20px"}
+      pt={"20px"}
       overflowY="scroll"
       sx={{
         "&::-webkit-scrollbar": {
@@ -45,6 +48,7 @@ function CommentSection() {
       <EachComment />
       <EachComment />
       <EachComment />
+      <NewComment />
     </Box>
   );
 }
