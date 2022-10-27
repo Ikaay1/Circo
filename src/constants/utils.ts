@@ -523,7 +523,7 @@ export const channelNav: {
 export const shareData: string[] = [
   'whatsapp',
   'ig',
-  'tiktok',
+  'tikTok',
   'figma',
   'github',
   'twitter',
