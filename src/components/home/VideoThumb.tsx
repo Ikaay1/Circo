@@ -22,7 +22,6 @@ function VideoThumb({
       onClick={() => router.push(`/player/${id}`)}
     >
       <Box
-        bg="Red"
         h={{ lg: "130px", mlg: "180px" }}
         bgImage={`url(${imgUrl})`}
         bgSize="cover"
