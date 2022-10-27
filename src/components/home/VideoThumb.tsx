@@ -1,28 +1,46 @@
 import { useRouter } from "next/router";
 import React from "react";
 
-import { Avatar, Box, Flex, Image, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Image,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
+import SubScribeModal from "./SubScribeModal";
 
 function VideoThumb({
   imgUrl,
   id,
   length,
   thumbWidth,
+  isSubscribed,
 }: {
   imgUrl: string;
   id: string;
   length: number;
   thumbWidth: { base: string; lg: string; mlg: string; xl: string };
+  isSubscribed: boolean;
 }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const router = useRouter();
   return (
     <Box
       cursor={"pointer"}
       w="full"
-      onClick={() => router.push(`/player/${id}`)}
+      onClick={() => {
+        if (isSubscribed) {
+          router.push(`/player/${id}`);
+        } else {
+          onOpen();
+        }
+      }}
     >
+      <SubScribeModal onClose={onClose} isOpen={isOpen} onOpen={onOpen} />
       <Box
-        bg="Red"
         h={{ lg: "130px", mlg: "180px" }}
         bgImage={`url(${imgUrl})`}
         bgSize="cover"
