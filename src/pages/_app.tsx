@@ -5,15 +5,39 @@ import Layout from "layouts/Layout";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import Router from "next/router";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import {
+  Button,
+  ChakraProvider,
+  ColorModeScript,
+  useToast,
+} from "@chakra-ui/react";
 import theme from "@constants/theme";
 import { persistor, store } from "../redux/app/store";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
+// import { customGetToken, onMessageListener } from "@constants/firebase";
+
 const NProgress = require("nprogress");
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
+  const toast = useToast();
+  const [isTokenFound, setTokenFound] = useState(false);
+
+  // customGetToken(setTokenFound);
+
+  // onMessageListener()
+  //   .then((payload: any) => {
+  //     toast({
+  //       title: "Account created.",
+  //       description: "We've created your account for you.",
+  //       status: "info",
+  //       duration: 9000,
+  //       isClosable: true,
+  //     });
+  //     console.log(payload);
+  //   })
+  //   .catch((err: any) => console.log("failed: ", err));
 
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
