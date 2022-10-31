@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,7 +19,37 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
 const analytics = getAnalytics(app);
 
-// key pair for messaging
-// BJUohSRLcnnvvnpKhNArVAH9Ry7Bc8DudcsfsUF0KYDv_1RD7zhvGOxJXb2kFsiR2RyAmsdGCJg8zMvNqm5Xh9E
+export const customGetToken = (setTokenFound: any) => {
+  return getToken(messaging, {
+    vapidKey:
+      "BJUohSRLcnnvvnpKhNArVAH9Ry7Bc8DudcsfsUF0KYDv_1RD7zhvGOxJXb2kFsiR2RyAmsdGCJg8zMvNqm5Xh9E",
+  })
+    .then((currentToken: any) => {
+      if (currentToken) {
+        console.log("current token for client: ", currentToken);
+        setTokenFound(true);
+        // Track the token -> client mapping, by sending to backend server
+        // show on the UI that permission is secured
+      } else {
+        console.log(
+          "No registration token available. Request permission to generate one."
+        );
+        setTokenFound(false);
+        // shows on the UI that permission is required
+      }
+    })
+    .catch((err: any) => {
+      console.log("An error occurred while retrieving token. ", err);
+      // catch error while creating client token
+    });
+};
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    onMessage(messaging, (payload) => {
+      resolve(payload);
+    });
+  });
