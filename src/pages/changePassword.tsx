@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Box } from "@chakra-ui/react";
-import AuthButton from "@components/auth/AuthButton";
-import AuthInput from "@components/auth/AuthInput";
-import { CliqueLogo } from "@components/landing/Navbar";
-import { changePasswordInputData } from "@constants/utils";
-
-import { ShowAuthHeader, ShowAuthImage } from "./login";
+import { Box } from '@chakra-ui/react';
+import AuthButton from '@components/auth/AuthButton';
+import AuthInput from '@components/auth/AuthInput';
+import CliqueLogo from '@components/auth/CliqueLogo';
+import ShowAuthHeader from '@components/auth/ShowAuthHeader';
+import ShowAuthImage from '@components/auth/ShowAuthImage';
+import { changePasswordInputData } from '@constants/utils';
 
 const ChangePassword = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword0, setShowPassword0] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
 
@@ -23,32 +23,32 @@ const ChangePassword = () => {
   };
 
   return (
-    <Box display={"flex"} justifyContent="space-between" alignItems={"center"}>
+    <Box display={'flex'} justifyContent='space-between' alignItems={'center'}>
       <CliqueLogo />
       <ShowAuthImage />
       <Box
-        marginLeft={{ base: "40%", xl: "50%" }}
-        minW={{ base: "60%", xl: "50%" }}
-        py="50px"
+        marginLeft={{base: '40%', xl: '50%'}}
+        minW={{base: '60%', xl: '50%'}}
+        py='50px'
       >
-        <Box padding={"1rem"} width="450px" height={"100%"} margin="0 auto">
+        <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
           <ShowAuthHeader
-            header="Change Password"
-            detail="Enter your Clique email address to chnage password"
+            header='Change Password'
+            detail='Enter your Clique email address to chnage password'
           />
-          <form onSubmit={(e) => e.preventDefault()} className="login-form">
-            {changePasswordInputData.map(({ name, key, inputName }, i) => (
+          <form onSubmit={(e) => e.preventDefault()} className='login-form'>
+            {changePasswordInputData.map(({name, key, inputName}, i) => (
               <div key={key}>
-                <Box position="relative" height="57px" marginTop={".5rem"}>
+                <Box position='relative' height='57px' marginTop={'.5rem'}>
                   <AuthInput
                     image={true}
                     name={name}
                     handleShowPassword={() => handleShowPassword(i)}
                     theState={
-                      inputName === "password" ? password : confirmPassword
+                      inputName === 'password' ? password : confirmPassword
                     }
                     setTheState={
-                      inputName === "password"
+                      inputName === 'password'
                         ? setPassword
                         : setConfirmPassword
                     }
@@ -59,7 +59,7 @@ const ChangePassword = () => {
                 </Box>
               </div>
             ))}
-            <AuthButton {...{ marginTop: "4.7rem" }} name="Change Password" />
+            <AuthButton {...{marginTop: '4.7rem'}} name='Change Password' />
           </form>
         </Box>
       </Box>

@@ -1,20 +1,21 @@
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { toast } from "react-hot-toast";
-import { useSignupMutation } from "redux/services/auth.service";
-import { setCredentials } from "redux/slices/authSlice";
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useSignupMutation } from 'redux/services/auth.service';
+import { setCredentials } from 'redux/slices/authSlice';
 
-import { Box } from "@chakra-ui/react";
-import AuthButton from "@components/auth/AuthButton";
-import AuthInput from "@components/auth/AuthInput";
-import { CliqueLogo } from "@components/landing/Navbar";
-import { LoginDataInterface } from "@constants/interface";
+import { Box } from '@chakra-ui/react';
+import AuthButton from '@components/auth/AuthButton';
+import AuthInput from '@components/auth/AuthInput';
+import CliqueLogo from '@components/auth/CliqueLogo';
+import ShowAuthHeader from '@components/auth/ShowAuthHeader';
+import ShowAuthImage from '@components/auth/ShowAuthImage';
+import { LoginDataInterface } from '@constants/interface';
 
-import { useAppDispatch } from "../redux/app/hooks";
-import { ShowAuthHeader, ShowAuthImage } from "./login";
+import { useAppDispatch } from '../redux/app/hooks';
 
 const Referral = () => {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState('');
 
   const [signup, signUpStatus] = useSignupMutation();
   const router = useRouter();
@@ -22,52 +23,52 @@ const Referral = () => {
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const allData = JSON.parse(localStorage.getItem("userData")!);
-    const hashedOtp = JSON.parse(localStorage.getItem("hashedOtp")!);
+    const allData = JSON.parse(localStorage.getItem('userData')!);
+    const hashedOtp = JSON.parse(localStorage.getItem('hashedOtp')!);
     const userData = {
       ...allData,
       otp_code: otp.trim(),
       otp_hash: `${hashedOtp}`,
-      social: "NULL",
+      social: 'NULL',
     };
     const res: LoginDataInterface = await signup(userData);
-    if ("data" in res) {
+    if ('data' in res) {
       dispatch(
         setCredentials({
           payload: res?.data.data,
-        })
+        }),
       );
       router.push(`/home`);
     } else if (res.error) {
       //@ts-ignore
       toast.error(res?.error?.data?.message);
     } else {
-      toast.error("Something went wrong");
+      toast.error('Something went wrong');
     }
   };
 
   return (
-    <Box display={"flex"} justifyContent="space-between" alignItems={"center"}>
+    <Box display={'flex'} justifyContent='space-between' alignItems={'center'}>
       <CliqueLogo />
       <ShowAuthImage />
       <Box
-        marginLeft={{ base: "40%", xl: "50%" }}
-        minW={{ base: "60%", xl: "50%" }}
-        py="50px"
+        marginLeft={{base: '40%', xl: '50%'}}
+        minW={{base: '60%', xl: '50%'}}
+        py='50px'
       >
-        <Box padding={"1rem"} width="450px" height={"100%"} margin="0 auto">
+        <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
           <ShowAuthHeader
-            header="Enter OTP"
-            detail="Enter the OTP sent to your email address"
+            header='Enter OTP'
+            detail='Enter the OTP sent to your email address'
           />
-          <form onSubmit={handleSignUp} className="login-form">
-            <Box position="relative" height="57px" marginTop={".5rem"}>
-              <AuthInput name={"OTP"} theState={otp} setTheState={setOtp} />
+          <form onSubmit={handleSignUp} className='login-form'>
+            <Box position='relative' height='57px' marginTop={'.5rem'}>
+              <AuthInput name={'OTP'} theState={otp} setTheState={setOtp} />
             </Box>
             <AuthButton
               status={signUpStatus}
-              {...{ marginTop: "6.5rem" }}
-              name="Next"
+              {...{marginTop: '6.5rem'}}
+              name='Next'
             />
           </form>
         </Box>
