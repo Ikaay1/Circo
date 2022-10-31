@@ -144,7 +144,7 @@ const Home: NextPage = () => {
             </Box>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           display={'flex'}
           justifyContent={{base: 'space-between', xl: 'space-around'}}
           alignItems='center'
@@ -171,7 +171,7 @@ const Home: NextPage = () => {
             src='/assets/android.png'
             alt='android'
           />
-        </Box>
+        </Box> */}
       </Box>
       <Box
         px={{base: '1rem', sm: '2rem', lg: '5rem'}}
@@ -601,6 +601,7 @@ const Home: NextPage = () => {
             display='flex'
             justifyContent={'space-between'}
             w='100%'
+            className='track'
           >
             {famousCreatorsImageData.map((image) => (
               <Image
