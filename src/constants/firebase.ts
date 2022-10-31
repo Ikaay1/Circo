@@ -20,6 +20,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-
 // key pair for messaging
 // BJUohSRLcnnvvnpKhNArVAH9Ry7Bc8DudcsfsUF0KYDv_1RD7zhvGOxJXb2kFsiR2RyAmsdGCJg8zMvNqm5Xh9E

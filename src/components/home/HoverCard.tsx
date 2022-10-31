@@ -33,16 +33,13 @@ function HoverCard({
         }
       }}
       position={"absolute"}
-      left="50%"
-      top="50%"
-      transform="translate(-50%, -50%)"
       cursor={"pointer"}
       rounded="20px"
       overflow={"hidden"}
       zIndex={100}
       bg="clique.secondaryGrey1"
       w="500px"
-      h="400px"
+      h="350px"
     >
       <SmallPlayer />
       <Flex p="15px">
