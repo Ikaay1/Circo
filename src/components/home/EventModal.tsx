@@ -108,9 +108,9 @@ function EventModal({ imgUrl }: any) {
                   rounded="full"
                   bg={"clique.darkGrey"}
                   color="clique.black "
-                  px="20px"
+                  px="10px"
                   fontWeight={400}
-                  size={"xs"}
+                  size={"sm"}
                 >
                   pay for live
                 </Button>
