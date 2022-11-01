@@ -68,14 +68,14 @@ const Creators = () => {
               key={image}
             />
           ))}
-          <Image
+          {/* <Image
             w={{lg: '238px', xl: '342px'}}
             h='544px'
             src='/assets/celeb5.png'
             alt=''
             objectFit={'cover'}
             display={{base: 'none', lg: 'inline'}}
-          />
+          /> */}
         </Box>
         <Box
           height={{base: '80px', lg: '264px'}}
