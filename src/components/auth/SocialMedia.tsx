@@ -6,10 +6,10 @@ import { socialMediaIconsData } from '@constants/utils';
 
 export const SocialMedia = ({
   haveAccount,
-  login,
+  text,
 }: {
   haveAccount: string;
-  login: boolean;
+  text: string;
 }) => {
   return (
     <Box marginTop={'2.5rem'}>
@@ -48,8 +48,8 @@ export const SocialMedia = ({
           {haveAccount}
         </Text>
         <span style={{color: '#892cdc'}}>
-          <Link href={login ? '/login' : '/signup'}>
-            {login ? 'Login' : 'Sign Up'}
+          <Link href={text === 'Login here' ? '/login' : '/signup'}>
+            {text}
           </Link>
         </span>
       </Box>

@@ -100,7 +100,18 @@ const Login = () => {
               name='Login'
             />
           </form>
-          <SocialMedia haveAccount={"Don't have an account?"} login={false} />
+          <SocialMedia
+            haveAccount={"Don't have an account?"}
+            text={'Sign Up'}
+          />
+          <Box mt='.35rem' textAlign={'center'}>
+            <Text display={'inline'} marginRight='.25rem'>
+              Need help? send a mail to
+            </Text>
+            <span style={{color: '#892cdc'}}>
+              <a href='mailto: support@clique.com'>support@clique.com</a>
+            </span>
+          </Box>
         </Box>
       </Box>
     </Box>
