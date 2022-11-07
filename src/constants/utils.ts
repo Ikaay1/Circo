@@ -211,6 +211,10 @@ export const famousCreatorsImageData: string[] = [
   'celeb2',
   'celeb3',
   'celeb4',
+  'celeb5',
+  'celeb6',
+  'celeb7',
+  'celeb8',
 ];
 
 export const contactInfoData: {

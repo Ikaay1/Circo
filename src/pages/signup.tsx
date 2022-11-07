@@ -177,7 +177,10 @@ const Signup = () => {
               name='Sign Up'
             />
           </form>
-          <SocialMedia haveAccount={'Already have an account?'} login={true} />
+          <SocialMedia
+            haveAccount={'Already have an account?'}
+            text={'Login here'}
+          />
         </Box>
       </Box>
     </Box>

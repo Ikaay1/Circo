@@ -1,5 +1,5 @@
 import { Box, useColorModeValue, useDisclosure } from '@chakra-ui/react';
-import Index from '@components/profile';
+import Index from '@components/channel';
 import SideMenu from '@components/profile/SideMenu';
 import Header from '@components/widgets/Header';
 import { channelMenu } from '@constants/utils';
