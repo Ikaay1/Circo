@@ -14,11 +14,15 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: string;
   colorScheme?: string;
   fontSize?: string;
+mr?: string;
+px?: string;
 }
 
 const Btn = forwardRef(
   (
     {
+      px,
+      mr,
       fontSize,
       leftIcon,
       rightIcon,
@@ -43,10 +47,11 @@ const Btn = forwardRef(
           bg={`${bg ? bg : "clique.base"}`}
           py={`${py ? py : "3"}`}
           maxW="100%"
-          variant={variant}
           colorScheme={colorScheme}
           leftIcon={leftIcon}
           fontSize={fontSize}
+          mr={mr}
+          px={px}
         >
           {text}
         </Button>

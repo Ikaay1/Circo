@@ -16,6 +16,7 @@ import ContentIcon from '@icons/ContentIcon';
 import CopyRightIcon from '@icons/CopyRightIcon';
 import DiscoverIcon from '@icons/DiscoverIcon';
 import EditIcon from '@icons/EditIcon';
+import VideoContent from '@icons/VideoContent';
 import FaqIcon from '@icons/FaqIcon';
 import HomeIcon from '@icons/HomeIcon';
 import LiveIcon from '@icons/LiveIcon';
@@ -29,6 +30,9 @@ import WalletIcon from '@icons/WalletIcon';
 
 import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
 import { MenuData } from './interface';
+
+const channelBol = false;
+
 
 export const loginInputData: (
   | {
@@ -515,6 +519,15 @@ export const channelMenu: MenuData[] = [
     icon: AnalyticsIcon,
   },
 ];
+
+
+export const createChannelMenu = [
+  {
+    name: 'Create Channel',
+    route: 'channel',
+    icon: VideoContent,
+  },
+]
 
 export const channelNav: {
   title: string;

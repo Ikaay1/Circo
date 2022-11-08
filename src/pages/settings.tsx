@@ -4,6 +4,8 @@ import Index from "@components/settings/Index";
 import SideMenu from "@components/settings/SideMenu";
 import Header from "@components/widgets/Header";
 import { scrollBarStyle } from "@constants/utils";
+import { settingsMenu } from "@constants/utils";
+
 
 const Settings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,7 +29,7 @@ const Settings = () => {
       <Header upload={onOpen} />
       <Box h={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
         <Box flex="1" h="100%">
-          <SideMenu click={(route) => setState(route)} />
+          <SideMenu click={(route) => setState(route)} menuList={settingsMenu}/>
         </Box>
         <Box
           flex="4.4"
