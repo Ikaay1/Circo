@@ -6,6 +6,8 @@ function CliqueTab({ children }: { children: React.ReactNode }) {
     <Tab
       px={0}
       mr="20px"
+      fontSize={"smSubHead"}
+      py="5px"
       _selected={{
         borderBottom: "3px solid",
         borderColor: "clique.base",

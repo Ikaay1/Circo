@@ -41,6 +41,7 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
           </Box>
         </Text>
       )}
+      
 
       <SimpleGrid
         autoColumns={"300px"}
