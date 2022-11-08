@@ -37,4 +37,4 @@ export const liveAPI = createApi({
   }),
 });
 
-export const { useCreateEventMutation } = liveAPI;
+export const { useCreateEventMutation, useCreateLiveStreamMutation } = liveAPI;

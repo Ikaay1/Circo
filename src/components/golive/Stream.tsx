@@ -10,19 +10,27 @@ import {
   Input,
   Select,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
 import Btn from "@components/Button/Btn";
+import { CategoriesInterface } from "@constants/interface";
 import { videoDetails } from "@constants/utils";
 import AddIcon from "@icons/AddIcon";
 import { Field, Form, Formik } from "formik";
 import React from "react";
+import { useCategoryQuery } from "redux/services/category.service";
+import { useCreateEventMutation } from "redux/services/live.service";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
 
 function Stream({ state }: { state: string }) {
+  const toast = useToast();
+  const { data, isLoading } = useCategoryQuery("");
+  const [createEvent, createEventInfo] = useCreateEventMutation();
+
   return (
     <Formik
       initialValues={{
@@ -41,19 +49,34 @@ function Stream({ state }: { state: string }) {
         category: Yup.string().required("Category is Required"),
         fee: Yup.number().required("Fee Required"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
         const data = {
           title: values.title,
           description: values.description,
           ageRange: values.ageRange,
-          paidToWatch: values,
-          category: "category must be a string",
-          categoryId: "categoryId must be a string",
+          paidToWatch: values.fee > 0 ? true : false,
+          category: state === "stream" ? "LIVE" : "SCHEDULE",
+          categoryId: values.category,
         };
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 4000);
+        const res: any = await createEvent(data);
+        if (res.data) {
+          toast({
+            title: "Event Created Successfully",
+            position: "top-right",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "Event Creation Failed",
+            description: "Event Creation Failed",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
+        setSubmitting(false);
       }}
     >
       {(props) => (
@@ -147,13 +170,23 @@ function Stream({ state }: { state: string }) {
                     w="full"
                     name="category"
                     placeholder="Select Category"
+                    pointerEvents={isLoading ? "none" : "auto"}
                   >
+                    {data &&
+                      data?.data?.map(
+                        (category: CategoriesInterface, index: number) => (
+                          <option key={index} value={category._id}>
+                            {category.name}
+                          </option>
+                        )
+                      )}
                     <option>lsd;lfksdmlf</option>
                   </SelectField>
                 </GridItem>
                 <GridItem colSpan={2}>
-                  <SelectField name="ageRange" placeholder="Age Range">
-                    <option value={"1"}>lsd;lfksdmlf</option>
+                  <SelectField name="ageRange" placeholder="Select Age Range">
+                    <option value={"18 and above"}>18 and above</option>
+                    <option value={"Below 18"}>Below 18</option>
                   </SelectField>
                 </GridItem>
               </Grid>
