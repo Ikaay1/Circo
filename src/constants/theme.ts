@@ -156,6 +156,27 @@ const components = {
     },
   },
   Switch: switchTheme,
+
+  Radio: {
+    baseStyle: {
+      control: {
+        bg: "clique.secondaryGrey1",
+        border: "2px solid #892CDC",
+        _checked: {
+          bg: "clique.mixedBase",
+          color: "clique.mixedBase",
+          boxShadow: "none",
+          outline: "none",
+          border: "none",
+          _hover: {
+            bg: "clique.mixedBase",
+          },
+        },
+
+        boxShadow: "none",
+      },
+    },
+  },
 };
 
 const theme = extendTheme({

@@ -1,41 +1,64 @@
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { authApi } from "redux/services/auth.service";
 import {
-  persistReducer,
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import userReducer from "redux/slices/authSlice";
-import uploadReducer from "redux/slices/uploadSlice";
-import storage from "redux-persist/lib/storage";
+	FLUSH,
+	PAUSE,
+	PERSIST,
+	persistReducer,
+	persistStore,
+	PURGE,
+	REGISTER,
+	REHYDRATE,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { authApi } from 'redux/services/auth.service';
+import { categoryApi } from 'redux/services/category.service';
+import { contentApi } from 'redux/services/content.service';
+import userReducer from 'redux/slices/authSlice';
+import contentReducer from 'redux/slices/contentSlice';
+import uploadReducer from 'redux/slices/uploadSlice';
+
+import {
+	Action,
+	combineReducers,
+	configureStore,
+	ThunkAction,
+} from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+// const persistedReducer = persistReducer(persistConfig, userReducer);
 
-const uploadPersit = persistReducer(persistConfig, uploadReducer);
+// const uploadPersit = persistReducer(persistConfig, uploadReducer);
+
+const rootReducer = combineReducers({
+  userReducer: userReducer,
+  upload: uploadReducer,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: {
-    userReducer: persistedReducer,
+    // userReducer: persistedReducer,
+    app: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
-    upload: uploadPersit,
+    // upload: uploadPersit,
+    [categoryApi.reducerPath]: categoryApi.reducer,
+    content: contentReducer,
+    [contentApi.reducerPath]: contentApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([authApi.middleware]),
+    }).concat([
+      authApi.middleware,
+      categoryApi.middleware,
+      contentApi.middleware,
+    ]),
 });
 
 setupListeners(store.dispatch);

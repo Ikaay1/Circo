@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
 	CategoryScale,
 	Chart as ChartJS,
@@ -8,6 +9,7 @@ import {
 	Title,
 	Tooltip,
 } from 'chart.js';
+import { store } from 'redux/app/store';
 
 import AccountIcon from '@icons/AccountIcon';
 import ChannelIcon from '@icons/ChannelIcon';
@@ -19,11 +21,13 @@ import EditIcon from '@icons/EditIcon';
 import VideoContent from '@icons/VideoContent';
 import FaqIcon from '@icons/FaqIcon';
 import HomeIcon from '@icons/HomeIcon';
+import LiveEventIcon from '@icons/LiveEventIcon';
 import LiveIcon from '@icons/LiveIcon';
 import NotificationSetIcon from '@icons/NotificationSetIcon';
 import PrivacyPolicyIcon from '@icons/PrivacyPolicyIcon';
 import ProfileIcon from '@icons/ProfileIcon';
 import SettingsIcon from '@icons/SettingsIcon';
+import StreamIcon from '@icons/StreamIcon';
 import TermsServiceIcon from '@icons/TermsServiceIcon';
 import TrendingIcon from '@icons/TrendingIcon';
 import WalletIcon from '@icons/WalletIcon';
@@ -31,7 +35,6 @@ import WalletIcon from '@icons/WalletIcon';
 import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
 import { MenuData } from './interface';
 
-const channelBol = false;
 
 
 export const loginInputData: (
@@ -409,7 +412,8 @@ export const playListData = [
     name: 'Ayra Star Mix',
   },
 ];
-export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
+// export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
+export const baseUrl: string = 'http://localhost:4000/';
 
 export const scrollBarStyle = {
   '&::-webkit-scrollbar': {
@@ -499,6 +503,19 @@ export const settingsMenu = [
     name: 'FAQs',
     route: 'faqs',
     icon: FaqIcon,
+  },
+];
+
+export const goliveMenu = [
+  {
+    name: 'Stream',
+    route: 'stream',
+    icon: StreamIcon,
+  },
+  {
+    name: 'Live event',
+    route: 'liveevent',
+    icon: LiveEventIcon,
   },
 ];
 
@@ -623,3 +640,18 @@ export const data = {
     },
   ],
 };
+
+export const age: string[] = ['18 and above', 'Below 18'];
+
+export const API = axios.create({baseURL: baseUrl});
+
+API.interceptors.request.use((req) => {
+  if (store.getState().app.userReducer.token) {
+    if (req.headers) {
+      req.headers.Authorization = `Bearer ${
+        store.getState().app.userReducer.token
+      }`;
+    }
+  }
+  return req;
+});

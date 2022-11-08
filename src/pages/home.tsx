@@ -10,6 +10,7 @@ import SideMenu from "@components/widgets/sideMenu";
 import { scrollBarStyle } from "@constants/utils";
 
 function Index() {
+  const [numberOfTickets, setNumberOfTickets] = React.useState(2);
   return (
     <HomeLayout>
       <Flex>

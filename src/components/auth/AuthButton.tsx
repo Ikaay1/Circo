@@ -1,28 +1,29 @@
-import React from 'react';
+import React from "react";
 
-import { Button } from '@chakra-ui/react';
+import { Button } from "@chakra-ui/react";
 
-const AuthButton = ({status, name, fontSize, ...props}: any) => {
-    return (
-        <Button
-            type='submit'
-            background='clique.purple'
-            borderRadius='50px'
-            width='100%;'
-            height='60px;'
-            display='flex;'
-            alignItems='center'
-            justifyContent='center'
-            fontWeight='500'
-            fontSize={fontSize ? fontSize : 'head'}
-            letterSpacing='-0.02em;'
-            color='clique.white'
-            style={props}
-            isLoading={status && status.isLoading}
-        >
-            {name}
-        </Button>
-    );
+const AuthButton = ({ status, name, fontSize, h, w, mx, ...props }: any) => {
+  return (
+    <Button
+      type="submit"
+      background="clique.purple"
+      borderRadius="50px"
+      width={w ? w : "100%;"}
+      height={h ? h : "60px;"}
+      mx={mx ? mx : ""}
+      display="flex;"
+      alignItems="center"
+      justifyContent="center"
+      fontWeight="500"
+      fontSize={fontSize ? fontSize : "head"}
+      letterSpacing="-0.02em;"
+      color="clique.white"
+      style={props}
+      isLoading={status && status.isLoading}
+    >
+      {name}
+    </Button>
+  );
 };
 
 export default AuthButton;

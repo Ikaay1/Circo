@@ -8,7 +8,6 @@ import { settingsMenu } from "@constants/utils";
 
 
 const Settings = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, setState] = useState<string>("account");
   const [code, setCode] = useState<string>("D657Y85");
   const { hasCopied, onCopy } = useClipboard(code as string);
@@ -26,7 +25,7 @@ const Settings = () => {
 
   return (
     <Box>
-      <Header upload={onOpen} />
+      <Header />
       <Box h={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
         <Box flex="1" h="100%">
           <SideMenu click={(route) => setState(route)} menuList={settingsMenu}/>
