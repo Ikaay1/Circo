@@ -42,7 +42,7 @@ const Login = () => {
     if ('data' in res) {
       dispatch(
         setCredentials({
-          payload: res?.data.data,
+          payload: res?.data,
         }),
       );
       router.push('/home');
