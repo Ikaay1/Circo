@@ -10,7 +10,6 @@ export const liveAPI = createApi({
       const token = store.getState()?.app?.userReducer.token;
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
-        headers.set("Content-Type", "application/json");
       }
       return headers;
     },
@@ -21,6 +20,7 @@ export const liveAPI = createApi({
       query: (body) => ({
         url: `event/create`,
         method: "POST",
+        headers: {},
         body: body,
       }),
       invalidatesTags: ["Live"],
@@ -30,6 +30,7 @@ export const liveAPI = createApi({
       query: (body) => ({
         url: `livestream`,
         method: "POST",
+
         body: body,
       }),
       invalidatesTags: ["Live"],

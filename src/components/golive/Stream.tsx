@@ -1,6 +1,5 @@
 import {
   Box,
-  Divider,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -8,15 +7,11 @@ import {
   GridItem,
   Icon,
   Input,
-  Select,
   Text,
   useToast,
-  VStack,
 } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
-import Btn from "@components/Button/Btn";
 import { CategoriesInterface } from "@constants/interface";
-import { videoDetails } from "@constants/utils";
 import AddIcon from "@icons/AddIcon";
 import { Field, Form, Formik } from "formik";
 import React from "react";
@@ -62,7 +57,17 @@ function Stream({ state }: { state: string }) {
           category: state === "stream" ? "LIVE" : "SCHEDULE",
           categoryId: values.category,
         };
-        const res: any = await createEvent(data);
+
+        const formData = new FormData();
+        formData.append("thumbNail", values.thumbNail);
+        formData.append("title", values.title);
+        formData.append("description", values.description);
+        formData.append("ageRange", values.ageRange);
+        formData.append("paidToWatch", values.fee > 0 ? "true" : "false");
+        formData.append("category", state === "stream" ? "LIVE" : "SCHEDULE");
+        formData.append("categoryId", values.category);
+
+        const res: any = await createEvent(formData);
         if (res.data) {
           const createLive: any = await createLiveStream({
             eventId: res.data?.data?._id,
