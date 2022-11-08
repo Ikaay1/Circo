@@ -12,8 +12,8 @@ import storage from 'redux-persist/lib/storage';
 import { authApi } from 'redux/services/auth.service';
 import { categoryApi } from 'redux/services/category.service';
 import { contentApi } from 'redux/services/content.service';
+import { userApi } from 'redux/services/user.service';
 import userReducer from 'redux/slices/authSlice';
-import contentReducer from 'redux/slices/contentSlice';
 import uploadReducer from 'redux/slices/uploadSlice';
 
 import {
@@ -35,7 +35,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   userReducer: userReducer,
-  upload: uploadReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -43,11 +42,12 @@ export const store = configureStore({
   reducer: {
     // userReducer: persistedReducer,
     app: persistedReducer,
+    upload: uploadReducer,
     [authApi.reducerPath]: authApi.reducer,
     // upload: uploadPersit,
     [categoryApi.reducerPath]: categoryApi.reducer,
-    content: contentReducer,
     [contentApi.reducerPath]: contentApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

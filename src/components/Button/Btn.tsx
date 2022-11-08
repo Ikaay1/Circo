@@ -33,6 +33,7 @@ const Btn = forwardRef(
       variant,
       colorScheme,
       submit,
+      loading,
       ...props
     }: any,
     ref,
@@ -50,6 +51,7 @@ const Btn = forwardRef(
           leftIcon={leftIcon}
           fontSize={fontSize}
           type={submit ? 'submit' : 'button'}
+          isLoading={loading}
         >
           {text}
         </Button>
