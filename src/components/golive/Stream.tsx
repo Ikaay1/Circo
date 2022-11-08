@@ -2,6 +2,7 @@ import {
   Box,
   Divider,
   Flex,
+  FormControl,
   FormErrorMessage,
   Grid,
   GridItem,
@@ -15,7 +16,7 @@ import AuthButton from "@components/auth/AuthButton";
 import Btn from "@components/Button/Btn";
 import { videoDetails } from "@constants/utils";
 import AddIcon from "@icons/AddIcon";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
@@ -24,15 +25,31 @@ import SelectField from "./SelectField";
 function Stream({ state }: { state: string }) {
   return (
     <Formik
-      initialValues={{ title: "", description: "", thumbNail: null }}
+      initialValues={{
+        title: "",
+        description: "",
+        thumbNail: "" as any,
+        category: "",
+        fee: 0,
+        ageRange: "",
+      }}
       validationSchema={Yup.object({
-        title: Yup.string().required("Required"),
-        description: Yup.string().required("Required"),
-        thumbNail: Yup.mixed().required("Required"),
-        ageRange: Yup.string().required("Required"),
-        category: Yup.string().required("Required"),
+        title: Yup.string().required("Title is Required"),
+        description: Yup.string().required("Description is Required"),
+        thumbNail: Yup.mixed().required("ThumbNail is Required"),
+        ageRange: Yup.string().required("Age Range Required"),
+        category: Yup.string().required("Category is Required"),
+        fee: Yup.number().required("Fee Required"),
       })}
       onSubmit={(values, { setSubmitting }) => {
+        const data = {
+          title: values.title,
+          description: values.description,
+          ageRange: values.ageRange,
+          paidToWatch: values,
+          category: "category must be a string",
+          categoryId: "categoryId must be a string",
+        };
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
@@ -68,44 +85,56 @@ function Stream({ state }: { state: string }) {
                 <Text fontSize="xsl" color="clique.secondaryGrey2" mb="2">
                   Select or upload a picture that shows what is your video
                 </Text>
-                <label htmlFor={"thumbnail"}>
-                  {props.values.thumbNail ? (
-                    <Box mt="7">
-                      {" "}
-                      <Box
-                        bgImage={
-                          "url(" +
-                          URL.createObjectURL(props.values.thumbNail) +
-                          ")"
-                        }
-                        rounded="10px"
-                        h="120px"
-                        w="250px"
-                        bgRepeat={"no-repeat"}
-                        bgSize={"cover"}
-                      ></Box>
-                    </Box>
-                  ) : (
-                    <Flex gap="2" mb="4" cursor={"pointer"}>
-                      <Flex
-                        flexDirection={"column"}
-                        alignItems={"center"}
-                        justifyContent="center"
-                        gap="2"
-                        py={4}
-                        border="1px"
-                        width="40%"
-                        borderRadius={"10px"}
-                        borderColor="clique.secondaryGrey2"
-                        borderStyle="dashed"
-                      >
-                        <Icon as={AddIcon} />
-                        <Text fontSize="smSubHead">Upload Thumbnail</Text>
-                      </Flex>
-                    </Flex>
+                <Field>
+                  {({ field, form }: any) => (
+                    <FormControl
+                      isInvalid={
+                        form.errors.thumbNail && form.touched.thumbNail
+                      }
+                    >
+                      <label htmlFor={"thumbnail"}>
+                        {props.values.thumbNail ? (
+                          <Box mt="7">
+                            {" "}
+                            <Box
+                              bgImage={
+                                "url(" +
+                                URL.createObjectURL(props.values.thumbNail) +
+                                ")"
+                              }
+                              rounded="10px"
+                              h="120px"
+                              w="250px"
+                              bgRepeat={"no-repeat"}
+                              bgSize={"cover"}
+                            ></Box>
+                          </Box>
+                        ) : (
+                          <Flex gap="2" mb="4" cursor={"pointer"}>
+                            <Flex
+                              flexDirection={"column"}
+                              alignItems={"center"}
+                              justifyContent="center"
+                              gap="2"
+                              py={4}
+                              border="1px"
+                              width="40%"
+                              borderRadius={"10px"}
+                              borderColor="clique.secondaryGrey2"
+                              borderStyle="dashed"
+                            >
+                              <Icon as={AddIcon} />
+                              <Text fontSize="smSubHead">Upload Thumbnail</Text>
+                            </Flex>
+                          </Flex>
+                        )}
+                      </label>
+                      <FormErrorMessage>
+                        {form.errors.thumbNail}
+                      </FormErrorMessage>
+                    </FormControl>
                   )}
-                </label>
-                <FormErrorMessage>{props.errors.thumbNail}</FormErrorMessage>
+                </Field>
               </Box>
 
               <Text fontSize={"subHead"} mb="4">
@@ -139,6 +168,7 @@ function Stream({ state }: { state: string }) {
                   <DetailCard
                     input={true}
                     name="fee"
+                    fee={true}
                     label="Enter fee for live"
                   />
                   <Text mt="10px" fontSize="smSubHead" color="clique.text">
@@ -163,9 +193,19 @@ function Stream({ state }: { state: string }) {
                   </Flex>
                 </Box>
               ) : (
-                <Box></Box>
+                <Box>
+                  <Text fontSize="smSubHead" color="clique.text">
+                    Live fee per ticket
+                  </Text>
+                  <DetailCard
+                    input={true}
+                    fee={true}
+                    name="fee"
+                    label="Enter fee for live"
+                  />
+                </Box>
               )}
-              <Box w="50%">
+              <Box w="100%">
                 <AuthButton
                   name={"Save"}
                   h="60px"

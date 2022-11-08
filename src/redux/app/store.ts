@@ -14,6 +14,7 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import userReducer from "redux/slices/authSlice";
 import uploadReducer from "redux/slices/uploadSlice";
 import storage from "redux-persist/lib/storage";
+import { liveAPI } from "redux/services/live.service";
 
 const persistConfig = {
   key: "root",
@@ -29,6 +30,7 @@ export const store = configureStore({
     userReducer: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
     upload: uploadPersit,
+    [liveAPI.reducerPath]: liveAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
