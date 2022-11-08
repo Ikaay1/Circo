@@ -1,5 +1,5 @@
 import { ChangeEvent, useRef, useState } from "react";
-
+import { Form, useFormik } from "formik";
 import {
   Box,
   FormControl,
@@ -16,6 +16,8 @@ import Header from "@components/widgets/Header";
 
 import Btn from "@components/Button/Btn";
 import { createChannelMenu, scrollBarStyle } from "@constants/utils";
+import { useCreateChannelMutation } from "redux/services/channel.service";
+import { createChannelSchema } from "schemas/channel.schema";
 
 const CreateChannel = () => {
   const coverRef = useRef<HTMLInputElement | any>();
@@ -44,7 +46,7 @@ const CreateChannel = () => {
     profileRef.current.click();
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
   const [state, setState] = useState({
     name: "",
     bioDescription: "",
@@ -52,11 +54,33 @@ const CreateChannel = () => {
     subscriptionInfo: "",
   });
 
-  const handleChange = (
-    e: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>
-  ) => {
-    setState({ ...state, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (
+  //   e: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>
+  // ) => {
+  //   setState({ ...state, [e.target.name]: e.target.value });
+  // };
+
+  const onSubmit = async (values: any, actions: any) => {};
+
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      bioDescription: "",
+      subscriptionFee: "",
+      subscriptionInfo: "",
+    },
+    validationSchema: createChannelSchema,
+    onSubmit,
+  });
 
   return (
     <Box bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}>
@@ -72,140 +96,147 @@ const CreateChannel = () => {
             position={"relative"}
             sx={scrollBarStyle}
           >
-            <FormControl isInvalid={true}>
-              <Uploaders
-                coverRef={coverRef}
-                handleChooseCover={handleChooseCover}
-                handleChooseProfile={handleChooseProfile}
-                handleFileChange={handleFileChange}
-                profileRef={profileRef}
-                state={imageState}
-              />
-              <Box
-                display="flex"
-                justifyContent={"space-between"}
-                mt="6"
-                pl="8"
-                pr="11"
-              >
-                <Box w="55%" h="" pb="20">
-                  <Text
-                    fontWeight="600"
-                    fontSize="subHead"
-                    lineHeight="24px"
-                    color="clique.secondaryGrey2"
-                  >
-                    Bio
-                  </Text>
-
-                  <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    borderRadius={"10px"}
-                    w="70%"
-                  >
+            <form onSubmit={handleSubmit}>
+              <FormControl isInvalid={true}>
+                <Uploaders
+                  coverRef={coverRef}
+                  handleChooseCover={handleChooseCover}
+                  handleChooseProfile={handleChooseProfile}
+                  handleFileChange={handleFileChange}
+                  profileRef={profileRef}
+                  state={imageState}
+                />
+                <Box
+                  display="flex"
+                  justifyContent={"space-between"}
+                  mt="6"
+                  pl="8"
+                  pr="11"
+                >
+                  <Box w="55%" h="" pb="20">
                     <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
+                      fontWeight="600"
+                      fontSize="subHead"
+                      lineHeight="24px"
+                      color="clique.secondaryGrey2"
                     >
-                      Bio Description
+                      Bio
                     </Text>
-                    <Textarea
-                      variant="filled"
-                      value={state.bioDescription}
+
+                    <Box
                       bg="clique.secondaryGrey1"
-                      name="bioDescription"
-                      onChange={handleChange}
-                    />
-                    <FormErrorMessage>Email is required. </FormErrorMessage>
+                      px="2"
+                      py="3"
+                      mb="10"
+                      borderRadius={"10px"}
+                      w="70%"
+                    >
+                      <Text
+                        fontSize={"smSubHead"}
+                        fontWeight="400"
+                        mb="1"
+                        color={"clique.secondaryGrey2"}
+                      >
+                        Bio Description
+                      </Text>
+                      <Textarea
+                        variant="filled"
+                        value={values.bioDescription}
+                        bg="clique.secondaryGrey1"
+                        name="bioDescription"
+                        onChange={handleChange}
+                      />
+                      <FormErrorMessage>Email is required. </FormErrorMessage>
+                    </Box>
+
+                    <Box
+                      bg="clique.secondaryGrey1"
+                      px="2"
+                      py="3"
+                      mb="10"
+                      maxW={"100%"}
+                      borderRadius={"10px"}
+                    >
+                      <Text
+                        fontSize={"smSubHead"}
+                        fontWeight="400"
+                        mb="1"
+                        color={"clique.secondaryGrey2"}
+                      >
+                        Channel Name
+                      </Text>
+                      <Input
+                        variant="filled"
+                        value={values.name}
+                        bg="clique.secondaryGrey1"
+                        name="name"
+                        onChange={handleChange}
+                      />
+                      <FormErrorMessage>Email is required. </FormErrorMessage>
+                    </Box>
+
+                    <Box
+                      bg="clique.secondaryGrey1"
+                      px="2"
+                      py="3"
+                      mb="10"
+                      borderRadius={"10px"}
+                    >
+                      <Text
+                        fontSize={"smSubHead"}
+                        fontWeight="400"
+                        mb="1"
+                        color={"clique.secondaryGrey2"}
+                      >
+                        Subscription Information
+                      </Text>
+                      <Textarea
+                        variant="filled"
+                        value={values.subscriptionInfo}
+                        bg="clique.secondaryGrey1"
+                        name="subscriptionInfo"
+                        onChange={handleChange}
+                      />
+                      <FormErrorMessage>Email is required. </FormErrorMessage>
+                    </Box>
+
+                    <Box
+                      bg="clique.secondaryGrey1"
+                      px="2"
+                      py="3"
+                      mb="10"
+                      borderRadius={"10px"}
+                    >
+                      <Text
+                        fontSize={"smSubHead"}
+                        fontWeight="400"
+                        mb="1"
+                        color={"clique.secondaryGrey2"}
+                      >
+                        Subscription Fee
+                      </Text>
+                      <Input
+                        variant="filled"
+                        value={values.subscriptionFee}
+                        bg="clique.secondaryGrey1"
+                        name="subscriptionFee"
+                        onChange={handleChange}
+                      />
+                      <FormErrorMessage>Email is required. </FormErrorMessage>
+                    </Box>
                   </Box>
 
-                  <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    maxW={"100%"}
-                    borderRadius={"10px"}
-                  >
-                    <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
-                    >
-                      Channel Name
-                    </Text>
-                    <Input
-                      variant="filled"
-                      value={state.name}
-                      bg="clique.secondaryGrey1"
-                      name="name"
-                      onChange={handleChange}
+                  <Box>
+                    <Btn
+                      text="Create channel"
+                      py="6"
+                      isLoading={false}
+                      type="submit"
                     />
-                    <FormErrorMessage>Email is required. </FormErrorMessage>
-                  </Box>
-
-                  <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    borderRadius={"10px"}
-                  >
-                    <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
-                    >
-                      Subscription Information
-                    </Text>
-                    <Textarea
-                      variant="filled"
-                      value={state.subscriptionInfo}
-                      bg="clique.secondaryGrey1"
-                      name="subscriptionInfo"
-                      onChange={handleChange}
-                    />
-                    <FormErrorMessage>Email is required. </FormErrorMessage>
-                  </Box>
-
-                  <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    borderRadius={"10px"}
-                  >
-                    <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
-                    >
-                      Subscription Fee
-                    </Text>
-                    <Input
-                      variant="filled"
-                      value={state.subscriptionFee}
-                      bg="clique.secondaryGrey1"
-                      name="subscriptionFee"
-                      onChange={handleChange}
-                    />
-                    <FormErrorMessage>Email is required. </FormErrorMessage>
                   </Box>
                 </Box>
-
-                <Box>
-                  <Btn text="Create channel" py="6" />
-                </Box>
-              </Box>
-            </FormControl>
+              </FormControl>
+            </form>
           </Box>
         </Box>
       </Box>

@@ -14,13 +14,17 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: string;
   colorScheme?: string;
   fontSize?: string;
-mr?: string;
-px?: string;
+  mr?: string;
+  px?: string;
+  isLoading?: boolean;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 const Btn = forwardRef(
   (
     {
+      type,
+      isLoading,
       px,
       mr,
       fontSize,
@@ -52,6 +56,8 @@ const Btn = forwardRef(
           fontSize={fontSize}
           mr={mr}
           px={px}
+          isLoading={isLoading}
+          type={type}
         >
           {text}
         </Button>
