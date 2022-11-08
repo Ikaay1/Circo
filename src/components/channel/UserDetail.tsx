@@ -91,10 +91,12 @@ const UserDetail = () => {
             </>
           )}
         </Box>
-        <Box position={"absolute"} right="10" bottom="-55">
-          <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
-          <SideIcon />
-        </Box>
+        {router.pathname.includes("profile") ? (
+          <Box position={"absolute"} right="10" bottom="-55">
+            <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
+            <SideIcon />
+          </Box>
+        ) : null}
       </Box>
       <Modal
         isCentered
@@ -120,7 +122,11 @@ const UserDetail = () => {
           <Subscriptions />
         </ModalContent>
       </Modal>
-      <CreateChannelModal onOpen={channelOnOpen} isOpen={channelIsOpen} onClose={channelOnClose} />
+      <CreateChannelModal
+        onOpen={channelOnOpen}
+        isOpen={channelIsOpen}
+        onClose={channelOnClose}
+      />
     </>
   );
 };
