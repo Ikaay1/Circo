@@ -3,7 +3,7 @@ import { store } from 'redux/app/store';
 import { baseUrl } from '@constants/utils';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const categoryAPI = createApi({
+export const categoryApi = createApi({
   reducerPath: 'categoryApi',
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
@@ -30,4 +30,4 @@ export const categoryAPI = createApi({
   }),
 });
 
-export const {useCategoryQuery} = categoryAPI;
+export const {useCategoryQuery} = categoryApi;

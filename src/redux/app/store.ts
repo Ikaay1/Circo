@@ -10,8 +10,10 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authApi } from 'redux/services/auth.service';
-import { categoryAPI } from 'redux/services/category.service';
+import { categoryApi } from 'redux/services/category.service';
+import { contentApi } from 'redux/services/content.service';
 import userReducer from 'redux/slices/authSlice';
+import contentReducer from 'redux/slices/contentSlice';
 import uploadReducer from 'redux/slices/uploadSlice';
 
 import {
@@ -43,14 +45,20 @@ export const store = configureStore({
     app: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
     // upload: uploadPersit,
-    [categoryAPI.reducerPath]: categoryAPI.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
+    content: contentReducer,
+    [contentApi.reducerPath]: contentApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([authApi.middleware, categoryAPI.middleware]),
+    }).concat([
+      authApi.middleware,
+      categoryApi.middleware,
+      contentApi.middleware,
+    ]),
 });
 
 setupListeners(store.dispatch);

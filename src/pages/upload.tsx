@@ -9,7 +9,7 @@ type Props = {};
 
 function Upload({}: Props) {
   const router = useRouter();
-  const {name, url, file} = useAppSelector((store) => store.app.upload);
+  const {name, url} = useAppSelector((store) => store.app.upload);
   useEffect(() => {
     if (!name || !url) {
       router.back();
@@ -17,7 +17,7 @@ function Upload({}: Props) {
   }, [name, url, router]);
   return (
     <HomeLayout toggleView>
-      <UploadPage url={url} name={name} file={file} />
+      <UploadPage url={url} name={name} />
     </HomeLayout>
   );
 }

@@ -29,10 +29,10 @@ function UploadModal() {
     const file = event.target.files[0];
     const name = file?.name;
     const url = URL.createObjectURL(file);
-    console.log(file);
-    console.log(event.target.files);
+    // console.log(file);
+    // console.log();
     onClose();
-    dispatch(setSources({url, name, file: {...file}}));
+    dispatch(setSources({url, name}));
     router.push('/upload');
   };
   const handleChoose = () => {
