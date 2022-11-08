@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+
+import type {PayloadAction} from '@reduxjs/toolkit';
 
 type StateType = {
   url: string;
@@ -7,12 +8,12 @@ type StateType = {
 };
 
 const initialState: StateType = {
-  url: "",
-  name: "",
+  url: '',
+  name: '',
 };
 
 export const uploadSlice = createSlice({
-  name: "uploadReducer",
+  name: 'uploadReducer',
   initialState,
   reducers: {
     setSources: (state, action) => {
@@ -22,6 +23,6 @@ export const uploadSlice = createSlice({
   },
 });
 
-export const { setSources } = uploadSlice.actions;
+export const {setSources} = uploadSlice.actions;
 
 export default uploadSlice.reducer;

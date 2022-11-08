@@ -1,5 +1,5 @@
-import { SerializedError } from "@reduxjs/toolkit";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 export interface LoginUserInterface {
   data: {
@@ -22,12 +22,12 @@ export interface SignUpUserInterface {
 }
 
 export type LoginDataInterface =
-  | { data: LoginUserInterface }
-  | { error: FetchBaseQueryError | SerializedError };
+  | {data: LoginUserInterface}
+  | {error: FetchBaseQueryError | SerializedError};
 
 export type SignUpDataInterface =
-  | { data: SignUpUserInterface }
-  | { error: FetchBaseQueryError | SerializedError };
+  | {data: SignUpUserInterface}
+  | {error: FetchBaseQueryError | SerializedError};
 
 export type ReceiptInfo = {
   duration: string;
@@ -40,4 +40,9 @@ export interface MenuData {
   name: string;
   route: string;
   icon: any;
+}
+
+export interface CategoriesInterface {
+  _id: string;
+  name: string;
 }

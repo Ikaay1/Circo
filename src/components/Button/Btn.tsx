@@ -1,5 +1,6 @@
-import { Button } from "@chakra-ui/react";
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
+
+import { Button } from '@chakra-ui/react';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   py?: string;
@@ -31,29 +32,31 @@ const Btn = forwardRef(
       maxW,
       variant,
       colorScheme,
+      submit,
       ...props
-    }: React.PropsWithChildren<Props>,
-    ref
+    }: any,
+    ref,
   ) => {
     return (
       <>
         <Button
           {...props}
-          borderRadius={`${borderRadius ? borderRadius : "50px"}`}
-          bg={`${bg ? bg : "clique.base"}`}
-          py={`${py ? py : "3"}`}
-          maxW="100%"
+          borderRadius={`${borderRadius ? borderRadius : '50px'}`}
+          bg={`${bg ? bg : 'clique.base'}`}
+          py={`${py ? py : '3'}`}
+          maxW='100%'
           variant={variant}
           colorScheme={colorScheme}
           leftIcon={leftIcon}
           fontSize={fontSize}
+          type={submit ? 'submit' : 'button'}
         >
           {text}
         </Button>
       </>
     );
-  }
+  },
 );
 
-Btn.displayName = "Btn";
+Btn.displayName = 'Btn';
 export default Btn;
