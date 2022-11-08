@@ -21,7 +21,10 @@ import AddIcon from "@icons/AddIcon";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useCategoryQuery } from "redux/services/category.service";
-import { useCreateEventMutation } from "redux/services/live.service";
+import {
+  useCreateEventMutation,
+  useCreateLiveStreamMutation,
+} from "redux/services/live.service";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
@@ -30,6 +33,7 @@ function Stream({ state }: { state: string }) {
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
+  const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
 
   return (
     <Formik
@@ -60,20 +64,33 @@ function Stream({ state }: { state: string }) {
         };
         const res: any = await createEvent(data);
         if (res.data) {
-          toast({
-            title: "Event Created Successfully",
-            position: "top-right",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
+          const createLive: any = await createLiveStream({
+            eventId: res.data?.data?._id,
           });
+          if (createLive.data) {
+            toast({
+              title: "Event Created Successfully",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+              position: "top-right",
+            });
+          } else {
+            toast({
+              title: createLive.error?.data?.message,
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+              position: "top-right",
+            });
+          }
         } else {
           toast({
             title: "Event Creation Failed",
-            description: "Event Creation Failed",
             status: "error",
             duration: 3000,
             isClosable: true,
+            position: "top-right",
           });
         }
         setSubmitting(false);
@@ -180,7 +197,6 @@ function Stream({ state }: { state: string }) {
                           </option>
                         )
                       )}
-                    <option>lsd;lfksdmlf</option>
                   </SelectField>
                 </GridItem>
                 <GridItem colSpan={2}>
