@@ -1,8 +1,7 @@
-import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useCategoryQuery } from 'redux/services/category.service';
-import { useUploadContentMutation } from 'redux/services/content.service';
 
 import {
 	Box,
@@ -19,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 import { CategoriesInterface } from '@constants/interface';
-import { age, API, baseUrl, selectArr, videoDetails } from '@constants/utils';
+import { age, API, selectArr, videoDetails } from '@constants/utils';
 import AddIcon from '@icons/AddIcon';
 import CopyIcon from '@icons/CopyIcon';
 
@@ -39,27 +38,11 @@ function UploadPage({url, name}: Props) {
     visibility: '',
   });
 
-  // useEffect(() => {
-  //   const getCategories = async () => {
-  //     try {
-  //       const {data}: {data: CategoriesInterface[]} = await axios.get(
-  //         `http://localhost:4000/category`,
-  //       );
-  //       console.log(data);
-  //       setCategories(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getCategories();
-  // }, []);
-
-  console.log(state);
-
+  const router = useRouter();
   const {data, isLoading} = useCategoryQuery('');
   const [thumbNail, setThumbNail] = useState<string | Blob>('');
   const [imageError, setImageError] = useState<string>('');
-  console.log('thumbNail', thumbNail);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -76,11 +59,12 @@ function UploadPage({url, name}: Props) {
         toast.error('Please upload a thumbnail');
         return;
       }
+      setLoading(true);
       let file = await fetch(url)
         .then((r) => r.blob())
-        .then(
-          (blobFile) => new File([blobFile], 'fileName', {type: 'image/png'}),
-        );
+        .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
+      console.log(thumbNail);
+      console.log(file);
       const formData = new FormData();
       formData.append('title', state.title);
       formData.append('description', state.description);
@@ -88,14 +72,17 @@ function UploadPage({url, name}: Props) {
       formData.append('ageRange', state.ageRange);
       formData.append('file', file);
       formData.append('thumbNail', thumbNail);
-      const res = await API({
+      API({
         method: 'post',
         url: `content/upload-video`,
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'},
+      }).then((res) => {
+        setLoading(false);
+        router.push('/home');
       });
-      console.log(res);
     } catch (error: any) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -305,7 +292,7 @@ function UploadPage({url, name}: Props) {
               </Box>
             </Box>
           </Box>
-          <Btn text='upload' submit={true}></Btn>
+          <Btn text='upload' submit={true} loading={loading}></Btn>
         </Flex>
       </Flex>
     </form>

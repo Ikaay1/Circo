@@ -687,3 +687,25 @@ API.interceptors.request.use((req) => {
   }
   return req;
 });
+
+export interface contentData {
+  _id: string;
+  dislikesCount: number;
+  likesCount: number;
+  thumbNail: string;
+  video: string;
+  uploader_id: uploaderId;
+  title: string;
+  description: string;
+  view: number;
+  createdAt: any;
+}
+
+export interface uploaderId {
+  subscribersCount: number;
+  subscribers: string[];
+  _id: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
+}

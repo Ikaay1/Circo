@@ -41,6 +41,7 @@ const Btn = forwardRef(
       variant,
       colorScheme,
       submit,
+      loading,
       ...props
     }: any,
     ref,
@@ -61,6 +62,7 @@ const Btn = forwardRef(
           isLoading={isLoading}       
           variant={variant}
           type={submit ? 'submit' : 'button'}
+          isLoading={loading}
         >
           {text}
         </Button>

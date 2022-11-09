@@ -16,10 +16,12 @@ import { scrollBarStyle } from "@constants/utils";
 import Btn from "@components/Button/Btn";
 import SideIcon from "@icons/SideIcon";
 import CreateChannelModal from "@components/createChannel/CreateChannelModal";
+import { useGetChannelQuery } from "redux/services/channel.service";
 
 const UserDetail = () => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, isError, isLoading } = useGetChannelQuery("channel");
   const {
     isOpen: channelIsOpen,
     onOpen: channelOnOpen,
@@ -31,7 +33,7 @@ const UserDetail = () => {
         <Image
           w="100%"
           h="170px"
-          src="/assets/coverphoto.png"
+          src={data?.data?.channel?.cover}
           alt="cover photo"
         />
         <Box
@@ -64,7 +66,7 @@ const UserDetail = () => {
                 color="clique.white"
                 textAlign={"center"}
               >
-                Ayra Star
+                {data?.data?.channel?.name}
               </Text>
               <Text
                 fontSize="subHead"
@@ -72,7 +74,7 @@ const UserDetail = () => {
                 color="clique.secondaryGrey2"
                 textAlign={"center"}
               >
-                @ayrastar
+                @{data?.data?.channel?.name}
               </Text>
               <Text
                 fontWeight="500"
@@ -93,7 +95,10 @@ const UserDetail = () => {
         </Box>
         {router.pathname.includes("profile") ? (
           <Box position={"absolute"} right="10" bottom="-55">
-            <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
+            {data?.data?.channel === null && (
+              <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
+            )}
+
             <SideIcon />
           </Box>
         ) : null}

@@ -1,7 +1,9 @@
 import React from "react";
+import { useAppSelector } from "redux/app/hooks";
 
 import { SimpleGrid } from "@chakra-ui/react";
 
+import { contentData } from "../../constants/utils";
 import VideoThumb from "./VideoThumb";
 
 function VideoGrid({
@@ -10,9 +12,10 @@ function VideoGrid({
   thumbWidth,
 }: {
   width: string;
-  videos:Array<any>;
-  thumbWidth?: any
+  videos: contentData[];
+  thumbWidth?: any;
 }) {
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
   return (
     <SimpleGrid
       columns={{ base: 1, lg: 3, mlg: 3, xl: 4 }}
@@ -21,14 +24,21 @@ function VideoGrid({
       spacing={"30px"}
     >
       {videos.map((video, i) => (
-        <VideoThumb
-          id={`${i + 1}`}
-          imgUrl={video.thumbnail}
-          key={video}
-          length={videos.length}
-          thumbWidth={thumbWidth}
-          isSubscribed={i % 2 === 0}
-        />
+        <>
+          {console.log(video)}
+          <VideoThumb
+            video={video}
+            key={video._id}
+            thumbWidth={thumbWidth}
+            isSubscribed={
+              video?.uploader_id?.subscribers?.find(
+                (theId) => theId === userProfile._id
+              )
+                ? true
+                : false
+            }
+          />
+        </>
       ))}
     </SimpleGrid>
   );

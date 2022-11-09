@@ -1,86 +1,91 @@
-import { Avatar, Box, Flex, Icon, Text } from "@chakra-ui/react";
-import AvataWithSpace from "@components/widgets/AvataWithSpace";
-import React from "react";
-import { BiLike, BiDislike } from "react-icons/bi";
-import { VscReport } from "react-icons/vsc";
-import ReportModal from "./ReportModal";
+import moment from 'moment';
+import React from 'react';
+import { BiDislike, BiLike } from 'react-icons/bi';
+import { VscReport } from 'react-icons/vsc';
 
-function EachComment() {
+import { Avatar, Box, Flex, Icon, Text } from '@chakra-ui/react';
+import AvataWithSpace from '@components/widgets/AvataWithSpace';
+
+import ReportModal from './ReportModal';
+
+function EachComment({comment}: {comment: any}) {
   return (
-    <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
+    <Flex mt='15px' bg='clique.ashGrey' rounded='10px' p='20px'>
       <AvataWithSpace
-        name="Prosper Otemuyiwa"
-        url="https://bit.ly/prosper-baba"
-        mr="20px"
-        size="40px"
-        borderThickness="2px"
-        borderColor="clique.base"
+        name='Prosper Otemuyiwa'
+        url='https://bit.ly/prosper-baba'
+        mr='20px'
+        size='40px'
+        borderThickness='2px'
+        borderColor='clique.base'
       />
       <Box>
-        <Flex alignItems={"center"} justifyContent={"space-between"}>
+        <Flex alignItems={'center'} justifyContent={'space-between'}>
           <Text
             noOfLines={2}
-            color={"clique.white"}
-            fontFamily={"Poppins"}
+            color={'clique.white'}
+            fontFamily={'Poppins'}
             fontWeight={400}
-            fontSize={"subHead"}
-            lineHeight={"1.2"}
+            fontSize={'subHead'}
+            lineHeight={'1.2'}
           >
-            Emmanuel N.
+            {`${
+              comment.commenterId.firstName[0].toUpperCase() +
+              comment.commenterId.firstName.slice(1)
+            } ${comment.commenterId.lastName[0].toUpperCase()}`}
           </Text>
           <Text
             noOfLines={2}
-            color={"clique.darkGrey"}
-            fontFamily={"Poppins"}
+            color={'clique.darkGrey'}
+            fontFamily={'Poppins'}
             fontWeight={400}
-            fontSize={"smSubHead"}
-            lineHeight={"1.2"}
+            fontSize={'smSubHead'}
+            lineHeight={'1.2'}
           >
-            2hrs ago
+            {moment(comment.createdAt).fromNow()}
           </Text>
         </Flex>
 
         <Text
-          mt="5px"
-          color={"clique.white"}
-          fontFamily={"Poppins"}
+          mt='5px'
+          color={'clique.white'}
+          fontFamily={'Poppins'}
           fontWeight={400}
-          fontSize={"smSubHead"}
-          lineHeight={"1.3"}
+          fontSize={'smSubHead'}
+          lineHeight={'1.3'}
         >
-          This video is good and it’s it good and i’m out of comment because i
-          need to fill this box i created to post comments.
+          {comment.comment.comment}
         </Text>
-        <Flex alignItems={"center"} justifyContent="space-between" mt="15px">
-          <Flex alignItems={"center"}>
-            <Flex cursor={"pointer"} alignItems={"center"}>
-              <Icon color="clique.white" mr="5px" fontSize="20px" as={BiLike} />
+        <Flex alignItems={'center'} justifyContent='space-between' mt='15px'>
+          <Flex alignItems={'center'}>
+            <Flex cursor={'pointer'} alignItems={'center'}>
+              <Icon color='clique.white' mr='5px' fontSize='20px' as={BiLike} />
               <Text
-                color={"clique.white"}
-                fontFamily={"Poppins"}
+                color={'clique.white'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"smSubHead"}
-                lineHeight={"1.2"}
+                fontSize={'smSubHead'}
+                lineHeight={'1.2'}
               >
-                12
+                {comment.comment.likes.length}
               </Text>
             </Flex>
 
-            <Flex cursor={"pointer"} mx="20px" alignItems={"center"}>
+            <Flex cursor={'pointer'} mx='20px' alignItems={'center'}>
               <Icon
-                color="clique.white"
-                mr="5px"
-                fontSize="smHead"
+                color='clique.white'
+                mr='5px'
+                fontSize='smHead'
                 as={BiDislike}
               />
               <Text
-                color={"clique.white"}
-                fontFamily={"Poppins"}
+                color={'clique.white'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"smSubHead"}
-                lineHeight={"1.2"}
+                fontSize={'smSubHead'}
+                lineHeight={'1.2'}
               >
-                12
+                {comment.comment.dislikes.length}
               </Text>
             </Flex>
           </Flex>
