@@ -409,8 +409,8 @@ export const playListData = [
     name: 'Ayra Star Mix',
   },
 ];
-export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
-// export const baseUrl: string = 'http://localhost:4000/';
+// export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
+export const baseUrl: string = 'http://localhost:4000/';
 
 export const scrollBarStyle = {
   '&::-webkit-scrollbar': {
@@ -653,6 +653,8 @@ export interface contentData {
   uploader_id: uploaderId;
   title: string;
   description: string;
+  view: number;
+  createdAt: any;
 }
 
 export interface uploaderId {
@@ -661,4 +663,5 @@ export interface uploaderId {
   _id: string;
   firstName: string;
   lastName: string;
+  userName: string;
 }

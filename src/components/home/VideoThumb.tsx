@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -9,12 +10,10 @@ import SubScribeModal from './SubScribeModal';
 
 function VideoThumb({
   video,
-  length,
   thumbWidth,
   isSubscribed,
 }: {
   video: contentData;
-  length: number;
   thumbWidth: {base: string; lg: string; mlg: string; xl: string};
   isSubscribed: boolean;
 }) {
@@ -29,6 +28,7 @@ function VideoThumb({
           setIsHover={setIsHover}
           isSubscribed={isSubscribed}
           id={video._id}
+          video={video}
         />
       ) : (
         <Box
@@ -73,8 +73,7 @@ function VideoThumb({
                 fontSize={'16px'}
                 lineHeight={'1.2'}
               >
-                What’s New in the 2023 Volkswagen Arteon, the pro’s and cons of
-                our fav german auto
+                {video.title}
               </Text>
 
               <Text
@@ -86,7 +85,7 @@ function VideoThumb({
                 fontSize={'14px'}
                 lineHeight={'1.2'}
               >
-                {length === 4 ? '@ayrastar' : '@wenotch'}
+                @{video.uploader_id.userName}
               </Text>
               <Flex alignItems={'center'} mt='5px'>
                 <Text
@@ -98,7 +97,7 @@ function VideoThumb({
                   lineHeight={'1.2'}
                   mr='10px'
                 >
-                  {length === 4 ? '1.5M' : '1.2k'} views
+                  {video.view} views
                 </Text>
                 <Text
                   pos={'relative'}
@@ -121,7 +120,7 @@ function VideoThumb({
                   fontSize={'14px'}
                   lineHeight={'1.2'}
                 >
-                  {length === 4 ? '3 hours' : '3 days'} ago
+                  {moment(video.createdAt).fromNow()}
                 </Text>
               </Flex>
             </Box>

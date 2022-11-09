@@ -1,8 +1,12 @@
-import { Box, Slider, SliderFilledTrack, SliderTrack } from "@chakra-ui/react";
-import React, { useEffect } from "react";
-const { Player, ControlBar, BigPlayButton } = require("video-react");
+import React, { useEffect } from 'react';
 
-function SmallPlayer() {
+import { Box, Slider, SliderFilledTrack, SliderTrack } from '@chakra-ui/react';
+
+import { contentData } from '../../constants/utils';
+
+const {Player, ControlBar, BigPlayButton} = require('video-react');
+
+function SmallPlayer({video}: {video: contentData}) {
   const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
   const [totalDuration, setTotalDuration] = React.useState(0);
   const playerRef: any = React.useRef(null);
@@ -16,7 +20,7 @@ function SmallPlayer() {
     }
   }, []);
   return (
-    <Box h={"calc(100% - 130px)"}>
+    <Box h={'calc(100% - 130px)'}>
       <Player
         controls={false}
         playing={true}
@@ -24,20 +28,20 @@ function SmallPlayer() {
         muted={true}
         autoPlay={true}
         fluid={false}
-        src="/videoplayback.mp4"
-        height={"100%"}
-        width={"100%"}
+        src={video.video}
+        height={'100%'}
+        width={'100%'}
       >
         <ControlBar
-          className="my-class"
+          className='my-class'
           autoHide={false}
           disableDefaultControls={true}
         ></ControlBar>
-        <BigPlayButton position="center" />
+        <BigPlayButton position='center' />
       </Player>
       <Slider
-        mb={"20px"}
-        aria-label="slider-ex-1"
+        mb={'20px'}
+        aria-label='slider-ex-1'
         defaultValue={0}
         value={
           totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
@@ -47,8 +51,8 @@ function SmallPlayer() {
           playerRef.current.seek(timestamp);
         }}
       >
-        <SliderTrack h="4px" rounded="0" bg="clique.grey">
-          <SliderFilledTrack rounded="0" bg="clique.base" />
+        <SliderTrack h='4px' rounded='0' bg='clique.grey'>
+          <SliderFilledTrack rounded='0' bg='clique.base' />
         </SliderTrack>
       </Slider>
     </Box>

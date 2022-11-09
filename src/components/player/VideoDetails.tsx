@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppSelector } from 'redux/app/hooks';
+import { useSubscribeMutation } from 'redux/services/user.service';
 
 import { Avatar, Box, Button, Flex, Text } from '@chakra-ui/react';
 
@@ -16,6 +17,7 @@ function VideoDetails({
 }) {
   console.log(video);
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const [subscribe, subscribeStatus] = useSubscribeMutation();
 
   const handleSubscribe = async (id: string) => {
     const isSubscribed = subscribers.find((theId) => theId === userProfile._id);
@@ -27,7 +29,7 @@ function VideoDetails({
     } else {
       setSubscribers([...subscribers, userProfile._id]);
     }
-    API.post('subscribe', subscribeData).then((res) => {
+    subscribe(subscribeData).then((res) => {
       console.log('successfully subscribed/unsubscribed');
     });
   };

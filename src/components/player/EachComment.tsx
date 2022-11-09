@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { BiDislike, BiLike } from 'react-icons/bi';
 import { VscReport } from 'react-icons/vsc';
@@ -41,7 +42,7 @@ function EachComment({comment}: {comment: any}) {
             fontSize={'smSubHead'}
             lineHeight={'1.2'}
           >
-            2hrs ago
+            {moment(comment.createdAt).fromNow()}
           </Text>
         </Flex>
 

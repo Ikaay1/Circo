@@ -49,6 +49,18 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+
+    postCommentOnContent: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
   }),
 });
 
@@ -56,4 +68,5 @@ export const {
   useGetContentsQuery,
   useGetContentQuery,
   useGetContentCommentsQuery,
+  usePostCommentOnContentMutation,
 } = contentApi;

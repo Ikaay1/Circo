@@ -1,5 +1,8 @@
-import React from 'react';
-import { useGetContentCommentsQuery } from 'redux/services/content.service';
+import React, { useState } from 'react';
+import {
+	useGetContentCommentsQuery,
+	usePostCommentOnContentMutation,
+} from 'redux/services/content.service';
 
 import { Box, Text } from '@chakra-ui/react';
 
@@ -7,7 +10,19 @@ import EachComment from './EachComment';
 import NewComment from './NewComment';
 
 function CommentSection({id}: {id: string}) {
-  const {data, isLoading} = useGetContentCommentsQuery(id);
+  const {data, isLoading, refetch} = useGetContentCommentsQuery(id);
+  const [postCommentOnContent, postCommentOnContentStatus] =
+    usePostCommentOnContentMutation();
+  const [comment, setComment] = useState('');
+  const handleComment = async () => {
+    if (comment) {
+      setComment('');
+      postCommentOnContent({videoId: id, comment}).then(() => {
+        console.log('commented');
+      });
+      refetch();
+    }
+  };
   return (
     <>
       {isLoading || !data ? (
@@ -54,7 +69,11 @@ function CommentSection({id}: {id: string}) {
           {data.data.comments.map((comment: any) => (
             <EachComment key={comment._id} comment={comment} />
           ))}
-          <NewComment />
+          <NewComment
+            handleComment={handleComment}
+            setComment={setComment}
+            comment={comment}
+          />
         </Box>
       )}
     </>
