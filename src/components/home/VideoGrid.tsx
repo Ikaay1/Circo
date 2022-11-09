@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid } from '@chakra-ui/react';
 
-import VideoThumb from "./VideoThumb";
+import { contentData } from '../../constants/utils';
+import VideoThumb from './VideoThumb';
 
 function VideoGrid({
   width,
@@ -10,21 +11,20 @@ function VideoGrid({
   thumbWidth,
 }: {
   width: string;
-  videos: string[];
+  videos: contentData[];
   thumbWidth?: any;
 }) {
   return (
     <SimpleGrid
-      columns={{ base: 1, lg: 3, mlg: 3, xl: 4 }}
-      mt="20px"
+      columns={{base: 1, lg: 3, mlg: 3, xl: 4}}
+      mt='20px'
       w={width}
-      spacing={"30px"}
+      spacing={'30px'}
     >
-      {[...videos, ...videos].map((video, i) => (
+      {videos.map((video, i) => (
         <VideoThumb
-          id={`${i + 1}`}
-          imgUrl={`/${video}.png`}
-          key={video}
+          video={video}
+          key={video._id}
           length={videos.length}
           thumbWidth={thumbWidth}
           isSubscribed={i % 2 === 0}

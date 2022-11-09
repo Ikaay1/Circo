@@ -409,8 +409,8 @@ export const playListData = [
     name: 'Ayra Star Mix',
   },
 ];
-// export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
-export const baseUrl: string = 'http://localhost:4000/';
+export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
+// export const baseUrl: string = 'http://localhost:4000/';
 
 export const scrollBarStyle = {
   '&::-webkit-scrollbar': {
@@ -643,3 +643,22 @@ API.interceptors.request.use((req) => {
   }
   return req;
 });
+
+export interface contentData {
+  _id: string;
+  dislikesCount: number;
+  likesCount: number;
+  thumbNail: string;
+  video: string;
+  uploader_id: uploaderId;
+  title: string;
+  description: string;
+}
+
+export interface uploaderId {
+  subscribersCount: number;
+  subscribers: string[];
+  _id: string;
+  firstName: string;
+  lastName: string;
+}
