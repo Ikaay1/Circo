@@ -27,26 +27,14 @@ export const channelApi = createApi({
     getChannel: builder.query<any, any>({
       query: () => ({
         url: `/channel`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['channel'],
-    }),
-
-    getChannelVideos: builder.query<any, any>({
-      query: (id) => ({
-        url: `/content/channel/${id}`,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }),
-      providesTags: ['channel'],
+      providesTags: ["channel"],
     }),
   }),
-
 });
 
-export const { useCreateChannelMutation, useGetChannelQuery, useGetChannelVideosQuery } = channelApi;
+export const { useCreateChannelMutation, useGetChannelQuery } = channelApi;

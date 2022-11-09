@@ -3,6 +3,7 @@ import React from "react";
 
 import {
   Box,
+  Circle,
   Flex,
   Image,
   Modal,
@@ -21,7 +22,7 @@ import { useGetChannelQuery } from "redux/services/channel.service";
 const UserDetail = () => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isError, isLoading } = useGetChannelQuery("channel");
+  const { data, isError, isLoading } = useGetChannelQuery("");
   const {
     isOpen: channelIsOpen,
     onOpen: channelOnOpen,
@@ -30,12 +31,21 @@ const UserDetail = () => {
   return (
     <>
       <Box position="relative">
-        <Image
-          w="100%"
-          h="170px"
-          src={data?.data?.channel?.cover}
-          alt="cover photo"
-        />
+        {data?.data?.channel?.cover ? (
+          <Image
+            w="100%"
+            h="170px"
+            src={data?.data?.channel?.cover}
+            alt="cover photo"
+          />
+        ) : (
+          <Flex
+            w="100%"
+            h="160px"
+            bg="linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323"
+          ></Flex>
+        )}
+
         <Box
           position={"absolute"}
           bottom={
@@ -46,14 +56,18 @@ const UserDetail = () => {
           left={"50%"}
           transform="translateX(-50%)"
         >
-          <Image
-            src="/assets/profilephoto.png"
-            alt="profile photo"
-            borderRadius="50%"
-            objectFit={"cover"}
-            h="120px"
-            w="120px"
-          />
+          {data?.data?.channel?.profile ? (
+            <Image
+              src="/assets/profilephoto.png"
+              alt="profile photo"
+              borderRadius="50%"
+              objectFit={"cover"}
+              h="120px"
+              w="120px"
+            />
+          ) : (
+            <Circle size="120px" bg="#232323" color="white"></Circle>
+          )}
 
           {/* name of content creator. Shows on both profile and channel routes but only in their content subroutes(and analytics subroute for channel) */}
           {(router.query.name === "content" ||
@@ -93,6 +107,7 @@ const UserDetail = () => {
             </>
           )}
         </Box>
+
         {router.pathname.includes("profile") ? (
           <Box position={"absolute"} right="10" bottom="-55">
             {data?.data?.channel === null && (
