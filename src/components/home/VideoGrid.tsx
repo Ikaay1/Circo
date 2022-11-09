@@ -10,8 +10,8 @@ function VideoGrid({
   thumbWidth,
 }: {
   width: string;
-  videos: string[];
-  thumbWidth?: any;
+  videos:Array<any>;
+  thumbWidth?: any
 }) {
   return (
     <SimpleGrid
@@ -20,10 +20,10 @@ function VideoGrid({
       w={width}
       spacing={"30px"}
     >
-      {[...videos, ...videos].map((video, i) => (
+      {videos.map((video, i) => (
         <VideoThumb
           id={`${i + 1}`}
-          imgUrl={`/${video}.png`}
+          imgUrl={video.thumbnail}
           key={video}
           length={videos.length}
           thumbWidth={thumbWidth}

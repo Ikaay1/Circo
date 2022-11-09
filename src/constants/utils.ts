@@ -319,6 +319,40 @@ export const menu: {
   },
 ];
 
+export const menuWithOutLive: {
+  name: string;
+  icon: any;
+}[] = [
+  {
+    name: "home",
+    icon: HomeIcon,
+  },
+  {
+    name: "discover",
+    icon: DiscoverIcon,
+  },
+  {
+    name: "trending",
+    icon: TrendingIcon,
+  },
+  {
+    name: "profile",
+    icon: ProfileIcon,
+  },
+  {
+    name: "wallet",
+    icon: WalletIcon,
+  },
+  {
+    name: "Live Events",
+    icon: LiveIcon,
+  },
+  {
+    name: "settings",
+    icon: SettingsIcon,
+  },
+];
+
 export const subcribees: {
   name: string;
   imgUrl: string;

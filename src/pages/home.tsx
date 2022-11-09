@@ -11,15 +11,15 @@ import { scrollBarStyle } from "@constants/utils";
 import { useGetChannelQuery } from "redux/services/channel.service";
 
 function Index() {
-  const [hasChannel, setHasChannel] = useState(false);
+  const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
   const { data, isError, isLoading } = useGetChannelQuery("channel");
 
   useEffect(() => {
-    if (data?.channel?.name) {
-      setHasChannel(true);
+    if (!isLoading && data?.data?.channel === null) {
+      setHasChannel(false);
     }
-  }, []);
+  }, [isLoading, data, hasChannel]);
 
   return (
     <HomeLayout>

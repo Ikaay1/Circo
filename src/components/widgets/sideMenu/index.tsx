@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineLogout } from "react-icons/hi";
 
 import { Box, Divider, Flex, Icon, Link, Text } from "@chakra-ui/react";
-import { menu, scrollBarStyle, subcribees } from "@constants/utils";
+import {
+  menu,
+  menuWithOutLive,
+  scrollBarStyle,
+  subcribees,
+} from "@constants/utils";
 
 import EachMenu from "./EachMenu";
 import EachSubscribe from "./EachSubscribe";
@@ -14,17 +19,25 @@ type Props = {
   hasChannel: boolean;
 };
 
+type Menu = {
+  name: string;
+  icon: any;
+};
+
 function Index({ hasChannel }: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [menuState, setMenuState] = useState(menu);
+  const [menuStateN, setMenuStateN] = useState(menuWithOutLive);
+  const [computedMenu, setComputedMenu] = useState<Array<Menu>>([]);
 
   const handleLogout = () => {
     dispatch(logout);
     router.push("/");
   };
-  if (menu.length === 8 && !hasChannel) {
-    menu.splice(6, 1);
-  }
+  useEffect(() => {
+    hasChannel ? setComputedMenu(menuState) : setComputedMenu(menuStateN);
+  }, [hasChannel, menuState, menuStateN]);
 
   return (
     <Box
@@ -39,7 +52,7 @@ function Index({ hasChannel }: Props) {
       overflowY="scroll"
       sx={scrollBarStyle}
     >
-      {menu.map(
+      {computedMenu.map(
         (
           item: {
             name: string;

@@ -177,9 +177,9 @@ const CreateChannel = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {/* <FormErrorMessage>
+                    <FormErrorMessage>
                         {errors.bioDescription}
-                      </FormErrorMessage> */}
+                      </FormErrorMessage>
                   </Box>
 
                   <Box
