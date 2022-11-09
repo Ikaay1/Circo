@@ -1,5 +1,5 @@
 import HomeLayout from "layouts/HomeLayout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Box, Divider, Flex } from "@chakra-ui/react";
 import LiveEvents from "@components/home/LiveEvents";
@@ -8,13 +8,23 @@ import TagSection from "@components/home/TagSection";
 import VideoGrid from "@components/home/VideoGrid";
 import SideMenu from "@components/widgets/sideMenu";
 import { scrollBarStyle } from "@constants/utils";
+import { useGetChannelQuery } from "redux/services/channel.service";
 
 function Index() {
+  const [hasChannel, setHasChannel] = useState(false);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
+  const { data, isError, isLoading } = useGetChannelQuery("channel");
+
+  useEffect(() => {
+    if (data?.channel?.name) {
+      setHasChannel(true);
+    }
+  }, []);
+
   return (
     <HomeLayout>
       <Flex>
-        <SideMenu />
+        <SideMenu hasChannel={hasChannel} />
         <Box
           maxH={"90vh"}
           pb="50px"

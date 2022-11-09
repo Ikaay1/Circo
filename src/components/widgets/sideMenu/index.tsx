@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HiOutlineLogout } from "react-icons/hi";
 
 import { Box, Divider, Flex, Icon, Link, Text } from "@chakra-ui/react";
@@ -10,7 +10,11 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { logout } from "redux/slices/authSlice";
 
-function Index() {
+type Props = {
+  hasChannel: boolean;
+};
+
+function Index({ hasChannel }: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -18,6 +22,9 @@ function Index() {
     dispatch(logout);
     router.push("/");
   };
+  if (menu.length === 8 && !hasChannel) {
+    menu.splice(6, 1);
+  }
 
   return (
     <Box

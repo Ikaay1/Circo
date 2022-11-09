@@ -1,31 +1,33 @@
 import {
-	FLUSH,
-	PAUSE,
-	PERSIST,
-	persistReducer,
-	persistStore,
-	PURGE,
-	REGISTER,
-	REHYDRATE,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { authApi } from 'redux/services/auth.service';
-import { categoryApi } from 'redux/services/category.service';
-import { contentApi } from 'redux/services/content.service';
-import userReducer from 'redux/slices/authSlice';
-import contentReducer from 'redux/slices/contentSlice';
-import uploadReducer from 'redux/slices/uploadSlice';
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { authApi } from "redux/services/auth.service";
+import { categoryApi } from "redux/services/category.service";
+import { contentApi } from "redux/services/content.service";
+import userReducer from "redux/slices/authSlice";
+import contentReducer from "redux/slices/contentSlice";
+import uploadReducer from "redux/slices/uploadSlice";
+import channelReducer from "redux/slices/channelSlice"
 
 import {
-	Action,
-	combineReducers,
-	configureStore,
-	ThunkAction,
-} from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
+  Action,
+  combineReducers,
+  configureStore,
+  ThunkAction,
+} from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { channelApi } from "redux/services/channel.service";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
 };
 
@@ -48,6 +50,8 @@ export const store = configureStore({
     [categoryApi.reducerPath]: categoryApi.reducer,
     content: contentReducer,
     [contentApi.reducerPath]: contentApi.reducer,
+    channel: channelReducer,
+    [channelApi.reducerPath]: channelApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -58,6 +62,7 @@ export const store = configureStore({
       authApi.middleware,
       categoryApi.middleware,
       contentApi.middleware,
+      channelApi.middleware,
     ]),
 });
 
