@@ -61,6 +61,17 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
+
+    getUserContents: builder.query<any, any>({
+      query: () => ({
+        url: `content/channel`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -69,4 +80,5 @@ export const {
   useGetContentQuery,
   useGetContentCommentsQuery,
   usePostCommentOnContentMutation,
+  useGetUserContentsQuery,
 } = contentApi;
