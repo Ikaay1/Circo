@@ -62,7 +62,7 @@ export default function DetailCard({
                   bg="clique.secondaryGrey1"
                   {...field}
                   id="title"
-                  placeholder="Title"
+                  placeholder={`Enter ${name}`}
                   type={
                     type === "date" ? "date" : type === "time" ? "time" : "text"
                   }
@@ -77,6 +77,7 @@ export default function DetailCard({
           {({ field, form }: any) => (
             <FormControl isInvalid={form.errors[name] && form.touched[name]}>
               <Textarea
+                placeholder={`Enter ${name}`}
                 {...field}
                 variant="filled"
                 bg="clique.secondaryGrey1"

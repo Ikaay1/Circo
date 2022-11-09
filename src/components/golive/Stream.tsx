@@ -15,21 +15,23 @@ import { CategoriesInterface } from "@constants/interface";
 import AddIcon from "@icons/AddIcon";
 import { Field, Form, Formik } from "formik";
 import React from "react";
+import { useAppDispatch } from "redux/app/hooks";
 import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
 } from "redux/services/live.service";
+import { setStreamDetails } from "redux/slices/streamSlice";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
 
-function Stream({ state }: { state: string }) {
+function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
-
+  const dispatch = useAppDispatch();
   return (
     <Formik
       initialValues={{
@@ -48,7 +50,7 @@ function Stream({ state }: { state: string }) {
         category: Yup.string().required("Category is Required"),
         fee: Yup.number().required("Fee Required"),
       })}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting, resetForm }) => {
         const data = {
           title: values.title,
           description: values.description,
@@ -80,6 +82,12 @@ function Stream({ state }: { state: string }) {
               isClosable: true,
               position: "top-right",
             });
+            dispatch(
+              setStreamDetails({
+                payload: { ...createLive.data?.data?.livestream },
+              })
+            );
+            setTabIndex(1);
           } else {
             toast({
               title: createLive.error?.data?.message,

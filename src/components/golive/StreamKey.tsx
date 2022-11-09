@@ -15,10 +15,15 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useAppSelector } from "redux/app/hooks";
 import CopyButton from "./CopyButton";
 
 function StreamKey() {
   const [showPassword, setShowPassword] = React.useState(false);
+
+  const streamDetails = useAppSelector(
+    (state) => state.app.stream.streamDetails
+  );
 
   return (
     <Flex>
@@ -38,21 +43,21 @@ function StreamKey() {
           </Select>
         </Box>
         <Text mt="20px" fontSize="smSubHead" color="clique.text">
-          Stream key (paste in encoder)
+          Stream key
         </Text>
         <Grid
           templateColumns="repeat(15, 1fr)"
           mt="10px"
           justifyContent={"space-between"}
         >
-          <GridItem colSpan={9} mr="16px">
+          <GridItem colSpan={12} mr="16px">
             <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
                   border={"none"}
                   isReadOnly
                   type={showPassword ? "text" : "password"}
-                  value={"aaf"}
+                  value={streamDetails?.streamKey}
                 />
                 <InputRightElement>
                   <Icon
@@ -66,23 +71,10 @@ function StreamKey() {
             </Box>
           </GridItem>
 
-          <GridItem colSpan={3} justifySelf="center">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
-              <Button
-                _hover={{
-                  bg: "none",
-                }}
-                bg="none"
-              >
-                Reset
-              </Button>
-            </Box>
-          </GridItem>
-
-          <CopyButton value="it is" />
+          <CopyButton value={streamDetails?.streamKey} />
         </Grid>
         <Text mt="20px" fontSize="smSubHead" color="clique.text">
-          Streaming URL
+          Streaming ID
         </Text>
         <Grid
           templateColumns="repeat(15, 1fr)"
@@ -96,16 +88,16 @@ function StreamKey() {
                   border={"none"}
                   isReadOnly
                   type={"text"}
-                  value={"https://"}
+                  value={streamDetails?.streamerId}
                 />
               </InputGroup>
             </Box>
           </GridItem>
 
-          <CopyButton value="it is" />
+          <CopyButton value={streamDetails?.streamerId} />
         </Grid>
         <Text mt="20px" fontSize="smSubHead" color="clique.text">
-          Backup server URL
+          Playback Id
         </Text>
         <Grid
           templateColumns="repeat(15, 1fr)"
@@ -119,13 +111,13 @@ function StreamKey() {
                   border={"none"}
                   isReadOnly
                   type={"text"}
-                  value={"https://"}
+                  value={streamDetails?.playbackId}
                 />
               </InputGroup>
             </Box>
           </GridItem>
 
-          <CopyButton value="it is" />
+          <CopyButton value={streamDetails?.playbackId} />
         </Grid>
       </Box>
 
@@ -134,7 +126,7 @@ function StreamKey() {
           Stream latency
         </Text>
 
-        <RadioGroup
+        {/* <RadioGroup
           defaultValue="1"
           colorScheme="clique"
           color="clique.text"
@@ -146,7 +138,7 @@ function StreamKey() {
           <Box>
             <Radio value="2">Normal Latency</Radio>
           </Box>
-        </RadioGroup>
+        </RadioGroup> */}
       </Box>
     </Flex>
   );

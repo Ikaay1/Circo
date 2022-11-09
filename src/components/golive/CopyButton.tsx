@@ -21,7 +21,7 @@ function CopyButton({ value }: { value: string }) {
       colSpan={3}
       justifySelf="center"
       onClick={() => {
-        handleCopy("aaf");
+        handleCopy(value);
       }}
     >
       <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
