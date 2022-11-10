@@ -2,7 +2,16 @@ import React from "react";
 
 import { Button } from "@chakra-ui/react";
 
-const AuthButton = ({ status, name, fontSize, h, w, mx, ...props }: any) => {
+const AuthButton = ({
+  status,
+  name,
+  fontSize,
+  h,
+  w,
+  mx,
+  onClick,
+  ...props
+}: any) => {
   return (
     <Button
       type="submit"
@@ -20,6 +29,7 @@ const AuthButton = ({ status, name, fontSize, h, w, mx, ...props }: any) => {
       color="clique.white"
       style={props}
       isLoading={status && status.isLoading}
+      onClick={onClick}
     >
       {name}
     </Button>

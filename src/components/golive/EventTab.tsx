@@ -2,11 +2,16 @@ import { TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import CliqueTab from "@components/widgets/CliqueTab";
 import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
 import React, { useState } from "react";
+import { useAppSelector } from "redux/app/hooks";
+import EventKey from "./EventKey";
+import EventStream from "./EventStream";
 import Stream from "./Stream";
 import StreamKey from "./StreamKey";
 
-function GoLiveTab({ state }: { state: string }) {
+function EventTab() {
   const [tabIndex, setTabIndex] = useState(0);
+  const event = useAppSelector((state) => state.app.stream.selectedStream);
+
   return (
     <Tabs
       isLazy
@@ -24,14 +29,14 @@ function GoLiveTab({ state }: { state: string }) {
       </TabList>
       <TabPanels>
         <CliqueTabPanel>
-          <Stream state={state} setTabIndex={setTabIndex} />
+          <EventStream event={event} setTabIndex={setTabIndex} />
         </CliqueTabPanel>
         <CliqueTabPanel>
-          <StreamKey />
+          <EventKey />
         </CliqueTabPanel>
       </TabPanels>
     </Tabs>
   );
 }
 
-export default GoLiveTab;
+export default EventTab;

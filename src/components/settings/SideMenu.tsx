@@ -1,19 +1,29 @@
 import { useState } from "react";
 
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
-import { settingsMenu } from "@constants/utils";
 
-type Props = {
-  click: (route: string) => void;
+export type SideMenu = {
+  name: string;
+  icon: (props: any) => JSX.Element;
+  route: string;
 };
 
-const SideMenu = ({ click }: Props) => {
+type Props = {
+  click?: (route: string) => void;
+  menuList: SideMenu[];
+  create?: boolean;
+};
+
+const SideMenu = ({ click, menuList, create }: Props) => {
   const handleClick = (route: string) => {
-    click(route);
+    if (click) {
+      click(route);
+    }
     setState(route);
   };
-  const [state, setState] = useState("account");
-
+  let currentState = "";
+  create ? (currentState = "channel") : (currentState = "account");
+  const [state, setState] = useState(currentState);
   return (
     <Box
       pt={{ lg: "5rem" }}
@@ -24,7 +34,7 @@ const SideMenu = ({ click }: Props) => {
       minH="90vh"
       maxH="90vh"
     >
-      {settingsMenu.map(({ name, icon, route }, i) => (
+      {menuList.map(({ name, icon, route }, i) => (
         <Flex
           key={name}
           mt="5px"
@@ -55,8 +65,13 @@ const SideMenu = ({ click }: Props) => {
             color={state === route ? "clique.base" : "clique.whiteGrey"}
             alignItems={"center"}
           >
-            <Icon as={icon} fontSize="l" />
-            <Text fontSize="xsl" fontFamily={"Poppins"} fontWeight={500} pl="5">
+            <Icon as={icon} fontSize={create ? "sm2" : "l"} />
+            <Text
+              fontSize={create ? "sm2" : "xsl"}
+              fontFamily={"Poppins"}
+              fontWeight={500}
+              pl="5"
+            >
               {name}
             </Text>
           </Flex>

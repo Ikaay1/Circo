@@ -46,7 +46,7 @@ function VideoThumb({
           <SubScribeModal onClose={onClose} isOpen={isOpen} onOpen={onOpen} />
           <Box
             h={{lg: '130px', mlg: '180px'}}
-            bgImage={`url(${video.thumbNail})`}
+            bgImage={`url(${video?.thumbNail})`}
             bgSize='cover'
             bgPosition='center'
             rounded={'10px'}
@@ -73,7 +73,7 @@ function VideoThumb({
                 fontSize={'16px'}
                 lineHeight={'1.2'}
               >
-                {video.title}
+                {video?.title}
               </Text>
 
               <Text
@@ -85,7 +85,7 @@ function VideoThumb({
                 fontSize={'14px'}
                 lineHeight={'1.2'}
               >
-                @{video.uploader_id.userName}
+                @{video?.uploader_id?.userName}
               </Text>
               <Flex alignItems={'center'} mt='5px'>
                 <Text
@@ -97,7 +97,7 @@ function VideoThumb({
                   lineHeight={'1.2'}
                   mr='10px'
                 >
-                  {video.view} views
+                  {video?.view} views
                 </Text>
                 <Text
                   pos={'relative'}
@@ -120,7 +120,7 @@ function VideoThumb({
                   fontSize={'14px'}
                   lineHeight={'1.2'}
                 >
-                  {moment(video.createdAt).fromNow()}
+                  {moment(video?.createdAt).fromNow()}
                 </Text>
               </Flex>
             </Box>

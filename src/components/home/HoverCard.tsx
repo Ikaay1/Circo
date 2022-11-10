@@ -86,7 +86,7 @@ function HoverCard({
             fontSize={'14px'}
             lineHeight={'1.2'}
           >
-            @{video.uploader_id.userName}
+            @{video?.uploader_id?.userName}
           </Text>
           <Flex alignItems={'center'} justifyContent='space-between'>
             <Flex alignItems={'center'}>
@@ -122,7 +122,7 @@ function HoverCard({
                 fontSize={'14px'}
                 lineHeight={'1.2'}
               >
-                {moment(video.createdAt).fromNow()}
+                {moment(video?.createdAt).fromNow()}
               </Text>
             </Flex>
             {video.uploader_id._id !== userProfile._id && (

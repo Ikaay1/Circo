@@ -1,6 +1,7 @@
 import HomeLayout from 'layouts/HomeLayout';
 import React, { useEffect, useState } from 'react';
 import { useCategoryQuery } from 'redux/services/category.service';
+import { useGetChannelQuery } from 'redux/services/channel.service';
 import {
 	useGetContentsByCategoryQuery,
 	useGetContentsQuery,
@@ -17,6 +18,7 @@ import { scrollBarStyle } from '@constants/utils';
 import { contentData } from '../constants/utils';
 
 function Index() {
+  const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
   const {data, isLoading} = useGetContentsQuery('');
   const [categoryId, setCategoryId] = useState('');
@@ -36,6 +38,17 @@ function Index() {
     data?.data?.preference?.videos,
     videosByCategory.data?.data?.preference?.videos,
   ]);
+  const {
+    data: channelData,
+    isError,
+    isLoading: channelLoading,
+  } = useGetChannelQuery('channel');
+
+  useEffect(() => {
+    if (!channelLoading && channelData?.channelData?.channel === null) {
+      setHasChannel(false);
+    }
+  }, [channelLoading, channelData, hasChannel]);
 
   return (
     <>

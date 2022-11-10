@@ -15,11 +15,19 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: string;
   colorScheme?: string;
   fontSize?: string;
+  mr?: string;
+  px?: string;
+  isLoading?: boolean;
+  submit: boolean
 }
 
 const Btn = forwardRef(
   (
     {
+      type,
+      isLoading,
+      px,
+      mr,
       fontSize,
       leftIcon,
       rightIcon,
@@ -42,16 +50,18 @@ const Btn = forwardRef(
       <>
         <Button
           {...props}
-          borderRadius={`${borderRadius ? borderRadius : '50px'}`}
-          bg={`${bg ? bg : 'clique.base'}`}
-          py={`${py ? py : '3'}`}
-          maxW='100%'
-          variant={variant}
+          borderRadius={`${borderRadius ? borderRadius : "50px"}`}
+          bg={`${bg ? bg : "clique.base"}`}
+          py={`${py ? py : "3"}`}
+          maxW="100%"
           colorScheme={colorScheme}
           leftIcon={leftIcon}
           fontSize={fontSize}
+          mr={mr}
+          px={px}
+          isLoading={isLoading}       
+          variant={variant}
           type={submit ? 'submit' : 'button'}
-          isLoading={loading}
         >
           {text}
         </Button>

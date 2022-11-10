@@ -1,3 +1,4 @@
+
 import {
 	FLUSH,
 	PAUSE,
@@ -8,45 +9,48 @@ import {
 	REGISTER,
 	REHYDRATE,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { authApi } from 'redux/services/auth.service';
-import { categoryApi } from 'redux/services/category.service';
-import { contentApi } from 'redux/services/content.service';
-import { userApi } from 'redux/services/user.service';
-import userReducer from 'redux/slices/authSlice';
-import uploadReducer from 'redux/slices/uploadSlice';
+import channelReducer from "redux/slices/channelSlice"
+import storage from "redux-persist/lib/storage";
+import { authApi } from "redux/services/auth.service";
+import { categoryApi } from "redux/services/category.service";
+import { contentApi } from "redux/services/content.service";
+import userReducer from "redux/slices/authSlice";
+import streamReducer from "redux/slices/streamSlice";
+import uploadReducer from "redux/slices/uploadSlice";
 
 import {
-	Action,
-	combineReducers,
-	configureStore,
-	ThunkAction,
-} from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
+  Action,
+  combineReducers,
+  configureStore,
+  ThunkAction,
+} from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { channelApi } from "redux/services/channel.service";
+import { liveAPI } from "redux/services/live.service";
+import { userApi } from "redux/services/user.service";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
 };
 
-// const persistedReducer = persistReducer(persistConfig, userReducer);
-
-// const uploadPersit = persistReducer(persistConfig, uploadReducer);
-
 const rootReducer = combineReducers({
   userReducer: userReducer,
+  upload: uploadReducer,
+  stream: streamReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
+export const store: any = configureStore({
   reducer: {
-    // userReducer: persistedReducer,
     app: persistedReducer,
     upload: uploadReducer,
     [authApi.reducerPath]: authApi.reducer,
-    // upload: uploadPersit,
+    [liveAPI.reducerPath]: liveAPI.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [contentApi.reducerPath]: contentApi.reducer,
+    channel: channelReducer,
+    [channelApi.reducerPath]: channelApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -58,6 +62,7 @@ export const store = configureStore({
       authApi.middleware,
       categoryApi.middleware,
       contentApi.middleware,
+      channelApi.middleware,
     ]),
 });
 

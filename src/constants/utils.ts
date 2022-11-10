@@ -29,6 +29,7 @@ import SettingsIcon from '@icons/SettingsIcon';
 import StreamIcon from '@icons/StreamIcon';
 import TermsServiceIcon from '@icons/TermsServiceIcon';
 import TrendingIcon from '@icons/TrendingIcon';
+import VideoContent from '@icons/VideoContent';
 import WalletIcon from '@icons/WalletIcon';
 
 import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
@@ -307,9 +308,44 @@ export const menu: {
     name: 'Live Events',
     icon: LiveIcon,
   },
+
   {
     name: 'Your channel',
     icon: ChannelIcon,
+  },
+  {
+    name: 'settings',
+    icon: SettingsIcon,
+  },
+];
+
+export const menuWithOutLive: {
+  name: string;
+  icon: any;
+}[] = [
+  {
+    name: 'home',
+    icon: HomeIcon,
+  },
+  {
+    name: 'discover',
+    icon: DiscoverIcon,
+  },
+  {
+    name: 'trending',
+    icon: TrendingIcon,
+  },
+  {
+    name: 'profile',
+    icon: ProfileIcon,
+  },
+  {
+    name: 'wallet',
+    icon: WalletIcon,
+  },
+  {
+    name: 'Live Events',
+    icon: LiveIcon,
   },
   {
     name: 'settings',
@@ -409,8 +445,8 @@ export const playListData = [
     name: 'Ayra Star Mix',
   },
 ];
-// export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
-export const baseUrl: string = 'http://localhost:4000/';
+export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
+// export const baseUrl: string = "http://localhost:4000/";
 
 export const scrollBarStyle = {
   '&::-webkit-scrollbar': {
@@ -531,6 +567,14 @@ export const channelMenu: MenuData[] = [
     name: 'Channel Analytics',
     route: 'analytics',
     icon: AnalyticsIcon,
+  },
+];
+
+export const createChannelMenu = [
+  {
+    name: 'Create Channel',
+    route: 'channel',
+    icon: VideoContent,
   },
 ];
 

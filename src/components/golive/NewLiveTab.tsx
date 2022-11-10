@@ -2,10 +2,9 @@ import { TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import CliqueTab from "@components/widgets/CliqueTab";
 import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
 import React, { useState } from "react";
-import Stream from "./Stream";
-import StreamKey from "./StreamKey";
+import NewStream from "./NewStream"; 
 
-function GoLiveTab({ state }: { state: string }) {
+function NewLiveTab({ state, setState }: { state: string; setState: any }) {
   const [tabIndex, setTabIndex] = useState(0);
   return (
     <Tabs
@@ -19,19 +18,18 @@ function GoLiveTab({ state }: { state: string }) {
     >
       <TabList bg="clique.primaryBg" py="10px">
         <CliqueTab>Streaming details </CliqueTab>
-        <CliqueTab>Streaming Key </CliqueTab>
-        <CliqueTab>Monitor live</CliqueTab>
       </TabList>
       <TabPanels>
         <CliqueTabPanel>
-          <Stream state={state} setTabIndex={setTabIndex} />
-        </CliqueTabPanel>
-        <CliqueTabPanel>
-          <StreamKey />
+          <NewStream
+            setState={setState}
+            state={state}
+            setTabIndex={setTabIndex}
+          />
         </CliqueTabPanel>
       </TabPanels>
     </Tabs>
   );
 }
 
-export default GoLiveTab;
+export default NewLiveTab;
