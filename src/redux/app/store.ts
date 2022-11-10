@@ -14,7 +14,6 @@ import { categoryApi } from "redux/services/category.service";
 import { contentApi } from "redux/services/content.service";
 import userReducer from "redux/slices/authSlice";
 import streamReducer from "redux/slices/streamSlice";
-import contentReducer from "redux/slices/contentSlice";
 import uploadReducer from "redux/slices/uploadSlice";
 
 import {
@@ -25,6 +24,7 @@ import {
 } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { liveAPI } from "redux/services/live.service";
+import { userApi } from "redux/services/user.service";
 
 const persistConfig = {
   key: "root",
@@ -34,18 +34,19 @@ const persistConfig = {
 const rootReducer = combineReducers({
   userReducer: userReducer,
   upload: uploadReducer,
-  content: contentReducer,
   stream: streamReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
+export const store: any = configureStore({
   reducer: {
     app: persistedReducer,
+    upload: uploadReducer,
     [authApi.reducerPath]: authApi.reducer,
     [liveAPI.reducerPath]: liveAPI.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [contentApi.reducerPath]: contentApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

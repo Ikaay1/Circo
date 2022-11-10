@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Flex,
   Grid,
   GridItem,
@@ -8,12 +7,9 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Radio,
-  RadioGroup,
-  Select,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useAppSelector } from "redux/app/hooks";
 import CopyButton from "./CopyButton";

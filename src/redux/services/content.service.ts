@@ -17,21 +17,54 @@ export const contentApi = createApi({
   }),
   tagTypes: ['Content'],
   endpoints: (builder) => ({
-    uploadContent: builder.mutation<any, any>({
-      query: (body) => ({
+    getContents: builder.query<any, any>({
+      query: () => ({
         url: `content/upload-video`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
+
+    getContent: builder.query<any, any>({
+      query: (id) => ({
+        url: `content/upload-video/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
+
+    getContentComments: builder.query<any, any>({
+      query: (id) => ({
+        url: `comment/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
+
+    postCommentOnContent: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment`,
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
         body: body,
       }),
       invalidatesTags: ['Content'],
     }),
 
-    getContents: builder.query<any, any>({
+    getUserContents: builder.query<any, any>({
       query: () => ({
-        url: `/content/uploaded-video`,
+        url: `content/channel`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -42,4 +75,10 @@ export const contentApi = createApi({
   }),
 });
 
-export const {useUploadContentMutation, useGetContentsQuery} = contentApi;
+export const {
+  useGetContentsQuery,
+  useGetContentQuery,
+  useGetContentCommentsQuery,
+  usePostCommentOnContentMutation,
+  useGetUserContentsQuery,
+} = contentApi;
