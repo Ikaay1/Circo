@@ -96,19 +96,21 @@ function VideoDetails({
             </Text>
           </Box>
         </Flex>
-        <Button
-          rounded='full'
-          fontWeight={400}
-          bg={
-            subscribers.includes(userProfile._id)
-              ? 'clique.grey'
-              : 'clique.purple'
-          }
-          cursor='pointer'
-          onClick={() => handleSubscribe(video.uploader_id._id)}
-        >
-          {subscribers.includes(userProfile._id) ? 'Subscribed' : 'Subscribe'}
-        </Button>
+        {video.uploader_id._id !== userProfile._id && (
+          <Button
+            rounded='full'
+            fontWeight={400}
+            bg={
+              subscribers.includes(userProfile._id)
+                ? 'clique.grey'
+                : 'clique.purple'
+            }
+            cursor='pointer'
+            onClick={() => handleSubscribe(video.uploader_id._id)}
+          >
+            {subscribers.includes(userProfile._id) ? 'Subscribed' : 'Subscribe'}
+          </Button>
+        )}
       </Flex>
       <Text
         mt='5px'
