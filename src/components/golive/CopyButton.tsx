@@ -13,7 +13,7 @@ function CopyButton({ value }: { value: string }) {
     if (isCopied) {
       setTimeout(() => {
         setIsCopied(false);
-      }, 2000);
+      }, 1500);
     }
   }, [isCopied]);
   return (

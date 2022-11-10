@@ -1,7 +1,8 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import dayjs from "dayjs";
 
-function EventCard() {
+function EventCard({ event }: any) {
   return (
     <Flex
       alignItems={"center"}
@@ -13,7 +14,8 @@ function EventCard() {
       <Box
         w="80px"
         h="80px"
-        bg="clique.base"
+        bg="clique.black"
+        bgImage={`url(${event?.eventId?.thumbNails[0]})`}
         rounded={"5px"}
         bgRepeat="no-repeat"
         bgSize="cover"
@@ -28,8 +30,7 @@ function EventCard() {
           fontWeight={400}
           fontSize={"16px"}
         >
-          What’s New in the 2023 Volkswagen Arteon, the pro’s and cons of our
-          fav german auto
+          {event?.eventId?.title}
         </Text>
         <Text
           noOfLines={2}
@@ -40,7 +41,7 @@ function EventCard() {
           lineHeight={"1.2"}
           my="7px"
         >
-          Entertainment
+          {event?.eventId?.category}
         </Text>
         <Text
           noOfLines={2}
@@ -50,7 +51,7 @@ function EventCard() {
           fontSize={"14px"}
           lineHeight={"1.2"}
         >
-          Dec 12, 2021 | 10:00 AM
+          {dayjs(event?.eventId?.schedule)?.format("DD MMM YY hh:mm A")}
         </Text>
       </Box>
     </Flex>

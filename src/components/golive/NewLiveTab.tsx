@@ -8,6 +8,7 @@ function NewLiveTab({ state, setState }: { state: string; setState: any }) {
   const [tabIndex, setTabIndex] = useState(0);
   return (
     <Tabs
+      isLazy
       variant={"unstyled"}
       minW="full"
       fontFamily="Poppins"

@@ -35,7 +35,21 @@ export const liveAPI = createApi({
       }),
       invalidatesTags: ["Live"],
     }),
+
+    getLiveStream: builder.query<any, any>({
+      query: () => ({
+        url: `livestream/user/${
+          store.getState()?.app?.userReducer?.userProfile?._id
+        }`,
+        method: "GET",
+      }),
+      providesTags: ["Live"],
+    }),
   }),
 });
 
-export const { useCreateEventMutation, useCreateLiveStreamMutation } = liveAPI;
+export const {
+  useCreateEventMutation,
+  useCreateLiveStreamMutation,
+  useGetLiveStreamQuery,
+} = liveAPI;

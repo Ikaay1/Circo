@@ -1,9 +1,11 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
 import React from "react";
+import { useGetLiveStreamQuery } from "redux/services/live.service";
 import EventCard from "./EventCard";
 
 function LiveEventPage({ state, setState }: { state: string; setState: any }) {
+  const { data, isFetching } = useGetLiveStreamQuery();
   return (
     <Box w="full">
       <Flex w="full" justifyContent="right">
@@ -18,9 +20,11 @@ function LiveEventPage({ state, setState }: { state: string; setState: any }) {
         />
       </Flex>
 
-      {["event1", "event2", "event3"].map((event: any) => (
-        <EventCard key={event?._id}  />
-      ))}
+      {isFetching && <Spinner bg="clique.base" />}
+      {data &&
+        data?.data?.map((event: any) => (
+          <EventCard event={event} key={event?._id} />
+        ))}
     </Box>
   );
 }
