@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useCategoryQuery } from 'redux/services/category.service';
+import { useCreateContentMutation } from 'redux/services/content.service';
 
 import {
 	Box,
@@ -43,6 +44,7 @@ function UploadPage({url, name}: Props) {
   const [thumbNail, setThumbNail] = useState<string | Blob>('');
   const [imageError, setImageError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [createContent, createContentStatus] = useCreateContentMutation();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,12 +74,16 @@ function UploadPage({url, name}: Props) {
       formData.append('ageRange', state.ageRange);
       formData.append('file', file);
       formData.append('thumbNail', thumbNail);
-      API({
-        method: 'post',
-        url: `content/upload-video`,
-        data: formData,
-        headers: {'Content-Type': 'multipart/form-data'},
-      }).then((res) => {
+      // API({
+      //   method: 'post',
+      //   url: `content/upload-video`,
+      //   data: formData,
+      //   headers: {'Content-Type': 'multipart/form-data'},
+      // }).then((res) => {
+      //   setLoading(false);
+      //   router.push('/home');
+      // });
+      createContent(formData).then((res) => {
         setLoading(false);
         router.push('/home');
       });

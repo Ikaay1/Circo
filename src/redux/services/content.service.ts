@@ -17,6 +17,16 @@ export const contentApi = createApi({
   }),
   tagTypes: ['Content'],
   endpoints: (builder) => ({
+    createContent: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `content/upload-video`,
+        method: 'POST',
+        headers: {},
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
     getContents: builder.query<any, any>({
       query: () => ({
         url: `content/upload-video`,
@@ -72,6 +82,29 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+
+    createView: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `content/view`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
+    getContentsByCategory: builder.query<any, any>({
+      query: (id) => ({
+        url: `content/category/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -81,4 +114,7 @@ export const {
   useGetContentCommentsQuery,
   usePostCommentOnContentMutation,
   useGetUserContentsQuery,
+  useCreateViewMutation,
+  useGetContentsByCategoryQuery,
+  useCreateContentMutation,
 } = contentApi;

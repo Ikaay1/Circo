@@ -33,11 +33,6 @@ function HoverCard({
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [subscribe, subscribeStatus] = useSubscribeMutation();
 
-  const handleSubscribe = async (id: string) => {
-    video.uploader_id.subscribers.find((theId) => theId === userProfile._id);
-    const subscribeData = {subscribingToId: id};
-    await subscribe(subscribeData);
-  };
   return (
     <Box
       onMouseLeave={() => setIsHover(false)}
@@ -130,21 +125,23 @@ function HoverCard({
                 {moment(video.createdAt).fromNow()}
               </Text>
             </Flex>
-            <Button
-              color='clique.white'
-              bg={
-                video.uploader_id.subscribers.includes(userProfile._id)
-                  ? 'clique.grey'
-                  : 'clique.purple'
-              }
-              rounded={'full'}
-              fontWeight='400'
-              size={'sm'}
-            >
-              {video.uploader_id.subscribers.includes(userProfile._id)
-                ? 'Subscribed'
-                : 'Subscribe'}
-            </Button>
+            {video.uploader_id._id !== userProfile._id && (
+              <Button
+                color='clique.white'
+                bg={
+                  video.uploader_id.subscribers.includes(userProfile._id)
+                    ? 'clique.grey'
+                    : 'clique.purple'
+                }
+                rounded={'full'}
+                fontWeight='400'
+                size={'sm'}
+              >
+                {video.uploader_id.subscribers.includes(userProfile._id)
+                  ? 'Subscribed'
+                  : 'Subscribe'}
+              </Button>
+            )}
           </Flex>
         </Box>
       </Flex>

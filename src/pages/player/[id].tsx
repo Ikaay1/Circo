@@ -1,7 +1,11 @@
 import HomeLayout from 'layouts/HomeLayout';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useGetContentQuery } from 'redux/services/content.service';
+import { useAppSelector } from 'redux/app/hooks';
+import {
+	useCreateViewMutation,
+	useGetContentQuery,
+} from 'redux/services/content.service';
 
 import { Box, Flex } from '@chakra-ui/react';
 import CommentSection from '@components/player/CommentSection';
@@ -14,12 +18,25 @@ function Index() {
 
   const [subscribers, setSubscribers] = useState<string[]>([]);
   const {data, isLoading} = useGetContentQuery(id);
+  const [view, viewStatus] = useCreateViewMutation();
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
     if (data) {
       setSubscribers(data.data.preference.video.uploader_id.subscribers);
     }
   }, [data]);
+
+  useEffect(() => {
+    const createView = async () => {
+      await view({video_id: data.data.preference.video._id});
+    };
+    if (data) {
+      if (data.data.preference.video.uploader_id._id !== userProfile._id) {
+        createView();
+      }
+    }
+  }, [data, view, userProfile._id]);
 
   return (
     <>

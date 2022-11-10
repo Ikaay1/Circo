@@ -23,7 +23,7 @@ function UploadModal() {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const inputRef = useRef<HTMLInputElement | any>();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files || !event.target.files[0].name.includes('video')) {
+    if (!event.target.files || !event.target.files[0]?.type.includes('video')) {
       return;
     }
     const file = event.target.files[0];

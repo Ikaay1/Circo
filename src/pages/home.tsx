@@ -1,6 +1,10 @@
 import HomeLayout from 'layouts/HomeLayout';
 import React, { useEffect, useState } from 'react';
-import { useGetContentsQuery } from 'redux/services/content.service';
+import { useCategoryQuery } from 'redux/services/category.service';
+import {
+	useGetContentsByCategoryQuery,
+	useGetContentsQuery,
+} from 'redux/services/content.service';
 
 import { Box, Divider, Flex } from '@chakra-ui/react';
 import LiveEvents from '@components/home/LiveEvents';
@@ -10,41 +14,73 @@ import VideoGrid from '@components/home/VideoGrid';
 import SideMenu from '@components/widgets/sideMenu';
 import { scrollBarStyle } from '@constants/utils';
 
+import { contentData } from '../constants/utils';
+
 function Index() {
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
   const {data, isLoading} = useGetContentsQuery('');
+  const [categoryId, setCategoryId] = useState('');
+  const videosByCategory = useGetContentsByCategoryQuery(categoryId);
+  const categories = useCategoryQuery('');
+  const [category, setCategory] = useState('All');
+  const [contents, setContents] = useState<contentData[]>([]);
+
+  useEffect(() => {
+    if (category === 'All') {
+      setContents(data?.data?.preference?.videos);
+    } else {
+      setContents(videosByCategory.data?.data?.preference?.videos);
+    }
+  }, [
+    category,
+    data?.data?.preference?.videos,
+    videosByCategory.data?.data?.preference?.videos,
+  ]);
 
   return (
     <>
-      {isLoading || !data ? (
-        <Box></Box>
-      ) : (
-        <HomeLayout>
-          <Flex>
-            <SideMenu />
-            <Box
-              maxH={'90vh'}
-              pb='50px'
-              px='30px'
-              maxW={'calc(100vw - 500px)'}
-              overflowY={'scroll'}
-              overflowX={'hidden'}
-              sx={scrollBarStyle}
-            >
-              <LiveTopCard />
-              <Divider />
-              <TagSection />
-              <Divider />
-              <VideoGrid
-                thumbWidth={{lg: '220px', mlg: '280px', xl: 'full'}}
-                width={'calc(100vw - 560px)'}
-                videos={data.data.preference.videos}
-              />
-            </Box>
-            <LiveEvents />
-          </Flex>
-        </HomeLayout>
-      )}
+      <HomeLayout>
+        <Flex>
+          <SideMenu />
+          <Box
+            maxH={'90vh'}
+            pb='50px'
+            px='30px'
+            w={'calc(100vw - 500px)'}
+            overflowY={'scroll'}
+            overflowX={'hidden'}
+            sx={scrollBarStyle}
+          >
+            <LiveTopCard />
+
+            {categories.data && (
+              <>
+                <Divider />
+                <TagSection
+                  categories={categories.data.data}
+                  category={category}
+                  setCategory={setCategory}
+                  setCategoryId={setCategoryId}
+                />
+                <Divider />
+              </>
+            )}
+
+            {!contents?.length ? (
+              <Box></Box>
+            ) : (
+              <>
+                <VideoGrid
+                  thumbWidth={{lg: '220px', mlg: '280px', xl: 'full'}}
+                  width={'calc(100vw - 560px)'}
+                  videos={contents}
+                />
+              </>
+            )}
+          </Box>
+          <LiveEvents />
+        </Flex>
+      </HomeLayout>
     </>
   );
 }
