@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "redux/slices/authSlice";
 
 type Props = {
-  hasChannel: boolean;
+  hasChannel?: boolean;
 };
 
 type Menu = {
