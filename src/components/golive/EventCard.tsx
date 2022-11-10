@@ -1,10 +1,23 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import dayjs from "dayjs";
+import { useAppDispatch } from "redux/app/hooks";
+import { setSelectedStream } from "redux/slices/streamSlice";
 
-function EventCard({ event }: any) {
+function EventCard({ event, setState }: any) {
+  const dispatch = useAppDispatch();
+
   return (
     <Flex
+      onClick={() => {
+        dispatch(
+          setSelectedStream({
+            payload: { ...event },
+          })
+        );
+        setState("viewevent");
+      }}
+      cursor="pointer"
       alignItems={"center"}
       mt="20px"
       bg="clique.blackGrey"

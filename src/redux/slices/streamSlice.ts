@@ -3,10 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface IUserProps {
   streamDetails: null | any;
+  selectedStream: null | any;
 }
 
 const initialState: IUserProps = {
   streamDetails: null,
+  selectedStream: null,
 };
 
 export const streamSlice = createSlice({
@@ -17,13 +19,17 @@ export const streamSlice = createSlice({
       state,
       { payload: { payload } }: PayloadAction<{ payload: any }>
     ) => {
-      console.log("payload", payload);
-
       state.streamDetails = payload;
+    },
+    setSelectedStream: (
+      state,
+      { payload: { payload } }: PayloadAction<{ payload: any }>
+    ) => {
+      state.selectedStream = payload;
     },
   },
 });
 
-export const { setStreamDetails } = streamSlice.actions;
+export const { setStreamDetails, setSelectedStream } = streamSlice.actions;
 
 export default streamSlice.reducer;

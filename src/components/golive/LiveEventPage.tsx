@@ -23,7 +23,7 @@ function LiveEventPage({ state, setState }: { state: string; setState: any }) {
       {isFetching && <Spinner bg="clique.base" />}
       {data &&
         data?.data?.map((event: any) => (
-          <EventCard event={event} key={event?._id} />
+          <EventCard setState={setState} event={event} key={event?._id} />
         ))}
     </Box>
   );

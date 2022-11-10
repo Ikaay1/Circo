@@ -1,4 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
+import EventTab from "@components/golive/EventTab";
 import GoLiveTab from "@components/golive/GoLiveTab";
 import LiveEventPage from "@components/golive/LiveEventPage";
 import NewLiveTab from "@components/golive/NewLiveTab";
@@ -83,6 +84,23 @@ function Index({}: Props) {
                 Create Live Event
               </Text>
               <NewLiveTab setState={setState} state={state} />
+            </Box>
+          )}
+          {state === "viewevent" && (
+            <Box>
+              <Text
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
+              >
+                Go Live
+              </Text>
+              <EventTab />
             </Box>
           )}
         </Box>
