@@ -28,20 +28,6 @@ function StreamKey() {
   return (
     <Flex>
       <Box w="50%">
-        <Text fontSize="smSubHead" color="clique.text">
-          Select Streaming Key
-        </Text>
-        <Box
-          bg="clique.secondaryGrey1"
-          px="2"
-          py="3"
-          mt="10px"
-          borderRadius={"10px"}
-        >
-          <Select border={"none"} isReadOnly>
-            <option>Key 1</option>
-          </Select>
-        </Box>
         <Text mt="20px" fontSize="smSubHead" color="clique.text">
           Stream key
         </Text>
@@ -119,12 +105,36 @@ function StreamKey() {
 
           <CopyButton value={streamDetails?.playbackId} />
         </Grid>
+
+        <Text mt="20px" fontSize="smSubHead" color="clique.text">
+          RMTP URL
+        </Text>
+        <Grid
+          templateColumns="repeat(15, 1fr)"
+          mt="10px"
+          justifyContent={"space-between"}
+        >
+          <GridItem colSpan={12} mr="16px">
+            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+              <InputGroup border={"none"}>
+                <Input
+                  border={"none"}
+                  isReadOnly
+                  type={"text"}
+                  value={"rtmps://global-live.mux.com:443/app/ "}
+                />
+              </InputGroup>
+            </Box>
+          </GridItem>
+
+          <CopyButton value={"tmps://global-live.mux.com:443/app/ "} />
+        </Grid>
       </Box>
 
       <Box px="50px">
-        <Text mt="20px" fontSize="smSubHead" color="clique.text">
+        {/* <Text mt="20px" fontSize="smSubHead" color="clique.text">
           Stream latency
-        </Text>
+        </Text> */}
 
         {/* <RadioGroup
           defaultValue="1"

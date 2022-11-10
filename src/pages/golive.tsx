@@ -1,5 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import GoLiveTab from "@components/golive/GoLiveTab";
+import LiveEventPage from "@components/golive/LiveEventPage";
+import NewLiveTab from "@components/golive/NewLiveTab";
 import SideMenu from "@components/golive/SideMenu";
 import Header from "@components/widgets/Header";
 import { scrollBarStyle } from "@constants/utils";
@@ -30,19 +32,59 @@ function Index({}: Props) {
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          <Text
-            pt="20px"
-            position={"relative"}
-            color={"clique.white"}
-            fontFamily={"Poppins"}
-            fontWeight={500}
-            textTransform={"capitalize"}
-            fontSize="head"
-            lineHeight={"1"}
-          >
-            Go Live
-          </Text>
-          <GoLiveTab state={state} />
+          {state === "stream" && (
+            <Box>
+              {" "}
+              <Text
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
+              >
+                Stream
+              </Text>{" "}
+              <GoLiveTab state={state} />
+            </Box>
+          )}
+          {state === "liveevent" && (
+            <Box>
+              <Text
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
+              >
+                Live Event
+              </Text>
+              <LiveEventPage setState={setState} state={state} />
+            </Box>
+          )}
+
+          {state === "create" && (
+            <Box>
+              <Text
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
+              >
+                Create Live Event
+              </Text>
+              <NewLiveTab setState={setState} state={state} />
+            </Box>
+          )}
         </Box>
       </Box>
     </Box>
