@@ -5,7 +5,7 @@ import { useGetLiveStreamQuery } from "redux/services/live.service";
 import EventCard from "./EventCard";
 
 function LiveEventPage({ state, setState }: { state: string; setState: any }) {
-  const { data, isFetching } = useGetLiveStreamQuery();
+  const { data, isFetching } = useGetLiveStreamQuery("");
   return (
     <Box w="full">
       <Flex w="full" justifyContent="right">
