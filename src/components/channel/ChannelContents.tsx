@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useGetUserContentsQuery } from 'redux/services/content.service';
 
-import { Box, Text } from '@chakra-ui/react';
-import VideoGrid from '@components/home/VideoGrid';
-import Playlists from '@components/profile/Playlists';
-import { channelNav } from '@constants/utils';
+import { Box, Text } from "@chakra-ui/react";
+import VideoGrid from "@components/home/VideoGrid";
+import Playlists from "@components/profile/Playlists";
+import { channelNav } from "@constants/utils";
 
 const Contents = () => {
   const [route, setRoute] = useState('upload');

@@ -1,13 +1,15 @@
+
 import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
+	FLUSH,
+	PAUSE,
+	PERSIST,
+	persistReducer,
+	persistStore,
+	PURGE,
+	REGISTER,
+	REHYDRATE,
+} from 'redux-persist';
+import channelReducer from "redux/slices/channelSlice"
 import storage from "redux-persist/lib/storage";
 import { authApi } from "redux/services/auth.service";
 import { categoryApi } from "redux/services/category.service";
@@ -23,6 +25,7 @@ import {
   ThunkAction,
 } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { channelApi } from "redux/services/channel.service";
 import { liveAPI } from "redux/services/live.service";
 import { userApi } from "redux/services/user.service";
 
@@ -46,6 +49,8 @@ export const store: any = configureStore({
     [liveAPI.reducerPath]: liveAPI.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [contentApi.reducerPath]: contentApi.reducer,
+    channel: channelReducer,
+    [channelApi.reducerPath]: channelApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -57,6 +62,7 @@ export const store: any = configureStore({
       authApi.middleware,
       categoryApi.middleware,
       contentApi.middleware,
+      channelApi.middleware,
     ]),
 });
 

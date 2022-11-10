@@ -34,7 +34,7 @@ function HoverCard({
   const [subscribe, subscribeStatus] = useSubscribeMutation();
 
   const handleSubscribe = async (id: string) => {
-    video.uploader_id.subscribers.find((theId) => theId === userProfile._id);
+    video?.uploader_id?.subscribers?.find((theId) => theId === userProfile._id);
     const subscribeData = {subscribingToId: id};
     await subscribe(subscribeData);
   };
@@ -91,7 +91,7 @@ function HoverCard({
             fontSize={'14px'}
             lineHeight={'1.2'}
           >
-            @{video.uploader_id.userName}
+            @{video?.uploader_id?.userName}
           </Text>
           <Flex alignItems={'center'} justifyContent='space-between'>
             <Flex alignItems={'center'}>
@@ -127,13 +127,13 @@ function HoverCard({
                 fontSize={'14px'}
                 lineHeight={'1.2'}
               >
-                {moment(video.createdAt).fromNow()}
+                {moment(video?.createdAt).fromNow()}
               </Text>
             </Flex>
             <Button
               color='clique.white'
               bg={
-                video.uploader_id.subscribers.includes(userProfile._id)
+                video?.uploader_id?.subscribers?.includes(userProfile._id)
                   ? 'clique.grey'
                   : 'clique.purple'
               }
@@ -141,7 +141,7 @@ function HoverCard({
               fontWeight='400'
               size={'sm'}
             >
-              {video.uploader_id.subscribers.includes(userProfile._id)
+              {video?.uploader_id?.subscribers?.includes(userProfile._id)
                 ? 'Subscribed'
                 : 'Subscribe'}
             </Button>
