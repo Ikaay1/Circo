@@ -26,7 +26,7 @@ import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
 
-function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
+function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
@@ -35,13 +35,15 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
   return (
     <Formik
       initialValues={{
-        title: "",
-        description: "",
-        thumbNail: "" as any,
-        category: "",
-        fee: 0,
-        ageRange: "",
+        title: event?.eventId?.title,
+        description: event?.eventId?.description,
+        thumbNail: event?.eventId?.thumbNails[0] as any,
+        category: event?.eventId?.categoryId,
+        fee: event?.eventId?.paidToWatch ? event?.eventId?.fee : 0,
+        ageRange: event?.eventId?.ageRange,
+        schedule: event?.eventId?.schedule,
       }}
+      enableReinitialize
       validationSchema={Yup.object({
         title: Yup.string().required("Title is Required"),
         description: Yup.string().required("Description is Required"),
@@ -56,7 +58,7 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
           description: values.description,
           ageRange: values.ageRange,
           paidToWatch: values.fee > 0 ? true : false,
-          category: state === "stream" ? "LIVE" : "SCHEDULE",
+          category: "SCHEDULE",
           categoryId: values.category,
         };
 
@@ -66,7 +68,7 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
         formData.append("description", values.description);
         formData.append("ageRange", values.ageRange);
         formData.append("paidToWatch", values.fee > 0 ? "true" : "false");
-        formData.append("category", state === "stream" ? "LIVE" : "SCHEDULE");
+        formData.append("category", "SCHEDULE");
         formData.append("categoryId", values.category);
 
         const res: any = await createEvent(formData);
@@ -147,13 +149,14 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
                     >
                       <label htmlFor={"thumbnail"}>
                         {props.values.thumbNail ? (
-                          <Box mt="7">
-                            {" "}
+                          <Box mt="7"> 
                             <Box
                               bgImage={
-                                "url(" +
-                                URL.createObjectURL(props.values.thumbNail) +
-                                ")"
+                                props.values.thumbNail?.startsWith("http")
+                                  ? `url(${props.values.thumbNail})`
+                                  : `url(${URL.createObjectURL(
+                                      props.values.thumbNail
+                                    )})`
                               }
                               rounded="10px"
                               h="120px"
@@ -222,41 +225,31 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
             </Box>
 
             <Flex w="50%" px="40px" flexDir={"column"} justify="space-between">
-              {state === "liveevent" ? (
-                <Box>
-                  <Text fontSize="smSubHead" color="clique.text">
-                    Live fee per ticket
-                  </Text>
-                  <DetailCard
-                    input={true}
-                    name="fee"
-                    fee={true}
-                    label="Enter fee for live"
-                  />
-                  <Text mt="10px" fontSize="smSubHead" color="clique.text">
-                    Schedule
-                  </Text>
+              <Box>
+                <Text fontSize="smSubHead" color="clique.text">
+                  Live fee per ticket
+                </Text>
+                <DetailCard
+                  input={true}
+                  name="fee"
+                  fee={true}
+                  label="Enter fee for live"
+                />
+                <Text mt="10px" fontSize="smSubHead" color="clique.text">
+                  Schedule
+                </Text>
 
-                  <Flex alignItems={"center"} justifyContent="space-between">
-                    <DetailCard
-                      w="48%"
-                      input={true}
-                      name="time"
-                      label="Time"
-                      type="time"
-                    />
-                    <DetailCard
-                      w="48%"
-                      input={true}
-                      name="date"
-                      type="date"
-                      label="Date"
-                    />
-                  </Flex>
-                </Box>
-              ) : (
-                <Box></Box>
-              )}
+                <Flex alignItems={"center"} justifyContent="space-between">
+                  <DetailCard
+                    w="48%"
+                    input={true}
+                    name="schedule"
+                    type="date"
+                    label="Date"
+                  />
+                </Flex>
+              </Box>
+
               <Box w="100%">
                 <AuthButton
                   name={"Save"}
@@ -273,4 +266,4 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
   );
 }
 
-export default Stream;
+export default EventStream;

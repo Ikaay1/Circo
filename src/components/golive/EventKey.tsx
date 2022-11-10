@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Flex,
   Grid,
   GridItem,
@@ -8,21 +7,18 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Radio,
-  RadioGroup,
-  Select,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useAppSelector } from "redux/app/hooks";
 import CopyButton from "./CopyButton";
 
-function StreamKey() {
+function EventKey() {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const streamDetails = useAppSelector(
-    (state) => state.app.stream.streamDetails
+    (state) => state.app.stream.selectedStream
   );
 
   return (
@@ -131,27 +127,9 @@ function StreamKey() {
         </Grid>
       </Box>
 
-      <Box px="50px">
-        {/* <Text mt="20px" fontSize="smSubHead" color="clique.text">
-          Stream latency
-        </Text> */}
-
-        {/* <RadioGroup
-          defaultValue="1"
-          colorScheme="clique"
-          color="clique.text"
-          mt="10px"
-        >
-          <Box>
-            <Radio value={"1"}>Normal Latency</Radio>
-          </Box>
-          <Box>
-            <Radio value="2">Normal Latency</Radio>
-          </Box>
-        </RadioGroup> */}
-      </Box>
+      <Box px="50px"></Box>
     </Flex>
   );
 }
 
-export default StreamKey;
+export default EventKey;
