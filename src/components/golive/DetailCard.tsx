@@ -3,11 +3,13 @@ import {
   FormControl,
   FormErrorMessage,
   Input,
+  InputGroup,
+  InputLeftElement,
   Text,
   Textarea,
 } from "@chakra-ui/react";
 import { Field } from "formik";
-import React, { ChangeEvent } from "react";
+import React from "react";
 
 type Props = {
   label: string;
@@ -15,9 +17,17 @@ type Props = {
   name: string;
   type?: string;
   w?: string;
+  fee?: boolean;
 };
 
-export default function DetailCard({ name, label, input, type, w }: Props) {
+export default function DetailCard({
+  name,
+  label,
+  input,
+  type,
+  w,
+  fee,
+}: Props) {
   return (
     <Box
       w={w}
@@ -40,16 +50,24 @@ export default function DetailCard({ name, label, input, type, w }: Props) {
         <Field name={name}>
           {({ field, form }: any) => (
             <FormControl isInvalid={form.errors[name] && form.touched[name]}>
-              <Input
-                variant="filled"
-                bg="clique.secondaryGrey1"
-                {...field}
-                id="title"
-                placeholder="Title"
-                type={
-                  type === "date" ? "date" : type === "time" ? "time" : "text"
-                }
-              />
+              <InputGroup>
+                {fee && (
+                  <InputLeftElement pr="0" pointerEvents="none">
+                    N
+                  </InputLeftElement>
+                )}
+                <Input
+                  pl={fee && "25px"}
+                  variant="filled"
+                  bg="clique.secondaryGrey1"
+                  {...field}
+                  id="title"
+                  placeholder={`Enter ${name}`}
+                  type={
+                    type === "date" ? "datetime-local" : type === "time" ? "time" : "text"
+                  }
+                />
+              </InputGroup>
               <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
             </FormControl>
           )}
@@ -59,6 +77,7 @@ export default function DetailCard({ name, label, input, type, w }: Props) {
           {({ field, form }: any) => (
             <FormControl isInvalid={form.errors[name] && form.touched[name]}>
               <Textarea
+                placeholder={`Enter ${name}`}
                 {...field}
                 variant="filled"
                 bg="clique.secondaryGrey1"

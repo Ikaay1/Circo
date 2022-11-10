@@ -47,7 +47,7 @@ function Header({ upload }: Props) {
         maxW="200px"
         minW="200px"
       >
-        <Image alt="clique logo" h="100%" src="/clique-logo.png" />
+        <Image alt="clique logo" h="100%" src="/assets/Clique-Logo.svg" />
       </Box>
 
       {/* Second div */}
@@ -82,7 +82,7 @@ function Header({ upload }: Props) {
             _placeholder={{
               color: "clique.white",
             }}
-            placeholder="search"
+            placeholder="Search"
           />
         </InputGroup>
         <HStack alignItems={"center"}>
