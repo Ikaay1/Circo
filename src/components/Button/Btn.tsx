@@ -62,7 +62,6 @@ const Btn = forwardRef(
           isLoading={isLoading}       
           variant={variant}
           type={submit ? 'submit' : 'button'}
-          isLoading={loading}
         >
           {text}
         </Button>
