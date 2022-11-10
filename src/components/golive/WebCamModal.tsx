@@ -1,6 +1,7 @@
 import {
   Box,
   Flex,
+  FormControl,
   FormErrorMessage,
   Grid,
   GridItem,
@@ -12,8 +13,9 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import React from "react";
 import Stream from "./Stream";
 import * as Yup from "yup";
@@ -22,9 +24,20 @@ import SelectField from "./SelectField";
 import AuthButton from "@components/auth/AuthButton";
 import AddIcon from "@icons/AddIcon";
 import WebCamIcon from "@icons/WebCamIcon";
+import { scrollBarStyle } from "@constants/utils";
+import { useCategoryQuery } from "redux/services/category.service";
+import {
+  useCreateEventMutation,
+  useCreateLiveStreamMutation,
+} from "redux/services/live.service";
+import { CategoriesInterface } from "@constants/interface";
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const { data, isLoading } = useCategoryQuery("");
+  const [createEvent, createEventInfo] = useCreateEventMutation();
+  const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
   return (
     <>
       <Flex
@@ -57,28 +70,91 @@ function WebCamModal({ setState }: { setState: any }) {
         </Flex>
       </Flex>
 
-      <Modal size={"4xl"} isCentered isOpen={isOpen} onClose={onClose}>
+      <Modal size={"3xl"} isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay /> <ModalOverlay />
         <ModalContent
+          m={0}
           bg="clique.black"
+          maxH={"90vh"}
           borderColor="clique.black"
           borderRadius="xl"
+          px="60px"
+          py="30px"
+          overflowY={"scroll"}
+          sx={scrollBarStyle}
         >
           <ModalBody>
             <Formik
-              initialValues={{ title: "", description: "", thumbNail: null }}
+              initialValues={{
+                title: "",
+                description: "",
+                thumbNail: "" as any,
+                category: "",
+                fee: 0,
+                ageRange: "",
+              }}
               validationSchema={Yup.object({
-                title: Yup.string().required("Required"),
-                description: Yup.string().required("Required"),
-                thumbNail: Yup.mixed().required("Required"),
-                ageRange: Yup.string().required("Required"),
-                category: Yup.string().required("Required"),
+                title: Yup.string().required("Title is Required"),
+                description: Yup.string().required("Description is Required"),
+                thumbNail: Yup.mixed().required("ThumbNail is Required"),
+                ageRange: Yup.string().required("Age Range Required"),
+                category: Yup.string().required("Category is Required"),
+                fee: Yup.number().required("Fee Required"),
               })}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 4000);
+              onSubmit={async (values, { setSubmitting }) => {
+                const data = {
+                  title: values.title,
+                  description: values.description,
+                  ageRange: values.ageRange,
+                  paidToWatch: values.fee > 0 ? true : false,
+                  category: "LIVE",
+                  categoryId: values.category,
+                };
+
+                const formData = new FormData();
+                formData.append("thumbNail", values.thumbNail);
+                formData.append("title", values.title);
+                formData.append("description", values.description);
+                formData.append("ageRange", values.ageRange);
+                formData.append(
+                  "paidToWatch",
+                  values.fee > 0 ? "true" : "false"
+                );
+                formData.append("category", "LIVE");
+                formData.append("categoryId", values.category);
+
+                const res: any = await createEvent(formData);
+                if (res.data) {
+                  const createLive: any = await createLiveStream({
+                    eventId: res.data?.data?._id,
+                  });
+                  if (createLive.data) {
+                    toast({
+                      title: "Event Created Successfully",
+                      status: "success",
+                      duration: 3000,
+                      isClosable: true,
+                      position: "top-right",
+                    });
+                  } else {
+                    toast({
+                      title: createLive.error?.data?.message,
+                      status: "error",
+                      duration: 3000,
+                      isClosable: true,
+                      position: "top-right",
+                    });
+                  }
+                } else {
+                  toast({
+                    title: "Event Creation Failed",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                    position: "top-right",
+                  });
+                }
+                setSubmitting(false);
               }}
             >
               {(props) => (
@@ -102,15 +178,15 @@ function WebCamModal({ setState }: { setState: any }) {
                         />
                         <Input
                           type={"file"}
+                          visibility={"hidden"}
                           onChange={(e: any) => {
+                            console.log("sdf");
                             props.setFieldValue("thumbNail", e.target.files[0]);
+                            console.log(props.values.thumbNail);
                           }}
-                          display={"none"}
-                          id={"thumbnail"}
-                        />{" "}
-                        <Text mt="7" fontSize="smSubHead">
-                          Thumbnail
-                        </Text>
+                          id={"thumbNail"}
+                        />
+                        <Text fontSize="smSubHead">Thumbnail</Text>
                         <Text
                           fontSize="xsl"
                           color="clique.secondaryGrey2"
@@ -119,48 +195,59 @@ function WebCamModal({ setState }: { setState: any }) {
                           Select or upload a picture that shows what is your
                           video
                         </Text>
-                        <label htmlFor={"thumbnail"}>
-                          {props.values.thumbNail ? (
-                            <Box mt="7">
-                              {" "}
-                              <Box
-                                bgImage={
-                                  "url(" +
-                                  URL.createObjectURL(props.values.thumbNail) +
-                                  ")"
-                                }
-                                rounded="10px"
-                                h="120px"
-                                w="250px"
-                                bgRepeat={"no-repeat"}
-                                bgSize={"cover"}
-                              ></Box>
-                            </Box>
-                          ) : (
-                            <Flex gap="2" mb="4" cursor={"pointer"}>
-                              <Flex
-                                flexDirection={"column"}
-                                alignItems={"center"}
-                                justifyContent="center"
-                                gap="2"
-                                py={4}
-                                border="1px"
-                                width="40%"
-                                borderRadius={"10px"}
-                                borderColor="clique.secondaryGrey2"
-                                borderStyle="dashed"
-                              >
-                                <Icon as={AddIcon} />
-                                <Text fontSize="smSubHead">
-                                  Upload Thumbnail
-                                </Text>
-                              </Flex>
-                            </Flex>
+                        <Field>
+                          {({ field, form }: any) => (
+                            <FormControl
+                              isInvalid={
+                                form.errors.thumbNail && form.touched.thumbNail
+                              }
+                            >
+                              <label htmlFor={"thumbNail"}>
+                                {props.values.thumbNail ? (
+                                  <Box mt="7">
+                                    <Box
+                                      bgImage={
+                                        "url(" +
+                                        URL.createObjectURL(
+                                          props.values.thumbNail
+                                        ) +
+                                        ")"
+                                      }
+                                      rounded="10px"
+                                      h="120px"
+                                      w="250px"
+                                      bgRepeat={"no-repeat"}
+                                      bgSize={"cover"}
+                                    ></Box>
+                                  </Box>
+                                ) : (
+                                  <Flex gap="2" mb="4" cursor={"pointer"}>
+                                    <Flex
+                                      flexDirection={"column"}
+                                      alignItems={"center"}
+                                      justifyContent="center"
+                                      gap="2"
+                                      py={4}
+                                      border="1px"
+                                      width="40%"
+                                      borderRadius={"10px"}
+                                      borderColor="clique.secondaryGrey2"
+                                      borderStyle="dashed"
+                                    >
+                                      <Icon as={AddIcon} />
+                                      <Text fontSize="smSubHead">
+                                        Upload Thumbnail
+                                      </Text>
+                                    </Flex>
+                                  </Flex>
+                                )}
+                              </label>
+                              <FormErrorMessage>
+                                {form.errors.thumbNail}
+                              </FormErrorMessage>
+                            </FormControl>
                           )}
-                        </label>
-                        <FormErrorMessage>
-                          {props.errors.thumbNail}
-                        </FormErrorMessage>
+                        </Field>
                       </Box>
 
                       <Text fontSize={"subHead"} mb="4">
@@ -179,19 +266,30 @@ function WebCamModal({ setState }: { setState: any }) {
                             name="category"
                             placeholder="Select Category"
                           >
-                            <option>lsd;lfksdmlf</option>
+                            {data &&
+                              data?.data?.map(
+                                (
+                                  category: CategoriesInterface,
+                                  index: number
+                                ) => (
+                                  <option key={index} value={category._id}>
+                                    {category.name}
+                                  </option>
+                                )
+                              )}
                           </SelectField>
                         </GridItem>
                         <GridItem colSpan={2}>
                           <SelectField name="ageRange" placeholder="Age Range">
-                            <option value={"1"}>lsd;lfksdmlf</option>
+                            <option value={"18 and above"}>18 and above</option>
+                            <option value={"Below 18"}>Below 18</option>
                           </SelectField>
                         </GridItem>
                         <GridItem colSpan={4}>
                           <AuthButton
                             w="50%"
                             mx="auto"
-                            name={"Save"}
+                            name={"Go Live"}
                             h="60px"
                             fontSize="subHead"
                             status={{ isLoading: props.isSubmitting }}

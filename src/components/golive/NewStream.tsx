@@ -26,7 +26,15 @@ import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
 
-function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
+function NewStream({
+  state,
+  setTabIndex,
+  setState,
+}: {
+  state: string;
+  setTabIndex: any;
+  setState: any;
+}) {
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
@@ -41,6 +49,7 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
         category: "",
         fee: 0,
         ageRange: "",
+        schedule: "",
       }}
       validationSchema={Yup.object({
         title: Yup.string().required("Title is Required"),
@@ -49,6 +58,7 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
         ageRange: Yup.string().required("Age Range Required"),
         category: Yup.string().required("Category is Required"),
         fee: Yup.number().required("Fee Required"),
+        schedule: Yup.string().required("Schedule Date Required"),
       })}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         const data = {
@@ -68,6 +78,8 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
         formData.append("paidToWatch", values.fee > 0 ? "true" : "false");
         formData.append("category", state === "stream" ? "LIVE" : "SCHEDULE");
         formData.append("categoryId", values.category);
+        formData.append("fee", values.fee.toString());
+        formData.append("schedule", values.schedule);
 
         const res: any = await createEvent(formData);
         if (res.data) {
@@ -82,12 +94,8 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
               isClosable: true,
               position: "top-right",
             });
-            dispatch(
-              setStreamDetails({
-                payload: { ...createLive.data?.data?.livestream },
-              })
-            );
-            setTabIndex(1);
+
+            setState("liveevent");
           } else {
             toast({
               title: createLive.error?.data?.message,
@@ -222,7 +230,7 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
             </Box>
 
             <Flex w="50%" px="40px" flexDir={"column"} justify="space-between">
-              {state === "liveevent" ? (
+              {state === "create" ? (
                 <Box>
                   <Text fontSize="smSubHead" color="clique.text">
                     Live fee per ticket
@@ -238,19 +246,19 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
                   </Text>
 
                   <Flex alignItems={"center"} justifyContent="space-between">
-                    <DetailCard
+                    {/* <DetailCard
                       w="48%"
                       input={true}
                       name="time"
                       label="Time"
                       type="time"
-                    />
+                    /> */}
                     <DetailCard
                       w="48%"
                       input={true}
-                      name="date"
+                      name="schedule"
                       type="date"
-                      label="Date"
+                      label="date - time"
                     />
                   </Flex>
                 </Box>
@@ -273,4 +281,4 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
   );
 }
 
-export default Stream;
+export default NewStream;
