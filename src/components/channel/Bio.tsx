@@ -17,7 +17,7 @@ import { useGetChannelQuery } from "redux/services/channel.service";
 
 const Bio = ({ showSubscribe }: { showSubscribe: boolean }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isError, isLoading } = useGetChannelQuery("channel");
+  const { data, isError, isLoading } = useGetChannelQuery("");
   return (
     <>
       <Box
@@ -44,10 +44,6 @@ const Bio = ({ showSubscribe }: { showSubscribe: boolean }) => {
             color="clique.secondaryGrey2"
             pr="1rem"
           >
-            {/* I am Ayra Star, a music artist with the best selling album on Apple
-            Music, and Spotify, titled “19 and Undagelous”. I have toured 47
-            countries doing music tours in cities likes LA, NYC, Texas, Toronto
-            and many more. */}
             {data?.data?.channel?.bio}
           </Text>
         </Box>

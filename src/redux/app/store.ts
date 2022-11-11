@@ -14,10 +14,10 @@ import { categoryApi } from 'redux/services/category.service';
 import { channelApi } from 'redux/services/channel.service';
 import { contentApi } from 'redux/services/content.service';
 import { liveAPI } from 'redux/services/live.service';
+import { playlistApi } from 'redux/services/playlist.service';
 import { userApi } from 'redux/services/user.service';
 import userReducer from 'redux/slices/authSlice';
 import categoryReducer from 'redux/slices/categorySlice';
-import channelReducer from 'redux/slices/channelSlice';
 import streamReducer from 'redux/slices/streamSlice';
 import uploadReducer from 'redux/slices/uploadSlice';
 
@@ -48,9 +48,9 @@ export const store: any = configureStore({
     category: categoryReducer,
     [authApi.reducerPath]: authApi.reducer,
     [liveAPI.reducerPath]: liveAPI.reducer,
+    [playlistApi.reducerPath]: playlistApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [contentApi.reducerPath]: contentApi.reducer,
-    channel: channelReducer,
     [channelApi.reducerPath]: channelApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
@@ -64,6 +64,7 @@ export const store: any = configureStore({
       categoryApi.middleware,
       contentApi.middleware,
       channelApi.middleware,
+      playlistApi.middleware,
     ]),
 });
 

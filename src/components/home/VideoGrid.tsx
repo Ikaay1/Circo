@@ -25,7 +25,6 @@ function VideoGrid({
     >
       {videos.map((video, i) => (
         <>
-          {console.log(video)}
           <VideoThumb
             video={video}
             key={video._id}
