@@ -20,7 +20,7 @@ function PlayerCard({ streamDetails }: any) {
   }, [isCopied]);
 
   return (
-    <Box w="400px" maxW="400px" rounded={"10px"} overflow="hidden">
+    <Box w="400px" maxW="400px" rounded={"10px"}>
       <Box h="300px">
         <MuxPlayer
           style={{ height: "100%", maxWidth: "100%" }}
@@ -128,7 +128,7 @@ function PlayerCard({ streamDetails }: any) {
           <Button
             mt="80px"
             rounded="full"
-            bg="clique.red"
+            bg="clique.dangerRed"
             color="white"
             colorScheme={"red"}
             fontFamily={"Poppins"}

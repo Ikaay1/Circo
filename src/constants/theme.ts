@@ -29,7 +29,7 @@ const switchTheme = defineMultiStyleConfig({ baseStyle });
 //colors
 const colors = {
   clique: {
-    red: " #BA1A1A",
+    dangerRed: " #BA1A1A",
     base: "#892CDC",
     white: "#FFFFFF",
     black: "#131311",

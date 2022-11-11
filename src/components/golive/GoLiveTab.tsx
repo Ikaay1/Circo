@@ -14,7 +14,7 @@ function GoLiveTab({ state }: { state: string }) {
   );
   return (
     <Tabs
-      isLazy
+      // isLazy
       variant={"unstyled"}
       minW="full"
       fontFamily="Poppins"
@@ -29,7 +29,11 @@ function GoLiveTab({ state }: { state: string }) {
       </TabList>
       <TabPanels>
         <CliqueTabPanel>
-          <Stream state={state} setTabIndex={setTabIndex} />
+          <Stream
+            streamDetails={streamDetails}
+            state={state}
+            setTabIndex={setTabIndex}
+          />
         </CliqueTabPanel>
         <CliqueTabPanel>
           <StreamKey streamDetails={streamDetails} />
