@@ -4,7 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import {
 	useCreateViewMutation,
+	useDislikeContentCommentMutation,
+	useDislikeContentMutation,
 	useGetContentQuery,
+	useLikeContentCommentMutation,
+	useLikeContentMutation,
 } from 'redux/services/content.service';
 
 import { Box, Flex } from '@chakra-ui/react';
@@ -17,8 +21,13 @@ function Index() {
   const {id} = router.query;
 
   const [subscribers, setSubscribers] = useState<string[]>([]);
-  const {data, isLoading} = useGetContentQuery(id);
+  const {data, isLoading, refetch} = useGetContentQuery(id);
   const [view, viewStatus] = useCreateViewMutation();
+  const [like, likeStatus] = useLikeContentMutation();
+  const [dislike, dislikeStatus] = useDislikeContentMutation();
+  const [likeComment, likeCommentStatus] = useLikeContentCommentMutation();
+  const [dislikeComment, dislikeCommentStatus] =
+    useDislikeContentCommentMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
@@ -36,7 +45,27 @@ function Index() {
         createView();
       }
     }
-  }, [data, view, userProfile._id]);
+  }, [data, view, userProfile?._id, refetch]);
+
+  const handleLike = async () => {
+    await like({video_id: data.data.preference.video._id});
+    refetch();
+  };
+
+  const handleDislike = async () => {
+    await dislike({video_id: data.data.preference.video._id});
+    refetch();
+  };
+
+  const handleLikeComment = async (id: string) => {
+    await likeComment({commentId: id});
+    refetch();
+  };
+
+  const handleDislikeComment = async (id: string) => {
+    await dislikeComment({commentId: id});
+    refetch();
+  };
 
   return (
     <>
@@ -68,7 +97,11 @@ function Index() {
                 },
               }}
             >
-              <VideoPlayer video={data.data.preference.video} />
+              <VideoPlayer
+                video={data.data.preference.video}
+                handleLike={handleLike}
+                handleDislike={handleDislike}
+              />
               <VideoDetails
                 video={data.data.preference.video}
                 setSubscribers={setSubscribers}
@@ -76,7 +109,11 @@ function Index() {
               />
             </Box>
             {/* @ts-ignore */}
-            <CommentSection id={id} />
+            <CommentSection
+              id={id}
+              handleLikeComment={handleLikeComment}
+              handleDislikeComment={handleDislikeComment}
+            />
           </Flex>
         </HomeLayout>
       )}

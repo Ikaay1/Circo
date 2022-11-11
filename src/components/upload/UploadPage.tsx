@@ -74,15 +74,6 @@ function UploadPage({url, name}: Props) {
       formData.append('ageRange', state.ageRange);
       formData.append('file', file);
       formData.append('thumbNail', thumbNail);
-      // API({
-      //   method: 'post',
-      //   url: `content/upload-video`,
-      //   data: formData,
-      //   headers: {'Content-Type': 'multipart/form-data'},
-      // }).then((res) => {
-      //   setLoading(false);
-      //   router.push('/home');
-      // });
       createContent(formData).then((res) => {
         setLoading(false);
         router.push('/home');

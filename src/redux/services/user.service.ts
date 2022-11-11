@@ -28,7 +28,18 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+
+    getUser: builder.query<any, any>({
+      query: (id) => ({
+        url: `users/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['User'],
+    }),
   }),
 });
 
-export const {useSubscribeMutation} = userApi;
+export const {useSubscribeMutation, useGetUserQuery} = userApi;

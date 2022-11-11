@@ -1,5 +1,7 @@
 import HomeLayout from 'layouts/HomeLayout';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
 import { useCategoryQuery } from 'redux/services/category.service';
 import { useGetChannelQuery } from 'redux/services/channel.service';
 import {
@@ -26,6 +28,14 @@ function Index() {
   const categories = useCategoryQuery('');
   const [category, setCategory] = useState('All');
   const [contents, setContents] = useState<contentData[]>([]);
+  const router = useRouter();
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+
+  useEffect(() => {
+    if (!userProfile._id) {
+      router.push('/login');
+    }
+  }, [userProfile._id, router]);
 
   useEffect(() => {
     if (category === 'All') {
