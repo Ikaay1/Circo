@@ -37,21 +37,17 @@ const Login = () => {
       userNameOrEmail: userNameDetail,
       password: password.trim(),
     };
-    const res: LoginDataInterface = await login(userData);
-
+    const res: any = await login(userData);
+    console.log(res);
     if ('data' in res) {
       dispatch(
         setCredentials({
-          payload: res?.data,
+          payload: res.data,
         }),
       );
       router.push('/home');
-      // localStorage.setItem('token', res.data?.token);
-    } else if (res.error) {
-      //@ts-ignore
-      toast.error(res?.error?.data?.message);
     } else {
-      toast.error('Something went wrong');
+      toast.error(res.error?.data?.message);
     }
   };
 

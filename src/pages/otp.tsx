@@ -1,8 +1,5 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useSignupMutation } from 'redux/services/auth.service';
-import { setCredentials } from 'redux/slices/authSlice';
 
 import { Box } from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
@@ -10,16 +7,11 @@ import AuthInput from '@components/auth/AuthInput';
 import CliqueLogo from '@components/auth/CliqueLogo';
 import ShowAuthHeader from '@components/auth/ShowAuthHeader';
 import ShowAuthImage from '@components/auth/ShowAuthImage';
-import { LoginDataInterface } from '@constants/interface';
-
-import { useAppDispatch } from '../redux/app/hooks';
 
 const Referral = () => {
   const [otp, setOtp] = useState('');
 
-  const [signup, signUpStatus] = useSignupMutation();
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,20 +23,9 @@ const Referral = () => {
       otp_hash: `${hashedOtp}`,
       social: 'NULL',
     };
-    const res: LoginDataInterface = await signup(userData);
-    if ('data' in res) {
-      dispatch(
-        setCredentials({
-          payload: res?.data.data,
-        }),
-      );
-      router.push(`/home`);
-    } else if (res.error) {
-      //@ts-ignore
-      toast.error(res?.error?.data?.message);
-    } else {
-      toast.error('Something went wrong');
-    }
+    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.removeItem('hashedOtp');
+    router.push('/interests');
   };
 
   return (
@@ -65,11 +46,7 @@ const Referral = () => {
             <Box position='relative' height='57px' marginTop={'.5rem'}>
               <AuthInput name={'OTP'} theState={otp} setTheState={setOtp} />
             </Box>
-            <AuthButton
-              status={signUpStatus}
-              {...{marginTop: '6.5rem'}}
-              name='Next'
-            />
+            <AuthButton {...{marginTop: '6.5rem'}} name='Next' />
           </form>
         </Box>
       </Box>

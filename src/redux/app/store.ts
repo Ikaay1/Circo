@@ -1,4 +1,3 @@
-
 import {
 	FLUSH,
 	PAUSE,
@@ -9,28 +8,29 @@ import {
 	REGISTER,
 	REHYDRATE,
 } from 'redux-persist';
-import channelReducer from "redux/slices/channelSlice"
-import storage from "redux-persist/lib/storage";
-import { authApi } from "redux/services/auth.service";
-import { categoryApi } from "redux/services/category.service";
-import { contentApi } from "redux/services/content.service";
-import userReducer from "redux/slices/authSlice";
-import streamReducer from "redux/slices/streamSlice";
-import uploadReducer from "redux/slices/uploadSlice";
+import storage from 'redux-persist/lib/storage';
+import { authApi } from 'redux/services/auth.service';
+import { categoryApi } from 'redux/services/category.service';
+import { channelApi } from 'redux/services/channel.service';
+import { contentApi } from 'redux/services/content.service';
+import { liveAPI } from 'redux/services/live.service';
+import { userApi } from 'redux/services/user.service';
+import userReducer from 'redux/slices/authSlice';
+import categoryReducer from 'redux/slices/categorySlice';
+import channelReducer from 'redux/slices/channelSlice';
+import streamReducer from 'redux/slices/streamSlice';
+import uploadReducer from 'redux/slices/uploadSlice';
 
 import {
-  Action,
-  combineReducers,
-  configureStore,
-  ThunkAction,
-} from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { channelApi } from "redux/services/channel.service";
-import { liveAPI } from "redux/services/live.service";
-import { userApi } from "redux/services/user.service";
+	Action,
+	combineReducers,
+	configureStore,
+	ThunkAction,
+} from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
 };
 
@@ -45,6 +45,7 @@ export const store: any = configureStore({
   reducer: {
     app: persistedReducer,
     upload: uploadReducer,
+    category: categoryReducer,
     [authApi.reducerPath]: authApi.reducer,
     [liveAPI.reducerPath]: liveAPI.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,

@@ -13,7 +13,15 @@ import Control from './Control';
 
 const {Player, ControlBar, BigPlayButton} = require('video-react');
 
-function VideoPlayer({video}: {video: contentData}) {
+function VideoPlayer({
+  video,
+  handleLike,
+  handleDislike,
+}: {
+  video: contentData;
+  handleLike: () => void;
+  handleDislike: () => void;
+}) {
   const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
   const [totalDuration, setTotalDuration] = React.useState(0);
   const [isMuted, setIsMuted] = React.useState(false);
@@ -103,6 +111,9 @@ function VideoPlayer({video}: {video: contentData}) {
           setIsMuted={setIsMuted}
           setIsPlay={setIsPlay}
           playerRef={playerRef}
+          video={video}
+          handleLike={handleLike}
+          handleDislike={handleDislike}
         />
       </Flex>
     </Flex>
