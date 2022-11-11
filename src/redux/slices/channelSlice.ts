@@ -10,11 +10,11 @@ export const channelSlice = createSlice({
   initialState,
   reducers: {
     setChannel: (state, action) => {
-      state.channel = action.payload.channel;
-      state.hasChannel = true;
+      // state.channel = action.payload.channel;
+      // state.hasChannel = true;
     },
     setHasChannel: (state, action) => {
-      state.hasChannel = true;
+      // state.hasChannel = true;
     },
   },
 });

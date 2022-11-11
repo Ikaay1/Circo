@@ -1,15 +1,14 @@
-
 import {
-	FLUSH,
-	PAUSE,
-	PERSIST,
-	persistReducer,
-	persistStore,
-	PURGE,
-	REGISTER,
-	REHYDRATE,
-} from 'redux-persist';
-import channelReducer from "redux/slices/channelSlice"
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+import channelReducer from "redux/slices/channelSlice";
 import storage from "redux-persist/lib/storage";
 import { authApi } from "redux/services/auth.service";
 import { categoryApi } from "redux/services/category.service";
@@ -28,6 +27,7 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { channelApi } from "redux/services/channel.service";
 import { liveAPI } from "redux/services/live.service";
 import { userApi } from "redux/services/user.service";
+import { playlistApi } from "redux/services/playlist.service";
 
 const persistConfig = {
   key: "root",
@@ -47,9 +47,9 @@ export const store: any = configureStore({
     upload: uploadReducer,
     [authApi.reducerPath]: authApi.reducer,
     [liveAPI.reducerPath]: liveAPI.reducer,
+    [playlistApi.reducerPath]: playlistApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [contentApi.reducerPath]: contentApi.reducer,
-    channel: channelReducer,
     [channelApi.reducerPath]: channelApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
@@ -63,6 +63,7 @@ export const store: any = configureStore({
       categoryApi.middleware,
       contentApi.middleware,
       channelApi.middleware,
+      playlistApi.middleware,
     ]),
 });
 

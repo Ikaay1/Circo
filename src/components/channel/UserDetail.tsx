@@ -18,11 +18,14 @@ import Btn from "@components/Button/Btn";
 import SideIcon from "@icons/SideIcon";
 import CreateChannelModal from "@components/createChannel/CreateChannelModal";
 import { useGetChannelQuery } from "redux/services/channel.service";
+import { useAppSelector } from "redux/app/hooks";
 
 const UserDetail = () => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isError, isLoading } = useGetChannelQuery("");
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
+
   const {
     isOpen: channelIsOpen,
     onOpen: channelOnOpen,
@@ -58,7 +61,8 @@ const UserDetail = () => {
         >
           {data?.data?.channel?.profile ? (
             <Image
-              src="/assets/profilephoto.png"
+              // src="/assets/profilephoto.png"
+              src={data?.data?.channel?.profile}
               alt="profile photo"
               borderRadius="50%"
               objectFit={"cover"}
@@ -88,7 +92,7 @@ const UserDetail = () => {
                 color="clique.secondaryGrey2"
                 textAlign={"center"}
               >
-                @{data?.data?.channel?.name}
+                @{userProfile.userName}
               </Text>
               <Text
                 fontWeight="500"
