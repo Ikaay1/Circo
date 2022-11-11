@@ -3,6 +3,8 @@ import React from "react";
 
 import {
   Box,
+  Circle,
+  Flex,
   Icon,
   Image,
   Modal,
@@ -17,8 +19,10 @@ import AddPlaylistIcon from "@icons/AddPlaylistIcon";
 
 import VideoIcon from "../../assets/icons/VideoIcon";
 import NewPlaylist from "./NewPlaylist";
+import { useGetPlaylistQuery } from "redux/services/playlist.service";
 
 const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
+  const { data, isLoading } = useGetPlaylistQuery("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   return (
@@ -41,7 +45,6 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
           </Box>
         </Text>
       )}
-      
 
       <SimpleGrid
         autoColumns={"300px"}
@@ -50,8 +53,8 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
         w={"100%"}
         spacing={"30px"}
       >
-        {playListData.map(({ bigImage, smallImage, name, noOfVideos }) => (
-          <Box key={bigImage}>
+        {data?.data?.playlists?.map((each: any) => (
+          <Box key={each?._id}>
             <Box
               h={{ lg: "130px", mlg: "180px" }}
               maxH="200px"
@@ -60,17 +63,27 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
               onClick={
                 router.asPath.split("/")[1] === "profile"
                   ? () => router.push("/profile/1/content/playlist")
-                  : () => router.push("/channel/1/content/playlist")
+                  : () => router.push(`/channel/1/content/playlist/${each._id}`)
               }
             >
-              <Image
-                w="100%"
-                h="100%"
-                src={`/assets/${bigImage}.png`}
-                alt=""
-                objectFit={"cover"}
-                borderRadius="10px"
-              />
+              {each.videos[0].thumbNail ? (
+                <Image
+                  w="100%"
+                  h="100%"
+                  src={each.videos[0].thumbNail}
+                  alt=""
+                  objectFit={"cover"}
+                  borderRadius="10px"
+                />
+              ) : (
+                <Flex
+                  w="100%"
+                  h="100%"
+                  borderRadius="10px"
+                  bg="linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323"
+                ></Flex>
+              )}
+
               <Box
                 position={"absolute"}
                 h="100%"
@@ -91,7 +104,7 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
                   lineHeight="20px"
                   color="clique.white"
                 >
-                  {noOfVideos} videos
+                  {each?.videos?.length} videos
                 </Text>
               </Box>
             </Box>
@@ -105,16 +118,26 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
               color="clique.white"
               mt=".7rem"
             >
-              <Image
-                src={`/assets/${smallImage}.png`}
-                marginRight={".7rem"}
-                w="34px"
-                h="34px"
-                borderRadius="50%"
-                objectFit={"cover"}
-                alt=""
-              />
-              {name}
+              {each?.cover ? (
+                <Image
+                  src={each?.cover}
+                  marginRight={".7rem"}
+                  w="34px"
+                  h="34px"
+                  borderRadius="50%"
+                  objectFit={"cover"}
+                  alt=""
+                />
+              ) : (
+                <Circle
+                  size="34px"
+                  bg="#232323"
+                  color="white"
+                  marginRight={".7rem"}
+                ></Circle>
+              )}
+
+              {each?.name}
             </Text>
           </Box>
         ))}
