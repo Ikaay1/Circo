@@ -26,7 +26,15 @@ import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
 
-function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
+function Stream({
+  state,
+  setTabIndex,
+  streamDetails,
+}: {
+  state: string;
+  setTabIndex: any;
+  streamDetails: any;
+}) {
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
@@ -34,13 +42,14 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
   const dispatch = useAppDispatch();
   return (
     <Formik
+      enableReinitialize
       initialValues={{
-        title: "",
-        description: "",
-        thumbNail: "" as any,
-        category: "",
-        fee: 0,
-        ageRange: "",
+        title: streamDetails?.eventId?.title || "",
+        description: streamDetails?.eventId?.description || "",
+        thumbNail: streamDetails?.eventId?.thumbNails[0] || ("" as any),
+        category: streamDetails?.eventId?.categoryId || "",
+        fee: streamDetails?.eventId?.fee || 0,
+        ageRange: streamDetails?.eventId?.ageRange || "",
       }}
       validationSchema={Yup.object({
         title: Yup.string().required("Title is Required"),
@@ -84,7 +93,10 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
             });
             dispatch(
               setStreamDetails({
-                payload: { ...createLive.data?.data?.livestream },
+                payload: {
+                  ...createLive.data?.data?.livestream,
+                  eventId: res.data?.data,
+                },
               })
             );
             setTabIndex(1);
@@ -151,9 +163,11 @@ function Stream({ state, setTabIndex }: { state: string; setTabIndex: any }) {
                             {" "}
                             <Box
                               bgImage={
-                                "url(" +
-                                URL.createObjectURL(props.values.thumbNail) +
-                                ")"
+                                props.values.thumbNail?.startsWith("http")
+                                  ? `url(${props.values.thumbNail})`
+                                  : `url(${URL.createObjectURL(
+                                      props.values.thumbNail
+                                    )})`
                               }
                               rounded="10px"
                               h="120px"
