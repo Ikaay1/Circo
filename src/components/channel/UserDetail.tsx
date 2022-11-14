@@ -25,7 +25,6 @@ const UserDetail = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isError, isLoading } = useGetChannelQuery("");
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-
   const {
     isOpen: channelIsOpen,
     onOpen: channelOnOpen,
