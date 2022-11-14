@@ -79,17 +79,7 @@ function Index() {
     data,
     dataBySearch,
   ]);
-  const {
-    data: channelData,
-    isError,
-    isLoading: channelLoading,
-  } = useGetChannelQuery('channel');
-
-  useEffect(() => {
-    if (!channelLoading && channelData?.channelData?.channel === null) {
-      setHasChannel(false);
-    }
-  }, [channelLoading, channelData, hasChannel]);
+ 
 
   return (
     <>

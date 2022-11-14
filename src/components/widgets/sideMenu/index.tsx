@@ -17,7 +17,6 @@ import { useGetChannelQuery } from "redux/services/channel.service";
 
 import { useAppDispatch } from "redux/app/hooks";
 
-
 type Menu = {
   name: string;
   icon: any;
@@ -26,22 +25,22 @@ type Menu = {
 function Index() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [menuState, setMenuState] = useState(menu);
-  const [menuStateN, setMenuStateN] = useState(menuWithOutLive);
   const [computedMenu, setComputedMenu] = useState<Array<Menu>>([]);
   const {
     data: channelData,
     isError,
     isLoading: channelLoading,
-  } = useGetChannelQuery("channel");
+    refetch,
+  } = useGetChannelQuery("");
 
   useEffect(() => {
-    if (!channelLoading && channelData?.channelData?.channel === null) {
-      setComputedMenu(menuStateN);
+    refetch();
+    if (!channelLoading && channelData?.data?.channel === null) {
+      setComputedMenu(menuWithOutLive);
     } else {
-      setComputedMenu(menuState);
+      setComputedMenu(menu);
     }
-  }, [channelLoading, channelData, menuState, menuStateN]);
+  }, [channelLoading, channelData, refetch]);
 
   const handleLogout = () => {
     dispatch(logout());

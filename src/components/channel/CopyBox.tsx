@@ -3,7 +3,6 @@ import React from 'react';
 import { Box, Icon, Image, Text } from '@chakra-ui/react';
 import { shareData } from '@constants/utils';
 import CopyLinkIcon from '@icons/CopyLinkIcon';
-
 import ChannelInput from './ChannelInput';
 
 const CopyBox = () => {
