@@ -31,7 +31,7 @@ function Index() {
     isError,
     isLoading: channelLoading,
     refetch,
-  } = useGetChannelQuery("channel");
+  } = useGetChannelQuery("");
 
   useEffect(() => {
     refetch();

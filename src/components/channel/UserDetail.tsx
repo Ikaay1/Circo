@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import React from "react";
 
 import {
   Box,
@@ -10,20 +9,33 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
+import Btn from "@components/Button/Btn";
+import CreateChannelModal from "@components/createChannel/CreateChannelModal";
 import Subscriptions from "@components/profile/Subscriptions";
 import { scrollBarStyle } from "@constants/utils";
-import Btn from "@components/Button/Btn";
 import SideIcon from "@icons/SideIcon";
-import CreateChannelModal from "@components/createChannel/CreateChannelModal";
-import { useGetChannelQuery } from "redux/services/channel.service";
 import { useAppSelector } from "redux/app/hooks";
 
-const UserDetail = () => {
+type Channel = {
+  bio: string;
+  cover?: string;
+  createdAt: string;
+  isDisabled: boolean;
+  name: string;
+  subscriptionFee: number;
+  subscriptionInfo: string;
+  profile?: string;
+  updatedAt: string;
+  userId: string;
+  visitors: Array<string>;
+  _id: string;
+};
+
+const UserDetail = ({ data }: { data?: Channel }) => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isError, isLoading } = useGetChannelQuery("");
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const {
     isOpen: channelIsOpen,
@@ -33,13 +45,8 @@ const UserDetail = () => {
   return (
     <>
       <Box position="relative">
-        {data?.data?.channel?.cover ? (
-          <Image
-            w="100%"
-            h="170px"
-            src={data?.data?.channel?.cover}
-            alt="cover photo"
-          />
+        {data?.cover ? (
+          <Image w="100%" h="170px" src={data?.cover} alt="cover photo" />
         ) : (
           <Flex
             w="100%"
@@ -58,9 +65,9 @@ const UserDetail = () => {
           left={"50%"}
           transform="translateX(-50%)"
         >
-          {data?.data?.channel?.profile ? (
+          {data?.profile ? (
             <Image
-              src={data?.data?.channel?.profile}
+              src={data?.profile}
               alt="profile photo"
               borderRadius="50%"
               objectFit={"cover"}
@@ -82,7 +89,7 @@ const UserDetail = () => {
                 color="clique.white"
                 textAlign={"center"}
               >
-                {data?.data?.channel?.name}
+                {data?.name}
               </Text>
               <Text
                 fontSize="subHead"
@@ -112,7 +119,7 @@ const UserDetail = () => {
 
         {router.pathname.includes("profile") ? (
           <Box position={"absolute"} right="10" bottom="-55">
-            {data?.data?.channel === null && (
+            {data === null && (
               <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
             )}
 

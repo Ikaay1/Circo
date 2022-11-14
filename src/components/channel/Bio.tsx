@@ -1,4 +1,3 @@
-import React from "react";
 
 import {
   Box,
@@ -7,17 +6,21 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
 import ShareIcon from "@icons/ShareIcon";
 
 import CopyBox from "./CopyBox";
-import { useGetChannelQuery } from "redux/services/channel.service";
 
-const Bio = ({ showSubscribe }: { showSubscribe: boolean }) => {
+const Bio = ({
+  showSubscribe,
+  bio,
+}: {
+  showSubscribe: boolean;
+  bio?: string;
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isError, isLoading } = useGetChannelQuery("");
   return (
     <>
       <Box
@@ -44,7 +47,7 @@ const Bio = ({ showSubscribe }: { showSubscribe: boolean }) => {
             color="clique.secondaryGrey2"
             pr="1rem"
           >
-            {data?.data?.channel?.bio}
+            {bio}
           </Text>
         </Box>
         {showSubscribe && (

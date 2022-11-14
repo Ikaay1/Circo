@@ -23,7 +23,7 @@ function VideoGrid({
       w={width}
       spacing={'30px'}
     >
-      {videos.map((video, i) => (
+      {videos?.map((video, i) => (
         <>
           <VideoThumb
             video={video}
