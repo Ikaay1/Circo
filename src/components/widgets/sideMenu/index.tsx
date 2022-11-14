@@ -12,10 +12,10 @@ import {
 import EachMenu from "./EachMenu";
 import EachSubscribe from "./EachSubscribe";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { logout } from "redux/slices/authSlice";
 import { useGetChannelQuery } from "redux/services/channel.service";
 
+import { useAppDispatch } from "redux/app/hooks";
 
 
 type Menu = {
@@ -25,7 +25,7 @@ type Menu = {
 
 function Index() {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [menuState, setMenuState] = useState(menu);
   const [menuStateN, setMenuStateN] = useState(menuWithOutLive);
   const [computedMenu, setComputedMenu] = useState<Array<Menu>>([]);
@@ -44,8 +44,8 @@ function Index() {
   }, [channelLoading, channelData, menuState, menuStateN]);
 
   const handleLogout = () => {
-    dispatch(logout);
-    router.push("/");
+    dispatch(logout());
+    router.push("/login");
   };
 
   return (
