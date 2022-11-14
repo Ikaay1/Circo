@@ -31,7 +31,8 @@ function HoverCard({
   const router = useRouter();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const [subscribe, subscribeStatus] = useSubscribeMutation();
+  // const [subscribe, subscribeStatus] = useSubscribeMutation();
+  console.log('video is...', video);
 
   return (
     <Box
@@ -125,11 +126,11 @@ function HoverCard({
                 {moment(video?.createdAt).fromNow()}
               </Text>
             </Flex>
-            {video.uploader_id._id !== userProfile._id && (
+            {video.uploader_id._id !== userProfile?._id && (
               <Button
                 color='clique.white'
                 bg={
-                  video.uploader_id.subscribers.includes(userProfile._id)
+                  video.uploader_id.subscribers.includes(userProfile?._id)
                     ? 'clique.grey'
                     : 'clique.purple'
                 }
@@ -137,7 +138,7 @@ function HoverCard({
                 fontWeight='400'
                 size={'sm'}
               >
-                {video.uploader_id.subscribers.includes(userProfile._id)
+                {video.uploader_id.subscribers.includes(userProfile?._id)
                   ? 'Subscribed'
                   : 'Subscribe'}
               </Button>

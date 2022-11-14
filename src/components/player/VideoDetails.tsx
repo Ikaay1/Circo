@@ -20,14 +20,16 @@ function VideoDetails({
   const [subscribe, subscribeStatus] = useSubscribeMutation();
 
   const handleSubscribe = async (id: string) => {
-    const isSubscribed = subscribers.find((theId) => theId === userProfile._id);
+    const isSubscribed = subscribers.find(
+      (theId) => theId === userProfile?._id,
+    );
     const subscribeData = {subscribingToId: id};
     if (isSubscribed) {
       setSubscribers(
-        subscribers.filter((eachId) => eachId !== userProfile._id),
+        subscribers.filter((eachId) => eachId !== userProfile?._id),
       );
     } else {
-      setSubscribers([...subscribers, userProfile._id]);
+      setSubscribers([...subscribers, userProfile?._id]);
     }
     subscribe(subscribeData).then((res) => {
       console.log('successfully subscribed/unsubscribed');
@@ -96,21 +98,19 @@ function VideoDetails({
             </Text>
           </Box>
         </Flex>
-        {video.uploader_id._id !== userProfile._id && (
-          <Button
-            rounded='full'
-            fontWeight={400}
-            bg={
-              subscribers.includes(userProfile._id)
-                ? 'clique.grey'
-                : 'clique.purple'
-            }
-            cursor='pointer'
-            onClick={() => handleSubscribe(video.uploader_id._id)}
-          >
-            {subscribers.includes(userProfile._id) ? 'Subscribed' : 'Subscribe'}
-          </Button>
-        )}
+        <Button
+          rounded='full'
+          fontWeight={400}
+          bg={
+            subscribers.includes(userProfile?._id)
+              ? 'clique.grey'
+              : 'clique.purple'
+          }
+          cursor='pointer'
+          onClick={() => handleSubscribe(video.uploader_id._id)}
+        >
+          {subscribers.includes(userProfile?._id) ? 'Subscribed' : 'Subscribe'}
+        </Button>
       </Flex>
       <Text
         mt='5px'

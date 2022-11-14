@@ -1,20 +1,28 @@
-import Header from "@components/widgets/Header";
-import { Box, useColorModeValue } from "@chakra-ui/react";
-import React from "react";
-import { IHomeLayoutProps } from "types";
-import ProtectedRoute from "./ProtectedRoute";
+import React from 'react';
+import { IHomeLayoutProps } from 'types';
 
-function HomeLayout({ children, upload, toggleView }: IHomeLayoutProps) {
+import { Box, useColorModeValue } from '@chakra-ui/react';
+import Header from '@components/widgets/Header';
+
+import ProtectedRoute from './ProtectedRoute';
+
+function HomeLayout({
+  children,
+  upload,
+  toggleView,
+  search,
+  setSearch,
+}: IHomeLayoutProps) {
   return (
     <Box
-      maxH={toggleView ? "" : "100vh"}
-      maxW={"100vw"}
-      w="100vw"
-      h={toggleView ? "" : "100vh"}
+      maxH={toggleView ? '' : '100vh'}
+      maxW={'100vw'}
+      w='100vw'
+      h={toggleView ? '' : '100vh'}
       // overflowY={"hidden"}
-      bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}
+      bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}
     >
-      <Header upload={upload} />
+      <Header upload={upload} search={search} setSearch={setSearch} />
       {children}
     </Box>
   );

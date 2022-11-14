@@ -6,14 +6,12 @@ import { CategoriesInterface } from '../../constants/interface';
 
 function TagSection({
   categories,
-  category,
-  setCategory,
   setCategoryId,
+  categoryId
 }: {
   categories: CategoriesInterface[];
-  category: string;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
   setCategoryId: React.Dispatch<React.SetStateAction<string>>;
+  categoryId: string
 }) {
   return (
     <HStack
@@ -28,13 +26,13 @@ function TagSection({
       <Button
         variant='ghost'
         rounded={'full'}
-        bg={category === 'All' ? 'clique.base' : 'clique.grey'}
+        bg={!categoryId ? 'clique.base' : 'clique.grey'}
         fontFamily={'Poppins'}
         size={'sm'}
         fontWeight={400}
         px='20px'
-        color={category === 'All' ? 'clique.black' : 'clique.white'}
-        onClick={() => setCategory('All')}
+        color={!categoryId ? 'clique.black' : 'clique.white'}
+        onClick={() => setCategoryId('')}
       >
         All
       </Button>
@@ -42,17 +40,16 @@ function TagSection({
         <Button
           variant='ghost'
           rounded={'full'}
-          bg={category === eachCategory.name ? 'clique.base' : 'clique.grey'}
+          bg={categoryId === eachCategory.name ? 'clique.base' : 'clique.grey'}
           fontFamily={'Poppins'}
           size={'sm'}
           px='20px'
           fontWeight={400}
           color={
-            category === eachCategory.name ? 'clique.black' : 'clique.white'
+            categoryId === eachCategory._id ? 'clique.black' : 'clique.white'
           }
           key={eachCategory.name}
           onClick={() => {
-            setCategory(eachCategory.name);
             setCategoryId(eachCategory._id);
           }}
         >

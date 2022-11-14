@@ -4,9 +4,10 @@ import { BiDislike, BiLike } from 'react-icons/bi';
 import { VscReport } from 'react-icons/vsc';
 import { useAppSelector } from 'redux/app/hooks';
 
-import { Avatar, Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
 
+import commentInterface from '../../constants/utils';
 import ReportModal from './ReportModal';
 
 function EachComment({
@@ -14,8 +15,7 @@ function EachComment({
   handleLikeComment,
   handleDislikeComment,
 }: {
-  comment: any;
-
+  comment: commentInterface;
   handleLikeComment: (id: string) => void;
   handleDislikeComment: (id: string) => void;
 }) {
@@ -73,7 +73,7 @@ function EachComment({
               <Box onClick={() => handleLikeComment(comment._id)}>
                 <Icon
                   color={
-                    comment.comment.likes.includes(userProfile._id)
+                    comment.comment.likes.includes(userProfile?._id)
                       ? 'clique.base'
                       : 'clique.white'
                   }
@@ -97,7 +97,7 @@ function EachComment({
               <Box onClick={() => handleDislikeComment(comment._id)}>
                 <Icon
                   color={
-                    comment.comment.dislikes.includes(userProfile._id)
+                    comment.comment.dislikes.includes(userProfile?._id)
                       ? 'clique.base'
                       : 'clique.white'
                   }
@@ -117,7 +117,7 @@ function EachComment({
               </Text>
             </Flex>
           </Flex>
-          <ReportModal />
+          <ReportModal comment={comment} />
         </Flex>
       </Box>
     </Flex>

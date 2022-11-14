@@ -152,6 +152,26 @@ body {
   animation: marquee 15s linear infinite;
   width: 180%;
 }
+
+.clique-loader {
+  animation: clique 1s linear infinite;
+  /* display: none; */
+  /* opacity: 1; */
+}
+
+@keyframes clique {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

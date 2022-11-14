@@ -18,11 +18,13 @@ import DownloadIcon from '@icons/DownloadIcon';
 import LoopIcon from '@icons/LoopIcon';
 import OptionsIcon from '@icons/OptionsIcon';
 
+import { API, baseUrl, contentData } from '../../constants/utils';
+
 function VideoOptionMenu({player, video}: any) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [isLoop, setIsLoop] = React.useState<any>(null);
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
-  const {data, refetch} = useGetUserQuery(userProfile._id);
+  const {data, refetch} = useGetUserQuery(userProfile?._id);
   const dispatch = useAppDispatch();
   console.log('video', video);
 
@@ -46,10 +48,15 @@ function VideoOptionMenu({player, video}: any) {
     }
   }, [data]);
 
-  const handleSaveVideo = async () => {
+  const handleSaveVideo = async (save: string) => {
     console.log('entered');
-    await saveVideo({videoId: video._id});
-    refetch();
+    if (save === 'save') {
+      await saveVideo({videoId: video._id});
+      refetch();
+    } else {
+      await API.delete(`${baseUrl}unsave/${video._id}`);
+      refetch();
+    }
   };
 
   return (
@@ -65,19 +72,22 @@ function VideoOptionMenu({player, video}: any) {
         border={'none'}
       >
         <MenuItem
-          icon={
-            <Icon
-              fontSize={'24px'}
-              onClick={() => {
-                //downloaf video
-                handleSaveVideo();
-                // player.current.download();
-              }}
-              as={DownloadIcon}
-            />
-          }
+          icon={<Icon fontSize={'24px'} as={DownloadIcon} />}
+          onClick={() => {
+            //downloaf video
+            !userProfile?.savedVideos.find(
+              (each: contentData) => each._id === video._id,
+            )
+              ? handleSaveVideo('save')
+              : handleSaveVideo('unsave');
+            // player.current.download();
+          }}
         >
-          Save Video
+          {!userProfile?.savedVideos.find(
+            (each: contentData) => each._id === video._id,
+          )
+            ? 'Save Video'
+            : 'Unsave Video'}
         </MenuItem>
         <MenuItem
           onClick={() => {

@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import type {PayloadAction} from '@reduxjs/toolkit';
-
 type StateType = {
   url: string;
   name: string;
