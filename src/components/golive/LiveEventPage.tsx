@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Skeleton, Spinner } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
 import React from "react";
 import { useGetLiveStreamQuery } from "redux/services/live.service";
@@ -20,7 +20,17 @@ function LiveEventPage({ state, setState }: { state: string; setState: any }) {
         />
       </Flex>
 
-      {isFetching && <Spinner bg="clique.base" />}
+      {isFetching &&
+        [1, 2, 3, 4, 5].map((i) => (
+          <Flex key={i} h="100px" mt="20px" bg="clique.blackGrey" p="10px">
+            <Skeleton w="80px" h="100%" mr="10px" />
+            <Box w="100%">
+              <Skeleton w="100%" h="20px" mb="7px" />
+              <Skeleton w="100%" h="20px" mb="6px" />
+              <Skeleton w="100%" h="20px" mb="7px" />
+            </Box>
+          </Flex>
+        ))}
       {data &&
         data?.data?.map((event: any) => (
           <EventCard setState={setState} event={event} key={event?._id} />
