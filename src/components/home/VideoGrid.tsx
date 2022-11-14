@@ -15,7 +15,7 @@ function VideoGrid({
   videos: contentData[];
   thumbWidth?: any;
 }) {
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
   return (
     <SimpleGrid
       columns={{base: 1, lg: 3, mlg: 3, xl: 4}}

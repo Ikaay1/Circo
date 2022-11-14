@@ -1,28 +1,18 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { useFormik } from "formik";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  Input,
-  Text,
-  Textarea,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import Btn from "@components/Button/Btn";
 import Uploaders from "@components/createChannel/Uploaders";
 import SideMenu from "@components/settings/SideMenu";
 import Header from "@components/widgets/Header";
-import Btn from "@components/Button/Btn";
 import { createChannelMenu, scrollBarStyle } from "@constants/utils";
+import { Form, Formik, FormikHelpers } from "formik";
+import { ChangeEvent, useRef, useState } from "react";
 import { useCreateChannelMutation } from "redux/services/channel.service";
 import { createChannelSchema } from "schemas/channel.schema";
-
+import CustumField from "@components/createChannel/CustumField";
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
-import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 import { useAppDispatch } from "redux/app/hooks";
 import { setChannel } from "redux/slices/channelSlice";
 
@@ -68,7 +58,10 @@ const CreateChannel = () => {
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const onSubmit = async (values: CreateChannel, actions: any) => {
+  const onSubmit = async (
+    values: CreateChannel,
+    { setSubmitting }: FormikHelpers<CreateChannel>
+  ) => {
     const myFormData = new FormData();
     myFormData.append("name", values.name);
     myFormData.append("bio", values.bioDescription);
@@ -82,6 +75,7 @@ const CreateChannel = () => {
     if ("data" in res) {
       dispatch(setChannel(res.data));
       router.push("/channel/1/content");
+      setSubmitting(false);
     } else if (res.error) {
       //@ts-ignore
       toast.error(res?.error?.data?.message);
@@ -90,28 +84,12 @@ const CreateChannel = () => {
     }
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-    isValid,
-    isValidating,
-    validateField,
-  } = useFormik({
-    initialValues: {
-      name: "",
-      bioDescription: "",
-      subscriptionFee: "",
-      subscriptionInfo: "",
-    },
-    validationSchema: createChannelSchema,
-    onSubmit,
-  });
+  const initialValues = {
+    name: "",
+    bioDescription: "",
+    subscriptionFee: "",
+    subscriptionInfo: "",
+  };
 
   return (
     <Box bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}>
@@ -127,155 +105,71 @@ const CreateChannel = () => {
             position={"relative"}
             sx={scrollBarStyle}
           >
-            <FormControl isInvalid={!isValid}>
-              <Uploaders
-                coverRef={coverRef}
-                handleChooseCover={handleChooseCover}
-                handleChooseProfile={handleChooseProfile}
-                handleFileChange={handleFileChange}
-                profileRef={profileRef}
-                state={imageState}
-              />
-              <Box
-                display="flex"
-                justifyContent={"space-between"}
-                mt="6"
-                pl="8"
-                pr="11"
-              >
-                <Box w="55%" h="" pb="20">
-                  <Text
-                    fontWeight="600"
-                    fontSize="subHead"
-                    lineHeight="24px"
-                    color="clique.secondaryGrey2"
-                  >
-                    Bio
-                  </Text>
-
+            <Uploaders
+              coverRef={coverRef}
+              handleChooseCover={handleChooseCover}
+              handleChooseProfile={handleChooseProfile}
+              handleFileChange={handleFileChange}
+              profileRef={profileRef}
+              state={imageState}
+            />
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={createChannelSchema}
+            >
+              {(props) => (
+                <Form>
                   <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    borderRadius={"10px"}
-                    w="70%"
+                    display="flex"
+                    justifyContent={"space-between"}
+                    mt="6"
+                    pl="8"
+                    pr="11"
                   >
-                    <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
-                    >
-                      Bio Description
-                    </Text>
-                    <Textarea
-                      variant="filled"
-                      value={values.bioDescription}
-                      bg="clique.secondaryGrey1"
-                      name="bioDescription"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <FormErrorMessage>
-                        {errors.bioDescription}
-                      </FormErrorMessage>
-                  </Box>
+                    <Box w="55%" h="" pb="20">
+                      <Text
+                        fontWeight="600"
+                        fontSize="subHead"
+                        lineHeight="24px"
+                        color="clique.secondaryGrey2"
+                      >
+                        Bio
+                      </Text>
 
-                  <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    maxW={"100%"}
-                    borderRadius={"10px"}
-                  >
-                    <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
-                    >
-                      Channel Name
-                    </Text>
-                    <Input
-                      variant="filled"
-                      value={values.name}
-                      bg="clique.secondaryGrey1"
-                      name="name"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <FormErrorMessage>{errors.name} </FormErrorMessage>
-                  </Box>
+                      <CustumField
+                        name="Bio Description"
+                        nameValue="bioDescription"
+                        textArea={true}
+                      />
+                      <CustumField
+                        name="Channel Name"
+                        nameValue="name"
+                        textArea={false}
+                      />
+                      <CustumField
+                        name="Subscription Information"
+                        nameValue="subscriptionInfo"
+                        textArea={true}
+                      />
+                      <CustumField
+                        name="Subscription Fee"
+                        nameValue="subscriptionFee"
+                        textArea={false}
+                      />
+                    </Box>
 
-                  <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    borderRadius={"10px"}
-                  >
-                    <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
-                    >
-                      Subscription Information
-                    </Text>
-                    <Textarea
-                      variant="filled"
-                      value={values.subscriptionInfo}
-                      bg="clique.secondaryGrey1"
-                      name="subscriptionInfo"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <FormErrorMessage>
-                      {errors.subscriptionInfo}{" "}
-                    </FormErrorMessage>
+                    <Box>
+                      <Btn
+                        submit={true}
+                        text="Create channel"
+                        isLoading={props.isSubmitting}
+                      ></Btn>
+                    </Box>
                   </Box>
-
-                  <Box
-                    bg="clique.secondaryGrey1"
-                    px="2"
-                    py="3"
-                    mb="10"
-                    borderRadius={"10px"}
-                  >
-                    <Text
-                      fontSize={"smSubHead"}
-                      fontWeight="400"
-                      mb="1"
-                      color={"clique.secondaryGrey2"}
-                    >
-                      Subscription Fee
-                    </Text>
-                    <Input
-                      variant="filled"
-                      value={values.subscriptionFee}
-                      bg="clique.secondaryGrey1"
-                      name="subscriptionFee"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <FormErrorMessage>
-                      {errors.subscriptionFee}
-                    </FormErrorMessage>
-                  </Box>
-                </Box>
-
-                <Box>
-                  <Btn
-                    submit={true}
-                    text="Create channel"
-                    onClick={handleSubmit}
-                    isLoading={isSubmitting}
-                  ></Btn>
-                </Box>
-              </Box>
-            </FormControl>
+                </Form>
+              )}
+            </Formik>
           </Box>
         </Box>
       </Box>

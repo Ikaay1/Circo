@@ -13,6 +13,7 @@ export type Playlist = {
   updatedAt: string;
   userId: string;
   videos: Videos[];
+  _id:string
 };
 
 export type Videos = {
@@ -23,10 +24,10 @@ export type Videos = {
   _id: string;
 };
 
-interface Props {
+export interface PlaylistProps {
   playlist?: Playlist;
 }
-const PlaylistDetails = ({ playlist }: Props) => {
+const PlaylistDetails = ({ playlist }: PlaylistProps) => {
 
   const router = useRouter();
   return (

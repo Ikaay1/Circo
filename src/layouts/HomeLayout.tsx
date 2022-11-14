@@ -4,6 +4,8 @@ import { IHomeLayoutProps } from 'types';
 import { Box, useColorModeValue } from '@chakra-ui/react';
 import Header from '@components/widgets/Header';
 
+import ProtectedRoute from './ProtectedRoute';
+
 function HomeLayout({
   children,
   upload,
@@ -26,4 +28,4 @@ function HomeLayout({
   );
 }
 
-export default HomeLayout;
+export default ProtectedRoute(HomeLayout);

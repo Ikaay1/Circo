@@ -21,6 +21,7 @@
     "firebase": "^9.13.0",
     "formik": "^2.2.9",
     "framer-motion": "^6",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "next": "12.3.1",
     "nprogress": "^0.2.0",
