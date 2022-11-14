@@ -22,12 +22,11 @@ function Index() {
 
   const [subscribers, setSubscribers] = useState<string[]>([]);
   const {data, isLoading, refetch} = useGetContentQuery(id);
-  const [view, viewStatus] = useCreateViewMutation();
-  const [like, likeStatus] = useLikeContentMutation();
-  const [dislike, dislikeStatus] = useDislikeContentMutation();
-  const [likeComment, likeCommentStatus] = useLikeContentCommentMutation();
-  const [dislikeComment, dislikeCommentStatus] =
-    useDislikeContentCommentMutation();
+  const [view] = useCreateViewMutation();
+  const [like] = useLikeContentMutation();
+  const [dislike] = useDislikeContentMutation();
+  const [likeComment] = useLikeContentCommentMutation();
+  const [dislikeComment] = useDislikeContentCommentMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
@@ -41,7 +40,7 @@ function Index() {
       await view({video_id: data.data.preference.video._id});
     };
     if (data) {
-      if (data.data.preference.video.uploader_id._id !== userProfile._id) {
+      if (data.data.preference.video.uploader_id._id !== userProfile?._id) {
         createView();
       }
     }

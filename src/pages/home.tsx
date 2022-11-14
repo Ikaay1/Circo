@@ -5,11 +5,12 @@ import { useAppSelector } from 'redux/app/hooks';
 import { useCategoryQuery } from 'redux/services/category.service';
 import { useGetChannelQuery } from 'redux/services/channel.service';
 import {
-	useGetContentsByCategoryQuery,
+	useGetContentsBySearchQuery,
 	useGetContentsQuery,
 } from 'redux/services/content.service';
 
 import { Box, Divider, Flex } from '@chakra-ui/react';
+import CliqueLoader from '@components/home/CliqueLoader';
 import LiveEvents from '@components/home/LiveEvents';
 import LiveTopCard from '@components/home/LiveTopCard';
 import TagSection from '@components/home/TagSection';
@@ -22,31 +23,61 @@ import { contentData } from '../constants/utils';
 function Index() {
   const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
-  const {data, isLoading} = useGetContentsQuery('');
+  const {data} = useGetContentsQuery({page: 1, limit: 50});
   const [categoryId, setCategoryId] = useState('');
-  const videosByCategory = useGetContentsByCategoryQuery(categoryId);
   const categories = useCategoryQuery('');
-  const [category, setCategory] = useState('All');
   const [contents, setContents] = useState<contentData[]>([]);
   const router = useRouter();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const [search, setSearch] = useState('');
+  const {data: dataBySearch, refetch} = useGetContentsBySearchQuery({
+    page: 1,
+    limit: 50,
+    search: search,
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!userProfile._id) {
+    if (!userProfile?._id) {
       router.push('/login');
     }
-  }, [userProfile._id, router]);
+  }, [userProfile?._id, router]);
 
   useEffect(() => {
-    if (category === 'All') {
-      setContents(data?.data?.preference?.videos);
+    if (!search) {
+      if (data) {
+        setLoading(false);
+      }
+      if (!categoryId) {
+        setContents(data?.data?.preference?.videos);
+      } else {
+        setContents(
+          data?.data?.preference?.videos.filter(
+            (video: contentData) => video.category_id === categoryId,
+          ),
+        );
+      }
     } else {
-      setContents(videosByCategory.data?.data?.preference?.videos);
+      if (dataBySearch) {
+        setLoading(false);
+      }
+      if (!categoryId) {
+        setContents(dataBySearch?.data?.preference?.videos);
+      } else {
+        setContents(
+          dataBySearch?.data?.preference?.videos.filter(
+            (video: contentData) => video.category_id === categoryId,
+          ),
+        );
+      }
     }
   }, [
-    category,
     data?.data?.preference?.videos,
-    videosByCategory.data?.data?.preference?.videos,
+    search,
+    dataBySearch?.data?.preference?.videos,
+    categoryId,
+    data,
+    dataBySearch,
   ]);
   const {
     data: channelData,
@@ -62,7 +93,7 @@ function Index() {
 
   return (
     <>
-      <HomeLayout>
+      <HomeLayout search={search} setSearch={setSearch}>
         <Flex>
           <SideMenu />
           <Box
@@ -74,25 +105,20 @@ function Index() {
             overflowX={'hidden'}
             sx={scrollBarStyle}
           >
-            <LiveTopCard />
-
-            {categories.data && (
+            {!categories.data || loading ? (
+              <CliqueLoader />
+            ) : (
               <>
+                <LiveTopCard />
+
                 <Divider />
                 <TagSection
                   categories={categories.data.data}
-                  category={category}
-                  setCategory={setCategory}
                   setCategoryId={setCategoryId}
+                  categoryId={categoryId}
                 />
                 <Divider />
-              </>
-            )}
 
-            {!contents?.length ? (
-              <Box></Box>
-            ) : (
-              <>
                 <VideoGrid
                   thumbWidth={{lg: '220px', mlg: '280px', xl: 'full'}}
                   width={'calc(100vw - 560px)'}
