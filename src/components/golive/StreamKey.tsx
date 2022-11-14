@@ -18,12 +18,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useAppSelector } from "redux/app/hooks";
 import CopyButton from "./CopyButton";
 
-function StreamKey() {
+function StreamKey({ streamDetails }: any) {
   const [showPassword, setShowPassword] = React.useState(false);
-
-  const streamDetails = useAppSelector(
-    (state) => state.app.stream.streamDetails
-  );
 
   return (
     <Flex>

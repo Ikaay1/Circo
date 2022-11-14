@@ -89,7 +89,7 @@ function HoverCard({
             @{video?.uploader_id?.userName}
           </Text>
           <Flex alignItems={'center'} justifyContent='space-between'>
-            <Flex alignItems={'center'}>
+            <Flex alignItems={'center'} mr='.8rem'>
               <Text
                 noOfLines={2}
                 color={'clique.darkGrey'}

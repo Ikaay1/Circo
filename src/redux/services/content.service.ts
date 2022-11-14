@@ -105,6 +105,64 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+    likeContent: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `content/like`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
+    dislikeContent: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `content/dislike`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+    likeContentComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment/like`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
+    dislikeContentComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment/dislike`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
+    saveVideo: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `save`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
   }),
 });
 
@@ -117,4 +175,9 @@ export const {
   useCreateViewMutation,
   useGetContentsByCategoryQuery,
   useCreateContentMutation,
+  useLikeContentMutation,
+  useDislikeContentMutation,
+  useLikeContentCommentMutation,
+  useDislikeContentCommentMutation,
+  useSaveVideoMutation,
 } = contentApi;
