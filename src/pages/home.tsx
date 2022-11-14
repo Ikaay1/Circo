@@ -1,44 +1,38 @@
-import HomeLayout from 'layouts/HomeLayout';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useCategoryQuery } from 'redux/services/category.service';
-import { useGetChannelQuery } from 'redux/services/channel.service';
+import HomeLayout from "layouts/HomeLayout";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "redux/app/hooks";
+import { useCategoryQuery } from "redux/services/category.service";
+import { useGetChannelQuery } from "redux/services/channel.service";
 import {
-	useGetContentsByCategoryQuery,
-	useGetContentsQuery,
-} from 'redux/services/content.service';
+  useGetContentsByCategoryQuery,
+  useGetContentsQuery,
+} from "redux/services/content.service";
 
-import { Box, Divider, Flex } from '@chakra-ui/react';
-import LiveEvents from '@components/home/LiveEvents';
-import LiveTopCard from '@components/home/LiveTopCard';
-import TagSection from '@components/home/TagSection';
-import VideoGrid from '@components/home/VideoGrid';
-import SideMenu from '@components/widgets/sideMenu';
-import { scrollBarStyle } from '@constants/utils';
+import { Box, Divider, Flex } from "@chakra-ui/react";
+import LiveEvents from "@components/home/LiveEvents";
+import LiveTopCard from "@components/home/LiveTopCard";
+import TagSection from "@components/home/TagSection";
+import VideoGrid from "@components/home/VideoGrid";
+import SideMenu from "@components/widgets/sideMenu";
+import { scrollBarStyle } from "@constants/utils";
 
-import { contentData } from '../constants/utils';
+import { contentData } from "../constants/utils";
 
 function Index() {
   const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
-  const {data, isLoading} = useGetContentsQuery('');
-  const [categoryId, setCategoryId] = useState('');
+  const { data, isLoading } = useGetContentsQuery("");
+  const [categoryId, setCategoryId] = useState("");
   const videosByCategory = useGetContentsByCategoryQuery(categoryId);
-  const categories = useCategoryQuery('');
-  const [category, setCategory] = useState('All');
+  const categories = useCategoryQuery("");
+  const [category, setCategory] = useState("All");
   const [contents, setContents] = useState<contentData[]>([]);
   const router = useRouter();
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
-    if (!userProfile._id) {
-      router.push('/login');
-    }
-  }, [userProfile._id, router]);
-
-  useEffect(() => {
-    if (category === 'All') {
+    if (category === "All") {
       setContents(data?.data?.preference?.videos);
     } else {
       setContents(videosByCategory.data?.data?.preference?.videos);
@@ -52,7 +46,7 @@ function Index() {
     data: channelData,
     isError,
     isLoading: channelLoading,
-  } = useGetChannelQuery('channel');
+  } = useGetChannelQuery("channel");
 
   useEffect(() => {
     if (!channelLoading && channelData?.channelData?.channel === null) {
@@ -66,12 +60,12 @@ function Index() {
         <Flex>
           <SideMenu />
           <Box
-            maxH={'90vh'}
-            pb='50px'
-            px='30px'
-            w={'calc(100vw - 500px)'}
-            overflowY={'scroll'}
-            overflowX={'hidden'}
+            maxH={"90vh"}
+            pb="50px"
+            px="30px"
+            w={"calc(100vw - 500px)"}
+            overflowY={"scroll"}
+            overflowX={"hidden"}
             sx={scrollBarStyle}
           >
             <LiveTopCard />
@@ -94,8 +88,8 @@ function Index() {
             ) : (
               <>
                 <VideoGrid
-                  thumbWidth={{lg: '220px', mlg: '280px', xl: 'full'}}
-                  width={'calc(100vw - 560px)'}
+                  thumbWidth={{ lg: "220px", mlg: "280px", xl: "full" }}
+                  width={"calc(100vw - 560px)"}
                   videos={contents}
                 />
               </>

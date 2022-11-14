@@ -2,6 +2,7 @@ import Header from "@components/widgets/Header";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { IHomeLayoutProps } from "types";
+import ProtectedRoute from "./ProtectedRoute";
 
 function HomeLayout({ children, upload, toggleView }: IHomeLayoutProps) {
   return (
@@ -19,4 +20,4 @@ function HomeLayout({ children, upload, toggleView }: IHomeLayoutProps) {
   );
 }
 
-export default HomeLayout;
+export default ProtectedRoute(HomeLayout);

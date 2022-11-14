@@ -6,8 +6,6 @@ import { useAppSelector } from "redux/app/hooks";
 import EventKey from "./EventKey";
 import EventStream from "./EventStream";
 import Monitor from "./Monitor";
-import Stream from "./Stream";
-import StreamKey from "./StreamKey";
 
 function EventTab() {
   const [tabIndex, setTabIndex] = useState(0);
