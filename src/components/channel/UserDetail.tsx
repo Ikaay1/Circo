@@ -61,7 +61,6 @@ const UserDetail = () => {
         >
           {data?.data?.channel?.profile ? (
             <Image
-              // src="/assets/profilephoto.png"
               src={data?.data?.channel?.profile}
               alt="profile photo"
               borderRadius="50%"

@@ -9,11 +9,11 @@ import { channelNav } from "@constants/utils";
 const Contents = () => {
   const [route, setRoute] = useState('upload');
   const {data, isLoading} = useGetUserContentsQuery('');
-
+console.log({data})
   return (
     <>
       {isLoading || !data ? (
-        <Box></Box>
+        <Box>loading...</Box>
       ) : (
         <>
           <Box
