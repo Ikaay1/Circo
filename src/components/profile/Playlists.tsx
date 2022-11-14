@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import React from "react";
 
 import {
   Box,
@@ -11,41 +10,35 @@ import {
   ModalContent,
   ModalOverlay,
   SimpleGrid,
+  SkeletonText,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { playListData, scrollBarStyle } from "@constants/utils";
+import { scrollBarStyle } from "@constants/utils";
 import AddPlaylistIcon from "@icons/AddPlaylistIcon";
 
+import { useGetPlaylistQuery } from "redux/services/playlist.service";
 import VideoIcon from "../../assets/icons/VideoIcon";
 import NewPlaylist from "./NewPlaylist";
-import { useGetPlaylistQuery } from "redux/services/playlist.service";
+import { Playlist } from "./PlaylistDetails";
+import EmptyState from "@components/emptyState/EmptyState";
 
 const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
   const { data, isLoading } = useGetPlaylistQuery("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  return (
-    <>
-      {newPlaylist && (
-        <Text
-          display="flex"
-          alignItems={"center"}
-          fontSize="head"
-          lineHeight="32px"
-          color="clique.white"
-        >
-          New Playlist{" "}
-          <Box
-            onClick={() => {
-              onOpen();
-            }}
-          >
-            <Icon as={AddPlaylistIcon} />
-          </Box>
-        </Text>
-      )}
 
+  let content;
+  if (isLoading || !data) {
+    content = <SkeletonText mt="4" noOfLines={4} spacing="4" />;
+  } else if (!isLoading && data?.data?.playlists.length === 0) {
+    content = (
+      <EmptyState
+        msg="Oops! No playlist here yet."
+      />
+    );
+  } else {
+    content = (
       <SimpleGrid
         autoColumns={"300px"}
         mt="20px"
@@ -53,7 +46,7 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
         w={"100%"}
         spacing={"30px"}
       >
-        {data?.data?.playlists?.map((each: any) => (
+        {data?.data?.playlists?.map((each: Playlist) => (
           <Box key={each?._id}>
             <Box
               h={{ lg: "130px", mlg: "180px" }}
@@ -62,7 +55,7 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
               cursor={"pointer"}
               onClick={
                 router.asPath.split("/")[1] === "profile"
-                  ? () => router.push("/profile/1/content/playlist")
+                  ? () => router.push(`/profile/1/content/playlist/${each._id}`)
                   : () => router.push(`/channel/1/content/playlist/${each._id}`)
               }
             >
@@ -142,6 +135,30 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
           </Box>
         ))}
       </SimpleGrid>
+    );
+  }
+
+  return (
+    <>
+      {newPlaylist && (
+        <Text
+          display="flex"
+          alignItems={"center"}
+          fontSize="head"
+          lineHeight="32px"
+          color="clique.white"
+        >
+          New Playlist
+          <Box
+            onClick={() => {
+              onOpen();
+            }}
+          >
+            <Icon as={AddPlaylistIcon} />
+          </Box>
+        </Text>
+      )}
+      {content}
 
       <Modal
         isCentered
