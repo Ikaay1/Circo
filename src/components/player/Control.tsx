@@ -32,19 +32,32 @@ function Control({
     <Grid templateColumns='repeat(7, 1fr)' px='30px' py='20px' gap={4}>
       <GridItem colSpan={2}>
         <Flex alignItems='center'>
-          <Text
-            mt='5px'
-            minW={'100px'}
-            color={'clique.white'}
-            fontFamily={'Poppins'}
-            fontWeight={400}
-            fontSize={'smSubHead'}
-            lineHeight={'1'}
-            mr='30px'
-          >
-            {moment(currentTimestamp * 1000).format('mm:ss')} /{' '}
-            {moment(totalDuration * 1000).format('mm:ss')}
-          </Text>
+          {!currentTimestamp || !totalDuration ? (
+            <Text
+              mt='5px'
+              minW={'100px'}
+              color={'clique.white'}
+              fontFamily={'Poppins'}
+              fontWeight={400}
+              fontSize={'smSubHead'}
+              lineHeight={'1'}
+              mr='30px'
+            ></Text>
+          ) : (
+            <Text
+              mt='5px'
+              minW={'100px'}
+              color={'clique.white'}
+              fontFamily={'Poppins'}
+              fontWeight={400}
+              fontSize={'smSubHead'}
+              lineHeight={'1'}
+              mr='30px'
+            >
+              {moment(currentTimestamp * 1000).format('mm:ss')} /{' '}
+              {moment(totalDuration * 1000).format('mm:ss')}
+            </Text>
+          )}
           {!isMuted ? (
             <Icon
               fontSize='smHead'
@@ -70,7 +83,7 @@ function Control({
               <Box onClick={handleLike}>
                 <Icon
                   color={
-                    video.likes.includes(userProfile._id)
+                    video.likes.includes(userProfile?._id)
                       ? 'clique.base'
                       : 'clique.white'
                   }
@@ -100,7 +113,7 @@ function Control({
               <Box onClick={handleDislike}>
                 <Icon
                   color={
-                    video.dislikes.includes(userProfile._id)
+                    video.dislikes.includes(userProfile?._id)
                       ? 'clique.base'
                       : 'clique.white'
                   }

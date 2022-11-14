@@ -28,8 +28,8 @@ export const contentApi = createApi({
     }),
 
     getContents: builder.query<any, any>({
-      query: () => ({
-        url: `content/upload-video`,
+      query: ({page, limit}) => ({
+        url: `content/upload-video?page=${page}&limit=${limit}`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -95,16 +95,6 @@ export const contentApi = createApi({
       invalidatesTags: ['Content'],
     }),
 
-    getContentsByCategory: builder.query<any, any>({
-      query: (id) => ({
-        url: `content/category/${id}`,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }),
-      providesTags: ['Content'],
-    }),
     likeContent: builder.mutation<any, any>({
       query: (body) => ({
         url: `content/like`,
@@ -163,6 +153,29 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
+
+    reportComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `report`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
+    getContentsBySearch: builder.query<any, any>({
+      query: ({page, limit, search}) => ({
+        url: `content/search?page=${page}&limit=${limit}&search=${search}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -173,11 +186,12 @@ export const {
   usePostCommentOnContentMutation,
   useGetUserContentsQuery,
   useCreateViewMutation,
-  useGetContentsByCategoryQuery,
   useCreateContentMutation,
   useLikeContentMutation,
   useDislikeContentMutation,
   useLikeContentCommentMutation,
   useDislikeContentCommentMutation,
   useSaveVideoMutation,
+  useReportCommentMutation,
+  useGetContentsBySearchQuery,
 } = contentApi;
