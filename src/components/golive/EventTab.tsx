@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
 import EventKey from "./EventKey";
 import EventStream from "./EventStream";
+import Monitor from "./Monitor";
 import Stream from "./Stream";
 import StreamKey from "./StreamKey";
 
@@ -33,6 +34,9 @@ function EventTab() {
         </CliqueTabPanel>
         <CliqueTabPanel>
           <EventKey />
+        </CliqueTabPanel>
+        <CliqueTabPanel>
+          <Monitor streamDetails={event} />
         </CliqueTabPanel>
       </TabPanels>
     </Tabs>
