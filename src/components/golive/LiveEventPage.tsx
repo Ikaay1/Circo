@@ -1,5 +1,6 @@
 import { Box, Flex, Skeleton, Spinner } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
+import EmptyState from "@components/emptyState/EmptyState";
 import React from "react";
 import { useGetLiveStreamQuery } from "redux/services/live.service";
 import EventCard from "./EventCard";
@@ -35,6 +36,8 @@ function LiveEventPage({ state, setState }: { state: string; setState: any }) {
         data?.data?.map((event: any) => (
           <EventCard setState={setState} event={event} key={event?._id} />
         ))}
+
+      {data && data?.data?.length === 0 && <EmptyState msg="No Events" />}
     </Box>
   );
 }

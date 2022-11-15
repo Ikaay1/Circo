@@ -541,7 +541,7 @@ export const settingsMenu = [
 
 export const goliveMenu = [
   {
-    name: "Stream",
+    name: "Stream Now",
     route: "stream",
     icon: StreamIcon,
   },
