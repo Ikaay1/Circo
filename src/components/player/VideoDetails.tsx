@@ -15,7 +15,6 @@ function VideoDetails({
   setSubscribers: React.Dispatch<React.SetStateAction<string[]>>;
   subscribers: string[];
 }) {
-  console.log(video);
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [subscribe, subscribeStatus] = useSubscribeMutation();
 
