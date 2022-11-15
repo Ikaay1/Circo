@@ -42,7 +42,7 @@ function TagSection({
         <Button
           variant='ghost'
           rounded={'full'}
-          bg={categoryId === eachCategory.name ? 'clique.base' : 'clique.grey'}
+          bg={categoryId === eachCategory._id ? 'clique.base' : 'clique.grey'}
           fontFamily={'Poppins'}
           size={'sm'}
           px='20px'

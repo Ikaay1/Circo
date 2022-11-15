@@ -144,10 +144,13 @@ const Interests = () => {
               </Box>
             </>
           ) : (
-            <Box padding='6' boxShadow='lg' w='100%'>
-              <SkeletonCircle size='10' />
-              <SkeletonText mt='4' noOfLines={4} spacing='4' />
-            </Box>
+            <>
+              {[1, 2, 3, 4, 5, 6, 7].map((each) => (
+                <Box boxShadow='lg' key={each}>
+                  <SkeletonCircle w='150px' h='50px' />
+                </Box>
+              ))}
+            </>
           )}
         </Box>
       </Box>
