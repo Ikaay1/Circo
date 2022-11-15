@@ -7,20 +7,22 @@ import { CategoriesInterface } from '../../constants/interface';
 function TagSection({
   categories,
   setCategoryId,
-  categoryId
+  categoryId,
 }: {
   categories: CategoriesInterface[];
   setCategoryId: React.Dispatch<React.SetStateAction<string>>;
-  categoryId: string
+  categoryId: string;
 }) {
   return (
     <HStack
+      gap='10px 1px'
       py='10px'
       // position={'sticky'}
       top='0'
       // bg='clique.primaryBg'
       alignItems={'center'}
       maxW='100%'
+      flexWrap={'wrap'}
       bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}
     >
       <Button

@@ -9,7 +9,13 @@ import {
 	useGetContentsQuery,
 } from 'redux/services/content.service';
 
-import { Box, Divider, Flex } from '@chakra-ui/react';
+import {
+	Box,
+	Divider,
+	Flex,
+	SkeletonCircle,
+	SkeletonText,
+} from '@chakra-ui/react';
 import EmptyState from '@components/emptyState/EmptyState';
 import CliqueLoader from '@components/home/CliqueLoader';
 import LiveEvents from '@components/home/LiveEvents';
@@ -17,7 +23,7 @@ import LiveTopCard from '@components/home/LiveTopCard';
 import TagSection from '@components/home/TagSection';
 import VideoGrid from '@components/home/VideoGrid';
 import SideMenu from '@components/widgets/sideMenu';
-import { scrollBarStyle } from '@constants/utils';
+import { API, baseUrl, scrollBarStyle } from '@constants/utils';
 
 import { contentData } from '../constants/utils';
 
@@ -31,12 +37,12 @@ function Index() {
   const router = useRouter();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [search, setSearch] = useState('');
-  const {data: dataBySearch, refetch} = useGetContentsBySearchQuery({
-    page: 1,
-    limit: 50,
-    search: search,
-  });
-  const [loading, setLoading] = useState(true);
+  // const {data: dataBySearch, refetch} = useGetContentsBySearchQuery({
+  //   page: 1,
+  //   limit: 50,
+  //   search: search,
+  // });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!userProfile?._id) {
@@ -47,40 +53,38 @@ function Index() {
   useEffect(() => {
     if (!search) {
       if (data) {
-        setLoading(false);
-      }
-      if (!categoryId) {
-        setContents(data?.data?.preference?.videos);
-      } else {
-        setContents(
-          data?.data?.preference?.videos.filter(
-            (video: contentData) => video.category_id === categoryId,
-          ),
-        );
-      }
-    } else {
-      if (dataBySearch) {
-        setLoading(false);
-      }
-      if (!categoryId) {
-        setContents(dataBySearch?.data?.preference?.videos);
-      } else {
-        setContents(
-          dataBySearch?.data?.preference?.videos.filter(
-            (video: contentData) => video.category_id === categoryId,
-          ),
-        );
+        if (!categoryId) {
+          setContents(data?.data?.preference?.videos);
+        } else {
+          setContents(
+            data?.data?.preference?.videos.filter(
+              (video: contentData) => video.category_id === categoryId,
+            ),
+          );
+        }
       }
     }
-  }, [
-    data?.data?.preference?.videos,
-    search,
-    dataBySearch?.data?.preference?.videos,
-    categoryId,
-    data,
-    dataBySearch,
-  ]);
- 
+  }, [data, categoryId, search]);
+
+  useEffect(() => {
+    if (search) {
+      setLoading(true);
+      API.get(
+        `${baseUrl}content/search?page=${1}&limit=${50}&search=${search}`,
+      ).then((res) => {
+        if (!categoryId) {
+          setContents(res?.data?.data?.preference?.videos);
+        } else {
+          setContents(
+            res?.data?.data?.preference?.videos.filter(
+              (video: contentData) => video.category_id === categoryId,
+            ),
+          );
+        }
+        setLoading(false);
+      });
+    }
+  }, [search, categoryId]);
 
   return (
     <>
@@ -96,7 +100,7 @@ function Index() {
             overflowX={'hidden'}
             sx={scrollBarStyle}
           >
-            {!categories.data || loading ? (
+            {!categories.data || (!data && !contents.length) ? (
               <CliqueLoader />
             ) : (
               <>
@@ -110,8 +114,13 @@ function Index() {
                 />
                 <Divider />
 
-                {!loading && !contents.length ? (
-                  <Box mt='20px'>
+                {loading ? (
+                  <Box padding='6' boxShadow='lg' w='100%'>
+                    <SkeletonCircle size='10' />
+                    <SkeletonText mt='4' noOfLines={4} spacing='4' />
+                  </Box>
+                ) : data && !contents.length ? (
+                  <Box mt='20px' height='65%'>
                     <EmptyState msg='Oops!. No video here' />
                   </Box>
                 ) : (
