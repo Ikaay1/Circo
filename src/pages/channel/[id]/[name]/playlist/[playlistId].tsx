@@ -6,6 +6,7 @@ import SideMenu from "@components/profile/SideMenu";
 import Header from "@components/widgets/Header";
 import { channelMenu, scrollBarStyle } from "@constants/utils";
 import { useGetSinglePlaylistQuery } from "redux/services/playlist.service";
+import CliqueLoader from "@components/home/CliqueLoader";
 
 const Playlist = () => {
   const router = useRouter();
@@ -21,7 +22,11 @@ const Playlist = () => {
           <SideMenu menu={channelMenu} />
         </Box>
         <Box flex="5.5" h="100%" overflowY="scroll" sx={scrollBarStyle}>
-          <PlaylistDetails playlist={data?.data?.playlist} />
+          {isLoading && !data ? (
+            <CliqueLoader />
+          ) : (
+            <PlaylistDetails playlist={data?.data?.playlist} />
+          )}
         </Box>
       </Box>
     </Box>

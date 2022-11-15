@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 
 // import { useGetUserContentsQuery } from 'redux/services/content.service';
@@ -12,9 +12,7 @@ import Playlists from './Playlists';
 
 const ProfileContents = () => {
   const [route, setRoute] = useState('paid');
-  // const {data, isLoading} = useGetUserContentsQuery('');
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-
   return (
     <>
       <Box borderBottom={'1px solid rgba(255, 255, 255, 0.1)'} display='flex'>

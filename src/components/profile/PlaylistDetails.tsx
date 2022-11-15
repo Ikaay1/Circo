@@ -16,7 +16,7 @@ export type Playlist = {
   _id:string
 };
 
-export type Videos = {
+export interface Videos  {
   category_name: string;
   thumbNail: string;
   title: string;
@@ -28,7 +28,6 @@ export interface PlaylistProps {
   playlist?: Playlist;
 }
 const PlaylistDetails = ({ playlist }: PlaylistProps) => {
-
   const router = useRouter();
   return (
     <Box display={"flex"} px="1.4rem" py="2rem" gap="25px">
