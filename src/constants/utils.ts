@@ -699,6 +699,7 @@ export interface contentData {
   description: string;
   view: number;
   createdAt: any;
+  category_id: string;
 }
 
 export interface uploaderId {
@@ -708,4 +709,18 @@ export interface uploaderId {
   firstName: string;
   lastName: string;
   userName: string;
+}
+
+export default interface commentInterface {
+  _id: string;
+  commenterId: {
+    firstName: string;
+    lastName: string;
+  };
+  comment: {
+    comment: string;
+    likes: string[];
+    dislikes: string[];
+  };
+  createdAt: string;
 }

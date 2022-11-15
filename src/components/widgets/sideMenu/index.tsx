@@ -13,31 +13,39 @@ import EachMenu from "./EachMenu";
 import EachSubscribe from "./EachSubscribe";
 import { useRouter } from "next/router";
 import { logout } from "redux/slices/authSlice";
-import { useAppDispatch } from "redux/app/hooks";
+import { useGetChannelQuery } from "redux/services/channel.service";
 
-type Props = {
-  hasChannel?: boolean;
-};
+import { useAppDispatch } from "redux/app/hooks";
 
 type Menu = {
   name: string;
   icon: any;
 };
 
-function Index({ hasChannel }: Props) {
+function Index() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [menuState, setMenuState] = useState(menu);
-  const [menuStateN, setMenuStateN] = useState(menuWithOutLive);
   const [computedMenu, setComputedMenu] = useState<Array<Menu>>([]);
+  const {
+    data: channelData,
+    isError,
+    isLoading: channelLoading,
+    refetch,
+  } = useGetChannelQuery("");
+
+  useEffect(() => {
+    refetch();
+    if (!channelLoading && channelData?.data?.channel === null) {
+      setComputedMenu(menuWithOutLive);
+    } else {
+      setComputedMenu(menu);
+    }
+  }, [channelLoading, channelData, refetch]);
 
   const handleLogout = () => {
     dispatch(logout());
     router.push("/login");
   };
-  useEffect(() => {
-    hasChannel ? setComputedMenu(menuState) : setComputedMenu(menuStateN);
-  }, [hasChannel, menuState, menuStateN]);
 
   return (
     <Box
