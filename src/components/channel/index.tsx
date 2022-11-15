@@ -33,7 +33,10 @@ const Index = () => {
           pb="3rem"
           sx={scrollBarStyle}
         >
-          <UserDetail data={channelData?.data?.channel} />
+          {router.query.name !== "edit" && (
+            <UserDetail data={channelData?.data?.channel} />
+          )}
+
           {router.query.name !== "edit" && (
             <Bio
               showSubscribe={router.query.name === "analytics" ? false : true}
@@ -47,8 +50,8 @@ const Index = () => {
           )}
 
           {router.query.name === "edit" && (
-            <Box mt={"1.4rem"} px="1.35rem">
-              <EditChannel />
+            <Box width={"100%"}>
+              <EditChannel data={channelData?.data?.channel} />
             </Box>
           )}
 

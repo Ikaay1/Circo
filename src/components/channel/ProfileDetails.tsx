@@ -30,7 +30,6 @@ const ProfileDetails = () => {
         color="clique.secondaryGrey2"
         textAlign={"center"}
       >
-          {/* @{`${userProfile.}`} */}
       </Text>
       <Text
         fontWeight="500"

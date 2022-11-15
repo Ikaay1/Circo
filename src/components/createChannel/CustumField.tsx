@@ -13,9 +13,10 @@ type Props = {
   name: string;
   nameValue: string;
   textArea: boolean;
+  variant?: "small" | "medium" | "large";
 };
 
-export default function CustumField({ name, nameValue, textArea }: Props) {
+export default function CustumField({ name, nameValue, textArea,variant }: Props) {
   return (
     <Field name={nameValue}>
       {({ field, form: { touched, errors } }: any) => (
@@ -26,7 +27,7 @@ export default function CustumField({ name, nameValue, textArea }: Props) {
             py="3"
             mb="10"
             borderRadius={"10px"}
-            w="70%"
+            w={variant === "small" ? "70%" : "100%"}
           >
             <Text
               fontSize={"smSubHead"}

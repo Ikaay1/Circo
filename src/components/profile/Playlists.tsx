@@ -4,12 +4,15 @@ import {
   Box,
   Circle,
   Flex,
+  HStack,
   Icon,
   Image,
   Modal,
   ModalContent,
   ModalOverlay,
   SimpleGrid,
+  Skeleton,
+  SkeletonCircle,
   SkeletonText,
   Text,
   useDisclosure,
@@ -24,19 +27,36 @@ import { Playlist } from "./PlaylistDetails";
 import EmptyState from "@components/emptyState/EmptyState";
 
 const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
-  const { data, isLoading } = useGetPlaylistQuery("");
+  const { data, isLoading, isFetching } = useGetPlaylistQuery("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-
   let content;
   if (isLoading || !data) {
-    content = <SkeletonText mt="4" noOfLines={4} spacing="4" />;
-  } else if (!isLoading && data?.data?.playlists.length === 0) {
     content = (
-      <EmptyState
-        msg="Oops! No playlist here yet."
-      />
+      <HStack spacing="24px">
+        {[1, 2, 3].map((i) => (
+          <Flex
+            key={i}
+            h="150px"
+            bg="clique.blackGrey"
+            flexDirection={"column"}
+            p="1"
+          >
+            <Skeleton w="300px" h="100%" borderRadius={"7px"} />
+            <Flex align={"center"} mt="1">
+              <SkeletonCircle size="10" mr="1" />
+              <Skeleton
+                w="70px"
+                h="20px"
+                borderRadius={"3px"}
+              />
+            </Flex>
+          </Flex>
+        ))}
+      </HStack>
     );
+  } else if (!isLoading && data?.data?.playlists.length === 0) {
+    content = <EmptyState msg="Oops! No playlist here yet." />;
   } else {
     content = (
       <SimpleGrid

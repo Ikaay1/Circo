@@ -16,10 +16,10 @@ export const channelApi = createApi({
   }),
   tagTypes: ["channel"],
   endpoints: (builder) => ({
-    createChannel: builder.mutation<any, any>({
+    updateChannel: builder.mutation<any, any>({
       query: (body) => ({
-        url: `channel/create`,
-        method: "POST",
+        url: `channel/update`,
+        method: "PATCH",
         body: body,
       }),
       invalidatesTags: ["channel"],
@@ -37,4 +37,4 @@ export const channelApi = createApi({
   }),
 });
 
-export const { useCreateChannelMutation, useGetChannelQuery } = channelApi;
+export const { useUpdateChannelMutation, useGetChannelQuery } = channelApi;
