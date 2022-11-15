@@ -34,7 +34,6 @@ function VideoThumb({
     <Box position={"relative"}>
       {isHover ? (
         <ScaleFade reverse unmountOnExit in={isHover}>
-          {" "}
           <HoverCard
             setIsHover={setIsHover}
             isSubscribed={isSubscribed}

@@ -157,49 +157,43 @@ function Stream({
                         form.errors.thumbNail && form.touched.thumbNail
                       }
                     >
-                      <Flex>
-                        <label htmlFor={"thumbnail"}>
-                          {props.values.thumbNail ? (
-                            <Box mt="7">
-                              {" "}
-                              <Box
-                                bgImage={
-                                  props.values.thumbNail?.name
-                                    ? URL.createObjectURL(
-                                        props.values.thumbNail
-                                      )
-                                    : props.values.thumbNail
-                                }
-                                rounded="10px"
-                                h="120px"
-                                w="250px"
-                                bgRepeat={"no-repeat"}
-                                bgSize={"cover"}
-                              ></Box>
-                            </Box>
-                          ) : (
-                            <Flex gap="2" mb="4" cursor={"pointer"}>
-                              <Flex
-                                flexDirection={"column"}
-                                alignItems={"center"}
-                                justifyContent="center"
-                                gap="2"
-                                py={4}
-                                border="1px"
-                                width="40%"
-                                borderRadius={"10px"}
-                                borderColor="clique.secondaryGrey2"
-                                borderStyle="dashed"
-                              >
-                                <Icon as={AddIcon} />
-                                <Text fontSize="smSubHead">
-                                  Upload Thumbnail
-                                </Text>
-                              </Flex>
+                      <label htmlFor={"thumbnail"}>
+                        {props.values.thumbNail ? (
+                          <Box mt="7">
+                            {" "}
+                            <Box
+                              bgImage={
+                                props.values.thumbNail?.name
+                                  ? URL.createObjectURL(props.values.thumbNail)
+                                  : props.values.thumbNail
+                              }
+                              rounded="10px"
+                              h="120px"
+                              w="250px"
+                              bgRepeat={"no-repeat"}
+                              bgSize={"cover"}
+                            ></Box>
+                          </Box>
+                        ) : (
+                          <Flex gap="2" mb="4" cursor={"pointer"}>
+                            <Flex
+                              flexDirection={"column"}
+                              alignItems={"center"}
+                              justifyContent="center"
+                              gap="2"
+                              py={4}
+                              border="1px"
+                              width="40%"
+                              borderRadius={"10px"}
+                              borderColor="clique.secondaryGrey2"
+                              borderStyle="dashed"
+                            >
+                              <Icon as={AddIcon} />
+                              <Text fontSize="smSubHead">Upload Thumbnail</Text>
                             </Flex>
-                          )}
-                        </label>
-                      </Flex>
+                          </Flex>
+                        )}
+                      </label>
 
                       <FormErrorMessage>
                         {form.errors.thumbNail}
