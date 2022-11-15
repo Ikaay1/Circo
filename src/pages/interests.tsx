@@ -6,7 +6,16 @@ import { useAppDispatch } from 'redux/app/hooks';
 import { useSignupMutation } from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
-import { Box, Icon, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+	Box,
+	Icon,
+	Skeleton,
+	SkeletonCircle,
+	SkeletonText,
+	Stack,
+	Text,
+	useColorModeValue,
+} from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import { CategoriesInterface, LoginDataInterface } from '@constants/interface';
 import { scrollBarStyle } from '@constants/utils';
@@ -34,10 +43,22 @@ const Interests = () => {
       interests: categories,
     };
 
-    await signup(userData);
+    console.log(userData);
 
+    const res: any = await signup(userData);
+    console.log(res);
     localStorage.removeItem('userData');
-    router.push(`/login`);
+    if ('data' in res) {
+      dispatch(
+        setCredentials({
+          payload: res.data,
+        }),
+      );
+      router.push('/home');
+      localStorage.removeItem('userData');
+    } else {
+      toast.error(res.error?.data?.message);
+    }
   };
 
   return (
@@ -75,51 +96,62 @@ const Interests = () => {
           flexWrap={'wrap'}
           marginTop='3rem'
         >
-          {data &&
-            data.data.map((category: CategoriesInterface) => (
-              <Box
-                display={'flex'}
-                alignItems='center'
-                bg={
-                  categories.includes(category._id)
-                    ? 'clique.paleGreen'
-                    : 'clique.paleGrey'
-                }
-                padding='10.5px'
-                borderRadius={'26.58px'}
-                key={category._id}
-                cursor={'pointer'}
-                onClick={() =>
-                  setCategories((prevCategories) =>
-                    prevCategories.includes(category._id)
-                      ? prevCategories.filter((id) => id !== category._id)
-                      : [...prevCategories, category._id],
-                  )
-                }
-              >
-                <Text
-                  mr='.55rem'
-                  fontSize='sm2'
-                  lineHeight='27px'
-                  color='clique.white'
+          {data ? (
+            <>
+              {data.data.map((category: CategoriesInterface) => (
+                <Box
+                  display={'flex'}
+                  alignItems='center'
+                  bg={
+                    categories.includes(category._id)
+                      ? 'clique.paleGreen'
+                      : 'clique.paleGrey'
+                  }
+                  padding='10.5px'
+                  borderRadius={'26.58px'}
+                  key={category._id}
+                  cursor={'pointer'}
+                  onClick={() =>
+                    setCategories((prevCategories) =>
+                      prevCategories.includes(category._id)
+                        ? prevCategories.filter((id) => id !== category._id)
+                        : [...prevCategories, category._id],
+                    )
+                  }
                 >
-                  {category.name}
-                </Text>
-                <Icon
-                  as={categories.includes(category._id) ? TickIcon : PlusIcon}
+                  <Text
+                    mr='.55rem'
+                    fontSize='sm2'
+                    lineHeight='27px'
+                    color='clique.white'
+                  >
+                    {category.name}
+                  </Text>
+                  <Icon
+                    as={categories.includes(category._id) ? TickIcon : PlusIcon}
+                  />
+                </Box>
+              ))}
+              <Box>
+                <AuthButton
+                  w='380px'
+                  margin={'auto'}
+                  marginTop='2rem'
+                  name="Let's go!"
+                  onClick={handleSignUp}
+                  status={signUpStatus}
                 />
               </Box>
-            ))}
-        </Box>
-        <Box>
-          <AuthButton
-            w='380px'
-            margin={'auto'}
-            marginTop='2rem'
-            name="Let's go!"
-            onClick={handleSignUp}
-            status={signUpStatus}
-          />
+            </>
+          ) : (
+            <>
+              {[1, 2, 3, 4, 5, 6, 7].map((each) => (
+                <Box boxShadow='lg' key={each}>
+                  <SkeletonCircle w='150px' h='50px' />
+                </Box>
+              ))}
+            </>
+          )}
         </Box>
       </Box>
     </Box>
