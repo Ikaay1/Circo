@@ -445,8 +445,8 @@ export const playListData = [
     name: "Ayra Star Mix",
   },
 ];
-export const baseUrl: string = "https://clique-backend-dev.onrender.com/";
-// export const baseUrl: string = 'http://localhost:4000/';
+// export const baseUrl: string = "https://clique-backend-dev.onrender.com/";
+export const baseUrl: string = 'http://localhost:4000/';
 
 export const scrollBarStyle = {
   "&::-webkit-scrollbar": {

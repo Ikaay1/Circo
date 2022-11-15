@@ -28,44 +28,71 @@ const Uploaders = ({
   return (
     <>
       <Box position="relative">
-        <Flex
-          w="100%"
-          h="160px"
-          bg="linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323"
-          justifyContent="center"
-          alignItems="center"
-          onClick={handleChooseCover}
-          cursor="pointer"
-        >
-          {state.cover ? (
-            <Image w="100%" h="160px" src={state.cover} alt="cover photo" />
-          ) : (
-            <Icon as={AddIcon} />
-          )}
-        </Flex>
+        {state.cover ? (
+          <Box width="100%">
+            <Image
+              w="100%"
+              h="170px"
+              src={state.cover}
+              alt="cover photo"
+              width="100%"
+              objectFit="cover"
+              zIndex={"1"}
+            />
+            <Box
+              position={"absolute"}
+              top="43%"
+              left="48%"
+              zIndex="20"
+              onClick={handleChooseCover}
+              cursor="pointer"
+            >
+              <Icon as={AddIcon} />
+            </Box>
+          </Box>
+        ) : (
+          <Flex
+            w="100%"
+            h="160px"
+            bg="linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(.jpg), #232323"
+            justifyContent="center"
+            alignItems="center"
+          ></Flex>
+        )}
 
         <Box
           position={"absolute"}
-          bottom="-52%"
+          bottom="-57%"
           left={"50%"}
           transform="translateX(-50%)"
-          onClick={handleChooseProfile}
-          cursor="pointer"
         >
-          <Circle size="120px" bg="#232323" color="white">
-            {state.profile ? (
-              <Image
-                src={state.profile}
-                alt="profile photo"
-                borderRadius="50%"
-                objectFit={"cover"}
-                h="120px"
-                w="120px"
-              />
-            ) : (
-              <Icon as={AddIcon} />
-            )}
-          </Circle>
+          {state.profile ? (
+            <Box width="100%">
+              <Box zIndex={"-1"} position="relative">
+                <Image
+                  src={state.profile}
+                  alt="profile photo"
+                  borderRadius="50%"
+                  objectFit={"cover"}
+                  h="120px"
+                  w="120px"
+                />
+              </Box>
+
+              <Box
+                top="36%"
+                left="38%"
+                zIndex="1"
+                position={"absolute"}
+                onClick={handleChooseProfile}
+                cursor="pointer"
+              >
+                <Icon as={AddIcon} />
+              </Box>
+            </Box>
+          ) : (
+            <Circle size="120px" bg="#232323" color="white"></Circle>
+          )}
         </Box>
       </Box>
       <input

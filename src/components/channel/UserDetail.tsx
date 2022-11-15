@@ -9,7 +9,7 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 import CreateChannelModal from "@components/createChannel/CreateChannelModal";
@@ -18,7 +18,7 @@ import { scrollBarStyle } from "@constants/utils";
 import SideIcon from "@icons/SideIcon";
 import { useAppSelector } from "redux/app/hooks";
 
-type Channel = {
+export type Channel = {
   bio: string;
   cover?: string;
   createdAt: string;
@@ -26,7 +26,7 @@ type Channel = {
   name: string;
   subscriptionFee: number;
   subscriptionInfo: string;
-  profile?: string;
+  photo?: string;
   updatedAt: string;
   userId: string;
   visitors: Array<string>;
@@ -46,7 +46,14 @@ const UserDetail = ({ data }: { data?: Channel }) => {
     <>
       <Box position="relative">
         {data?.cover ? (
-          <Image w="100%" h="170px" src={data?.cover} alt="cover photo" />
+          <Image
+            w="100%"
+            h="170px"
+            src={data?.cover}
+            alt="cover photo"
+            width="100%"
+            objectFit="cover"
+          />
         ) : (
           <Flex
             w="100%"
@@ -65,9 +72,9 @@ const UserDetail = ({ data }: { data?: Channel }) => {
           left={"50%"}
           transform="translateX(-50%)"
         >
-          {data?.profile ? (
+          {data?.photo ? (
             <Image
-              src={data?.profile}
+              src={data?.photo}
               alt="profile photo"
               borderRadius="50%"
               objectFit={"cover"}
