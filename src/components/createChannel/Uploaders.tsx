@@ -28,7 +28,7 @@ const Uploaders = ({
   return (
     <>
       <Box position="relative">
-        {false ? (
+        {state.cover ? (
           <Box width="100%">
             <Image
               w="100%"
