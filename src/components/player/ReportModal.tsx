@@ -27,7 +27,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
 
   const handleReport = async (values: any) => {
     const reports = Object.keys(values);
-    console.log(reports);
     if (!reports.length) {
       toast.error('Please check your report(s)');
       return;

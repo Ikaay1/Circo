@@ -30,9 +30,11 @@ function VideoGrid({
             key={video._id}
             thumbWidth={thumbWidth}
             isSubscribed={
-              video?.uploader_id?.subscribers?.find(
-                (theId) => theId === userProfile?._id,
-              )
+              video.uploader_id?._id === userProfile?._id
+                ? true
+                : video?.uploader_id?.subscribers?.find(
+                    (theId) => theId === userProfile?._id,
+                  )
                 ? true
                 : false
             }

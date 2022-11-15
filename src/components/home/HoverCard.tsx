@@ -126,7 +126,7 @@ function HoverCard({
                 {moment(video?.createdAt).fromNow()}
               </Text>
             </Flex>
-            {video.uploader_id._id !== userProfile?._id && (
+            {video.uploader_id?._id !== userProfile?._id && (
               <Button
                 color='clique.white'
                 bg={

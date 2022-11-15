@@ -19,6 +19,7 @@ function VideoThumb({
 }) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [isHover, setIsHover] = React.useState(false);
+  console.log(video.uploader_id);
 
   const router = useRouter();
   return (

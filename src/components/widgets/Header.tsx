@@ -28,7 +28,6 @@ type Props = {
 function Header({upload, search, setSearch}: Props) {
   const [searchWidth, setSearchWidth] = React.useState('300px');
   const router = useRouter();
-  console.log(router);
 
   return (
     <Flex
