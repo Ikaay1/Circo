@@ -46,7 +46,7 @@ function Stream({
       initialValues={{
         title: streamDetails?.eventId?.title || "",
         description: streamDetails?.eventId?.description || "",
-        thumbNail: streamDetails?.eventId?.thumbNails[0] || ("" as any),
+        thumbNail: streamDetails?.eventId?.thumbNails[0] || "",
         category: streamDetails?.eventId?.categoryId || "",
         fee: streamDetails?.eventId?.fee || 0,
         ageRange: streamDetails?.eventId?.ageRange || "",
@@ -163,11 +163,9 @@ function Stream({
                             {" "}
                             <Box
                               bgImage={
-                                props.values.thumbNail?.startsWith("http")
-                                  ? `url(${props.values.thumbNail})`
-                                  : `url(${URL.createObjectURL(
-                                      props.values.thumbNail
-                                    )})`
+                                props.values.thumbNail?.name
+                                  ? URL.createObjectURL(props.values.thumbNail)
+                                  : props.values.thumbNail
                               }
                               rounded="10px"
                               h="120px"
@@ -196,6 +194,7 @@ function Stream({
                           </Flex>
                         )}
                       </label>
+
                       <FormErrorMessage>
                         {form.errors.thumbNail}
                       </FormErrorMessage>

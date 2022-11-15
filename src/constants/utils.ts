@@ -446,7 +446,9 @@ export const playListData = [
   },
 ];
 // export const baseUrl: string = 'https://clique-backend-dev.onrender.com/';
-export const baseUrl: string = 'http://localhost:3000/';
+// export const baseUrl: string = 'http://localhost:3000/';
+
+export const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
 
 export const scrollBarStyle = {
   '&::-webkit-scrollbar': {
@@ -541,7 +543,7 @@ export const settingsMenu = [
 
 export const goliveMenu = [
   {
-    name: 'Stream',
+    name: 'Stream Now',
     route: 'stream',
     icon: StreamIcon,
   },
