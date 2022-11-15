@@ -10,6 +10,7 @@ import {
 } from 'redux/services/content.service';
 
 import { Box, Divider, Flex } from '@chakra-ui/react';
+import EmptyState from '@components/emptyState/EmptyState';
 import CliqueLoader from '@components/home/CliqueLoader';
 import LiveEvents from '@components/home/LiveEvents';
 import LiveTopCard from '@components/home/LiveTopCard';
@@ -109,11 +110,17 @@ function Index() {
                 />
                 <Divider />
 
-                <VideoGrid
-                  thumbWidth={{lg: '220px', mlg: '280px', xl: 'full'}}
-                  width={'calc(100vw - 560px)'}
-                  videos={contents}
-                />
+                {!loading && !contents.length ? (
+                  <Box mt='20px'>
+                    <EmptyState msg='Oops!. No video here' />
+                  </Box>
+                ) : (
+                  <VideoGrid
+                    thumbWidth={{lg: '220px', mlg: '280px', xl: 'full'}}
+                    width={'calc(100vw - 560px)'}
+                    videos={contents}
+                  />
+                )}
               </>
             )}
           </Box>
