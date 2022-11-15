@@ -127,20 +127,23 @@ function HoverCard({
                 {moment(video?.createdAt).fromNow()}
               </Text>
             </Flex>
-            {video.uploader_id._id !== userProfile?._id && (
+            {video.uploader_id?._id !== userProfile?._id && (
               <>
-                {/* <Box
-                  bgImage={
-                    props.values.thumbNail?.startsWith("http")
-                      ? `url(${props.values.thumbNail})`
-                      : `url(${URL.createObjectURL(props.values.thumbNail)})`
-                  }
-                  rounded="10px"
-                  h="120px"
-                  w="250px"
-                  bgRepeat={"no-repeat"}
-                  bgSize={"cover"}
-                ></Box> */}
+                {/* // <Button
+              //   color='clique.white'
+              //   bg={
+              //     video.uploader_id.subscribers.includes(userProfile?._id)
+              //       ? 'clique.grey'
+              //       : 'clique.purple'
+              //   }
+              //   rounded={'full'}
+              //   fontWeight='400'
+              //   size={'sm'}
+              // >
+              //   {video.uploader_id.subscribers.includes(userProfile?._id)
+              //     ? 'Subscribed'
+              //     : 'Subscribe'}
+              // </Button> */}
               </>
             )}
           </Flex>

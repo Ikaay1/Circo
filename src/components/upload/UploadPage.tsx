@@ -43,7 +43,6 @@ function UploadPage({url, name}: Props) {
   const {data, isLoading} = useCategoryQuery('');
   const [thumbNail, setThumbNail] = useState<string | Blob>('');
   const [imageError, setImageError] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
   const [createContent, createContentStatus] = useCreateContentMutation();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -61,12 +60,9 @@ function UploadPage({url, name}: Props) {
         toast.error('Please upload a thumbnail');
         return;
       }
-      setLoading(true);
       let file = await fetch(url)
         .then((r) => r.blob())
         .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
-      console.log(thumbNail);
-      console.log(file);
       const formData = new FormData();
       formData.append('title', state.title);
       formData.append('description', state.description);
@@ -74,12 +70,9 @@ function UploadPage({url, name}: Props) {
       formData.append('ageRange', state.ageRange);
       formData.append('file', file);
       formData.append('thumbNail', thumbNail);
-      createContent(formData).then((res) => {
-        setLoading(false);
-        router.push('/home');
-      });
+      await createContent(formData);
+      router.push('/home');
     } catch (error: any) {
-      setLoading(false);
       console.log(error);
     }
   };
@@ -289,7 +282,11 @@ function UploadPage({url, name}: Props) {
               </Box>
             </Box>
           </Box>
-          <Btn text='upload' submit={true} loading={loading}></Btn>
+          <Btn
+            text='upload'
+            submit={true}
+            isLoading={createContentStatus.isLoading}
+          />
         </Flex>
       </Flex>
     </form>

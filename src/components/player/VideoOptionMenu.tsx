@@ -26,7 +26,6 @@ function VideoOptionMenu({player, video}: any) {
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
   const {data, refetch} = useGetUserQuery(userProfile?._id);
   const dispatch = useAppDispatch();
-  console.log('video', video);
 
   useEffect(() => {
     if (player.current) {
@@ -49,7 +48,6 @@ function VideoOptionMenu({player, video}: any) {
   }, [data]);
 
   const handleSaveVideo = async (save: string) => {
-    console.log('entered');
     if (save === 'save') {
       await saveVideo({videoId: video._id});
       refetch();
