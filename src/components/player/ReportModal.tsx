@@ -81,11 +81,18 @@ function ReportModal() {
             </Text>
             <Box>
               <Formik
-                initialValues={{}}
+                initialValues={{
+                  spam: false,
+                  nudity: false,
+                  violence: false,
+                  harassment: false,
+                  other: false,
+                }}
                 onSubmit={(values, actions) => {
                   setTimeout(() => {
                     alert(JSON.stringify(values, null, 2));
                     actions.setSubmitting(false);
+                    actions.resetForm();
                   }, 1000);
                 }}
               >

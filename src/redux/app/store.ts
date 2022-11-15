@@ -66,6 +66,7 @@ export const store: any = configureStore({
       channelApi.middleware,
       playlistApi.middleware,
       liveAPI.middleware,
+      userApi.middleware,
     ]),
 });
 
