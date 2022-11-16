@@ -4,22 +4,20 @@ import {
   Flex,
   Image,
   Modal,
-  ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import EventsCard from "./EventsCard";
+import moment from "moment";
 
-function EventModal({ imgUrl }: any) {
+function EventModal({ event }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <EventsCard onOpen={onOpen} imgUrl={imgUrl} />
+      <EventsCard onOpen={onOpen} event={event} />
 
       <Modal
         isCentered
@@ -43,7 +41,7 @@ function EventModal({ imgUrl }: any) {
             <Image
               w="100%"
               borderTopRadius={"10px"}
-              src={imgUrl}
+              src={event?.eventId?.thumbNails[0]}
               alt="burnaboys event"
             />
             <Box bg="clique.lightGrey" rounded={"10px"} p="20px">
@@ -55,7 +53,7 @@ function EventModal({ imgUrl }: any) {
                 lineHeight={"1.3"}
                 mr="5px"
               >
-                BURNABOY LIVE CONCERT
+                {event?.eventId?.title}
               </Text>
               <Text
                 color={"clique.base"}
@@ -65,7 +63,7 @@ function EventModal({ imgUrl }: any) {
                 lineHeight={"1.3"}
                 mr="5px"
               >
-                Friday 12th March 2021
+                {moment(event?.eventId?.schedule).format("MMM Do YYYY h:mm a")}
               </Text>
               <Text
                 mt="20px"
@@ -78,10 +76,8 @@ function EventModal({ imgUrl }: any) {
               >
                 <Text color={"clique.base"} as="span">
                   About:
-                </Text>{" "}
-                Lörem ipsum suledes. Safönde pred in. Oskap nil reaning har
-                ultrare. Vajuska varade, cynfili parade, på öl. Intrabel
-                tralingar. Prer gps-väst som kat igöskapet. Söning 5:2-diet
+                </Text>
+                {event?.eventId?.description}
               </Text>
 
               <Flex
@@ -98,9 +94,9 @@ function EventModal({ imgUrl }: any) {
                   mr="5px"
                 >
                   <Text color={"clique.base"} as="span">
-                    Fee:
-                  </Text>{" "}
-                  N5000
+                    Fee:{" "}
+                  </Text>
+                  N{event?.eventId?.fee}
                 </Text>
 
                 <Button
