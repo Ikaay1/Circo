@@ -1,12 +1,13 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import moment from "moment";
 
-function EventsCard({ onOpen, imgUrl }: any) {
+function EventsCard({ onOpen, event }: any) {
   return (
     <Box onClick={onOpen} cursor="pointer" p="10px">
       <Image
         w="100%"
-        src={imgUrl}
+        src={event?.eventId?.thumbNails[0]}
         borderTopRadius={"10px"}
         alt="burnaboys event"
       />
@@ -20,6 +21,7 @@ function EventsCard({ onOpen, imgUrl }: any) {
         bg="linear-gradient(151.47deg, rgba(0, 0, 0, 0.71) -17.86%, rgba(186, 159, 0, 0.56) 217.73%)"
       >
         <Text
+          maxW={"35%"}
           noOfLines={2}
           color={"clique.white"}
           fontFamily={"Poppins"}
@@ -28,7 +30,7 @@ function EventsCard({ onOpen, imgUrl }: any) {
           lineHeight={"1.2"}
           mr="5px"
         >
-          BURNABOY
+          {event?.eventId?.title}
         </Text>
         <Text
           pos={"relative"}
@@ -62,7 +64,7 @@ function EventsCard({ onOpen, imgUrl }: any) {
           fontSize={"smSubHead"}
           lineHeight={"1.2"}
         >
-          12th Dec
+          {moment(event?.eventId?.schedule).format("MMM Do ")}
         </Text>{" "}
         <Text
           pos={"relative"}
@@ -74,7 +76,7 @@ function EventsCard({ onOpen, imgUrl }: any) {
           fontSize={"smSubHead"}
           lineHeight={"1.2"}
         >
-          7pm
+          {moment(event?.eventId?.schedule).format("h a")}
         </Text>
       </Flex>
     </Box>

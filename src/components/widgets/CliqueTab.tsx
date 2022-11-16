@@ -1,9 +1,16 @@
 import { Tab } from "@chakra-ui/react";
 import React from "react";
 
-function CliqueTab({ children }: { children: React.ReactNode }) {
+function CliqueTab({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
   return (
     <Tab
+      onClick={onClick}
       px={0}
       mr="20px"
       fontSize={"smSubHead"}

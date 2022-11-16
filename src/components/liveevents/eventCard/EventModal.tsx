@@ -15,9 +15,9 @@ import { scrollBarStyle } from "@constants/utils";
 
 import BodyOne from "./BodyOne";
 import BodyTwo from "./BodyTwo";
-import Card from "./EventCard";
+import EventCard from "./EventCard";
 
-function EventModal() {
+function EventModal({ event }: { event: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [step, setStep] = React.useState(1);
 
@@ -28,7 +28,7 @@ function EventModal() {
   }, [isOpen]);
   return (
     <>
-      <Card onOpen={onOpen} />
+      <EventCard event={event} onOpen={onOpen} />
 
       <Modal
         isCentered

@@ -1,15 +1,16 @@
 import React from "react";
-
+import moment from "moment";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-function EventCard({ onOpen }: { onOpen: () => void }) {
+function EventCard({ onOpen, event }: { onOpen: () => void; event: any }) {
   return (
     <Flex
+      minW={{ lg: "220px", mlg: "280px", xl: "full" }}
       rounded={"10px"}
       alignItems="flex-end"
       h={{ lg: "180px", mlg: "200px" }}
       bg="clique.lightGrey"
-      bgImage={"url(/eventFlyer.png)"}
+      bgImage={`url(${event?.eventId?.thumbNails[0]})`}
       bgSize={"cover"}
       bgPosition={"center"}
       onClick={() => {
@@ -35,7 +36,7 @@ function EventCard({ onOpen }: { onOpen: () => void }) {
           lineHeight={"1.2"}
           mr="5px"
         >
-          BURNABOY LIVE - EKO HOTEL AND SUITS
+          {event?.eventId?.title}
         </Text>
         <Text
           noOfLines={2}
@@ -46,7 +47,7 @@ function EventCard({ onOpen }: { onOpen: () => void }) {
           lineHeight={"1.2"}
           mt="5px"
         >
-          DEC 26 . 6PM
+          {moment(event?.eventId?.schedule).format("MMM DD . h:mm A")}
         </Text>
       </Box>
     </Flex>
