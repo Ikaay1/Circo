@@ -6,13 +6,7 @@ import Header from '@components/widgets/Header';
 
 import ProtectedRoute from './ProtectedRoute';
 
-function HomeLayout({
-  children,
-  upload,
-  toggleView,
-  search,
-  setSearch,
-}: IHomeLayoutProps) {
+function HomeLayout({children, upload, toggleView}: IHomeLayoutProps) {
   return (
     <Box
       maxH={toggleView ? '' : '100vh'}
@@ -22,7 +16,7 @@ function HomeLayout({
       // overflowY={"hidden"}
       bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}
     >
-      <Header upload={upload} search={search} setSearch={setSearch} />
+      <Header upload={upload} />
       {children}
     </Box>
   );

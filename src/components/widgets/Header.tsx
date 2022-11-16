@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BsBroadcast } from 'react-icons/bs';
 import { MdAddCircleOutline, MdOutlineNotificationsNone } from 'react-icons/md';
@@ -21,13 +21,12 @@ import UploadModal from '@components/upload/UploadModal';
 
 type Props = {
   upload?: () => void;
-  search?: string;
-  setSearch?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function Header({upload, search, setSearch}: Props) {
-  const [searchWidth, setSearchWidth] = React.useState('300px');
+function Header({upload}: Props) {
+  const [searchWidth, setSearchWidth] = useState('300px');
   const router = useRouter();
+  const [search, setSearch] = useState('');
 
   return (
     <Flex
@@ -60,11 +59,13 @@ function Header({upload, search, setSearch}: Props) {
         justifyContent={'space-between'}
       >
         <InputGroup w={searchWidth} transition='all 1s ease'>
-          <InputLeftElement px='20px' pointerEvents='none'>
+          <InputLeftElement px='20px'>
             <Icon
               fontSize={'smHead'}
               color='clique.white'
               as={AiOutlineSearch}
+              cursor={'pointer'}
+              onClick={() => router.push(`/search/${search}`)}
             />
           </InputLeftElement>
           <Input
@@ -84,8 +85,8 @@ function Header({upload, search, setSearch}: Props) {
             _placeholder={{
               color: 'clique.white',
             }}
-            value={search ? search : ''}
-            onChange={setSearch ? (e) => setSearch(e.target.value) : () => {}}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder='Search'
           />
         </InputGroup>
