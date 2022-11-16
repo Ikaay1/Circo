@@ -446,8 +446,7 @@ export const playListData = [
   },
 ];
 
-// export const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
-export const baseUrl = "http://localhost:4000/";
+export const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
 
 export const scrollBarStyle = {
   "&::-webkit-scrollbar": {
