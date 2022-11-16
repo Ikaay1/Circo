@@ -1,4 +1,4 @@
-import { Box, Divider, Text } from "@chakra-ui/react";
+import { Box, Divider, Skeleton, Text } from "@chakra-ui/react";
 import React from "react";
 import { useGetAllLiveStreamQuery } from "redux/services/live.service";
 import EventModal from "./EventModal";
@@ -50,6 +50,10 @@ function LiveEvents() {
       <Box px="50px" py="5px">
         <Divider />
       </Box>
+      {isFetching &&
+        [...Array(5)].map((_, i) => (
+          <Skeleton h="250px" mr="10px" w="" m="10px" rounded="10px" key={i} />
+        ))}
       {filteredData?.map((event: any) => (
         <EventModal key={event._id} event={event} />
       ))}
