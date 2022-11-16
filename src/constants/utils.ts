@@ -547,7 +547,7 @@ export const goliveMenu = [
     icon: StreamIcon,
   },
   {
-    name: "Live event",
+    name: "Schedule Stream",
     route: "liveevent",
     icon: LiveEventIcon,
   },
