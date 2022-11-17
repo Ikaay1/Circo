@@ -176,6 +176,17 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+
+    getContentsByCategory: builder.query<any, any>({
+      query: ({page, limit, categoryId}) => ({
+        url: `content/upload-video/category/${categoryId}?page=${page}&limit=${limit}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -194,4 +205,5 @@ export const {
   useSaveVideoMutation,
   useReportCommentMutation,
   useGetContentsBySearchQuery,
+  useGetContentsByCategoryQuery,
 } = contentApi;
