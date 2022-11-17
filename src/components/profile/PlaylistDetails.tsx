@@ -39,8 +39,8 @@ const PlaylistDetails = ({
   playlist,
   isLoading,
 }: {
-  playlist: Playlist;
-  isLoading: Boolean;
+  playlist?: Playlist;
+  isLoading?: Boolean;
 }) => {
   const router = useRouter();
   return (
@@ -51,7 +51,7 @@ const PlaylistDetails = ({
             <ProfileDetails />
           </Box>
         )}
-        {!isLoading && playlist?  (
+        {!isLoading && playlist ? (
           <Box
             marginTop={
               router.asPath === "/channel/1/content/playlist" ? "3rem" : "0rem"
@@ -108,8 +108,8 @@ const PlaylistDetails = ({
       <Box flex="5">
         <PlaylistList
           videos={playlist?.videos as Videos[]}
-          id={playlist?.userId}
-          isLoading={isLoading}
+          id={playlist?.userId as string}
+          isLoading={isLoading as boolean}
         />
       </Box>
     </Box>
