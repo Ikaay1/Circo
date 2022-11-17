@@ -4,6 +4,7 @@ import {
   Box,
   Circle,
   Flex,
+  Icon,
   Image,
   Modal,
   ModalContent,
@@ -12,11 +13,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
-import CreateChannelModal from "@components/createChannel/CreateChannelModal";
+// import CreateChannelModal from "@components/createChannel/CreateChannelModal";
 import Subscriptions from "@components/profile/Subscriptions";
 import { scrollBarStyle } from "@constants/utils";
 import SideIcon from "@icons/SideIcon";
 import { useAppSelector } from "redux/app/hooks";
+import EmptyProfile from "@icons/EmptyProfile";
 
 export type Channel = {
   bio: string;
@@ -55,11 +57,14 @@ const UserDetail = ({ data }: { data?: Channel }) => {
             objectFit="cover"
           />
         ) : (
-          <Flex
+          <Image
+            objectFit="cover"
             w="100%"
             h="160px"
-            bg="linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323"
-          ></Flex>
+            src="/assets/channelEmpty.png"
+            alt="empty state"
+            width="100%"
+          />
         )}
 
         <Box
@@ -82,7 +87,24 @@ const UserDetail = ({ data }: { data?: Channel }) => {
               w="120px"
             />
           ) : (
-            <Circle size="120px" bg="#232323" color="white"></Circle>
+            <>
+              <Circle
+                size="120px"
+                bg="#232323"
+                color="white"
+                zIndex={"-1"}
+              ></Circle>
+              <Box top="15%" left="17%" position={"absolute"}>
+                <Icon as={EmptyProfile} fontSize="81px" />
+                <Box
+                  top="55%"
+                  left="43%"
+                  zIndex="1"
+                  position={"absolute"}
+                  cursor="pointer"
+                ></Box>
+              </Box>
+            </>
           )}
 
           {/* name of content creator. Shows on both profile and channel routes but only in their content subroutes(and analytics subroute for channel) */}
@@ -126,9 +148,9 @@ const UserDetail = ({ data }: { data?: Channel }) => {
 
         {router.pathname.includes("profile") ? (
           <Box position={"absolute"} right="10" bottom="-55">
-            {data === null && (
+            {/* {data === null && (
               <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
-            )}
+            )} */}
 
             <SideIcon />
           </Box>
@@ -158,11 +180,11 @@ const UserDetail = ({ data }: { data?: Channel }) => {
           <Subscriptions />
         </ModalContent>
       </Modal>
-      <CreateChannelModal
+      {/* <CreateChannelModal
         onOpen={channelOnOpen}
         isOpen={channelIsOpen}
         onClose={channelOnClose}
-      />
+      /> */}
     </>
   );
 };
