@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  useGetContentCommentsQuery,
-  usePostCommentOnContentMutation,
-} from "redux/services/content.service";
-
 import { Box, Text } from "@chakra-ui/react";
-
-import EachComment from "./EachComment";
-import NewComment from "./NewComment";
 
 function CommentSection({}: {}) {
   return (
