@@ -27,8 +27,8 @@ export const playlistApi = createApi({
     }),
 
     getPlaylist: builder.query<any, any>({
-      query: () => ({
-        url: `playlist/${store.getState()?.app?.userReducer?.userProfile?._id}`,
+      query: (id) => ({
+        url: `playlist/${id}`,
         method: "GET",
       }),
       providesTags: ["playlist"],

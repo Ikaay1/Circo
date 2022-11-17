@@ -10,7 +10,7 @@ import CliqueLoader from "@components/home/CliqueLoader";
 
 const Playlist = () => {
   const router = useRouter();
-  const id = router.query.playlistId;
+  const id = router?.query?.playlistId;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useGetSinglePlaylistQuery(id);
 
@@ -22,11 +22,10 @@ const Playlist = () => {
           <SideMenu menu={channelMenu} />
         </Box>
         <Box flex="5.5" h="100%" overflowY="scroll" sx={scrollBarStyle}>
-          {isLoading && !data ? (
-            <CliqueLoader />
-          ) : (
-            <PlaylistDetails playlist={data?.data?.playlist} />
-          )}
+          <PlaylistDetails
+            playlist={data?.data?.playlist}
+            isLoading={isLoading}
+          />
         </Box>
       </Box>
     </Box>

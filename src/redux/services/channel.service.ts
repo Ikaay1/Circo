@@ -34,7 +34,21 @@ export const channelApi = createApi({
       }),
       providesTags: ["channel"],
     }),
+    getIndividualChannel: builder.query<any, any>({
+      query: (userId) => ({
+        url: `/channel/${userId}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      providesTags: ["channel"],
+    }),
   }),
 });
 
-export const { useUpdateChannelMutation, useGetChannelQuery } = channelApi;
+export const {
+  useUpdateChannelMutation,
+  useGetChannelQuery,
+  useGetIndividualChannelQuery,
+} = channelApi;
