@@ -25,22 +25,22 @@ type Menu = {
 function Index() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [computedMenu, setComputedMenu] = useState<Array<Menu>>([]);
-  const {
-    data: channelData,
-    isError,
-    isLoading: channelLoading,
-    refetch,
-  } = useGetChannelQuery("");
+  // const [computedMenu, setComputedMenu] = useState<Array<Menu>>([]);
+  // const {
+  //   data: channelData,
+  //   isError,
+  //   isLoading: channelLoading,
+  //   refetch,
+  // } = useGetChannelQuery("");
 
-  useEffect(() => {
-    refetch();
-    if (!channelLoading && channelData?.data?.channel === null) {
-      setComputedMenu(menuWithOutLive);
-    } else {
-      setComputedMenu(menu);
-    }
-  }, [channelLoading, channelData, refetch]);
+  // useEffect(() => {
+  //   refetch();
+  //   if (!channelLoading && channelData?.data?.channel === null) {
+  //     setComputedMenu(menuWithOutLive);
+  //   } else {
+  //     setComputedMenu(menu);
+  //   }
+  // }, [channelLoading, channelData, refetch]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -60,7 +60,7 @@ function Index() {
       overflowY="scroll"
       sx={scrollBarStyle}
     >
-      {computedMenu.map(
+      {menu.map(
         (
           item: {
             name: string;

@@ -50,7 +50,7 @@ const Index = () => {
           )}
 
           {router.query.name === "edit" && (
-            <Box width={"100%"}>
+            <Box>
               <EditChannel data={channelData?.data?.channel} />
             </Box>
           )}
