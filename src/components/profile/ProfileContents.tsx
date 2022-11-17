@@ -13,6 +13,7 @@ import Playlists from "./Playlists";
 const ProfileContents = () => {
   const [route, setRoute] = useState("paid");
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+  console.log(userProfile)
   return (
     <>
       <Box borderBottom={"1px solid rgba(255, 255, 255, 0.1)"} display="flex">
@@ -59,7 +60,7 @@ const ProfileContents = () => {
 
       {route === "play" && (
         <Box mt={"2.5rem"}>
-          <Playlists newPlaylist={true} />
+          <Playlists newPlaylist={true} id={userProfile._id} />
         </Box>
       )}
 

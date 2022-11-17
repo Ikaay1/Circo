@@ -83,6 +83,19 @@ export const contentApi = createApi({
       providesTags: ['Content'],
     }),
 
+    getSingleUserContent: builder.query<any, any>({
+      query: (id) => ({
+        url: `content/channel/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
+
+
+
     createView: builder.mutation<any, any>({
       query: (body) => ({
         url: `content/view`,
@@ -194,4 +207,5 @@ export const {
   useSaveVideoMutation,
   useReportCommentMutation,
   useGetContentsBySearchQuery,
+  useGetSingleUserContentQuery
 } = contentApi;
