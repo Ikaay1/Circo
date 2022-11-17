@@ -12,6 +12,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 
+import { useRoutingChannel } from '../../../custumHooks/useRoutingChannel';
 import { contentData } from '../../constants/utils';
 import HoverCard from './HoverCard';
 import SubScribeModal from './SubScribeModal';
@@ -29,37 +30,10 @@ function VideoThumb({
 }) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [isHover, setIsHover] = React.useState(false);
-
+  const {handleRouting} = useRoutingChannel();
   const router = useRouter();
   return (
     <Box position={'relative'} ref={lastElementRef}>
-      <Data
-        {...{
-          isHover,
-          video,
-          setIsHover,
-          isSubscribed,
-          onClose,
-          onOpen,
-          router,
-        }}
-      />
-    </Box>
-  );
-}
-
-const Data = ({
-  isHover,
-  video,
-  setIsHover,
-  isSubscribed,
-  onClose,
-  onOpen,
-  router,
-  isOpen,
-}: any) => {
-  return (
-    <>
       {isHover ? (
         <ScaleFade reverse unmountOnExit in={isHover}>
           <HoverCard
@@ -70,26 +44,33 @@ const Data = ({
           />
         </ScaleFade>
       ) : (
-        <Box
-          onMouseEnter={() => setIsHover(true)}
-          cursor={'pointer'}
-          w='full'
-          onClick={() => {
-            if (isSubscribed) {
-              router.push(`/player/${video._id}`);
-            } else {
-              onOpen();
-            }
-          }}
-        >
-          <SubScribeModal onClose={onClose} isOpen={isOpen} onOpen={onOpen} />
+        <Box>
           <Box
-            h={{lg: '130px', mlg: '180px'}}
-            bgImage={`url(${video?.thumbNail})`}
-            bgSize='cover'
-            bgPosition='center'
-            rounded={'10px'}
-          />
+            onMouseEnter={() => setIsHover(true)}
+            cursor={'pointer'}
+            w='full'
+            onClick={() => {
+              if (isSubscribed) {
+                router.push(`/player/${video._id}`);
+              } else {
+                onOpen();
+              }
+            }}
+          >
+            <SubScribeModal
+              onClose={onClose}
+              isOpen={isOpen}
+              onOpen={onOpen}
+              id={video?.uploader_id?._id}
+            />
+            <Box
+              h={{lg: '130px', mlg: '180px'}}
+              bgImage={`url(${video?.thumbNail})`}
+              bgSize='cover'
+              bgPosition='center'
+              rounded={'10px'}
+            />
+          </Box>
 
           <Flex mt='15px'>
             <Avatar
@@ -102,6 +83,8 @@ const Data = ({
                   ? '/assets/ayarstar.png'
                   : 'https://bit.ly/prosper-baba'
               }
+              onClick={() => handleRouting(video?.uploader_id?._id)}
+              cursor='pointer'
             />
             <Box>
               <Text
@@ -166,8 +149,8 @@ const Data = ({
           </Flex>
         </Box>
       )}
-    </>
+    </Box>
   );
-};
+}
 
 export default VideoThumb;

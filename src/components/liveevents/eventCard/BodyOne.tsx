@@ -1,6 +1,16 @@
 import { Button, Text } from "@chakra-ui/react";
+import moment from "moment";
+import { useRouter } from "next/router";
+const NProgress = require("nprogress");
 
-function BodyOne({ setStep }: { setStep: (step: number) => void }) {
+function BodyOne({
+  setStep,
+  event,
+}: {
+  setStep: (step: number) => void;
+  event: any;
+}) {
+  const router = useRouter();
   return (
     <>
       <Text
@@ -13,7 +23,9 @@ function BodyOne({ setStep }: { setStep: (step: number) => void }) {
         textTransform={"uppercase"}
         mr="5px"
       >
-        TIWA SAVAGE LIVE - ONTARIO CANDA DEC 28 . 8PM
+        {event?.eventId?.title}
+        {": "}
+        {moment(event?.eventId?.schedule).format("MMM Do YYYY h:mm a")}
       </Text>
       <Text
         mt="20px"
@@ -27,21 +39,26 @@ function BodyOne({ setStep }: { setStep: (step: number) => void }) {
         <Text color={"clique.base"} as="span">
           About:
         </Text>{" "}
-        Lörem ipsum suledes. Safönde pred in. Oskap nil reaning har ultrare.
-        Vajuska varade, cynfili parade, på öl. Intrabel tralingar. Prer gps-väst
-        som kat igöskapet. Söning 5:2-diet
+        {event?.eventId?.description}
       </Text>
       <Button
         mt={"50px"}
         w="full"
         size="lg"
-        // onClick={() => setStep(2)}
+        onClick={() => {
+          NProgress.start();
+          if (event?.eventId?.fee === 0) {
+            router.push(`/stream/${event?.eventId?._id}`);
+          }
+          4;
+          NProgress.done();
+        }}
         bg="clique.base"
         color="clique.white"
         rounded={"full"}
         colorScheme="purple"
       >
-        Purchase Ticket
+        {event?.eventId?.fee ? `Purchase Ticket` : "Join Stream"}
       </Button>
     </>
   );

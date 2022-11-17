@@ -14,16 +14,20 @@ import {
 import CliqueGiftIcon from "@icons/CliqueGiftIcon";
 import { Field, Form, Formik } from "formik";
 import React from "react";
+import { useRoutingChannel } from "../../../custumHooks/useRoutingChannel";
 
 function SubScribeModal({
   isOpen,
   onOpen,
   onClose,
+  id,
 }: {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
+  id: string;
 }) {
+  const { handleRouting } = useRoutingChannel();
   return (
     <>
       <Modal size={"2xl"} isOpen={isOpen} isCentered onClose={onClose}>
@@ -67,6 +71,7 @@ function SubScribeModal({
               rounded={"full"}
               fontWeight={400}
               colorScheme="purple"
+              onClick={() => handleRouting(id)}
             >
               Go to Channel
             </Button>

@@ -26,8 +26,14 @@ import NewPlaylist from "./NewPlaylist";
 import { Playlist } from "./PlaylistDetails";
 import EmptyState from "@components/emptyState/EmptyState";
 
-const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
-  const { data, isLoading, isFetching } = useGetPlaylistQuery("");
+const Playlists = ({
+  newPlaylist,
+  id,
+}: {
+  newPlaylist: boolean;
+  id: string;
+}) => {
+  const { data, isLoading, isFetching } = useGetPlaylistQuery(id);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   let content;
@@ -45,11 +51,7 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
             <Skeleton w="300px" h="100%" borderRadius={"7px"} />
             <Flex align={"center"} mt="1">
               <SkeletonCircle size="10" mr="1" />
-              <Skeleton
-                w="70px"
-                h="20px"
-                borderRadius={"3px"}
-              />
+              <Skeleton w="70px" h="20px" borderRadius={"3px"} />
             </Flex>
           </Flex>
         ))}
@@ -79,11 +81,11 @@ const Playlists = ({ newPlaylist }: { newPlaylist: boolean }) => {
                   : () => router.push(`/channel/1/content/playlist/${each._id}`)
               }
             >
-              {each.videos[0].thumbNail ? (
+              {each?.videos[0]?.thumbNail ? (
                 <Image
                   w="100%"
                   h="100%"
-                  src={each.videos[0].thumbNail}
+                  src={each?.videos[0]?.thumbNail}
                   alt=""
                   objectFit={"cover"}
                   borderRadius="10px"
