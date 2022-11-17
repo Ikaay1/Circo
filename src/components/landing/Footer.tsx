@@ -150,7 +150,7 @@ const Footer = () => {
               justifyContent={{
                 base: 'center',
                 sm: 'flex-start',
-                lg: 'flex-end',
+                lg: 'flex-start',
               }}
               className={'button-container'}
               mt={{base: '.7rem'}}

@@ -132,16 +132,6 @@ const Interests = () => {
                   />
                 </Box>
               ))}
-              <Box>
-                <AuthButton
-                  w='380px'
-                  margin={'auto'}
-                  marginTop='2rem'
-                  name="Let's go!"
-                  onClick={handleSignUp}
-                  status={signUpStatus}
-                />
-              </Box>
             </>
           ) : (
             <>
@@ -153,6 +143,17 @@ const Interests = () => {
             </>
           )}
         </Box>
+        {data && (
+          <Box marginTop='2rem'>
+            <AuthButton
+              w='380px'
+              margin={'0 auto'}
+              name="Let's go!"
+              onClick={handleSignUp}
+              status={signUpStatus}
+            />
+          </Box>
+        )}
       </Box>
     </Box>
   );
