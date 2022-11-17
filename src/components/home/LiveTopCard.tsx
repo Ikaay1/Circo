@@ -48,8 +48,12 @@ function LiveTopCard() {
               <Avatar
                 p="0"
                 size="md"
-                name="Prosper Otemuyiwa"
-                src="https://bit.ly/prosper-baba"
+                name={
+                  event?.streamerId?.firstName +
+                  " " +
+                  event?.streamerId?.lastName
+                }
+                src={event?.streamerId?.profilePicture}
               />
             </Flex>
           ))}
