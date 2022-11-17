@@ -1,24 +1,14 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
-import {
-  Box,
-  FormControl,
-  Text,
-  useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
-import AuthButton from "@components/auth/AuthButton";
+import { Box, Text, useDisclosure, useToast } from "@chakra-ui/react";
 
-import ChannelInput from "./ChannelInput";
-import TextArea from "./TextArea";
 import Btn from "@components/Button/Btn";
-import CustumField from "@components/createChannel/CustumField";
-import Uploaders from "@components/createChannel/Uploaders";
-import { Formik, Form, FormikHelpers } from "formik";
-import { updateChannelSchema } from "schemas/channel.schema";
+import CustumField from "@components/channel/CustumField";
+import Uploaders from "@components/channel/Uploaders";
 import { SerializedError } from "@reduxjs/toolkit";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+import { Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
+import { updateChannelSchema } from "schemas/channel.schema";
 
 import { useAppDispatch } from "redux/app/hooks";
 import { useUpdateChannelMutation } from "redux/services/channel.service";
@@ -86,7 +76,6 @@ const EditChannel = ({ data }: { data?: Channel }) => {
     profileRef.current.files[0] &&
       myFormData.append("photo", profileRef.current.files[0]);
     const res: any = await updateChannel(myFormData);
-    console.log({ res });
     if ("data" in res) {
       dispatch(setChannel(res.data));
       toast({
@@ -124,7 +113,7 @@ const EditChannel = ({ data }: { data?: Channel }) => {
   };
 
   return (
-    <Box >
+    <>
       <Uploaders
         coverRef={coverRef}
         handleChooseCover={handleChooseCover}
@@ -191,7 +180,7 @@ const EditChannel = ({ data }: { data?: Channel }) => {
           </Form>
         )}
       </Formik>
-    </Box>
+    </>
   );
 };
 

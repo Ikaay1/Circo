@@ -1,6 +1,8 @@
-import { Box, Circle, Flex, Icon, Image } from "@chakra-ui/react";
+import { Box, Circle, Icon, Image } from "@chakra-ui/react";
 import AddIcon from "@icons/AddIcon";
-import { useRef, ChangeEvent, useState } from "react";
+import EmptyProfile from "@icons/EmptyProfile";
+import ProfileAdd from "@icons/ProfileAdd";
+import { ChangeEvent } from "react";
 
 type Props = {
   handleChooseCover: () => void;
@@ -16,7 +18,6 @@ type Props = {
   coverRef: HTMLInputElement | any;
   profileRef: HTMLInputElement | any;
 };
-
 const Uploaders = ({
   handleChooseCover,
   handleChooseProfile,
@@ -29,7 +30,7 @@ const Uploaders = ({
     <>
       <Box position="relative">
         {state.cover ? (
-          <Box width="100%">
+          <Box>
             <Image
               w="100%"
               h="170px"
@@ -37,13 +38,13 @@ const Uploaders = ({
               alt="cover photo"
               width="100%"
               objectFit="cover"
-              zIndex={"1"}
+              zIndex={"-1"}
             />
             <Box
               position={"absolute"}
               top="43%"
-              left="48%"
-              zIndex="20"
+              left="48.5%"
+              zIndex="1"
               onClick={handleChooseCover}
               cursor="pointer"
             >
@@ -51,13 +52,27 @@ const Uploaders = ({
             </Box>
           </Box>
         ) : (
-          <Flex
-            w="100%"
-            h="160px"
-            bg="linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(.jpg), #232323"
-            justifyContent="center"
-            alignItems="center"
-          ></Flex>
+          <>
+            <Image
+              objectFit="cover"
+              w="100%"
+              h="160px"
+              src="/assets/channelEmpty.png"
+              alt="empty state"
+              width="100%"
+              zIndex={"-1"}
+            />
+            <Box
+              position={"absolute"}
+              top="43%"
+              left="48.5%"
+              onClick={handleChooseCover}
+              cursor="pointer"
+              zIndex="1"
+            >
+              <Icon as={AddIcon} />
+            </Box>
+          </>
         )}
 
         <Box
@@ -68,17 +83,15 @@ const Uploaders = ({
         >
           {state.profile ? (
             <Box width="100%">
-              <Box zIndex={"-1"} position="relative">
-                <Image
-                  src={state.profile}
-                  alt="profile photo"
-                  borderRadius="50%"
-                  objectFit={"cover"}
-                  h="120px"
-                  w="120px"
-                />
-              </Box>
-
+              <Image
+                src={state.profile}
+                alt="profile photo"
+                borderRadius="50%"
+                objectFit={"cover"}
+                h="120px"
+                w="120px"
+                zIndex={"-1"}
+              />
               <Box
                 top="36%"
                 left="38%"
@@ -91,7 +104,27 @@ const Uploaders = ({
               </Box>
             </Box>
           ) : (
-            <Circle size="120px" bg="#232323" color="white"></Circle>
+            <>
+              <Circle
+                size="120px"
+                bg="#232323"
+                color="white"
+                zIndex={"-1"}
+              ></Circle>
+              <Box top="15%" left="17%" position={"absolute"}>
+                <Icon as={EmptyProfile} fontSize="81px" />
+                <Box
+                  top="55%"
+                  left="43%"
+                  zIndex="1"
+                  position={"absolute"}
+                  onClick={handleChooseProfile}
+                  cursor="pointer"
+                >
+                  <Icon as={ProfileAdd} boxSize={3} />
+                </Box>
+              </Box>
+            </>
           )}
         </Box>
       </Box>
