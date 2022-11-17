@@ -53,10 +53,10 @@ function EventModal({ event }: { event: any }) {
         >
           <Box px="50px">
             <Image
-              h={"300px"}
               w="full"
               alt="event flyer"
-              src="/eventFlyer.png"
+              src={event?.eventId?.thumbNails[0]}
+              rounded={"10px"}
             />
             <Text
               pt="10px"
@@ -66,7 +66,7 @@ function EventModal({ event }: { event: any }) {
               textTransform={"capitalize"}
               fontSize="smHead"
             >
-              N16,000
+              N{event?.eventId?.fee}
             </Text>
             <Text
               textAlign={"center"}
@@ -80,7 +80,7 @@ function EventModal({ event }: { event: any }) {
 
             {step === 1 && (
               <SlideFade in={step === 1} offsetX="0px" offsetY={"0"} dir="left">
-                <BodyOne setStep={setStep} />
+                <BodyOne event={event} setStep={setStep} />
               </SlideFade>
             )}
             {/* {step === 2 && (
