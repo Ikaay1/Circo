@@ -1,4 +1,5 @@
 import React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import { useAppSelector } from 'redux/app/hooks';
 
 import { SimpleGrid } from '@chakra-ui/react';
@@ -16,6 +17,7 @@ function VideoGrid({
   thumbWidth?: any;
 }) {
   const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
+
   return (
     <SimpleGrid
       columns={{base: 1, lg: 3, mlg: 3, xl: 4}}

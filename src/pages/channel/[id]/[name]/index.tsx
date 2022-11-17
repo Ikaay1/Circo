@@ -13,7 +13,7 @@ const Profile = () => {
         <Box flex='1.3' h='100%'>
           <SideMenu menu={channelMenu} />
         </Box>
-        <Box flex='5.5' h='100%'   >
+        <Box flex='5.5' h='100%'>
           <Index />
         </Box>
       </Box>
