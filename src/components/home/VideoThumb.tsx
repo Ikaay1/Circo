@@ -20,17 +20,46 @@ function VideoThumb({
   video,
   thumbWidth,
   isSubscribed,
+  lastElementRef,
 }: {
   video: contentData;
   thumbWidth: {base: string; lg: string; mlg: string; xl: string};
   isSubscribed: boolean;
+  lastElementRef?: any;
 }) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [isHover, setIsHover] = React.useState(false);
 
   const router = useRouter();
   return (
-    <Box position={'relative'}>
+    <Box position={'relative'} ref={lastElementRef}>
+      <Data
+        {...{
+          isHover,
+          video,
+          setIsHover,
+          isSubscribed,
+          onClose,
+          onOpen,
+          router,
+        }}
+      />
+    </Box>
+  );
+}
+
+const Data = ({
+  isHover,
+  video,
+  setIsHover,
+  isSubscribed,
+  onClose,
+  onOpen,
+  router,
+  isOpen,
+}: any) => {
+  return (
+    <>
       {isHover ? (
         <ScaleFade reverse unmountOnExit in={isHover}>
           <HoverCard
@@ -137,8 +166,8 @@ function VideoThumb({
           </Flex>
         </Box>
       )}
-    </Box>
+    </>
   );
-}
+};
 
 export default VideoThumb;

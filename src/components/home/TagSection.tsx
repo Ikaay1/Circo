@@ -7,10 +7,12 @@ import { CategoriesInterface } from '../../constants/interface';
 function TagSection({
   categories,
   setCategoryId,
+  setPage,
   categoryId,
 }: {
   categories: CategoriesInterface[];
   setCategoryId: React.Dispatch<React.SetStateAction<string>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
   categoryId: string;
 }) {
   return (
@@ -28,13 +30,16 @@ function TagSection({
       <Button
         variant='ghost'
         rounded={'full'}
-        bg={!categoryId ? 'clique.base' : 'clique.grey'}
+        bg={categoryId === 'all' ? 'clique.base' : 'clique.grey'}
         fontFamily={'Poppins'}
         size={'sm'}
         fontWeight={400}
         px='20px'
-        color={!categoryId ? 'clique.black' : 'clique.white'}
-        onClick={() => setCategoryId('')}
+        color={categoryId === 'all' ? 'clique.black' : 'clique.white'}
+        onClick={() => {
+          setCategoryId('all');
+          setPage(1);
+        }}
       >
         All
       </Button>
@@ -53,6 +58,7 @@ function TagSection({
           key={eachCategory.name}
           onClick={() => {
             setCategoryId(eachCategory._id);
+            setPage(1);
           }}
         >
           {eachCategory.name}

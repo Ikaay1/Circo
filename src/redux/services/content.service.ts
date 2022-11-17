@@ -28,8 +28,8 @@ export const contentApi = createApi({
     }),
 
     getContents: builder.query<any, any>({
-      query: ({page, limit}) => ({
-        url: `content/upload-video?page=${page}&limit=${limit}`,
+      query: ({page, limit, categoryId}) => ({
+        url: `content/upload-video/category/${categoryId}?page=${page}&limit=${limit}`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -167,19 +167,8 @@ export const contentApi = createApi({
     }),
 
     getContentsBySearch: builder.query<any, any>({
-      query: ({page, limit, search}) => ({
-        url: `content/search?page=${page}&limit=${limit}&search=${search}`,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }),
-      providesTags: ['Content'],
-    }),
-
-    getContentsByCategory: builder.query<any, any>({
-      query: ({page, limit, categoryId}) => ({
-        url: `content/upload-video/category/${categoryId}?page=${page}&limit=${limit}`,
+      query: ({page, limit, search, categoryId}) => ({
+        url: `content/search/${categoryId}?page=${page}&limit=${limit}&search=${search}`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -205,5 +194,4 @@ export const {
   useSaveVideoMutation,
   useReportCommentMutation,
   useGetContentsBySearchQuery,
-  useGetContentsByCategoryQuery,
 } = contentApi;
