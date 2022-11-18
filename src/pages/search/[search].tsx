@@ -1,9 +1,8 @@
 import HomeLayout from 'layouts/HomeLayout';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
 import { useCategoryQuery } from 'redux/services/category.service';
-import { useGetContentsQuery } from 'redux/services/content.service';
+import { useGetContentsBySearchQuery } from 'redux/services/content.service';
 
 import {
 	Box,
@@ -22,20 +21,19 @@ import VideoGrid from '@components/home/VideoGrid';
 import SideMenu from '@components/widgets/sideMenu';
 import { contentData, scrollBarStyle } from '@constants/utils';
 
-function Index() {
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
-  const [contents, setContents] = useState<contentData[]>([]);
-  const [hasChannel, setHasChannel] = useState(true);
-  const [numberOfTickets, setNumberOfTickets] = React.useState(2);
+function Search() {
   const [categoryId, setCategoryId] = useState('all');
   const categories = useCategoryQuery('');
   const router = useRouter();
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
-  const {data, isFetching, isLoading} = useGetContentsQuery({
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+  const [contents, setContents] = useState<contentData[]>([]);
+  const [page, setPage] = useState(1);
+  const {search} = router.query;
+  const {data, isFetching, isLoading} = useGetContentsBySearchQuery({
     page,
     limit: 7,
+    search,
     categoryId,
   });
 
@@ -47,18 +45,13 @@ function Index() {
       observerRef.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
           setPage((prevPage) => prevPage + 1);
+          console.log('last');
         }
       });
       if (node) observerRef.current.observe(node);
     },
     [loading, hasMore],
   );
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      router.push('/login');
-    }
-  }, [userProfile?._id, router]);
 
   useEffect(() => {
     setHasMore(false);
@@ -203,4 +196,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Search;

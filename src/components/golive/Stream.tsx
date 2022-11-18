@@ -21,7 +21,8 @@ import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
 } from "redux/services/live.service";
-import { setStreamDetails } from "redux/slices/streamSlice";
+import { setStreamDetails } from "redux/slices/streamSlice"; 
+import { streamSchema } from "schemas/livestream.schema";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
@@ -51,14 +52,7 @@ function Stream({
         fee: streamDetails?.eventId?.fee || 0,
         ageRange: streamDetails?.eventId?.ageRange || "",
       }}
-      validationSchema={Yup.object({
-        title: Yup.string().required("Title is Required"),
-        description: Yup.string().required("Description is Required"),
-        thumbNail: Yup.mixed().required("ThumbNail is Required"),
-        ageRange: Yup.string().required("Age Range Required"),
-        category: Yup.string().required("Category is Required"),
-        fee: Yup.number().required("Fee Required"),
-      })}
+      validationSchema={streamSchema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         const data = {
           title: values.title,

@@ -16,6 +16,7 @@ import {
 import { contentData } from "../../constants/utils";
 import SmallPlayer from "./SmallPlayer";
 import SubScribeModal from "./SubScribeModal";
+import { useRoutingChannel } from "../../../custumHooks/useRoutingChannel";
 
 function HoverCard({
   setIsHover,
@@ -32,18 +33,10 @@ function HoverCard({
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [subscribe, subscribeStatus] = useSubscribeMutation();
-  console.log("video is...", video);
-
+  const { handleRouting } = useRoutingChannel();
   return (
-    <Box 
+    <Box
       onMouseLeave={() => setIsHover(false)}
-      onClick={() => {
-        if (isSubscribed) {
-          router.push(`/player/${id}`);
-        } else {
-          onOpen();
-        }
-      }}
       position={"absolute"}
       cursor={"pointer"}
       rounded="20px"
@@ -53,7 +46,17 @@ function HoverCard({
       w="calc(100% + 20px)"
       transform={"translateX(-10px)"}
     >
-      <SmallPlayer video={video} />
+      <Box
+        onClick={() => {
+          if (isSubscribed) {
+            router.push(`/player/${id}`);
+          } else {
+            onOpen();
+          }
+        }}
+      >
+        <SmallPlayer video={video} />
+      </Box>
       <Flex p="15px">
         <Avatar
           mr={"10px"}
@@ -65,6 +68,8 @@ function HoverCard({
               ? "/assets/ayarstar.png"
               : "https://bit.ly/prosper-baba"
           }
+          onClick={() => handleRouting(video?.uploader_id?._id)}
+          cursor="pointer"
         />
         <Box>
           <Text
@@ -148,7 +153,12 @@ function HoverCard({
           </Flex>
         </Box>
       </Flex>
-      <SubScribeModal onClose={onClose} isOpen={isOpen} onOpen={onOpen} />
+      <SubScribeModal
+        onClose={onClose}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        id={video?.uploader_id?._id}
+      />
     </Box>
   );
 }

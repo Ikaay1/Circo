@@ -445,8 +445,8 @@ export const playListData = [
     name: "Ayra Star Mix",
   },
 ];
-// export const baseUrl: string = "https://clique-backend-dev.onrender.com/";
-export const baseUrl: string = 'http://localhost:4000/';
+
+export const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
 
 export const scrollBarStyle = {
   "&::-webkit-scrollbar": {
@@ -541,12 +541,12 @@ export const settingsMenu = [
 
 export const goliveMenu = [
   {
-    name: "Stream",
+    name: "Stream Now",
     route: "stream",
     icon: StreamIcon,
   },
   {
-    name: "Live event",
+    name: "Schedule Stream",
     route: "liveevent",
     icon: LiveEventIcon,
   },

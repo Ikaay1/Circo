@@ -15,9 +15,9 @@ import { scrollBarStyle } from "@constants/utils";
 
 import BodyOne from "./BodyOne";
 import BodyTwo from "./BodyTwo";
-import Card from "./EventCard";
+import EventCard from "./EventCard";
 
-function EventModal() {
+function EventModal({ event }: { event: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [step, setStep] = React.useState(1);
 
@@ -28,7 +28,7 @@ function EventModal() {
   }, [isOpen]);
   return (
     <>
-      <Card onOpen={onOpen} />
+      <EventCard event={event} onOpen={onOpen} />
 
       <Modal
         isCentered
@@ -53,10 +53,10 @@ function EventModal() {
         >
           <Box px="50px">
             <Image
-              h={"300px"}
               w="full"
               alt="event flyer"
-              src="/eventFlyer.png"
+              src={event?.eventId?.thumbNails[0]}
+              rounded={"10px"}
             />
             <Text
               pt="10px"
@@ -66,7 +66,7 @@ function EventModal() {
               textTransform={"capitalize"}
               fontSize="smHead"
             >
-              N16,000
+              N{event?.eventId?.fee}
             </Text>
             <Text
               textAlign={"center"}
@@ -80,7 +80,7 @@ function EventModal() {
 
             {step === 1 && (
               <SlideFade in={step === 1} offsetX="0px" offsetY={"0"} dir="left">
-                <BodyOne setStep={setStep} />
+                <BodyOne event={event} setStep={setStep} />
               </SlideFade>
             )}
             {/* {step === 2 && (

@@ -1,46 +1,23 @@
-import React, { useEffect, useState } from "react";
 import { HiOutlineLogout } from "react-icons/hi";
 
-import { Box, Divider, Flex, Icon, Link, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Icon, Text } from "@chakra-ui/react";
 import {
-  menu,
-  menuWithOutLive,
-  scrollBarStyle,
-  subcribees,
+  menu, scrollBarStyle,
+  subcribees
 } from "@constants/utils";
 
-import EachMenu from "./EachMenu";
-import EachSubscribe from "./EachSubscribe";
 import { useRouter } from "next/router";
 import { logout } from "redux/slices/authSlice";
-import { useGetChannelQuery } from "redux/services/channel.service";
+import EachMenu from "./EachMenu";
+import EachSubscribe from "./EachSubscribe";
 
 import { useAppDispatch } from "redux/app/hooks";
 
-type Menu = {
-  name: string;
-  icon: any;
-};
 
 function Index() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [computedMenu, setComputedMenu] = useState<Array<Menu>>([]);
-  const {
-    data: channelData,
-    isError,
-    isLoading: channelLoading,
-    refetch,
-  } = useGetChannelQuery("");
 
-  useEffect(() => {
-    refetch();
-    if (!channelLoading && channelData?.data?.channel === null) {
-      setComputedMenu(menuWithOutLive);
-    } else {
-      setComputedMenu(menu);
-    }
-  }, [channelLoading, channelData, refetch]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -60,7 +37,7 @@ function Index() {
       overflowY="scroll"
       sx={scrollBarStyle}
     >
-      {computedMenu.map(
+      {menu.map(
         (
           item: {
             name: string;

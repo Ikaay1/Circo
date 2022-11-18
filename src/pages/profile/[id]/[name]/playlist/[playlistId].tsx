@@ -22,11 +22,10 @@ const Playlist = () => {
           <SideMenu menu={channelMenu} />
         </Box>
         <Box flex="5.5" h="100%" overflowY="scroll" sx={scrollBarStyle}>
-          {isLoading && !data ? (
-            <CliqueLoader />
-          ) : (
-            <PlaylistDetails playlist={data?.data?.playlist} />
-          )}
+          <PlaylistDetails
+            playlist={data?.data?.playlist}
+            isLoading={isLoading}
+          />
         </Box>
       </Box>
     </Box>

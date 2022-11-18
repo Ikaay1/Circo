@@ -11,14 +11,18 @@ import { useGetUserContentsQuery } from "redux/services/content.service";
 import CliqueLoader from "@components/home/CliqueLoader";
 import { useGetChannelQuery } from "redux/services/channel.service";
 
-const Index = () => {
+const Index = ({
+  channelData,
+  data,
+  channelLoading,
+  isLoading,
+}: {
+  channelData?: any;
+  data?: any;
+  channelLoading?: boolean;
+  isLoading?: boolean;
+}) => {
   const router = useRouter();
-  const { data, isLoading } = useGetUserContentsQuery("");
-  const {
-    data: channelData,
-    isError,
-    isLoading: channelLoading,
-  } = useGetChannelQuery("");
   const des =
     router.query.name === "content" || router.pathname.includes("subscribe");
   return (
@@ -34,7 +38,10 @@ const Index = () => {
           sx={scrollBarStyle}
         >
           {router.query.name !== "edit" && (
-            <UserDetail data={channelData?.data?.channel} />
+            <UserDetail
+              data={channelData?.data?.channel}
+              id={channelData?.data?.channel?.userId}
+            />
           )}
 
           {router.query.name !== "edit" && (
@@ -45,12 +52,16 @@ const Index = () => {
           )}
           {des && (
             <Box mt={"6rem"} px="1.35rem">
-              <ChannelContents videos={data?.data?.videos} />
+              <ChannelContents
+                videos={data?.data?.videos}
+                id={channelData?.data?.channel?.userId}
+                isLoading={channelLoading as boolean}
+              />
             </Box>
           )}
 
           {router.query.name === "edit" && (
-            <Box width={"100%"}>
+            <Box>
               <EditChannel data={channelData?.data?.channel} />
             </Box>
           )}
