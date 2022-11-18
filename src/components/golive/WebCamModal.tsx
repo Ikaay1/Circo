@@ -29,7 +29,7 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
-} from "redux/services/live.service";
+} from "redux/services/livestream/live.service";
 import { CategoriesInterface } from "@constants/interface";
 
 function WebCamModal({ setState }: { setState: any }) {

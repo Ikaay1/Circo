@@ -1,6 +1,6 @@
 import { Box, Divider, Skeleton, Text } from "@chakra-ui/react";
 import React from "react";
-import { useGetAllLiveStreamQuery } from "redux/services/live.service";
+import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
 import EventModal from "./EventModal";
 
 function LiveEvents() {
