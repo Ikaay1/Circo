@@ -5,28 +5,22 @@ import { useAppSelector } from 'redux/app/hooks';
 import { useCategoryQuery } from 'redux/services/category.service';
 import { useGetContentsQuery } from 'redux/services/content.service';
 
-import {
-	Box,
-	Divider,
-	Flex,
-	SimpleGrid,
-	Skeleton,
-	SkeletonCircle,
-} from '@chakra-ui/react';
+import { Box, Divider, Flex } from '@chakra-ui/react';
 import EmptyState from '@components/emptyState/EmptyState';
 import CliqueLoader from '@components/home/CliqueLoader';
 import LiveEvents from '@components/home/LiveEvents';
 import LiveTopCard from '@components/home/LiveTopCard';
 import TagSection from '@components/home/TagSection';
 import VideoGrid from '@components/home/VideoGrid';
+import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
 import SideMenu from '@components/widgets/sideMenu';
 import { contentData, scrollBarStyle } from '@constants/utils';
 
+import useGetContents from '../hooks/useGetContents';
+
 function Index() {
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
-  const [contents, setContents] = useState<contentData[]>([]);
+
   const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
   const [categoryId, setCategoryId] = useState('all');
@@ -36,6 +30,20 @@ function Index() {
   const {data, isFetching, isLoading} = useGetContentsQuery({
     page,
     limit: 7,
+    categoryId,
+  });
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
+  const {loading, hasMore, contents} = useGetContents({
+    data,
+    isFetching,
+    page,
+    isLoading,
     categoryId,
   });
 
@@ -53,40 +61,6 @@ function Index() {
     },
     [loading, hasMore],
   );
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      router.push('/login');
-    }
-  }, [userProfile?._id, router]);
-
-  useEffect(() => {
-    setHasMore(false);
-    setContents([]);
-  }, [categoryId]);
-
-  useEffect(() => {
-    if (data && !isFetching) {
-      setContents((prevContents) => [
-        ...prevContents,
-        ...data?.data?.preference?.videos,
-      ]);
-      if (data?.data?.preference?.videos.length === 7) {
-        setHasMore(page < data?.data?.preference.totalPages);
-      } else {
-        setHasMore(false);
-      }
-    }
-  }, [data, page, isFetching]);
-
-  useEffect(() => {
-    if (!hasMore) return;
-    if (data && !isLoading && isFetching && page !== 1) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [data, isFetching, isLoading, page, hasMore]);
 
   return (
     <>
@@ -119,32 +93,7 @@ function Index() {
                 {
                   <>
                     {isFetching && page === 1 ? (
-                      <SimpleGrid
-                        mt='20px'
-                        w='100%'
-                        bg='clique.blackGrey'
-                        p='10px'
-                        columns={{lg: 3, xl: 4}}
-                        spacing={'30px'}
-                      >
-                        {[1, 2, 3, 4, 5, 6].map((num) => (
-                          <Box
-                            key={num}
-                            h={'100%'}
-                            w={{lg: '230px', xl: '310px'}}
-                          >
-                            <Skeleton h='150px' borderRadius='10px' />
-                            <Flex mt={'.5rem'} alignItems='center' w='100%'>
-                              <SkeletonCircle size='10' mr='.5rem' />
-                              <Box w='100%'>
-                                <Skeleton w='100%' height='10px' />
-                                <Skeleton w='100%' my={'3px'} height='10px' />
-                                <Skeleton w='100%' height='10px' />
-                              </Box>
-                            </Flex>
-                          </Box>
-                        ))}
-                      </SimpleGrid>
+                      <VideoSkeletonLoader />
                     ) : !isFetching && !contents.length ? (
                       <Box mt='20px' height='65%'>
                         <EmptyState msg='Oops!. No video here' />
@@ -157,38 +106,7 @@ function Index() {
                           videos={contents}
                           lastElementRef={lastElementRef}
                         />
-                        {loading && (
-                          <SimpleGrid
-                            mt='20px'
-                            w='100%'
-                            bg='clique.blackGrey'
-                            p='10px'
-                            columns={{lg: 3, xl: 4}}
-                            spacing={'30px'}
-                          >
-                            {[1, 2, 3, 4, 5, 6].map((num) => (
-                              <Box
-                                key={num}
-                                h={'100%'}
-                                w={{lg: '230px', xl: '310px'}}
-                              >
-                                <Skeleton h='150px' borderRadius='10px' />
-                                <Flex mt={'.5rem'} alignItems='center' w='100%'>
-                                  <SkeletonCircle size='10' mr='.5rem' />
-                                  <Box w='100%'>
-                                    <Skeleton w='100%' height='10px' />
-                                    <Skeleton
-                                      w='100%'
-                                      my={'3px'}
-                                      height='10px'
-                                    />
-                                    <Skeleton w='100%' height='10px' />
-                                  </Box>
-                                </Flex>
-                              </Box>
-                            ))}
-                          </SimpleGrid>
-                        )}
+                        {loading && <VideoSkeletonLoader />}
                       </>
                     )}
                   </>
