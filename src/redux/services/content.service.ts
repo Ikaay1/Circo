@@ -205,4 +205,5 @@ export const {
   useSaveVideoMutation,
   useReportCommentMutation,
   useGetContentsBySearchQuery,
+  useGetSingleUserContentQuery,
 } = contentApi;
