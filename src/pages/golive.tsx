@@ -100,7 +100,7 @@ function Index({}: Props) {
               >
                 Go Live
               </Text>
-              <EventTab />
+              <EventTab setState={setState} />
             </Box>
           )}
         </Box>

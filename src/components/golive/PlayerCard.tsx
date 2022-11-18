@@ -1,16 +1,28 @@
-import { Box, Button, Flex, HStack, Icon, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Icon,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import MuxPlayer from "@mux/mux-player-react/lazy";
 import React, { useEffect } from "react";
 import { BiCopy } from "react-icons/bi";
+import { useAppDispatch, useAppSelector } from "redux/app/hooks";
+import {
+  useEndStreamMutation,
+  useStartStreamMutation,
+} from "redux/services/live.service";
+import { clearStreamDetails, setSelectedStream, setStreamDetails } from "redux/slices/streamSlice";
 
-function PlayerCard({ streamDetails }: any) {
+function PlayerCard({ streamDetails, setState }: any) {
   const [isCopied, setIsCopied] = React.useState(false);
-
   const handleCopy = (e: string) => {
     navigator.clipboard.writeText(e);
     setIsCopied(true);
   };
-
   useEffect(() => {
     if (isCopied) {
       setTimeout(() => {
@@ -18,6 +30,85 @@ function PlayerCard({ streamDetails }: any) {
       }, 1500);
     }
   }, [isCopied]);
+
+  const [startStream, startInfo] = useStartStreamMutation();
+  const [endStream, endInfo] = useEndStreamMutation();
+
+  const toast = useToast();
+
+  const dispatch = useAppDispatch();
+  const streamId = useAppSelector(
+    (state) => state?.app?.stream?.streamDetails?._id
+  );
+  const selectedStreamId = useAppSelector(
+    (state) => state?.app?.stream?.selectedStream?._id
+  );
+
+  const handleUpdateStream = async () => {
+    if (streamDetails?.status === "not-started") {
+      const startRes: any = await startStream(streamDetails?._id);
+      if (startRes?.data?.data) {
+        toast({
+          title: "Stream Started",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
+        if (streamId === selectedStreamId) {
+          dispatch(
+            setStreamDetails({
+              payload: {
+                ...startRes?.data?.data?.livestream,
+              },
+            })
+          );
+        } else if (selectedStreamId === streamDetails?._id) {
+          dispatch(
+            setSelectedStream({
+              payload: {
+                ...startRes?.data?.data?.livestream,
+              },
+            })
+          );
+        }
+      } else {
+        toast({
+          title: "Error",
+          description: startRes?.error?.data?.message ?? "Something went wrong",
+          status: "error",
+          position: "top-right",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else {
+      const endRes: any = await endStream(streamDetails?._id);
+      if (endRes?.data?.data) {
+        toast({
+          title: "Stream Ended",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
+        if (streamId === streamDetails?._id) {
+          dispatch(clearStreamDetails());
+        } else if (selectedStreamId === streamDetails?._id) {
+          setState("liveevent");
+        }
+      } else {
+        toast({
+          title: "Error",
+          description: endRes?.error?.data?.message ?? "Something went wrong",
+          status: "error",
+          position: "top-right",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    }
+  };
 
   return (
     <Box w="400px" maxW="400px" rounded={"10px"}>
@@ -128,12 +219,29 @@ function PlayerCard({ streamDetails }: any) {
           <Button
             mt="80px"
             rounded="full"
-            bg="clique.dangerRed"
+            onClick={() => {
+              handleUpdateStream();
+            }}
+            isLoading={startInfo.isLoading || endInfo.isLoading}
+            isDisabled={
+              startInfo.isLoading ||
+              endInfo.isLoading ||
+              streamDetails?.status === "ended" ||
+              !streamDetails
+            }
+            bg={
+              streamDetails?.status === "not-started"
+                ? "clique.green"
+                : "clique.dangerRed"
+            }
             color="white"
-            colorScheme={"red"}
+            colorScheme={
+              streamDetails?.status === "not-started" ? "green" : "red"
+            }
             fontFamily={"Poppins"}
           >
-            End Live Session
+            {streamDetails?.status === "not-started" ? "Start" : "End"} Live
+            Stream
           </Button>
         </Flex>
       </Box>

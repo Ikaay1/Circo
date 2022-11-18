@@ -27,9 +27,17 @@ export const streamSlice = createSlice({
     ) => {
       state.selectedStream = payload;
     },
+
+    clearStreamDetails: (state) => {
+      state.streamDetails = null;
+    },
+    clearSelectedStream: (state) => {
+      state.selectedStream = null;
+    },
   },
 });
 
-export const { setStreamDetails, setSelectedStream } = streamSlice.actions;
+export const { setStreamDetails, setSelectedStream, clearStreamDetails } =
+  streamSlice.actions;
 
 export default streamSlice.reducer;

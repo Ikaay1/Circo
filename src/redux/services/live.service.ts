@@ -59,6 +59,20 @@ export const liveAPI = createApi({
       }),
       providesTags: ["Live"],
     }),
+    startStream: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `livestream/start/${id}`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Live"],
+    }),
+    endStream: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `livestream/end/${id}`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Live"],
+    }),
   }),
 });
 
@@ -68,4 +82,6 @@ export const {
   useGetLiveStreamQuery,
   useGetAllLiveStreamQuery,
   useGetStreamQuery,
+  useStartStreamMutation,
+  useEndStreamMutation,
 } = liveAPI;
