@@ -21,7 +21,7 @@ import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
 } from "redux/services/live.service";
-import { setStreamDetails } from "redux/slices/streamSlice"; 
+import { setStreamDetails } from "redux/slices/streamSlice";
 import { streamSchema } from "schemas/livestream.schema";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";

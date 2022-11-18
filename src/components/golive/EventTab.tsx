@@ -7,7 +7,7 @@ import EventKey from "./EventKey";
 import EventStream from "./EventStream";
 import Monitor from "./Monitor";
 
-function EventTab() {
+function EventTab({ setState }: any) {
   const [tabIndex, setTabIndex] = useState(0);
   const event = useAppSelector((state) => state.app.stream.selectedStream);
 
@@ -34,7 +34,7 @@ function EventTab() {
           <EventKey />
         </CliqueTabPanel>
         <CliqueTabPanel>
-          <Monitor streamDetails={event} />
+          <Monitor setState={setState} streamDetails={event} />
         </CliqueTabPanel>
       </TabPanels>
     </Tabs>
