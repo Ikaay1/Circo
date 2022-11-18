@@ -38,8 +38,36 @@ export const streamCommentAPI = createApi({
       }),
       invalidatesTags: ["Live"],
     }),
+
+    likeStreamComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `livestream/comment/like`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    dislikeStreamComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `livestream/comment/dislike`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
   }),
 });
 
-export const { useGetStreamCommentsQuery, usePostCommentOnStreamMutation } =
-  streamCommentAPI;
+export const {
+  useGetStreamCommentsQuery,
+  usePostCommentOnStreamMutation,
+  useLikeStreamCommentMutation,
+  useDislikeStreamCommentMutation,
+} = streamCommentAPI;

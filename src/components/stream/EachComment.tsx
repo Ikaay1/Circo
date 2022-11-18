@@ -4,10 +4,21 @@ import { BiDislike, BiLike } from "react-icons/bi";
 import { useAppSelector } from "redux/app/hooks";
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
+import { useRouter } from "next/router";
+import {
+  useDislikeStreamCommentMutation,
+  useLikeStreamCommentMutation,
+} from "redux/services/livestream/streamComment.service";
 
 function EachComment({ comment }: { comment: any }) {
-  console.log(comment);
+  const router = useRouter();
+  const { id } = router.query;
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+
+  const [likeStreamComment, commentInfo] = useLikeStreamCommentMutation();
+  const [dislikeStreamComment, commentInfo2] =
+    useDislikeStreamCommentMutation();
+
   return (
     <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
       <AvataWithSpace
@@ -58,9 +69,19 @@ function EachComment({ comment }: { comment: any }) {
         <Flex alignItems={"center"} justifyContent="space-between" mt="15px">
           <Flex alignItems={"center"}>
             <Flex cursor={"pointer"} alignItems={"center"}>
-              <Box onClick={() => {}}>
+              <Box
+                onClick={async () => {
+                  await likeStreamComment({
+                    commentId: comment._id,
+                  });
+                }}
+              >
                 <Icon
-                  color={1 === 1 ? "clique.base" : "clique.white"}
+                  color={
+                    comment?.likes?.includes(userProfile?._id)
+                      ? "clique.base"
+                      : "clique.white"
+                  }
                   mr="5px"
                   fontSize="20px"
                   as={BiLike}
@@ -73,14 +94,24 @@ function EachComment({ comment }: { comment: any }) {
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
-                54665
+                {comment?.countCommentLikes}
               </Text>
             </Flex>
 
             <Flex cursor={"pointer"} mx="20px" alignItems={"center"}>
-              <Box onClick={() => {}}>
+              <Box
+                onClick={async () => {
+                  await dislikeStreamComment({
+                    commentId: comment._id,
+                  });
+                }}
+              >
                 <Icon
-                  color={1 === 1 ? "clique.base" : "clique.white"}
+                  color={
+                    comment?.dislikes?.includes(userProfile?._id)
+                      ? "clique.base"
+                      : "clique.white"
+                  }
                   mr="5px"
                   fontSize="smHead"
                   as={BiDislike}
@@ -93,8 +124,7 @@ function EachComment({ comment }: { comment: any }) {
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
-                64565
-                {/* {comment.comment.dislikes.length} */}
+                {comment?.countCommentDislikes}
               </Text>
             </Flex>
           </Flex>
