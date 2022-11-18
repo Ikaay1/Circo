@@ -3,10 +3,10 @@ import React from "react";
 import CommentSection from "./CommentSection";
 import PlayerCard from "./PlayerCard";
 
-function Monitor({ streamDetails }: any) {
+function Monitor({ streamDetails, setState }: any) {
   return (
     <Flex justifyContent={"space-between"} h="80vh">
-      <PlayerCard streamDetails={streamDetails} />
+      <PlayerCard setState={setState} streamDetails={streamDetails} />
       <CommentSection id={""} />
     </Flex>
   );
