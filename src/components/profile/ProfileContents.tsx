@@ -9,11 +9,11 @@ import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
 import { profileNav } from "@constants/utils";
 
 import Playlists from "./Playlists";
+import EmptyState from "@components/emptyState/EmptyState";
 
 const ProfileContents = () => {
   const [route, setRoute] = useState("paid");
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  console.log(userProfile)
   return (
     <>
       <Box borderBottom={"1px solid rgba(255, 255, 255, 0.1)"} display="flex">
@@ -64,11 +64,16 @@ const ProfileContents = () => {
         </Box>
       )}
 
-      {route === "saved" && (
-        <Box mt={"2.3rem"}>
-          <VideoGrid width={"100%"} videos={userProfile.savedVideos} />
-        </Box>
-      )}
+      {route === "saved" &&
+        (userProfile.savedVideos.length === 0 ? (
+          <Box mt="2.3rem">
+            <EmptyState msg="Oops! No saved videos yet. save a video!" />
+          </Box>
+        ) : (
+          <Box mt={"2.3rem"}>
+            <VideoGrid width={"100%"} videos={userProfile.savedVideos} />
+          </Box>
+        ))}
     </>
   );
 };

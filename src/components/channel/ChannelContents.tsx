@@ -3,9 +3,10 @@ import { useState } from "react";
 import {
   Box,
   Flex,
-  HStack, Skeleton,
+  HStack,
+  Skeleton,
   SkeletonCircle,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import EmptyState from "@components/emptyState/EmptyState";
 import VideoGrid from "@components/home/VideoGrid";
@@ -58,16 +59,6 @@ const Contents = ({
 
       {route === "upload" && (
         <>
-          {/* {videos?.length === 0 ? (
-            <Box mt="4">
-              <EmptyState msg="Oops! No post yet. Upload a video!" />
-            </Box>
-          ) : (
-            <Box mt={"2.3rem"}>
-              <VideoGrid width={"100%"} videos={videos as contentData[]} />
-            </Box>
-          )} */}
-
           {isLoading ? (
             <HStack spacing="12px" mt="2.3rem">
               {[1, 2, 3, 4].map((num) => (
