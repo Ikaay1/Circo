@@ -47,7 +47,12 @@ function BodyOne({
         size="lg"
         onClick={() => {
           NProgress.start();
-          if (event?.eventId?.fee === 0) {
+
+          if (
+            event?.eventId?.fee === 0 ||
+            event?.eventId?.fee === "0" ||
+            !event?.eventId?.fee
+          ) {
             router.push(`/stream/${event?.eventId?._id}`);
           }
           4;

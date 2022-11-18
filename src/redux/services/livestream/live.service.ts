@@ -114,30 +114,6 @@ export const liveAPI = createApi({
       invalidatesTags: ["Live"],
     }),
 
-    likeStreamComment: builder.mutation<any, any>({
-      query: (body) => ({
-        url: `comment/like`,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: body,
-      }),
-      invalidatesTags: ["Live"],
-    }),
-
-    dislikeStreamComment: builder.mutation<any, any>({
-      query: (body) => ({
-        url: `comment/dislike`,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: body,
-      }),
-      invalidatesTags: ["Live"],
-    }),
-
     reportComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `report`,
@@ -163,7 +139,5 @@ export const {
   useCreateViewMutation,
   useLikeStreamMutation,
   useDislikeStreamMutation,
-  useLikeStreamCommentMutation,
-  useDislikeStreamCommentMutation,
   useReportCommentMutation,
 } = liveAPI;
