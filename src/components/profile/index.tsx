@@ -20,7 +20,7 @@ const Index = () => {
       pb="3rem"
       sx={scrollBarStyle}
     >
-      <UserDetail id={userProfile?._id} />
+      {router.query.name === "content" && <UserDetail id={userProfile?._id} />}
 
       {router.query.name === "content" && (
         <Box mt={"15rem"} px="1.35rem">
@@ -28,11 +28,7 @@ const Index = () => {
         </Box>
       )}
 
-      {router.query.name === "edit" && (
-        <Box mt={"8.5rem"} px="1.35rem">
-          <EditProfile />
-        </Box>
-      )}
+      {router.query.name === "edit" && <EditProfile />}
     </Box>
   );
 };

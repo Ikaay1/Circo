@@ -1,4 +1,3 @@
-
 import {
   Box,
   Icon,
@@ -6,21 +5,28 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
 import ShareIcon from "@icons/ShareIcon";
+import { useAppSelector } from "redux/app/hooks";
 
 import CopyBox from "./CopyBox";
 
 const Bio = ({
   showSubscribe,
   bio,
+  id,
+  onClick
 }: {
   showSubscribe: boolean;
   bio?: string;
+  id: string;
+  onClick: () => void;
+
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, } = useDisclosure();
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
   return (
     <>
       <Box
@@ -61,13 +67,16 @@ const Bio = ({
             >
               <Icon as={ShareIcon} />
             </Box>
-            <AuthButton
-              width="180px"
-              height="50px"
-              borderRadius="30px"
-              fontSize="sm2"
-              name="Subscribe"
-            />
+            {userProfile._id === id ? null : (
+              <AuthButton
+                width="180px"
+                height="50px"
+                borderRadius="30px"
+                fontSize="sm2"
+                name="Subscribe"
+                onClick={onClick}
+              />
+            )}
           </Box>
         )}
       </Box>

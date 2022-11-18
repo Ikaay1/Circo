@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Box, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import PlaylistDetails from "@components/profile/PlaylistDetails";
 import SideMenu from "@components/profile/SideMenu";
@@ -8,7 +7,6 @@ import { profileMenu, scrollBarStyle } from "@constants/utils";
 
 const Playlist = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log("this is where i am o")
   return (
     <Box bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}>
       <Header upload={onOpen} />
