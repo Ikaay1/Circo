@@ -28,7 +28,7 @@ import {
   ThunkAction,
 } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { streamCommentAPI } from "redux/services/livestream/streamComment.service";
+import { streamCommentAPI } from "redux/services/livestream/streamComment.service"; 
 
 const persistConfig = {
   key: "root",
@@ -54,7 +54,7 @@ export const store: any = configureStore({
     [contentApi.reducerPath]: contentApi.reducer,
     [channelApi.reducerPath]: channelApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
-    [streamCommentAPI.reducerPath]: streamCommentAPI.reducer,
+    [streamCommentAPI.reducerPath]: streamCommentAPI.reducer, 
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
