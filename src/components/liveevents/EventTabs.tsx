@@ -10,7 +10,7 @@ import {
 import CliqueTab from "@components/widgets/CliqueTab";
 import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
 import React from "react";
-import { useGetAllLiveStreamQuery } from "redux/services/live.service";
+import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
 import CardLoader from "./CardLoad";
 import EventModal from "./eventCard/EventModal";
 
@@ -84,7 +84,7 @@ function EventTabs() {
           <SimpleGrid
             columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
             spacing="30px"
-            w="full" 
+            w="full"
           >
             {isFetching &&
               [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (

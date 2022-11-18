@@ -20,7 +20,7 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
-} from "redux/services/live.service";
+} from "redux/services/livestream/live.service";
 import { setStreamDetails } from "redux/slices/streamSlice";
 import { streamSchema } from "schemas/livestream.schema";
 import * as Yup from "yup";

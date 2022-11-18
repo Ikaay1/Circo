@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import {
   useEndStreamMutation,
   useStartStreamMutation,
-} from "redux/services/live.service";
+} from "redux/services/livestream/live.service";
 import {
   clearStreamDetails,
   setSelectedStream,
