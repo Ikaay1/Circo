@@ -9,7 +9,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { purpleBoxStyle } from "@constants/utils";
-import { useGetAllLiveStreamQuery } from "redux/services/live.service";
+import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
 
 function LiveTopCard() {
   const { data, isFetching } = useGetAllLiveStreamQuery({

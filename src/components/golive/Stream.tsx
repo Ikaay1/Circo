@@ -20,8 +20,8 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
-} from "redux/services/live.service";
-import { setStreamDetails } from "redux/slices/streamSlice"; 
+} from "redux/services/livestream/live.service";
+import { setStreamDetails } from "redux/slices/streamSlice";
 import { streamSchema } from "schemas/livestream.schema";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";

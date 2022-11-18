@@ -20,7 +20,7 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
-} from "redux/services/live.service";
+} from "redux/services/livestream/live.service";
 import { setStreamDetails } from "redux/slices/streamSlice";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
@@ -149,7 +149,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
                     >
                       <label htmlFor={"thumbnail"}>
                         {props.values.thumbNail ? (
-                          <Box mt="7"> 
+                          <Box mt="7">
                             <Box
                               bgImage={
                                 props.values.thumbNail?.startsWith("http")

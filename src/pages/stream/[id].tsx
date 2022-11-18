@@ -3,17 +3,14 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Skeleton } from "@chakra-ui/react";
 import StreamPlayer from "@components/stream/StreamPlayer";
-import { useGetStreamQuery } from "redux/services/live.service";
+import { useGetStreamQuery } from "redux/services/livestream/live.service";
 import CommentSection from "@components/stream/CommentSection";
 import VideoDetails from "@components/stream/VideoDetails";
 
 function Index() {
   const router = useRouter();
   const { id } = router.query;
-
   const { data, isFetching } = useGetStreamQuery(id as string);
-  console.log(data);
-
   return (
     <HomeLayout>
       <Flex>
@@ -49,16 +46,13 @@ function Index() {
           )}
 
           {isFetching ? (
-            <Skeleton h="580px" rounded="20px" w="100%" />
+            <Skeleton h="580px" mt="10px" rounded="20px" w="100%" />
           ) : (
             <VideoDetails stream={data?.data?.stream} />
           )}
         </Box>
-        {isFetching ? (
-          <Skeleton h="90vh" rounded="20px" w="400px" />
-        ) : (
-          <CommentSection />
-        )}
+
+        <CommentSection />
       </Flex>
     </HomeLayout>
   );
