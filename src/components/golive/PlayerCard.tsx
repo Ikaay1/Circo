@@ -15,7 +15,11 @@ import {
   useEndStreamMutation,
   useStartStreamMutation,
 } from "redux/services/live.service";
-import { clearStreamDetails, setSelectedStream, setStreamDetails } from "redux/slices/streamSlice";
+import {
+  clearStreamDetails,
+  setSelectedStream,
+  setStreamDetails,
+} from "redux/slices/streamSlice";
 
 function PlayerCard({ streamDetails, setState }: any) {
   const [isCopied, setIsCopied] = React.useState(false);
@@ -55,7 +59,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           isClosable: true,
           position: "top-right",
         });
-        if (streamId === selectedStreamId) {
+        if (streamId === streamDetails?._id) {
           dispatch(
             setStreamDetails({
               payload: {
