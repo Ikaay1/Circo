@@ -20,6 +20,7 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
+  useUpdateEventMutation,
 } from "redux/services/livestream/live.service";
 import { setStreamDetails } from "redux/slices/streamSlice";
 import { streamSchema } from "schemas/livestream.schema";
@@ -39,6 +40,7 @@ function Stream({
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
+  const [updateEvent, updateInfo] = useUpdateEventMutation();
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
   const dispatch = useAppDispatch();
   return (
@@ -72,31 +74,33 @@ function Stream({
         formData.append("category", state === "stream" ? "LIVE" : "SCHEDULE");
         formData.append("categoryId", values.category);
 
-        const res: any = await createEvent(formData);
-        if (res.data) {
-          const createLive: any = await createLiveStream({
-            eventId: res.data?.data?._id,
+        //check if the stream is being created or updated
+        if (streamDetails?.eventId?._id) {
+          const res: any = await updateEvent({
+            id: streamDetails?.eventId?._id,
+            body: formData,
           });
-          if (createLive.data) {
+          if (res.data) {
             toast({
-              title: "Event Created Successfully",
+              title: "Event Updated",
+              description: "Stream Updated Successfully",
               status: "success",
               duration: 3000,
               isClosable: true,
               position: "top-right",
             });
+
             dispatch(
               setStreamDetails({
                 payload: {
-                  ...createLive.data?.data?.livestream,
-                  eventId: res.data?.data,
+                  ...streamDetails,
+                  eventId: res?.data?.data,
                 },
               })
             );
-            setTabIndex(1);
           } else {
             toast({
-              title: createLive.error?.data?.message,
+              title: "Event Update Failed",
               status: "error",
               duration: 3000,
               isClosable: true,
@@ -104,14 +108,48 @@ function Stream({
             });
           }
         } else {
-          toast({
-            title: "Event Creation Failed",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-            position: "top-right",
-          });
+          const res: any = await createEvent(formData);
+          if (res.data) {
+            const createLive: any = await createLiveStream({
+              eventId: res.data?.data?._id,
+            });
+            if (createLive.data) {
+              toast({
+                title: "Event Created Successfully",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "top-right",
+              });
+              dispatch(
+                setStreamDetails({
+                  payload: {
+                    ...createLive.data?.data?.livestream,
+                    eventId: res.data?.data,
+                  },
+                })
+              );
+              setTabIndex(1);
+            } else {
+              toast({
+                title: createLive.error?.data?.message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+                position: "top-right",
+              });
+            }
+          } else {
+            toast({
+              title: "Event Creation Failed",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+              position: "top-right",
+            });
+          }
         }
+
         setSubmitting(false);
       }}
     >

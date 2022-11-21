@@ -667,23 +667,37 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top' as const,
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+        color: '#A1A1A1',
+      },
+    },
+    y: {
+      grid: {
+        color: '#A1A1A1',
+      },
+    },
+  },
 };
 
-const labels = ['January', 'July'];
+const labels = ['July 31', 'Aug 29', 'Sep 29', 'Oct 29', 'Nov 17'];
 
 export const data = {
   labels,
   datasets: [
     {
       label: '',
-      data: [0, 400],
+      data: [10, 20, 50],
       borderColor: 'rgb(137, 44, 220)',
-      backgroundColor: 'rgba(137, 44, 220, 0.5)',
+      backgroundColor: '#E6E6E6',
     },
   ],
 };

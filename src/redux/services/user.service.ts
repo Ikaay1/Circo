@@ -44,6 +44,14 @@ export const userApi = createApi({
       query: (body) => ({
         url: `users/update`,
         method: 'PATCH',
+        body: body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+    subscribeToUserChannel: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `subscribe`,
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -70,4 +78,5 @@ export const {
   useGetUserQuery,
   useUpdateProfileMutation,
   useGetSuggestedUsersQuery,
+  useSubscribeToUserChannelMutation,
 } = userApi;

@@ -5,31 +5,22 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Spinner,
+  useToast,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
+import { usePostCommentOnStreamMutation } from "redux/services/livestream/streamComment.service";
 
-function NewComment({
-  handleComment,
-  setComment,
-  comment,
-}: {
-  handleComment: () => void;
-  setComment: React.Dispatch<React.SetStateAction<string>>;
-  comment: string;
-}) {
+function NewComment({ id, profile }: { id: string; profile: any }) {
+  const [comment, setComment] = React.useState("");
+  const [postCommentOnStream, postInfo] = usePostCommentOnStreamMutation();
+
+  const toast = useToast();
   return (
-    <Flex
-      pos={"absolute"}
-      bottom="0"
-      right={"0"}
-      px="20px"
-      bg="clique.black"
-      py="20px"
-      w="400px"
-    >
+    <Flex px="20px" bg="clique.black" py="20px" w="full"  >
       <AvataWithSpace
-        name="Prosper Otemuyiwa"
-        url="https://bit.ly/prosper-baba"
+        name={profile?.firstName + " " + profile?.lastName}
+        url={profile?.avatar}
         mr="20px"
         size="40px"
         borderThickness="2px"
@@ -53,15 +44,57 @@ function NewComment({
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          onKeyDown={async (e) => {
+            if (e.key === "Enter") {
+              const post: any = await postCommentOnStream({
+                streamId: id,
+                commentBody: comment,
+              });
+
+              if (post.data) {
+                setComment("");
+              } else {
+                toast({
+                  title: "Error",
+                  description: "Something went wrong",
+                  status: "error",
+                  duration: 3000,
+                  position: "top-right",
+                  isClosable: true,
+                });
+              }
+            }
+          }}
         />
         <InputRightElement
           cursor={"pointer"}
           h="100%"
           roundedRight="10px"
           bg="clique.ashGrey"
-          onClick={handleComment}
+          onClick={async () => {
+            const post: any = await postCommentOnStream({
+              streamId: id,
+              commentBody: comment,
+            });
+            if (post.data) {
+              setComment("");
+            } else {
+              toast({
+                title: "Error",
+                description: "Something went wrong",
+                status: "error",
+                duration: 3000,
+                position: "top-right",
+                isClosable: true,
+              });
+            }
+          }}
         >
-          <Image w="25px" src="/assets/inputIcon.svg" alt="icon" />
+          {postInfo.isLoading ? (
+            <Spinner />
+          ) : (
+            <Image w="25px" src="/assets/inputIcon.svg" alt="icon" />
+          )}
         </InputRightElement>
       </InputGroup>
     </Flex>

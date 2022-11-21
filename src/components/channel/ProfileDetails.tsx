@@ -15,7 +15,7 @@ const ProfileDetails = ({ id }: { id: string }) => {
   const abbreNum = useNumberAbbrev();
   return (
     <>
-      {isLoading ? (
+      {isLoading && !data? (
         <Box>
           <SkeletonCircle size="40" mx="auto" />
           <Skeleton w="60%" height="20px" mb="2" mt="3" mx="auto" />
@@ -52,7 +52,7 @@ const ProfileDetails = ({ id }: { id: string }) => {
             textAlign={"center"}
           >
             <Skeleton isLoaded={!isLoading} width="70%" mx="auto" mt="2">
-              {data?.data?.firstName + " " + data?.data?.lastName}
+              {data?.data.firstName + " " + data?.data?.lastName}
             </Skeleton>
           </Text>
           <Text
