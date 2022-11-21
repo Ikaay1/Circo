@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
 import ShareIcon from "@icons/ShareIcon";
+import { useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
 
 import CopyBox from "./CopyBox";
@@ -17,16 +18,19 @@ const Bio = ({
   showSubscribe,
   bio,
   id,
-  onClick
+  onClick,
+  buttonText,
 }: {
   showSubscribe: boolean;
   bio?: string;
   id: string;
   onClick: () => void;
-
+  buttonText?: string;
 }) => {
-  const { isOpen, onOpen, onClose, } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+  const [state, setState] = useState("");
+
   return (
     <>
       <Box
@@ -73,7 +77,7 @@ const Bio = ({
                 height="50px"
                 borderRadius="30px"
                 fontSize="sm2"
-                name="Subscribe"
+                name={buttonText}
                 onClick={onClick}
               />
             )}

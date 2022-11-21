@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import ChannelContents from "@components/channel/ChannelContents";
 import { scrollBarStyle } from "@constants/utils";
 import Analytics from "./Analytics";
@@ -17,12 +17,15 @@ const Index = ({
   channelLoading,
   isLoading,
   onClick,
+  buttonText
 }: {
   channelData?: any;
   data?: any;
   channelLoading?: boolean;
   isLoading?: boolean;
   onClick?: () => void;
+  buttonText?: string;
+
 }) => {
   const router = useRouter();
   const des =
@@ -52,6 +55,7 @@ const Index = ({
               bio={channelData?.data?.channel?.bio}
               id={channelData?.data?.channel?.userId}
               onClick={onClick as () => void}
+              buttonText={buttonText}
             />
           )}
           {des && (
@@ -71,7 +75,7 @@ const Index = ({
           )}
 
           {router.query.name === "analytics" && (
-            <Box mt={"6rem"} px="1.35rem">
+            <Box mt={"10rem"} px="1.35rem" >
               <Analytics />
             </Box>
           )}
