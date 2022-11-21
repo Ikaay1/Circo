@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import EachComment from "./EachComment";
 import NewComment from "./NewComment";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
+import { scrollBarStyle } from "@constants/utils";
 
 function CommentSection({}: {}) {
   const router = useRouter();
@@ -26,20 +27,7 @@ function CommentSection({}: {}) {
       maxH="90vh"
       pt={"20px"}
       overflowY="scroll"
-      sx={{
-        "&::-webkit-scrollbar": {
-          width: "4px",
-          rounded: "full",
-        },
-        "&::-webkit-scrollbar-track": {
-          boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-          webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-        },
-        "&::-webkit-scrollbar-thumb": {
-          bg: "clique.grey",
-          outline: "none",
-        },
-      }}
+      sx={scrollBarStyle}
     >
       <Text
         textAlign={"left"}
@@ -73,15 +61,6 @@ function CommentSection({}: {}) {
         data?.data?.map((comment: any, i: number) => (
           <EachComment key={comment._id} comment={comment} />
         ))}
-
-      {/* <EachComment
-        key={comment._id}
-        comment={comment}
-        handleLikeComment={handleLikeComment}
-        handleDislikeComment={handleDislikeComment}
-      />
-
-     */}
 
       <NewComment profile={userProfile} id={id as string} />
     </Box>

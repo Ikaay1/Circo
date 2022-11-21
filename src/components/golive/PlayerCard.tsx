@@ -161,12 +161,14 @@ function PlayerCard({ streamDetails, setState }: any) {
             textTransform={"capitalize"}
             fontSize="smSubHead"
           >
-            https://clique.com/8u6yt26f
+            clique.live/stream/{streamDetails?._id}
           </Text>
 
           <Button
             onClick={() => {
-              handleCopy("https://clique.com/8u6yt26f");
+              handleCopy(
+                `localhost:3000/stream/${streamDetails?.eventId?._id}`
+              );
             }}
             _hover={{
               bg: "none",
@@ -207,7 +209,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           textTransform={"capitalize"}
           fontSize="smSubHead"
         >
-          Title
+          Description
         </Text>
         <Text
           position={"relative"}
@@ -217,8 +219,79 @@ function PlayerCard({ streamDetails, setState }: any) {
           fontSize="smSubHead"
           textTransform={"uppercase"}
         >
-          {streamDetails?.eventId?.title}
+          {streamDetails?.eventId?.description}
         </Text>
+
+        <Flex alignItems={"center"} justifyContent="space-between" pr="50px">
+          <Box>
+            <Text
+              mt="10px"
+              color={"clique.secondaryGrey2"}
+              fontFamily={"Poppins"}
+              fontWeight={500}
+              fontSize="smSubHead"
+              textAlign={"center"}
+            >
+              Views
+            </Text>
+            <Text
+              textAlign={"center"}
+              color={"clique.white"}
+              fontFamily={"Poppins"}
+              fontWeight={500}
+              fontSize="smSubHead"
+              textTransform={"uppercase"}
+            >
+              {streamDetails?.viewsCount}
+            </Text>
+          </Box>
+          <Box>
+            <Text
+              mt="10px"
+              position={"relative"}
+              textAlign={"center"}
+              color={"clique.secondaryGrey2"}
+              fontFamily={"Poppins"}
+              fontWeight={500}
+              fontSize="smSubHead"
+            >
+              Likes
+            </Text>
+            <Text
+              position={"relative"}
+              color={"clique.white"}
+              textAlign={"center"}
+              fontFamily={"Poppins"}
+              fontWeight={500}
+              fontSize="smSubHead"
+              textTransform={"uppercase"}
+            >
+              {streamDetails?.likesCount}
+            </Text>
+          </Box>
+          <Box>
+            <Text
+              mt="10px"
+              textAlign={"center"}
+              color={"clique.secondaryGrey2"}
+              fontFamily={"Poppins"}
+              fontWeight={500}
+              fontSize="smSubHead"
+            >
+              Dislikes
+            </Text>
+            <Text
+              textAlign={"center"}
+              color={"clique.white"}
+              fontFamily={"Poppins"}
+              fontWeight={500}
+              fontSize="smSubHead"
+              textTransform={"uppercase"}
+            >
+              {streamDetails?.dislikesCount}
+            </Text>
+          </Box>
+        </Flex>
         <Flex w="full" justifyContent={"center"}>
           <Button
             mt="80px"
