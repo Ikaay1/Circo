@@ -16,11 +16,13 @@ const Index = ({
   data,
   channelLoading,
   isLoading,
+  onClick,
 }: {
   channelData?: any;
   data?: any;
   channelLoading?: boolean;
   isLoading?: boolean;
+  onClick?: () => void;
 }) => {
   const router = useRouter();
   const des =
@@ -48,6 +50,8 @@ const Index = ({
             <Bio
               showSubscribe={router.query.name === "analytics" ? false : true}
               bio={channelData?.data?.channel?.bio}
+              id={channelData?.data?.channel?.userId}
+              onClick={onClick as () => void}
             />
           )}
           {des && (

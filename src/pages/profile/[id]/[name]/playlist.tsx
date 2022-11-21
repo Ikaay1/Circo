@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Box, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import PlaylistDetails from "@components/profile/PlaylistDetails";
 import SideMenu from "@components/profile/SideMenu";

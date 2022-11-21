@@ -46,16 +46,19 @@ const PlaylistDetails = ({
   return (
     <Box display={"flex"} px="1.4rem" py="2rem" gap="25px">
       <Box flex="1.6">
-        {router.asPath === "/channel/1/content/playlist" && (
+        {
+          // router.asPath === "/channel/1/content/playlist" &&
+
           <Box>
-            <ProfileDetails />
+            <ProfileDetails id={playlist?.userId as string} />
           </Box>
-        )}
+        }
         {!isLoading && playlist ? (
           <Box
-            marginTop={
-              router.asPath === "/channel/1/content/playlist" ? "3rem" : "0rem"
-            }
+            // marginTop={
+            //   router.asPath === "/channel/1/content/playlist" ? "3rem" : "0rem"
+            // }
+            mt="3rem"
           >
             {playlist?.videos[0]?.thumbNail ? (
               <Image

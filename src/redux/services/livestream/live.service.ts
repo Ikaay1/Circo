@@ -45,6 +45,7 @@ export const liveAPI = createApi({
       }),
       providesTags: ["Live"],
     }),
+
     getStream: builder.query<any, any>({
       query: (id) => ({
         url: `livestream/${id}`,
@@ -52,6 +53,7 @@ export const liveAPI = createApi({
       }),
       providesTags: ["Live"],
     }),
+
     getAllLiveStream: builder.query<any, any>({
       query: (type) => ({
         url: `livestream/?paid=${type?.paid}&ongoing=${type?.ongoing}`,
@@ -59,6 +61,7 @@ export const liveAPI = createApi({
       }),
       providesTags: ["Live"],
     }),
+
     startStream: builder.mutation<any, any>({
       query: (id) => ({
         url: `livestream/start/${id}`,
@@ -66,10 +69,59 @@ export const liveAPI = createApi({
       }),
       invalidatesTags: ["Live"],
     }),
+
     endStream: builder.mutation<any, any>({
       query: (id) => ({
         url: `livestream/end/${id}`,
         method: "PUT",
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    createView: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `content/view`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    likeStream: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `content/like`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    dislikeStream: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `content/dislike`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    reportComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `report`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
       }),
       invalidatesTags: ["Live"],
     }),
@@ -84,4 +136,8 @@ export const {
   useGetStreamQuery,
   useStartStreamMutation,
   useEndStreamMutation,
+  useCreateViewMutation,
+  useLikeStreamMutation,
+  useDislikeStreamMutation,
+  useReportCommentMutation,
 } = liveAPI;

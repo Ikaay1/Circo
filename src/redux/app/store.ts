@@ -13,7 +13,7 @@ import { authApi } from "redux/services/auth.service";
 import { categoryApi } from "redux/services/category.service";
 import { channelApi } from "redux/services/channel.service";
 import { contentApi } from "redux/services/content.service";
-import { liveAPI } from "redux/services/live.service";
+import { liveAPI } from "redux/services/livestream/live.service";
 import { playlistApi } from "redux/services/playlist.service";
 import { userApi } from "redux/services/user.service";
 import userReducer from "redux/slices/authSlice";
@@ -28,6 +28,7 @@ import {
   ThunkAction,
 } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { streamCommentAPI } from "redux/services/livestream/streamComment.service"; 
 
 const persistConfig = {
   key: "root",
@@ -53,6 +54,7 @@ export const store: any = configureStore({
     [contentApi.reducerPath]: contentApi.reducer,
     [channelApi.reducerPath]: channelApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [streamCommentAPI.reducerPath]: streamCommentAPI.reducer, 
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -67,6 +69,7 @@ export const store: any = configureStore({
       playlistApi.middleware,
       liveAPI.middleware,
       userApi.middleware,
+      streamCommentAPI.middleware,
     ]),
 });
 

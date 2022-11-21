@@ -1,28 +1,31 @@
 import moment from "moment";
 import React from "react";
 import { BiDislike, BiLike } from "react-icons/bi";
-import { VscReport } from "react-icons/vsc";
 import { useAppSelector } from "redux/app/hooks";
-
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
+import { useRouter } from "next/router";
+import {
+  useDislikeStreamCommentMutation,
+  useLikeStreamCommentMutation,
+} from "redux/services/livestream/streamComment.service";
 
-import commentInterface from "../../constants/utils";
-function EachComment({
-  comment,
-  handleLikeComment,
-  handleDislikeComment,
-}: {
-  comment: commentInterface;
-  handleLikeComment: (id: string) => void;
-  handleDislikeComment: (id: string) => void;
-}) {
+function EachComment({ comment }: { comment: any }) {
+  const router = useRouter();
+  const { id } = router.query;
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+
+  const [likeStreamComment, commentInfo] = useLikeStreamCommentMutation();
+  const [dislikeStreamComment, commentInfo2] =
+    useDislikeStreamCommentMutation();
+
   return (
     <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
       <AvataWithSpace
-        name="Prosper Otemuyiwa"
-        url="https://bit.ly/prosper-baba"
+        name={
+          comment?.commentUser?.firstName + " " + comment?.commentUser?.lastName
+        }
+        url={comment?.commentUser?.profilePicture}
         mr="20px"
         size="40px"
         borderThickness="2px"
@@ -31,6 +34,7 @@ function EachComment({
       <Box>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Text
+            mr="10px"
             noOfLines={2}
             color={"clique.white"}
             fontFamily={"Poppins"}
@@ -38,10 +42,7 @@ function EachComment({
             fontSize={"subHead"}
             lineHeight={"1.2"}
           >
-            {`${
-              comment.commenterId.firstName[0].toUpperCase() +
-              comment.commenterId.firstName.slice(1)
-            } ${comment.commenterId.lastName[0].toUpperCase()}`}
+            {comment?.commentUser?.userName ?? " NA "}
           </Text>
           <Text
             noOfLines={2}
@@ -63,15 +64,21 @@ function EachComment({
           fontSize={"smSubHead"}
           lineHeight={"1.3"}
         >
-          {comment.comment.comment}
+          {comment?.commentBody}
         </Text>
         <Flex alignItems={"center"} justifyContent="space-between" mt="15px">
           <Flex alignItems={"center"}>
             <Flex cursor={"pointer"} alignItems={"center"}>
-              <Box onClick={() => handleLikeComment(comment._id)}>
+              <Box
+                onClick={async () => {
+                  await likeStreamComment({
+                    commentId: comment._id,
+                  });
+                }}
+              >
                 <Icon
                   color={
-                    comment.comment.likes.includes(userProfile?._id)
+                    comment?.likes?.includes(userProfile?._id)
                       ? "clique.base"
                       : "clique.white"
                   }
@@ -87,15 +94,21 @@ function EachComment({
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
-                {comment.comment.likes.length}
+                {comment?.countCommentLikes}
               </Text>
             </Flex>
 
             <Flex cursor={"pointer"} mx="20px" alignItems={"center"}>
-              <Box onClick={() => handleDislikeComment(comment._id)}>
+              <Box
+                onClick={async () => {
+                  await dislikeStreamComment({
+                    commentId: comment._id,
+                  });
+                }}
+              >
                 <Icon
                   color={
-                    comment.comment.dislikes.includes(userProfile?._id)
+                    comment?.dislikes?.includes(userProfile?._id)
                       ? "clique.base"
                       : "clique.white"
                   }
@@ -111,7 +124,7 @@ function EachComment({
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
               >
-                {comment.comment.dislikes.length}
+                {comment?.countCommentDislikes}
               </Text>
             </Flex>
           </Flex>
