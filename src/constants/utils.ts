@@ -1,39 +1,39 @@
-import axios from "axios";
+import axios from 'axios';
 import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-} from "chart.js";
-import { store } from "redux/app/store";
+	CategoryScale,
+	Chart as ChartJS,
+	Legend,
+	LinearScale,
+	LineElement,
+	PointElement,
+	Title,
+	Tooltip,
+} from 'chart.js';
+import { store } from 'redux/app/store';
 
-import AccountIcon from "@icons/AccountIcon";
-import ChannelIcon from "@icons/ChannelIcon";
-import CommunityGuidIcon from "@icons/CommunityGuidIcon";
-import ContentIcon from "@icons/ContentIcon";
-import CopyRightIcon from "@icons/CopyRightIcon";
-import DiscoverIcon from "@icons/DiscoverIcon";
-import EditIcon from "@icons/EditIcon";
-import FaqIcon from "@icons/FaqIcon";
-import HomeIcon from "@icons/HomeIcon";
-import LiveEventIcon from "@icons/LiveEventIcon";
-import LiveIcon from "@icons/LiveIcon";
-import NotificationSetIcon from "@icons/NotificationSetIcon";
-import PrivacyPolicyIcon from "@icons/PrivacyPolicyIcon";
-import ProfileIcon from "@icons/ProfileIcon";
-import SettingsIcon from "@icons/SettingsIcon";
-import StreamIcon from "@icons/StreamIcon";
-import TermsServiceIcon from "@icons/TermsServiceIcon";
-import TrendingIcon from "@icons/TrendingIcon";
-import VideoContent from "@icons/VideoContent";
-import WalletIcon from "@icons/WalletIcon";
+import AccountIcon from '@icons/AccountIcon';
+import ChannelIcon from '@icons/ChannelIcon';
+import CommunityGuidIcon from '@icons/CommunityGuidIcon';
+import ContentIcon from '@icons/ContentIcon';
+import CopyRightIcon from '@icons/CopyRightIcon';
+import DiscoverIcon from '@icons/DiscoverIcon';
+import EditIcon from '@icons/EditIcon';
+import FaqIcon from '@icons/FaqIcon';
+import HomeIcon from '@icons/HomeIcon';
+import LiveEventIcon from '@icons/LiveEventIcon';
+import LiveIcon from '@icons/LiveIcon';
+import NotificationSetIcon from '@icons/NotificationSetIcon';
+import PrivacyPolicyIcon from '@icons/PrivacyPolicyIcon';
+import ProfileIcon from '@icons/ProfileIcon';
+import SettingsIcon from '@icons/SettingsIcon';
+import StreamIcon from '@icons/StreamIcon';
+import TermsServiceIcon from '@icons/TermsServiceIcon';
+import TrendingIcon from '@icons/TrendingIcon';
+import VideoContent from '@icons/VideoContent';
+import WalletIcon from '@icons/WalletIcon';
 
-import AnalyticsIcon from "../assets/icons/AnalyticsIcon";
-import { MenuData } from "./interface";
+import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
+import { MenuData } from './interface';
 
 export const loginInputData: (
   | {
@@ -47,8 +47,8 @@ export const loginInputData: (
       image: string;
     }
 )[] = [
-  { key: "1", name: "Username/Email" },
-  { key: "2", name: "Password", image: "/assets/Password-lock.png" },
+  {key: '1', name: 'Username/Email'},
+  {key: '2', name: 'Password', image: '/assets/Password-lock.png'},
 ];
 
 export const signUpInputData: (
@@ -66,29 +66,29 @@ export const signUpInputData: (
     }
 )[] = [
   {
-    key: "1",
-    name: "Username",
-    inputName: "userName",
+    key: '1',
+    name: 'Username',
+    inputName: 'userName',
   },
   {
-    key: "2",
-    name: "Email",
-    inputName: "email",
+    key: '2',
+    name: 'Email',
+    inputName: 'email',
   },
   {
-    key: "3",
-    name: "Password",
-    image: "/assets/Password-lock.png",
+    key: '3',
+    name: 'Password',
+    image: '/assets/Password-lock.png',
   },
 
   {
-    key: "4",
-    name: "Referral Code (Optional)",
-    inputName: "referralCode",
+    key: '4',
+    name: 'Referral Code (Optional)',
+    inputName: 'referralCode',
   },
 ];
 
-export const socialMediaIconsData = ["google", "apple", "facebook"];
+export const socialMediaIconsData = ['google', 'apple', 'facebook'];
 
 export const changePasswordInputData: {
   key: string;
@@ -96,14 +96,14 @@ export const changePasswordInputData: {
   inputName: string;
 }[] = [
   {
-    key: "1",
-    name: "New password",
-    inputName: "password",
+    key: '1',
+    name: 'New password',
+    inputName: 'password',
   },
   {
-    key: "2",
-    name: "Confirm new password",
-    inputName: "confirmPassword",
+    key: '2',
+    name: 'Confirm new password',
+    inputName: 'confirmPassword',
   },
 ];
 
@@ -114,25 +114,25 @@ export const cliquePlatformData1: {
   image: string;
 }[] = [
   {
-    key: "1",
-    name: "Monetization",
+    key: '1',
+    name: 'Monetization',
     detail:
-      "Clique allows users to subscribe to their favourite creators channels. As a creator, you get to earn on your craft, and as a user, you have access to all your creator gives.",
-    image: "money",
+      'Clique allows users to subscribe to their favourite creators channels. As a creator, you get to earn on your craft, and as a user, you have access to all your creator gives.',
+    image: 'money',
   },
   {
-    key: "2",
-    name: "Stream Live",
+    key: '2',
+    name: 'Stream Live',
     detail:
-      "Clique allows creators go live from any device and you can also create standard live events for your followers with ticket purchases all on one platform",
-    image: "stream",
+      'Clique allows creators go live from any device and you can also create standard live events for your followers with ticket purchases all on one platform',
+    image: 'stream',
   },
   {
-    key: "3",
-    name: "Schedule Streams",
+    key: '3',
+    name: 'Schedule Streams',
     detail:
-      "Your content can go before you, while you focus on making more plans on it. How? You can schedule a live stream and your followers anticipate",
-    image: "schedule",
+      'Your content can go before you, while you focus on making more plans on it. How? You can schedule a live stream and your followers anticipate',
+    image: 'schedule',
   },
 ];
 
@@ -143,25 +143,25 @@ export const cliquePlatformData2: {
   image: string;
 }[] = [
   {
-    key: "4",
-    name: "For all devices",
+    key: '4',
+    name: 'For all devices',
     detail:
-      "What you can do on one, you can do on all. Yes! Clique is on both mobile platforms and the web platform.",
-    image: "all-devices",
+      'What you can do on one, you can do on all. Yes! Clique is on both mobile platforms and the web platform.',
+    image: 'all-devices',
   },
   {
-    key: "5",
-    name: "Analytics",
+    key: '5',
+    name: 'Analytics',
     detail:
-      "We won’t leave you half way. Clique also allows you as a creator to analyse and see your progress with money and followers..",
-    image: "analytics",
+      'We won’t leave you half way. Clique also allows you as a creator to analyse and see your progress with money and followers..',
+    image: 'analytics',
   },
   {
-    key: "6",
-    name: "Upload & Organize",
+    key: '6',
+    name: 'Upload & Organize',
     detail:
-      "Clique has a very smooth and easy platfom for creator to create, upload and for users to follow and keep track. This platform is the best thing after sliced bread.",
-    image: "upload",
+      'Clique has a very smooth and easy platfom for creator to create, upload and for users to follow and keep track. This platform is the best thing after sliced bread.',
+    image: 'upload',
   },
 ];
 
@@ -172,22 +172,22 @@ export const walletData: {
   amount: string;
 }[] = [
   {
-    key: "1",
-    time: "8 hour",
-    amount: "₦20,000.00",
-    image: "arrow-up",
+    key: '1',
+    time: '8 hour',
+    amount: '₦20,000.00',
+    image: 'arrow-up',
   },
   {
-    key: "2",
-    time: "1 hour",
+    key: '2',
+    time: '1 hour',
     amount: "₦83,200.00'",
-    image: "arrow-up",
+    image: 'arrow-up',
   },
   {
-    key: "3",
-    time: "4 hour",
-    amount: "₦8,100.00",
-    image: "arrow-down",
+    key: '3',
+    time: '4 hour',
+    amount: '₦8,100.00',
+    image: 'arrow-down',
   },
 ];
 
@@ -198,28 +198,28 @@ export const helpGrowData: {
   bigImage: string;
 }[] = [
   {
-    key: "1",
-    header: "Increase your earning",
-    image: "microphone",
-    bigImage: "big-microphone",
+    key: '1',
+    header: 'Increase your earning',
+    image: 'microphone',
+    bigImage: 'big-microphone',
   },
   {
-    key: "2",
-    header: "Optimized for growth",
-    image: "movie-action",
-    bigImage: "big-movie-action",
+    key: '2',
+    header: 'Optimized for growth',
+    image: 'movie-action',
+    bigImage: 'big-movie-action',
   },
 ];
 
 export const famousCreatorsImageData: string[] = [
-  "celeb1",
-  "celeb2",
-  "celeb3",
-  "celeb4",
-  "celeb5",
-  "celeb6",
-  "celeb7",
-  "celeb8",
+  'celeb1',
+  'celeb2',
+  'celeb3',
+  'celeb4',
+  'celeb5',
+  'celeb6',
+  'celeb7',
+  'celeb8',
 ];
 
 export const contactInfoData: {
@@ -227,16 +227,16 @@ export const contactInfoData: {
   detail: string;
 }[] = [
   {
-    image: "location",
-    detail: "2715 Ash Dr. San Jose, Ikoyi Link Bridge 83475",
+    image: 'location',
+    detail: '2715 Ash Dr. San Jose, Ikoyi Link Bridge 83475',
   },
   {
-    image: "call",
-    detail: "(234) 81 5678 2341",
+    image: 'call',
+    detail: '(234) 81 5678 2341',
   },
   {
-    image: "message",
-    detail: "info@clique.co",
+    image: 'message',
+    detail: 'info@clique.co',
   },
 ];
 
@@ -245,16 +245,16 @@ export const footerOthersData: {
   detail: string;
 }[] = [
   {
-    key: "1",
-    detail: "FAQs",
+    key: '1',
+    detail: 'FAQs',
   },
   {
-    key: "2",
-    detail: "Privacy Policy",
+    key: '2',
+    detail: 'Privacy Policy',
   },
   {
-    key: "3",
-    detail: "Terms and Conditions",
+    key: '3',
+    detail: 'Terms and Conditions',
   },
 ];
 
@@ -263,20 +263,20 @@ export const sideBarData: {
   detail: string;
 }[] = [
   {
-    key: "0",
-    detail: "About",
+    key: '0',
+    detail: 'About',
   },
   {
-    key: "1",
-    detail: "FAQs",
+    key: '1',
+    detail: 'FAQs',
   },
   {
-    key: "2",
-    detail: "Privacy Policy",
+    key: '2',
+    detail: 'Privacy Policy',
   },
   {
-    key: "3",
-    detail: "Terms and Conditions",
+    key: '3',
+    detail: 'Terms and Conditions',
   },
 ];
 
@@ -285,36 +285,36 @@ export const menu: {
   icon: any;
 }[] = [
   {
-    name: "home",
+    name: 'home',
     icon: HomeIcon,
   },
   {
-    name: "discover",
+    name: 'discover',
     icon: DiscoverIcon,
   },
   {
-    name: "trending",
+    name: 'trending',
     icon: TrendingIcon,
   },
   {
-    name: "profile",
+    name: 'profile',
     icon: ProfileIcon,
   },
   {
-    name: "wallet",
+    name: 'wallet',
     icon: WalletIcon,
   },
   {
-    name: "Live Events",
+    name: 'Live Events',
     icon: LiveIcon,
   },
 
   {
-    name: "Your channel",
+    name: 'Your channel',
     icon: ChannelIcon,
   },
   {
-    name: "settings",
+    name: 'settings',
     icon: SettingsIcon,
   },
 ];
@@ -324,31 +324,31 @@ export const menuWithOutLive: {
   icon: any;
 }[] = [
   {
-    name: "home",
+    name: 'home',
     icon: HomeIcon,
   },
   {
-    name: "discover",
+    name: 'discover',
     icon: DiscoverIcon,
   },
   {
-    name: "trending",
+    name: 'trending',
     icon: TrendingIcon,
   },
   {
-    name: "profile",
+    name: 'profile',
     icon: ProfileIcon,
   },
   {
-    name: "wallet",
+    name: 'wallet',
     icon: WalletIcon,
   },
   {
-    name: "Live Events",
+    name: 'Live Events',
     icon: LiveIcon,
   },
   {
-    name: "settings",
+    name: 'settings',
     icon: SettingsIcon,
   },
 ];
@@ -358,38 +358,38 @@ export const subcribees: {
   imgUrl: string;
 }[] = [
   {
-    name: "burnaboy",
-    imgUrl: "https://bit.ly/prosper-baba",
+    name: 'burnaboy',
+    imgUrl: 'https://bit.ly/prosper-baba',
   },
   {
-    name: "burnaboy",
-    imgUrl: "https://bit.ly/prosper-baba",
+    name: 'burnaboy',
+    imgUrl: 'https://bit.ly/prosper-baba',
   },
 ];
 
 export const videoDetails = [
   {
-    title: "Title",
+    title: 'Title',
     input: true,
   },
   {
-    title: "Description",
+    title: 'Description',
     input: false,
   },
 ];
 
 export const selectArr = [
   {
-    placeholder: "Choose Category",
-    options: ["Option"],
+    placeholder: 'Choose Category',
+    options: ['Option'],
   },
   {
-    placeholder: "Age Range",
-    options: ["Option"],
+    placeholder: 'Age Range',
+    options: ['Option'],
   },
   {
-    placeholder: "Visibility",
-    options: ["Option"],
+    placeholder: 'Visibility',
+    options: ['Option'],
   },
 ];
 
@@ -399,13 +399,13 @@ export const profileMenu: {
   icon: any;
 }[] = [
   {
-    name: "Content",
-    route: "content",
+    name: 'Content',
+    route: 'content',
     icon: ContentIcon,
   },
   {
-    name: "Edit Profile Details",
-    route: "edit",
+    name: 'Edit Profile Details',
+    route: 'edit',
     icon: DiscoverIcon,
   },
 ];
@@ -414,166 +414,181 @@ export const profileNav: {
   title: string;
   name: string;
 }[] = [
-  { title: "Paid Live", name: "paid" },
-  { title: "Playlists", name: "play" },
-  { title: "Saved Videos", name: "saved" },
+  {title: 'Paid Live', name: 'paid'},
+  {title: 'Playlists', name: 'play'},
+  {title: 'Saved Videos', name: 'saved'},
 ];
 
 export const playListData = [
   {
-    bigImage: "tiger",
-    noOfVideos: "43",
-    smallImage: "uploader",
-    name: "NAT GEO COMPILATIONS",
+    bigImage: 'tiger',
+    noOfVideos: '43',
+    smallImage: 'uploader',
+    name: 'NAT GEO COMPILATIONS',
   },
   {
-    bigImage: "flower",
-    noOfVideos: "76",
-    smallImage: "flowersmall",
-    name: "Plant Cultivation Practices",
+    bigImage: 'flower',
+    noOfVideos: '76',
+    smallImage: 'flowersmall',
+    name: 'Plant Cultivation Practices',
   },
   {
-    bigImage: "food",
-    noOfVideos: "6",
-    smallImage: "foodsmall",
-    name: "Food Network",
+    bigImage: 'food',
+    noOfVideos: '6',
+    smallImage: 'foodsmall',
+    name: 'Food Network',
   },
   {
-    bigImage: "ayarmix",
-    noOfVideos: "25",
-    smallImage: "ayarstar",
-    name: "Ayra Star Mix",
+    bigImage: 'ayarmix',
+    noOfVideos: '25',
+    smallImage: 'ayarstar',
+    name: 'Ayra Star Mix',
   },
 ];
 
 export const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
 
 export const scrollBarStyle = {
-  "&::-webkit-scrollbar": {
-    width: "8px",
-    rounded: "full",
+  '&::-webkit-scrollbar': {
+    width: '8px',
+    rounded: 'full',
   },
-  "&::-webkit-scrollbar-track": {
-    boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-    webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+  '&::-webkit-scrollbar-track': {
+    boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+    webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
   },
-  "&::-webkit-scrollbar-thumb": {
-    bg: "clique.primaryBg",
-    outline: "none",
+  '&::-webkit-scrollbar-thumb': {
+    bg: 'clique.primaryBg',
+    outline: 'none',
+  },
+};
+
+export const scrollBarStyle2 = {
+  '&::-webkit-scrollbar': {
+    width: '8px',
+    rounded: 'full',
+  },
+  '&::-webkit-scrollbar-track': {
+    boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+    webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+  },
+  '&::-webkit-scrollbar-thumb': {
+    bg: 'clique.base',
+    outline: 'none',
   },
 };
 
 export const purpleBoxStyle = {
   content: '""',
-  position: "absolute",
-  top: "50%",
-  transform: "translateY(-50%)",
-  bg: "clique.base",
+  position: 'absolute',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  bg: 'clique.base',
   left: 0,
-  width: "6px",
-  height: "25px",
-  borderRightRadius: "4px",
+  width: '6px',
+  height: '25px',
+  borderRightRadius: '4px',
 };
 
 export const editInputData = [
-  { name: "First name", sideContent: "Edit" },
-  { name: "Last name", sideContent: "Edit" },
+  {name: 'First name', sideContent: 'Edit'},
+  {name: 'Last name', sideContent: 'Edit'},
   {
-    name: "Username",
-    sideContent: "(Username can only be changed 2 times a year)",
+    name: 'Username',
+    sideContent: '(Username can only be changed 2 times a year)',
   },
-  { name: "Email", sideContent: "Edit" },
-  { name: "Password", sideContent: "Edit" },
-  { name: "Date of Birth", sideContent: "Edit" },
+  {name: 'Email', sideContent: 'Edit'},
+  {name: 'Password', sideContent: 'Edit'},
+  {name: 'Date of Birth', sideContent: 'Edit'},
 ];
 
 export const subscriptionsData = [
-  { name: "Kint Klarton Brown", status: "active" },
-  { name: "Naomi Cambel", status: "active" },
-  { name: "Black Lives Matter", status: "active" },
-  { name: "Sarah Banks", status: "notActive" },
-  { name: "Jennifer Ugochi", status: "active" },
-  { name: "Lanre Kolade", status: "active" },
-  { name: "Chiamaka Okoye", status: "notActive" },
-  { name: "Mirabelle Odes", status: "notActive" },
-  { name: "Chimamanda Nneka", status: "active" },
-  { name: "Isioma Violet", status: "active" },
-  { name: "Dara Omolara", status: "active" },
+  {name: 'Kint Klarton Brown', status: 'active'},
+  {name: 'Naomi Cambel', status: 'active'},
+  {name: 'Black Lives Matter', status: 'active'},
+  {name: 'Sarah Banks', status: 'notActive'},
+  {name: 'Jennifer Ugochi', status: 'active'},
+  {name: 'Lanre Kolade', status: 'active'},
+  {name: 'Chiamaka Okoye', status: 'notActive'},
+  {name: 'Mirabelle Odes', status: 'notActive'},
+  {name: 'Chimamanda Nneka', status: 'active'},
+  {name: 'Isioma Violet', status: 'active'},
+  {name: 'Dara Omolara', status: 'active'},
 ];
 
 export const settingsMenu = [
   {
-    name: "Account",
-    route: "account",
+    name: 'Account',
+    route: 'account',
     icon: AccountIcon,
   },
   {
-    name: "Notification Settings",
-    route: "notification",
+    name: 'Notification Settings',
+    route: 'notification',
     icon: NotificationSetIcon,
   },
   {
-    name: "Copyright Policy",
-    route: "copyright",
+    name: 'Copyright Policy',
+    route: 'copyright',
     icon: CopyRightIcon,
   },
   {
-    name: "Terms Of Services",
-    route: "terms",
+    name: 'Terms Of Services',
+    route: 'terms',
     icon: TermsServiceIcon,
   },
   {
-    name: "Community Guidelines",
-    route: "guidlines",
+    name: 'Community Guidelines',
+    route: 'guidlines',
     icon: CommunityGuidIcon,
   },
   {
-    name: "Privacy Policy",
-    route: "privacy",
+    name: 'Privacy Policy',
+    route: 'privacy',
     icon: PrivacyPolicyIcon,
   },
   {
-    name: "FAQs",
-    route: "faqs",
+    name: 'FAQs',
+    route: 'faqs',
     icon: FaqIcon,
   },
 ];
 
 export const goliveMenu = [
   {
-    name: "Stream Now",
-    route: "stream",
+    name: 'Stream Now',
+    route: 'stream',
     icon: StreamIcon,
   },
   {
-    name: "Schedule Stream",
-    route: "liveevent",
+    name: 'Schedule Stream',
+    route: 'liveevent',
     icon: LiveEventIcon,
   },
 ];
 
 export const channelMenu: MenuData[] = [
   {
-    name: "Content",
-    route: "content",
+    name: 'Content',
+    route: 'content',
     icon: ContentIcon,
   },
   {
-    name: "Edit Channel Details",
-    route: "edit",
+    name: 'Edit Channel Details',
+    route: 'edit',
     icon: DiscoverIcon,
   },
   {
-    name: "Channel Analytics",
-    route: "analytics",
+    name: 'Channel Analytics',
+    route: 'analytics',
     icon: AnalyticsIcon,
   },
 ];
 
 export const createChannelMenu = [
   {
-    name: "Create Channel",
-    route: "channel",
+    name: 'Create Channel',
+    route: 'channel',
     icon: VideoContent,
   },
 ];
@@ -582,18 +597,18 @@ export const channelNav: {
   title: string;
   name: string;
 }[] = [
-  { title: "Uploads", name: "upload" },
-  { title: "Live Recordings", name: "live" },
-  { title: "Playlists", name: "playlist" },
+  {title: 'Uploads', name: 'upload'},
+  {title: 'Live Recordings', name: 'live'},
+  {title: 'Playlists', name: 'playlist'},
 ];
 
 export const shareData: string[] = [
-  "whatsapp",
-  "ig",
-  "tikTok",
-  "figma",
-  "github",
-  "twitter",
+  'whatsapp',
+  'ig',
+  'tikTok',
+  'figma',
+  'github',
+  'twitter',
 ];
 
 export const chartData: {
@@ -603,21 +618,21 @@ export const chartData: {
   increase: boolean;
 }[] = [
   {
-    name: "Subscribers",
-    amount: "13,241",
-    detail: "Daily subscribers insight",
+    name: 'Subscribers',
+    amount: '13,241',
+    detail: 'Daily subscribers insight',
     increase: false,
   },
   {
-    name: "Visitor",
-    amount: "9,334",
-    detail: "Daily Visitors insight",
+    name: 'Visitor',
+    amount: '9,334',
+    detail: 'Daily Visitors insight',
     increase: true,
   },
   {
-    name: "Returning Visitor",
-    amount: "4,107",
-    detail: "Daily Returning Visitors insight",
+    name: 'Returning Visitor',
+    amount: '4,107',
+    detail: 'Daily Returning Visitors insight',
     increase: true,
   },
 ];
@@ -627,16 +642,16 @@ export const analyticsData: {
   text2: string;
 }[] = [
   {
-    text1: "Total Number of Likes",
-    text2: "21,678,009",
+    text1: 'Total Number of Likes',
+    text2: '21,678,009',
   },
   {
-    text1: "Total Number of Shares",
-    text2: "638,935",
+    text1: 'Total Number of Shares',
+    text2: '638,935',
   },
   {
-    text1: "Total Number of Live Stream Views",
-    text2: "1,975,935",
+    text1: 'Total Number of Live Stream Views',
+    text2: '1,975,935',
   },
 ];
 
@@ -647,35 +662,35 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: "top" as const,
+      position: 'top' as const,
     },
   },
 };
 
-const labels = ["January", "July"];
+const labels = ['January', 'July'];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "",
+      label: '',
       data: [0, 400],
-      borderColor: "rgb(137, 44, 220)",
-      backgroundColor: "rgba(137, 44, 220, 0.5)",
+      borderColor: 'rgb(137, 44, 220)',
+      backgroundColor: 'rgba(137, 44, 220, 0.5)',
     },
   ],
 };
 
-export const age: string[] = ["18 and above", "Below 18"];
+export const age: string[] = ['18 and above', 'Below 18'];
 
-export const API = axios.create({ baseURL: baseUrl });
+export const API = axios.create({baseURL: baseUrl});
 
 API.interceptors.request.use((req) => {
   if (store.getState().app.userReducer.token) {
@@ -700,6 +715,7 @@ export interface contentData {
   view: number;
   createdAt: any;
   category_id: string;
+  uploader_userName: string;
 }
 
 export interface uploaderId {
@@ -709,6 +725,7 @@ export interface uploaderId {
   firstName: string;
   lastName: string;
   userName: string;
+  photo?: string;
 }
 
 export default interface commentInterface {

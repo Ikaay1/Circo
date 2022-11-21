@@ -155,7 +155,7 @@ const Footer = () => {
               className={'button-container'}
               mt={{base: '.7rem'}}
             >
-              <button type='submit'>send message</button>
+              <button type='submit'>Send message</button>
             </Box>
           </form>
         </Box>

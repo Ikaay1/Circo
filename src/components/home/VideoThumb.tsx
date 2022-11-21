@@ -73,22 +73,34 @@ function VideoThumb({
           </Box>
 
           <Flex mt='15px'>
-            <Avatar
-              mr={'10px'}
-              p='0'
-              size='sm'
-              name='Prosper Otemuyiwa'
-              src={
-                length === 4
-                  ? '/assets/ayarstar.png'
-                  : 'https://bit.ly/prosper-baba'
-              }
-              onClick={() => handleRouting(video?.uploader_id?._id)}
-              cursor='pointer'
-            />
-            <Box>
+            {video?.uploader_id?.photo ? (
+              <Avatar
+                mr={'10px'}
+                p='0'
+                size='sm'
+                name='Prosper Otemuyiwa'
+                src={video?.uploader_id?.photo}
+                onClick={() => handleRouting(video?.uploader_id?._id)}
+                cursor='pointer'
+              />
+            ) : (
+              <Avatar
+                size='sm'
+                name={
+                  video?.uploader_id?.firstName +
+                  ' ' +
+                  video?.uploader_id?.lastName
+                }
+                borderColor='clique.greenYellow'
+                onClick={() => handleRouting(video?.uploader_id?._id)}
+                cursor='pointer'
+                mr={'10px'}
+                p='0'
+              />
+            )}
+            <Box w='calc(100% - 40px)'>
               <Text
-                noOfLines={2}
+                noOfLines={1}
                 color={'clique.white'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
