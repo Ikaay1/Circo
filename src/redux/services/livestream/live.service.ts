@@ -1,4 +1,4 @@
-import { baseUrl } from "@constants/utils";
+import { baseUrl, data } from "@constants/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { store } from "redux/app/store";
 
@@ -80,7 +80,7 @@ export const liveAPI = createApi({
 
     createView: builder.mutation<any, any>({
       query: (body) => ({
-        url: `content/view`,
+        url: `livestream/view`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export const liveAPI = createApi({
 
     likeStream: builder.mutation<any, any>({
       query: (body) => ({
-        url: `content/like`,
+        url: `livestream/like`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export const liveAPI = createApi({
 
     dislikeStream: builder.mutation<any, any>({
       query: (body) => ({
-        url: `content/dislike`,
+        url: `livestream/dislike`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,6 +125,16 @@ export const liveAPI = createApi({
       }),
       invalidatesTags: ["Live"],
     }),
+
+    updateEvent: builder.mutation<any, any>({
+      query: (data) => ({
+        url: `event/update/${data.id}`,
+        method: "PATCH",
+        headers: {},
+        body: data.body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
   }),
 });
 
@@ -140,4 +150,5 @@ export const {
   useLikeStreamMutation,
   useDislikeStreamMutation,
   useReportCommentMutation,
+  useUpdateEventMutation,
 } = liveAPI;

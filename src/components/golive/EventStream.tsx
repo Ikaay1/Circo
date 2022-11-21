@@ -20,8 +20,9 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
+  useUpdateEventMutation,
 } from "redux/services/livestream/live.service";
-import { setStreamDetails } from "redux/slices/streamSlice";
+import { setSelectedStream, setStreamDetails } from "redux/slices/streamSlice";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
@@ -29,15 +30,14 @@ import SelectField from "./SelectField";
 function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
-  const [createEvent, createEventInfo] = useCreateEventMutation();
-  const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
+  const [updateEvent, updateInfo] = useUpdateEventMutation(); 
   const dispatch = useAppDispatch();
   return (
     <Formik
       initialValues={{
         title: event?.eventId?.title,
         description: event?.eventId?.description,
-        thumbNail: event?.eventId?.thumbNails[0] as any,
+        thumbNail: event?.eventId?.thumbNails[0] || "",
         category: event?.eventId?.categoryId,
         fee: event?.eventId?.paidToWatch ? event?.eventId?.fee : 0,
         ageRange: event?.eventId?.ageRange,
@@ -71,34 +71,28 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
         formData.append("category", "SCHEDULE");
         formData.append("categoryId", values.category);
 
-        const res: any = await createEvent(formData);
+        const res: any = await updateEvent({
+          id: event?.eventId?._id,
+          body: formData,
+        });
         if (res.data) {
-          const createLive: any = await createLiveStream({
-            eventId: res.data?.data?._id,
+          toast({
+            title: "Stream Updated",
+            description: "Stream Updated Successfully",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top-right",
           });
-          if (createLive.data) {
-            toast({
-              title: "Event Created Successfully",
-              status: "success",
-              duration: 3000,
-              isClosable: true,
-              position: "top-right",
-            });
-            dispatch(
-              setStreamDetails({
-                payload: { ...createLive.data?.data?.livestream },
-              })
-            );
-            setTabIndex(1);
-          } else {
-            toast({
-              title: createLive.error?.data?.message,
-              status: "error",
-              duration: 3000,
-              isClosable: true,
-              position: "top-right",
-            });
-          }
+
+          dispatch(
+            setSelectedStream({
+              payload: {
+                ...event,
+                eventId: res?.data?.data,
+              },
+            })
+          );
         } else {
           toast({
             title: "Event Creation Failed",
@@ -152,11 +146,9 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
                           <Box mt="7">
                             <Box
                               bgImage={
-                                props.values.thumbNail?.startsWith("http")
-                                  ? `url(${props.values.thumbNail})`
-                                  : `url(${URL.createObjectURL(
-                                      props.values.thumbNail
-                                    )})`
+                                props.values.thumbNail?.name
+                                  ? URL.createObjectURL(props.values.thumbNail)
+                                  : props.values.thumbNail
                               }
                               rounded="10px"
                               h="120px"
