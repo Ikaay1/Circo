@@ -80,7 +80,7 @@ export const liveAPI = createApi({
 
     createView: builder.mutation<any, any>({
       query: (body) => ({
-        url: `content/view`,
+        url: `livestream/view`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export const liveAPI = createApi({
 
     likeStream: builder.mutation<any, any>({
       query: (body) => ({
-        url: `content/like`,
+        url: `livestream/like`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export const liveAPI = createApi({
 
     dislikeStream: builder.mutation<any, any>({
       query: (body) => ({
-        url: `content/dislike`,
+        url: `livestream/dislike`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",

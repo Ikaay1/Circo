@@ -3,14 +3,24 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Skeleton } from "@chakra-ui/react";
 import StreamPlayer from "@components/stream/StreamPlayer";
-import { useGetStreamQuery } from "redux/services/livestream/live.service";
+import {
+  useCreateViewMutation,
+  useGetStreamQuery,
+} from "redux/services/livestream/live.service";
 import CommentSection from "@components/stream/CommentSection";
 import VideoDetails from "@components/stream/VideoDetails";
 
 function Index() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, isFetching } = useGetStreamQuery(id as string);
+  const { data, isFetching, isLoading } = useGetStreamQuery(id as string);
+  const [createView, info] = useCreateViewMutation();
+
+  useEffect(() => {
+    if (data?.data) {
+      createView({ streamId: data?.data?.stream?._id });
+    }
+  }, [data]);
   return (
     <HomeLayout>
       <Flex>
@@ -37,7 +47,7 @@ function Index() {
             },
           }}
         >
-          {isFetching ? (
+          {isLoading ? (
             <Flex w="100%" justify={"space-between"}>
               <Skeleton h="580px" rounded="20px" w="100%" />
             </Flex>
@@ -45,7 +55,7 @@ function Index() {
             <StreamPlayer stream={data?.data?.stream} />
           )}
 
-          {isFetching ? (
+          {isLoading ? (
             <Skeleton h="580px" mt="10px" rounded="20px" w="100%" />
           ) : (
             <VideoDetails stream={data?.data?.stream} />
