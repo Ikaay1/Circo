@@ -1,25 +1,24 @@
 import { ChangeEvent, useRef, useState } from "react";
 
-import {
-  Box,
-  Flex, useToast,
-  VStack
-} from "@chakra-ui/react";
+import { Box, Flex, useToast, VStack } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 import Uploaders from "@components/channel/Uploaders";
 import { Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
-import { useUpdateProfileMutation } from "redux/services/user.service";
+import {
+  useGetUserQuery,
+  useUpdateProfileMutation,
+} from "redux/services/user.service";
 import { setChannel } from "redux/slices/channelSlice";
 import { editProfileSchema } from "schemas/editProfile.schema";
 import CustumField from "./CustumField";
+import { setUser } from "redux/slices/authSlice";
 
 interface UpdateProfile {
   firstName: string;
   lastName: string;
-  dob: string;
-  password: string;
+  // dob: string;
   email: string;
   photo?: string;
   cover?: string;
@@ -32,16 +31,15 @@ interface UpdateProfile {
 
 const EditProfile = () => {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-
   const toast = useToast();
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [updateProfile, status] = useUpdateProfileMutation();
+  const [updateProfile] = useUpdateProfileMutation();
   const coverRef = useRef<HTMLInputElement | any>();
   const profileRef = useRef<HTMLInputElement | any>();
   const [imageState, setimageState] = useState({
-    cover: userProfile?.cover ? userProfile.cover : "",
-    profile: userProfile?.photo ? userProfile.photo : "",
+    cover: userProfile?.cover ? userProfile?.cover : "",
+    profile: userProfile?.photo ? userProfile?.photo : "",
   });
   const handleFileChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -74,16 +72,19 @@ const EditProfile = () => {
     myFormData.append("firstName", values.firstName);
     myFormData.append("lastName", values.lastName);
     myFormData.append("email", values.email);
-    myFormData.append("password", values.password);
     myFormData.append("userName", values.username);
-    myFormData.append("dateOfBirth", values.dob);
+    // myFormData.append("dateOfBirth", values.dob);
     coverRef.current.files[0] &&
       myFormData.append("cover", coverRef.current.files[0]);
     profileRef.current.files[0] &&
       myFormData.append("photo", profileRef.current.files[0]);
     const res: any = await updateProfile(myFormData);
     if ("data" in res) {
-      dispatch(setChannel(res.data));
+      dispatch(
+        setUser({
+          payload: res?.data?.data?.user,
+        })
+      );
       toast({
         title: "Profile successfully updated",
         status: "success",
@@ -93,7 +94,6 @@ const EditProfile = () => {
       });
       setSubmitting(false);
     } else if (res.error) {
-      console.log(res.error);
       toast({
         title: res.error.error,
         status: "error",
@@ -113,12 +113,11 @@ const EditProfile = () => {
   };
 
   const initialValues = {
-    firstName: userProfile.firstName ? userProfile.firstName : "",
-    lastName: userProfile.lastName ? userProfile.lastName : "",
-    email: userProfile.email ? userProfile.email : "",
-    username: userProfile.userName ? userProfile.userName : "",
-    password: userProfile.password ? userProfile.password : "",
-    dob: userProfile.dateOfBirth ? userProfile.dateOfBirth : "",
+    firstName: userProfile?.firstName ? userProfile?.firstName : "",
+    lastName: userProfile?.lastName ? userProfile?.lastName : "",
+    email: userProfile?.email ? userProfile?.email : "",
+    username: userProfile?.userName ? userProfile?.userName : "",
+    // dob: user?.dateOfBirth ? user?.dateOfBirth : "",
   };
 
   return (
@@ -141,7 +140,7 @@ const EditProfile = () => {
       >
         {(props) => (
           <Form>
-            <Flex justifyContent={"end"} mt="5">
+            <Flex justifyContent={"end"} mt="5" mr="5">
               <Btn
                 submit={true}
                 text="Save Changes"
@@ -165,16 +164,12 @@ const EditProfile = () => {
                 nameValue="username"
               />
               <CustumField name="Email" sideContent="Edit" nameValue="email" />
-              <CustumField
-                name="Password"
-                sideContent="Edit"
-                nameValue="password"
-              />
-              <CustumField
+
+              {/* <CustumField
                 name="Date of Birth"
                 sideContent="Edit"
                 nameValue="dob"
-              />
+              /> */}
             </VStack>
           </Form>
         )}
