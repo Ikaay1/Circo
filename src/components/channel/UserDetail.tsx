@@ -77,7 +77,7 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
               width="100%"
             />
           )
-        ) : userProfile.cover ? (
+        ) : userProfile?.cover ? (
           <Image
             w="100%"
             h="170px"
@@ -102,9 +102,8 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
           bottom={
             router.query.name === "content" ||
             router.query.name === "analytics" ||
-            router.pathname.includes("subscribe") ||
-            router.pathname.includes("profile")
-              ? "-100%"
+            router.pathname.includes("subscribe") 
+              ? "-90%"
               : "-52%"
           }
           left={"50%"}
@@ -144,7 +143,7 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
                 </>
               )}
             </Box>
-          ) : userProfile.photo ? (
+          ) : userProfile?.photo ? (
             <Image
               src={userProfile?.photo}
               alt="profile photo"

@@ -1,74 +1,86 @@
-import { store } from 'redux/app/store';
+import { store } from "redux/app/store";
 
-import { baseUrl } from '@constants/utils';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseUrl } from "@constants/utils";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userApi = createApi({
-  reducerPath: 'userApi',
+  reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
     prepareHeaders: (headers) => {
       headers.set(
-        'Authorization',
-        `Bearer ${store.getState().app.userReducer.token}`,
+        "Authorization",
+        `Bearer ${store.getState().app.userReducer.token}`
       );
       return headers;
     },
   }),
-  tagTypes: ['User'],
+  tagTypes: ["User"],
   endpoints: (builder) => ({
     subscribe: builder.mutation<any, any>({
       query: (body) => ({
         url: `subscribe`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
 
     getUser: builder.query<any, any>({
       query: (id) => ({
         url: `users/${id}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['User'],
+      providesTags: ["User"],
     }),
 
     updateProfile: builder.mutation<any, any>({
       query: (body) => ({
         url: `users/update`,
-        method: 'PATCH',
+        method: "PATCH",
         body: body,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     subscribeToUserChannel: builder.mutation<any, any>({
       query: (body) => ({
         url: `subscribe`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
 
     getSuggestedUsers: builder.query<any, any>({
-      query: ({page, limit}) => ({
+      query: ({ page, limit }) => ({
         url: `content/suggested?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['User'],
+      providesTags: ["User"],
+    }),
+
+    changePassword: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `users/change/password`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
@@ -79,4 +91,5 @@ export const {
   useUpdateProfileMutation,
   useGetSuggestedUsersQuery,
   useSubscribeToUserChannelMutation,
+  useChangePasswordMutation,
 } = userApi;
