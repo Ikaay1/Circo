@@ -1,29 +1,32 @@
-import { Box, Flex, Progress, Text } from "@chakra-ui/react";
-import React from "react";
+import React from 'react';
 
-function SearchProgressBar() {
+import { Box, Flex, Progress, Text } from '@chakra-ui/react';
+
+import SearchInterface from '../../constants/interface';
+
+function SearchProgressBar({searchWord}: {searchWord: SearchInterface}) {
   return (
-    <Box mb="15px">
-      <Flex justifyContent={"space-between"}>
-        <Text fontSize={"smSubHead"} fontFamily={"Poppins"}>
-          Title
+    <Box mb='15px'>
+      <Flex justifyContent={'space-between'}>
+        <Text fontSize={'smSubHead'} fontFamily={'Poppins'}>
+          {searchWord.word}
         </Text>
-        <Text fontFamily={"Poppins"} fontSize={"smSubHead"}>
-          20000
+        <Text fontFamily={'Poppins'} fontSize={'smSubHead'}>
+          {searchWord.count}
         </Text>
       </Flex>
 
       <Progress
-        colorScheme="yellow"
-        size={"sm"}
-        rounded={"full"}
+        colorScheme='yellow'
+        size={'sm'}
+        rounded={'full'}
         value={50}
-        color="red"
-        background="clique.progressBg"
+        color='red'
+        background='clique.progressBg'
         sx={{
-          "& > div": {
-            background: "clique.yellow",
-            borderRadius: "full",
+          '& > div': {
+            background: 'clique.yellow',
+            borderRadius: 'full',
           },
         }}
       />

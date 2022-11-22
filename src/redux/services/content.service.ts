@@ -198,6 +198,28 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+
+    getTrending: builder.query<any, any>({
+      query: ({page, limit}) => ({
+        url: `content/most-watched?page=${page}&limit=${limit}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
+
+    getSearchHistory: builder.query<any, any>({
+      query: ({page, limit}) => ({
+        url: `content/search-history?page=${page}&limit=${limit}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -218,4 +240,6 @@ export const {
   useGetContentsBySearchQuery,
   useGetSingleUserContentQuery,
   useGetDiscoverQuery,
+  useGetTrendingQuery,
+  useGetSearchHistoryQuery,
 } = contentApi;

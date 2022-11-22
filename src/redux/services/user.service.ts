@@ -70,6 +70,17 @@ export const userApi = createApi({
       }),
       providesTags: ['User'],
     }),
+
+    getPopularCreators: builder.query<any, any>({
+      query: ({page, limit}) => ({
+        url: `content/popular-creators?page=${page}&limit=${limit}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['User'],
+    }),
   }),
 });
 
@@ -79,4 +90,5 @@ export const {
   useUpdateProfileMutation,
   useGetSuggestedUsersQuery,
   useSubscribeToUserChannelMutation,
+  useGetPopularCreatorsQuery,
 } = userApi;

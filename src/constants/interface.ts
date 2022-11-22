@@ -46,3 +46,9 @@ export interface CategoriesInterface {
   _id: string;
   name: string;
 }
+
+export default interface SearchInterface {
+  word: string;
+  count: number;
+  _id: string;
+}
