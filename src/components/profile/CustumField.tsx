@@ -5,18 +5,27 @@ import {
   Text,
   Input,
   Flex,
+  Icon,
 } from "@chakra-ui/react";
 import ChannelInput from "@components/channel/ChannelInput";
+import PasswordIcon from "@icons/PasswordIcon";
 import { Field } from "formik";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   nameValue: string;
-  sideContent: string;
+  sideContent?: string;
   name: string;
+  type?: string;
 };
 
-export default function CustumField({ nameValue, sideContent, name }: Props) {
+export default function CustumField({
+  nameValue,
+  sideContent,
+  name,
+  type,
+}: Props) {
+  const [show, setShow] = useState<Boolean>(false);
   return (
     <Field name={nameValue}>
       {({ field, form: { touched, errors } }: any) => (
@@ -36,7 +45,7 @@ export default function CustumField({ nameValue, sideContent, name }: Props) {
               height="100%"
               background="#clique.secondaryGrey3"
               borderRadius="10px"
-              type={"text"}
+              type={type ? (show ? "text" : "password") : "text"}
               outline="none"
               fontSize="subHead"
               color="clique.white"
@@ -66,7 +75,15 @@ export default function CustumField({ nameValue, sideContent, name }: Props) {
               fontSize="sm"
               color="clique.secondaryGrey2"
             >
-              {sideContent}
+              {sideContent ? (
+                sideContent
+              ) : (
+                <Icon
+                  as={PasswordIcon}
+                  cursor="pointer"
+                  onClick={() => setShow(!show)}
+                />
+              )}
             </Text>
           </Box>
           <Flex mx="auto" justify={"center"}>
