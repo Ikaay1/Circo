@@ -187,6 +187,17 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+
+    getDiscover: builder.query<any, any>({
+      query: ({page, limit}) => ({
+        url: `content/discover?page=${page}&limit=${limit}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -206,4 +217,5 @@ export const {
   useReportCommentMutation,
   useGetContentsBySearchQuery,
   useGetSingleUserContentQuery,
+  useGetDiscoverQuery,
 } = contentApi;

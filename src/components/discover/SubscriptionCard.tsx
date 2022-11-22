@@ -1,20 +1,27 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import AvataWithSpace from "@components/widgets/AvataWithSpace";
-import React from "react";
-import SubcribeOverLay from "./SubcribeOverLay";
-import SubscribeBody from "./SubscribeBody";
+import React from 'react';
 
-function SubscriptionCard() {
+import { Flex } from '@chakra-ui/react';
+
+import SubcribeOverLay from './SubcribeOverLay';
+import SubscribeBody from './SubscribeBody';
+
+function SubscriptionCard({user, refetch}: any) {
   const [isHover, setIsHover] = React.useState(false);
+
   return (
     <Flex
-      cursor={"pointer"}
-      minW="420px"
-      mr="20px"
+      cursor={'pointer'}
+      minW='420px'
+      mr='20px'
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
+      key={user._id}
     >
-      {!isHover ? <SubscribeBody /> : <SubcribeOverLay isHover={isHover} />}
+      {!isHover ? (
+        <SubscribeBody user={user} />
+      ) : (
+        <SubcribeOverLay isHover={isHover} user={user} refetch={refetch} />
+      )}{' '}
     </Flex>
   );
 }
