@@ -1,25 +1,33 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import AvataWithSpace from "@components/widgets/AvataWithSpace";
-import React from "react";
+import React from 'react';
 
-function CreatorAvatarBox() {
+import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
+import AvataWithSpace from '@components/widgets/AvataWithSpace';
+
+function CreatorAvatarBox({user}: {user: any}) {
   return (
-    <Flex justifyContent={"center"} alignItems="center" flexDir={"column"}>
-      <AvataWithSpace
-        name="Prosper Otemuyiwa"
-        url="https://bit.ly/prosper-baba"
-        size="45px"
-        borderColor="clique.brown"
-        borderThickness="3px"
-      />
-
+    <Flex justifyContent={'center'} alignItems='center' flexDir={'column'}>
+      {user.photo ? (
+        <AvataWithSpace
+          name='Prosper Otemuyiwa'
+          url={user.photo}
+          size='45px'
+          borderColor='clique.brown'
+          borderThickness='3px'
+        />
+      ) : (
+        <Avatar
+          size='md'
+          name={user.firstName + ' ' + user.lastName}
+          borderColor='clique.greenYellow'
+        />
+      )}
       <Text
-        mt="5px"
-        fontFamily={"Poppins"}
-        fontSize="smSubHead"
-        color={"clique.lightGrey"}
+        mt='5px'
+        fontFamily={'Poppins'}
+        fontSize='smSubHead'
+        color={'clique.lightGrey'}
       >
-        Emma
+        {user.userName}
       </Text>
     </Flex>
   );

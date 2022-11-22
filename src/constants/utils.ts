@@ -467,6 +467,7 @@ export const scrollBarStyle2 = {
   '&::-webkit-scrollbar': {
     width: '8px',
     rounded: 'full',
+    height: '8px',
   },
   '&::-webkit-scrollbar-track': {
     boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
@@ -475,6 +476,7 @@ export const scrollBarStyle2 = {
   '&::-webkit-scrollbar-thumb': {
     bg: 'clique.base',
     outline: 'none',
+    borderRadius: '20px',
   },
 };
 

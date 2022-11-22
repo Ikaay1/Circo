@@ -13,7 +13,7 @@ function SubcribeOverLay({
   user: any;
   refetch: any;
 }) {
-  const [subscribe, subscribeStatus] = useSubscribeMutation();
+  const [subscribe] = useSubscribeMutation();
   return (
     <Flex
       w='full'

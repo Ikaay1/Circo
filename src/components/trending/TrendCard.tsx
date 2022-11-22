@@ -1,118 +1,130 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import AvataWithSpace from "@components/widgets/AvataWithSpace";
-import { useRouter } from "next/router";
-import React from "react";
+import moment from 'moment';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-function TrendCard({ position }: { position: string }) {
+import { Avatar, Box, Flex, Image, Text } from '@chakra-ui/react';
+import AvataWithSpace from '@components/widgets/AvataWithSpace';
+
+import { contentData } from '../../constants/utils';
+
+function TrendCard({position, video}: {position: string; video: contentData}) {
   const router = useRouter();
 
   return (
     <Flex
-      onClick={() => router.push("/player/" + position)}
-      cursor={"pointer"}
-      position={"relative"}
+      onClick={() => router.push('/player/' + video._id)}
+      cursor={'pointer'}
+      position={'relative'}
       _before={{
         content: `"${position}"`,
-        position: "absolute",
-        fontSize: "big",
-        left: "-20px",
-        top: "-35px",
-        color: "clique.base",
+        position: 'absolute',
+        fontSize: 'big',
+        left: '-20px',
+        top: '-35px',
+        color: 'clique.base',
         fontWeight: 500,
       }}
-      alignItems={"center"}
-      rounded={"20px"}
-      px="50px"
-      py="20px"
-      mt="30px"
-      h="220px"
-      bg="clique.white"
+      alignItems={'center'}
+      rounded={'20px'}
+      px='50px'
+      py='20px'
+      mt='30px'
+      h='220px'
+      bg='clique.white'
     >
-      <Box minW="50%" pr="40px">
-        <Image
-          maxH={"100%"}
-          mr="30px"
-          src="/assets/kortyvid.png"
-          alt="kortyvid"
-        />
+      <Box minW='50%' pr='40px'>
+        <Image maxH={'100%'} mr='30px' src={video.thumbNail} alt='kortyvid' />
       </Box>
 
-      <Box w="50%">
+      <Box w='50%'>
         <Flex>
-          <AvataWithSpace
-            mr="10px"
-            name="Prosper Otemuyiwa"
-            url="https://bit.ly/prosper-baba"
-            size="45px"
-            borderColor="clique.brown"
-            borderThickness="3px"
-          />
+          {video.uploader_id?.photo ? (
+            <AvataWithSpace
+              mr='10px'
+              name='Prosper Otemuyiwa'
+              url={video.uploader_id.photo}
+              size='45px'
+              borderColor='clique.brown'
+              borderThickness='3px'
+            />
+          ) : (
+            <Avatar
+              size='md'
+              name={
+                video.uploader_id.firstName + ' ' + video.uploader_id.lastName
+              }
+              mr='10px'
+              borderColor='clique.greenYellow'
+            />
+          )}
 
           <Box>
             <Text
-              fontFamily={"Poppins"}
-              fontSize="smSubHead"
-              color={"clique.lightGrey"}
+              fontFamily={'Poppins'}
+              fontSize='smSubHead'
+              color={'clique.lightGrey'}
+              noOfLines={1}
             >
-              Emma
+              {video.uploader_id.userName}
             </Text>
-            <Flex mt="5px" alignItems={"center"}>
+            <Flex mt='5px' alignItems={'center'}>
               <Text
                 noOfLines={2}
-                color={"clique.lightGrey"}
-                fontFamily={"Poppins"}
+                color={'clique.lightGrey'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"smSubHead"}
-                lineHeight={"1.2"}
-                mr="10px"
+                fontSize={'smSubHead'}
+                lineHeight={'1.2'}
+                mr='10px'
               >
-                1.2k views
+                {video.view} {video.view !== 1 ? 'views' : 'view'}
               </Text>
               <Text
-                pos={"relative"}
+                pos={'relative'}
                 _before={{
                   content: '""',
-                  position: "absolute",
-                  top: "50%",
-                  transform: "translateY(-50%)",
+                  position: 'absolute',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
                   left: 0,
-                  width: "4px",
-                  background: "clique.lightGrey",
-                  height: "4px",
-                  rounded: "full",
+                  width: '4px',
+                  background: 'clique.lightGrey',
+                  height: '4px',
+                  rounded: 'full',
                 }}
-                pl="10px"
+                pl='10px'
                 noOfLines={2}
-                color={"clique.lightGrey"}
-                fontFamily={"Poppins"}
+                color={'clique.lightGrey'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"smSubHead"}
-                lineHeight={"1.2"}
+                fontSize={'smSubHead'}
+                lineHeight={'1.2'}
               >
-                3 days ago
+                {moment(video?.createdAt).fromNow()}
               </Text>
             </Flex>
           </Box>
         </Flex>
 
         <Text
-          mt="5px"
-          color={"clique.black"}
-          fontFamily={"Poppins"}
+          mt='5px'
+          color={'clique.black'}
+          fontFamily={'Poppins'}
           fontWeight={700}
-          textTransform={"capitalize"}
-          fontSize="head"
+          textTransform={'capitalize'}
+          fontSize='head'
+          noOfLines={2}
         >
-          Eniola korty eo
+          {video.title}
         </Text>
 
         <Text
-          fontFamily={"Poppins"}
-          fontSize="smSubHead"
-          color={"clique.lightGrey"}
+          fontFamily={'Poppins'}
+          fontSize='smSubHead'
+          color={'clique.lightGrey'}
+          noOfLines={4}
         >
-          My journey so far has been amazing thanks to you guys. I’m ALMOST
-          there
+          {video.description}
         </Text>
       </Box>
     </Flex>

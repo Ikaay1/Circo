@@ -16,7 +16,7 @@ import {
 function Index() {
   const {data, isFetching, refetch} = useGetSuggestedUsersQuery({
     page: 1,
-    limit: 5,
+    limit: 7,
   });
   console.log(data?.data?.user);
   return (
@@ -63,7 +63,7 @@ function Index() {
             Suggested Subscriptions
           </Text>
           <Flex overflowX={'scroll'} sx={scrollBarStyle2}>
-            {isFetching ? (
+            {isFetching || !data ? (
               <>
                 {[1, 2].map((num) => (
                   <Box
@@ -90,7 +90,7 @@ function Index() {
               </>
             ) : (
               <>
-                {data.data.user.map((user: any) => (
+                {data?.data?.user?.map((user: any) => (
                   <Box key={user._id}>
                     <SubscriptionCard user={user} refetch={refetch} />
                   </Box>
