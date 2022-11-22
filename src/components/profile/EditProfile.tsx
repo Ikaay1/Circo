@@ -1,12 +1,13 @@
 import { ChangeEvent, useRef, useState } from "react";
 
-import { Box, Flex, useToast, VStack } from "@chakra-ui/react";
+import { Box, Flex, useToast, VStack, Text, Icon } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 import Uploaders from "@components/channel/Uploaders";
 import { Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import {
+  useChangePasswordMutation,
   useGetUserQuery,
   useUpdateProfileMutation,
 } from "redux/services/user.service";
@@ -14,6 +15,8 @@ import { setChannel } from "redux/slices/channelSlice";
 import { editProfileSchema } from "schemas/editProfile.schema";
 import CustumField from "./CustumField";
 import { setUser } from "redux/slices/authSlice";
+import { changePasswordSchema } from "schemas/changePassword.schema";
+import PasswordIcon from "@icons/PasswordIcon";
 
 interface UpdateProfile {
   firstName: string;
@@ -23,6 +26,12 @@ interface UpdateProfile {
   photo?: string;
   cover?: string;
   username: string;
+}
+
+interface ChangePassword {
+  oldPassword: string;
+  newPassword: string;
+  passwordConfirmation: string;
 }
 
 // export type UpdateChannelInterface =
@@ -35,6 +44,7 @@ const EditProfile = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [updateProfile] = useUpdateProfileMutation();
+  const [changePassword] = useChangePasswordMutation();
   const coverRef = useRef<HTMLInputElement | any>();
   const profileRef = useRef<HTMLInputElement | any>();
   const [imageState, setimageState] = useState({
@@ -112,6 +122,48 @@ const EditProfile = () => {
     }
   };
 
+  const submitPassword = async (
+    values: ChangePassword,
+    { setSubmitting, resetForm }: FormikHelpers<ChangePassword>
+  ) => {
+    const res: any = await changePassword({
+      oldPassword: values.oldPassword,
+      newPassword: values.newPassword,
+    });
+    if ("data" in res) {
+      dispatch(
+        setUser({
+          payload: res?.data?.data,
+        })
+      );
+      toast({
+        title: "Successfully changed password",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setSubmitting(false);
+      resetForm();
+    } else if (res.error) {
+      toast({
+        title: "Invalid credentials",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+    } else {
+      toast({
+        title: "Something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  };
+
   const initialValues = {
     firstName: userProfile?.firstName ? userProfile?.firstName : "",
     lastName: userProfile?.lastName ? userProfile?.lastName : "",
@@ -119,7 +171,11 @@ const EditProfile = () => {
     username: userProfile?.userName ? userProfile?.userName : "",
     // dob: user?.dateOfBirth ? user?.dateOfBirth : "",
   };
-
+  const passWordInitialValues = {
+    passwordConfirmation: "",
+    newPassword: "",
+    oldPassword: "",
+  };
   return (
     <>
       <Box>
@@ -170,6 +226,49 @@ const EditProfile = () => {
                 sideContent="Edit"
                 nameValue="dob"
               /> */}
+            </VStack>
+          </Form>
+        )}
+      </Formik>
+
+      <Formik
+        initialValues={passWordInitialValues}
+        onSubmit={submitPassword}
+        validationSchema={changePasswordSchema}
+      >
+        {(props) => (
+          <Form>
+            <VStack mt="100px" justifyContent={"center"} >
+              <Box pr="35%">
+                <Text>Change Password</Text>
+              </Box>
+              <VStack mt="100px" justify={"center"} alignSelf="center" mb="12">
+                <CustumField
+                  name="Old Password"
+                  nameValue="oldPassword"
+                  type="password"
+                />
+                <CustumField
+                  name="New Passowrd"
+                  nameValue="newPassword"
+                  type="password"
+                />
+                <CustumField
+                  name="Confirm New Password"
+                  nameValue="passwordConfirmation"
+                  type="password"
+                />
+              </VStack>
+
+              <Box pr="27%" mx="auto" pt="5%">
+                <Btn
+                  submit={true}
+                  text="Change password"
+                  isLoading={props.isSubmitting}
+                  px="12"
+                  py="6"
+                ></Btn>
+              </Box>
             </VStack>
           </Form>
         )}

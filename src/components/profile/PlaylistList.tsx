@@ -1,5 +1,3 @@
-import React from "react";
-import { useAppSelector } from "redux/app/hooks";
 import {
   Box,
   Flex,
@@ -7,12 +5,12 @@ import {
   Image,
   Skeleton,
   Text,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 
+import { useGetUserQuery } from "redux/services/user.service";
 import MoreIcon from "../../assets/icons/MoreIcon";
 import { Videos } from "./PlaylistDetails";
-import { useGetUserQuery } from "redux/services/user.service";
 
 type Props = {
   videos: Videos[];

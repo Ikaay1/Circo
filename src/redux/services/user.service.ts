@@ -71,6 +71,18 @@ export const userApi = createApi({
       providesTags: ['User'],
     }),
 
+    changePassword: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `users/change/password`,
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
     getPopularCreators: builder.query<any, any>({
       query: ({page, limit}) => ({
         url: `content/popular-creators?page=${page}&limit=${limit}`,
@@ -91,4 +103,5 @@ export const {
   useGetSuggestedUsersQuery,
   useSubscribeToUserChannelMutation,
   useGetPopularCreatorsQuery,
+  useChangePasswordMutation,
 } = userApi;
