@@ -31,6 +31,7 @@ import {
   useCreateLiveStreamMutation,
 } from "redux/services/livestream/live.service";
 import { CategoriesInterface } from "@constants/interface";
+import { useRouter } from "next/router";
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,6 +39,8 @@ function WebCamModal({ setState }: { setState: any }) {
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
+
+  const router = useRouter();
   return (
     <>
       <Flex
@@ -136,6 +139,10 @@ function WebCamModal({ setState }: { setState: any }) {
                       isClosable: true,
                       position: "top-right",
                     });
+                    console.log(createLive.data.data);
+                    router.push(
+                      `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}`
+                    );
                   } else {
                     toast({
                       title: createLive.error?.data?.message,
