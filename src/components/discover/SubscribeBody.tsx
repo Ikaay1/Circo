@@ -8,14 +8,14 @@ function SubscribeBody({user}: {user: any}) {
     <Flex
       h='220px'
       w='full'
-      bgImage={!user.photo ? '/assets/temsimg.png' : user.photo}
+      bgImage={user.photo ? user.photo : '/assets/linear-gradient.png'}
       bgSize='cover'
       bgPosition={'center'}
       bgRepeat='no-repeat'
       rounded={'20px'}
     >
       <Flex
-        backgroundColor={'rgba(0, 0, 0, 0.6)'}
+        backgroundColor={user.photo && 'rgba(0, 0, 0, 0.6)'}
         flexDirection={'column'}
         alignItems={'start'}
         justifyContent='space-between'
@@ -34,7 +34,7 @@ function SubscribeBody({user}: {user: any}) {
             {user?.photo ? (
               <AvataWithSpace
                 name='Prosper Otemuyiwa'
-                url='https://bit.ly/prosper-baba'
+                url={user.photo}
                 size='45px'
                 borderColor='clique.brown'
                 borderThickness='3px'
