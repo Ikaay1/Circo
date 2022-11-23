@@ -17,10 +17,12 @@ const Contents = ({
   videos,
   id,
   isLoading,
+  lastElementRef,
 }: {
   videos?: contentData[];
   id: string;
   isLoading: boolean;
+  lastElementRef?: any;
 }) => {
   const [route, setRoute] = useState("upload");
   return (
@@ -81,7 +83,11 @@ const Contents = ({
             </Box>
           ) : (
             <Box mt={"2.3rem"}>
-              <VideoGrid width={"100%"} videos={videos as contentData[]} />
+              <VideoGrid
+                width={"100%"}
+                videos={videos as contentData[]}
+                lastElementRef={lastElementRef}
+              />
             </Box>
           )}
         </>
