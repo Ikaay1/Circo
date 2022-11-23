@@ -32,6 +32,8 @@ import {
 } from "redux/services/livestream/live.service";
 import { CategoriesInterface } from "@constants/interface";
 import { useRouter } from "next/router";
+import { useAppDispatch } from "redux/app/hooks";
+import { setWebCamStream } from "redux/slices/streamSlice";
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,6 +41,7 @@ function WebCamModal({ setState }: { setState: any }) {
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
   return (
@@ -139,7 +142,14 @@ function WebCamModal({ setState }: { setState: any }) {
                       isClosable: true,
                       position: "top-right",
                     });
-                    console.log(createLive.data.data);
+
+                    dispatch(
+                      setWebCamStream({
+                        payload: {
+                          ...createLive?.data?.data?.livestream,
+                        },
+                      })
+                    );
                     router.push(
                       `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}`
                     );
