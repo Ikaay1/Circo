@@ -23,6 +23,9 @@ export const authApi = createApi({
       query: (body) => ({
         url: `pre-signup`,
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: body,
       }),
       invalidatesTags: ['Auth'],
@@ -33,6 +36,9 @@ export const authApi = createApi({
       query: (body) => ({
         url: `signup`,
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: body,
       }),
       invalidatesTags: ['Auth'],
@@ -42,6 +48,9 @@ export const authApi = createApi({
       query: (body) => ({
         url: `forgot-password`,
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: body,
       }),
       invalidatesTags: ['Auth'],
@@ -51,6 +60,9 @@ export const authApi = createApi({
       query: (body) => ({
         url: `verify-forgot-password-link`,
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: body,
       }),
       invalidatesTags: ['Auth'],
@@ -60,6 +72,9 @@ export const authApi = createApi({
       query: (body) => ({
         url: `change-password`,
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: body,
       }),
       invalidatesTags: ['Auth'],
