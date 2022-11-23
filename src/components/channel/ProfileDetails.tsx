@@ -8,7 +8,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { useGetUserQuery } from "redux/services/user.service";
-import { useNumberAbbrev } from "../../../custumHooks/useNumberAbbrev";
+import { useNumberAbbrev } from "../../hooks/useNumberAbbrev";
 
 const ProfileDetails = ({ id }: { id: string }) => {
   const { isLoading, data } = useGetUserQuery(id);

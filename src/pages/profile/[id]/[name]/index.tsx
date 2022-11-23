@@ -2,10 +2,12 @@ import { Box, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import Index from '@components/profile';
 import SideMenu from '@components/profile/SideMenu';
 import Header from '@components/widgets/Header';
+import { useRouter } from 'next/router';
 
 import { profileMenu } from '../../../../constants/utils';
 
 const Profile = () => {
+  const router = useRouter()
   const {isOpen, onOpen, onClose} = useDisclosure();
   return (
     <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>

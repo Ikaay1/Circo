@@ -14,7 +14,7 @@ import {
 import CliqueGiftIcon from "@icons/CliqueGiftIcon";
 import { Field, Form, Formik } from "formik";
 import React from "react";
-import { useRoutingChannel } from "../../../custumHooks/useRoutingChannel";
+import { useRoutingChannel } from "../../hooks/useRoutingChannel";
 
 function SubScribeModal({
   isOpen,
