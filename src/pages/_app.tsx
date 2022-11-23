@@ -4,7 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import Layout from "layouts/Layout";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import {
   Button,
   ChakraProvider,
@@ -23,6 +23,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
   const toast = useToast();
   const [isTokenFound, setTokenFound] = useState(false);
+  const router = useRouter();
+
 
   // customGetToken(setTokenFound);
 
@@ -64,6 +66,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   if (typeof window === "undefined") {
     return <></>;
   }
+
+
+
+
+
 
   return (
     <Provider store={store}>

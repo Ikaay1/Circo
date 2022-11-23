@@ -6,19 +6,20 @@ import {
   Box,
   useColorModeValue,
   useDisclosure,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import Index from "@components/channel";
+import SubscribeModal from "@components/channel/subscribe/SubscribeModal";
+import UnsubscribeModal from "@components/channel/subscribe/UnsubscribeModal";
 import Header from "@components/widgets/Header";
 import SideMenu from "@components/widgets/sideMenu";
-import UnsubscribeModal from "@components/channel/subscribe/UnsubscribeModal";
-import SubscribeModal from "@components/channel/subscribe/SubscribeModal";
-import {
-  useGetUserQuery,
-  useSubscribeToUserChannelMutation,
-} from "redux/services/user.service";
+import useGet from "hooks/useGet";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
+import {
+  useGetUserQuery,
+  useSubscribeToUserChannelMutation
+} from "redux/services/user.service";
 
 type Subcribers = {
   _id: string;
@@ -63,8 +64,25 @@ const SubscribeChannel = () => {
   //   onOpen: isSortOnOpen,
   //   onClose: isSortOnClose,
   // } = useDisclosure();
-
-  const { data, isLoading } = useGetSingleUserContentQuery(id);
+  const [page, setPage] = useState(1);
+  const {
+    data,
+    isLoading,
+    isFetching: videoFetch,
+  } = useGetSingleUserContentQuery({
+    id,
+    page,
+    limit: 3,
+  });
+  const { contents, lastElementRef, loading } = useGet({
+    data,
+    isFetching: videoFetch,
+    isLoading,
+    fetchNumber: 3,
+    page,
+    setPage,
+  });
+  console.log({ data });
   const handleSubscription = () => {
     state === "Subscribe" ? isSubOnOpen() : onOpen();
   };
@@ -116,11 +134,12 @@ const SubscribeChannel = () => {
           <Box flex="5.5" h="100%">
             <Index
               channelData={channelData}
-              data={data}
+              data={contents}
               channelLoading={channelLoading}
               isLoading={isLoading}
               onClick={handleSubscription}
               buttonText={state}
+              lastElementRef={lastElementRef}
             />
           </Box>
         </Box>

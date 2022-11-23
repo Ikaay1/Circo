@@ -39,9 +39,7 @@ export type Channel = {
 
 const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-
   const router = useRouter();
-
   const { isLoading, data: userData } = useGetUserQuery(id);
   const des =
     router.query.name === "content" ||

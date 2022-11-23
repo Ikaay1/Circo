@@ -1,9 +1,7 @@
 import { Box, Divider, Flex, Skeleton, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { TbCopy } from "react-icons/tb";
-import {
-  useUpdatePreferenceMutation
-} from "redux/services/settings.service";
+import { useUpdatePreferenceMutation } from "redux/services/settings.service";
 import SimpleSwitch from "./SimpleSwitch";
 
 type Props = {
@@ -27,17 +25,17 @@ type Notification = {
 };
 
 const defaultState = {
-  likeMyPost: false,
-  commentOnMyPost: false,
-  likeMyComment: false,
-  mentionMe: false,
-  newSubcriber: false,
-  receivePayment: false,
-  walletCredits: false,
-  walletsDebits: false,
-  liveStreamStarted: false,
-  lightOrDark: false,
-  allNotifications: false,
+  likeMyPost: true,
+  commentOnMyPost: true,
+  likeMyComment: true,
+  mentionMe: true,
+  newSubcriber: true,
+  receivePayment: true,
+  walletCredits: true,
+  walletsDebits: true,
+  liveStreamStarted: true,
+  lightOrDark: true,
+  allNotifications: true,
 };
 
 const Notification = ({ isLoading, data, onClick }: Props) => {
