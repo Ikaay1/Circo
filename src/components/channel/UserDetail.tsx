@@ -20,6 +20,7 @@ import { scrollBarStyle } from "@constants/utils";
 import EmptyProfile from "@icons/EmptyProfile";
 import SideIcon from "@icons/SideIcon";
 import { useGetUserQuery } from "redux/services/user.service";
+import { useAppSelector } from "redux/app/hooks";
 
 export type Channel = {
   bio: string;
@@ -37,9 +38,8 @@ export type Channel = {
 };
 
 const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
-  
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
- 
   const { isLoading, data: userData } = useGetUserQuery(id);
   const des =
     router.query.name === "content" ||
@@ -55,11 +55,31 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
   return (
     <>
       <Box position="relative">
-        {data?.cover ? (
+        {!router.pathname.includes("profile") ? (
+          data?.cover ? (
+            <Image
+              w="100%"
+              h="170px"
+              src={data?.cover}
+              alt="cover photo"
+              width="100%"
+              objectFit="cover"
+            />
+          ) : (
+            <Image
+              objectFit="cover"
+              w="100%"
+              h="160px"
+              src="/assets/channelEmpty.png"
+              alt="empty state"
+              width="100%"
+            />
+          )
+        ) : userProfile?.cover ? (
           <Image
             w="100%"
             h="170px"
-            src={data?.cover}
+            src={userProfile?.cover}
             alt="cover photo"
             width="100%"
             objectFit="cover"
@@ -80,8 +100,8 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
           bottom={
             router.query.name === "content" ||
             router.query.name === "analytics" ||
-            router.pathname.includes("subscribe")
-              ? "-100%"
+            router.pathname.includes("subscribe") 
+              ? "-90%"
               : "-52%"
           }
           left={"50%"}
@@ -121,6 +141,16 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
                 </>
               )}
             </Box>
+          ) : userProfile?.photo ? (
+            <Image
+              src={userProfile?.photo}
+              alt="profile photo"
+              borderRadius="50%"
+              objectFit={"cover"}
+              h="120px"
+              w="120px"
+              mx="auto"
+            />
           ) : (
             <WrapItem>
               <Avatar

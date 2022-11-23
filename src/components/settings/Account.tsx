@@ -1,9 +1,20 @@
-import { Avatar, Box, Divider, Flex, Link, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Divider,
+  Flex,
+  Link,
+  Text,
+  WrapItem,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
+import { useAppSelector } from "redux/app/hooks";
 
 type Props = {};
 
 function Account({}: Props) {
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
+
   return (
     <Box>
       <Text fontSize={"smSubHead"} mb="3">
@@ -36,20 +47,20 @@ function Account({}: Props) {
         upload videos and go live.
       </Text>
       <Flex>
-        <Avatar
-          p="0"
-          size="md"
-          name="Prosper Otemuyiwa"
-          src="https://bit.ly/prosper-baba"
-        />
+        <WrapItem>
+          <Avatar
+            p="0"
+            size="md"
+            src={userProfile.photo}
+            name={userProfile.firstName + " " + userProfile.lastName}
+          />
+        </WrapItem>
 
         <Flex flexDirection={"column"} ml="5" pt="3.5" fontSize={"smSubHead"}>
-            <Text
-              mb="2"
-            >
-              Guru Maraji
-            </Text>
-
+          <Text mb="2">
+            {userProfile.firstName + " " + userProfile.lastName}
+          </Text>
+          {/* 
           <NextLink href="" passHref>
             <Link
               mb="2"
@@ -58,7 +69,7 @@ function Account({}: Props) {
             >
               Create your channel
             </Link>
-          </NextLink>
+          </NextLink> */}
 
           <NextLink href="/channel/1/edit" passHref>
             <Link
@@ -87,7 +98,7 @@ function Account({}: Props) {
         their videos and live shows.
       </Text>
 
-      <NextLink href="" passHref>
+      <NextLink href="/profile/1/content" passHref>
         <Link color="clique.tertiary" _hover={{ textDecoration: "none" }}>
           View subscriptions
         </Link>

@@ -2,7 +2,7 @@ import React from "react";
 //@ts-ignore
 import { Line } from "react-chartjs-2";
 
-import { Box, Icon, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { analyticsData, chartData, data, options } from "@constants/utils";
 import FallIcon from "@icons/FallIcon";
 import UpIcon from "@icons/UpIcon";
@@ -10,80 +10,63 @@ import UpIcon from "@icons/UpIcon";
 const Analytics = () => {
   return (
     <Box>
-      <Box
-        display={"flex"}
-        justifyContent="space-between"
-        alignItems={"center"}
-      >
-        {chartData.map(({ name, detail, increase, amount }) => (
-          <Box w="330px" key={name}>
-            <Text
-              fontWeight="500"
-              fontSize="subHead"
-              lineHeight="26px"
-              color="clique.secondaryGrey2"
-            >
-              {name}
+      <Box bg="clique.blackGrey" maxH={"300px"} py="5">
+        <Box pl="4">
+          <Text
+            fontWeight="500"
+            fontSize="subHead"
+            lineHeight="26px"
+            color="clique.secondaryGrey2"
+          >
+            Subscribers
+          </Text>
+          <Box display={"flex"} alignItems="center">
+            <Text fontSize="smHead2" lineHeight="36px" color="clique.white">
+              13,241
             </Text>
-            <Box display={"flex"} alignItems="center" mt=".15rem">
-              <Text
-                fontSize="smHead2"
-                lineHeight="36px"
-                color="clique.white"
-                mr="1rem"
-              >
-                {amount}
-              </Text>
-              <Box
-                w="22px"
-                h="22px"
-                backgroundColor={increase ? "clique.lightGreen" : "clique.wine"}
-                borderRadius="50%"
-                display={"flex"}
-                justifyContent="center"
-                alignItems={"center"}
-              >
-                <Icon as={increase ? UpIcon : FallIcon} />
-              </Box>
-            </Box>
-            <Text
-              fontSize="smSubHead"
-              lineHeight="26px"
-              color="clique.secondaryGrey2"
-              mt=".15rem"
+            <Box
+              backgroundColor={true ? "clique.lightGreen" : "clique.wine"}
+              borderRadius="50%"
+              display={"flex"}
+              justifyContent="center"
+              alignItems={"center"}
+              ml="2"
             >
-              {detail}
-            </Text>
-
-            <Box w="100%" marginRight="auto" mt="1.1rem">
-              <Line options={options} data={data} />
+              <Icon as={true ? UpIcon : FallIcon} />
             </Box>
           </Box>
-        ))}
+          <Text
+            fontSize="smSubHead"
+            lineHeight="26px"
+            color="clique.secondaryGrey2"
+          >
+            Daily subscribers insight
+          </Text>
+        </Box>
+        <Box height={"100%"} width="90%" mx="auto">
+          <Line options={options} data={data} />
+        </Box>
       </Box>
-      <Box marginTop={"2rem"}>
+      <Flex marginTop={"2rem"} justifyContent="space-between">
         {analyticsData.map(({ text1, text2 }) => (
           <Box
-            w="375px"
-            display={"flex"}
-            justifyContent="space-between"
             alignItems={"center"}
             marginTop="1rem"
             key={text1}
+            bg="clique.blackGrey"
+            px="6"
+            py="2"
+            textAlign={"center"}
           >
-            <Text
-              fontSize="smSubHead"
-              lineHeight="24px"
-              color="clique.secondaryGrey2"
-            >
+            <Text fontSize="sm" lineHeight="24px" color="clique.secondaryGrey2">
               {text1}
             </Text>
-            <Text fontSize="smSubHead" lineHeight="24px" color="clique.white">
+            <Text fontSize="smHead" lineHeight="24px" color="clique.white">
               {text2}
             </Text>
           </Box>
         ))}
-      </Box>
+      </Flex>
     </Box>
   );
 };

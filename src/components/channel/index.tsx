@@ -1,15 +1,12 @@
-import { useRouter } from "next/router";
-import React from "react";
 import { Box } from "@chakra-ui/react";
 import ChannelContents from "@components/channel/ChannelContents";
-import { scrollBarStyle } from "@constants/utils";
+import CliqueLoader from "@components/home/CliqueLoader";
+import { contentData, scrollBarStyle } from "@constants/utils";
+import { useRouter } from "next/router";
 import Analytics from "./Analytics";
 import Bio from "./Bio";
 import EditChannel from "./EditChannel";
 import UserDetail from "./UserDetail";
-import { useGetUserContentsQuery } from "redux/services/content.service";
-import CliqueLoader from "@components/home/CliqueLoader";
-import { useGetChannelQuery } from "redux/services/channel.service";
 
 const Index = ({
   channelData,
@@ -17,16 +14,21 @@ const Index = ({
   channelLoading,
   isLoading,
   onClick,
+  buttonText,
+  lastElementRef,
 }: {
   channelData?: any;
-  data?: any;
+  data?: contentData[];
   channelLoading?: boolean;
   isLoading?: boolean;
   onClick?: () => void;
+  buttonText?: string;
+  lastElementRef?: any;
 }) => {
   const router = useRouter();
   const des =
     router.query.name === "content" || router.pathname.includes("subscribe");
+
   return (
     <>
       {(isLoading && channelLoading) || (!data && !channelData) ? (
@@ -52,14 +54,16 @@ const Index = ({
               bio={channelData?.data?.channel?.bio}
               id={channelData?.data?.channel?.userId}
               onClick={onClick as () => void}
+              buttonText={buttonText}
             />
           )}
           {des && (
             <Box mt={"6rem"} px="1.35rem">
               <ChannelContents
-                videos={data?.data?.videos}
+                videos={data}
                 id={channelData?.data?.channel?.userId}
                 isLoading={channelLoading as boolean}
+                lastElementRef={lastElementRef}
               />
             </Box>
           )}
@@ -71,7 +75,7 @@ const Index = ({
           )}
 
           {router.query.name === "analytics" && (
-            <Box mt={"6rem"} px="1.35rem">
+            <Box mt={"10rem"} px="1.35rem">
               <Analytics />
             </Box>
           )}

@@ -3,13 +3,26 @@ import Index from "@components/channel";
 import SideMenu from "@components/profile/SideMenu";
 import Header from "@components/widgets/Header";
 import { channelMenu } from "@constants/utils";
+import useGet from "hooks/useGet";
+import { useState } from "react";
 import { useGetChannelQuery } from "redux/services/channel.service";
 import { useGetUserContentsQuery } from "redux/services/content.service";
 
 const Profile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useGetUserContentsQuery("");
-
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isFetching } = useGetUserContentsQuery({
+    page,
+    limit: 3,
+  });
+  const { contents, lastElementRef, loading } = useGet({
+    data,
+    isFetching,
+    isLoading,
+    fetchNumber: 3,
+    page,
+    setPage,
+  });
   const {
     data: channelData,
     isError,
@@ -26,8 +39,9 @@ const Profile = () => {
           <Index
             channelData={channelData}
             isLoading={isLoading}
-            data={data}
+            data={contents}
             channelLoading={channelLoading}
+            lastElementRef={lastElementRef}
           />
         </Box>
       </Box>

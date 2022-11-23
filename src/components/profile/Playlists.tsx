@@ -75,10 +75,8 @@ const Playlists = ({
               maxH="200px"
               position={"relative"}
               cursor={"pointer"}
-              onClick={
-                router.asPath.split("/")[1] === "profile"
-                  ? () => router.push(`/profile/1/content/playlist/${each._id}`)
-                  : () => router.push(`/channel/1/content/playlist/${each._id}`)
+              onClick={() =>
+                router.push(`/channel/1/content/playlist/${each._id}`)
               }
             >
               {each?.videos[0]?.thumbNail ? (

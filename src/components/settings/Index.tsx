@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import { scrollBarStyle } from "@constants/utils";
 import React from "react";
+import { useGetPreferenceQuery } from "redux/services/settings.service";
 import Account from "./Account";
 import CommunityGuidlines from "./CommunityGuidlines";
 import CopyrightPolicy from "./CopyrightPolicy";
@@ -15,13 +16,20 @@ export type SettingsProps = {
 };
 
 function Index({ current, onClick }: SettingsProps) {
+  const { isLoading, data } = useGetPreferenceQuery("");
   let active;
   switch (current) {
     case "account":
       active = <Account />;
       break;
     case "notification":
-      active = <Notification onClick={onClick} />;
+      active = (
+        <Notification
+          onClick={onClick}
+          data={data?.data?.preference}
+          isLoading={isLoading}
+        />
+      );
       break;
     case "copyright":
       active = <CopyrightPolicy />;
