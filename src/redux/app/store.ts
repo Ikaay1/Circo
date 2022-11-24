@@ -1,38 +1,39 @@
 import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { authApi } from "redux/services/auth.service";
-import { categoryApi } from "redux/services/category.service";
-import { channelApi } from "redux/services/channel.service";
-import { contentApi } from "redux/services/content.service";
-import { liveAPI } from "redux/services/livestream/live.service";
-import { playlistApi } from "redux/services/playlist.service";
-import { userApi } from "redux/services/user.service";
-import { settingsApi } from "redux/services/settings.service";
-import userReducer from "redux/slices/authSlice";
-import categoryReducer from "redux/slices/categorySlice";
-import streamReducer from "redux/slices/streamSlice";
-import uploadReducer from "redux/slices/uploadSlice";
+	FLUSH,
+	PAUSE,
+	PERSIST,
+	persistReducer,
+	persistStore,
+	PURGE,
+	REGISTER,
+	REHYDRATE,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { authApi } from 'redux/services/auth.service';
+import { categoryApi } from 'redux/services/category.service';
+import { channelApi } from 'redux/services/channel.service';
+import { contentApi } from 'redux/services/content.service';
+import { liveAPI } from 'redux/services/livestream/live.service';
+import { streamCommentAPI } from 'redux/services/livestream/streamComment.service';
+import { playlistApi } from 'redux/services/playlist.service';
+import { settingsApi } from 'redux/services/settings.service';
+import { userApi } from 'redux/services/user.service';
+import { walletApi } from 'redux/services/wallet.service';
+import userReducer from 'redux/slices/authSlice';
+import categoryReducer from 'redux/slices/categorySlice';
+import streamReducer from 'redux/slices/streamSlice';
+import uploadReducer from 'redux/slices/uploadSlice';
 
 import {
-  Action,
-  combineReducers,
-  configureStore,
-  ThunkAction,
-} from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { streamCommentAPI } from "redux/services/livestream/streamComment.service";
+	Action,
+	combineReducers,
+	configureStore,
+	ThunkAction,
+} from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
 };
 
@@ -57,6 +58,7 @@ export const store: any = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [streamCommentAPI.reducerPath]: streamCommentAPI.reducer,
     [settingsApi.reducerPath]: settingsApi.reducer,
+    [walletApi.reducerPath]: walletApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -73,6 +75,7 @@ export const store: any = configureStore({
       userApi.middleware,
       streamCommentAPI.middleware,
       settingsApi.middleware,
+      walletApi.middleware,
     ]),
 });
 

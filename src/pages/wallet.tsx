@@ -1,21 +1,21 @@
-import { Box, Flex, useDisclosure } from "@chakra-ui/react";
-import SideMenu from "@components/widgets/sideMenu";
+import HomeLayout from 'layouts/HomeLayout';
+import { useState } from 'react';
 
-import AddMoneyModal from "@components/wallet/AddMoneyModal";
-import Beneficiaries from "@components/wallet/Beneficiaries";
-import BeneficiaryModal from "@components/wallet/BeneficiaryModal";
-import MainWallet from "@components/wallet/MainWallet";
-import { scrollBarStyle } from "@constants/utils";
-import HomeLayout from "layouts/HomeLayout";
-import SortModal from "@components/wallet/SortModal";
-import TransactionRecieptModal from "@components/wallet/TransactionRecieptModal";
-import { ReceiptInfo } from "@constants/interface";
-import { useState } from "react";
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import AddMoneyModal from '@components/wallet/AddMoneyModal';
+import Beneficiaries from '@components/wallet/Beneficiaries';
+import BeneficiaryModal from '@components/wallet/BeneficiaryModal';
+import MainWallet from '@components/wallet/MainWallet';
+import SortModal from '@components/wallet/SortModal';
+import TransactionRecieptModal from '@components/wallet/TransactionRecieptModal';
+import SideMenu from '@components/widgets/sideMenu';
+import { ReceiptInfo } from '@constants/interface';
+import { scrollBarStyle } from '@constants/utils';
 
 type Props = {};
 
 function Wallet({}: Props) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {isOpen, onOpen, onClose} = useDisclosure();
   const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
 
   const {
@@ -47,13 +47,13 @@ function Wallet({}: Props) {
       <Flex>
         <SideMenu />
         <Box
-          maxH={"90vh"}
-          pb="50px"
-          px={"2"}
-          pl={{ xl: "100px" }}
-          maxW="50%"
-          overflowY={"scroll"}
-          overflowX={"hidden"}
+          maxH={'90vh'}
+          pb='50px'
+          px={'2'}
+          pl={{xl: '100px'}}
+          w='62%'
+          overflowY={'scroll'}
+          overflowX={'hidden'}
           sx={scrollBarStyle}
         >
           <MainWallet
@@ -63,13 +63,13 @@ function Wallet({}: Props) {
           />
         </Box>
         <Box
-          maxH={"90vh"}
-          pb="40px"
-          px="2"
-          pr={{ xl: "100px" }}
-          maxW="50%"
-          overflowY={"scroll"}
-          overflowX={"hidden"}
+          maxH={'90vh'}
+          pb='40px'
+          px='2'
+          pr={{xl: '100px'}}
+          w='38%'
+          overflowY={'scroll'}
+          overflowX={'hidden'}
           sx={scrollBarStyle}
         >
           <Beneficiaries
@@ -82,7 +82,7 @@ function Wallet({}: Props) {
       <BeneficiaryModal
         isOpen={isBeneIsOpen}
         onClose={isBeneOnClose}
-        type={hasBeneficiary ? "change" : "add"}
+        type={hasBeneficiary ? 'change' : 'add'}
       />
       <SortModal isOpen={isSortIsOpen} onClose={isSortOnClose} />
       <TransactionRecieptModal
