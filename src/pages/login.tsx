@@ -86,7 +86,12 @@ const Login = () => {
                 <input type='checkbox' name='' />
                 Remember me?
               </label>
-              <Text cursor='pointer' fontSize='sm' color='clique.secondaryRed'>
+              <Text
+                cursor='pointer'
+                fontSize='sm'
+                color='clique.secondaryRed'
+                onClick={() => router.push('confirmEmail')}
+              >
                 Forgot Password
               </Text>
             </Box>

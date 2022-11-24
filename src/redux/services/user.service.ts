@@ -93,6 +93,17 @@ export const userApi = createApi({
       }),
       providesTags: ['User'],
     }),
+
+    getSubscriptions: builder.query<any, any>({
+      query: ({page, limit}) => ({
+        url: `content/subscriptions?page=${page}&limit=${limit}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['User'],
+    }),
   }),
 });
 
@@ -104,4 +115,5 @@ export const {
   useSubscribeToUserChannelMutation,
   useGetPopularCreatorsQuery,
   useChangePasswordMutation,
+  useGetSubscriptionsQuery,
 } = userApi;

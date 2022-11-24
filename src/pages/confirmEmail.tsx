@@ -1,4 +1,7 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useVerifyEmailMutation } from 'redux/services/auth.service';
 
 import { Box, Text } from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
@@ -9,6 +12,17 @@ import ShowAuthImage from '@components/auth/ShowAuthImage';
 
 const ConfirmEmail = () => {
   const [email, setEmail] = useState('');
+  const [verifyEmail, verifyEmailStatus] = useVerifyEmailMutation();
+  const router = useRouter();
+
+  const handleVerifyEmail = async () => {
+    const res: any = await verifyEmail({email});
+    if ('data' in res) {
+      toast.success('Please check your email, a link has been sent there');
+    } else {
+      toast.error(res.error?.data?.message);
+    }
+  };
 
   return (
     <Box display={'flex'} justifyContent='space-between' alignItems={'center'}>
@@ -24,7 +38,13 @@ const ConfirmEmail = () => {
             header='Change Password'
             detail='Enter your Clique email address to chnage password'
           />
-          <form onSubmit={(e) => e.preventDefault()} className='login-form'>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleVerifyEmail();
+            }}
+            className='login-form'
+          >
             <Box position='relative' height='57px' marginTop={'.5rem'}>
               <AuthInput
                 name={'Email'}
@@ -40,7 +60,11 @@ const ConfirmEmail = () => {
               You will receive an email with a link to verify your account then,
               you can change your password
             </Text>
-            <AuthButton {...{marginTop: '.8rem'}} name='Next' />
+            <AuthButton
+              {...{marginTop: '.8rem'}}
+              name='Next'
+              status={verifyEmailStatus}
+            />
           </form>
         </Box>
       </Box>
