@@ -40,7 +40,7 @@ function Wallet({}: Props) {
     setModalInfo(info);
     isReceiptOnOpen();
   };
-  const hasBeneficiary = true;
+  const hasBeneficiary = false;
 
   return (
     <HomeLayout>
