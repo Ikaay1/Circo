@@ -10,8 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { purpleBoxStyle } from "@constants/utils";
 import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
+import { useRouter } from "next/router";
 
 function LiveTopCard() {
+  const router = useRouter();
   const { data, isFetching } = useGetAllLiveStreamQuery({
     ongoing: "true",
   });
@@ -37,6 +39,10 @@ function LiveTopCard() {
         {data &&
           data?.data.map((event: any, i: number) => (
             <Flex
+              onClick={() => {
+                router.push(`/stream/${event?.eventId?._id}`);
+              }}
+              cursor="pointer"
               key={i}
               alignItems={"center"}
               justifyContent="center"
