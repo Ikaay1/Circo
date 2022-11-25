@@ -24,7 +24,16 @@ const TransactionHistory = (props: Props) => {
       <VStack spacing={1} align='stretch'>
         {walletData.transaction_history.map((each: any) => {
           const info: ReceiptInfo = {
-            name: each.recipient,
+            name:
+              each.type === 'deposit'
+                ? each.recipient
+                : each.type === 'transferIn'
+                ? each.sender
+                : each.recipient,
+            from:
+              each.type === 'deposit' || each.type === 'transferIn'
+                ? 'From'
+                : 'To',
             duration: moment(each.date).fromNow(),
             date: each.date.slice(0, 10),
             reference: each.reference,
@@ -34,7 +43,11 @@ const TransactionHistory = (props: Props) => {
             <HistoryCard
               key={each._reference}
               amount={each.amount}
-              credit={each.type === 'deposit' ? true : false}
+              credit={
+                each.type === 'deposit' || each.type === 'transferIn'
+                  ? true
+                  : false
+              }
               duration={moment(each.date).fromNow()}
               onClick={() => props.click(info)}
             />

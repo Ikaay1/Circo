@@ -4,36 +4,17 @@ import { useSubscribeMutation } from 'redux/services/user.service';
 
 import { Avatar, Box, Button, Flex, Text } from '@chakra-ui/react';
 
-import { API, contentData } from '../../constants/utils';
+import { contentData } from '../../constants/utils';
 
 function VideoDetails({
   video,
-  setSubscribers,
   subscribers,
 }: {
   video: contentData;
-  setSubscribers: React.Dispatch<React.SetStateAction<string[]>>;
   subscribers: string[];
 }) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [subscribe, subscribeStatus] = useSubscribeMutation();
-
-  const handleSubscribe = async (id: string) => {
-    const isSubscribed = subscribers.find(
-      (theId) => theId === userProfile?._id,
-    );
-    const subscribeData = {subscribingToId: id};
-    if (isSubscribed) {
-      setSubscribers(
-        subscribers.filter((eachId) => eachId !== userProfile?._id),
-      );
-    } else {
-      setSubscribers([...subscribers, userProfile?._id]);
-    }
-    subscribe(subscribeData).then((res) => {
-      console.log('successfully subscribed/unsubscribed');
-    });
-  };
 
   return (
     <Box mt='20px'>
@@ -92,27 +73,20 @@ function VideoDetails({
               lineHeight={'1.2'}
             >
               {`${subscribers.length} ${
-                subscribers.length === 1 ? 'subcriber' : 'subscribers'
+                subscribers.length === 1 ? 'subscriber' : 'subscribers'
               }`}
             </Text>
           </Box>
         </Flex>
         {video.uploader_id._id !== userProfile._id && (
-          <Button
+          <Box
+            p='.6rem 1.2rem'
             rounded='full'
             fontWeight={400}
-            bg={
-              subscribers.includes(userProfile?._id)
-                ? 'clique.grey'
-                : 'clique.purple'
-            }
-            cursor='pointer'
-            onClick={() => handleSubscribe(video.uploader_id._id)}
+            bg={'clique.grey'}
           >
-            {subscribers.includes(userProfile?._id)
-              ? 'Subscribed'
-              : 'Subscribe'}
-          </Button>
+            Subscribed
+          </Box>
         )}
       </Flex>
       <Text

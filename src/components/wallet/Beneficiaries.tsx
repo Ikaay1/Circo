@@ -6,12 +6,17 @@ import WithdrawalCard from './WithdrawalCard';
 type Props = {
   onClick: () => void;
   hasBeneficiary: boolean;
+  walletData: any;
 };
 
-function Beneficiaries({onClick, hasBeneficiary}: Props) {
+function Beneficiaries({onClick, hasBeneficiary, walletData}: Props) {
   return (
     <Box pr='2' pt='6'>
-      <BeneficiariesCard onClick={onClick} hasBeneficiary={hasBeneficiary} />
+      <BeneficiariesCard
+        walletData={walletData}
+        onClick={onClick}
+        hasBeneficiary={hasBeneficiary}
+      />
       <WithdrawalCard />
     </Box>
   );

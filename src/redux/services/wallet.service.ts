@@ -39,7 +39,49 @@ export const walletApi = createApi({
       }),
       providesTags: ['Wallet'],
     }),
+
+    sendOTP: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/get-otp`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Wallet'],
+    }),
+
+    addBeneficiary: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/create/beneficiary`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Wallet'],
+    }),
+
+    updateBeneficiary: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/update/beneficiary`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Wallet'],
+    }),
   }),
 });
 
-export const {useDepositToWalletMutation, useGetUserWalletQuery} = walletApi;
+export const {
+  useDepositToWalletMutation,
+  useGetUserWalletQuery,
+  useSendOTPMutation,
+  useAddBeneficiaryMutation,
+  useUpdateBeneficiaryMutation,
+} = walletApi;

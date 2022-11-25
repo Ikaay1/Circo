@@ -1,15 +1,15 @@
 import {
-  Flex,
-  Icon,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  Spacer,
-  Text,
-} from "@chakra-ui/react";
-import { ReceiptInfo } from "@constants/interface";
-import UpwardIcon from "@icons/UpwardIcon";
+	Flex,
+	Icon,
+	Modal,
+	ModalBody,
+	ModalContent,
+	ModalHeader,
+	Spacer,
+	Text,
+} from '@chakra-ui/react';
+import { ReceiptInfo } from '@constants/interface';
+import UpwardIcon from '@icons/UpwardIcon';
 
 type Props = {
   isOpen: boolean;
@@ -17,105 +17,105 @@ type Props = {
   info: ReceiptInfo;
 };
 
-function TransactionRecieptModal({ isOpen, onClose, info }: Props) {
+function TransactionRecieptModal({isOpen, onClose, info}: Props) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size={"md"}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size={'md'}>
       <ModalContent
-        bg="clique.black"
-        borderColor="clique.black"
-        borderRadius="xl"
-        pt="3"
-        pb="5"
-        px="1"
+        bg='clique.black'
+        borderColor='clique.black'
+        borderRadius='xl'
+        pt='3'
+        pb='5'
+        px='1'
       >
-        <ModalHeader alignSelf="center" fontSize={"subHead"}>
+        <ModalHeader alignSelf='center' fontSize={'subHead'}>
           Transaction Receipt
         </ModalHeader>
 
         <ModalBody>
           <Flex
-            flexDirection={"column"}
-            pb="20"
-            px="2"
-            pt="3"
-            borderRadius={"xl"}
-            backgroundSize={"cover"}
+            flexDirection={'column'}
+            pb='20'
+            px='2'
+            pt='3'
+            borderRadius={'xl'}
+            backgroundSize={'cover'}
             backgroundImage="'/assets/transactionbg.svg'"
           >
             <Flex
-              justifyContent={"space-between"}
-              align="center"
-              justify="center"
-              mb="12"
+              justifyContent={'space-between'}
+              align='center'
+              justify='center'
+              mb='12'
             >
               <Spacer />
-              <Icon as={UpwardIcon} fontSize="5xl" />
+              <Icon as={UpwardIcon} fontSize='5xl' />
               <Spacer />
-              <Text fontSize={"xsl"} fontWeight="400" color={"clique.white"}>
+              <Text fontSize={'xsl'} fontWeight='400' color={'clique.white'}>
                 {info?.duration}
               </Text>
             </Flex>
-            <Flex justifyContent={"space-between"} mb="2">
+            <Flex justifyContent={'space-between'} mb='2'>
               <Text
-                fontWeight="400"
-                color={"clique.secondaryGrey2"}
-                fontSize="xsl"
+                fontWeight='400'
+                color={'clique.secondaryGrey2'}
+                fontSize='xsl'
               >
-                From
+                {info?.from}
               </Text>
 
               <Text
-                fontSize={"smSubHead"}
-                fontWeight="400"
-                color={"clique.white"}
+                fontSize={'smSubHead'}
+                fontWeight='400'
+                color={'clique.white'}
               >
                 {info?.name}
               </Text>
             </Flex>
-            <Flex justifyContent={"space-between"} mb="2">
+            <Flex justifyContent={'space-between'} mb='2'>
               <Text
-                fontSize={"smSubHead"}
-                fontWeight="400"
-                color={"clique.secondaryGrey2"}
+                fontSize={'smSubHead'}
+                fontWeight='400'
+                color={'clique.secondaryGrey2'}
               >
                 Description
               </Text>
               <Text
-                fontSize={"smSubHead"}
-                fontWeight="400"
-                color={"clique.white"}
+                fontSize={'smSubHead'}
+                fontWeight='400'
+                color={'clique.white'}
               >
                 {info?.description}
               </Text>
             </Flex>
-            <Flex justifyContent={"space-between"} mb="2">
+            <Flex justifyContent={'space-between'} mb='2'>
               <Text
-                fontSize={"smSubHead"}
-                fontWeight="400"
-                color={"clique.secondaryGrey2"}
+                fontSize={'smSubHead'}
+                fontWeight='400'
+                color={'clique.secondaryGrey2'}
               >
                 Date
               </Text>
               <Text
-                fontSize={"smSubHead"}
-                fontWeight="400"
-                color={"clique.white"}
+                fontSize={'smSubHead'}
+                fontWeight='400'
+                color={'clique.white'}
               >
                 {info?.date}
               </Text>
             </Flex>
-            <Flex justifyContent={"space-between"}>
+            <Flex justifyContent={'space-between'}>
               <Text
-                fontSize={"smSubHead"}
-                fontWeight="400"
-                color={"clique.secondaryGrey2"}
+                fontSize={'smSubHead'}
+                fontWeight='400'
+                color={'clique.secondaryGrey2'}
               >
                 Reference
               </Text>
               <Text
-                fontSize={"smSubHead"}
-                fontWeight="400"
-                color={"clique.white"}
+                fontSize={'smSubHead'}
+                fontWeight='400'
+                color={'clique.white'}
               >
                 {info?.reference}
               </Text>

@@ -35,6 +35,7 @@ export type ReceiptInfo = {
   description: string;
   date: string;
   reference: string;
+  from: string;
 };
 export interface MenuData {
   name: string;

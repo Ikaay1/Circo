@@ -11,34 +11,20 @@ type Props = {
   onClick: () => void;
   click: (info: ReceiptInfo) => void;
   onSort: () => void;
+  walletData: any;
 };
 
-function MainWallet({onClick, onSort, click}: Props) {
-  const {data, isFetching} = useGetUserWalletQuery('');
-  console.log(data);
-
+function MainWallet({onClick, onSort, click, walletData}: Props) {
   return (
-    <Flex
-      pt='7'
-      flexDirection='column'
-      gap='5'
-      w='100%'
-      h={isFetching || !data ? '100%' : ''}
-    >
-      {isFetching || !data ? (
-        <Box w='100%' h='100%'>
-          <CliqueLoader />
-        </Box>
-      ) : (
-        <>
-          <WalletCard walletData={data?.data} onClick={onClick} />
-          <TransactionHistory
-            walletData={data?.data}
-            onClick={onSort}
-            click={(info) => click(info)}
-          />
-        </>
-      )}
+    <Flex pt='7' flexDirection='column' gap='5' w='100%'>
+      <>
+        <WalletCard walletData={walletData} onClick={onClick} />
+        <TransactionHistory
+          walletData={walletData}
+          onClick={onSort}
+          click={(info) => click(info)}
+        />
+      </>
     </Flex>
   );
 }

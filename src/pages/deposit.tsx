@@ -92,7 +92,7 @@ export default function Home() {
   const router = useRouter();
   let {id, amount} = router.query;
   const {data, isFetching: getUserLoading} = useGetUserQuery(id);
-  const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
+  const [depositToWallet] = useDepositToWalletMutation();
   const [requestData, setRequestData] = useState({email: ''});
   const [transSuccess, setTransSuccess] = useState(false);
 
