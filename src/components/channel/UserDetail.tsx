@@ -10,6 +10,7 @@ import {
   ModalContent,
   ModalOverlay,
   Skeleton,
+  SkeletonCircle,
   Text,
   useDisclosure,
   WrapItem,
@@ -100,7 +101,7 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
           bottom={
             router.query.name === "content" ||
             router.query.name === "analytics" ||
-            router.pathname.includes("subscribe") 
+            router.pathname.includes("subscribe")
               ? "-90%"
               : "-52%"
           }
@@ -151,6 +152,10 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
               w="120px"
               mx="auto"
             />
+          ) : !userData && isLoading ? (
+            <Box mx="auto">
+              <SkeletonCircle size="10" h="120px" w="120px" />
+            </Box>
           ) : (
             <WrapItem>
               <Avatar
