@@ -1,22 +1,25 @@
-import { Box, Flex, useDisclosure } from "@chakra-ui/react";
-import SideMenu from "@components/widgets/sideMenu";
+import HomeLayout from 'layouts/HomeLayout';
+import { useState } from 'react';
+import { useGetUserWalletQuery } from 'redux/services/wallet.service';
 
-import AddMoneyModal from "@components/wallet/AddMoneyModal";
-import Beneficiaries from "@components/wallet/Beneficiaries";
-import BeneficiaryModal from "@components/wallet/BeneficiaryModal";
-import MainWallet from "@components/wallet/MainWallet";
-import { scrollBarStyle } from "@constants/utils";
-import HomeLayout from "layouts/HomeLayout";
-import SortModal from "@components/wallet/SortModal";
-import TransactionRecieptModal from "@components/wallet/TransactionRecieptModal";
-import { ReceiptInfo } from "@constants/interface";
-import { useState } from "react";
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import CliqueLoader from '@components/home/CliqueLoader';
+import AddMoneyModal from '@components/wallet/AddMoneyModal';
+import Beneficiaries from '@components/wallet/Beneficiaries';
+import BeneficiaryModal from '@components/wallet/BeneficiaryModal';
+import MainWallet from '@components/wallet/MainWallet';
+import SortModal from '@components/wallet/SortModal';
+import TransactionRecieptModal from '@components/wallet/TransactionRecieptModal';
+import SideMenu from '@components/widgets/sideMenu';
+import { ReceiptInfo } from '@constants/interface';
+import { scrollBarStyle } from '@constants/utils';
 
 type Props = {};
 
 function Wallet({}: Props) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {isOpen, onOpen, onClose} = useDisclosure();
   const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
+  const {data, isFetching, refetch, isError} = useGetUserWalletQuery('');
 
   const {
     isOpen: isBeneIsOpen,
@@ -40,49 +43,64 @@ function Wallet({}: Props) {
     setModalInfo(info);
     isReceiptOnOpen();
   };
-  const hasBeneficiary = false;
 
   return (
     <HomeLayout>
       <Flex>
         <SideMenu />
-        <Box
-          maxH={"90vh"}
-          pb="50px"
-          px={"2"}
-          pl={{ xl: "100px" }}
-          maxW="50%"
-          overflowY={"scroll"}
-          overflowX={"hidden"}
-          sx={scrollBarStyle}
-        >
-          <MainWallet
-            onClick={onOpen}
-            onSort={isSortOnOpen}
-            click={(info) => handleClick(info)}
-          />
-        </Box>
-        <Box
-          maxH={"90vh"}
-          pb="40px"
-          px="2"
-          pr={{ xl: "100px" }}
-          maxW="50%"
-          overflowY={"scroll"}
-          overflowX={"hidden"}
-          sx={scrollBarStyle}
-        >
-          <Beneficiaries
-            onClick={isBeneOnOpen}
-            hasBeneficiary={hasBeneficiary}
-          />
-        </Box>
+        {isFetching || !data ? (
+          <Box w='100%' h='90vh'>
+            <CliqueLoader />
+          </Box>
+        ) : (
+          <>
+            <Box
+              maxH={'90vh'}
+              pb='50px'
+              px={'2'}
+              pl={{xl: '100px'}}
+              w='62%'
+              overflowY={'scroll'}
+              overflowX={'hidden'}
+              sx={scrollBarStyle}
+            >
+              <MainWallet
+                onClick={onOpen}
+                onSort={isSortOnOpen}
+                click={(info) => handleClick(info)}
+                walletData={data?.data}
+              />
+            </Box>
+            <Box
+              maxH={'90vh'}
+              pb='40px'
+              px='2'
+              pr={{xl: '100px'}}
+              w='38%'
+              overflowY={'scroll'}
+              overflowX={'hidden'}
+              sx={scrollBarStyle}
+            >
+              <Beneficiaries
+                onClick={isBeneOnOpen}
+                hasBeneficiary={
+                  data?.data?.beneficiary?.accountNumber ? true : false
+                }
+                walletData={data?.data}
+              />
+            </Box>
+          </>
+        )}
       </Flex>
       <AddMoneyModal isOpen={isOpen} onClose={onClose} />
       <BeneficiaryModal
         isOpen={isBeneIsOpen}
         onClose={isBeneOnClose}
-        type={hasBeneficiary ? "change" : "add"}
+        type={data?.data?.beneficiary?.accountNumber ? 'change' : 'add'}
+        refetch={refetch}
+        beneficiary={
+          data?.data?.beneficiary?.accountNumber ? data?.data?.beneficiary : ''
+        }
       />
       <SortModal isOpen={isSortIsOpen} onClose={isSortOnClose} />
       <TransactionRecieptModal
