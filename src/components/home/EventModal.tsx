@@ -12,9 +12,17 @@ import {
 import React from "react";
 import EventsCard from "./EventsCard";
 import moment from "moment";
+import { useAppSelector } from "redux/app/hooks";
+import { useRouter } from "next/router";
+const NProgress = require("nprogress");
 
 function EventModal({ event }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const router = useRouter();
+  const userProfile = useAppSelector(
+    (store) => store.app.userReducer.userProfile
+  );
   return (
     <>
       <EventsCard onOpen={onOpen} event={event} />
@@ -107,8 +115,31 @@ function EventModal({ event }: any) {
                   px="10px"
                   fontWeight={400}
                   size={"sm"}
+                  onClick={() => {
+                    NProgress.start();
+
+                    if (
+                      event?.eventId?.fee === 0 ||
+                      event?.eventId?.fee === "0" ||
+                      !event?.eventId?.fee ||
+                      event?.paid.includes(userProfile?._id) ||
+                      event?.streamerId?._id === userProfile?._id
+                    ) {
+                      router.push(`/stream/${event?.eventId?._id}`);
+                    } else {
+                      //call paystack
+                    }
+
+                    NProgress.done();
+                  }}
                 >
-                  pay for live
+                  {event?.eventId?.fee === 0 ||
+                  event?.eventId?.fee === "0" ||
+                  !event?.eventId?.fee ||
+                  event?.paid.includes(userProfile?._id) ||
+                  event?.streamerId?._id === userProfile?._id
+                    ? "Join Stream"
+                    : `Purchase Ticket`}
                 </Button>
               </Flex>
             </Box>

@@ -63,10 +63,12 @@ function CommentSection({ streamDetails }: any) {
 
       {
         <Flex w="full" h="full" flexDir={"column"} justify="space-between">
-          {data &&
-            data?.data?.map((comment: any, i: number) => (
-              <EachComment key={comment._id} comment={comment} />
-            ))}
+          <Box>
+            {data &&
+              data?.data?.map((comment: any, i: number) => (
+                <EachComment key={comment._id} comment={comment} />
+              ))}
+          </Box>
 
           {!data || (data && data?.data?.length === 0 && <Box></Box>)}
 

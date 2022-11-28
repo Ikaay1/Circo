@@ -53,6 +53,13 @@ export const liveAPI = createApi({
       }),
       providesTags: ["Live"],
     }),
+    getUserPaidStream: builder.query<any, any>({
+      query: (id) => ({
+        url: `livestream/userspaidlive`,
+        method: "GET",
+      }),
+      providesTags: ["Live"],
+    }),
 
     getAllLiveStream: builder.query<any, any>({
       query: (type) => ({
@@ -151,4 +158,5 @@ export const {
   useDislikeStreamMutation,
   useReportCommentMutation,
   useUpdateEventMutation,
+  useGetUserPaidStreamQuery,
 } = liveAPI;

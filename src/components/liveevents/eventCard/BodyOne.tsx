@@ -1,6 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import moment from "moment";
 import { useRouter } from "next/router";
+import { useAppSelector } from "redux/app/hooks";
 const NProgress = require("nprogress");
 
 function BodyOne({
@@ -11,6 +12,9 @@ function BodyOne({
   event: any;
 }) {
   const router = useRouter();
+  const userProfile = useAppSelector(
+    (store) => store.app.userReducer.userProfile
+  );
   return (
     <>
       <Text
@@ -51,11 +55,15 @@ function BodyOne({
           if (
             event?.eventId?.fee === 0 ||
             event?.eventId?.fee === "0" ||
-            !event?.eventId?.fee
+            !event?.eventId?.fee ||
+            event?.paid.includes(userProfile?._id) ||
+            event?.streamerId?._id === userProfile?._id
           ) {
             router.push(`/stream/${event?.eventId?._id}`);
+          } else {
+            //call paystack
           }
-          4;
+
           NProgress.done();
         }}
         bg="clique.base"
@@ -63,7 +71,13 @@ function BodyOne({
         rounded={"full"}
         colorScheme="purple"
       >
-        {event?.eventId?.fee ? `Purchase Ticket` : "Join Stream"}
+        {event?.eventId?.fee === 0 ||
+        event?.eventId?.fee === "0" ||
+        !event?.eventId?.fee ||
+        event?.paid.includes(userProfile?._id) ||
+        event?.streamerId?._id === userProfile?._id
+          ? "Join Stream"
+          : `Purchase Ticket`}
       </Button>
     </>
   );
