@@ -11,12 +11,14 @@ const AuthButton = ({
   mx,
   onClick,
   disabled,
+  bg,
+  cursor,
   ...props
 }: any) => {
   return (
     <Button
       type='submit'
-      background='clique.purple'
+      background={bg ? bg : 'clique.purple'}
       borderRadius='50px'
       width={w ? w : '100%;'}
       height={h ? h : '60px;'}
@@ -28,6 +30,7 @@ const AuthButton = ({
       fontSize={fontSize ? fontSize : 'head'}
       letterSpacing='-0.02em;'
       color='clique.white'
+      cursor={cursor && cursor}
       disabled={disabled}
       style={props}
       isLoading={status && status.isLoading}

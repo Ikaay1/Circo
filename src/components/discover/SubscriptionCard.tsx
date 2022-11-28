@@ -5,7 +5,7 @@ import { Flex } from '@chakra-ui/react';
 import SubcribeOverLay from './SubcribeOverLay';
 import SubscribeBody from './SubscribeBody';
 
-function SubscriptionCard({user, refetch}: any) {
+function SubscriptionCard({user}: any) {
   const [isHover, setIsHover] = React.useState(false);
 
   return (
@@ -20,7 +20,7 @@ function SubscriptionCard({user, refetch}: any) {
       {!isHover ? (
         <SubscribeBody user={user} />
       ) : (
-        <SubcribeOverLay isHover={isHover} user={user} refetch={refetch} />
+        <SubcribeOverLay isHover={isHover} user={user} />
       )}{' '}
     </Flex>
   );

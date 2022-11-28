@@ -50,7 +50,7 @@ export const userApi = createApi({
     }),
     subscribeToUserChannel: builder.mutation<any, any>({
       query: (body) => ({
-        url: `subscribe`,
+        url: `wallet/transfer/subscribe`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
