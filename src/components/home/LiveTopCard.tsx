@@ -11,12 +11,17 @@ import {
 import { purpleBoxStyle } from "@constants/utils";
 import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
 import { useRouter } from "next/router";
+import { useAppSelector } from "redux/app/hooks";
+const NProgress = require("nprogress");
 
 function LiveTopCard() {
   const router = useRouter();
   const { data, isFetching } = useGetAllLiveStreamQuery({
     ongoing: "true",
   });
+  const userProfile = useAppSelector(
+    (store) => store.app.userReducer.userProfile
+  );
   return (
     <Flex alignItems={"center"} maxW="calc(100vw - 560px)" my="10px">
       <Text
@@ -40,7 +45,21 @@ function LiveTopCard() {
           data?.data.map((event: any, i: number) => (
             <Flex
               onClick={() => {
-                router.push(`/stream/${event?.eventId?._id}`);
+                NProgress.start();
+
+                if (
+                  event?.eventId?.fee === 0 ||
+                  event?.eventId?.fee === "0" ||
+                  !event?.eventId?.fee ||
+                  event?.paid.includes(userProfile?._id) ||
+                  event?.streamerId?._id === userProfile?._id
+                ) {
+                  router.push(`/stream/${event?.eventId?._id}`);
+                } else {
+                  //call paystack
+                }
+
+                NProgress.done();
               }}
               cursor="pointer"
               key={i}
