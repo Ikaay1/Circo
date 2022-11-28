@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useGetBanksQuery } from 'redux/services/bank.service';
 import {
 	useAddBeneficiaryMutation,
 	useSendOTPMutation,
-	useUpdateBeneficiaryMutation,
 } from 'redux/services/wallet.service';
 
 import {
@@ -38,10 +38,9 @@ function BeneficiaryModal({
   beneficiary,
 }: Props) {
   const toast = useToast();
+  const {data, isFetching} = useGetBanksQuery('');
   const [sendOTP] = useSendOTPMutation();
   const [addBeneficiary, addBeneficiaryStatus] = useAddBeneficiaryMutation();
-  const [updateBeneficiary, updateBeneficiaryStatus] =
-    useUpdateBeneficiaryMutation();
   const [beneficiaryData, setBeneficiaryData] = useState({
     otp_hash: '',
     otp_code: '',
@@ -116,49 +115,29 @@ function BeneficiaryModal({
           position: 'top',
         });
       } else {
-        if (type === 'add') {
-          await addBeneficiary({
-            bankName: beneficiaryData.bankName,
-            accountName: beneficiaryData.accountName,
-            accountNumber: beneficiaryData.accountNumber,
-            otp_code: beneficiaryData.otp_code,
-            otp_hash: beneficiaryData.otp_hash,
-            password: beneficiaryData.password,
-          });
-          setBeneficiaryData({
-            otp_hash: '',
-            otp_code: '',
-            password: '',
-            bankName: '',
-            accountName: '',
-            accountNumber: '',
-          });
-          onClose();
-          refetch();
-        }
-        if (type === 'change') {
-          await updateBeneficiary({
-            bankName: beneficiaryData.bankName,
-            accountName: beneficiaryData.accountName,
-            accountNumber: beneficiaryData.accountNumber,
-            otp_code: beneficiaryData.otp_code,
-            otp_hash: beneficiaryData.otp_hash,
-            password: beneficiaryData.password,
-          });
-          setBeneficiaryData({
-            otp_hash: '',
-            otp_code: '',
-            password: '',
-            bankName: '',
-            accountName: '',
-            accountNumber: '',
-          });
-          onClose();
-          refetch();
-        }
+        await addBeneficiary({
+          bankName: beneficiaryData.bankName,
+          accountName: beneficiaryData.accountName,
+          accountNumber: beneficiaryData.accountNumber,
+          otp_code: beneficiaryData.otp_code,
+          otp_hash: beneficiaryData.otp_hash,
+          password: beneficiaryData.password,
+        });
+        setBeneficiaryData({
+          otp_hash: '',
+          otp_code: '',
+          password: '',
+          bankName: '',
+          accountName: '',
+          accountNumber: '',
+        });
+        onClose();
+        refetch();
       }
     }
   };
+
+  console.log(beneficiaryData);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -211,11 +190,11 @@ function BeneficiaryModal({
                 value={beneficiaryData.bankName}
                 onChange={(e) => handleChange(e)}
               >
-                <option value='FirstBank'>FirstBank</option>
-                <option value='Zenith Bank'> Bank</option>
-                <option value='United Bank For Africa'>
-                  United Bank For Africa
-                </option>
+                {data?.data.map((bank: any) => (
+                  <option value={bank.name} key={bank.id}>
+                    {bank.name}
+                  </option>
+                ))}
               </Select>
             </Box>
 
@@ -326,11 +305,7 @@ function BeneficiaryModal({
                 text={type === 'add' ? 'Add beneficiary' : 'Change beneficiary'}
                 style={{width: '100%'}}
                 onClick={handleCreateBeneficiary}
-                isLoading={
-                  type == 'add'
-                    ? addBeneficiaryStatus.isLoading
-                    : updateBeneficiaryStatus.isLoading
-                }
+                isLoading={addBeneficiaryStatus.isLoading}
               ></Btn>
             </Box>
           </Flex>

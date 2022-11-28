@@ -10,7 +10,7 @@ export default function WalletCard({onClick, walletData}: Props) {
   const handleMoneyIn = () => {
     let num = 0;
     walletData.transaction_history.forEach((history: any) => {
-      if (history.type === 'deposit') {
+      if (history.type === 'deposit' || history.type === 'transferIn') {
         num += history.amount;
       }
     });
@@ -20,7 +20,7 @@ export default function WalletCard({onClick, walletData}: Props) {
   const handleMoneyOut = () => {
     let num = 0;
     walletData.transaction_history.forEach((history: any) => {
-      if (history.type === 'withdraw') {
+      if (history.type === 'withdraw' || history.type === 'transferOut') {
         num += history.amount;
       }
     });

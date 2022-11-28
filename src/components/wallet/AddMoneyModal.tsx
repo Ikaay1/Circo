@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAppSelector } from 'redux/app/hooks';
 
@@ -22,9 +21,15 @@ type Props = {
 };
 
 function AddMoneyModal({isOpen, onClose}: Props) {
+  // const router = useRouter();
   const [amount, setAmount] = useState<string | number>('');
-  const router = useRouter();
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const {userProfile, token} = useAppSelector((store) => store.app.userReducer);
+
+  useEffect(() => {
+    if (!amount) {
+      setAmount('');
+    }
+  }, [amount]);
 
   const handleDeposit = () => {
     if (!amount) {
@@ -32,7 +37,11 @@ function AddMoneyModal({isOpen, onClose}: Props) {
       return;
     }
     if (userProfile._id) {
-      router.push(`/deposit?id=${userProfile._id}&amount=${amount}`);
+      // router.push(`/deposit?id=${userProfile._id}&amount=${amount}`);
+      window.open(
+        `https://clique-payment.netlify.app?id=${userProfile._id}&amount=${amount}&token=${token}`,
+      );
+      onClose();
     }
   };
   return (

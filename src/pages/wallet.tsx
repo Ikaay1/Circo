@@ -19,7 +19,7 @@ type Props = {};
 function Wallet({}: Props) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
-  const {data, isFetching, refetch} = useGetUserWalletQuery('');
+  const {data, isFetching, refetch, isError} = useGetUserWalletQuery('');
 
   const {
     isOpen: isBeneIsOpen,

@@ -10,6 +10,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authApi } from 'redux/services/auth.service';
+import { bankApi } from 'redux/services/bank.service';
 import { categoryApi } from 'redux/services/category.service';
 import { channelApi } from 'redux/services/channel.service';
 import { contentApi } from 'redux/services/content.service';
@@ -59,6 +60,7 @@ export const store: any = configureStore({
     [streamCommentAPI.reducerPath]: streamCommentAPI.reducer,
     [settingsApi.reducerPath]: settingsApi.reducer,
     [walletApi.reducerPath]: walletApi.reducer,
+    [bankApi.reducerPath]: bankApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -76,6 +78,7 @@ export const store: any = configureStore({
       streamCommentAPI.middleware,
       settingsApi.middleware,
       walletApi.middleware,
+      bankApi.middleware,
     ]),
 });
 
