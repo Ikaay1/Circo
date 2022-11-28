@@ -26,6 +26,7 @@ function CreatorAvatarBox({user}: {user: any}) {
         fontFamily={'Poppins'}
         fontSize='smSubHead'
         color={'clique.lightGrey'}
+        noOfLines={1}
       >
         {user.userName}
       </Text>

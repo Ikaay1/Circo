@@ -50,9 +50,10 @@ function PopularBox() {
         ></Skeleton>
       ) : (
         <SimpleGrid
-          h='220px'
+          // h='220px'
           bg='clique.white'
           spacingX={'10px'}
+          spacingY={'12px'}
           columns={3}
           rounded={'20px'}
           p='20px'
