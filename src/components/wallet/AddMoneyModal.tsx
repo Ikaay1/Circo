@@ -38,7 +38,7 @@ function AddMoneyModal({isOpen, onClose}: Props) {
     }
     if (userProfile._id) {
       // router.push(`/deposit?id=${userProfile._id}&amount=${amount}`);
-      window.open(
+      window.location.replace(
         `https://clique-payment.netlify.app?id=${userProfile._id}&amount=${amount}&token=${token}`,
       );
       onClose();
