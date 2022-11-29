@@ -17,6 +17,7 @@ import { useGetUserLiveStreamQuery } from "redux/services/livestream/live.servic
 import { useAppSelector } from "redux/app/hooks";
 import CardLoader from "@components/liveevents/CardLoad";
 import EventModal from "@components/liveevents/eventCard/EventModal";
+import RecordingCard from "./RecordingCard";
 
 const Contents = ({
   videos,
@@ -72,7 +73,7 @@ const Contents = ({
             {!isFetching &&
               data &&
               data.data.map((event: any) => (
-                <EventModal key={event.id} event={event} />
+                <RecordingCard key={event.id} event={event} />
               ))}
           </SimpleGrid>
         </Box>
