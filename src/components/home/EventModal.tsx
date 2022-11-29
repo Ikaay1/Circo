@@ -163,6 +163,7 @@ function EventModal({ event }: any) {
 
                     NProgress.done();
                   }}
+                  isLoading={payInfor.isLoading}
                 >
                   {event?.eventId?.fee === 0 ||
                   event?.eventId?.fee === "0" ||

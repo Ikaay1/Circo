@@ -17,7 +17,7 @@ function BodyOne({
     (store) => store.app.userReducer.userProfile
   );
 
-  const [payForLive, payInfor] = usePayForLiveMutation();
+  const [payForLive, payInfo] = usePayForLiveMutation();
   const toast = useToast();
   return (
     <>
@@ -99,6 +99,7 @@ function BodyOne({
         color="clique.white"
         rounded={"full"}
         colorScheme="purple"
+        isLoading={payInfo.isLoading}
       >
         {event?.eventId?.fee === 0 ||
         event?.eventId?.fee === "0" ||
