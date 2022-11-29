@@ -20,7 +20,6 @@ export const playlistApi = createApi({
       query: (body) => ({
         url: `playlist/create`,
         method: "POST",
-        headers: {},
         body: body,
       }),
       invalidatesTags: ["playlist"],
@@ -40,7 +39,20 @@ export const playlistApi = createApi({
       }),
       providesTags: ["playlist"],
     }),
+    addVideo: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `playlist/update/videos/add`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["playlist"],
+    }),
   }),
 });
 
-export const { useGetPlaylistQuery, useGetSinglePlaylistQuery } = playlistApi;
+export const {
+  useGetPlaylistQuery,
+  useGetSinglePlaylistQuery,
+  useCreatePlaylistMutation,
+  useAddVideoMutation
+} = playlistApi;

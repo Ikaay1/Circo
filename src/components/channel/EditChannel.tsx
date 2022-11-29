@@ -12,7 +12,7 @@ import { updateChannelSchema } from "schemas/channel.schema";
 
 import { useAppDispatch } from "redux/app/hooks";
 import { useUpdateChannelMutation } from "redux/services/channel.service";
-import { setChannel } from "redux/slices/channelSlice";
+// import { setChannel } from "redux/slices/channelSlice";
 import { Channel } from "./UserDetail";
 interface UpdateChannel {
   name: string;
@@ -77,7 +77,6 @@ const EditChannel = ({ data }: { data?: Channel }) => {
       myFormData.append("photo", profileRef.current.files[0]);
     const res: any = await updateChannel(myFormData);
     if ("data" in res) {
-      dispatch(setChannel(res.data));
       toast({
         title: "Channel successfully updated",
         status: "success",

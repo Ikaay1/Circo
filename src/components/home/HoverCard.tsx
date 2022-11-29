@@ -11,6 +11,7 @@ import {
   Flex,
   Text,
   useDisclosure,
+  Checkbox,
 } from "@chakra-ui/react";
 
 import { useRoutingChannel } from "../../hooks/useRoutingChannel";

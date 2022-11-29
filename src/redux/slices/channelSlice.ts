@@ -1,24 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: any = {
-  channel: {},
-  hasChannel: false,
+type StateType = {
+  playlistVids: Array<string>;
+  route: "upload" | "playlist" | "live";
+};
+
+const initialState: StateType = {
+  playlistVids: [],
+  route: "upload",
 };
 
 export const channelSlice = createSlice({
   name: "channelReducer",
   initialState,
   reducers: {
-    setChannel: (state, action) => {
-      // state.channel = action.payload.channel;
-      // state.hasChannel = true;
+    addPlaylistVideo: (state, action) => {
+      state.playlistVids = [...state.playlistVids, action.payload];
     },
-    setHasChannel: (state, action) => {
-      // state.hasChannel = true;
+    removePlaylistVideo: (state, action) => {
+      const newPlaylist = state.playlistVids.filter((each) => {
+        return each !== action.payload;
+      });
+      state.playlistVids = newPlaylist;
+    },
+    setRoute: (state, action) => {
+      state.route = action.payload;
     },
   },
 });
 
-export const { setChannel, setHasChannel } = channelSlice.actions;
+export const { addPlaylistVideo, removePlaylistVideo, setRoute } =
+  channelSlice.actions;
 
 export default channelSlice.reducer;

@@ -46,7 +46,7 @@ const Contents = ({
 
       {route === "playlist" && (
         <Box mt={"2.5rem"}>
-          <Playlists newPlaylist={false} id={id} />
+          <Playlists newPlaylist={true} id={id} />
         </Box>
       )}
 

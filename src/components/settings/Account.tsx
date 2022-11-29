@@ -28,7 +28,11 @@ function Account({}: Props) {
         <span style={{ color: "#3088D9" }}> sparksdclark@gmail.com</span>
       </Text>
 
-      <NextLink href="/channel/1/edit" passHref>
+      <NextLink
+        href="https://b24-i9fnco.bitrix24.site/crm_form_dzs40/"
+        passHref={true}
+        target="_blank"
+      >
         <Link
           color="clique.red"
           fontSize={"smSubHead"}
@@ -81,7 +85,11 @@ function Account({}: Props) {
             </Link>
           </NextLink>
 
-          <NextLink href="/channel/1/edit" passHref>
+          <NextLink
+            href="https://b24-i9fnco.bitrix24.site/crm_form_dzs40/"
+            passHref={true}
+            target="_blank"
+          >
             <Link color="clique.red" mb="2" _hover={{ textDecoration: "none" }}>
               Delete acount
             </Link>
