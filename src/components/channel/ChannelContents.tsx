@@ -4,6 +4,7 @@ import {
   Box,
   Flex,
   HStack,
+  SimpleGrid,
   Skeleton,
   SkeletonCircle,
   Text,
@@ -12,6 +13,10 @@ import EmptyState from "@components/emptyState/EmptyState";
 import VideoGrid from "@components/home/VideoGrid";
 import Playlists from "@components/profile/Playlists";
 import { channelNav, contentData } from "@constants/utils";
+import { useGetUserLiveStreamQuery } from "redux/services/livestream/live.service";
+import { useAppSelector } from "redux/app/hooks";
+import CardLoader from "@components/liveevents/CardLoad";
+import EventModal from "@components/liveevents/eventCard/EventModal";
 
 const Contents = ({
   videos,
@@ -25,6 +30,10 @@ const Contents = ({
   lastElementRef?: any;
 }) => {
   const [route, setRoute] = useState("upload");
+  const userProfile = useAppSelector(
+    (state) => state?.app?.userReducer?.userProfile
+  );
+  const { data, isFetching } = useGetUserLiveStreamQuery(userProfile?._id);
   return (
     <>
       <Box borderBottom={"1px solid rgba(255, 255, 255, 0.1)"} display="flex">
@@ -52,10 +61,20 @@ const Contents = ({
 
       {route === "live" && (
         <Box mt={"2.3rem"}>
-          {/* <VideoGrid
-            width={'100%'}
-            videos={['videoImage', 'videoImage1', 'videoImage2', 'videoImage3']}
-          /> */}
+          <SimpleGrid
+            columns={{ base: 3, lg: 4, mlg: 4, xl: 5 }}
+            spacing="30px"
+          >
+            {isFetching &&
+              [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+                <CardLoader key={i} />
+              ))}
+            {!isFetching &&
+              data &&
+              data.data.map((event: any) => (
+                <EventModal key={event.id} event={event} />
+              ))}
+          </SimpleGrid>
         </Box>
       )}
 
