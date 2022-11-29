@@ -7,6 +7,7 @@ const ChannelInput = ({
   value,
   autoFocus,
   placeholder,
+  isReadonly,
   ...props
 }: any) => {
   return (
@@ -25,6 +26,7 @@ const ChannelInput = ({
         autoFocus={false}
         style={props}
         className="edit-profile-input"
+        isReadOnly={isReadonly}
         value={value ? value : ""}
       />
       <Text
