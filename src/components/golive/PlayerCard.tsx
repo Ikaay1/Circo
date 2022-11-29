@@ -20,6 +20,7 @@ import {
   setSelectedStream,
   setStreamDetails,
 } from "redux/slices/streamSlice";
+import EndLiveModal from "./EndLiveModal";
 
 function PlayerCard({ streamDetails, setState }: any) {
   const [isCopied, setIsCopied] = React.useState(false);
@@ -96,6 +97,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           isClosable: true,
           position: "top-right",
         });
+
         if (streamId === streamDetails?._id) {
           dispatch(clearStreamDetails());
         } else if (selectedStreamId === streamDetails?._id) {
@@ -293,33 +295,34 @@ function PlayerCard({ streamDetails, setState }: any) {
           </Box>
         </Flex>
         <Flex w="full" justifyContent={"center"}>
-          <Button
-            mt="80px"
-            rounded="full"
-            onClick={() => {
-              handleUpdateStream();
-            }}
-            isLoading={startInfo.isLoading || endInfo.isLoading}
-            isDisabled={
-              startInfo.isLoading ||
-              endInfo.isLoading ||
-              streamDetails?.status === "ended" ||
-              !streamDetails
-            }
-            bg={
-              streamDetails?.status === "not-started"
-                ? "clique.green"
-                : "clique.dangerRed"
-            }
-            color="white"
-            colorScheme={
-              streamDetails?.status === "not-started" ? "green" : "red"
-            }
-            fontFamily={"Poppins"}
-          >
-            {streamDetails?.status === "not-started" ? "Start" : "End"} Live
-            Stream
-          </Button>
+          {streamDetails?.status === "not-started" ? (
+            <Button
+              mt="80px"
+              rounded="full"
+              onClick={() => {
+                handleUpdateStream();
+              }}
+              isLoading={startInfo.isLoading || endInfo.isLoading}
+              isDisabled={
+                startInfo.isLoading ||
+                endInfo.isLoading ||
+                streamDetails?.status === "ended" ||
+                !streamDetails
+              }
+              bg={"clique.green"}
+              color="white"
+              colorScheme={"green"}
+              fontFamily={"Poppins"}
+            >
+              Start Live Stream
+            </Button>
+          ) : (
+            <EndLiveModal
+              streamDetails={streamDetails}
+              handleClick={handleUpdateStream}
+              loading={startInfo.isLoading || endInfo.isLoading}
+            />
+          )}
         </Flex>
       </Box>
     </Box>

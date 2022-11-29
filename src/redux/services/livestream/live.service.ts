@@ -54,6 +54,22 @@ export const liveAPI = createApi({
       providesTags: ["Live"],
     }),
 
+    getUserPaidStream: builder.query<any, any>({
+      query: (id) => ({
+        url: `livestream/userspaidlive`,
+        method: "GET",
+      }),
+      providesTags: ["Live"],
+    }),
+
+    getUserLiveStream: builder.query<any, any>({
+      query: (id) => ({
+        url: `livestream/liverecordings/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Live"],
+    }),
+
     getAllLiveStream: builder.query<any, any>({
       query: (type) => ({
         url: `livestream/?paid=${type?.paid}&ongoing=${type?.ongoing}`,
@@ -126,6 +142,18 @@ export const liveAPI = createApi({
       invalidatesTags: ["Live"],
     }),
 
+    payForLive: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/transfer/live`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
     updateEvent: builder.mutation<any, any>({
       query: (data) => ({
         url: `event/update/${data.id}`,
@@ -151,4 +179,7 @@ export const {
   useDislikeStreamMutation,
   useReportCommentMutation,
   useUpdateEventMutation,
+  useGetUserPaidStreamQuery,
+  usePayForLiveMutation,
+  useGetUserLiveStreamQuery,
 } = liveAPI;

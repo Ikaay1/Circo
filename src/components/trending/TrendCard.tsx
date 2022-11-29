@@ -32,7 +32,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
       h='220px'
       bg='clique.white'
     >
-      <Box minW='50%' pr='40px'>
+      <Box minW='50%' pr='40px' h='100%'>
         <Image maxH={'100%'} mr='30px' src={video.thumbNail} alt='kortyvid' />
       </Box>
 

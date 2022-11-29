@@ -1,6 +1,8 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Button, Text, useToast } from "@chakra-ui/react";
 import moment from "moment";
 import { useRouter } from "next/router";
+import { useAppSelector } from "redux/app/hooks";
+import { usePayForLiveMutation } from "redux/services/livestream/live.service";
 const NProgress = require("nprogress");
 
 function BodyOne({
@@ -11,6 +13,12 @@ function BodyOne({
   event: any;
 }) {
   const router = useRouter();
+  const userProfile = useAppSelector(
+    (store) => store.app.userReducer.userProfile
+  );
+
+  const [payForLive, payInfo] = usePayForLiveMutation();
+  const toast = useToast();
   return (
     <>
       <Text
@@ -45,25 +53,61 @@ function BodyOne({
         mt={"50px"}
         w="full"
         size="lg"
-        onClick={() => {
+        onClick={async () => {
           NProgress.start();
-
+          console.log("I was pushed");
           if (
             event?.eventId?.fee === 0 ||
             event?.eventId?.fee === "0" ||
-            !event?.eventId?.fee
+            !event?.eventId?.fee ||
+            event?.paid.includes(userProfile?._id) ||
+            event?.streamerId?._id === userProfile?._id
           ) {
             router.push(`/stream/${event?.eventId?._id}`);
+          } else {
+            const res: any = await payForLive({
+              eventId: event?.eventId?._id,
+              description: event?.eventId?.title,
+              amount: event?.eventId?.fee,
+              receiversId: event?.streamerId?._id,
+            });
+            if (res?.data) {
+              router.push(`/stream/${event?.eventId?._id}`);
+              toast({
+                title: "Payment Successful",
+                description: "You have successfully paid for this event",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "top-right",
+              });
+            } else {
+              toast({
+                title: "Error",
+                description: res?.error?.data?.message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+                position: "top-right",
+              });
+            }
           }
-          4;
+
           NProgress.done();
         }}
         bg="clique.base"
         color="clique.white"
         rounded={"full"}
         colorScheme="purple"
+        isLoading={payInfo.isLoading}
       >
-        {event?.eventId?.fee ? `Purchase Ticket` : "Join Stream"}
+        {event?.eventId?.fee === 0 ||
+        event?.eventId?.fee === "0" ||
+        !event?.eventId?.fee ||
+        event?.paid.includes(userProfile?._id) ||
+        event?.streamerId?._id === userProfile?._id
+          ? "Join Stream"
+          : `Purchase Ticket`}
       </Button>
     </>
   );

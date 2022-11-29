@@ -465,9 +465,9 @@ export const scrollBarStyle = {
 
 export const scrollBarStyle2 = {
   '&::-webkit-scrollbar': {
-    width: '8px',
-    rounded: 'full',
-    height: '8px',
+    width: '10px',
+    // rounded: 'full',
+    // height: '20px',
   },
   '&::-webkit-scrollbar-track': {
     boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
@@ -477,6 +477,9 @@ export const scrollBarStyle2 = {
     bg: 'clique.base',
     outline: 'none',
     borderRadius: '20px',
+    background: 'clique.base',
+    backgroundClip: 'content-box',
+    borderTop: '10px solid transparent',
   },
 };
 

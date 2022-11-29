@@ -13,17 +13,15 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import { useRoutingChannel } from "../../hooks/useRoutingChannel";
 import { contentData } from "../../constants/utils";
+import { useRoutingChannel } from "../../hooks/useRoutingChannel";
 import HoverCard from "./HoverCard";
 import SubScribeModal from "./SubScribeModal";
-import SideIcon from "@icons/SideIcon";
-import VideoSideIcon from "@icons/VideoSideIcon";
-import PlaylistAddIcon from "@icons/PlaylistAddIcon";
-import TrashIcon from "@icons/TrashIcon";
-import ShareIcon from "@icons/ShareIcon";
-import ShareE from "@icons/ShareE";
 import AddToPlaylistModal from "@components/profile/AddToPlaylistModal";
+import PlaylistAddIcon from "@icons/PlaylistAddIcon";
+import ShareE from "@icons/ShareE";
+import TrashIcon from "@icons/TrashIcon";
+import VideoSideIcon from "@icons/VideoSideIcon";
 
 function VideoThumb({
   video,
@@ -51,6 +49,7 @@ function VideoThumb({
       onOpenPlay();
     }
   };
+  console.log();
   return (
     <>
       <Box position={"relative"} ref={lastElementRef}>
@@ -82,6 +81,7 @@ function VideoThumb({
                 isOpen={isOpen}
                 onOpen={onOpen}
                 id={video?.uploader_id?._id}
+                userName={video?.uploader_id?.userName}
               />
               <Box
                 h={{ lg: "130px", mlg: "180px" }}

@@ -8,13 +8,26 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import EventsCard from "./EventsCard";
 import moment from "moment";
+import { useAppSelector } from "redux/app/hooks";
+import { useRouter } from "next/router";
+import { usePayForLiveMutation } from "redux/services/livestream/live.service";
+const NProgress = require("nprogress");
 
 function EventModal({ event }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const router = useRouter();
+  const userProfile = useAppSelector(
+    (store) => store.app.userReducer.userProfile
+  );
+
+  const [payForLive, payInfor] = usePayForLiveMutation();
+  const toast = useToast();
   return (
     <>
       <EventsCard onOpen={onOpen} event={event} />
@@ -107,8 +120,58 @@ function EventModal({ event }: any) {
                   px="10px"
                   fontWeight={400}
                   size={"sm"}
+                  onClick={async () => {
+                    NProgress.start();
+
+                    if (
+                      event?.eventId?.fee === 0 ||
+                      event?.eventId?.fee === "0" ||
+                      !event?.eventId?.fee ||
+                      event?.paid.includes(userProfile?._id) ||
+                      event?.streamerId?._id === userProfile?._id
+                    ) {
+                      router.push(`/stream/${event?.eventId?._id}`);
+                    } else {
+                      const res: any = await payForLive({
+                        eventId: event?.eventId?._id,
+                        description: event?.eventId?.title,
+                        amount: event?.eventId?.fee,
+                        receiversId: event?.streamerId?._id,
+                      });
+                      if (res?.data) {
+                        router.push(`/stream/${event?.eventId?._id}`);
+                        toast({
+                          title: "Payment Successful",
+                          description:
+                            "You have successfully paid for this event",
+                          status: "success",
+                          duration: 3000,
+                          isClosable: true,
+                          position: "top-right",
+                        });
+                      } else {
+                        toast({
+                          title: "Error",
+                          description: res?.error?.data?.message,
+                          status: "error",
+                          duration: 3000,
+                          isClosable: true,
+                          position: "top-right",
+                        });
+                      }
+                    }
+
+                    NProgress.done();
+                  }}
+                  isLoading={payInfor.isLoading}
                 >
-                  pay for live
+                  {event?.eventId?.fee === 0 ||
+                  event?.eventId?.fee === "0" ||
+                  !event?.eventId?.fee ||
+                  event?.paid.includes(userProfile?._id) ||
+                  event?.streamerId?._id === userProfile?._id
+                    ? "Join Stream"
+                    : `Purchase Ticket`}
                 </Button>
               </Flex>
             </Box>

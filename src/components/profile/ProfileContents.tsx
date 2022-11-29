@@ -10,10 +10,16 @@ import { profileNav } from "@constants/utils";
 
 import Playlists from "./Playlists";
 import EmptyState from "@components/emptyState/EmptyState";
+import { useGetUserPaidStreamQuery } from "redux/services/livestream/live.service";
+import CardLoader from "@components/liveevents/CardLoad";
+import EventModal from "@components/liveevents/eventCard/EventModal";
 
 const ProfileContents = () => {
   const [route, setRoute] = useState("paid");
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+
+  const { data, isFetching } = useGetUserPaidStreamQuery("");
+
   return (
     <>
       <Box borderBottom={"1px solid rgba(255, 255, 255, 0.1)"} display="flex">
@@ -47,10 +53,15 @@ const ProfileContents = () => {
                   columns={{ base: 3, lg: 4, mlg: 4, xl: 5 }}
                   spacing="30px"
                 >
-                  {/* <EventModal />
-                  <EventModal />
-                  <EventModal />
-                  <EventModal /> */}
+                  {isFetching &&
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+                      <CardLoader key={i} />
+                    ))}
+                  {!isFetching &&
+                    data &&
+                    data.data.map((event: any) => (
+                      <EventModal key={event.id} event={event} />
+                    ))}
                 </SimpleGrid>
               </CliqueTabPanel>
             </TabPanels>

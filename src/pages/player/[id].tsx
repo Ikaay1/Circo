@@ -1,6 +1,6 @@
 import HomeLayout from 'layouts/HomeLayout';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import {
 	useCreateViewMutation,
@@ -19,8 +19,6 @@ import VideoPlayer from '@components/player/VideoPlayer';
 function Index() {
   const router = useRouter();
   const {id} = router.query;
-
-  const [subscribers, setSubscribers] = useState<string[]>([]);
   const {data, isLoading, refetch} = useGetContentQuery(id);
   const [view] = useCreateViewMutation();
   const [like] = useLikeContentMutation();
@@ -28,12 +26,6 @@ function Index() {
   const [likeComment] = useLikeContentCommentMutation();
   const [dislikeComment] = useDislikeContentCommentMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-
-  useEffect(() => {
-    if (data) {
-      setSubscribers(data.data.preference.video.uploader_id.subscribers);
-    }
-  }, [data]);
 
   useEffect(() => {
     const createView = async () => {
@@ -103,8 +95,7 @@ function Index() {
               />
               <VideoDetails
                 video={data.data.preference.video}
-                setSubscribers={setSubscribers}
-                subscribers={subscribers}
+                subscribers={data.data.preference.video.uploader_id.subscribers}
               />
             </Box>
             {/* @ts-ignore */}
