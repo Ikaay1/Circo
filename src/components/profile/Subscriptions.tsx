@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Avatar, Box, Image, Text } from '@chakra-ui/react';
+import {
+	Avatar,
+	Box,
+	Image,
+	Skeleton,
+	SkeletonCircle,
+	Text,
+	WrapItem,
+} from '@chakra-ui/react';
 
 const Subscriptions = ({userData}: {userData: any}) => {
   return (
@@ -26,7 +34,7 @@ const Subscriptions = ({userData}: {userData: any}) => {
             firstName: string;
             lastName: string;
             _id: string;
-            photo?: string;
+            photo: string;
           }) => (
             <Box
               display={'flex'}
@@ -36,26 +44,21 @@ const Subscriptions = ({userData}: {userData: any}) => {
               key={_id}
             >
               <Box display={'flex'} alignItems='center'>
-                {photo ? (
-                  <Image
+                <WrapItem>
+                  <Avatar
                     w='57px'
                     h='57px'
-                    borderRadius={'50%'}
-                    objectFit='cover'
-                    pr='.7rem'
-                    src={photo}
-                    alt=''
-                  />
-                ) : (
-                  <Avatar
-                    size='md'
-                    mr='.7rem'
                     name={firstName + ' ' + lastName}
-                    borderColor='clique.greenYellow'
+                    src={photo}
                   />
-                )}
+                </WrapItem>
 
-                <Text fontSize='subHead' lineHeight='31px' color='clique.white'>
+                <Text
+                  fontSize='subHead'
+                  lineHeight='31px'
+                  color='clique.white'
+                  pl='.7rem'
+                >
                   {firstName + ' ' + lastName}
                 </Text>
               </Box>

@@ -71,7 +71,7 @@ const ProfileContents = () => {
 
       {route === "play" && (
         <Box mt={"2.5rem"}>
-          <Playlists newPlaylist={true} id={userProfile._id} />
+          <Playlists id={userProfile._id} />
         </Box>
       )}
 

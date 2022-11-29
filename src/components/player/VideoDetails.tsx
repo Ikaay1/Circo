@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useSubscribeMutation } from 'redux/services/user.service';
 
-import { Avatar, Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Text, WrapItem } from '@chakra-ui/react';
 
 import { contentData } from '../../constants/utils';
 
@@ -14,7 +14,6 @@ function VideoDetails({
   subscribers: string[];
 }) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-  const [subscribe, subscribeStatus] = useSubscribeMutation();
 
   return (
     <Box mt='20px'>
@@ -38,12 +37,15 @@ function VideoDetails({
             borderColor='clique.base'
             rounded='full'
           >
-            <Avatar
-              p='0'
-              size='md'
-              name='Prosper Otemuyiwa'
-              src='https://bit.ly/prosper-baba'
-            />
+            <WrapItem>
+              <Avatar
+                size='md'
+                name={
+                  video.uploader_id.firstName + ' ' + video.uploader_id.lastName
+                }
+                src={video.uploader_id.photo}
+              />
+            </WrapItem>
           </Flex>
 
           <Box>
