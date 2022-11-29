@@ -133,6 +133,18 @@ export const liveAPI = createApi({
       invalidatesTags: ["Live"],
     }),
 
+    payForLive: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/transfer/live`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
     updateEvent: builder.mutation<any, any>({
       query: (data) => ({
         url: `event/update/${data.id}`,
@@ -159,4 +171,5 @@ export const {
   useReportCommentMutation,
   useUpdateEventMutation,
   useGetUserPaidStreamQuery,
+  usePayForLiveMutation,
 } = liveAPI;
