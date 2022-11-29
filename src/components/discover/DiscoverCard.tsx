@@ -72,7 +72,7 @@ function DiscoverCard({video}: {video: contentData}) {
               fontSize='subHead'
               color={'clique.white'}
             >
-              {video.uploader_userName}
+              {video?.uploader_userName}
             </Text>
             <Flex mt='5px' alignItems={'center'}>
               <Text

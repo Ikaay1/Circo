@@ -9,6 +9,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { ReceiptInfo } from '@constants/interface';
+import DownwardIcon from '@icons/DownwardIcon';
 import UpwardIcon from '@icons/UpwardIcon';
 
 type Props = {
@@ -49,7 +50,10 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
               mb='12'
             >
               <Spacer />
-              <Icon as={UpwardIcon} fontSize='5xl' />
+              <Icon
+                as={info?.from === 'To' ? DownwardIcon : UpwardIcon}
+                fontSize='5xl'
+              />
               <Spacer />
               <Text fontSize={'xsl'} fontWeight='400' color={'clique.white'}>
                 {info?.duration}
@@ -84,6 +88,7 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
                 fontSize={'smSubHead'}
                 fontWeight='400'
                 color={'clique.white'}
+                textAlign={'right'}
               >
                 {info?.description}
               </Text>

@@ -65,7 +65,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
               color={'clique.lightGrey'}
               noOfLines={1}
             >
-              {video.uploader_id.userName}
+              {video.uploader_id?.userName}
             </Text>
             <Flex mt='5px' alignItems={'center'}>
               <Text

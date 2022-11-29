@@ -58,9 +58,9 @@ function SubScribeModal({
             lineHeight={'1.5'}
             textAlign='center'
           >
-            You are not subscribed to{' '}
+            You are not subscribed to
             <Text as='span' color='clique.base'>
-              {userName}
+              {" " +userName}
             </Text>
             . Subscribe to the channel and have access to permium content,
             videos and exclusive live shows.

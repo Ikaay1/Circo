@@ -28,7 +28,7 @@ function UploadModal() {
     }
     const file = event.target.files[0];
     const name = file?.name;
-    const url = URL.createObjectURL(file);
+    const url = URL?.createObjectURL(file);
     // console.log(file);
     // console.log();
     onClose();

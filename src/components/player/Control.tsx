@@ -174,7 +174,9 @@ function Control({
       </GridItem>
       <GridItem colSpan={2} justifySelf='end'>
         <Flex alignItems='center' h='100%'>
-          <GiftModal />
+          {video.uploader_id._id !== userProfile._id && (
+            <GiftModal video={video} />
+          )}
           <VideoOptionMenu player={playerRef} video={video} />
           {!isFullScreen ? (
             <Icon
