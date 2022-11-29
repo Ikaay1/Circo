@@ -71,6 +71,7 @@ const colors = {
     mixedBase: "linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)",
     paleGreen: "#395644",
     paleGrey: "#2C2C2C",
+    darkGrey1: "#524C46",
     chat: "rgba(0, 0, 0, 0.2)",
     close: "#3a3a3a",
   },

@@ -26,7 +26,6 @@ export const userSlice = createSlice({
       state,
       { payload: { payload } }: PayloadAction<{ payload: any }>
     ) => {
-      console.log("payload", payload);
       state.userProfile = payload;
     },
     logout: () => {

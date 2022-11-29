@@ -1,14 +1,17 @@
-import React from "react";
-
-import { Box, Image, Text } from "@chakra-ui/react";
-import { subscriptionsData } from "@constants/utils";
+import {
+  Avatar,
+  Box,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  WrapItem,
+} from "@chakra-ui/react";
 import { useAppSelector } from "redux/app/hooks";
 import { useGetUserQuery } from "redux/services/user.service";
 
 const Subscriptions = () => {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const { isLoading, data: userData } = useGetUserQuery(userProfile._id);
-  
   return (
     <Box p="1rem" pb="2.5rem">
       <Text
@@ -27,10 +30,12 @@ const Subscriptions = () => {
             firstName,
             lastName,
             _id,
+            photo,
           }: {
             firstName: string;
             lastName: string;
             _id: string;
+            photo: string;
           }) => (
             <Box
               display={"flex"}
@@ -40,26 +45,39 @@ const Subscriptions = () => {
               key={_id}
             >
               <Box display={"flex"} alignItems="center">
-                <Image
-                  w="57px"
-                  h="57px"
-                  borderRadius={"50%"}
-                  objectFit="cover"
-                  pr=".7rem"
-                  src="/assets/subscriptionavatar.png"
-                  alt=""
-                />
-                <Text fontSize="subHead" lineHeight="31px" color="clique.white">
-                  {firstName + " " + lastName}
-                </Text>
+                {isLoading ? (
+                  <SkeletonCircle h="57px" w="57px" />
+                ) : (
+                  <WrapItem>
+                    <Avatar
+                      w="57px"
+                      h="57px"
+                      name={firstName + " " + lastName}
+                      src={photo}
+                    />
+                  </WrapItem>
+                )}
+
+                <Skeleton isLoaded={!isLoading} ml=".7rem">
+                  <Text
+                    fontSize="subHead"
+                    lineHeight="31px"
+                    color="clique.white"
+                    pl=".7rem"
+                  >
+                    {firstName + " " + lastName}
+                  </Text>
+                </Skeleton>
               </Box>
-              <Text
-                fontSize="sm"
-                lineHeight="26px"
-                color={"active" === "active" ? "clique.green" : "clique.red"}
-              >
-                {"active" === "active" ? "Active" : "Expired"}
-              </Text>
+              <Skeleton isLoaded={!isLoading}>
+                <Text
+                  fontSize="sm"
+                  lineHeight="26px"
+                  color={"active" === "active" ? "clique.green" : "clique.red"}
+                >
+                  {"active" === "active" ? "Active" : "Expired"}
+                </Text>
+              </Skeleton>
             </Box>
           )
         )}

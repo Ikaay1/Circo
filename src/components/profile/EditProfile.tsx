@@ -1,28 +1,24 @@
 import { ChangeEvent, useRef, useState } from "react";
 
-import { Box, Flex, useToast, VStack, Text, Icon } from "@chakra-ui/react";
+import { Box, Flex, Text, useToast, VStack } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 import Uploaders from "@components/channel/Uploaders";
 import { Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import {
-  useChangePasswordMutation,
-  useGetUserQuery,
-  useUpdateProfileMutation,
+  useChangePasswordMutation, useUpdateProfileMutation
 } from "redux/services/user.service";
-import { setChannel } from "redux/slices/channelSlice";
-import { editProfileSchema } from "schemas/editProfile.schema";
-import CustumField from "./CustumField";
 import { setUser } from "redux/slices/authSlice";
 import { changePasswordSchema } from "schemas/changePassword.schema";
-import PasswordIcon from "@icons/PasswordIcon";
+import { editProfileSchema } from "schemas/editProfile.schema";
+import CustumField from "./CustumField";
 
 interface UpdateProfile {
   firstName: string;
   lastName: string;
   // dob: string;
-  email: string;
+  // email: string;
   photo?: string;
   cover?: string;
   username: string;
@@ -59,7 +55,7 @@ const EditProfile = () => {
       return;
     }
     const image = event.target.files[0];
-    const url = URL.createObjectURL(image);
+    const url = URL?.createObjectURL(image);
     if (cover) {
       setimageState({ ...imageState, cover: url });
     } else {
@@ -81,7 +77,7 @@ const EditProfile = () => {
     const myFormData = new FormData();
     myFormData.append("firstName", values.firstName);
     myFormData.append("lastName", values.lastName);
-    myFormData.append("email", values.email);
+    // myFormData.append("email", values.email);
     myFormData.append("userName", values.username);
     // myFormData.append("dateOfBirth", values.dob);
     coverRef.current.files[0] &&
@@ -90,6 +86,7 @@ const EditProfile = () => {
       myFormData.append("photo", profileRef.current.files[0]);
     const res: any = await updateProfile(myFormData);
     if ("data" in res) {
+      console.log(res)
       dispatch(
         setUser({
           payload: res?.data?.data?.user,
@@ -105,7 +102,7 @@ const EditProfile = () => {
       setSubmitting(false);
     } else if (res.error) {
       toast({
-        title: res.error.error,
+        title: res.error.data.message,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -147,7 +144,7 @@ const EditProfile = () => {
       resetForm();
     } else if (res.error) {
       toast({
-        title: "Invalid credentials",
+        title: res.error.data.message,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -167,7 +164,7 @@ const EditProfile = () => {
   const initialValues = {
     firstName: userProfile?.firstName ? userProfile?.firstName : "",
     lastName: userProfile?.lastName ? userProfile?.lastName : "",
-    email: userProfile?.email ? userProfile?.email : "",
+    // email: userProfile?.email ? userProfile?.email : "",
     username: userProfile?.userName ? userProfile?.userName : "",
     // dob: user?.dateOfBirth ? user?.dateOfBirth : "",
   };
@@ -219,7 +216,7 @@ const EditProfile = () => {
                 sideContent="(Username can only be changed 2 times a year)"
                 nameValue="username"
               />
-              <CustumField name="Email" sideContent="Edit" nameValue="email" />
+              {/* <CustumField name="Email" sideContent="Edit" nameValue="email" /> */}
 
               {/* <CustumField
                 name="Date of Birth"
@@ -238,7 +235,7 @@ const EditProfile = () => {
       >
         {(props) => (
           <Form>
-            <VStack mt="100px" justifyContent={"center"} >
+            <VStack mt="100px" justifyContent={"center"}>
               <Box pr="35%">
                 <Text>Change Password</Text>
               </Box>

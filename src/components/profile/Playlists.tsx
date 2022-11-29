@@ -30,7 +30,7 @@ const Playlists = ({
   newPlaylist,
   id,
 }: {
-  newPlaylist: boolean;
+  newPlaylist?: boolean;
   id: string;
 }) => {
   const { data, isLoading, isFetching } = useGetPlaylistQuery(id);
@@ -160,7 +160,7 @@ const Playlists = ({
 
   return (
     <>
-      {newPlaylist && (
+      {newPlaylist && router.query.name === "content" ? (
         <Text
           display="flex"
           alignItems={"center"}
@@ -177,7 +177,7 @@ const Playlists = ({
             <Icon as={AddPlaylistIcon} />
           </Box>
         </Text>
-      )}
+      ) : null}
       {content}
 
       <Modal
