@@ -27,14 +27,25 @@ const Signup = () => {
 
   const handlePreSignup = async (e: any) => {
     e.preventDefault();
-
-    const allData = {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      userName: userName.trim(),
-      email: email.toLowerCase().trim(),
-      password: password.trim(),
-    };
+    let allData;
+    if (!referralCode) {
+      allData = {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        userName: userName.trim(),
+        email: email.toLowerCase().trim(),
+        password: password.trim(),
+      };
+    } else {
+      allData = {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        userName: userName.trim(),
+        email: email.toLowerCase().trim(),
+        password: password.trim(),
+        referredBy: referralCode.trim(),
+      };
+    }
 
     const data = {
       firstName: firstName.trim(),

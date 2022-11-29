@@ -1,27 +1,29 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
+import { useEffect, useMemo } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useResetSubscriptionsMutation } from 'redux/services/channel.service';
+import { useGetUserQuery } from 'redux/services/user.service';
 
 import {
-  Avatar,
-  Box,
-  Circle,
-  Icon,
-  Image,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  Skeleton,
-  SkeletonCircle,
-  Text,
-  useDisclosure,
-  WrapItem,
-} from "@chakra-ui/react";
+	Avatar,
+	Box,
+	Circle,
+	Icon,
+	Image,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	Skeleton,
+	SkeletonCircle,
+	Text,
+	useDisclosure,
+	WrapItem,
+} from '@chakra-ui/react';
 // import CreateChannelModal from "@components/createChannel/CreateChannelModal";
-import Subscriptions from "@components/profile/Subscriptions";
-import { scrollBarStyle } from "@constants/utils";
-import EmptyProfile from "@icons/EmptyProfile";
-import SideIcon from "@icons/SideIcon";
-import { useGetUserQuery } from "redux/services/user.service";
-import { useAppSelector } from "redux/app/hooks";
+import Subscriptions from '@components/profile/Subscriptions';
+import { scrollBarStyle } from '@constants/utils';
+import EmptyProfile from '@icons/EmptyProfile';
+import SideIcon from '@icons/SideIcon';
 
 export type Channel = {
   bio: string;
@@ -38,15 +40,26 @@ export type Channel = {
   _id: string;
 };
 
-const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
+const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const [resetSubscriptions] = useResetSubscriptionsMutation();
   const router = useRouter();
-  const { isLoading, data: userData } = useGetUserQuery(id);
+  const {isLoading, data: userData} = useGetUserQuery(id);
   const des =
-    router.query.name === "content" ||
-    router.query.name === "analytics" ||
-    router.pathname.includes("subscribe");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+    router.query.name === 'content' ||
+    router.query.name === 'analytics' ||
+    router.pathname.includes('subscribe');
+  const {isOpen, onOpen, onClose} = useDisclosure();
+  const date = useMemo(() => new Date(), []);
+
+  useEffect(() => {
+    const resetSub = async () => {
+      await resetSubscriptions({});
+    };
+    if (date.toString().slice(8, 10) === '01') {
+      resetSub();
+    }
+  }, [date, resetSubscriptions]);
 
   const {
     isOpen: channelIsOpen,
@@ -55,88 +68,88 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
   } = useDisclosure();
   return (
     <>
-      <Box position="relative">
-        {!router.pathname.includes("profile") ? (
+      <Box position='relative'>
+        {!router.pathname.includes('profile') ? (
           data?.cover ? (
             <Image
-              w="100%"
-              h="170px"
+              w='100%'
+              h='170px'
               src={data?.cover}
-              alt="cover photo"
-              width="100%"
-              objectFit="cover"
+              alt='cover photo'
+              width='100%'
+              objectFit='cover'
             />
           ) : (
             <Image
-              objectFit="cover"
-              w="100%"
-              h="160px"
-              src="/assets/channelEmpty.png"
-              alt="empty state"
-              width="100%"
+              objectFit='cover'
+              w='100%'
+              h='160px'
+              src='/assets/channelEmpty.png'
+              alt='empty state'
+              width='100%'
             />
           )
         ) : userProfile?.cover ? (
           <Image
-            w="100%"
-            h="170px"
+            w='100%'
+            h='170px'
             src={userProfile?.cover}
-            alt="cover photo"
-            width="100%"
-            objectFit="cover"
+            alt='cover photo'
+            width='100%'
+            objectFit='cover'
           />
         ) : (
           <Image
-            objectFit="cover"
-            w="100%"
-            h="160px"
-            src="/assets/channelEmpty.png"
-            alt="empty state"
-            width="100%"
+            objectFit='cover'
+            w='100%'
+            h='160px'
+            src='/assets/channelEmpty.png'
+            alt='empty state'
+            width='100%'
           />
         )}
 
         <Box
-          position={"absolute"}
+          position={'absolute'}
           bottom={
-            router.query.name === "content" ||
-            router.query.name === "analytics" ||
-            router.pathname.includes("subscribe")
-              ? "-90%"
-              : "-52%"
+            router.query.name === 'content' ||
+            router.query.name === 'analytics' ||
+            router.pathname.includes('subscribe')
+              ? '-90%'
+              : '-52%'
           }
-          left={"50%"}
-          transform="translateX(-50%)"
+          left={'50%'}
+          transform='translateX(-50%)'
         >
-          {!router.pathname.includes("profile") ? (
-            <Box width="100%" mx="auto">
+          {!router.pathname.includes('profile') ? (
+            <Box width='100%' mx='auto'>
               {data?.photo ? (
                 <Image
                   src={data?.photo}
-                  alt="profile photo"
-                  borderRadius="50%"
-                  objectFit={"cover"}
-                  h="120px"
-                  w="120px"
-                  mx="auto"
+                  alt='profile photo'
+                  borderRadius='50%'
+                  objectFit={'cover'}
+                  h='120px'
+                  w='120px'
+                  mx='auto'
                 />
               ) : (
                 <>
                   <Circle
-                    size="120px"
-                    bg="#232323"
-                    color="white"
-                    zIndex={"-1"}
-                    mx="auto"
+                    size='120px'
+                    bg='#232323'
+                    color='white'
+                    zIndex={'-1'}
+                    mx='auto'
                   ></Circle>
-                  <Box top="15%" left="17%" position={"absolute"}>
-                    <Icon as={EmptyProfile} fontSize="81px" />
+                  <Box top='15%' left='17%' position={'absolute'}>
+                    <Icon as={EmptyProfile} fontSize='81px' />
                     <Box
-                      top="55%"
-                      left="43%"
-                      zIndex="1"
-                      position={"absolute"}
-                      cursor="pointer"
+                      top='55%'
+                      left='43%'
+                      zIndex='1'
+                      position={'absolute'}
+                      cursor='pointer'
                     ></Box>
                   </Box>
                 </>
@@ -145,25 +158,25 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
           ) : userProfile?.photo ? (
             <Image
               src={userProfile?.photo}
-              alt="profile photo"
-              borderRadius="50%"
-              objectFit={"cover"}
-              h="120px"
-              w="120px"
-              mx="auto"
+              alt='profile photo'
+              borderRadius='50%'
+              objectFit={'cover'}
+              h='120px'
+              w='120px'
+              mx='auto'
             />
           ) : !userData && isLoading ? (
-            <Box mx="auto">
-              <SkeletonCircle size="10" h="120px" w="120px" />
+            <Box mx='auto'>
+              <SkeletonCircle size='10' h='120px' w='120px' />
             </Box>
           ) : (
             <WrapItem>
               <Avatar
-                size="2xl"
+                size='2xl'
                 name={
-                  userData?.data?.firstName + " " + userData?.data?.lastName
+                  userData?.data?.firstName + ' ' + userData?.data?.lastName
                 }
-                mx="auto"
+                mx='auto'
               />
             </WrapItem>
           )}
@@ -172,38 +185,38 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
           {des && (
             <Box>
               <Text
-                fontWeight="600"
-                fontSize="head"
-                lineHeight="32px"
-                color="clique.white"
-                textAlign={"center"}
-                mx="auto"
+                fontWeight='600'
+                fontSize='head'
+                lineHeight='32px'
+                color='clique.white'
+                textAlign={'center'}
+                mx='auto'
               >
                 {data?.name}
               </Text>
               <Text
-                fontSize="subHead"
-                lineHeight="24px"
-                color="clique.secondaryGrey2"
-                textAlign={"center"}
+                fontSize='subHead'
+                lineHeight='24px'
+                color='clique.secondaryGrey2'
+                textAlign={'center'}
               >
                 {isLoading ? (
-                  <Skeleton height="13px" maxW={"100px"} mx="auto" />
+                  <Skeleton height='13px' maxW={'100px'} mx='auto' />
                 ) : (
                   ` @${userData?.data?.userName}`
                 )}
               </Text>
               <Text
-                fontWeight="500"
-                fontSize="subHead"
-                lineHeight="24px"
-                textDecorationLine="underline"
-                color="clique.secondaryGrey2"
-                textAlign={"center"}
+                fontWeight='500'
+                fontSize='subHead'
+                lineHeight='24px'
+                textDecorationLine='underline'
+                color='clique.secondaryGrey2'
+                textAlign={'center'}
                 onClick={() => {
                   onOpen();
                 }}
-                cursor="pointer"
+                cursor='pointer'
               >
                 SUBSCRIPTIONS
               </Text>
@@ -211,8 +224,8 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
           )}
         </Box>
 
-        {router.pathname.includes("profile") ? (
-          <Box position={"absolute"} right="10" bottom="-55">
+        {router.pathname.includes('profile') ? (
+          <Box position={'absolute'} right='10' bottom='-55'>
             {/* {data === null && (
               <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
             )} */}
@@ -225,24 +238,24 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
         isCentered
         onClose={onClose}
         isOpen={isOpen}
-        motionPreset="slideInRight"
-        scrollBehavior="inside"
+        motionPreset='slideInRight'
+        scrollBehavior='inside'
       >
         <ModalOverlay />
         <ModalContent
-          maxW="400px"
-          w="400px"
-          bottom="0"
-          minH="100vh"
-          overflowY={"scroll"}
+          maxW='400px'
+          w='400px'
+          bottom='0'
+          minH='100vh'
+          overflowY={'scroll'}
           sx={scrollBarStyle}
-          m="0"
-          py="30px"
-          position={"absolute"}
+          m='0'
+          py='30px'
+          position={'absolute'}
           right={0}
-          bg="clique.black"
+          bg='clique.black'
         >
-          <Subscriptions />
+          <Subscriptions userData={userData} />
         </ModalContent>
       </Modal>
       {/* <CreateChannelModal

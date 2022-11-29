@@ -63,6 +63,18 @@ export const walletApi = createApi({
       }),
       invalidatesTags: ['Wallet'],
     }),
+
+    giftUser: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/transfer/gift`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Wallet'],
+    }),
   }),
 });
 
@@ -71,4 +83,5 @@ export const {
   useGetUserWalletQuery,
   useSendOTPMutation,
   useAddBeneficiaryMutation,
+  useGiftUserMutation,
 } = walletApi;
