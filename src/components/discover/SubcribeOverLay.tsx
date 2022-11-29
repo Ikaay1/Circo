@@ -1,19 +1,12 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useSubscribeMutation } from 'redux/services/user.service';
 
 import { Avatar, Box, Button, Flex, SlideFade, Text } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
 
-function SubcribeOverLay({
-  isHover,
-  user,
-  refetch,
-}: {
-  isHover: boolean;
-  user: any;
-  refetch: any;
-}) {
-  const [subscribe] = useSubscribeMutation();
+function SubcribeOverLay({isHover, user}: {isHover: boolean; user: any}) {
+  const router = useRouter();
   return (
     <Flex
       w='full'
@@ -72,10 +65,7 @@ function SubcribeOverLay({
                 bg='none'
                 rounded={'full'}
                 fontWeight='400'
-                onClick={async () => {
-                  await subscribe({subscribingToId: user._id});
-                  refetch();
-                }}
+                onClick={() => router.push(`/channel/subscribe/${user._id}`)}
               >
                 Subscribe
               </Button>

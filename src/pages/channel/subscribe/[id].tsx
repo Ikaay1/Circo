@@ -1,25 +1,25 @@
-import { useRouter } from "next/router";
-import { useGetIndividualChannelQuery } from "redux/services/channel.service";
-import { useGetSingleUserContentQuery } from "redux/services/content.service";
+import useGet from 'hooks/useGet';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
+import { useGetSingleUserContentQuery } from 'redux/services/content.service';
+import {
+	useGetUserQuery,
+	useSubscribeToUserChannelMutation,
+} from 'redux/services/user.service';
 
 import {
-  Box,
-  useColorModeValue,
-  useDisclosure,
-  useToast
-} from "@chakra-ui/react";
-import Index from "@components/channel";
-import SubscribeModal from "@components/channel/subscribe/SubscribeModal";
-import UnsubscribeModal from "@components/channel/subscribe/UnsubscribeModal";
-import Header from "@components/widgets/Header";
-import SideMenu from "@components/widgets/sideMenu";
-import useGet from "hooks/useGet";
-import { useEffect, useState } from "react";
-import { useAppSelector } from "redux/app/hooks";
-import {
-  useGetUserQuery,
-  useSubscribeToUserChannelMutation
-} from "redux/services/user.service";
+	Box,
+	useColorModeValue,
+	useDisclosure,
+	useToast,
+} from '@chakra-ui/react';
+import Index from '@components/channel';
+import SubscribeModal from '@components/channel/subscribe/SubscribeModal';
+import UnsubscribeModal from '@components/channel/subscribe/UnsubscribeModal';
+import Header from '@components/widgets/Header';
+import SideMenu from '@components/widgets/sideMenu';
 
 type Subcribers = {
   _id: string;
@@ -28,7 +28,8 @@ type Subcribers = {
 };
 const SubscribeChannel = () => {
   const router = useRouter();
-  const [subcribeToUserChannnel] = useSubscribeToUserChannelMutation();
+  const [subcribeToUserChannnel, subcribeToUserChannnelStatus] =
+    useSubscribeToUserChannelMutation();
   const id = router?.query?.id;
   const toast = useToast();
   const {
@@ -36,8 +37,8 @@ const SubscribeChannel = () => {
     isFetching,
     data: channelData,
   } = useGetIndividualChannelQuery(id);
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const { isLoading: userLoading, data: userData } = useGetUserQuery(id);
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const {isLoading: userLoading, data: userData} = useGetUserQuery(id);
   const [state, setState] = useState<string>();
 
   useEffect(() => {
@@ -45,13 +46,13 @@ const SubscribeChannel = () => {
       const buttonText = userData?.data?.subscribers?.find(
         (each: Subcribers) => {
           return each._id === userProfile._id;
-        }
+        },
       );
-      buttonText ? setState("Unsubscribe") : setState("Subscribe");
+      buttonText ? setState('Subscribed') : setState('Subscribe');
     }
   }, [userLoading, userData, userProfile]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {isOpen, onOpen, onClose} = useDisclosure();
 
   const {
     isOpen: isSubOpen,
@@ -74,7 +75,7 @@ const SubscribeChannel = () => {
     page,
     limit: 3,
   });
-  const { contents, lastElementRef, loading } = useGet({
+  const {contents, lastElementRef, loading} = useGet({
     data,
     isFetching: videoFetch,
     isLoading,
@@ -82,56 +83,59 @@ const SubscribeChannel = () => {
     page,
     setPage,
   });
-  console.log({ data });
   const handleSubscription = () => {
-    state === "Subscribe" ? isSubOnOpen() : onOpen();
+    if (state === 'Subscribe') {
+      isSubOnOpen();
+    }
   };
 
   const subscribeHandler = async () => {
     const res: any = await subcribeToUserChannnel({
-      subscribingToId: id,
+      amount: channelData?.data?.channel?.subscriptionFee
+        ? channelData?.data?.channel?.subscriptionFee
+        : 0,
+      description: 'Payment for subscription',
+      receiversId: channelData?.data?.channel?.userId,
     });
-    if ("data" in res) {
+    if ('data' in res) {
       toast({
         title: res.data.message,
-        status: "success",
+        status: 'success',
         duration: 3000,
         isClosable: true,
-        position: "top-right",
+        position: 'top-right',
       });
       onClose();
       isSubOnClose();
-      res.data.message.includes("subscribed")
-        ? setState("Unsubscribe")
-        : setState("Subscribe");
+      setState('Subscribed');
     } else if (res.error) {
       toast({
         title: res.error.data.message,
-        status: "error",
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        position: "top-right",
+        position: 'top-right',
       });
     } else {
       toast({
-        title: "Something went wrong",
-        status: "error",
+        title: 'Something went wrong',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        position: "top-right",
+        position: 'top-right',
       });
     }
   };
 
   return (
-    <Box bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}>
+    <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
       <>
         <Header upload={onOpen} />
-        <Box h={{ lg: "90vh" }} display="flex">
-          <Box flex="1.3" h="100%">
+        <Box h={{lg: '90vh'}} display='flex'>
+          <Box flex='1.3' h='100%'>
             <SideMenu />
           </Box>
-          <Box flex="5.5" h="100%">
+          <Box flex='5.5' h='100%'>
             <Index
               channelData={channelData}
               data={contents}
@@ -143,19 +147,21 @@ const SubscribeChannel = () => {
             />
           </Box>
         </Box>
-        <UnsubscribeModal
+        {/* <UnsubscribeModal
           isOpen={isOpen}
           onClose={onClose}
           name={channelData?.data?.channel?.name}
           isLoading={isLoading}
           onClick={subscribeHandler}
-        />
+        /> */}
         <SubscribeModal
           isOpen={isSubOpen}
           onClose={isSubOnClose}
           onClick={subscribeHandler}
           bio={channelData?.data?.channel?.bio}
+          fee={channelData?.data?.channel?.subscriptionFee}
           isLoading={isLoading}
+          status={subcribeToUserChannnelStatus}
         />
       </>
     </Box>
