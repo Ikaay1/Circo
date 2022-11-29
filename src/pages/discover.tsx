@@ -14,7 +14,7 @@ import {
 } from '@constants/utils';
 
 function Index() {
-  const {data, isFetching, refetch} = useGetSuggestedUsersQuery({
+  const {data, isFetching} = useGetSuggestedUsersQuery({
     page: 1,
     limit: 7,
   });
@@ -92,7 +92,7 @@ function Index() {
               <>
                 {data?.data?.user?.map((user: any) => (
                   <Box key={user._id}>
-                    <SubscriptionCard user={user} refetch={refetch} />
+                    <SubscriptionCard user={user} />
                   </Box>
                 ))}
               </>
