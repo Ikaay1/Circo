@@ -65,36 +65,38 @@ function Index() {
           ))}
         </>
       ) : (
-        data?.data?.user.length > 0 && (
-          <>
-            <Text
-              pl="60px"
-              fontFamily={"Poppins"}
-              fontWeight={500}
-              textTransform={"capitalize"}
-            >
-              subscriptions
-            </Text>
-            {data?.data?.user.map(
-              (item: {
-                userName: string;
-                firstName: string;
-                lastName: string;
-                photo: any;
-                _id: string;
-              }) => (
-                <EachSubscribe
-                  key={item._id}
-                  name={item.userName}
-                  imgUrl={item.photo}
-                  firstName={item.firstName}
-                  lastName={item.lastName}
-                  id={item._id}
-                />
-              )
-            )}
-          </>
-        )
+        <>
+          {data?.data?.user.length > 0 && (
+            <>
+              <Text
+                pl="60px"
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+              >
+                subscriptions
+              </Text>
+              {data?.data?.user.map(
+                (item: {
+                  userName: string;
+                  firstName: string;
+                  lastName: string;
+                  photo: any;
+                  _id: string;
+                }) => (
+                  <EachSubscribe
+                    key={item._id}
+                    name={item.userName}
+                    imgUrl={item.photo}
+                    firstName={item.firstName}
+                    lastName={item.lastName}
+                    id={item._id}
+                  />
+                )
+              )}
+            </>
+          )}
+        </>
       )}
 
       <Box px="50px" py="20px">
