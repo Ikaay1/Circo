@@ -3,6 +3,7 @@ import { useAppSelector } from 'redux/app/hooks';
 import { useGetUserLiveStreamQuery } from 'redux/services/livestream/live.service';
 
 import {
+<<<<<<< HEAD
 	Box,
 	Flex,
 	HStack,
@@ -17,6 +18,25 @@ import CardLoader from '@components/liveevents/CardLoad';
 import EventModal from '@components/liveevents/eventCard/EventModal';
 import Playlists from '@components/profile/Playlists';
 import { channelNav, contentData } from '@constants/utils';
+=======
+  Box,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+} from "@chakra-ui/react";
+import EmptyState from "@components/emptyState/EmptyState";
+import VideoGrid from "@components/home/VideoGrid";
+import Playlists from "@components/profile/Playlists";
+import { channelNav, contentData } from "@constants/utils";
+import { useGetUserLiveStreamQuery } from "redux/services/livestream/live.service";
+import { useAppSelector } from "redux/app/hooks";
+import CardLoader from "@components/liveevents/CardLoad";
+import EventModal from "@components/liveevents/eventCard/EventModal";
+import RecordingCard from "./RecordingCard";
+>>>>>>> 78a4c9ca1a3065ca4b656ac8367381a43149524f
 
 const Contents = ({
   videos,
@@ -71,7 +91,7 @@ const Contents = ({
             {!isFetching &&
               data &&
               data.data.map((event: any) => (
-                <EventModal key={event.id} event={event} />
+                <RecordingCard key={event.id} event={event} />
               ))}
           </SimpleGrid>
         </Box>
