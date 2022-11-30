@@ -1,24 +1,22 @@
-import { useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useGetUserLiveStreamQuery } from 'redux/services/livestream/live.service';
-
+import { useState } from 'react'; 
 import {
-	Box,
-	Flex,
-	HStack,
-	SimpleGrid,
-	Skeleton,
-	SkeletonCircle,
-	Text,
-} from '@chakra-ui/react';
-import EmptyState from '@components/emptyState/EmptyState';
-import VideoGrid from '@components/home/VideoGrid';
-import CardLoader from '@components/liveevents/CardLoad';
-import EventModal from '@components/liveevents/eventCard/EventModal';
-import Playlists from '@components/profile/Playlists';
-import { channelNav, contentData } from '@constants/utils';
-
-import RecordingCard from './RecordingCard';
+  Box,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+} from "@chakra-ui/react";
+import EmptyState from "@components/emptyState/EmptyState";
+import VideoGrid from "@components/home/VideoGrid";
+import Playlists from "@components/profile/Playlists";
+import { channelNav, contentData } from "@constants/utils";
+import { useGetUserLiveStreamQuery } from "redux/services/livestream/live.service";
+import { useAppSelector } from "redux/app/hooks";
+import CardLoader from "@components/liveevents/CardLoad";
+import RecordingCard from "./RecordingCard";
+import { useRouter } from "next/router";
 
 const Contents = ({
   videos,
@@ -33,28 +31,36 @@ const Contents = ({
   lastElementRef?: any;
   setContents?: any;
 }) => {
-  const [route, setRoute] = useState('upload');
+  const routes = useRouter();
+  const path = routes.pathname.split("/")[2];
+  console.log(path);
+
+  const [route, setRoute] = useState("upload");
   const userProfile = useAppSelector(
     (state) => state?.app?.userReducer?.userProfile,
   );
-  const {data, isFetching} = useGetUserLiveStreamQuery(userProfile?._id);
+  const { data, isFetching, isError } = useGetUserLiveStreamQuery(
+    userProfile?._id
+  );
   return (
     <>
-      <Box borderBottom={'1px solid rgba(255, 255, 255, 0.1)'} display='flex'>
-        {channelNav.map(({title, name}) => (
-          <Text
-            mr={'3rem'}
-            lineHeight='24px'
-            color='clique.white'
-            pb={'.8rem'}
-            borderBottom={route === name ? '4px solid #892CDC' : 'none'}
-            cursor={'pointer'}
-            key={'name'}
-            onClick={() => setRoute(name)}
-          >
-            {title}
-          </Text>
-        ))}
+      <Box borderBottom={"1px solid rgba(255, 255, 255, 0.1)"} display="flex">
+        {channelNav.map(({ title, name }) =>
+          name === "live" && path === "subscribe" ? null : (
+            <Text
+              mr={"3rem"}
+              lineHeight="24px"
+              color="clique.white"
+              pb={".8rem"}
+              borderBottom={route === name ? "4px solid #892CDC" : "none"}
+              cursor={"pointer"}
+              key={"name"}
+              onClick={() => setRoute(name)}
+            >
+              {title}
+            </Text>
+          )
+        )}
       </Box>
 
       {route === 'playlist' && (
@@ -63,9 +69,12 @@ const Contents = ({
         </Box>
       )}
 
-      {route === 'live' && (
-        <Box mt={'2.3rem'}>
-          <SimpleGrid columns={{base: 3, lg: 4, mlg: 4, xl: 5}} spacing='30px'>
+      {route === "live" && path !== "subscribe" && (
+        <Box mt={"2.3rem"}>
+          <SimpleGrid
+            columns={{ base: 3, lg: 4, mlg: 4, xl: 5 }}
+            spacing="30px"
+          >
             {isFetching &&
               [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
                 <CardLoader key={i} />
@@ -75,7 +84,11 @@ const Contents = ({
               data.data.map((event: any) => (
                 <RecordingCard key={event.id} event={event} />
               ))}
-          </SimpleGrid>
+          </SimpleGrid>{" "}
+          {data && data?.data?.length === 0 && (
+            <EmptyState msg="Oops! You have no live recording available" />
+          )}
+          {isError && <EmptyState msg="Oops! something went wrong" />}
         </Box>
       )}
 
