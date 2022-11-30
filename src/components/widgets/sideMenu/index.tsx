@@ -77,21 +77,20 @@ function Index() {
                 subscriptions
               </Text>
               {data?.data?.user.map(
-                (
-                  item: {
-                    userName: string;
-                    firstName: string;
-                    lastName: string;
-                    photo: any;
-                  },
-                  index: number,
-                ) => (
+                (item: {
+                  userName: string;
+                  firstName: string;
+                  lastName: string;
+                  photo: any;
+                  _id: string;
+                }) => (
                   <EachSubscribe
-                    key={index}
+                    key={item._id}
                     name={item.userName}
                     imgUrl={item.photo}
                     firstName={item.firstName}
                     lastName={item.lastName}
+                    id={item._id}
                   />
                 ),
               )}

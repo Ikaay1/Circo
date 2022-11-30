@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { MdAddCircleOutline } from 'react-icons/md';
 import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
 import { useSaveVideoMutation } from 'redux/services/content.service';
 import { useGetUserQuery } from 'redux/services/user.service';
@@ -13,6 +12,7 @@ import {
 	MenuItem,
 	MenuList,
 	Text,
+	useToast,
 } from '@chakra-ui/react';
 import DownloadIcon from '@icons/DownloadIcon';
 import LoopIcon from '@icons/LoopIcon';
@@ -26,6 +26,7 @@ function VideoOptionMenu({player, video}: any) {
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
   const {data, refetch} = useGetUserQuery(userProfile?._id);
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   useEffect(() => {
     if (player.current) {
@@ -50,9 +51,23 @@ function VideoOptionMenu({player, video}: any) {
   const handleSaveVideo = async (save: string) => {
     if (save === 'save') {
       await saveVideo({videoId: video._id});
+      toast({
+        title: 'You have successfully saved this video',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
       refetch();
     } else {
       await API.delete(`${baseUrl}unsave/${video._id}`);
+      toast({
+        title: 'You have successfully unsaved this video',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
       refetch();
     }
   };

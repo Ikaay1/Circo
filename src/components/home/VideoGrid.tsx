@@ -11,11 +11,13 @@ function VideoGrid({
   videos,
   thumbWidth,
   lastElementRef,
+  setContents
 }: {
   width: string;
   videos: contentData[];
   thumbWidth?: any;
   lastElementRef?: any;
+  setContents?: any
 }) {
   const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
 
@@ -46,6 +48,7 @@ function VideoGrid({
                       : false
                   }
                   lastElementRef={lastElementRef}
+                  setContents={setContents}
                 />
               </>
             );
@@ -65,6 +68,7 @@ function VideoGrid({
                       ? true
                       : false
                   }
+                  setContents={setContents}
                 />
               </>
             );

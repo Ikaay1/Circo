@@ -18,6 +18,7 @@ const Index = ({
   onClick,
   buttonText,
   lastElementRef,
+  setContents,
 }: {
   channelData?: any;
   data?: contentData[];
@@ -26,6 +27,7 @@ const Index = ({
   onClick?: () => void;
   buttonText?: string;
   lastElementRef?: any;
+  setContents?: any;
 }) => {
   const router = useRouter();
   const des =
@@ -66,6 +68,7 @@ const Index = ({
                 id={channelData?.data?.channel?.userId}
                 isLoading={channelLoading as boolean}
                 lastElementRef={lastElementRef}
+                setContents={setContents}
               />
             </Box>
           )}

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useSubscribeMutation } from 'redux/services/user.service';
@@ -14,6 +15,7 @@ function VideoDetails({
   subscribers: string[];
 }) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const router = useRouter();
 
   return (
     <Box mt='20px'>
@@ -44,6 +46,15 @@ function VideoDetails({
                   video.uploader_id.firstName + ' ' + video.uploader_id.lastName
                 }
                 src={video.uploader_id.photo}
+                cursor='pointer'
+                onClick={
+                  video.uploader_id._id === userProfile._id
+                    ? () => router.push('/channel/1/content')
+                    : () =>
+                        router.push(
+                          `/channel/subscribe/${video.uploader_id._id}`,
+                        )
+                }
               />
             </WrapItem>
           </Flex>
@@ -56,6 +67,13 @@ function VideoDetails({
               fontWeight={400}
               fontSize='subHead'
               lineHeight={'1.2'}
+              cursor='pointer'
+              onClick={
+                video.uploader_id._id === userProfile._id
+                  ? () => router.push('/channel/1/content')
+                  : () =>
+                      router.push(`/channel/subscribe/${video.uploader_id._id}`)
+              }
             >
               {`${
                 video.uploader_id.firstName[0].toUpperCase() +
