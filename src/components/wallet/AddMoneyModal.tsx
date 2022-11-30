@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAppSelector } from 'redux/app/hooks';
 
@@ -18,18 +18,20 @@ import Btn from '@components/Button/Btn';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  setShow?: Dispatch<SetStateAction<boolean>>;
+  amount: number | string;
+  setAmount: Dispatch<SetStateAction<number | string>>;
 };
 
-function AddMoneyModal({isOpen, onClose}: Props) {
+function AddMoneyModal({isOpen, onClose, setShow, amount, setAmount}: Props) {
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
   // const router = useRouter();
-  const [amount, setAmount] = useState<string | number>('');
-  const {userProfile, token} = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
     if (!amount) {
       setAmount('');
     }
-  }, [amount]);
+  }, [amount, setAmount]);
 
   const handleDeposit = () => {
     if (!amount) {
@@ -38,9 +40,10 @@ function AddMoneyModal({isOpen, onClose}: Props) {
     }
     if (userProfile._id) {
       // router.push(`/deposit?id=${userProfile._id}&amount=${amount}`);
-      window.location.replace(
-        `https://clique-payment.netlify.app?id=${userProfile._id}&amount=${amount}&token=${token}`,
-      );
+      // window.location.replace(
+      //   `https://clique-payment.netlify.app?id=${userProfile._id}&amount=${amount}&token=${token}`,
+      // );
+      setShow && setShow(true);
       onClose();
     }
   };

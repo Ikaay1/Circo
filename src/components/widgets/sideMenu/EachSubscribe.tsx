@@ -8,17 +8,25 @@ function EachSubscribe({
   imgUrl,
   firstName,
   lastName,
+  id,
 }: {
   name: string;
   imgUrl?: string;
   firstName: string;
   lastName: string;
+  id: string;
 }) {
   const router = useRouter();
   const path = router.pathname;
 
   return (
-    <Flex pl='50px' mt='15px' alignItems={'center'}>
+    <Flex
+      pl='50px'
+      mt='15px'
+      alignItems={'center'}
+      cursor={'pointer'}
+      onClick={() => router.push(`/channel/subscribe/${id}`)}
+    >
       {imgUrl ? (
         <Avatar size={'sm'} src={imgUrl} mr='10px' />
       ) : (
