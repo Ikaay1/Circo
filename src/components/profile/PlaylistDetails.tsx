@@ -1,17 +1,18 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import {
-  Box
-} from "@chakra-ui/react";
+import { Box } from '@chakra-ui/react';
 
-import PlaylistList from "./PlaylistList";
+import PlaylistList from './PlaylistList';
 
 export type Playlist = {
   cover: string;
   createdAt: string;
   name: string;
   updatedAt: string;
-  userId: string;
+  userId: {
+    photo: string;
+    _id: string;
+  };
   videos: Videos[];
   _id: string;
 };
@@ -22,6 +23,8 @@ export interface Videos {
   title: string;
   video: string;
   _id: string;
+  uploader_firstName: string;
+  uploader_lastName: string;
 }
 
 export interface PlaylistProps {
@@ -34,13 +37,12 @@ const PlaylistDetails = ({
   playlist?: Playlist;
   isLoading?: Boolean;
 }) => {
-  const router = useRouter();
   return (
-    <Box display={"flex"} px="1.4rem" py="2rem" gap="25px">
-      <Box flex="5">
+    <Box display={'flex'} px='1.4rem' py='2rem' gap='25px'>
+      <Box flex='5'>
         <PlaylistList
           videos={playlist?.videos as Videos[]}
-          id={playlist?.userId as string}
+          id={playlist?.userId?._id as string}
           isLoading={isLoading as boolean}
         />
       </Box>

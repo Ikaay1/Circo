@@ -11,6 +11,7 @@ import {
 	ScaleFade,
 	Text,
 	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import AddToPlaylistModal from '@components/profile/AddToPlaylistModal';
 import PlaylistAddIcon from '@icons/PlaylistAddIcon';
@@ -18,7 +19,7 @@ import ShareE from '@icons/ShareE';
 import TrashIcon from '@icons/TrashIcon';
 import VideoSideIcon from '@icons/VideoSideIcon';
 
-import { contentData } from '../../constants/utils';
+import { API, baseUrl, contentData } from '../../constants/utils';
 import { useRoutingChannel } from '../../hooks/useRoutingChannel';
 import HoverCard from './HoverCard';
 import SubScribeModal from './SubScribeModal';
@@ -28,12 +29,15 @@ function VideoThumb({
   thumbWidth,
   isSubscribed,
   lastElementRef,
+  setContents,
 }: {
   video: contentData;
   thumbWidth: {base: string; lg: string; mlg: string; xl: string};
   isSubscribed: boolean;
   lastElementRef?: any;
+  setContents?: any;
 }) {
+  const toast = useToast();
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {
     isOpen: isOpenPlay,
@@ -44,12 +48,25 @@ function VideoThumb({
   const {handleRouting} = useRoutingChannel();
   const router = useRouter();
   const [show, setShow] = React.useState(false);
-  const handleClick = (i: number) => {
+  const handleClick = async (i: number) => {
     if (i === 1) {
       onOpenPlay();
+    } else if (i === 2) {
+      await API.delete(`${baseUrl}content/delete-video/${video._id}`);
+      toast({
+        title: 'Video successfully deleted',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      // router.reload();
+      setContents((prevContents: contentData[]) =>
+        prevContents.filter((content) => content._id !== video._id),
+      );
     }
   };
-  console.log();
+  console.log(router);
   return (
     <>
       <Box position={'relative'} ref={lastElementRef}>
@@ -191,25 +208,45 @@ function VideoThumb({
                 }}
                 onMouseLeave={() => setShow(false)}
               >
-                {VideoSideMenu.map((each, i) => (
-                  <Flex
-                    align='center'
-                    justifyItems={'center'}
-                    mb='2'
-                    key={i}
-                    cursor='pointer'
-                    onClick={() => handleClick(i)}
-                  >
-                    <Icon
-                      as={each.icon}
-                      fontSize='15px'
-                      cursor='pointer'
-                    ></Icon>
-                    <Text ml='2' fontSize={'sm3'}>
-                      {each.text}
-                    </Text>
-                  </Flex>
-                ))}
+                {router.asPath === '/channel/1/content'
+                  ? VideoSideMenu.map((each, i) => (
+                      <Flex
+                        align='center'
+                        justifyItems={'center'}
+                        mb='2'
+                        key={i}
+                        cursor='pointer'
+                        onClick={() => handleClick(i)}
+                      >
+                        <Icon
+                          as={each.icon}
+                          fontSize='15px'
+                          cursor='pointer'
+                        ></Icon>
+                        <Text ml='2' fontSize={'sm3'}>
+                          {each.text}
+                        </Text>
+                      </Flex>
+                    ))
+                  : VideoSideMenu2.map((each, i) => (
+                      <Flex
+                        align='center'
+                        justifyItems={'center'}
+                        mb='2'
+                        key={i}
+                        cursor='pointer'
+                        onClick={() => handleClick(i)}
+                      >
+                        <Icon
+                          as={each.icon}
+                          fontSize='15px'
+                          cursor='pointer'
+                        ></Icon>
+                        <Text ml='2' fontSize={'sm3'}>
+                          {each.text}
+                        </Text>
+                      </Flex>
+                    ))}
               </Box>
             ) : null}
           </Box>
@@ -225,6 +262,11 @@ function VideoThumb({
 }
 
 export default VideoThumb;
+
+const VideoSideMenu2 = [
+  {icon: ShareE, text: 'Share'},
+  {icon: PlaylistAddIcon, text: 'Add to playlist'},
+];
 
 const VideoSideMenu = [
   {icon: ShareE, text: 'Share'},

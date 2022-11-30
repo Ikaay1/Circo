@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { contentData } from "@constants/utils";
+import { contentData } from '@constants/utils';
 
 const useGet = ({
   data,
@@ -50,10 +50,10 @@ const useGet = ({
       });
       if (node) observerRef.current.observe(node);
     },
-    [loading, hasMore]
+    [loading, hasMore],
   );
 
-  return { loading, contents, lastElementRef };
+  return {loading, contents, lastElementRef, setContents};
 };
 
 export default useGet;
