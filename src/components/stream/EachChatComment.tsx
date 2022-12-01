@@ -25,7 +25,7 @@ function EachChatComment({ comment }: { comment: any }) {
         name={
           comment?.commentUser?.firstName + " " + comment?.commentUser?.lastName
         }
-        url={comment?.commentUser?.profilePicture}
+        url={comment?.commentUser?.photo}
         mr="20px"
         size="40px"
         borderThickness="2px"
