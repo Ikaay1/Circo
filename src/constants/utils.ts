@@ -750,6 +750,7 @@ export interface uploaderId {
 export default interface commentInterface {
   _id: string;
   commenterId: {
+    photo: string;
     firstName: string;
     lastName: string;
   };

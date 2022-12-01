@@ -10,6 +10,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
+import { useAppSelector } from "redux/app/hooks";
 
 function NewComment({
   handleComment,
@@ -22,6 +23,7 @@ function NewComment({
   comment: string;
   postInfo: any;
 }) {
+  const profile = useAppSelector((state) => state.app.userReducer.userProfile);
   return (
     <Flex
       pos={"fixed"}
@@ -33,8 +35,8 @@ function NewComment({
       w="400px"
     >
       <AvataWithSpace
-        name="Prosper Otemuyiwa"
-        url="https://bit.ly/prosper-baba"
+        name={profile?.firstName + " " + profile?.lastName}
+        url={profile?.photo}
         mr="20px"
         size="40px"
         borderThickness="2px"

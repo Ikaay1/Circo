@@ -28,7 +28,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
     >
       <AvataWithSpace
         name={profile?.firstName + " " + profile?.lastName}
-        url={profile?.avatar}
+        url={profile?.photo}
         mr="20px"
         size="40px"
         borderThickness="2px"

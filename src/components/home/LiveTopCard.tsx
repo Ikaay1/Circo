@@ -78,7 +78,7 @@ function LiveTopCard() {
                   " " +
                   event?.streamerId?.lastName
                 }
-                src={event?.streamerId?.profilePicture}
+                src={event?.streamerId?.photo}
               />
             </Flex>
           ))}
