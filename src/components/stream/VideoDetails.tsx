@@ -32,7 +32,7 @@ function VideoDetails({ stream }: { stream: any }) {
                 " " +
                 stream?.streamerId?.lastName
               }
-              src={stream?.streamerId?.profilePicture}
+              src={stream?.streamerId?.photo}
             />
           </Flex>
 
