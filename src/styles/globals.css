@@ -159,46 +159,33 @@ body {
   /* opacity: 1; */
 }
 
-.container {
-  background-color: rgb(14, 1, 35);
+.flutter-div {
   display: flex;
-  -moz-box-pack: center;
-  justify-content: center;
-  -moz-box-align: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 0px 5px;
-}
-.powered {
-  display: flex;
-  -moz-box-pack: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin: 0px 0px 20px;
+  height: 100vh;
 }
-.logo {
-  max-height: 4rem;
-}
-.header-text {
-  color: white;
-  font-size: 1.2rem;
-}
-.paystack-button {
-  align-self: center;
-  background: linear-gradient(
-    90deg,
-    rgba(81, 126, 254, 1) 0%,
-    rgba(135, 129, 255, 1) 100%
-  );
-  padding: 10px 40px;
-  border-radius: 15px;
-  border: none;
-  color: white;
-}
-.checkout-form {
+
+.flutterwave-button {
+  cursor: pointer;
+  position: relative;
+  background-color: #f5a623;
+  color: #fff;
+  width: 180px;
+  height: 44px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  box-shadow: 0.5px 0.5px 1.5px 0 rgb(50 50 54 / 13%),
+    0 0 1.5px 0.5px rgb(63 63 68 / 5%);
+  border-radius: 3px;
+  border: none;
+  padding: 15px 0;
+  transition: all 0.1s ease-in;
 }
 
 @keyframes clique {

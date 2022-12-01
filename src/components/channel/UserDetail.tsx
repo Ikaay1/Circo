@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useMemo } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
-import { useResetSubscriptionsMutation } from 'redux/services/channel.service';
 import { useGetUserQuery } from 'redux/services/user.service';
 
 import {
@@ -42,7 +40,6 @@ export type Channel = {
 
 const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-  // const [resetSubscriptions] = useResetSubscriptionsMutation();
   const router = useRouter();
   const {isLoading, data: userData} = useGetUserQuery(id);
   const des =
@@ -50,16 +47,6 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
     router.query.name === 'analytics' ||
     router.pathname.includes('subscribe');
   const {isOpen, onOpen, onClose} = useDisclosure();
-  // const date = useMemo(() => new Date(), []);
-
-  // useEffect(() => {
-  //   const resetSub = async () => {
-  //     await resetSubscriptions({});
-  //   };
-  //   if (date.toString().slice(8, 10) === '01') {
-  //     resetSub();
-  //   }
-  // }, [date, resetSubscriptions]);
 
   const {
     isOpen: channelIsOpen,
