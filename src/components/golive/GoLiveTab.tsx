@@ -1,4 +1,5 @@
 import { TabList, TabPanels, Tabs } from "@chakra-ui/react";
+import EmptyState from "@components/emptyState/EmptyState";
 import CliqueTab from "@components/widgets/CliqueTab";
 import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
 import React, { useState } from "react";
@@ -38,8 +39,13 @@ function GoLiveTab({ state }: { state: string }) {
         <CliqueTabPanel>
           <StreamKey streamDetails={streamDetails} />
         </CliqueTabPanel>
+
         <CliqueTabPanel>
-          <Monitor streamDetails={streamDetails} />
+          {streamDetails ? (
+            <Monitor streamDetails={streamDetails} />
+          ) : (
+            <EmptyState msg="No Stream to monitor" />
+          )}
         </CliqueTabPanel>
       </TabPanels>
     </Tabs>
