@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useRef } from 'react';
+import { toast } from 'react-hot-toast';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { useAppDispatch } from 'redux/app/hooks';
 import { setSources } from 'redux/slices/uploadSlice';
@@ -24,6 +25,7 @@ function UploadModal() {
   const inputRef = useRef<HTMLInputElement | any>();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]?.type.includes('video')) {
+      toast.error('Please select a video');
       return;
     }
     const file = event.target.files[0];

@@ -40,7 +40,7 @@ const PlaylistList = ({videos, id, isLoading: netWorkLoading}: Props) => {
         </Flex>
       ) : (
         <Box>
-          {videos.length ? (
+          {videos?.length ? (
             videos?.map((item, i) => (
               <Box
                 display={'flex'}

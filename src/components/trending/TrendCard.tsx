@@ -26,14 +26,21 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
       }}
       alignItems={'center'}
       rounded={'20px'}
-      px='50px'
+      px='30px'
       py='20px'
       mt='30px'
       h='220px'
       bg='clique.white'
     >
-      <Box minW='50%' pr='40px' h='100%'>
-        <Image maxH={'100%'} mr='30px' src={video.thumbNail} alt='kortyvid' />
+      <Box w='300px' pr='40px' h='100%'>
+        <Image
+          maxH={'100%'}
+          h='100%'
+          w='100%'
+          objectFit={'cover'}
+          src={video.thumbNail}
+          alt='kortyvid'
+        />
       </Box>
 
       <Box w='50%'>

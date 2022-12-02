@@ -23,6 +23,9 @@ function HistoryCard({credit, amount, onClick, duration}: Props) {
       py='3'
       onClick={onClick}
       cursor='pointer'
+      _hover={{
+        bg: 'rgba(35, 35, 35, .1)',
+      }}
     >
       <Flex align={'center'}>
         <Icon as={iconArg} fontSize='3xl' mr='2' />
