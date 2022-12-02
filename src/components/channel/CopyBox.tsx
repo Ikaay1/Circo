@@ -36,25 +36,19 @@ const CopyBox = () => {
             onClick={() => {
               if (icon === "whatsapp") {
                 window.open(
-                  `https://wa.me/?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20https://www.clique.com/channel/subscribe/${profile?._id}`
+                  `https://wa.me/?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`
                 );
               } else if (icon === "ig") {
-                handleCopy(
-                  `https://www.clique.com/channel/subscribe/${profile?._id}`
-                );
                 window.open(
                   `https://www.instagram.com/direct/t/340282366841710300949128165346056853440`
                 );
               } else if (icon === "twitter") {
                 window.open(
-                  `https://twitter.com/intent/tweet?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20https://www.clique.com/channel/subscribe/${profile?._id}`
+                  `https://twitter.com/intent/tweet?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`
                 );
-              } else if (icon === "tikTok") {
-                handleCopy(
-                  `https://www.clique.com/channel/subscribe/${profile?._id}`
-                );
+              } else if (icon === "facebook") {
                 window.open(
-                  `https://www.tiktok.com/share/video/6850701001366894598?lang=en`
+                  `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`
                 );
               }
             }}
@@ -81,7 +75,7 @@ const CopyBox = () => {
       <Box mt="3rem" height={"55px"} position={"relative"}>
         <ChannelInput
           isReadonly
-          value={`clique.com/channel/subscribe/${profile?._id}`}
+          value={`${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`}
         />
         <Box
           position="absolute"
@@ -94,7 +88,7 @@ const CopyBox = () => {
           cursor="pointer"
           onClick={() => {
             handleCopy(
-              `https://www.clique.com/channel/subscribe/${profile?._id}`
+              `${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`
             );
           }}
         >

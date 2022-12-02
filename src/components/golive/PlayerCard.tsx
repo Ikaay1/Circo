@@ -117,7 +117,7 @@ function PlayerCard({ streamDetails, setState }: any) {
   };
 
   return (
-    <Box w="400px" maxW="400px" rounded={"10px"}>
+    <Box w="450px" maxW="450px" rounded={"10px"}>
       <Box h="300px">
         <MuxPlayer
           style={{ height: "100%", maxWidth: "100%" }}
@@ -160,16 +160,16 @@ function PlayerCard({ streamDetails, setState }: any) {
             color={"clique.primaryBlue"}
             fontFamily={"Poppins"}
             fontWeight={500}
-            textTransform={"capitalize"}
             fontSize="smSubHead"
           >
-            clique.live/stream/{streamDetails?._id}
+            {`${process.env.NEXT_PUBLIC_FEURL}`}
+            {streamDetails?._id}
           </Text>
 
           <Button
             onClick={() => {
               handleCopy(
-                `localhost:3000/stream/${streamDetails?.eventId?._id}`
+                `${process.env.NEXT_PUBLIC_FEURL}${streamDetails?.eventId?._id}`
               );
             }}
             _hover={{
@@ -316,12 +316,24 @@ function PlayerCard({ streamDetails, setState }: any) {
             >
               Start Live Stream
             </Button>
-          ) : (
+          ) : streamDetails?.status === "ongoing" ? (
             <EndLiveModal
               streamDetails={streamDetails}
               handleClick={handleUpdateStream}
               loading={startInfo.isLoading || endInfo.isLoading}
             />
+          ) : (
+            <Button
+              mt="80px"
+              rounded="full"
+              isDisabled={true}
+              bg={"clique.grey"}
+              color="white"
+              colorScheme={"gray"}
+              fontFamily={"Poppins"}
+            >
+              Not available
+            </Button>
           )}
         </Flex>
       </Box>

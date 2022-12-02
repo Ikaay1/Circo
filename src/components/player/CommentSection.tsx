@@ -9,15 +9,7 @@ import { Box, Text } from "@chakra-ui/react";
 import EachComment from "./EachComment";
 import NewComment from "./NewComment";
 
-function CommentSection({
-  id,
-  handleLikeComment,
-  handleDislikeComment,
-}: {
-  id: string | string[] | undefined;
-  handleLikeComment: (id: string) => void;
-  handleDislikeComment: (id: string) => void;
-}) {
+function CommentSection({ id }: { id: string | string[] | undefined }) {
   const { data, isLoading, refetch } = useGetContentCommentsQuery(id);
   const [postCommentOnContent, postCommentOnContentStatus] =
     usePostCommentOnContentMutation();
@@ -75,12 +67,7 @@ function CommentSection({
           </Text>
 
           {data.data.comments.map((comment: any) => (
-            <EachComment
-              key={comment._id}
-              comment={comment}
-              handleLikeComment={handleLikeComment}
-              handleDislikeComment={handleDislikeComment}
-            />
+            <EachComment key={comment._id} comment={comment} />
           ))}
           <NewComment
             handleComment={handleComment}
