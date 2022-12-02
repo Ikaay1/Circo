@@ -22,8 +22,8 @@ function CommentSection({ streamDetails }: any) {
   );
   return (
     <Box
-      w="400px"
-      maxW="400px"
+      w="450px"
+      maxW="450px"
       px="20px"
       pb="80px"
       minW="400px"

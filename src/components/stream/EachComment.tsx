@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 import { BiDislike, BiLike } from "react-icons/bi";
 import { useAppSelector } from "redux/app/hooks";
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Spinner, Text } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import { useRouter } from "next/router";
 import {
@@ -15,9 +15,8 @@ function EachComment({ comment }: { comment: any }) {
   const { id } = router.query;
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
-  const [likeStreamComment, commentInfo] = useLikeStreamCommentMutation();
-  const [dislikeStreamComment, commentInfo2] =
-    useDislikeStreamCommentMutation();
+  const [likeStreamComment, likeInfo] = useLikeStreamCommentMutation();
+  const [dislikeStreamComment, dislikeInfo] = useDislikeStreamCommentMutation();
 
   return (
     <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
@@ -69,24 +68,28 @@ function EachComment({ comment }: { comment: any }) {
         <Flex alignItems={"center"} justifyContent="space-between" mt="15px">
           <Flex alignItems={"center"}>
             <Flex cursor={"pointer"} alignItems={"center"}>
-              <Box
-                onClick={async () => {
-                  await likeStreamComment({
-                    commentId: comment._id,
-                  });
-                }}
-              >
-                <Icon
-                  color={
-                    comment?.likes?.includes(userProfile?._id)
-                      ? "clique.base"
-                      : "clique.white"
-                  }
-                  mr="5px"
-                  fontSize="20px"
-                  as={BiLike}
-                />
-              </Box>
+              {likeInfo.isLoading ? (
+                <Spinner size={"sm"} mr="5px" bg="clique.base" />
+              ) : (
+                <Box
+                  onClick={async () => {
+                    await likeStreamComment({
+                      commentId: comment._id,
+                    });
+                  }}
+                >
+                  <Icon
+                    color={
+                      comment?.likes?.includes(userProfile?._id)
+                        ? "clique.base"
+                        : "clique.white"
+                    }
+                    mr="5px"
+                    fontSize="20px"
+                    as={BiLike}
+                  />
+                </Box>
+              )}
               <Text
                 color={"clique.white"}
                 fontFamily={"Poppins"}
@@ -99,24 +102,28 @@ function EachComment({ comment }: { comment: any }) {
             </Flex>
 
             <Flex cursor={"pointer"} mx="20px" alignItems={"center"}>
-              <Box
-                onClick={async () => {
-                  await dislikeStreamComment({
-                    commentId: comment._id,
-                  });
-                }}
-              >
-                <Icon
-                  color={
-                    comment?.dislikes?.includes(userProfile?._id)
-                      ? "clique.base"
-                      : "clique.white"
-                  }
-                  mr="5px"
-                  fontSize="smHead"
-                  as={BiDislike}
-                />
-              </Box>
+              {dislikeInfo.isLoading ? (
+                <Spinner size={"sm"} mr="5px" bg="clique.base" />
+              ) : (
+                <Box
+                  onClick={async () => {
+                    await dislikeStreamComment({
+                      commentId: comment._id,
+                    });
+                  }}
+                >
+                  <Icon
+                    color={
+                      comment?.dislikes?.includes(userProfile?._id)
+                        ? "clique.base"
+                        : "clique.white"
+                    }
+                    mr="5px"
+                    fontSize="smHead"
+                    as={BiDislike}
+                  />
+                </Box>
+              )}
               <Text
                 color={"clique.white"}
                 fontFamily={"Poppins"}
