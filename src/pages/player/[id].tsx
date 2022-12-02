@@ -21,8 +21,6 @@ function Index() {
   const { id } = router.query;
   const { data, isLoading, refetch } = useGetContentQuery(id);
   const [view] = useCreateViewMutation();
-  const [like] = useLikeContentMutation();
-  const [dislike] = useDislikeContentMutation();
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
@@ -35,16 +33,6 @@ function Index() {
       }
     }
   }, [data, view, userProfile?._id, refetch]);
-
-  const handleLike = async () => {
-    await like({ video_id: data.data.preference.video._id });
-    refetch();
-  };
-
-  const handleDislike = async () => {
-    await dislike({ video_id: data.data.preference.video._id });
-    refetch();
-  };
 
   return (
     <>
@@ -76,11 +64,7 @@ function Index() {
                 },
               }}
             >
-              <VideoPlayer
-                video={data.data.preference.video}
-                handleLike={handleLike}
-                handleDislike={handleDislike}
-              />
+              <VideoPlayer video={data.data.preference.video} />
               <VideoDetails
                 video={data.data.preference.video}
                 subscribers={data.data.preference.video.uploader_id.subscribers}
