@@ -46,6 +46,7 @@ function EachComment({ comment }: { comment: commentInterface }) {
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.2"}
+            mr="10px"
           >
             {`${
               comment.commenterId.firstName[0].toUpperCase() +

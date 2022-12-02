@@ -46,9 +46,9 @@ const CopyBox = () => {
                 window.open(
                   `https://twitter.com/intent/tweet?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`
                 );
-              } else if (icon === "tikTok") {
+              } else if (icon === "facebook") {
                 window.open(
-                  `https://www.tiktok.com/share/video/6850701001366894598?lang=en`
+                  `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`
                 );
               }
             }}
