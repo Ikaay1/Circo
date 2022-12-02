@@ -101,6 +101,7 @@ function Wallet({}: Props) {
         onClose={onClose}
         amount={amount}
         setAmount={setAmount}
+        refetch={refetch}
       />
       <BeneficiaryModal
         isOpen={isBeneIsOpen}

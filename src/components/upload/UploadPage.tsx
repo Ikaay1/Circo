@@ -102,13 +102,11 @@ function UploadPage({url, name}: Props) {
             className='no-wrap'
             mt='4'
           >
-            NAT GEO WILD DOCUMENTARY
+            {state.title}
           </Text>
-          <Text fontSize='xsl'>
-            This is a documentation based on the life and times of NAT GEO WILD.
-            This documentation shows you how they started, their challenges and
-            how they have been able to overcome and
-            <span style={{color: '#3D8EC9'}}> more...</span>
+          <Text fontSize='xsl' noOfLines={5}>
+            {state.description}
+            {/* <span style={{color: '#3D8EC9'}}> more...</span> */}
           </Text>
         </Box>
 

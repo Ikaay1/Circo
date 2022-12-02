@@ -753,6 +753,7 @@ export default interface commentInterface {
     photo: string;
     firstName: string;
     lastName: string;
+    _id: string;
   };
   comment: {
     comment: string;
