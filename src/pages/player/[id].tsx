@@ -4,11 +4,7 @@ import React, { useEffect } from "react";
 import { useAppSelector } from "redux/app/hooks";
 import {
   useCreateViewMutation,
-  useDislikeContentCommentMutation,
-  useDislikeContentMutation,
   useGetContentQuery,
-  useLikeContentCommentMutation,
-  useLikeContentMutation,
 } from "redux/services/content.service";
 
 import { Box, Flex } from "@chakra-ui/react";
