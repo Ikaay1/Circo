@@ -44,52 +44,52 @@ function UploadModal() {
   return (
     <>
       <Button
-        rightIcon={<Icon fontSize={'lg'} as={MdAddCircleOutline} />}
-        variant='ghost'
-        rounded={'full'}
-        bg='clique.base'
-        fontFamily={'Poppins'}
-        size={'sm'}
+        rightIcon={<Icon fontSize={"lg"} as={MdAddCircleOutline} />}
+        variant="ghost"
+        rounded={"full"}
+        bg="clique.base"
+        fontFamily={"Poppins"}
+        size={"sm"}
         onClick={onOpen}
       >
         Upload
       </Button>
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay bg="clique.modalOverlay" />
         <ModalContent
-          bg='clique.black'
-          borderColor='clique.black'
-          borderRadius='xl'
+          bg="clique.black"
+          borderColor="clique.black"
+          borderRadius="xl"
         >
           <ModalBody>
             <Flex
-              align='center'
-              justify='center'
-              direction='column'
-              pt='100px'
-              pb='100px'
+              align="center"
+              justify="center"
+              direction="column"
+              pt="100px"
+              pb="100px"
             >
-              <Icon as={UploadIcon} fontSize='70px' />
+              <Icon as={UploadIcon} fontSize="70px" />
               <Text
-                textAlign={'center'}
-                fontFamily={'Poppins'}
+                textAlign={"center"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
-                fontSize='smHead'
-                mb='14'
-                mt='14'
+                fontSize="smHead"
+                mb="14"
+                mt="14"
               >
                 Drag and drop file to uplaod
               </Text>
-              <Button bg='clique.tertiary' onClick={handleChoose} px='7'>
+              <Button bg="clique.tertiary" onClick={handleChoose} px="7">
                 Select file
               </Button>
               <input
                 ref={inputRef}
-                type='file'
+                type="file"
                 onChange={handleFileChange}
-                accept='.mp4'
+                accept=".mp4"
                 style={{
-                  display: 'none',
+                  display: "none",
                 }}
               />
             </Flex>

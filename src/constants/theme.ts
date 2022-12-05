@@ -74,6 +74,7 @@ const colors = {
     darkGrey1: "#524C46",
     chat: "rgba(0, 0, 0, 0.2)",
     close: "#3a3a3a",
+    modalOverlay: "rgba(0, 0, 0, 0.8)",
   },
 };
 
