@@ -1,9 +1,13 @@
+import axios from 'axios';
+import { resolve } from 'path';
 import { useEffect, useState } from 'react';
 import { useGetBanksQuery } from 'redux/services/bank.service';
 import {
-	useAddBeneficiaryMutation,
+	useConfirmAccountMutation,
 	useSendOTPMutation,
-} from 'redux/services/wallet.service';
+} from 'redux/services/beneficiary.service';
+import { useAddBeneficiaryMutation } from 'redux/services/wallet.service';
+import request from 'request';
 
 import {
 	Box,
@@ -20,6 +24,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
+import { banks } from '@constants/utils';
 import TapIcon from '@icons/TapIcon';
 
 type Props = {
@@ -39,6 +44,7 @@ function BeneficiaryModal({
 }: Props) {
   const toast = useToast();
   const {data, isFetching} = useGetBanksQuery('');
+  const [loading, setLoading] = useState(false);
   const [sendOTP] = useSendOTPMutation();
   const [addBeneficiary, addBeneficiaryStatus] = useAddBeneficiaryMutation();
   const [beneficiaryData, setBeneficiaryData] = useState({
@@ -49,12 +55,35 @@ function BeneficiaryModal({
     accountName: '',
     accountNumber: '',
   });
+  const [confirmAccount, confirmAccountStatus] = useConfirmAccountMutation();
+  console.log('banks', data);
+
+  useEffect(() => {
+    const confirm = async () => {
+      console.log({
+        accountNumber: beneficiaryData.accountNumber,
+        code: beneficiaryData.bankName.split('#')[1],
+      });
+
+      const data = await confirmAccount({
+        accountNumber: beneficiaryData.accountNumber.trim(),
+        code: beneficiaryData.bankName.trim().split('#')[1],
+      });
+      console.log('response', data);
+    };
+    if (
+      beneficiaryData.accountNumber.length === 10 &&
+      beneficiaryData.bankName
+    ) {
+      confirm();
+    }
+  }, [beneficiaryData.accountNumber, confirmAccount, beneficiaryData.bankName]);
 
   useEffect(() => {
     if (type === 'change') {
       setBeneficiaryData((prevData) => ({
         ...prevData,
-        bankName: beneficiary.bankName,
+        bankName: `${beneficiary.bankName}#${beneficiary?.code}`,
         accountName: beneficiary.accountName,
         accountNumber: beneficiary.accountNumber,
       }));
@@ -64,23 +93,33 @@ function BeneficiaryModal({
     beneficiary.bankName,
     beneficiary.accountName,
     beneficiary.accountNumber,
+    beneficiary?.code,
   ]);
 
+  console.log('====================================');
+  console.log(data);
+  console.log('====================================');
+
   const handleSendOTP = async () => {
-    const res: any = await sendOTP({});
-    if ('data' in res) {
-      toast({
-        title: 'Otp sent successfully. Please check your email',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'top',
-      });
-      setBeneficiaryData((prevData) => ({
-        ...prevData,
-        otp_hash: res.data?.data?.otp_hash,
-      }));
-    }
+    setLoading(true);
+    sendOTP({}).then((res) => {
+      if ('data' in res) {
+        toast({
+          title: 'Otp sent successfully. Please check your email',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        });
+        setBeneficiaryData((prevData) => ({
+          ...prevData,
+          otp_hash: res.data?.data?.otp_hash,
+        }));
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    });
   };
 
   const handleChange = (e: any) => {
@@ -116,12 +155,13 @@ function BeneficiaryModal({
         });
       } else {
         await addBeneficiary({
-          bankName: beneficiaryData.bankName,
+          bankName: beneficiaryData.bankName.split('#')[0],
           accountName: beneficiaryData.accountName,
           accountNumber: beneficiaryData.accountNumber,
           otp_code: beneficiaryData.otp_code,
           otp_hash: beneficiaryData.otp_hash,
           password: beneficiaryData.password,
+          code: beneficiaryData.bankName.split('#')[1],
         });
         setBeneficiaryData({
           otp_hash: '',
@@ -159,8 +199,9 @@ function BeneficiaryModal({
               py='12'
               borderRadius='16px'
               leftIcon={<Icon as={TapIcon} color='white' />}
-              text='Tap to receieve OTP in your mail'
+              text='Tap to receive OTP in your mail'
               fontSize={'smSubHead'}
+              isLoading={loading}
               onClick={handleSendOTP}
             />
 
@@ -190,8 +231,8 @@ function BeneficiaryModal({
                 value={beneficiaryData.bankName}
                 onChange={(e) => handleChange(e)}
               >
-                {data?.data.map((bank: any) => (
-                  <option value={bank.name} key={bank.id}>
+                {banks.map((bank: any) => (
+                  <option value={`${bank.name}#${bank.code}`} key={bank.id}>
                     {bank.name}
                   </option>
                 ))}
