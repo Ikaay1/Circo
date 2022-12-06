@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useCategoryQuery } from 'redux/services/category.service';
 import { useGetContentsQuery } from 'redux/services/content.service';
+import { useDepositToWalletMutation } from 'redux/services/wallet.service';
 
 import { Box, Divider, Flex } from '@chakra-ui/react';
 import EmptyState from '@components/emptyState/EmptyState';
@@ -19,13 +20,15 @@ import { contentData, scrollBarStyle } from '@constants/utils';
 import useGetContents from '../hooks/useGetContents';
 
 function Index() {
+  const router = useRouter();
   const [page, setPage] = useState(1);
+  const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
+  const {tx_ref} = router.query;
 
   const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
   const [categoryId, setCategoryId] = useState('all');
   const categories = useCategoryQuery('');
-  const router = useRouter();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const {data, isFetching, isLoading} = useGetContentsQuery({
     page,
@@ -38,6 +41,26 @@ function Index() {
       router.push('/login');
     }
   }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    const deposit = async () => {
+      depositToWallet({
+        amount: Number(JSON.parse(localStorage.getItem('okay')!)),
+        description: 'Funding wallet',
+        reference: `${tx_ref}`,
+      })
+        .then((res: any) => {
+          localStorage.removeItem('okay');
+        })
+        .catch((err) => {
+          localStorage.removeItem('okay');
+        });
+      router.push('/home');
+    };
+    if (tx_ref && localStorage.getItem('okay')) {
+      deposit();
+    }
+  }, [tx_ref, depositToWallet, router]);
 
   const {loading, hasMore, contents} = useGetContents({
     data,

@@ -1,18 +1,20 @@
-import { ChangeEvent, useRef, useState } from "react";
-
-import { Box, Flex, Text, useToast, VStack } from "@chakra-ui/react";
-import Btn from "@components/Button/Btn";
-import Uploaders from "@components/channel/Uploaders";
-import { Form, Formik, FormikHelpers } from "formik";
-import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "redux/app/hooks";
+import { Form, Formik, FormikHelpers } from 'formik';
+import { useRouter } from 'next/router';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
 import {
-  useChangePasswordMutation, useUpdateProfileMutation
-} from "redux/services/user.service";
-import { setUser } from "redux/slices/authSlice";
-import { changePasswordSchema } from "schemas/changePassword.schema";
-import { editProfileSchema } from "schemas/editProfile.schema";
-import CustumField from "./CustumField";
+	useChangePasswordMutation,
+	useUpdateProfileMutation,
+} from 'redux/services/user.service';
+import { setUser } from 'redux/slices/authSlice';
+import { changePasswordSchema } from 'schemas/changePassword.schema';
+import { editProfileSchema } from 'schemas/editProfile.schema';
+
+import { Box, Flex, Text, useToast, VStack } from '@chakra-ui/react';
+import Btn from '@components/Button/Btn';
+import Uploaders from '@components/channel/Uploaders';
+
+import CustumField from './CustumField';
 
 interface UpdateProfile {
   firstName: string;
@@ -47,6 +49,13 @@ const EditProfile = () => {
     cover: userProfile?.cover ? userProfile?.cover : "",
     profile: userProfile?.photo ? userProfile?.photo : "",
   });
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   const handleFileChange = (
     event: ChangeEvent<HTMLInputElement>,
     cover: boolean

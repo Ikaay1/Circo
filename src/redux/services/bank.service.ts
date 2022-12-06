@@ -1,24 +1,42 @@
+import { store } from 'redux/app/store';
+
+import { baseUrl } from '@constants/utils';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const bankApi = createApi({
   reducerPath: 'bankApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.flutterwave.com/',
+    baseUrl: baseUrl,
+    prepareHeaders: (headers) => {
+      headers.set(
+        'Authorization',
+        `Bearer ${store.getState().app.userReducer.token}`,
+      );
+      return headers;
+    },
   }),
   tagTypes: ['Bank'],
   endpoints: (builder) => ({
     getBanks: builder.query<any, any>({
       query: () => ({
-        url: `v3/banks/NG`,
+        url: `banks`,
         method: 'GET',
-        headers: {
-          Authorization:
-            'Bearer FLWSECK_TEST-d7eecc595c1f8a5c3a8ab17ee5dda128-X',
-        },
       }),
       providesTags: ['Bank'],
+    }),
+
+    flutterwavePayment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `flutterwave`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Bank'],
     }),
   }),
 });
 
-export const {useGetBanksQuery} = bankApi;
+export const {useGetBanksQuery, useFlutterwavePaymentMutation} = bankApi;

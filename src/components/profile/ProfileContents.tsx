@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useGetUserPaidStreamQuery } from 'redux/services/livestream/live.service';
 // import EventModal from "@components/liveevents/eventCard/EventModal";
@@ -19,14 +20,26 @@ import Playlists from './Playlists';
 const ProfileContents = () => {
   const [route, setRoute] = useState('paid');
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-  const {
-    data: userData,
-    isFetching: userIsFetching,
-  } = useGetUserQuery(userProfile._id);
+  const {data: userData, isFetching: userIsFetching} = useGetUserQuery(
+    userProfile?._id,
+  );
 
   console.log(userData);
+  const router = useRouter();
 
   const {data, isFetching} = useGetUserPaidStreamQuery('');
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <>
@@ -92,10 +105,7 @@ const ProfileContents = () => {
           </Box>
         ) : (
           <Box mt={'2.3rem'}>
-            <VideoGrid
-              width={'100%'}
-              videos={userData?.data?.savedVideos}
-            />
+            <VideoGrid width={'100%'} videos={userData?.data?.savedVideos} />
           </Box>
         ))}
     </>

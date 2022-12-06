@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAppSelector } from 'redux/app/hooks';
+import { useFlutterwavePaymentMutation } from 'redux/services/bank.service';
 import { useGetUserQuery } from 'redux/services/user.service';
 import { useDepositToWalletMutation } from 'redux/services/wallet.service';
 
@@ -26,31 +27,23 @@ type Props = {
   amount: number | string;
   setAmount: Dispatch<SetStateAction<number | string>>;
   refetch: () => void;
+  flutterwave: any;
+  flutterwaveStatus: {
+    isLoading: boolean;
+  };
 };
 
-function AddMoneyModal({isOpen, onClose, amount, setAmount, refetch}: Props) {
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
-  const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
+function AddMoneyModal({
+  isOpen,
+  onClose,
+  amount,
+  setAmount,
+  refetch,
+  flutterwave,
+  flutterwaveStatus,
+}: Props) {
+  const {token} = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
-  const {data, isFetching} = useGetUserQuery(userProfile?._id);
-  const config: any = {
-    public_key: process.env.NEXT_PUBLIC_KEY,
-    tx_ref: Date.now(),
-    amount,
-    currency: 'NGN',
-    payment_options: 'card,mobilemoney,ussd',
-    customer: {
-      email: data?.data?.email,
-      name: data?.data?.firstName + ' ' + data?.data?.lastName,
-    },
-    customizations: {
-      title: 'Deposit to wallet',
-      description: 'Deposit to my wallet',
-      logo: 'https://clique-web.vercel.app/assets/clique-logo.png',
-    },
-  };
-
-  const handleFlutterPayment = useFlutterwave(config);
 
   useEffect(() => {
     if (!amount) {
@@ -59,42 +52,47 @@ function AddMoneyModal({isOpen, onClose, amount, setAmount, refetch}: Props) {
   }, [amount, setAmount]);
 
   useEffect(() => {
-    if (!userProfile?._id) {
+    if (!token) {
       router.push('/login');
     }
-  }, [router, userProfile]);
+  }, [router, token]);
 
-  const handleDeposit = () => {
+  const handleDeposit = async () => {
     if (!amount) {
       toast.error('Please input an Amount');
       return;
     }
-    if (data?.data?.email) {
-      onClose();
-      handleFlutterPayment({
-        callback: async (response) => {
-          const res: any = await depositToWallet({
-            amount: Number(response.amount),
-            description: 'Funding wallet',
-            reference: `${response.tx_ref}`,
-          });
-          if ('data' in res) {
-            refetch();
-          }
-          if ('error' in res) {
-            console.log(res?.error);
-            //   toast.error(
-            //     res?.error?.data?.message
-            //       ? res?.error?.data?.message
-            //       : "Something went wrong, couldn't make deposit",
-            //   );
-          }
-          closePaymentModal(); // this will close the modal programmatically
-          setAmount('');
-        },
-        onClose: () => {},
-      });
+    onClose();
+    const res: any = await flutterwave({amount: Number(amount)});
+    console.log(res);
+    if ('data' in res) {
+      setAmount('');
+      localStorage.setItem('okay', JSON.stringify(amount));
+      window.open(res.data?.data?.data?.link);
     }
+    // handleFlutterPayment({
+    //   callback: async (response) => {
+    //     const res: any = await depositToWallet({
+    //       amount: Number(response.amount),
+    //       description: 'Funding wallet',
+    //       reference: `${response.tx_ref}`,
+    //     });
+    //     if ('data' in res) {
+    //       refetch();
+    //     }
+    //     if ('error' in res) {
+    //       console.log(res?.error);
+    //       //   toast.error(
+    //       //     res?.error?.data?.message
+    //       //       ? res?.error?.data?.message
+    //       //       : "Something went wrong, couldn't make deposit",
+    //       //   );
+    //     }
+    //     closePaymentModal(); // this will close the modal programmatically
+    //     setAmount('');
+    //   },
+    //   onClose: () => {},
+    // });
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -137,16 +135,12 @@ function AddMoneyModal({isOpen, onClose, amount, setAmount, refetch}: Props) {
               />
             </Box>
             <Box px='7'>
-              {!data?.data?.email || isFetching ? (
-                <SkeletonCircle mx='auto' w='150px' h='50px' />
-              ) : (
-                <Btn
-                  text='Add money to wallet'
-                  style={{width: '100%'}}
-                  isLoading={depositToWalletStatus.isLoading}
-                  onClick={handleDeposit}
-                ></Btn>
-              )}
+              <Btn
+                text='Add money to wallet'
+                style={{width: '100%'}}
+                isLoading={flutterwaveStatus.isLoading}
+                onClick={handleDeposit}
+              ></Btn>
             </Box>
           </Flex>
         </ModalBody>

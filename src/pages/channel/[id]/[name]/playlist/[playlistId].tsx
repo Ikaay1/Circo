@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useGetSinglePlaylistQuery } from 'redux/services/playlist.service';
 
@@ -14,6 +15,13 @@ const Playlist = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {data, isLoading} = useGetSinglePlaylistQuery(id);
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   return (
     <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
       <Header upload={onOpen} />
