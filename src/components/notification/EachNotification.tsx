@@ -32,10 +32,6 @@ function EachNotification({ data }: { data: any }) {
             if (data?.status === "unread") {
               await readNotification(data._id);
             }
-
-            if (data?.type === "Action") {
-              route.push(data?.link);
-            }
           }}
           _focus={{ outline: "none", boxShadow: "none", border: "none" }}
         >
@@ -73,6 +69,12 @@ function EachNotification({ data }: { data: any }) {
         </AccordionButton>
       </Box>
       <AccordionPanel
+        onClick={() => {
+          if (data?.type === "Action") {
+            route.push(data?.link);
+          }
+        }}
+        cursor={data?.type === "Action" ? "pointer" : "default"}
         fontFamily={"Poppins"}
         fontSize="smSubHead"
         pb={4}
