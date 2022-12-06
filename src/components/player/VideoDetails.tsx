@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useSubscribeMutation } from 'redux/services/user.service';
 
@@ -16,6 +16,18 @@ function VideoDetails({
 }) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <Box mt='20px'>

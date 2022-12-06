@@ -1,44 +1,53 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Flex,
-  Skeleton,
-  SkeletonCircle,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
-import { scrollBarStyle } from "@constants/utils";
-import { useRouter } from "next/router";
-import { useAppSelector } from "redux/app/hooks";
-import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
-import EachComment from "@components/stream/EachComment";
-import NewComment from "./NewComment";
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useGetStreamCommentsQuery } from 'redux/services/livestream/streamComment.service';
 
-function CommentSection({ streamDetails }: any) {
+import {
+	Box,
+	Flex,
+	Skeleton,
+	SkeletonCircle,
+	Spinner,
+	Text,
+} from '@chakra-ui/react';
+import EachComment from '@components/stream/EachComment';
+import { scrollBarStyle } from '@constants/utils';
+
+import NewComment from './NewComment';
+
+function CommentSection({streamDetails}: any) {
   const router = useRouter();
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const { data, isLoading, isFetching } = useGetStreamCommentsQuery(
-    streamDetails?.eventId?._id
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const {data, isLoading, isFetching} = useGetStreamCommentsQuery(
+    streamDetails?.eventId?._id,
   );
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   return (
     <Box
-      w="450px"
-      maxW="450px"
-      px="20px"
-      pb="80px"
-      minW="400px"
-      bg="clique.black"
-      pt={"20px"}
+      w='450px'
+      maxW='450px'
+      px='20px'
+      pb='80px'
+      minW='400px'
+      bg='clique.black'
+      pt={'20px'}
       sx={scrollBarStyle}
-      maxH="90vh"
-      overflowY="scroll"
+      maxH='90vh'
+      overflowY='scroll'
     >
       <Text
-        textAlign={"left"}
-        fontFamily={"Poppins"}
+        textAlign={'left'}
+        fontFamily={'Poppins'}
         fontWeight={500}
-        textTransform={"capitalize"}
-        fontSize="smHead"
+        textTransform={'capitalize'}
+        fontSize='smHead'
       >
         Comments
       </Text>
@@ -47,22 +56,22 @@ function CommentSection({ streamDetails }: any) {
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
           <Flex
             key={i}
-            w="full"
-            mt="15px"
-            bg="clique.ashGrey"
-            rounded="10px"
-            p="20px"
+            w='full'
+            mt='15px'
+            bg='clique.ashGrey'
+            rounded='10px'
+            p='20px'
           >
-            <SkeletonCircle minH="40px" minW="40px" mr="20px" />
-            <Box w="full">
-              <Skeleton h="15px" />
-              <Skeleton h="15px" mt="5px" />
+            <SkeletonCircle minH='40px' minW='40px' mr='20px' />
+            <Box w='full'>
+              <Skeleton h='15px' />
+              <Skeleton h='15px' mt='5px' />
             </Box>
           </Flex>
         ))}
 
       {
-        <Flex w="full" h="full" flexDir={"column"} justify="space-between">
+        <Flex w='full' h='full' flexDir={'column'} justify='space-between'>
           <Box>
             {data &&
               data?.data?.map((comment: any, i: number) => (

@@ -1,17 +1,18 @@
-import React from "react";
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useGetAllLiveStreamQuery } from 'redux/services/livestream/live.service';
 
 import {
-  Avatar,
-  Flex,
-  HStack,
-  SkeletonCircle,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { purpleBoxStyle } from "@constants/utils";
-import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
-import { useRouter } from "next/router";
-import { useAppSelector } from "redux/app/hooks";
+	Avatar,
+	Flex,
+	HStack,
+	SkeletonCircle,
+	Text,
+	useColorModeValue,
+} from '@chakra-ui/react';
+import { purpleBoxStyle } from '@constants/utils';
+
 const NProgress = require("nprogress");
 
 function LiveTopCard() {
@@ -22,6 +23,13 @@ function LiveTopCard() {
   const userProfile = useAppSelector(
     (store) => store.app.userReducer.userProfile
   );
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   return (
     <Flex alignItems={"center"} maxW="calc(100vw - 560px)" my="10px">
       <Text

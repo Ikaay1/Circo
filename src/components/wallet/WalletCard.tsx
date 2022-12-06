@@ -4,9 +4,16 @@ import Btn from '@components/Button/Btn';
 type Props = {
   onClick: () => void;
   walletData: any;
+  flutterwaveStatus: {
+    isLoading: boolean;
+  };
 };
 
-export default function WalletCard({onClick, walletData}: Props) {
+export default function WalletCard({
+  onClick,
+  walletData,
+  flutterwaveStatus,
+}: Props) {
   const handleMoneyIn = () => {
     let num = 0;
     walletData.transaction_history.forEach((history: any) => {
@@ -50,6 +57,7 @@ export default function WalletCard({onClick, walletData}: Props) {
               bg='linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)'
               onClick={onClick}
               maxW='70%'
+              disabled={flutterwaveStatus.isLoading}
             ></Btn>
           </Flex>
         </GridItem>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { TbCopy } from 'react-icons/tb';
 import { useAppSelector } from 'redux/app/hooks';
 import { useUpdatePreferenceMutation } from 'redux/services/settings.service';
@@ -57,6 +58,15 @@ const Notification = ({isLoading, data, onClick}: Props) => {
     liveStreamStarted: data ? data?.liveStreamStarted : false,
     lightOrDark: data ? data?.lightOrDark : false,
   });
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
+
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({...prev, [e.target.name]: e.target.checked}));
     if (e.target.name === 'allNotifications') {

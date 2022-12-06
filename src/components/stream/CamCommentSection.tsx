@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { MdOutlineClose } from 'react-icons/md';
+import { useAppSelector } from 'redux/app/hooks';
+import { useGetStreamCommentsQuery } from 'redux/services/livestream/streamComment.service';
+
 import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Skeleton,
-  SkeletonCircle,
-  Text,
-} from "@chakra-ui/react";
-import { useAppSelector } from "redux/app/hooks";
-import { useRouter } from "next/router";
-import { MdOutlineClose } from "react-icons/md";
-import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
-import { scrollBarStyle } from "@constants/utils";
-import EachChatComment from "./EachChatComment";
-import NewChatComment from "./NewChatComment";
+	Box,
+	Button,
+	Flex,
+	Icon,
+	Skeleton,
+	SkeletonCircle,
+	Text,
+} from '@chakra-ui/react';
+import { scrollBarStyle } from '@constants/utils';
+
+import EachChatComment from './EachChatComment';
+import NewChatComment from './NewChatComment';
 
 function CamCommentSection({
   setClose,
@@ -26,6 +28,19 @@ function CamCommentSection({
   id: string;
 }) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <Box

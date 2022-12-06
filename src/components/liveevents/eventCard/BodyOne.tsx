@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { usePayForLiveMutation } from 'redux/services/livestream/live.service';
 
@@ -21,6 +22,13 @@ function BodyOne({
 
   const [payForLive, payInfo] = usePayForLiveMutation();
   const toast = useToast();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   return (
     <>
       <Text

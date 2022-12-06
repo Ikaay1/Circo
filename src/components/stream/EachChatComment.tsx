@@ -1,14 +1,15 @@
-import moment from "moment";
-import React from "react";
-import { BiDislike, BiLike } from "react-icons/bi";
-import { useAppSelector } from "redux/app/hooks";
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
-import AvataWithSpace from "@components/widgets/AvataWithSpace";
-import { useRouter } from "next/router";
+import moment from 'moment';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { BiDislike, BiLike } from 'react-icons/bi';
+import { useAppSelector } from 'redux/app/hooks';
 import {
-  useDislikeStreamCommentMutation,
-  useLikeStreamCommentMutation,
-} from "redux/services/livestream/streamComment.service";
+	useDislikeStreamCommentMutation,
+	useLikeStreamCommentMutation,
+} from 'redux/services/livestream/streamComment.service';
+
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import AvataWithSpace from '@components/widgets/AvataWithSpace';
 
 function EachChatComment({ comment }: { comment: any }) {
   const router = useRouter();
@@ -18,6 +19,12 @@ function EachChatComment({ comment }: { comment: any }) {
   const [likeStreamComment, commentInfo] = useLikeStreamCommentMutation();
   const [dislikeStreamComment, commentInfo2] =
     useDislikeStreamCommentMutation();
+
+    useEffect(() => {
+      if (!userProfile?._id) {
+        router.push('/login');
+      }
+    }, [userProfile?._id, router]);
 
   return (
     <Flex mt="5px" bg="" rounded="10px" px="20px" pt="20px">

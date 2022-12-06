@@ -1,27 +1,37 @@
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { BiDislike, BiLike } from 'react-icons/bi';
+import { useAppSelector } from 'redux/app/hooks';
 import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Icon,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
-import React from "react";
-import MuxPlayer from "@mux/mux-player-react/lazy";
-import Control from "@components/player/Control";
-import { BiDislike, BiLike } from "react-icons/bi";
-import { useAppSelector } from "redux/app/hooks";
+	useDislikeStreamMutation,
+	useLikeStreamMutation,
+} from 'redux/services/livestream/live.service';
+
 import {
-  useDislikeStreamMutation,
-  useLikeStreamMutation,
-} from "redux/services/livestream/live.service";
+	Box,
+	Flex,
+	Grid,
+	GridItem,
+	Icon,
+	Spinner,
+	Text,
+} from '@chakra-ui/react';
+import Control from '@components/player/Control';
+import MuxPlayer from '@mux/mux-player-react/lazy';
+
 const Nprogress = require("nprogress");
 
 function StreamPlayer({ stream }: any) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+  const router = useRouter()
   const [likeStream, info] = useLikeStreamMutation();
   const [dislikeStream, info2] = useDislikeStreamMutation();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <Flex

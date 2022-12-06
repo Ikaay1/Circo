@@ -1,17 +1,25 @@
-import React, { useState } from "react";
-import { Box, Flex, Skeleton, SkeletonCircle, Text } from "@chakra-ui/react";
-import { useAppSelector } from "redux/app/hooks";
-import { useRouter } from "next/router";
-import EachComment from "./EachComment";
-import NewComment from "./NewComment";
-import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
-import { scrollBarStyle } from "@constants/utils";
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useGetStreamCommentsQuery } from 'redux/services/livestream/streamComment.service';
+
+import { Box, Flex, Skeleton, SkeletonCircle, Text } from '@chakra-ui/react';
+import { scrollBarStyle } from '@constants/utils';
+
+import EachComment from './EachComment';
+import NewComment from './NewComment';
 
 function CommentSection({}: {}) {
   const router = useRouter();
   const { id } = router.query;
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const { data, isLoading, isFetching } = useGetStreamCommentsQuery(id);
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <Box

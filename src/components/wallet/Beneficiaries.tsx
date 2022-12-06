@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react';
 
+import { walletData } from '../../constants/utils';
 import BeneficiariesCard from './BeneficiariesCard';
 import WithdrawalCard from './WithdrawalCard';
 
@@ -17,7 +18,7 @@ function Beneficiaries({onClick, hasBeneficiary, walletData}: Props) {
         onClick={onClick}
         hasBeneficiary={hasBeneficiary}
       />
-      <WithdrawalCard />
+      <WithdrawalCard walletData={walletData} />
     </Box>
   );
 }

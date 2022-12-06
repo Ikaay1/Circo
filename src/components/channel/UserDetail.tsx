@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useGetUserQuery } from 'redux/services/user.service';
 
@@ -53,6 +54,13 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
     onOpen: channelOnOpen,
     onClose: channelOnClose,
   } = useDisclosure();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   return (
     <>
       <Box position='relative'>

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
 import { useSaveVideoMutation } from 'redux/services/content.service';
@@ -27,6 +28,13 @@ function VideoOptionMenu({player, video}: any) {
   const {data, refetch} = useGetUserQuery(userProfile?._id);
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   useEffect(() => {
     if (player.current) {
