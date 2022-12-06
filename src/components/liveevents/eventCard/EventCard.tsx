@@ -47,7 +47,13 @@ function EventCard({ onOpen, event }: { onOpen: () => void; event: any }) {
           lineHeight={"1.2"}
           mt="5px"
         >
-          {moment(event?.eventId?.schedule).format("MMM DD . h:mm A")}
+          {moment(
+            event?.eventId?.schedule === undefined
+              ? event?.eventId?.schedule
+              : event?.eventId?.schedule === ""
+              ? Date.now()
+              : event?.eventId?.schedule
+          ).format("MMM DD . h:mm A")}
         </Text>
       </Box>
     </Flex>

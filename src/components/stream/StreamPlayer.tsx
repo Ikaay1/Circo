@@ -1,4 +1,12 @@
-import { Box, Flex, Grid, GridItem, Icon, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Icon,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import MuxPlayer from "@mux/mux-player-react/lazy";
 import Control from "@components/player/Control";
@@ -51,81 +59,92 @@ function StreamPlayer({ stream }: any) {
       >
         <GridItem colSpan={7}>
           <Flex alignItems="center" w="full" h="full" justifyContent={"center"}>
-            <Flex ml="30px" alignItems={"center"}>
-              <Flex
-                flexDir="column"
-                justify={"center"}
-                cursor={"pointer"}
-                alignItems={"center"}
-              >
-                <Box
-                  onClick={async () => {
-                    Nprogress.start();
-                    await likeStream({
-                      streamId: stream._id,
-                    });
-                    Nprogress.done();
-                  }}
+            <Flex
+              w="200px"
+              ml="30px"
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              {info.isLoading ? (
+                <Spinner size={"sm"} mr="5px" bg="clique.base" />
+              ) : (
+                <Flex
+                  flexDir="column"
+                  justify={"center"}
+                  cursor={"pointer"}
+                  alignItems={"center"}
                 >
-                  <Icon
-                    color={
-                      stream?.likes?.includes(userProfile?._id)
-                        ? "clique.base"
-                        : "clique.white"
-                    }
-                    mr="5px"
-                    fontSize="head"
-                    as={BiLike}
-                  />
-                </Box>
-                <Text
-                  color={"clique.white"}
-                  fontFamily={"Poppins"}
-                  fontWeight={400}
-                  fontSize={"smSubHead"}
-                  lineHeight={"1.2"}
-                >
-                  {stream?.likesCount}
-                </Text>
-              </Flex>
+                  <Box
+                    onClick={async () => {
+                      await likeStream({
+                        streamId: stream._id,
+                      });
+                    }}
+                  >
+                    <Icon
+                      color={
+                        stream?.likes?.includes(userProfile?._id)
+                          ? "clique.base"
+                          : "clique.white"
+                      }
+                      mr="5px"
+                      fontSize="head"
+                      as={BiLike}
+                    />
+                  </Box>
 
-              <Flex
-                flexDir="column"
-                justify={"center"}
-                cursor={"pointer"}
-                mx="10px"
-                alignItems={"center"}
-              >
-                <Box
-                  onClick={async () => {
-                    Nprogress.start();
-                    await dislikeStream({
-                      streamId: stream._id,
-                    });
-                    Nprogress.done();
-                  }}
+                  <Text
+                    color={"clique.white"}
+                    fontFamily={"Poppins"}
+                    fontWeight={400}
+                    fontSize={"smSubHead"}
+                    lineHeight={"1.2"}
+                  >
+                    {stream?.likesCount}
+                  </Text>
+                </Flex>
+              )}
+
+              {info2.isLoading ? (
+                <Spinner size={"sm"} mr="5px" bg="clique.base" />
+              ) : (
+                <Flex
+                  flexDir="column"
+                  justify={"center"}
+                  cursor={"pointer"}
+                  mx="10px"
+                  alignItems={"center"}
                 >
-                  <Icon
-                    color={
-                      stream?.dislikes.includes(userProfile?._id)
-                        ? "clique.base"
-                        : "clique.white"
-                    }
-                    mr="5px"
-                    fontSize=" head"
-                    as={BiDislike}
-                  />
-                </Box>
-                <Text
-                  color={"clique.white"}
-                  fontFamily={"Poppins"}
-                  fontWeight={400}
-                  fontSize={"smSubHead"}
-                  lineHeight={"1.2"}
-                >
-                  {stream?.dislikesCount}
-                </Text>
-              </Flex>
+                  <Box
+                    onClick={async () => {
+                      await dislikeStream({
+                        streamId: stream._id,
+                      });
+                    }}
+                  >
+                    <Icon
+                      color={
+                        stream?.dislikes.includes(userProfile?._id)
+                          ? "clique.base"
+                          : "clique.white"
+                      }
+                      mr="5px"
+                      fontSize=" head"
+                      as={BiDislike}
+                    />
+                  </Box>
+
+                  <Text
+                    color={"clique.white"}
+                    fontFamily={"Poppins"}
+                    fontWeight={400}
+                    fontSize={"smSubHead"}
+                    lineHeight={"1.2"}
+                  >
+                    {stream?.dislikesCount}
+                  </Text>
+                </Flex>
+              )}
             </Flex>
           </Flex>
         </GridItem>
