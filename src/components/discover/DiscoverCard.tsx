@@ -30,6 +30,7 @@ function DiscoverCard({video}: {video: contentData}) {
         display={'flex'}
         flexDirection='column'
         justifyContent={'space-between'}
+        rounded={'20px'}
       >
         <Text
           position={'relative'}

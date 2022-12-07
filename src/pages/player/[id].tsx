@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import {
 	useCreateViewMutation,
+	useExpiredSubscriptionMutation,
 	useGetContentQuery,
 } from 'redux/services/content.service';
 
@@ -18,12 +19,28 @@ function Index() {
   const {data, isLoading, refetch} = useGetContentQuery(id);
   const [view] = useCreateViewMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const [expiredSub] = useExpiredSubscriptionMutation();
 
   useEffect(() => {
     if (!userProfile?._id) {
       router.push('/login');
     }
   }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    const expired = async () => {
+      const res: any = await expiredSub({
+        id: data.data.preference.video.uploader_id._id,
+      });
+      console.log('res', res);
+      if (res?.data?.data?.email) {
+        router.push('/home');
+      }
+    };
+    if (data) {
+      expired();
+    }
+  }, [expiredSub, data, router]);
 
   useEffect(() => {
     const createView = async () => {

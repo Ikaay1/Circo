@@ -8,6 +8,7 @@ import {
 	Modal,
 	ModalContent,
 	ModalOverlay,
+	Spinner,
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
@@ -22,12 +23,14 @@ const Bio = ({
   id,
   onClick,
   buttonText,
+  isFetching,
 }: {
   showSubscribe: boolean;
   bio?: string;
   id: string;
   onClick: () => void;
   buttonText?: string;
+  isFetching?: boolean;
 }) => {
   const router = useRouter();
   const {isOpen, onOpen, onClose} = useDisclosure();
@@ -70,30 +73,43 @@ const Bio = ({
           </Text>
         </Box>
         {showSubscribe && (
-          <Box display={'flex'} alignItems='center'>
-            <Box
-              mr='.5rem'
-              cursor='pointer'
-              onClick={() => {
-                onOpen();
-              }}
-            >
-              <Icon as={ShareIcon} />
+          <Box>
+            <Box display={'flex'} alignItems='center'>
+              <Box
+                mr='.5rem'
+                cursor='pointer'
+                onClick={() => {
+                  onOpen();
+                }}
+              >
+                <Icon as={ShareIcon} />
+              </Box>
+              {userProfile?._id === id ? null : (
+                <AuthButton
+                  width='180px'
+                  height='50px'
+                  borderRadius='30px'
+                  fontSize='sm2'
+                  name={isFetching ? <Spinner /> : buttonText}
+                  onClick={onClick}
+                  bg={
+                    buttonText === 'Subscribed' || isFetching
+                      ? 'clique.grey'
+                      : 'clique.purple'
+                  }
+                  cursor={buttonText === 'Subscribed' && 'default'}
+                />
+              )}
             </Box>
-            {userProfile?._id === id ? null : (
-              <AuthButton
-                width='180px'
-                height='50px'
-                borderRadius='30px'
-                fontSize='sm2'
-                name={buttonText}
-                onClick={onClick}
-                bg={
-                  buttonText === 'Subscribed' ? 'clique.grey' : 'clique.purple'
-                }
-                cursor={buttonText === 'Subscribed' && 'default'}
-              />
-            )}
+            <Text
+              w='190px'
+              textAlign={'right'}
+              fontSize={'smSubHead'}
+              color={'clique.secondaryRed'}
+              mt='.4rem'
+            >
+              Your subscription expires 1 month after you subscribe
+            </Text>
           </Box>
         )}
       </Box>
