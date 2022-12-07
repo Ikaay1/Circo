@@ -387,10 +387,6 @@ export const selectArr = [
     placeholder: "Age Range",
     options: ["Option"],
   },
-  {
-    placeholder: "Visibility",
-    options: ["Option"],
-  },
 ];
 
 export const profileMenu: {
