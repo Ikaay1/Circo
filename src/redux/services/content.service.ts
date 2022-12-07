@@ -220,6 +220,18 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+
+    expiredSubscription: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `subscribe/reset`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
   }),
 });
 
@@ -242,4 +254,5 @@ export const {
   useGetDiscoverQuery,
   useGetTrendingQuery,
   useGetSearchHistoryQuery,
+  useExpiredSubscriptionMutation,
 } = contentApi;
