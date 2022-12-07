@@ -25,7 +25,7 @@ function Index() {
 
   const handleLogout = () => {
     dispatch(logout());
-    router.push("/login");
+    window.location.href = "/login";
   };
 
   return (
