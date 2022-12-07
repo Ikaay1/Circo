@@ -19,6 +19,7 @@ const Index = ({
   buttonText,
   lastElementRef,
   setContents,
+  isFetching,
 }: {
   channelData?: any;
   data?: contentData[];
@@ -28,6 +29,7 @@ const Index = ({
   buttonText?: string;
   lastElementRef?: any;
   setContents?: any;
+  isFetching?: boolean;
 }) => {
   const router = useRouter();
   const des =
@@ -59,6 +61,7 @@ const Index = ({
               id={channelData?.data?.channel?.userId}
               onClick={onClick as () => void}
               buttonText={buttonText}
+              isFetching={isFetching}
             />
           )}
           {des && (

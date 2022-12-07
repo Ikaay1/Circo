@@ -25,7 +25,7 @@ export const useRoutingChannel = () => {
     ) {
       return;
     }
-    if (id === userProfile._id) {
+    if (id === userProfile?._id) {
       router.push('/channel/1/content');
       return;
     }

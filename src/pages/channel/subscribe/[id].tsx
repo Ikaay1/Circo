@@ -3,7 +3,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
-import { useGetSingleUserContentQuery } from 'redux/services/content.service';
+import {
+	useExpiredSubscriptionMutation,
+	useGetSingleUserContentQuery,
+} from 'redux/services/content.service';
 import {
 	useGetUserQuery,
 	useSubscribeToUserChannelMutation,
@@ -38,14 +41,33 @@ const SubscribeChannel = () => {
     data: channelData,
   } = useGetIndividualChannelQuery(id);
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-  const {isLoading: userLoading, data: userData} = useGetUserQuery(id);
+  const {
+    isLoading: userLoading,
+    data: userData,
+    refetch,
+    isFetching: isUserFetching,
+  } = useGetUserQuery(id);
   const [state, setState] = useState<string>();
+  const [expiredSub] = useExpiredSubscriptionMutation();
 
   useEffect(() => {
     if (!userProfile?._id) {
       router.push('/login');
     }
   }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    const expired = async () => {
+      const res: any = await expiredSub({id});
+      console.log('res', res);
+      if (res?.data?.data?.email) {
+        refetch();
+      }
+    };
+    if (id) {
+      expired();
+    }
+  }, [expiredSub, id, refetch]);
 
   useEffect(() => {
     if (!userLoading && userData) {
@@ -150,6 +172,7 @@ const SubscribeChannel = () => {
               onClick={handleSubscription}
               buttonText={state}
               lastElementRef={lastElementRef}
+              isFetching={isUserFetching}
             />
           </Box>
         </Box>
