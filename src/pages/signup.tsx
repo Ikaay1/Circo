@@ -12,8 +12,10 @@ import SocialMedia from "@components/auth/SocialMedia";
 import { signUpInputData } from "@constants/utils";
 
 import { SignUpDataInterface } from "../constants/interface";
+import { useAppSelector } from "redux/app/hooks";
 
 const Signup = () => {
+  const token = useAppSelector((state) => state.app.userReducer.token);
   const toast = useToast();
   const [preSignup, preSignupStatus] = usePreSignupMutation();
   const router = useRouter();
@@ -87,7 +89,11 @@ const Signup = () => {
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-
+  useEffect(() => {
+    if (token) {
+      router.push("/home");
+    }
+  }, [token, router]);
   return (
     <Box display={"flex"} justifyContent="space-between" alignItems={"center"}>
       <CliqueLogo />
