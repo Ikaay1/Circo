@@ -1,41 +1,48 @@
-import { useRouter } from 'next/router';
-import React, { ChangeEvent, useRef } from 'react';
-import { toast } from 'react-hot-toast';
-import { MdAddCircleOutline } from 'react-icons/md';
-import { useAppDispatch } from 'redux/app/hooks';
-import { setSources } from 'redux/slices/uploadSlice';
-
+import { useRouter } from "next/router";
+import React, { ChangeEvent, useRef } from "react";
+import { MdAddCircleOutline } from "react-icons/md";
+import { useAppDispatch } from "redux/app/hooks";
+import { setSources } from "redux/slices/uploadSlice";
+import Dropzone from "react-dropzone";
 import {
-	Button,
-	Flex,
-	Icon,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalOverlay,
-	Text,
-	useDisclosure,
-} from '@chakra-ui/react';
-import UploadIcon from '@icons/UploadIcon';
+  Button,
+  Flex,
+  Icon,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import UploadIcon from "@icons/UploadIcon";
 
 function UploadModal() {
+  const toast = useToast();
+  const [isDragging, setIsDragging] = React.useState(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const {isOpen, onOpen, onClose} = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const inputRef = useRef<HTMLInputElement | any>();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files || !event.target.files[0]?.type.includes('video')) {
-      toast.error('Please select a video');
+    if (!event.target.files || !event.target.files[0]?.type.includes("video")) {
+      toast({
+        title: "Please select a video",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setIsDragging(false);
       return;
     }
     const file = event.target.files[0];
     const name = file?.name;
     const url = URL?.createObjectURL(file);
-    // console.log(file);
-    // console.log();
     onClose();
-    dispatch(setSources({url, name}));
-    router.push('/upload');
+    dispatch(setSources({ url, name }));
+    router.push("/upload");
   };
   const handleChoose = () => {
     inputRef.current.click();
@@ -63,23 +70,71 @@ function UploadModal() {
         >
           <ModalBody>
             <Flex
+              pt="100px"
               align="center"
               justify="center"
               direction="column"
-              pt="100px"
               pb="100px"
             >
-              <Icon as={UploadIcon} fontSize="70px" />
-              <Text
-                textAlign={"center"}
-                fontFamily={"Poppins"}
-                fontWeight={500}
-                fontSize="smHead"
-                mb="14"
-                mt="14"
+              <Dropzone
+                onDragEnter={() => {
+                  setIsDragging(true);
+                }}
+                onDragLeave={() => {
+                  setIsDragging(false);
+                }}
+                onDragOver={() => {
+                  setIsDragging(true);
+                }}
+                onDrop={(acceptedFiles) => {
+                  if (!acceptedFiles[0]?.type.includes("video")) {
+                    toast({
+                      title: "Please select a video",
+                      status: "error",
+                      duration: 3000,
+                      isClosable: true,
+                      position: "top-right",
+                    });
+                    setIsDragging(false);
+                    return;
+                  }
+                  const file = acceptedFiles[0];
+                  const name = file?.name;
+                  const url = URL?.createObjectURL(file);
+                  onClose();
+                  dispatch(setSources({ url, name }));
+                  router.push("/upload");
+                }}
               >
-                Drag and drop file to uplaod
-              </Text>
+                {({ getRootProps, getInputProps }) => (
+                  <section>
+                    <Flex
+                      p="20px"
+                      border={isDragging ? "2px dashed #fff" : "none"}
+                      align="center"
+                      justify="center"
+                      direction="column"
+                      {...getRootProps()}
+                      mb="14"
+                    >
+                      <input {...getInputProps()} />
+                      <Icon as={UploadIcon} fontSize="70px" />
+                      <Text
+                        textAlign={"center"}
+                        fontFamily={"Poppins"}
+                        fontWeight={500}
+                        fontSize="smHead"
+                        mt="14"
+                      >
+                        {isDragging
+                          ? "Drop the file here"
+                          : "  Drag and drop file to upload"}
+                      </Text>
+                    </Flex>
+                  </section>
+                )}
+              </Dropzone>
+
               <Button bg="clique.tertiary" onClick={handleChoose} px="7">
                 Select file
               </Button>
