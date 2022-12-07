@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePreSignupMutation } from "redux/services/auth.service";
 
 import { Box, Text, useToast } from "@chakra-ui/react";
