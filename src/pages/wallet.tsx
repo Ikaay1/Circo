@@ -1,36 +1,38 @@
-import HomeLayout from 'layouts/HomeLayout';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useFlutterwavePaymentMutation } from 'redux/services/bank.service';
-import { useGetUserWalletQuery } from 'redux/services/wallet.service';
-
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
-import CliqueLoader from '@components/home/CliqueLoader';
-import AddMoneyModal from '@components/wallet/AddMoneyModal';
-import Beneficiaries from '@components/wallet/Beneficiaries';
-import BeneficiaryModal from '@components/wallet/BeneficiaryModal';
-import MainWallet from '@components/wallet/MainWallet';
-import SortModal from '@components/wallet/SortModal';
-import TransactionRecieptModal from '@components/wallet/TransactionRecieptModal';
-import SideMenu from '@components/widgets/sideMenu';
-import { ReceiptInfo } from '@constants/interface';
-import { scrollBarStyle } from '@constants/utils';
+import HomeLayout from "layouts/HomeLayout";
+import { useEffect, useState } from "react";
+import { useGetUserWalletQuery } from "redux/services/wallet.service";
+import { useRouter } from "next/router";
+import { useAppSelector } from "redux/app/hooks";
+import { useFlutterwavePaymentMutation } from "redux/services/bank.service";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
+import CliqueLoader from "@components/home/CliqueLoader";
+import AddMoneyModal from "@components/wallet/AddMoneyModal";
+import Beneficiaries from "@components/wallet/Beneficiaries";
+import BeneficiaryModal from "@components/wallet/BeneficiaryModal";
+import MainWallet from "@components/wallet/MainWallet";
+import SortModal from "@components/wallet/SortModal";
+import TransactionRecieptModal from "@components/wallet/TransactionRecieptModal";
+import SideMenu from "@components/widgets/sideMenu";
+import { ReceiptInfo } from "@constants/interface";
+import { scrollBarStyle } from "@constants/utils";
 
 type Props = {};
 
 function Wallet({}: Props) {
-  const {isOpen, onOpen, onClose} = useDisclosure();
-  const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
-  const {data, isFetching, refetch, isError} = useGetUserWalletQuery('');
-  const [amount, setAmount] = useState<string | number>('');
-  const {userProfile, token} = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
+  const { data, isFetching, refetch, isError } = useGetUserWalletQuery("");
+  const [amount, setAmount] = useState<string | number>("");
+  const { userProfile, token } = useAppSelector(
+    (store) => store.app.userReducer
+  );
+
   const [flutterwave, flutterwaveStatus] = useFlutterwavePaymentMutation();
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [userProfile?._id, router]);
 
@@ -57,24 +59,28 @@ function Wallet({}: Props) {
     isReceiptOnOpen();
   };
 
+  useEffect(() => {
+    refetch();
+  }, [router]);
+
   return (
     <HomeLayout>
       <Flex>
         <SideMenu />
         {isFetching || !data ? (
-          <Box w='100%' h='90vh'>
+          <Box w="100%" h="90vh">
             <CliqueLoader />
           </Box>
         ) : (
           <>
             <Box
-              maxH={'90vh'}
-              pb='50px'
-              px={'2'}
-              pl={{xl: '100px'}}
-              w='62%'
-              overflowY={'scroll'}
-              overflowX={'hidden'}
+              maxH={"90vh"}
+              pb="50px"
+              px={"2"}
+              pl={{ xl: "100px" }}
+              w="62%"
+              overflowY={"scroll"}
+              overflowX={"hidden"}
               sx={scrollBarStyle}
             >
               <MainWallet
@@ -86,13 +92,13 @@ function Wallet({}: Props) {
               />
             </Box>
             <Box
-              maxH={'90vh'}
-              pb='40px'
-              px='2'
-              pr={{xl: '100px'}}
-              w='38%'
-              overflowY={'scroll'}
-              overflowX={'hidden'}
+              maxH={"90vh"}
+              pb="40px"
+              px="2"
+              pr={{ xl: "100px" }}
+              w="38%"
+              overflowY={"scroll"}
+              overflowX={"hidden"}
               sx={scrollBarStyle}
             >
               <Beneficiaries
@@ -119,10 +125,10 @@ function Wallet({}: Props) {
       <BeneficiaryModal
         isOpen={isBeneIsOpen}
         onClose={isBeneOnClose}
-        type={data?.data?.beneficiary?.accountNumber ? 'change' : 'add'}
+        type={data?.data?.beneficiary?.accountNumber ? "change" : "add"}
         refetch={refetch}
         beneficiary={
-          data?.data?.beneficiary?.accountNumber ? data?.data?.beneficiary : ''
+          data?.data?.beneficiary?.accountNumber ? data?.data?.beneficiary : ""
         }
       />
       <SortModal isOpen={isSortIsOpen} onClose={isSortOnClose} />
