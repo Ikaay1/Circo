@@ -1,8 +1,9 @@
 import HomeLayout from "layouts/HomeLayout";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "redux/app/hooks";
 import { useGetUserWalletQuery } from "redux/services/wallet.service";
-
+import { useRouter } from "next/router";
+import { useAppSelector } from "redux/app/hooks";
+import { useFlutterwavePaymentMutation } from "redux/services/bank.service";
 import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import CliqueLoader from "@components/home/CliqueLoader";
 import AddMoneyModal from "@components/wallet/AddMoneyModal";
@@ -14,7 +15,6 @@ import TransactionRecieptModal from "@components/wallet/TransactionRecieptModal"
 import SideMenu from "@components/widgets/sideMenu";
 import { ReceiptInfo } from "@constants/interface";
 import { scrollBarStyle } from "@constants/utils";
-import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -27,6 +27,14 @@ function Wallet({}: Props) {
   const { userProfile, token } = useAppSelector(
     (store) => store.app.userReducer
   );
+
+  const [flutterwave, flutterwaveStatus] = useFlutterwavePaymentMutation();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push("/login");
+    }
+  }, [userProfile?._id, router]);
 
   const {
     isOpen: isBeneIsOpen,
@@ -80,6 +88,7 @@ function Wallet({}: Props) {
                 onSort={isSortOnOpen}
                 click={(info) => handleClick(info)}
                 walletData={data?.data}
+                flutterwaveStatus={flutterwaveStatus}
               />
             </Box>
             <Box
@@ -110,6 +119,8 @@ function Wallet({}: Props) {
         amount={amount}
         setAmount={setAmount}
         refetch={refetch}
+        flutterwave={flutterwave}
+        flutterwaveStatus={flutterwaveStatus}
       />
       <BeneficiaryModal
         isOpen={isBeneIsOpen}

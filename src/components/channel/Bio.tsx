@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 
 import {
@@ -28,9 +29,16 @@ const Bio = ({
   onClick: () => void;
   buttonText?: string;
 }) => {
+  const router = useRouter();
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [state, setState] = useState('');
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <>
@@ -72,7 +80,7 @@ const Bio = ({
             >
               <Icon as={ShareIcon} />
             </Box>
-            {userProfile._id === id ? null : (
+            {userProfile?._id === id ? null : (
               <AuthButton
                 width='180px'
                 height='50px'

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useSubscribeMutation } from 'redux/services/user.service';
 
@@ -34,6 +34,13 @@ function HoverCard({
   const {isOpen, onOpen, onClose} = useDisclosure();
   // const [subscribe, subscribeStatus] = useSubscribeMutation();
   const {handleRouting} = useRoutingChannel();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   return (
     <Box
       onMouseLeave={() => setIsHover(false)}

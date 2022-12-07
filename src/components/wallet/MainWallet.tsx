@@ -12,13 +12,26 @@ type Props = {
   click: (info: ReceiptInfo) => void;
   onSort: () => void;
   walletData: any;
+  flutterwaveStatus: {
+    isLoading: boolean;
+  };
 };
 
-function MainWallet({onClick, onSort, click, walletData}: Props) {
+function MainWallet({
+  onClick,
+  onSort,
+  click,
+  walletData,
+  flutterwaveStatus,
+}: Props) {
   return (
     <Flex pt='7' flexDirection='column' gap='5' w='100%'>
       <>
-        <WalletCard walletData={walletData} onClick={onClick} />
+        <WalletCard
+          walletData={walletData}
+          onClick={onClick}
+          flutterwaveStatus={flutterwaveStatus}
+        />
         <TransactionHistory
           walletData={walletData}
           onClick={onSort}

@@ -1,4 +1,5 @@
-import React, { useCallback, useRef } from 'react';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 
 import { SimpleGrid } from '@chakra-ui/react';
@@ -11,17 +12,23 @@ function VideoGrid({
   videos,
   thumbWidth,
   lastElementRef,
-  setContents
+  setContents,
 }: {
   width: string;
   videos: contentData[];
   thumbWidth?: any;
   lastElementRef?: any;
-  setContents?: any
+  setContents?: any;
 }) {
   const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
+  const router = useRouter();
 
-  // console.log(response?.data?.preference?.totalPages);
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   return (
     <>
       <SimpleGrid

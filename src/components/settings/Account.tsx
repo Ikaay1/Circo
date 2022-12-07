@@ -1,4 +1,6 @@
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 
 import {
@@ -15,6 +17,13 @@ type Props = {};
 
 function Account({}: Props) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <Box>
@@ -26,7 +35,7 @@ function Account({}: Props) {
       </Text>
       <Text fontSize={'xsl'} mb='1.5'>
         You are signed in to clique as
-        <span style={{color: '#3088D9'}}> {userProfile.email}</span>
+        <span style={{color: '#3088D9'}}> {userProfile?.email}</span>
       </Text>
 
       <a
@@ -56,14 +65,14 @@ function Account({}: Props) {
           <Avatar
             p='0'
             size='md'
-            src={userProfile.photo}
-            name={userProfile.firstName + ' ' + userProfile.lastName}
+            src={userProfile?.photo}
+            name={userProfile?.firstName + ' ' + userProfile?.lastName}
           />
         </WrapItem>
 
         <Flex flexDirection={'column'} ml='5' pt='3.5' fontSize={'smSubHead'}>
           <Text mb='2'>
-            {userProfile.firstName + ' ' + userProfile.lastName}
+            {userProfile?.firstName + ' ' + userProfile?.lastName}
           </Text>
           {/*
           <NextLink href="" passHref>

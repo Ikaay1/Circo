@@ -24,6 +24,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
+import CliqueLoader from '@components/home/CliqueLoader';
 import { banks } from '@constants/utils';
 import TapIcon from '@icons/TapIcon';
 
@@ -56,20 +57,39 @@ function BeneficiaryModal({
     accountNumber: '',
   });
   const [confirmAccount, confirmAccountStatus] = useConfirmAccountMutation();
+  const [loading2, setLoading2] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [show, setShow] = useState(false);
   console.log('banks', data);
 
   useEffect(() => {
     const confirm = async () => {
-      console.log({
-        accountNumber: beneficiaryData.accountNumber,
-        code: beneficiaryData.bankName.split('#')[1],
-      });
-
-      const data = await confirmAccount({
+      setLoading2(true);
+      confirmAccount({
         accountNumber: beneficiaryData.accountNumber.trim(),
         code: beneficiaryData.bankName.trim().split('#')[1],
+      }).then((data: any) => {
+        if (data?.data?.data?.status === 'success') {
+          setBeneficiaryData((prevBeneficiaryData) => ({
+            ...prevBeneficiaryData,
+            accountName: data?.data?.data?.data?.account_name,
+          }));
+          setLoading2(false);
+        } else {
+          toast({
+            title: 'Account not found',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+            position: 'top',
+          });
+          setBeneficiaryData((prevBeneficiaryData) => ({
+            ...prevBeneficiaryData,
+            accountName: '',
+          }));
+          setLoading2(false);
+        }
       });
-      console.log('response', data);
     };
     if (
       beneficiaryData.accountNumber.length === 10 &&
@@ -77,7 +97,12 @@ function BeneficiaryModal({
     ) {
       confirm();
     }
-  }, [beneficiaryData.accountNumber, confirmAccount, beneficiaryData.bankName]);
+  }, [
+    beneficiaryData.accountNumber,
+    confirmAccount,
+    beneficiaryData.bankName,
+    toast,
+  ]);
 
   useEffect(() => {
     if (type === 'change') {
@@ -115,7 +140,13 @@ function BeneficiaryModal({
           ...prevData,
           otp_hash: res.data?.data?.otp_hash,
         }));
+        setDisabled(true);
+        setShow(true);
         setLoading(false);
+        setTimeout(() => {
+          setDisabled(false);
+          setShow(false);
+        }, 20000);
       } else {
         setLoading(false);
       }
@@ -202,153 +233,168 @@ function BeneficiaryModal({
               text='Tap to receive OTP in your mail'
               fontSize={'smSubHead'}
               isLoading={loading}
+              disabled={disabled}
               onClick={handleSendOTP}
             />
+            {show && (
+              <Text fontSize='smSubHead' my='1rem' mb='.5rem'>
+                You will be able to request for another OTP after 20 seconds
+              </Text>
+            )}
+            {loading2 ? (
+              <Box mt='1.3rem'>
+                <CliqueLoader />
+              </Box>
+            ) : (
+              <>
+                <Box
+                  bg='clique.secondaryGrey1'
+                  px='2'
+                  pt='1'
+                  borderRadius={'10px'}
+                  width='full'
+                  mb='4'
+                  mt='4'
+                >
+                  <Text
+                    fontSize={'smSubHead'}
+                    fontWeight='400'
+                    color={'clique.secondaryGrey2'}
+                  >
+                    Select Bank
+                  </Text>
+                  <Select
+                    bg='clique.secondaryGrey1'
+                    size='sm'
+                    border='none'
+                    placeholder='Select Bank'
+                    name='bankName'
+                    required={true}
+                    value={beneficiaryData.bankName}
+                    onChange={(e) => handleChange(e)}
+                  >
+                    {data?.data?.data?.map((bank: any) => (
+                      <option value={`${bank.name}#${bank.code}`} key={bank.id}>
+                        {bank.name}
+                      </option>
+                    ))}
+                  </Select>
+                </Box>
 
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-              mt='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                Select Bank
-              </Text>
-              <Select
-                bg='clique.secondaryGrey1'
-                size='sm'
-                border='none'
-                placeholder='Select Bank'
-                name='bankName'
-                required={true}
-                value={beneficiaryData.bankName}
-                onChange={(e) => handleChange(e)}
-              >
-                {banks.map((bank: any) => (
-                  <option value={`${bank.name}#${bank.code}`} key={bank.id}>
-                    {bank.name}
-                  </option>
-                ))}
-              </Select>
-            </Box>
+                <Box
+                  bg='clique.secondaryGrey1'
+                  px='2'
+                  pt='1'
+                  borderRadius={'10px'}
+                  width='full'
+                  mb='4'
+                >
+                  <Text
+                    fontSize={'smSubHead'}
+                    fontWeight='400'
+                    color={'clique.secondaryGrey2'}
+                  >
+                    Account number
+                  </Text>
+                  <Input
+                    name='accountNumber'
+                    variant='filled'
+                    size='sm'
+                    bg='clique.secondaryGrey1'
+                    required={true}
+                    value={beneficiaryData.accountNumber}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Box>
 
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                Account Name
-              </Text>
-              <Input
-                name='accountName'
-                variant='filled'
-                size='sm'
-                bg='clique.secondaryGrey1'
-                required={true}
-                value={beneficiaryData.accountName}
-                onChange={(e) => handleChange(e)}
-              />
-            </Box>
+                <Box
+                  bg='clique.secondaryGrey1'
+                  px='2'
+                  pt='1'
+                  borderRadius={'10px'}
+                  width='full'
+                  mb='4'
+                >
+                  <Text
+                    fontSize={'smSubHead'}
+                    fontWeight='400'
+                    color={'clique.secondaryGrey2'}
+                  >
+                    Account Name
+                  </Text>
+                  <Input
+                    name='accountName'
+                    variant='filled'
+                    size='sm'
+                    bg='clique.secondaryGrey1'
+                    required={true}
+                    value={beneficiaryData.accountName}
+                  />
+                </Box>
 
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                Account number
-              </Text>
-              <Input
-                name='accountNumber'
-                variant='filled'
-                size='sm'
-                bg='clique.secondaryGrey1'
-                required={true}
-                value={beneficiaryData.accountNumber}
-                onChange={(e) => handleChange(e)}
-              />
-            </Box>
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                OTP
-              </Text>
-              <Input
-                variant='filled'
-                name='otp_code'
-                size='sm'
-                bg='clique.secondaryGrey1'
-                required={true}
-                value={beneficiaryData.otp_code}
-                onChange={(e) => handleChange(e)}
-              />
-            </Box>
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                Password
-              </Text>
-              <Input
-                variant='filled'
-                size='sm'
-                bg='clique.secondaryGrey1'
-                type='password'
-                name='password'
-                required={true}
-                value={beneficiaryData.password}
-                onChange={(e) => handleChange(e)}
-              />
-            </Box>
-            <Box px='7'>
-              <Btn
-                text={type === 'add' ? 'Add beneficiary' : 'Change beneficiary'}
-                style={{width: '100%'}}
-                onClick={handleCreateBeneficiary}
-                isLoading={addBeneficiaryStatus.isLoading}
-              ></Btn>
-            </Box>
+                <Box
+                  bg='clique.secondaryGrey1'
+                  px='2'
+                  pt='1'
+                  borderRadius={'10px'}
+                  width='full'
+                  mb='4'
+                >
+                  <Text
+                    fontSize={'smSubHead'}
+                    fontWeight='400'
+                    color={'clique.secondaryGrey2'}
+                  >
+                    OTP
+                  </Text>
+                  <Input
+                    variant='filled'
+                    name='otp_code'
+                    size='sm'
+                    bg='clique.secondaryGrey1'
+                    required={true}
+                    value={beneficiaryData.otp_code}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Box>
+                <Box
+                  bg='clique.secondaryGrey1'
+                  px='2'
+                  pt='1'
+                  borderRadius={'10px'}
+                  width='full'
+                  mb='4'
+                >
+                  <Text
+                    fontSize={'smSubHead'}
+                    fontWeight='400'
+                    color={'clique.secondaryGrey2'}
+                  >
+                    Password
+                  </Text>
+                  <Input
+                    variant='filled'
+                    size='sm'
+                    bg='clique.secondaryGrey1'
+                    type='password'
+                    name='password'
+                    required={true}
+                    value={beneficiaryData.password}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Box>
+                <Box px='7'>
+                  <Btn
+                    text={
+                      type === 'add' ? 'Add beneficiary' : 'Change beneficiary'
+                    }
+                    style={{width: '100%'}}
+                    onClick={handleCreateBeneficiary}
+                    isLoading={addBeneficiaryStatus.isLoading}
+                  ></Btn>
+                </Box>
+              </>
+            )}
           </Flex>
         </ModalBody>
       </ModalContent>

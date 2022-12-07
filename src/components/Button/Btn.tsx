@@ -43,6 +43,7 @@ const Btn = forwardRef(
       loading,
       onClick,
       maxW,
+      disabled,
       ...props
     }: any,
     ref,
@@ -62,6 +63,7 @@ const Btn = forwardRef(
           px={px}
           onClick={onClick}
           isLoading={isLoading}
+          disabled={disabled}
           variant={variant}
           type={submit ? 'submit' : 'button'}
         >

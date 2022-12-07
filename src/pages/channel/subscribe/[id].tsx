@@ -42,10 +42,16 @@ const SubscribeChannel = () => {
   const [state, setState] = useState<string>();
 
   useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
+  useEffect(() => {
     if (!userLoading && userData) {
       const buttonText = userData?.data?.subscribers?.find(
         (each: Subcribers) => {
-          return each._id === userProfile._id;
+          return each._id === userProfile?._id;
         },
       );
       buttonText ? setState('Subscribed') : setState('Subscribe');

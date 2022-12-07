@@ -1,4 +1,6 @@
 import moment from 'moment';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import {
 	useAddVideoMutation,
@@ -36,6 +38,14 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
   const {data, isLoading, isFetching} = useGetPlaylistQuery(userProfile?._id);
   const [addVideo] = useAddVideoMutation();
   const toast = useToast();
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push('/login');
+    }
+  }, [userProfile?._id, router]);
+
   const handleAdd = async (id: string) => {
     const res: any = await addVideo({
       videoId,
