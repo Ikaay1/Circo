@@ -16,9 +16,9 @@ export default function WalletCard({
 }: Props) {
   const handleMoneyIn = () => {
     let num = 0;
-    walletData.transaction_history.forEach((history: any) => {
+    walletData?.transaction_history?.forEach((history: any) => {
       if (history.type === 'deposit' || history.type === 'transferIn') {
-        num += history.amount;
+        num += history?.amount;
       }
     });
     return num;
@@ -26,9 +26,9 @@ export default function WalletCard({
 
   const handleMoneyOut = () => {
     let num = 0;
-    walletData.transaction_history.forEach((history: any) => {
-      if (history.type === 'withdraw' || history.type === 'transferOut') {
-        num += history.amount;
+    walletData?.transaction_history?.forEach((history: any) => {
+      if (history?.type === 'withdraw' || history?.type === 'transferOut') {
+        num += history?.amount;
       }
     });
     return num;
@@ -68,7 +68,7 @@ export default function WalletCard({
               Total flow
             </Text>
             <Text fontSize={'subHead'} mb='8' fontWeight={400}>
-              ₦{handleMoneyIn()}
+              ₦{handleMoneyIn() ? handleMoneyIn() : 0}
             </Text>
             <Text fontSize={'xs'} color='clique.text'>
               This is the total amount of money that has come into your wallet
@@ -82,7 +82,7 @@ export default function WalletCard({
               Total Outflow
             </Text>
             <Text fontSize={'subHead'} mb='8' fontWeight={400}>
-              ₦{handleMoneyOut()}
+              ₦{handleMoneyOut() ? handleMoneyOut() : 0}
             </Text>
             <Text fontSize={'xs'} color='clique.text'>
               This is the total amount of money that has gone out of your wallet
