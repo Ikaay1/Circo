@@ -696,7 +696,7 @@ export const data = {
   ],
 };
 
-export const age: string[] = ["18 and above", "Below 18"];
+export const age: string[] = ["18 and above", "Below 18", "ALL"];
 
 export const API = axios.create({ baseURL: baseUrl });
 
