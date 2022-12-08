@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Box, Icon, Select, Text } from "@chakra-ui/react";
-import PasswordIcon from "@icons/PasswordIcon";
+import { Box, Icon, Select, Text } from '@chakra-ui/react';
+import PasswordIcon from '@icons/PasswordIcon';
 
 const AuthInput = ({
   image,
@@ -25,23 +25,23 @@ const AuthInput = ({
         <input
           value={theState}
           onChange={(e) => setTheState(e.target.value)}
-          className="input"
+          className='input'
           type={
             !i
               ? image
                 ? showPassword
-                  ? "text"
-                  : "password"
+                  ? 'text'
+                  : 'password'
                 : email
-                ? "email"
-                : "text"
+                ? 'email'
+                : 'text'
               : i === 1
               ? showPassword0
-                ? "text"
-                : "password"
+                ? 'text'
+                : 'password'
               : showPassword1
-              ? "text"
-              : "password"
+              ? 'text'
+              : 'password'
           }
           required={referral ? false : true}
           placeholder={name}
@@ -49,17 +49,17 @@ const AuthInput = ({
       ) : (
         <Select
           value={ageRange}
-          bg="clique.secondaryGrey1"
-          border={"none"}
-          borderRadius="15px"
+          bg='clique.secondaryGrey1'
+          border={'none'}
+          borderRadius='15px'
           //   pl="1.3rem"
-          _focus={{ boxShadow: "none" }}
-          h="57px"
-          w="100%"
+          _focus={{boxShadow: 'none'}}
+          h='57px'
+          w='100%'
           onChange={(e) => setAgeRange(e.target.value)}
-          className="input"
+          className='input'
           required={true}
-          placeholder={"Select " + name}
+          placeholder={'Select ' + name}
         >
           {option.map((item: any, i: number) => (
             <option key={i} value={item}>
@@ -69,21 +69,21 @@ const AuthInput = ({
         </Select>
       )}
       <Text
-        position="absolute"
-        top="6%"
-        left={"4.5%"}
-        fontSize="sm"
-        color="clique.white"
-        className="placeholder small"
+        position='absolute'
+        top='6%'
+        left={'4.5%'}
+        fontSize='sm'
+        color='clique.white'
+        className='placeholder small'
       >
         {name}
       </Text>
       {image && (
         <Box
-          position="absolute"
-          right={"4.5%"}
-          bottom="26%"
-          cursor={"pointer"}
+          position='absolute'
+          right={'4.5%'}
+          bottom='26%'
+          cursor={'pointer'}
           onClick={handleShowPassword}
         >
           <Icon as={PasswordIcon} />
