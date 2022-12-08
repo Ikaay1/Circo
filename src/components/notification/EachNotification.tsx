@@ -58,7 +58,11 @@ function EachNotification({ data }: { data: any }) {
               )}
             </Box>
 
-            <Text fontFamily={"Poppins"} fontSize="smSubHead">
+            <Text
+              fontWeight={data?.status === "unread" ? "bold" : "normal"}
+              fontFamily={"Poppins"}
+              fontSize="smSubHead"
+            >
               {data?.title}
             </Text>
           </Flex>
