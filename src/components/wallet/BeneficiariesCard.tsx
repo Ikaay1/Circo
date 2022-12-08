@@ -27,14 +27,14 @@ function BeneficiariesCard({onClick, hasBeneficiary, walletData}: Props) {
 
           <Box>
             <Text fontSize={'smSubHead'}>
-              {walletData.beneficiary.accountName}
+              {walletData?.beneficiary?.accountName}
             </Text>
             <Flex color='clique.text'>
               <Text mr='2' fontSize={'xs'}>
-                {walletData.beneficiary.bankName}
+                {walletData?.beneficiary?.bankName}
               </Text>
               <Text fontSize={'xs'}>
-                {walletData.beneficiary.accountNumber}
+                {walletData?.beneficiary?.accountNumber}
               </Text>
             </Flex>
           </Box>

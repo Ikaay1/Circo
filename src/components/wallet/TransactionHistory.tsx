@@ -22,8 +22,8 @@ const TransactionHistory = (props: Props) => {
       </Flex>
       <Divider mb='2'></Divider>
       <VStack spacing={1} align='stretch'>
-        {walletData.transaction_history.length ? (
-          walletData.transaction_history.map((each: any) => {
+        {walletData?.transaction_history?.length ? (
+          walletData?.transaction_history?.map((each: any) => {
             const info: ReceiptInfo = {
               name:
                 each.type === 'deposit'
