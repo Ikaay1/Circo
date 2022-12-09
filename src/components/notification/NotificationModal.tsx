@@ -26,9 +26,7 @@ function NotificationModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [page, setPage] = useState(1);
   const { data, isLoading, isFetching } = useGetNotificationQuery({ page });
-  const unread = data?.data?.notifications?.filter(
-    (item: any) => item?.status === "unread"
-  );
+
   const { loading, hasMore, contents } = useGetNotifications({
     data,
     isFetching,
@@ -77,7 +75,9 @@ function NotificationModal() {
             border="none"
             fontSize={"xs"}
           >
-            {unread?.length || 0}
+            {data?.data?.unread && data?.data?.unread > 0
+              ? data?.data?.unread
+              : ""}
           </AvatarBadge>
         </Avatar>
       </Flex>
