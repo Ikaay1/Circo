@@ -16,7 +16,7 @@ const useGetNotifications = ({ data, isFetching, page, isLoading }: any) => {
     if (data && !isFetching) {
       setContents((prevContents: any) => [
         ...prevContents,
-        ...data?.data?.notifications,
+        ...(data?.data?.notifications ?? []),
       ]);
       if (data?.data?.notifications?.length === 20) {
         setHasMore(page < data?.data?.totalPages);
