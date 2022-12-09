@@ -15,12 +15,19 @@ import UpwardIcon from "@icons/UpwardIcon";
 import DownwardIcon from "@icons/DownwardIcon";
 import { useRouter } from "next/router";
 
-function EachNotification({ data }: { data: any }) {
+function EachNotification({
+  lastElementRef,
+  data,
+}: {
+  data: any;
+  lastElementRef?: any;
+}) {
   const [readNotification, info] = useReadNotificationMutation();
   const route = useRouter();
 
   return (
     <AccordionItem
+      ref={lastElementRef}
       mb={"10px"}
       border={"none"}
       bg="clique.blackGrey"
