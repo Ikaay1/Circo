@@ -205,15 +205,15 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
                 fontWeight='500'
                 fontSize='subHead'
                 lineHeight='24px'
-                textDecorationLine='underline'
+                // textDecorationLine='underline'
                 color='clique.secondaryGrey2'
                 textAlign={'center'}
-                onClick={() => {
-                  onOpen();
-                }}
+                // onClick={() => {
+                //   onOpen();
+                // }}
                 cursor='pointer'
               >
-                SUBSCRIPTIONS
+                {userData?.data?.subscribersCount} SUBSCRIBERS
               </Text>
             </Box>
           )}

@@ -101,15 +101,17 @@ const Bio = ({
                 />
               )}
             </Box>
-            <Text
-              w='190px'
-              textAlign={'right'}
-              fontSize={'smSubHead'}
-              color={'clique.secondaryRed'}
-              mt='.4rem'
-            >
-              Your subscription expires 1 month after you subscribe
-            </Text>
+            {router.asPath !== '/channel/1/content' && (
+              <Text
+                w='190px'
+                textAlign={'right'}
+                fontSize={'smSubHead'}
+                color={'clique.secondaryRed'}
+                mt='.4rem'
+              >
+                Your subscription expires 1 month after you subscribe
+              </Text>
+            )}
           </Box>
         )}
       </Box>

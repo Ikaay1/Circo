@@ -100,7 +100,13 @@ const PlaylistList = ({videos, id, isLoading: netWorkLoading}: Props) => {
               </Box>
             ))
           ) : (
-            <Box>No video on this playlist yet</Box>
+            <Box>
+              No video on this playlist yet.{' '}
+              <span style={{color: '#892CDC'}}>
+                Click on the three dots below any video to add the video to a
+                playlist.
+              </span>
+            </Box>
           )}
         </Box>
       )}
