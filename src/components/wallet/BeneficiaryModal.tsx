@@ -268,6 +268,7 @@ function BeneficiaryModal({
                 required={true}
                 value={beneficiaryData.bankName}
                 onChange={(e) => handleChange(e)}
+                outline='none'
               >
                 {data?.data?.data?.map((bank: any) => (
                   <option value={`${bank.name}#${bank.code}`} key={bank.id}>
@@ -300,6 +301,8 @@ function BeneficiaryModal({
                 required={true}
                 value={beneficiaryData.accountNumber}
                 onChange={(e) => handleChange(e)}
+                outline='none'
+                border='none'
               />
             </Box>
 
@@ -313,7 +316,7 @@ function BeneficiaryModal({
               display={'flex'}
               justifyContent={'space-between'}
             >
-              <Box>
+              <Box width='90%'>
                 <Text
                   fontSize={'smSubHead'}
                   fontWeight='400'
@@ -329,6 +332,9 @@ function BeneficiaryModal({
                   required={true}
                   value={beneficiaryData.accountName}
                   readOnly={true}
+                  width='100%'
+                  outline='none'
+                  border='none'
                 />
               </Box>
               {loading2 && (
@@ -361,6 +367,8 @@ function BeneficiaryModal({
                 required={true}
                 value={beneficiaryData.otp_code}
                 onChange={(e) => handleChange(e)}
+                outline='none'
+                border='none'
               />
             </Box>
             <Box
@@ -387,6 +395,8 @@ function BeneficiaryModal({
                 required={true}
                 value={beneficiaryData.password}
                 onChange={(e) => handleChange(e)}
+                outline='none'
+                border='none'
               />
             </Box>
             <Box px='7'>
