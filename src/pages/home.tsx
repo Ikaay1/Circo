@@ -17,8 +17,10 @@ import VideoSkeletonLoader from "@components/home/VideoSkeletonLoader";
 import SideMenu from "@components/widgets/sideMenu";
 import { contentData, scrollBarStyle } from "@constants/utils";
 
+import io from "socket.io-client";
 import useGetContents from "../hooks/useGetContents";
 
+const socket = io(process.env.NEXT_PUBLIC_BASEURL!);
 function Index() {
   const router = useRouter();
   const [page, setPage] = useState(1);

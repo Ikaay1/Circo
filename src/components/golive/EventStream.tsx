@@ -30,7 +30,7 @@ import SelectField from "./SelectField";
 function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
   const toast = useToast();
   const { data, isLoading } = useCategoryQuery("");
-  const [updateEvent, updateInfo] = useUpdateEventMutation(); 
+  const [updateEvent, updateInfo] = useUpdateEventMutation();
   const dispatch = useAppDispatch();
   return (
     <Formik
@@ -211,6 +211,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
                   <SelectField name="ageRange" placeholder="Select Age Range">
                     <option value={"18 and above"}>18 and above</option>
                     <option value={"Below 18"}>Below 18</option>
+                    <option value={"ALL"}>All</option>
                   </SelectField>
                 </GridItem>
               </Grid>
