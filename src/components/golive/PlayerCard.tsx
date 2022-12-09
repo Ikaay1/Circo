@@ -162,14 +162,14 @@ function PlayerCard({ streamDetails, setState }: any) {
             fontWeight={500}
             fontSize="smSubHead"
           >
-            {`${process.env.NEXT_PUBLIC_FEURL}`}
+            {`${process.env.NEXT_PUBLIC_FEURL}`}stream/
             {streamDetails?._id}
           </Text>
 
           <Button
             onClick={() => {
               handleCopy(
-                `${process.env.NEXT_PUBLIC_FEURL}${streamDetails?.eventId?._id}`
+                `${process.env.NEXT_PUBLIC_FEURL}stream/${streamDetails?.eventId?._id}`
               );
             }}
             _hover={{
