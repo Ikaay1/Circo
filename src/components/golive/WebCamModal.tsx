@@ -299,7 +299,8 @@ function WebCamModal({ setState }: { setState: any }) {
                         <GridItem colSpan={2}>
                           <SelectField name="ageRange" placeholder="Age Range">
                             <option value={"18 and above"}>18 and above</option>
-                            <option value={"Below 18"}>Below 18</option>
+                            <option value={"Below 18"}>Below 18</option>{" "}
+                            <option value={"ALL"}>All</option>
                           </SelectField>
                         </GridItem>
                         <GridItem colSpan={4}>
