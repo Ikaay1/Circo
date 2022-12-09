@@ -17,8 +17,8 @@ export const notificationApi = createApi({
   tagTypes: ["Notification"],
   endpoints: (builder) => ({
     getNotification: builder.query<any, any>({
-      query: () => ({
-        url: `notifications`,
+      query: ({ page }) => ({
+        url: `notifications/?page=${page}&limit=20`,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
