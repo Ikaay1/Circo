@@ -6,5 +6,4 @@ export const editProfileSchema = yup.object().shape({
   email: yup.string().email().min(3),
   // dob: yup.string(),
   username: yup.string().min(5).max(30),
-
 });

@@ -15,7 +15,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { scrollBarStyle } from "@constants/utils";
-import React from "react";
+import useGetNotifications from "hooks/useGetNotifications";
+import React, { useState, useRef, useCallback } from "react";
 import { GoSettings } from "react-icons/go";
 import { MdOutlineNotificationsNone } from "react-icons/md";
 import { useGetNotificationQuery } from "redux/services/notification.service";
@@ -23,9 +24,31 @@ import AccordionNotification from "./AccordionNotification";
 
 function NotificationModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useGetNotificationQuery("");
-  const unread = data?.data?.preference?.filter(
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isFetching } = useGetNotificationQuery({ page });
+  const unread = data?.data?.notifications?.filter(
     (item: any) => item?.status === "unread"
+  );
+  const { loading, hasMore, contents } = useGetNotifications({
+    data,
+    isFetching,
+    page,
+    isLoading,
+  });
+
+  const observerRef: any = useRef();
+  const lastElementRef = useCallback(
+    (node: any) => {
+      if (loading) return;
+      if (observerRef.current) observerRef.current.disconnect();
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+      if (node) observerRef.current.observe(node);
+    },
+    [loading, hasMore]
   );
 
   return (
@@ -104,7 +127,12 @@ function NotificationModal() {
             [1, 2, 3, 4, 5].map((i) => (
               <Skeleton key={i} h="50px" rounded="10px" mb="10px" />
             ))}
-          {data && <AccordionNotification data={data?.data?.preference} />}
+          {data && (
+            <AccordionNotification
+              data={contents}
+              lastElementRef={lastElementRef}
+            />
+          )}
         </ModalContent>
       </Modal>
     </>
