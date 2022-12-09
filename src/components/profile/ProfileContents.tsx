@@ -70,20 +70,27 @@ const ProfileContents = () => {
           >
             <TabPanels>
               <CliqueTabPanel>
-                <SimpleGrid
-                  columns={{base: 3, lg: 4, mlg: 4, xl: 5}}
-                  spacing='30px'
-                >
-                  {isFetching &&
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+                {isFetching ? (
+                  <SimpleGrid
+                    columns={{base: 3, lg: 4, mlg: 4, xl: 5}}
+                    spacing='30px'
+                  >
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
                       <CardLoader key={i} />
                     ))}
-                  {!isFetching &&
-                    data &&
-                    data.data.map((event: any) => (
+                  </SimpleGrid>
+                ) : data && data?.data?.length ? (
+                  <SimpleGrid
+                    columns={{base: 3, lg: 4, mlg: 4, xl: 5}}
+                    spacing='30px'
+                  >
+                    {data.data.map((event: any) => (
                       <EventModal key={event.id} event={event} />
                     ))}
-                </SimpleGrid>
+                  </SimpleGrid>
+                ) : (
+                  <EmptyState msg='You have no paid live event' />
+                )}
               </CliqueTabPanel>
             </TabPanels>
           </Tabs>
