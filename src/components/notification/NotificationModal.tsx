@@ -137,7 +137,7 @@ function NotificationModal() {
             ))}
           {data && (
             <AccordionNotification
-              data={contents}
+              data={data?.data?.notifications}
               lastElementRef={lastElementRef}
             />
           )}
