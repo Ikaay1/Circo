@@ -1,26 +1,32 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useGetStreamCommentsQuery } from 'redux/services/livestream/streamComment.service';
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "redux/app/hooks";
+import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
 
-import { Box, Flex, Skeleton, SkeletonCircle, Text } from '@chakra-ui/react';
-import { scrollBarStyle } from '@constants/utils';
+import { Box, Flex, Skeleton, SkeletonCircle, Text } from "@chakra-ui/react";
+import { scrollBarStyle } from "@constants/utils";
 
-import EachComment from './EachComment';
-import NewComment from './NewComment';
+import EachComment from "./EachComment";
+import NewComment from "./NewComment";
+import io from "socket.io-client";
 
 function CommentSection({}: {}) {
   const router = useRouter();
   const { id } = router.query;
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const { data, isLoading, isFetching } = useGetStreamCommentsQuery(id);
+  const { data, isLoading, isFetching, refetch } =
+    useGetStreamCommentsQuery(id);
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [userProfile?._id, router]);
-
+  useEffect(() => {
+    io(process.env.NEXT_PUBLIC_BASEURL!).on("commentchange", (data: any) => {
+      refetch();
+    });
+  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <Box
       pos={"relative"}

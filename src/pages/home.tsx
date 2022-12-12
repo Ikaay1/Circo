@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import HomeLayout from "layouts/HomeLayout";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -17,10 +18,8 @@ import VideoSkeletonLoader from "@components/home/VideoSkeletonLoader";
 import SideMenu from "@components/widgets/sideMenu";
 import { contentData, scrollBarStyle } from "@constants/utils";
 
-import io from "socket.io-client";
 import useGetContents from "../hooks/useGetContents";
 
-const socket = io(process.env.NEXT_PUBLIC_BASEURL!);
 function Index() {
   const router = useRouter();
   const [page, setPage] = useState(1);
@@ -32,7 +31,7 @@ function Index() {
   const [categoryId, setCategoryId] = useState("all");
   const categories = useCategoryQuery("");
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const { data, isFetching, isLoading } = useGetContentsQuery({
+  const { data, isFetching, isLoading, refetch } = useGetContentsQuery({
     page,
     limit: 7,
     categoryId,

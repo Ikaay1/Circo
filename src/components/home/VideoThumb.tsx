@@ -72,7 +72,6 @@ function VideoThumb({
       );
     }
   };
-  console.log(router);
   return (
     <>
       <Box position={'relative'} ref={lastElementRef}>
