@@ -2,8 +2,9 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/constants*": ["constants/*"],
-      "@/components*": ["components/*"]
+      "@constants/*": ["constants/*"],
+      "@components/*": ["components/*"],
+      "@icons/*": ["assets/icons/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -21,6 +22,12 @@
     "incremental": true,
     "typeRoots": ["./types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/constants/fiirebase.js",
+    "src/components/createChannel/Testd.tss"
+, "src/redux/services/livestream/streamComment.service.ts", ],
   "exclude": ["node_modules"]
 }
