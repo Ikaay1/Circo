@@ -32,6 +32,9 @@ package-lock.json
 .env*.local
 .env
 
+yarn.lock
+package-lock.json
+
 # vercel
 .vercel
 
