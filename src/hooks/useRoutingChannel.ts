@@ -29,7 +29,7 @@ export const useRoutingChannel = () => {
       router.push('/channel/1/content');
       return;
     }
-    router.push(`channel/subscribe/${id}`);
+    router.push(`/channel/subscribe/${id}`);
   };
   return {handleRouting};
 };

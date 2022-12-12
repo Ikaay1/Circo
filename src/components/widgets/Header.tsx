@@ -127,6 +127,8 @@ function Header({upload}: Props) {
               size='sm'
               name={profile?.firstName + ' ' + profile?.lastName}
               src={profile?.photo}
+              cursor='pointer'
+              onClick={() => router.push('/profile/1/content')}
             />
           </Flex>
         </HStack>
