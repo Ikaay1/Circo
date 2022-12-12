@@ -16,16 +16,19 @@ import {
 } from "@chakra-ui/react";
 import { scrollBarStyle } from "@constants/utils";
 import useGetNotifications from "hooks/useGetNotifications";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { GoSettings } from "react-icons/go";
 import { MdOutlineNotificationsNone } from "react-icons/md";
 import { useGetNotificationQuery } from "redux/services/notification.service";
+import io from "socket.io-client";
 import AccordionNotification from "./AccordionNotification";
 
 function NotificationModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [page, setPage] = useState(1);
-  const { data, isLoading, isFetching } = useGetNotificationQuery({ page });
+  const { data, isLoading, isFetching, refetch } = useGetNotificationQuery({
+    page,
+  });
 
   const { loading, hasMore, contents } = useGetNotifications({
     data,
@@ -48,6 +51,11 @@ function NotificationModal() {
     },
     [loading, hasMore]
   );
+  useEffect(() => {
+    io(process.env.NEXT_PUBLIC_BASEURL!).on("newnotification", (data: any) => {
+      refetch();
+    });
+  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
 
   return (
     <>

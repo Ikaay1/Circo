@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import HomeLayout from "layouts/HomeLayout";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -9,11 +10,14 @@ import {
 } from "redux/services/livestream/live.service";
 import CommentSection from "@components/stream/CommentSection";
 import VideoDetails from "@components/stream/VideoDetails";
+import io from "socket.io-client";
 
 function Index() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, isFetching, isLoading } = useGetStreamQuery(id as string);
+  const { data, isFetching, isLoading, refetch } = useGetStreamQuery(
+    id as string
+  );
   const [createView, info] = useCreateViewMutation();
 
   useEffect(() => {
@@ -21,6 +25,13 @@ function Index() {
       createView({ streamId: data?.data?.stream?._id });
     }
   }, [data]);
+
+  useEffect(() => {
+    io(process.env.NEXT_PUBLIC_BASEURL!).on("newviewer", (data: any) => {
+      console.log(data);
+      refetch();
+    });
+  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <HomeLayout>
       <Flex>

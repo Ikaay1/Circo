@@ -15,6 +15,7 @@ import theme from "@constants/theme";
 import { persistor, store } from "../redux/app/store";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
+import { io } from "socket.io-client";
 
 const NProgress = require("nprogress");
 
@@ -50,6 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return <></>;
   }
 
+  const socket = io(process.env.NEXT_PUBLIC_BASEURL!);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
