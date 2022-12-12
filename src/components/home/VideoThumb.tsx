@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
 
 import {
 	Avatar,
@@ -9,6 +10,7 @@ import {
 	Flex,
 	Icon,
 	ScaleFade,
+	Skeleton,
 	Text,
 	useDisclosure,
 	useToast,
@@ -49,6 +51,9 @@ function VideoThumb({
   const {handleRouting} = useRoutingChannel();
   const router = useRouter();
   const [show, setShow] = React.useState(false);
+  const {isFetching, data: channelData} = useGetIndividualChannelQuery(
+    video?.uploader_id?._id,
+  );
   const handleClick = async (i: number) => {
     if (i === 1) {
       onOpenPlay();
@@ -78,6 +83,7 @@ function VideoThumb({
               isSubscribed={isSubscribed}
               id={video._id}
               video={video}
+              name={channelData?.data?.channel?.name}
             />
           </ScaleFade>
         ) : (
@@ -137,17 +143,22 @@ function VideoThumb({
                   {video?.title}
                 </Text>
 
-                <Text
-                  mt='5px'
-                  noOfLines={2}
-                  color={'clique.darkGrey'}
-                  fontFamily={'Poppins'}
-                  fontWeight={400}
-                  fontSize={'14px'}
-                  lineHeight={'1.2'}
-                >
-                  @{video?.uploader_id?.userName}
-                </Text>
+                {isFetching ? (
+                  <Skeleton height='13px' maxW={'100px'} mx='auto' />
+                ) : (
+                  <Text
+                    mt='5px'
+                    noOfLines={2}
+                    color={'clique.darkGrey'}
+                    fontFamily={'Poppins'}
+                    fontWeight={400}
+                    fontSize={'14px'}
+                    lineHeight={'1.2'}
+                  >
+                    @{channelData?.data?.channel?.name}
+                  </Text>
+                )}
+
                 <Flex alignItems={'center'} mt='5px'>
                   <Text
                     noOfLines={2}

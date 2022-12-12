@@ -211,7 +211,6 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
                 // onClick={() => {
                 //   onOpen();
                 // }}
-                cursor='pointer'
               >
                 {userData?.data?.subscribersCount} SUBSCRIBERS
               </Text>

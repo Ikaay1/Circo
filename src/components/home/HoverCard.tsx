@@ -23,11 +23,13 @@ function HoverCard({
   isSubscribed,
   id,
   video,
+  name,
 }: {
   setIsHover: any;
   isSubscribed: boolean;
   id: string;
   video: contentData;
+  name: string;
 }) {
   const router = useRouter();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
@@ -109,7 +111,7 @@ function HoverCard({
             fontSize={'14px'}
             lineHeight={'1.2'}
           >
-            @{video?.uploader_id?.userName}
+            @{name}
           </Text>
           <Flex alignItems={'center'} justifyContent='space-between'>
             <Flex alignItems={'center'} mr='.8rem'>
