@@ -23,9 +23,12 @@ function CommentSection({}: {}) {
     }
   }, [userProfile?._id, router]);
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!).on("commentchange", (data: any) => {
-      refetch();
-    });
+    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
+      "commentchange",
+      (data: any) => {
+        refetch();
+      }
+    );
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <Box

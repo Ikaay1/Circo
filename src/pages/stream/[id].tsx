@@ -27,10 +27,12 @@ function Index() {
   }, [data]);
 
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!).on("newviewer", (data: any) => {
-      console.log(data);
-      refetch();
-    });
+    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
+      "newviewer",
+      (data: any) => {
+        refetch();
+      }
+    );
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <HomeLayout>
