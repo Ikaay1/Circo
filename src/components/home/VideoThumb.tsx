@@ -143,7 +143,7 @@ function VideoThumb({
                 </Text>
 
                 {isFetching ? (
-                  <Skeleton height='13px' maxW={'100px'} mx='auto' />
+                  <Skeleton height='13px' maxW={'100px'} />
                 ) : (
                   <Text
                     mt='5px'
