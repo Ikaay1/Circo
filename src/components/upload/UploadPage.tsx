@@ -94,13 +94,7 @@ function UploadPage({url, name}: Props) {
           <Box borderRadius={'10px'} overflow='hidden'>
             <video width='100%' height={'60px'} src={url} />
           </Box>
-          <Text
-            fontWeight={600}
-            fontSize='smSubHead'
-            mb='3'
-            className='no-wrap'
-            mt='4'
-          >
+          <Text fontWeight={600} fontSize='smSubHead' mb='3' mt='4'>
             {state.title}
           </Text>
           <Text fontSize='xsl' noOfLines={5}>
