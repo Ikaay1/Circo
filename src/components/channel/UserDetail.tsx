@@ -28,6 +28,9 @@ export type Channel = {
   bio: string;
   cover?: string;
   createdAt: string;
+  category: {
+    _id: string;
+  };
   isDisabled: boolean;
   name: string;
   subscriptionFee: number;

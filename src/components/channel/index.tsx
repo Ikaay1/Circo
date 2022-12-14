@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Box } from '@chakra-ui/react';
 import ChannelContents from '@components/channel/ChannelContents';
 import CliqueLoader from '@components/home/CliqueLoader';
-import { contentData, scrollBarStyle } from '@constants/utils';
+import { contentData, scrollBarStyle, scrollBarStyle3 } from '@constants/utils';
 
 import Analytics from './Analytics';
 import Bio from './Bio';
@@ -45,7 +45,7 @@ const Index = ({
           overflowY='scroll'
           position={'relative'}
           pb='3rem'
-          sx={scrollBarStyle}
+          sx={scrollBarStyle3}
         >
           {router.query.name !== 'edit' && (
             <UserDetail

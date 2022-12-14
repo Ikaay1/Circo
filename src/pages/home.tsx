@@ -16,12 +16,7 @@ import TagSection from '@components/home/TagSection';
 import VideoGrid from '@components/home/VideoGrid';
 import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
 import SideMenu from '@components/widgets/sideMenu';
-import {
-	contentData,
-	scrollBarStyle,
-	scrollBarStyle2,
-	scrollBarStyle3,
-} from '@constants/utils';
+import { scrollBarStyle3 } from '@constants/utils';
 
 import useGetContents from '../hooks/useGetContents';
 

@@ -9,8 +9,8 @@ import LiveEvents from '@components/home/LiveEvents';
 import SideMenu from '@components/widgets/sideMenu';
 import {
 	purpleBoxStyle,
-	scrollBarStyle,
 	scrollBarStyle2,
+	scrollBarStyle3,
 } from '@constants/utils';
 
 function Index() {
@@ -31,7 +31,7 @@ function Index() {
           w={'calc(100vw - 500px)'}
           overflowY={'scroll'}
           overflowX={'hidden'}
-          sx={scrollBarStyle}
+          sx={scrollBarStyle3}
         >
           <Text
             py='20px'
