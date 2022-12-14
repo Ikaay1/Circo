@@ -27,7 +27,17 @@ export const categoryApi = createApi({
       }),
       providesTags: ['Category'],
     }),
+    creatorsCategory: builder.query<any, any>({
+      query: () => ({
+        url: `creators/category`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Category'],
+    }),
   }),
 });
 
-export const {useCategoryQuery} = categoryApi;
+export const {useCategoryQuery, useCreatorsCategoryQuery} = categoryApi;

@@ -1,28 +1,30 @@
-import { Box, Text } from "@chakra-ui/react";
-import { scrollBarStyle } from "@constants/utils";
-import React from "react";
-import { useGetPreferenceQuery } from "redux/services/settings.service";
-import Account from "./Account";
-import CommunityGuidlines from "./CommunityGuidlines";
-import CopyrightPolicy from "./CopyrightPolicy";
-import Faq from "./Faq";
-import Notification from "./Notification";
-import PrivacyPolicy from "./PrivacyPolicy";
-import TermsService from "./TermsService";
+import React from 'react';
+import { useGetPreferenceQuery } from 'redux/services/settings.service';
+
+import { Box, Text } from '@chakra-ui/react';
+import { scrollBarStyle } from '@constants/utils';
+
+import Account from './Account';
+import CommunityGuidlines from './CommunityGuidlines';
+import CopyrightPolicy from './CopyrightPolicy';
+import Faq from './Faq';
+import Notification from './Notification';
+import PrivacyPolicy from './PrivacyPolicy';
+import TermsService from './TermsService';
 
 export type SettingsProps = {
   current: string;
   onClick: (code: string) => void;
 };
 
-function Index({ current, onClick }: SettingsProps) {
-  const { isLoading, data } = useGetPreferenceQuery("");
+function Index({current, onClick}: SettingsProps) {
+  const {isLoading, data} = useGetPreferenceQuery('');
   let active;
   switch (current) {
-    case "account":
+    case 'account':
       active = <Account />;
       break;
-    case "notification":
+    case 'notification':
       active = (
         <Notification
           onClick={onClick}
@@ -31,19 +33,19 @@ function Index({ current, onClick }: SettingsProps) {
         />
       );
       break;
-    case "copyright":
+    case 'copyright':
       active = <CopyrightPolicy />;
       break;
-    case "terms":
+    case 'terms':
       active = <TermsService />;
       break;
-    case "guidlines":
+    case 'guidlines':
       active = <CommunityGuidlines />;
       break;
-    case "privacy":
+    case 'privacy':
       active = <PrivacyPolicy />;
       break;
-    case "faqs":
+    case 'faqs':
       active = <Faq />;
       break;
     default:
@@ -52,19 +54,19 @@ function Index({ current, onClick }: SettingsProps) {
   return (
     <Box>
       <Box
-        borderBottom={"1px solid #232323"}
-        height="12vh"
-        paddingLeft={"5"}
-        py="6"
-        mb="3"
+        borderBottom={'1px solid #232323'}
+        height='12vh'
+        paddingLeft={'5'}
+        py='6'
+        mb='3'
       >
         <Text>Settings</Text>
       </Box>
       <Box
-        pl="170px"
-        pr="12"
-        height={"100%"}
-        overflowY="scroll"
+        pl='170px'
+        pr='12'
+        height={'100%'}
+        overflowY='scroll'
         sx={scrollBarStyle}
       >
         {active}

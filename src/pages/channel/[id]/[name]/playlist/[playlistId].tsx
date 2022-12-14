@@ -7,7 +7,7 @@ import { Box, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import PlaylistDetails from '@components/profile/PlaylistDetails';
 import PlaylistSide from '@components/profile/PlaylistSide';
 import Header from '@components/widgets/Header';
-import { scrollBarStyle } from '@constants/utils';
+import { scrollBarStyle3 } from '@constants/utils';
 
 const Playlist = () => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const Playlist = () => {
             id={data?.data?.playlist?.userId._id}
           />
         </Box>
-        <Box flex='5.5' h='100%' overflowY='scroll' sx={scrollBarStyle}>
+        <Box flex='5.5' h='100%' overflowY='scroll' sx={scrollBarStyle3}>
           <PlaylistDetails
             playlist={data?.data?.playlist}
             isLoading={isLoading}

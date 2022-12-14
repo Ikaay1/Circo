@@ -13,7 +13,7 @@ import TagSection from '@components/home/TagSection';
 import VideoGrid from '@components/home/VideoGrid';
 import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
 import SideMenu from '@components/widgets/sideMenu';
-import { scrollBarStyle } from '@constants/utils';
+import { scrollBarStyle3 } from '@constants/utils';
 
 import useGetContents from '../../hooks/useGetContents';
 
@@ -65,7 +65,7 @@ function Search() {
             w={'calc(100vw - 500px)'}
             overflowY={'scroll'}
             overflowX={'hidden'}
-            sx={scrollBarStyle}
+            sx={scrollBarStyle3}
           >
             {!categories.data ? (
               <CliqueLoader />

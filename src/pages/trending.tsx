@@ -6,7 +6,7 @@ import LiveEvents from '@components/home/LiveEvents';
 import PopularBox from '@components/trending/PopularBox';
 import TrendingBox from '@components/trending/TrendingBox';
 import SideMenu from '@components/widgets/sideMenu';
-import { scrollBarStyle } from '@constants/utils';
+import { scrollBarStyle3 } from '@constants/utils';
 
 function Index() {
   return (
@@ -23,7 +23,7 @@ function Index() {
           minW={'calc(100vw - 500px)'}
           overflowY={'scroll'}
           overflowX={'hidden'}
-          sx={scrollBarStyle}
+          sx={scrollBarStyle3}
         >
           <HStack alignItems={'flex-start'} minH='100%' spacing={'20px'}>
             <TrendingBox />

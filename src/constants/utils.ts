@@ -481,7 +481,7 @@ export const scrollBarStyle2 = {
 
 export const scrollBarStyle3 = {
   '&::-webkit-scrollbar': {
-    width: '10px',
+    width: '5px',
     // rounded: 'full',
     // height: '20px',
   },
