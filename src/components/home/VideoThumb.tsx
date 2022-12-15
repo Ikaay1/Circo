@@ -168,7 +168,7 @@ function VideoThumb({
                     lineHeight={'1.2'}
                     mr='10px'
                   >
-                    {video?.view} views
+                    {video?.view} {video?.view !== 1 ? 'views' : 'view'}
                   </Text>
                   <Text
                     pos={'relative'}

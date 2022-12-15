@@ -52,9 +52,15 @@ const SubscribeChannel = () => {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    if (userProfile?._id === id) {
+      window.location.replace('/channel/1/content');
+    }
+  }, [userProfile?._id, id, router]);
 
   useEffect(() => {
     const expired = async () => {
@@ -64,10 +70,10 @@ const SubscribeChannel = () => {
         refetch();
       }
     };
-    if (id) {
+    if (id && userProfile?._id !== id) {
       expired();
     }
-  }, [expiredSub, id, refetch]);
+  }, [expiredSub, id, userProfile._id, refetch]);
 
   useEffect(() => {
     if (!userLoading && userData) {

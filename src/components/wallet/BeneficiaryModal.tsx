@@ -186,7 +186,7 @@ function BeneficiaryModal({
           position: 'top',
         });
       } else {
-        await addBeneficiary({
+        const res: any = await addBeneficiary({
           bankName: beneficiaryData.bankName.split('#')[0],
           accountName: beneficiaryData.accountName,
           accountNumber: beneficiaryData.accountNumber,
@@ -195,16 +195,34 @@ function BeneficiaryModal({
           password: beneficiaryData.password,
           code: beneficiaryData.bankName.split('#')[1],
         });
-        setBeneficiaryData({
-          otp_hash: '',
-          otp_code: '',
-          password: '',
-          bankName: '',
-          accountName: '',
-          accountNumber: '',
-        });
-        onClose();
-        refetch();
+        if ('data' in res) {
+          setBeneficiaryData({
+            otp_hash: '',
+            otp_code: '',
+            password: '',
+            bankName: '',
+            accountName: '',
+            accountNumber: '',
+          });
+          onClose();
+          refetch();
+        } else if (res.error) {
+          toast({
+            title: res.error?.data?.message,
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+            position: 'top',
+          });
+        } else {
+          toast({
+            title: 'Something went wrong',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+            position: 'top',
+          });
+        }
       }
     }
   };

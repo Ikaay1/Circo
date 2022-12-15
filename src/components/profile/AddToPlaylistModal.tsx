@@ -38,11 +38,11 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
   const {data, isLoading, isFetching} = useGetPlaylistQuery(userProfile?._id);
   const [addVideo] = useAddVideoMutation();
   const toast = useToast();
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 

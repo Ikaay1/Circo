@@ -32,7 +32,7 @@ function VideoOptionMenu({player, video}: any) {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 

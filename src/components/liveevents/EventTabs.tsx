@@ -39,7 +39,7 @@ function EventTabs() {
             setOngoing('');
           }}
         >
-          Unpaid Events
+          Free Events
         </CliqueTab>
         <CliqueTab
           onClick={() => {

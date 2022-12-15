@@ -53,15 +53,10 @@ function Control({
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      router.push('/login');
-    }
-  }, [userProfile?._id, router]);
   return (
     <Grid templateColumns='repeat(7, 1fr)' px='30px' py='20px' gap={4}>
       <GridItem colSpan={2}>
