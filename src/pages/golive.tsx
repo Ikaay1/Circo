@@ -1,68 +1,104 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
-import { Box, Text } from '@chakra-ui/react';
-import EventTab from '@components/golive/EventTab';
-import GoLiveTab from '@components/golive/GoLiveTab';
-import LiveEventPage from '@components/golive/LiveEventPage';
-import NewLiveTab from '@components/golive/NewLiveTab';
-import SideMenu from '@components/golive/SideMenu';
-import Header from '@components/widgets/Header';
-import { scrollBarStyle } from '@constants/utils';
+import { Box, Text } from "@chakra-ui/react";
+import EventTab from "@components/golive/EventTab";
+import GoLiveTab from "@components/golive/GoLiveTab";
+import LiveEventPage from "@components/golive/LiveEventPage";
+import NewLiveTab from "@components/golive/NewLiveTab";
+import SideMenu from "@components/golive/SideMenu";
+import Header from "@components/widgets/Header";
+import { scrollBarStyle } from "@constants/utils";
 
 type Props = {};
 
 function Index({}: Props) {
   const router = useRouter();
-  const [state, setState] = useState<string>('stream');
+  const [state, setState] = useState<string>("stream");
+  const refreshed = router.query.refreshed;
 
   return (
     <Box>
       <Header />
-      <Box h={{lg: '90vh'}} display='flex' bg='clique.primaryBg'>
-        <Box flex='1' h='100%'>
+      <Box h={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
+        <Box flex="1" h="100%">
           <SideMenu click={(route) => setState(route)} />
         </Box>
         <Box
-          maxW={'calc(100vw - 250px)'}
-          minW={'calc(100vw - 250px)'}
-          px='30px'
-          h='100%'
-          maxH={'90vh'}
-          pb='12'
-          overflowY={'scroll'}
-          overflowX={'hidden'}
+          maxW={"calc(100vw - 250px)"}
+          minW={"calc(100vw - 250px)"}
+          px="30px"
+          h="100%"
+          maxH={"90vh"}
+          pb="12"
+          overflowY={"scroll"}
+          overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          {state === 'stream' && (
+          {refreshed === "true" && state !== "stream" && (
             <Box>
-              {' '}
               <Text
-                pt='20px'
-                position={'relative'}
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
-                textTransform={'capitalize'}
-                fontSize='head'
-                lineHeight={'1'}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
+              >
+                Go Live
+              </Text>
+              <EventTab setState={setState} />
+            </Box>
+          )}
+
+          {refreshed === "truer" && state !== "stream" && (
+            <Box>
+              <Text
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
               >
                 Stream
-              </Text>{' '}
+              </Text>{" "}
               <GoLiveTab state={state} />
             </Box>
           )}
-          {state === 'liveevent' && (
+          {state === "stream" && (
+            <Box>
+              {" "}
+              <Text
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
+              >
+                Stream
+              </Text>{" "}
+              <GoLiveTab state={state} />
+            </Box>
+          )}
+          {state === "liveevent" && (
             <Box>
               <Text
-                pt='20px'
-                position={'relative'}
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
-                textTransform={'capitalize'}
-                fontSize='head'
-                lineHeight={'1'}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
               >
                 Live Event
               </Text>
@@ -70,34 +106,34 @@ function Index({}: Props) {
             </Box>
           )}
 
-          {state === 'create' && (
+          {state === "create" && (
             <Box>
               <Text
-                pt='20px'
-                position={'relative'}
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
-                textTransform={'capitalize'}
-                fontSize='head'
-                lineHeight={'1'}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
               >
                 Create Live Event
               </Text>
               <NewLiveTab setState={setState} state={state} />
             </Box>
           )}
-          {state === 'viewevent' && (
+          {state === "viewevent" && (
             <Box>
               <Text
-                pt='20px'
-                position={'relative'}
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                pt="20px"
+                position={"relative"}
+                color={"clique.white"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
-                textTransform={'capitalize'}
-                fontSize='head'
-                lineHeight={'1'}
+                textTransform={"capitalize"}
+                fontSize="head"
+                lineHeight={"1"}
               >
                 Go Live
               </Text>
