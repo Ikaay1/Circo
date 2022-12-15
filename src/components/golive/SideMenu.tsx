@@ -3,15 +3,18 @@ import { useState } from "react";
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { goliveMenu, settingsMenu } from "@constants/utils";
 import WebCamModal from "./WebCamModal";
+import { useRouter } from "next/router";
 
 type Props = {
   click: (route: string) => void;
 };
 
 const SideMenu = ({ click }: Props) => {
+  const router = useRouter();
   const handleClick = (route: string) => {
     click(route);
     setState(route);
+    router.query.refreshed = "false";
   };
   const [state, setState] = useState("stream");
 
