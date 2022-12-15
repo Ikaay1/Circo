@@ -58,14 +58,13 @@ const Notification = ({isLoading, data, onClick}: Props) => {
     liveStreamStarted: data ? data?.liveStreamStarted : false,
     lightOrDark: data ? data?.lightOrDark : false,
   });
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (!userProfile?._id) {
       router.push('/login');
     }
   }, [userProfile?._id, router]);
-
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({...prev, [e.target.name]: e.target.checked}));
@@ -211,7 +210,7 @@ const Notification = ({isLoading, data, onClick}: Props) => {
               <TbCopy
                 fontSize={'20'}
                 color='#8758FF'
-                onClick={() => onClick('D657Y85')}
+                onClick={() => onClick(userProfile?.referralCode)}
                 cursor='pointer'
               />
             </Flex>

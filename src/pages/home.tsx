@@ -1,37 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import HomeLayout from "layouts/HomeLayout";
-import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useAppSelector } from "redux/app/hooks";
-import { useCategoryQuery } from "redux/services/category.service";
-import { useGetContentsQuery } from "redux/services/content.service";
-import { useDepositToWalletMutation } from "redux/services/wallet.service";
+import HomeLayout from 'layouts/HomeLayout';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useCategoryQuery } from 'redux/services/category.service';
+import { useGetContentsQuery } from 'redux/services/content.service';
+import { useDepositToWalletMutation } from 'redux/services/wallet.service';
 
-import { Box, Divider, Flex } from "@chakra-ui/react";
-import EmptyState from "@components/emptyState/EmptyState";
-import CliqueLoader from "@components/home/CliqueLoader";
-import LiveEvents from "@components/home/LiveEvents";
-import LiveTopCard from "@components/home/LiveTopCard";
-import TagSection from "@components/home/TagSection";
-import VideoGrid from "@components/home/VideoGrid";
-import VideoSkeletonLoader from "@components/home/VideoSkeletonLoader";
-import SideMenu from "@components/widgets/sideMenu";
-import { contentData, scrollBarStyle } from "@constants/utils";
+import { Box, Divider, Flex } from '@chakra-ui/react';
+import EmptyState from '@components/emptyState/EmptyState';
+import CliqueLoader from '@components/home/CliqueLoader';
+import LiveEvents from '@components/home/LiveEvents';
+import LiveTopCard from '@components/home/LiveTopCard';
+import TagSection from '@components/home/TagSection';
+import VideoGrid from '@components/home/VideoGrid';
+import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
+import SideMenu from '@components/widgets/sideMenu';
+import { scrollBarStyle3 } from '@constants/utils';
 
-import useGetContents from "../hooks/useGetContents";
+import useGetContents from '../hooks/useGetContents';
 
 function Index() {
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
-  const { tx_ref } = router.query;
+  const {tx_ref} = router.query;
 
   const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
-  const [categoryId, setCategoryId] = useState("all");
-  const categories = useCategoryQuery("");
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const { data, isFetching, isLoading, refetch } = useGetContentsQuery({
+  const [categoryId, setCategoryId] = useState('all');
+  const categories = useCategoryQuery('');
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const {data, isFetching, isLoading, refetch} = useGetContentsQuery({
     page,
     limit: 7,
     categoryId,
@@ -39,31 +39,31 @@ function Index() {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push("/login");
+      router.push('/login');
     }
   }, [userProfile?._id, router]);
 
   useEffect(() => {
     const deposit = async () => {
       depositToWallet({
-        amount: Number(JSON.parse(localStorage.getItem("okay")!)),
-        description: "Funding wallet",
+        amount: Number(JSON.parse(localStorage.getItem('okay')!)),
+        description: 'Funding wallet',
         reference: `${tx_ref}`,
       })
         .then((res: any) => {
-          localStorage.removeItem("okay");
+          localStorage.removeItem('okay');
         })
         .catch((err) => {
-          localStorage.removeItem("okay");
+          localStorage.removeItem('okay');
         });
-      router.push("/home");
+      router.push('/home');
     };
-    if (tx_ref && localStorage.getItem("okay")) {
+    if (tx_ref && localStorage.getItem('okay')) {
       deposit();
     }
   }, [tx_ref, depositToWallet, router]);
 
-  const { loading, hasMore, contents } = useGetContents({
+  const {loading, hasMore, contents} = useGetContents({
     data,
     isFetching,
     page,
@@ -83,7 +83,7 @@ function Index() {
       });
       if (node) observerRef.current.observe(node);
     },
-    [loading, hasMore]
+    [loading, hasMore],
   );
 
   return (
@@ -92,13 +92,13 @@ function Index() {
         <Flex>
           <SideMenu />
           <Box
-            maxH={"90vh"}
-            pb="50px"
-            px="30px"
-            w={"calc(100vw - 500px)"}
-            overflowY={"scroll"}
-            overflowX={"hidden"}
-            sx={scrollBarStyle}
+            maxH={'90vh'}
+            pb='50px'
+            px='30px'
+            w={'calc(100vw - 500px)'}
+            overflowY={'scroll'}
+            overflowX={'hidden'}
+            sx={scrollBarStyle3}
           >
             {!categories.data ? (
               <CliqueLoader />
@@ -119,14 +119,14 @@ function Index() {
                     {isFetching && page === 1 ? (
                       <VideoSkeletonLoader />
                     ) : !isFetching && !contents.length ? (
-                      <Box mt="20px" height="65%">
-                        <EmptyState msg="Oops!. No video here" />
+                      <Box mt='20px' height='65%'>
+                        <EmptyState msg='Oops!. No video here' />
                       </Box>
                     ) : (
                       <>
                         <VideoGrid
-                          thumbWidth={{ lg: "220px", mlg: "280px", xl: "full" }}
-                          width={"calc(100vw - 560px)"}
+                          thumbWidth={{lg: '220px', mlg: '280px', xl: 'full'}}
+                          width={'calc(100vw - 560px)'}
                           videos={contents}
                           lastElementRef={lastElementRef}
                         />
