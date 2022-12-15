@@ -8,13 +8,7 @@ export const useRoutingChannel = () => {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
-    }
-  }, [userProfile?._id, router]);
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 

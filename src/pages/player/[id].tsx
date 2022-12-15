@@ -23,7 +23,7 @@ function Index() {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 

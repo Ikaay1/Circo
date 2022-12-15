@@ -30,7 +30,7 @@ function EachComment({comment}: {comment: commentInterface}) {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 
@@ -88,15 +88,12 @@ function EachComment({comment}: {comment: commentInterface}) {
           </Text>
         </Flex>
 
-        <Text
-          mt='5px'
-          color={'clique.white'}
-          fontFamily={'Poppins'}
-          fontWeight={400}
-          fontSize={'smSubHead'}
-          lineHeight={'1.3'}
-        >
-          {comment.comment.comment}
+        <Text mt='5px' color={'clique.white'}>
+          <pre
+            style={{fontFamily: 'Poppins', lineHeight: '1.3', fontSize: '14px'}}
+          >
+            {comment.comment.comment}
+          </pre>
         </Text>
         <Flex alignItems={'center'} justifyContent='space-between' mt='15px'>
           <Flex alignItems={'center'}>

@@ -60,7 +60,7 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 
@@ -215,21 +215,23 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
                 //   onOpen();
                 // }}
               >
-                {userData?.data?.subscribersCount} SUBSCRIBERS
+                {userData?.data?.subscribersCount}{' '}
+                {userData?.data?.subscribersCount !== 1
+                  ? 'SUBSCRIBERS'
+                  : 'SUBSCRIBER'}
               </Text>
             </Box>
           )}
         </Box>
-
-        {router.pathname.includes('profile') ? (
+        {/* {router.pathname.includes('profile') ? (
           <Box position={'absolute'} right='10' bottom='-55'>
             {/* {data === null && (
               <Btn text="Create channel" mr="4" onClick={channelOnOpen} />
             )} */}
 
-            <SideIcon />
-          </Box>
-        ) : null}
+        {/* <SideIcon /> */}
+        {/* </Box> */}
+        {/* // ) : null} */}
       </Box>
       <Modal
         isCentered
