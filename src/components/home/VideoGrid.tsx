@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useRef } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useRef } from "react";
+import { useAppSelector } from "redux/app/hooks";
 
-import { SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from "@chakra-ui/react";
 
-import { contentData } from '../../constants/utils';
-import VideoThumb from './VideoThumb';
+import { contentData } from "../../constants/utils";
+import VideoThumb from "./VideoThumb";
 
 function VideoGrid({
   width,
@@ -20,22 +20,22 @@ function VideoGrid({
   lastElementRef?: any;
   setContents?: any;
 }) {
-  const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
+  const { userProfile } = useAppSelector((store) => store?.app?.userReducer);
   const router = useRouter();
 
   useEffect(() => {
     if (!userProfile?._id) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [userProfile?._id, router]);
 
   return (
     <>
       <SimpleGrid
-        columns={{base: 1, lg: 3, mlg: 3, xl: 4}}
-        mt='20px'
+        columns={{ base: 1, lg: 3, mlg: 3, xl: 4 }}
+        mt="20px"
         w={width}
-        spacing={'30px'}
+        spacing={"30px"}
       >
         {videos?.map((video, i) => {
           if (videos.length === i + 1) {
@@ -49,7 +49,7 @@ function VideoGrid({
                     video.uploader_id?._id === userProfile?._id
                       ? true
                       : video?.uploader_id?.subscribers?.find(
-                          (theId) => theId === userProfile?._id,
+                          (theId) => theId === userProfile?._id
                         )
                       ? true
                       : false
@@ -70,7 +70,7 @@ function VideoGrid({
                     video.uploader_id?._id === userProfile?._id
                       ? true
                       : video?.uploader_id?.subscribers?.find(
-                          (theId) => theId === userProfile?._id,
+                          (theId) => theId === userProfile?._id
                         )
                       ? true
                       : false
