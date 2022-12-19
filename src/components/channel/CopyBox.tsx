@@ -9,7 +9,7 @@ import CopyLinkIcon from '@icons/CopyLinkIcon';
 
 import ChannelInput from './ChannelInput';
 
-const CopyBox = () => {
+const CopyBox = ({link}: {link: string}) => {
   const [isCopied, setIsCopied] = React.useState(false);
   const profile = useAppSelector((state) => state.app.userReducer.userProfile);
   const router = useRouter();
@@ -42,22 +42,42 @@ const CopyBox = () => {
           <Box
             cursor={'pointer'}
             onClick={() => {
-              if (icon === 'whatsapp') {
-                window.open(
-                  `https://wa.me/?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`,
-                );
-              } else if (icon === 'ig') {
-                window.open(
-                  `https://www.instagram.com/direct/t/340282366841710300949128165346056853440`,
-                );
-              } else if (icon === 'twitter') {
-                window.open(
-                  `https://twitter.com/intent/tweet?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`,
-                );
-              } else if (icon === 'facebook') {
-                window.open(
-                  `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`,
-                );
+              if (link.includes('channel')) {
+                if (icon === 'whatsapp') {
+                  window.open(
+                    `https://wa.me/?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20${process.env.NEXT_PUBLIC_FEURL}${link}`,
+                  );
+                } else if (icon === 'ig') {
+                  window.open(
+                    `https://www.instagram.com/direct/t/340282366841710300949128165346056853440`,
+                  );
+                } else if (icon === 'twitter') {
+                  window.open(
+                    `https://twitter.com/intent/tweet?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20channel%20${process.env.NEXT_PUBLIC_FEURL}${link}`,
+                  );
+                } else if (icon === 'facebook') {
+                  window.open(
+                    `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_FEURL}${link}`,
+                  );
+                }
+              } else {
+                if (icon === 'whatsapp') {
+                  window.open(
+                    `https://wa.me/?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20video%20${process.env.NEXT_PUBLIC_FEURL}${link}`,
+                  );
+                } else if (icon === 'ig') {
+                  window.open(
+                    `https://www.instagram.com/direct/t/340282366841710300949128165346056853440`,
+                  );
+                } else if (icon === 'twitter') {
+                  window.open(
+                    `https://twitter.com/intent/tweet?text=Hi%20use%20this%20link%20to%20checkout%20my%20clique%20video%20${process.env.NEXT_PUBLIC_FEURL}${link}`,
+                  );
+                } else if (icon === 'facebook') {
+                  window.open(
+                    `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_FEURL}${link}`,
+                  );
+                }
               }
             }}
             w='85px'
@@ -83,7 +103,7 @@ const CopyBox = () => {
       <Box mt='3rem' height={'55px'} position={'relative'}>
         <ChannelInput
           isReadonly
-          value={`${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`}
+          value={`${process.env.NEXT_PUBLIC_FEURL}${link}`}
         />
         <Box
           position='absolute'
@@ -95,9 +115,7 @@ const CopyBox = () => {
           color='clique.secondaryGrey2'
           cursor='pointer'
           onClick={() => {
-            handleCopy(
-              `${process.env.NEXT_PUBLIC_FEURL}channel/subscribe/${profile?._id}`,
-            );
+            handleCopy(`${process.env.NEXT_PUBLIC_FEURL}${link}`);
           }}
         >
           {isCopied ? 'Copied' : <Icon as={CopyLinkIcon} />}

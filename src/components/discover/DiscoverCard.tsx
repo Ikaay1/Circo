@@ -12,7 +12,9 @@ function DiscoverCard({video}: {video: contentData}) {
   console.log(video.uploader_id.firstName);
   return (
     <Box
-      onClick={() => router.push(`/player/${video._id}`)}
+      onClick={() =>
+        router.push(`/player/${video._id}/${video.uploader_id._id}`)
+      }
       cursor={'pointer'}
       h='280px'
       bgImage={video.thumbNail}

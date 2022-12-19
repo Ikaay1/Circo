@@ -7,16 +7,19 @@ import {
 	useExpiredSubscriptionMutation,
 	useGetContentQuery,
 } from 'redux/services/content.service';
+import { useGetUserQuery } from 'redux/services/user.service';
 
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, useToast } from '@chakra-ui/react';
 import CommentSection from '@components/player/CommentSection';
 import VideoDetails from '@components/player/VideoDetails';
 import VideoPlayer from '@components/player/VideoPlayer';
 
 function Index() {
+  const toast = useToast();
   const router = useRouter();
-  const {id} = router.query;
+  const {id, userId} = router.query;
   const {data, isLoading, refetch} = useGetContentQuery(id);
+  const {data: userData, isFetching} = useGetUserQuery(userId);
   const [view] = useCreateViewMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [expiredSub] = useExpiredSubscriptionMutation();
@@ -28,19 +31,49 @@ function Index() {
   }, [userProfile?._id, router]);
 
   useEffect(() => {
+    if (userData && userData?.data?._id !== userProfile?._id) {
+      if (
+        !userData?.data?.subscribers?.find(
+          (subscriber: {_id: string}) => subscriber._id === userProfile._id,
+        )
+      ) {
+        toast({
+          title: 'You are not subscribed to this content uploader',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setTimeout(() => {
+          window.location.replace('/home');
+        }, 1000);
+      }
+    }
+  }, [toast, userData, userProfile._id]);
+
+  useEffect(() => {
     const expired = async () => {
       const res: any = await expiredSub({
         id: data.data.preference.video.uploader_id._id,
       });
       console.log('res', res);
       if (res?.data?.data?.email) {
-        router.push('/home');
+        toast({
+          title: 'Your subscription to this content uploader has expired',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setTimeout(() => {
+          window.location.replace('/home');
+        }, 500);
       }
     };
     if (data) {
       expired();
     }
-  }, [expiredSub, data, router]);
+  }, [expiredSub, data, router, toast]);
 
   useEffect(() => {
     const createView = async () => {
@@ -55,7 +88,7 @@ function Index() {
 
   return (
     <>
-      {isLoading || !data ? (
+      {isLoading || !data || !userData ? (
         <Box></Box>
       ) : (
         <HomeLayout>
