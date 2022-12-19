@@ -77,6 +77,12 @@ function PlayerCard({ streamDetails, setState }: any) {
             })
           );
         }
+
+        window.location.replace(
+          `/golive/?refreshed=${
+            streamId === streamDetails?._id ? "truer" : "true"
+          }`
+        );
       } else {
         toast({
           title: "Error",
