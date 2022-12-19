@@ -25,6 +25,7 @@ export interface Videos {
   _id: string;
   uploader_firstName: string;
   uploader_lastName: string;
+  uploader_id: string;
 }
 
 export interface PlaylistProps {

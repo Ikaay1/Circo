@@ -24,10 +24,12 @@ function HoverCard({
   id,
   video,
   name,
+  userId,
 }: {
   setIsHover: any;
   isSubscribed: boolean;
   id: string;
+  userId: string;
   video: contentData;
   name: string;
 }) {
@@ -58,7 +60,7 @@ function HoverCard({
       <Box
         onClick={() => {
           if (isSubscribed) {
-            router.push(`/player/${id}`);
+            router.push(`/player/${id}/${userId}`);
           } else {
             onOpen();
           }

@@ -33,6 +33,7 @@ const Bio = ({
   isFetching?: boolean;
 }) => {
   const router = useRouter();
+  console.log(router);
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [state, setState] = useState('');
@@ -123,7 +124,13 @@ const Bio = ({
             left={'50%'}
             transform={'translate(-50%, 60%)'}
           >
-            <CopyBox />
+            <CopyBox
+              link={
+                router.asPath === '/channel/1/content'
+                  ? `channel/subscribe/${userProfile?._id}`
+                  : `channel/subscribe/${router?.query?.id}`
+              }
+            />
           </Box>
         </ModalContent>
       </Modal>

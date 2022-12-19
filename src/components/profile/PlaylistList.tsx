@@ -60,7 +60,11 @@ const PlaylistList = ({videos, id, isLoading: netWorkLoading}: Props) => {
                         borderRadius='10px'
                         alt='video thumbNail'
                         cursor='pointer'
-                        onClick={() => router.push(`/player/${item._id}`)}
+                        onClick={() =>
+                          router.push(
+                            `/player/${item?._id}/${item?.uploader_id}`,
+                          )
+                        }
                       />
                     ) : (
                       <Flex
@@ -69,7 +73,9 @@ const PlaylistList = ({videos, id, isLoading: netWorkLoading}: Props) => {
                         borderRadius='10px'
                         bg='linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323'
                         cursor='pointer'
-                        onClick={() => router.push(`/player/${item._id}`)}
+                        onClick={() =>
+                          router.push(`/player/${item._id}/${item.uploader_id}`)
+                        }
                       ></Flex>
                     )}
                   </Box>
@@ -81,7 +87,9 @@ const PlaylistList = ({videos, id, isLoading: netWorkLoading}: Props) => {
                       color='clique.white'
                       mb='.5rem'
                       cursor='pointer'
-                      onClick={() => router.push(`/player/${item._id}`)}
+                      onClick={() =>
+                        router.push(`/player/${item?._id}/${item?.uploader_id}`)
+                      }
                     >
                       {item?.title}
                     </Text>
