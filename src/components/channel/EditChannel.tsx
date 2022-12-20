@@ -121,7 +121,7 @@ const EditChannel = ({data}: {data?: Channel}) => {
   const initialValues = {
     name: data?.name ? data.name : '',
     bioDescription: data?.bio ? data?.bio : '',
-    category: data?.category._id ? data?.category._id : '',
+    category: data?.category?._id ? data?.category?._id : '',
     subscriptionFee: data?.subscriptionFee ? String(data?.subscriptionFee) : '',
     subscriptionInfo: data?.subscriptionInfo ? data?.subscriptionInfo : '',
   };
