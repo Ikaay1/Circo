@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputRightElement,
   Spinner,
+  Textarea,
   useToast,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
@@ -37,7 +38,8 @@ function NewChatComment({ id, profile }: { id: string; profile: any }) {
       />
 
       <InputGroup>
-        <Input
+        <Textarea
+          rows={2}
           rounded={"10px"}
           p="5px"
           px="10px"
