@@ -1,7 +1,9 @@
 import moment from 'moment';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
 import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
+import { useDeleteContentMutation } from 'redux/services/content.service';
 
 import {
 	Avatar,
@@ -13,11 +15,13 @@ import {
 	ModalOverlay,
 	ScaleFade,
 	Skeleton,
+	SkeletonCircle,
 	Text,
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
 import CopyBox from '@components/channel/CopyBox';
+import Sure from '@components/channel/Sure';
 import AddToPlaylistModal from '@components/profile/AddToPlaylistModal';
 import PlaylistAddIcon from '@icons/PlaylistAddIcon';
 import ShareE from '@icons/ShareE';
@@ -55,30 +59,32 @@ function VideoThumb({
     onClose: onClosePlay,
   } = useDisclosure();
   const [isHover, setIsHover] = React.useState(false);
+  const [deleteContent, deleteContentStatus] = useDeleteContentMutation();
   const {handleRouting} = useRoutingChannel();
   const router = useRouter();
   const [show, setShow] = React.useState(false);
+  const {
+    isOpen: isOpenSure,
+    onOpen: onOpenSure,
+    onClose: onCloseSure,
+  } = useDisclosure();
   const {isFetching, data: channelData} = useGetIndividualChannelQuery(
     video?.uploader_id?._id,
   );
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  useEffect(() => {
+    if (!userProfile?._id) {
+      window.location.replace('/login');
+    }
+  }, [userProfile?._id, router]);
+
   const handleClick = async (i: number) => {
     if (i === 0) {
       onOpenCopy();
     } else if (i === 1) {
       onOpenPlay();
     } else {
-      await API.delete(`${baseUrl}content/delete-video/${video._id}`);
-      toast({
-        title: 'Video successfully deleted',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
-      // router.reload();
-      setContents((prevContents: contentData[]) =>
-        prevContents.filter((content) => content._id !== video._id),
-      );
+      onOpenSure();
     }
   };
   return (
@@ -93,6 +99,7 @@ function VideoThumb({
               userId={video.uploader_id._id}
               video={video}
               name={channelData?.data?.channel?.name}
+              photo={channelData?.data?.channel?.photo}
             />
           </ScaleFade>
         ) : (
@@ -126,19 +133,23 @@ function VideoThumb({
             </Box>
 
             <Flex mt='15px'>
-              <Avatar
-                mr={'10px'}
-                p='0'
-                size='sm'
-                name={
-                  video?.uploader_id?.firstName +
-                  ' ' +
-                  video?.uploader_id?.lastName
-                }
-                src={video?.uploader_id?.photo}
-                onClick={() => handleRouting(video?.uploader_id?._id)}
-                cursor='pointer'
-              />
+              {isFetching ? (
+                <SkeletonCircle size='10' mr='10px' />
+              ) : (
+                <Avatar
+                  mr={'10px'}
+                  p='0'
+                  size='sm'
+                  name={
+                    video?.uploader_id?.firstName +
+                    ' ' +
+                    video?.uploader_id?.lastName
+                  }
+                  src={channelData?.data?.channel?.photo}
+                  onClick={() => handleRouting(video?.uploader_id?._id)}
+                  cursor='pointer'
+                />
+              )}
 
               <Box w='calc(100% - 40px)'>
                 <Text
@@ -236,7 +247,7 @@ function VideoThumb({
                 }}
                 onMouseLeave={() => setShow(false)}
               >
-                {router.asPath === '/channel/1/content'
+                {userProfile?._id === video.uploader_id._id
                   ? VideoSideMenu.map((each, i) => (
                       <Flex
                         align='center'
@@ -297,6 +308,26 @@ function VideoThumb({
           </Box>
         </ModalContent>
       </Modal>
+      <Sure
+        isOpen={isOpenSure}
+        isLoading={deleteContentStatus.isLoading}
+        onClose={onCloseSure}
+        header='Delete Content'
+        description='Are you sure you want to delete this content?'
+        buttonText='Delete'
+        onClick={async () => {
+          await deleteContent(video?._id);
+          toast({
+            title: 'Video successfully deleted',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+            position: 'top-right',
+          });
+          window.location.replace('/channel/1/content');
+          onCloseSure();
+        }}
+      />
     </>
   );
 }

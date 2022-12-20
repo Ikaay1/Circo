@@ -1,51 +1,68 @@
-import { baseUrl } from "@constants/utils";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { store } from "redux/app/store";
+import { store } from 'redux/app/store';
+
+import { baseUrl } from '@constants/utils';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const playlistApi = createApi({
-  reducerPath: "playlistApi",
+  reducerPath: 'playlistApi',
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers, {getState}) => {
       const token = store.getState()?.app?.userReducer.token;
       if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ["playlist"],
+  tagTypes: ['playlist'],
   endpoints: (builder) => ({
     createPlaylist: builder.mutation<any, any>({
       query: (body) => ({
         url: `playlist/create`,
-        method: "POST",
+        method: 'POST',
         body: body,
       }),
-      invalidatesTags: ["playlist"],
+      invalidatesTags: ['playlist'],
     }),
 
     getPlaylist: builder.query<any, any>({
       query: (id) => ({
         url: `playlist/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["playlist"],
+      providesTags: ['playlist'],
     }),
     getSinglePlaylist: builder.query<any, any>({
       query: (id) => ({
         url: `playlist/single/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["playlist"],
+      providesTags: ['playlist'],
     }),
     addVideo: builder.mutation<any, any>({
       query: (body) => ({
         url: `playlist/update/videos/add`,
-        method: "PUT",
+        method: 'PUT',
         body: body,
       }),
-      invalidatesTags: ["playlist"],
+      invalidatesTags: ['playlist'],
+    }),
+    removeVideo: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `playlist/update/videos/remove`,
+        method: 'PUT',
+        body: body,
+      }),
+      invalidatesTags: ['playlist'],
+    }),
+    deletePlaylist: builder.mutation({
+      query: (id) => ({
+        url: `playlist/delete/${id}`,
+        method: 'DELETE',
+        // credentials: 'include',
+      }),
+      invalidatesTags: ['playlist'],
     }),
   }),
 });
@@ -54,5 +71,7 @@ export const {
   useGetPlaylistQuery,
   useGetSinglePlaylistQuery,
   useCreatePlaylistMutation,
-  useAddVideoMutation
+  useAddVideoMutation,
+  useRemoveVideoMutation,
+  useDeletePlaylistMutation,
 } = playlistApi;

@@ -63,7 +63,7 @@ const Btn = forwardRef(
           px={px}
           onClick={onClick}
           isLoading={isLoading}
-          disabled={disabled}
+          disabled={disabled ? disabled : isLoading ? isLoading : false}
           variant={variant}
           type={submit ? 'submit' : 'button'}
         >
