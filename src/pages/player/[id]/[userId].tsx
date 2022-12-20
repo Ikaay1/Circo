@@ -10,6 +10,7 @@ import {
 import { useGetUserQuery } from 'redux/services/user.service';
 
 import { Box, Flex, useToast } from '@chakra-ui/react';
+import CliqueLoader from '@components/home/CliqueLoader';
 import CommentSection from '@components/player/CommentSection';
 import VideoDetails from '@components/player/VideoDetails';
 import VideoPlayer from '@components/player/VideoPlayer';
@@ -89,7 +90,9 @@ function Index() {
   return (
     <>
       {isLoading || !data || !userData ? (
-        <Box></Box>
+        <Box h='90vh'>
+          <CliqueLoader />
+        </Box>
       ) : (
         <HomeLayout>
           <Flex>

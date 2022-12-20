@@ -25,6 +25,7 @@ function HoverCard({
   video,
   name,
   userId,
+  photo,
 }: {
   setIsHover: any;
   isSubscribed: boolean;
@@ -32,6 +33,7 @@ function HoverCard({
   userId: string;
   video: contentData;
   name: string;
+  photo: string;
 }) {
   const router = useRouter();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
@@ -69,13 +71,13 @@ function HoverCard({
         <SmallPlayer video={video} />
       </Box>
       <Flex p='15px'>
-        {video?.uploader_id?.photo ? (
+        {photo ? (
           <Avatar
             mr={'10px'}
             p='0'
             size='sm'
             name='Prosper Otemuyiwa'
-            src={video?.uploader_id?.photo}
+            src={photo}
             onClick={() => handleRouting(video?.uploader_id?._id)}
             cursor='pointer'
           />

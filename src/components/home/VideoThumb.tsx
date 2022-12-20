@@ -58,9 +58,6 @@ function VideoThumb({
   const { handleRouting } = useRoutingChannel();
   const router = useRouter();
   const [show, setShow] = React.useState(false);
-  const { isFetching, data: channelData } = useGetIndividualChannelQuery(
-    video?.uploader_id?._id
-  );
   const handleClick = async (i: number) => {
     if (i === 0) {
       onOpenCopy();
@@ -92,7 +89,8 @@ function VideoThumb({
               id={video._id}
               userId={video.uploader_id._id}
               video={video}
-              name={channelData?.data?.channel?.name}
+              name={video?.channel_id?.name ?? "Not Available"}
+              photo={video?.channel_id?.photo}
             />
           </ScaleFade>
         ) : (
@@ -130,7 +128,7 @@ function VideoThumb({
                 mr={"10px"}
                 p="0"
                 size="sm"
-                name={video?.channel_id?.name ?? "N" + " " + "A"}
+                name={video?.channel_id?.name ?? "Not Available"}
                 src={video?.channel_id?.photo}
                 onClick={() => handleRouting(video?.uploader_id?._id)}
                 cursor="pointer"
@@ -148,22 +146,17 @@ function VideoThumb({
                   {video?.title}
                 </Text>
 
-                {isFetching ? (
-                  <Skeleton height="13px" maxW={"100px"} />
-                ) : (
-                  <Text
-                    mt="5px"
-                    noOfLines={2}
-                    color={"clique.darkGrey"}
-                    fontFamily={"Poppins"}
-                    fontWeight={400}
-                    fontSize={"14px"}
-                    lineHeight={"1.2"}
-                  >
-                    @{channelData?.data?.channel?.name}
-                  </Text>
-                )}
-
+                <Text
+                  mt="5px"
+                  noOfLines={2}
+                  color={"clique.darkGrey"}
+                  fontFamily={"Poppins"}
+                  fontWeight={400}
+                  fontSize={"14px"}
+                  lineHeight={"1.2"}
+                >
+                  @{video?.channel_id?.name ?? "Not Available"}
+                </Text>
                 <Flex alignItems={"center"} mt="5px">
                   <Text
                     noOfLines={2}

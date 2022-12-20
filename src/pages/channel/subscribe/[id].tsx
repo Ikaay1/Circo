@@ -1,28 +1,26 @@
-import useGet from 'hooks/useGet';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
+import useGet from "hooks/useGet";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "redux/app/hooks";
+import { useGetIndividualChannelQuery } from "redux/services/channel.service";
 import {
-	useExpiredSubscriptionMutation,
-	useGetSingleUserContentQuery,
-} from 'redux/services/content.service';
-import {
-	useGetUserQuery,
-	useSubscribeToUserChannelMutation,
-} from 'redux/services/user.service';
+  useExpiredSubscriptionMutation,
+  useGetSingleUserContentQuery,
+  useSubscribeToUserChannelMutation,
+} from "redux/services/content.service";
+import { useGetUserQuery } from "redux/services/user.service";
 
 import {
-	Box,
-	useColorModeValue,
-	useDisclosure,
-	useToast,
-} from '@chakra-ui/react';
-import Index from '@components/channel';
-import SubscribeModal from '@components/channel/subscribe/SubscribeModal';
-import UnsubscribeModal from '@components/channel/subscribe/UnsubscribeModal';
-import Header from '@components/widgets/Header';
-import SideMenu from '@components/widgets/sideMenu';
+  Box,
+  useColorModeValue,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import Index from "@components/channel";
+import SubscribeModal from "@components/channel/subscribe/SubscribeModal";
+import UnsubscribeModal from "@components/channel/subscribe/UnsubscribeModal";
+import Header from "@components/widgets/Header";
+import SideMenu from "@components/widgets/sideMenu";
 
 type Subcribers = {
   _id: string;
@@ -40,7 +38,7 @@ const SubscribeChannel = () => {
     isFetching,
     data: channelData,
   } = useGetIndividualChannelQuery(id);
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const {
     isLoading: userLoading,
     data: userData,
@@ -52,20 +50,20 @@ const SubscribeChannel = () => {
 
   useEffect(() => {
     if (!userProfile?._id) {
-      window.location.replace('/login');
+      window.location.replace("/login");
     }
   }, [userProfile?._id, router]);
 
   useEffect(() => {
     if (userProfile?._id === id) {
-      window.location.replace('/channel/1/content');
+      window.location.replace("/channel/1/content");
     }
   }, [userProfile?._id, id, router]);
 
   useEffect(() => {
     const expired = async () => {
-      const res: any = await expiredSub({id});
-      console.log('res', res);
+      const res: any = await expiredSub({ id });
+      console.log("res", res);
       if (res?.data?.data?.email) {
         refetch();
       }
@@ -80,13 +78,13 @@ const SubscribeChannel = () => {
       const buttonText = userData?.data?.subscribers?.find(
         (each: Subcribers) => {
           return each._id === userProfile?._id;
-        },
+        }
       );
-      buttonText ? setState('Subscribed') : setState('Subscribe');
+      buttonText ? setState("Subscribed") : setState("Subscribe");
     }
   }, [userLoading, userData, userProfile]);
 
-  const {isOpen, onOpen, onClose} = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
     isOpen: isSubOpen,
@@ -109,7 +107,7 @@ const SubscribeChannel = () => {
     page,
     limit: 3,
   });
-  const {contents, lastElementRef, loading} = useGet({
+  const { contents, lastElementRef, loading } = useGet({
     data,
     isFetching: videoFetch,
     isLoading,
@@ -118,7 +116,7 @@ const SubscribeChannel = () => {
     setPage,
   });
   const handleSubscription = () => {
-    if (state === 'Subscribe') {
+    if (state === "Subscribe") {
       isSubOnOpen();
     }
   };
@@ -128,48 +126,48 @@ const SubscribeChannel = () => {
       amount: channelData?.data?.channel?.subscriptionFee
         ? channelData?.data?.channel?.subscriptionFee
         : 0,
-      description: 'Payment for subscription',
+      description: "Payment for subscription",
       receiversId: channelData?.data?.channel?.userId,
     });
-    if ('data' in res) {
+    if ("data" in res) {
       toast({
         title: res.data.message,
-        status: 'success',
+        status: "success",
         duration: 3000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
       onClose();
       isSubOnClose();
-      setState('Subscribed');
+      setState("Subscribed");
     } else if (res.error) {
       toast({
         title: res.error.data.message,
-        status: 'error',
+        status: "error",
         duration: 3000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
     } else {
       toast({
-        title: 'Something went wrong',
-        status: 'error',
+        title: "Something went wrong",
+        status: "error",
         duration: 3000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
     }
   };
 
   return (
-    <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
+    <Box bg={useColorModeValue("clique.primaryBg", "clique.primaryBg")}>
       <>
         <Header upload={onOpen} />
-        <Box h={{lg: '90vh'}} display='flex'>
-          <Box flex='1.3' h='100%'>
+        <Box h={{ lg: "90vh" }} display="flex">
+          <Box flex="1.3" h="100%">
             <SideMenu />
           </Box>
-          <Box flex='5.5' h='100%'>
+          <Box flex="5.5" h="100%">
             <Index
               channelData={channelData}
               data={contents}
