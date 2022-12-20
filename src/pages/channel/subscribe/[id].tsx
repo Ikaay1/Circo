@@ -6,9 +6,11 @@ import { useGetIndividualChannelQuery } from "redux/services/channel.service";
 import {
   useExpiredSubscriptionMutation,
   useGetSingleUserContentQuery,
-  useSubscribeToUserChannelMutation,
 } from "redux/services/content.service";
-import { useGetUserQuery } from "redux/services/user.service";
+import {
+  useGetUserQuery,
+  useSubscribeToUserChannelMutation,
+} from "redux/services/user.service";
 
 import {
   Box,
@@ -140,6 +142,7 @@ const SubscribeChannel = () => {
       onClose();
       isSubOnClose();
       setState("Subscribed");
+      window.location.reload();
     } else if (res.error) {
       toast({
         title: res.error.data.message,

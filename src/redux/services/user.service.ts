@@ -48,6 +48,17 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    subscribeToUserChannel: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/transfer/subscribe`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["User"],
+    }),
 
     getSuggestedUsers: builder.query<any, any>({
       query: ({ page, limit }) => ({
@@ -101,7 +112,7 @@ export const {
   useGetUserQuery,
   useUpdateProfileMutation,
   useGetSuggestedUsersQuery,
-  // useSubscribeToUserChannelMutation,
+  useSubscribeToUserChannelMutation,
   useGetPopularCreatorsQuery,
   useChangePasswordMutation,
   useGetSubscriptionsQuery,
