@@ -24,8 +24,8 @@ function Index() {
   const {data, isFetching} = useGetSubscriptionsQuery({page: 1, limit: 5});
 
   const handleLogout = () => {
-    dispatch(logout());
     window.location.href = '/login';
+    dispatch(logout());
   };
 
   return (

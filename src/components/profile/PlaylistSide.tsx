@@ -1,17 +1,26 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useGetPlaylistQuery } from 'redux/services/playlist.service';
+import { useAppSelector } from 'redux/app/hooks';
+import {
+	useDeletePlaylistMutation,
+	useGetPlaylistQuery,
+} from 'redux/services/playlist.service';
 
 import {
 	Box,
 	Flex,
+	Icon,
 	Image,
 	Skeleton,
 	SkeletonCircle,
 	Text,
+	useDisclosure,
+	useToast,
 	VStack,
 } from '@chakra-ui/react';
 import ProfileDetails from '@components/channel/ProfileDetails';
+import Sure from '@components/channel/Sure';
+import TrashIconRed from '@icons/TrashIconRed';
 
 import PlaylistList from './PlaylistList';
 
@@ -48,7 +57,16 @@ const PlaylistSide = ({
   const router = useRouter();
   const [state, setState] = useState<Array<Playlist>>();
   const {data, isLoading: playLoading, isFetching} = useGetPlaylistQuery(id);
-  console.log('state', state);
+  const [deletePlaylist, deletePlaylistStatus] = useDeletePlaylistMutation();
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const toast = useToast();
+  const {isOpen, onOpen, onClose} = useDisclosure();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      window.location.replace('/login');
+    }
+  }, [userProfile?._id, router]);
 
   useEffect(() => {
     if (!isLoading && data && playlist) {
@@ -97,8 +115,29 @@ const PlaylistSide = ({
             color='clique.secondaryGrey2'
             textAlign={'center'}
           >
-            {playlist?.videos?.length} Videos
+            {playlist?.videos?.filter((each) => each?.video !== null)?.length}{' '}
+            {playlist?.videos?.filter((each) => each?.video !== null)
+              ?.length !== 1
+              ? 'Videos'
+              : 'Video'}
           </Text>
+          <Flex
+            alignItems='center'
+            justifyContent={'center'}
+            cursor='pointer'
+            my={'2rem'}
+            onClick={onOpen}
+          >
+            <Icon
+              as={TrashIconRed}
+              fontSize='15px'
+              cursor='pointer'
+              color='clique.secondaryRed'
+            ></Icon>
+            <Text ml='2' color='clique.secondaryRed'>
+              Delete Playlist
+            </Text>
+          </Flex>
         </Box>
       ) : (
         <Box>
@@ -110,26 +149,48 @@ const PlaylistSide = ({
         </Box>
       )}
       <Box>
-        <Text color='clique.text' fontSize={'sm'} mb='3'>
-          Playlist
-        </Text>
-        {state?.map((each, i) => {
-          return (
-            <Text
-              key={i}
-              cursor='pointer'
-              onClick={() =>
-                router.push(`/channel/1/content/playlist/${each._id}`)
-              }
-              fontSize={'subHead'}
-              mb='3'
-              color='clique.white'
-            >
-              {each.name}
-            </Text>
-          );
-        })}
+        {state?.length
+          ? state?.map((each, i) => (
+              <>
+                <Text color='clique.text' fontSize={'sm'} mb='3'>
+                  Playlist
+                </Text>
+                <Text
+                  key={i}
+                  cursor='pointer'
+                  onClick={() =>
+                    router.push(`/channel/1/content/playlist/${each._id}`)
+                  }
+                  fontSize={'subHead'}
+                  mb='3'
+                  color='clique.white'
+                >
+                  {each.name}
+                </Text>
+              </>
+            ))
+          : null}
       </Box>
+      <Sure
+        isOpen={isOpen}
+        onClose={onClose}
+        header='Delete Playlist'
+        description='Are you sure you want to delete this playlist?'
+        buttonText='Delete'
+        isLoading={deletePlaylistStatus.isLoading}
+        onClick={async () => {
+          await deletePlaylist(playlist?._id);
+          toast({
+            title: 'Playlist deleted successfully',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+            position: 'top-right',
+          });
+          onClose();
+          router.back();
+        }}
+      />
     </Box>
   );
 };

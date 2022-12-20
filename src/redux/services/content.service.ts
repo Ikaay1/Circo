@@ -232,6 +232,15 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
+
+    deleteContent: builder.mutation({
+      query: (id) => ({
+        url: `content/delete-video/${id}`,
+        method: 'DELETE',
+        // credentials: 'include',
+      }),
+      invalidatesTags: ['Content'],
+    }),
   }),
 });
 
@@ -255,4 +264,5 @@ export const {
   useGetTrendingQuery,
   useGetSearchHistoryQuery,
   useExpiredSubscriptionMutation,
+  useDeleteContentMutation,
 } = contentApi;

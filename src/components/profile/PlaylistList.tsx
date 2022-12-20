@@ -1,4 +1,7 @@
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useRemoveVideoMutation } from 'redux/services/playlist.service';
 
 import {
 	Box,
@@ -7,119 +10,178 @@ import {
 	Image,
 	Skeleton,
 	Text,
+	useDisclosure,
+	useToast,
 	VStack,
 } from '@chakra-ui/react';
+import Sure from '@components/channel/Sure';
+import TrashIconRed from '@icons/TrashIconRed';
 
 import MoreIcon from '../../assets/icons/MoreIcon';
-import { Videos } from './PlaylistDetails';
+import { Playlist, Videos } from './PlaylistDetails';
 
 type Props = {
-  videos: Videos[];
-  id: string;
-  isLoading: Boolean;
+  item: Videos;
+  i: number;
+  playlist: Playlist;
+  videoId: string;
 };
-const PlaylistList = ({videos, id, isLoading: netWorkLoading}: Props) => {
-  console.log('videos', videos);
+const PlaylistList = ({item, i, playlist, videoId}: Props) => {
   const router = useRouter();
+  const [show, setShow] = useState(false);
+  const [deleteVideo, deleteVideoStatus] = useRemoveVideoMutation();
+  const toast = useToast();
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const {isOpen, onOpen, onClose} = useDisclosure();
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      window.location.replace('/login');
+    }
+  }, [userProfile?._id, router]);
+
+  const handleDelete = async (playlistId: string, videoId: string) => {
+    setShow(false);
+    await deleteVideo({playlistId, videoId});
+    toast({
+      title: 'Video removed from playlist successfully',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position: 'top-right',
+    });
+    onClose();
+  };
 
   return (
     <>
-      {netWorkLoading ? (
-        <Flex flexDirection={'column'} gap='2'>
-          {[1, 2, 3, 4].map((each, i) => {
-            return (
-              <Flex key={i}>
-                <Skeleton h='100px' w='100px' borderRadius='10px' mr='2' />
-                <VStack my='auto'>
-                  <Skeleton w='70px' height='20px' mb='3' />
-                  <Skeleton w='70px' height='10px' />
-                </VStack>
-              </Flex>
-            );
-          })}
-        </Flex>
-      ) : (
-        <Box>
-          {videos?.length ? (
-            videos?.map((item, i) => (
-              <Box
-                display={'flex'}
-                justifyContent='space-between'
-                alignItems={'center'}
-                mt={i !== 0 ? '1.4rem' : '0em'}
-                key={item?._id}
-              >
-                <Box display={'flex'} alignItems={'center'}>
-                  <Box mr={'1rem'}>
-                    {item.thumbNail ? (
-                      <Image
-                        src={item.thumbNail}
-                        w='75px'
-                        h='75px'
-                        objectFit={'cover'}
-                        borderRadius='10px'
-                        alt='video thumbNail'
-                        cursor='pointer'
-                        onClick={() =>
-                          router.push(
-                            `/player/${item?._id}/${item?.uploader_id}`,
-                          )
-                        }
-                      />
-                    ) : (
-                      <Flex
-                        w='75px'
-                        h='75px'
-                        borderRadius='10px'
-                        bg='linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323'
-                        cursor='pointer'
-                        onClick={() =>
-                          router.push(`/player/${item._id}/${item.uploader_id}`)
-                        }
-                      ></Flex>
-                    )}
-                  </Box>
-                  <Box>
-                    <Text
-                      fontWeight='500'
-                      fontSize='smSubHead'
-                      lineHeight='28px'
-                      color='clique.white'
-                      mb='.5rem'
-                      cursor='pointer'
-                      onClick={() =>
-                        router.push(`/player/${item?._id}/${item?.uploader_id}`)
-                      }
-                    >
-                      {item?.title}
-                    </Text>
-                    <Text
-                      fontSize='sm'
-                      lineHeight='24px'
-                      color='clique.secondaryGrey2'
-                    >
-                      {item?.uploader_firstName} {item?.uploader_lastName}
-                    </Text>
-                  </Box>
-                </Box>
-                <Box cursor={'pointer'}>
-                  <Icon as={MoreIcon} />
-                </Box>
-              </Box>
-            ))
-          ) : (
+      {
+        <Box
+          display={'flex'}
+          justifyContent='space-between'
+          alignItems={'center'}
+          mt={i !== 0 ? '1.4rem' : '0em'}
+          key={item?.video?._id}
+          position='relative'
+        >
+          <Box display={'flex'} alignItems={'center'}>
+            <Box mr={'1rem'}>
+              {item?.video?.thumbNail ? (
+                <Image
+                  src={item?.video.thumbNail}
+                  w='75px'
+                  h='75px'
+                  objectFit={'cover'}
+                  borderRadius='10px'
+                  alt='video thumbNail'
+                  cursor='pointer'
+                  onClick={() =>
+                    router.push(
+                      `/player/${item?.video?._id}/${item?.video?.uploader_id}`,
+                    )
+                  }
+                />
+              ) : (
+                <Flex
+                  w='75px'
+                  h='75px'
+                  borderRadius='10px'
+                  bg='linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323'
+                  cursor='pointer'
+                  onClick={() =>
+                    router.push(
+                      `/player/${item?.video?._id}/${item?.video?.uploader_id}`,
+                    )
+                  }
+                ></Flex>
+              )}
+            </Box>
             <Box>
-              No video on this playlist yet.{' '}
-              <span style={{color: '#892CDC'}}>
-                Click on the three dots below any video to add the video to a
-                playlist.
-              </span>
+              <Text
+                fontWeight='500'
+                fontSize='smSubHead'
+                lineHeight='28px'
+                color='clique.white'
+                mb='.5rem'
+                cursor='pointer'
+                onClick={() =>
+                  router.push(
+                    `/player/${item?.video?._id}/${item?.video?.uploader_id}`,
+                  )
+                }
+              >
+                {item?.video?.title}
+              </Text>
+              <Text
+                fontSize='sm'
+                lineHeight='24px'
+                color='clique.secondaryGrey2'
+              >
+                {item?.video?.uploader_firstName}{' '}
+                {item?.video?.uploader_lastName}
+              </Text>
+            </Box>
+          </Box>
+          {show ? (
+            <Box
+              position={'absolute'}
+              bottom='0'
+              right='0.5'
+              bg='clique.secondaryGrey2'
+              p='3'
+              borderTopLeftRadius={15}
+              borderBottomRightRadius={'10px'}
+              pl='1'
+              sx={{
+                transition: 'all 3s ease-in-out',
+              }}
+              onMouseLeave={() => setShow(false)}
+            >
+              <Flex
+                align='center'
+                justifyItems={'center'}
+                mb='2'
+                key={i}
+                cursor='pointer'
+                onClick={onOpen}
+              >
+                <Icon
+                  as={videoSideMenu.icon}
+                  fontSize='15px'
+                  cursor='pointer'
+                  color='clique.secondaryRed'
+                ></Icon>
+                <Text ml='2' color='clique.secondaryRed'>
+                  {videoSideMenu.text}
+                </Text>
+              </Flex>
+            </Box>
+          ) : null}
+          {playlist.userId._id === userProfile?._id && (
+            <Box
+              cursor={'pointer'}
+              onClick={() => setShow((prevShow) => !prevShow)}
+            >
+              <Icon as={MoreIcon} />
             </Box>
           )}
         </Box>
-      )}
+      }
+      <Sure
+        isOpen={isOpen}
+        isLoading={deleteVideoStatus.isLoading}
+        onClose={onClose}
+        header='Remove song from Playlist'
+        description='Are you sure you want to remove this content from your playlist?'
+        buttonText='Remove'
+        onClick={() => {
+          handleDelete(playlist._id, videoId);
+        }}
+      />
     </>
   );
 };
+
+const videoSideMenu = {icon: TrashIconRed, text: 'Remove Video'};
 
 export default PlaylistList;
