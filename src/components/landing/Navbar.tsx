@@ -24,7 +24,7 @@ const Navbar = ({
           color='clique.white'
         >
           <Image src='/assets/clique-logo.png' alt='clique-logo' />
-          <Link href='/'>CLIQUE</Link>
+          <Link href='/'>CIRCO</Link>
         </Box>
         <Text
           display={{base: 'none', lg: 'block'}}

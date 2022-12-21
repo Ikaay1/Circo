@@ -1,39 +1,39 @@
-import axios from "axios";
+import axios from 'axios';
 import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-} from "chart.js";
-import { store } from "redux/app/store";
+	CategoryScale,
+	Chart as ChartJS,
+	Legend,
+	LinearScale,
+	LineElement,
+	PointElement,
+	Title,
+	Tooltip,
+} from 'chart.js';
+import { store } from 'redux/app/store';
 
-import AccountIcon from "@icons/AccountIcon";
-import ChannelIcon from "@icons/ChannelIcon";
-import CommunityGuidIcon from "@icons/CommunityGuidIcon";
-import ContentIcon from "@icons/ContentIcon";
-import CopyRightIcon from "@icons/CopyRightIcon";
-import DiscoverIcon from "@icons/DiscoverIcon";
-import EditIcon from "@icons/EditIcon";
-import FaqIcon from "@icons/FaqIcon";
-import HomeIcon from "@icons/HomeIcon";
-import LiveEventIcon from "@icons/LiveEventIcon";
-import LiveIcon from "@icons/LiveIcon";
-import NotificationSetIcon from "@icons/NotificationSetIcon";
-import PrivacyPolicyIcon from "@icons/PrivacyPolicyIcon";
-import ProfileIcon from "@icons/ProfileIcon";
-import SettingsIcon from "@icons/SettingsIcon";
-import StreamIcon from "@icons/StreamIcon";
-import TermsServiceIcon from "@icons/TermsServiceIcon";
-import TrendingIcon from "@icons/TrendingIcon";
-import VideoContent from "@icons/VideoContent";
-import WalletIcon from "@icons/WalletIcon";
+import AccountIcon from '@icons/AccountIcon';
+import ChannelIcon from '@icons/ChannelIcon';
+import CommunityGuidIcon from '@icons/CommunityGuidIcon';
+import ContentIcon from '@icons/ContentIcon';
+import CopyRightIcon from '@icons/CopyRightIcon';
+import DiscoverIcon from '@icons/DiscoverIcon';
+import EditIcon from '@icons/EditIcon';
+import FaqIcon from '@icons/FaqIcon';
+import HomeIcon from '@icons/HomeIcon';
+import LiveEventIcon from '@icons/LiveEventIcon';
+import LiveIcon from '@icons/LiveIcon';
+import NotificationSetIcon from '@icons/NotificationSetIcon';
+import PrivacyPolicyIcon from '@icons/PrivacyPolicyIcon';
+import ProfileIcon from '@icons/ProfileIcon';
+import SettingsIcon from '@icons/SettingsIcon';
+import StreamIcon from '@icons/StreamIcon';
+import TermsServiceIcon from '@icons/TermsServiceIcon';
+import TrendingIcon from '@icons/TrendingIcon';
+import VideoContent from '@icons/VideoContent';
+import WalletIcon from '@icons/WalletIcon';
 
-import AnalyticsIcon from "../assets/icons/AnalyticsIcon";
-import { MenuData } from "./interface";
+import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
+import { MenuData } from './interface';
 
 export const loginInputData: (
   | {
@@ -117,14 +117,14 @@ export const cliquePlatformData1: {
     key: "1",
     name: "Monetization",
     detail:
-      "Clique allows users to subscribe to their favourite creators channels. As a creator, you get to earn on your craft, and as a user, you have access to all your creator gives.",
+      "Circo allows users to subscribe to their favourite creators channels. As a creator, you get to earn on your craft, and as a user, you have access to all your creator gives.",
     image: "money",
   },
   {
     key: "2",
     name: "Stream Live",
     detail:
-      "Clique allows creators go live from any device and you can also create standard live events for your followers with ticket purchases all on one platform",
+      "Circo allows creators go live from any device and you can also create standard live events for your followers with ticket purchases all on one platform",
     image: "stream",
   },
   {
@@ -146,21 +146,21 @@ export const cliquePlatformData2: {
     key: "4",
     name: "For all devices",
     detail:
-      "What you can do on one, you can do on all. Yes! Clique is on both mobile platforms and the web platform.",
+      "What you can do on one, you can do on all. Yes! Circo is on both mobile platforms and the web platform.",
     image: "all-devices",
   },
   {
     key: "5",
     name: "Analytics",
     detail:
-      "We won’t leave you half way. Clique also allows you as a creator to analyse and see your progress with money and followers..",
+      "We won’t leave you half way. Circo also allows you as a creator to analyse and see your progress with money and followers..",
     image: "analytics",
   },
   {
     key: "6",
     name: "Upload & Organize",
     detail:
-      "Clique has a very smooth and easy platfom for creator to create, upload and for users to follow and keep track. This platform is the best thing after sliced bread.",
+      "Circo has a very smooth and easy platfom for creator to create, upload and for users to follow and keep track. This platform is the best thing after sliced bread.",
     image: "upload",
   },
 ];
@@ -236,7 +236,7 @@ export const contactInfoData: {
   },
   {
     image: "message",
-    detail: "info@clique.co",
+    detail: "info@circo.co",
   },
 ];
 

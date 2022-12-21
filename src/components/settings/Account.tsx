@@ -31,10 +31,10 @@ function Account({}: Props) {
         Profile
       </Text>
       <Text fontSize={'subHead'} mb='2.5'>
-        Choose how you appear and what you see on Clique
+        Choose how you appear and what you see on Circo
       </Text>
       <Text fontSize={'xsl'} mb='1.5'>
-        You are signed in to clique as
+        You are signed in to circo as
         <span style={{color: '#3088D9'}}> {userProfile?.email}</span>
       </Text>
 
@@ -54,10 +54,10 @@ function Account({}: Props) {
 
       <Divider mt='1.5' mb='3'></Divider>
       <Text fontSize={'smSubHead'} mb='3'>
-        Your Clique Channel
+        Your Circo Channel
       </Text>
       <Text fontSize={'subHead'} mb='3.5'>
-        This is your public presence on Clique. You need your own channel to
+        This is your public presence on Circo. You need your own channel to
         upload videos and go live.
       </Text>
       <Flex>

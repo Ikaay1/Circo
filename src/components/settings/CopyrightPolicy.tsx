@@ -1,12 +1,13 @@
-import Common from "./Common";
+import Common from './Common';
+
 type Props = {};
 
 function CopyrightPolicy({}: Props) {
   return (
     <Common
       title="Copyright Policy"
-      subTitle="Cliques copyright policy has been set to keep it’s users saftey."
-      main="Review Cliques Copyright Policy"
+      subTitle="Circos copyright policy has been set to keep it’s users saftey."
+      main="Review Circos Copyright Policy"
       highlight="sparksdclark@gmail.com"
     />
   );

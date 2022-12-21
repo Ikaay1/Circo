@@ -26,7 +26,7 @@ const Footer = () => {
               w={{base: '32.02px', lg: '45.39px'}}
               h={{base: '36.16px', lg: '51.24px'}}
             />
-            <Link href='/'>CLIQUE</Link>
+            <Link href='/'>CIRCO</Link>
           </Box>
           <Text
             fontSize={{base: 'smSubHead', lg: 'smHead'}}
@@ -173,7 +173,7 @@ const Footer = () => {
           display={{base: 'none', lg: 'block'}}
         ></Box>
         <Text textAlign={'center'} mt={{lg: '1.5rem'}}>
-          ©2022 Clique Ltd, All rights reserved
+          ©2022 Circo Ltd, All rights reserved
         </Text>
       </Box>
     </>
