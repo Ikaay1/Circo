@@ -50,7 +50,7 @@ function Index() {
         }, 1000);
       }
     }
-  }, [toast, userData, userProfile._id]);
+  }, [toast, userData, userProfile?._id]);
 
   useEffect(() => {
     const expired = async () => {
