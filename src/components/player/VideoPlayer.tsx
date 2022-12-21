@@ -13,7 +13,47 @@ import Control from "./Control";
 
 const { Player, ControlBar, BigPlayButton } = require("video-react");
 
-function VideoPlayer({ video }: { video: contentData }) {
+function VideoPlayer({
+  video,
+  videoIdsList,
+}: {
+  video: contentData;
+  videoIdsList: {
+    _id: string;
+  }[];
+}) {
+  const currentVideoIndex = videoIdsList.findIndex(
+    (videoId) => videoId?._id === video._id
+  );
+
+  const [nextVideoIndex, setNextVideoIndex] = React.useState<number | null>(
+    null
+  );
+
+  const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
+    null
+  );
+
+  useEffect(() => {
+    const length = videoIdsList.length;
+    console.log(length, "video list");
+    console.log(currentVideoIndex, "current video index");
+
+    if (currentVideoIndex === 0 && length > 1) {
+      setPrevVideoIndex(null);
+      setNextVideoIndex(currentVideoIndex + 1);
+      return;
+    } else if (currentVideoIndex === length - 1 && length > 1) {
+      setNextVideoIndex(null);
+      setPrevVideoIndex(currentVideoIndex - 1);
+      return;
+    } else if (length === 1) {
+      setNextVideoIndex(null);
+      setPrevVideoIndex(null);
+      return;
+    }
+  }, [currentVideoIndex, videoIdsList]);
+
   const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
   const [totalDuration, setTotalDuration] = React.useState(0);
   const [isMuted, setIsMuted] = React.useState(false);
@@ -103,6 +143,9 @@ function VideoPlayer({ video }: { video: contentData }) {
           setIsPlay={setIsPlay}
           playerRef={playerRef}
           video={video}
+          nextVideoIndex={nextVideoIndex}
+          prevVideoIndex={prevVideoIndex}
+          videoIdsList={videoIdsList}
         />
       </Flex>
     </Flex>
