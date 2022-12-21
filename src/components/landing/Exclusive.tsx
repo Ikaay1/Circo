@@ -32,7 +32,7 @@ const Exclusive = () => {
           marginTop={{base: '.75rem', lg: '1.25rem'}}
           letterSpacing='0.5px'
         >
-          Clique is that platform that offers the creators more expression with
+          Circo is that platform that offers the creators more expression with
           their exclusive content. Get connected to millions of followers for
           your daily contents and real time events.
         </Text>

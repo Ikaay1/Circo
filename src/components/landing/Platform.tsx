@@ -12,7 +12,7 @@ const Platform = () => {
         color='clique.black3'
         textAlign={'center'}
       >
-        One-Clique-Platform
+        One-Circo-Platform
       </Text>
       <Text
         fontSize={{base: 'smSubHead', lg: 'smHead'}}

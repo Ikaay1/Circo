@@ -36,7 +36,7 @@ const ConfirmEmail = () => {
         <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
           <ShowAuthHeader
             header='Change Password'
-            detail='Enter your Clique email address to chnage password'
+            detail='Enter your Circo email address to chnage password'
           />
           <form
             onSubmit={(e) => {
