@@ -30,7 +30,7 @@ function PopularBox() {
         pl="20px"
         _before={purpleBoxStyle}
         color={"clique.white"}
-        fontFamily={"Poppins"}
+        fontFamily={"Unbounded"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="head"
@@ -76,7 +76,7 @@ function PopularBox() {
         pl="20px"
         _before={purpleBoxStyle}
         color={"clique.white"}
-        fontFamily={"Poppins"}
+        fontFamily={"Unbounded"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="head"

@@ -16,7 +16,7 @@ function EventTab({ setState }: any) {
       isLazy
       variant={"unstyled"}
       minW="full"
-      fontFamily="Poppins"
+      fontFamily="Unbounded"
       color={"clique.white"}
       index={tabIndex}
       onChange={(index) => setTabIndex(index)}

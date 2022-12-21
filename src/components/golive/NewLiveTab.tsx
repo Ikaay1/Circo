@@ -2,7 +2,7 @@ import { TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import CliqueTab from "@components/widgets/CliqueTab";
 import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
 import React, { useState } from "react";
-import NewStream from "./NewStream"; 
+import NewStream from "./NewStream";
 
 function NewLiveTab({ state, setState }: { state: string; setState: any }) {
   const [tabIndex, setTabIndex] = useState(0);
@@ -11,7 +11,7 @@ function NewLiveTab({ state, setState }: { state: string; setState: any }) {
       isLazy
       variant={"unstyled"}
       minW="full"
-      fontFamily="Poppins"
+      fontFamily="Unbounded"
       color={"clique.white"}
       index={tabIndex}
       onChange={(index) => setTabIndex(index)}

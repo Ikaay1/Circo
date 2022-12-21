@@ -67,14 +67,14 @@ function EachNotification({
 
             <Text
               fontWeight={data?.status === "unread" ? "bold" : "normal"}
-              fontFamily={"Poppins"}
+              fontFamily={"Unbounded"}
               fontSize="smSubHead"
             >
               {data?.title}
             </Text>
           </Flex>
 
-          <Text fontFamily={"Poppins"} fontSize="smSubHead">
+          <Text fontFamily={"Unbounded"} fontSize="smSubHead">
             {moment(data?.createdAt).fromNow()}
           </Text>
         </AccordionButton>
@@ -86,7 +86,7 @@ function EachNotification({
           }
         }}
         cursor={data?.type === "Action" ? "pointer" : "default"}
-        fontFamily={"Poppins"}
+        fontFamily={"Unbounded"}
         fontSize="smSubHead"
         pb={4}
         pl="80px"
