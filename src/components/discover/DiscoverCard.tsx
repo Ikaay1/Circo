@@ -1,13 +1,13 @@
-import moment from 'moment';
-import { useRouter } from 'next/router';
-import React from 'react';
+import moment from "moment";
+import { useRouter } from "next/router";
+import React from "react";
 
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
-import AvataWithSpace from '@components/widgets/AvataWithSpace';
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+import AvataWithSpace from "@components/widgets/AvataWithSpace";
 
-import { contentData } from '../../constants/utils';
+import { contentData } from "../../constants/utils";
 
-function DiscoverCard({video}: {video: contentData}) {
+function DiscoverCard({ video }: { video: contentData }) {
   const router = useRouter();
   console.log(video.uploader_id.firstName);
   return (
@@ -15,100 +15,100 @@ function DiscoverCard({video}: {video: contentData}) {
       onClick={() =>
         router.push(`/player/${video._id}/${video.uploader_id._id}`)
       }
-      cursor={'pointer'}
-      h='280px'
+      cursor={"pointer"}
+      h="280px"
       bgImage={video.thumbNail}
-      bgSize='cover'
-      bgPosition={'center'}
-      bgRepeat='no-repeat'
-      rounded={'20px'}
+      bgSize="cover"
+      bgPosition={"center"}
+      bgRepeat="no-repeat"
+      rounded={"20px"}
     >
       <Box
-        backgroundColor={'rgba(0, 0, 0, 0.6)'}
-        px='30px'
-        py='20px'
-        h='280px'
-        w='100%'
-        display={'flex'}
-        flexDirection='column'
-        justifyContent={'space-between'}
-        rounded={'20px'}
+        backgroundColor={"rgba(0, 0, 0, 0.6)"}
+        px="30px"
+        py="20px"
+        h="280px"
+        w="100%"
+        display={"flex"}
+        flexDirection="column"
+        justifyContent={"space-between"}
+        rounded={"20px"}
       >
         <Text
-          position={'relative'}
-          w='60%'
-          color={'clique.white'}
-          fontFamily={'Poppins'}
+          position={"relative"}
+          w="60%"
+          color={"clique.white"}
+          fontFamily={"Unbounded"}
           fontWeight={700}
-          textTransform={'capitalize'}
-          fontSize='bigHead'
-          lineHeight={'1.2'}
+          textTransform={"capitalize"}
+          fontSize="bigHead"
+          lineHeight={"1.2"}
           noOfLines={3}
         >
           {video.title}
-        </Text>{' '}
+        </Text>{" "}
         <Flex>
           {video?.uploader_id?.photo ? (
             <AvataWithSpace
-              mr='10px'
-              name='Prosper Otemuyiwa'
+              mr="10px"
+              name="Prosper Otemuyiwa"
               url={video.uploader_id.photo}
-              size='60px'
-              borderColor='clique.greenYellow'
-              borderThickness='4px'
-              avatarSize='45px'
+              size="60px"
+              borderColor="clique.greenYellow"
+              borderThickness="4px"
+              avatarSize="45px"
             />
           ) : (
             <Avatar
-              size='lg'
+              size="lg"
               name={
-                video.uploader_id.firstName + ' ' + video.uploader_id.lastName
+                video.uploader_id.firstName + " " + video.uploader_id.lastName
               }
-              mr='10px'
-              borderColor='clique.greenYellow'
+              mr="10px"
+              borderColor="clique.greenYellow"
             />
           )}
 
           <Box>
             <Text
-              fontFamily={'Poppins'}
-              fontSize='subHead'
-              color={'clique.white'}
+              fontFamily={"Unbounded"}
+              fontSize="subHead"
+              color={"clique.white"}
             >
               {video?.uploader_userName}
             </Text>
-            <Flex mt='5px' alignItems={'center'}>
+            <Flex mt="5px" alignItems={"center"}>
               <Text
                 noOfLines={2}
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                color={"clique.white"}
+                fontFamily={"Unbounded"}
                 fontWeight={400}
-                fontSize={'subHead'}
-                lineHeight={'1.2'}
-                mr='10px'
+                fontSize={"subHead"}
+                lineHeight={"1.2"}
+                mr="10px"
               >
-                {video.view} {video.view > 1 ? 'views' : 'view'}
+                {video.view} {video.view > 1 ? "views" : "view"}
               </Text>
               <Text
-                pos={'relative'}
+                pos={"relative"}
                 _before={{
                   content: '""',
-                  position: 'absolute',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
+                  position: "absolute",
+                  top: "50%",
+                  transform: "translateY(-50%)",
                   left: 0,
-                  width: '4px',
-                  background: 'clique.lightGrey',
-                  height: '4px',
-                  rounded: 'full',
+                  width: "4px",
+                  background: "clique.lightGrey",
+                  height: "4px",
+                  rounded: "full",
                 }}
-                pl='10px'
+                pl="10px"
                 noOfLines={2}
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                color={"clique.white"}
+                fontFamily={"Unbounded"}
                 fontWeight={400}
-                fontSize={'subHead'}
-                lineHeight={'1.2'}
+                fontSize={"subHead"}
+                lineHeight={"1.2"}
               >
                 {moment(video?.createdAt).fromNow()}
               </Text>

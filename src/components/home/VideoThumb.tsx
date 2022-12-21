@@ -138,7 +138,7 @@ function VideoThumb({
                 <Text
                   noOfLines={1}
                   color={"clique.white"}
-                  fontFamily={"Poppins"}
+                  fontFamily={"Unbounded"}
                   fontWeight={400}
                   fontSize={"16px"}
                   lineHeight={"1.2"}
@@ -150,7 +150,7 @@ function VideoThumb({
                   mt="5px"
                   noOfLines={2}
                   color={"clique.darkGrey"}
-                  fontFamily={"Poppins"}
+                  fontFamily={"Unbounded"}
                   fontWeight={400}
                   fontSize={"14px"}
                   lineHeight={"1.2"}
@@ -161,7 +161,7 @@ function VideoThumb({
                   <Text
                     noOfLines={2}
                     color={"clique.darkGrey"}
-                    fontFamily={"Poppins"}
+                    fontFamily={"Unbounded"}
                     fontWeight={400}
                     fontSize={"14px"}
                     lineHeight={"1.2"}
@@ -185,7 +185,7 @@ function VideoThumb({
                     pl="10px"
                     noOfLines={2}
                     color={"clique.darkGrey"}
-                    fontFamily={"Poppins"}
+                    fontFamily={"Unbounded"}
                     fontWeight={400}
                     fontSize={"14px"}
                     lineHeight={"1.2"}

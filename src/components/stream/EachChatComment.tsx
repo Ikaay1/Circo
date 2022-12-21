@@ -1,15 +1,15 @@
-import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { BiDislike, BiLike } from 'react-icons/bi';
-import { useAppSelector } from 'redux/app/hooks';
+import moment from "moment";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { BiDislike, BiLike } from "react-icons/bi";
+import { useAppSelector } from "redux/app/hooks";
 import {
-	useDislikeStreamCommentMutation,
-	useLikeStreamCommentMutation,
-} from 'redux/services/livestream/streamComment.service';
+  useDislikeStreamCommentMutation,
+  useLikeStreamCommentMutation,
+} from "redux/services/livestream/streamComment.service";
 
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
-import AvataWithSpace from '@components/widgets/AvataWithSpace';
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import AvataWithSpace from "@components/widgets/AvataWithSpace";
 
 function EachChatComment({ comment }: { comment: any }) {
   const router = useRouter();
@@ -20,11 +20,11 @@ function EachChatComment({ comment }: { comment: any }) {
   const [dislikeStreamComment, commentInfo2] =
     useDislikeStreamCommentMutation();
 
-    useEffect(() => {
-      if (!userProfile?._id) {
-        router.push('/login');
-      }
-    }, [userProfile?._id, router]);
+  useEffect(() => {
+    if (!userProfile?._id) {
+      router.push("/login");
+    }
+  }, [userProfile?._id, router]);
 
   return (
     <Flex mt="5px" bg="" rounded="10px" px="20px" pt="20px">
@@ -44,7 +44,7 @@ function EachChatComment({ comment }: { comment: any }) {
             mr="10px"
             noOfLines={2}
             color={"clique.white"}
-            fontFamily={"Poppins"}
+            fontFamily={"Unbounded"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.2"}
@@ -54,7 +54,7 @@ function EachChatComment({ comment }: { comment: any }) {
           <Text
             noOfLines={2}
             color={"clique.darkGrey"}
-            fontFamily={"Poppins"}
+            fontFamily={"Unbounded"}
             fontWeight={400}
             fontSize={"smSubHead"}
             lineHeight={"1.2"}
@@ -66,7 +66,7 @@ function EachChatComment({ comment }: { comment: any }) {
         <Text
           mt="5px"
           color={"clique.white"}
-          fontFamily={"Poppins"}
+          fontFamily={"Unbounded"}
           fontWeight={400}
           fontSize={"smSubHead"}
           lineHeight={"1.3"}
@@ -96,7 +96,7 @@ function EachChatComment({ comment }: { comment: any }) {
               </Box>
               <Text
                 color={"clique.white"}
-                fontFamily={"Poppins"}
+                fontFamily={"Unbounded"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
@@ -126,7 +126,7 @@ function EachChatComment({ comment }: { comment: any }) {
               </Box>
               <Text
                 color={"clique.white"}
-                fontFamily={"Poppins"}
+                fontFamily={"Unbounded"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}

@@ -39,7 +39,7 @@ function EventCard({ event, setState }: any) {
       <Box>
         <Text
           color={"clique.white"}
-          fontFamily={"Poppins"}
+          fontFamily={"Unbounded"}
           fontWeight={400}
           fontSize={"16px"}
         >
@@ -48,7 +48,7 @@ function EventCard({ event, setState }: any) {
         <Text
           noOfLines={2}
           color={"clique.darkGrey"}
-          fontFamily={"Poppins"}
+          fontFamily={"Unbounded"}
           fontWeight={400}
           fontSize={"14px"}
           lineHeight={"1.2"}
@@ -59,7 +59,7 @@ function EventCard({ event, setState }: any) {
         <Text
           noOfLines={2}
           color={"clique.darkGrey"}
-          fontFamily={"Poppins"}
+          fontFamily={"Unbounded"}
           fontWeight={400}
           fontSize={"14px"}
           lineHeight={"1.2"}

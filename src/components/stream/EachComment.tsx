@@ -1,82 +1,82 @@
-import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { BiDislike, BiLike } from 'react-icons/bi';
-import { useAppSelector } from 'redux/app/hooks';
+import moment from "moment";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { BiDislike, BiLike } from "react-icons/bi";
+import { useAppSelector } from "redux/app/hooks";
 import {
-	useDislikeStreamCommentMutation,
-	useLikeStreamCommentMutation,
-} from 'redux/services/livestream/streamComment.service';
+  useDislikeStreamCommentMutation,
+  useLikeStreamCommentMutation,
+} from "redux/services/livestream/streamComment.service";
 
-import { Box, Flex, Icon, Spinner, Text } from '@chakra-ui/react';
-import AvataWithSpace from '@components/widgets/AvataWithSpace';
+import { Box, Flex, Icon, Spinner, Text } from "@chakra-ui/react";
+import AvataWithSpace from "@components/widgets/AvataWithSpace";
 
-function EachComment({comment}: {comment: any}) {
+function EachComment({ comment }: { comment: any }) {
   const router = useRouter();
-  const {id} = router.query;
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const { id } = router.query;
+  const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
   const [likeStreamComment, likeInfo] = useLikeStreamCommentMutation();
   const [dislikeStreamComment, dislikeInfo] = useDislikeStreamCommentMutation();
 
   useEffect(() => {
     if (!userProfile?._id) {
-      window.location.replace('/login');
+      window.location.replace("/login");
     }
   }, [userProfile?._id, router]);
 
   return (
-    <Flex mt='15px' bg='clique.ashGrey' rounded='10px' p='20px'>
+    <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
       <AvataWithSpace
         name={
-          comment?.commentUser?.firstName + ' ' + comment?.commentUser?.lastName
+          comment?.commentUser?.firstName + " " + comment?.commentUser?.lastName
         }
         url={comment?.commentUser?.photo}
-        mr='20px'
-        size='40px'
-        borderThickness='2px'
-        borderColor='clique.base'
+        mr="20px"
+        size="40px"
+        borderThickness="2px"
+        borderColor="clique.base"
       />
       <Box>
-        <Flex alignItems={'center'} justifyContent={'space-between'}>
+        <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Text
-            mr='10px'
+            mr="10px"
             noOfLines={2}
-            color={'clique.white'}
-            fontFamily={'Poppins'}
+            color={"clique.white"}
+            fontFamily={"Unbounded"}
             fontWeight={400}
-            fontSize={'subHead'}
-            lineHeight={'1.2'}
+            fontSize={"subHead"}
+            lineHeight={"1.2"}
           >
-            {comment?.commentUser?.userName ?? ' NA '}
+            {comment?.commentUser?.userName ?? " NA "}
           </Text>
           <Text
             noOfLines={2}
-            color={'clique.darkGrey'}
-            fontFamily={'Poppins'}
+            color={"clique.darkGrey"}
+            fontFamily={"Unbounded"}
             fontWeight={400}
-            fontSize={'smSubHead'}
-            lineHeight={'1.2'}
+            fontSize={"smSubHead"}
+            lineHeight={"1.2"}
           >
             {moment(comment.createdAt).fromNow()}
           </Text>
         </Flex>
 
         <Text
-          mt='5px'
-          color={'clique.white'}
-          fontFamily={'Poppins'}
+          mt="5px"
+          color={"clique.white"}
+          fontFamily={"Unbounded"}
           fontWeight={400}
-          fontSize={'smSubHead'}
-          lineHeight={'1.3'}
+          fontSize={"smSubHead"}
+          lineHeight={"1.3"}
         >
           {comment?.commentBody}
         </Text>
-        <Flex alignItems={'center'} justifyContent='space-between' mt='15px'>
-          <Flex alignItems={'center'}>
-            <Flex cursor={'pointer'} alignItems={'center'}>
+        <Flex alignItems={"center"} justifyContent="space-between" mt="15px">
+          <Flex alignItems={"center"}>
+            <Flex cursor={"pointer"} alignItems={"center"}>
               {likeInfo.isLoading ? (
-                <Spinner size={'sm'} mr='5px' bg='clique.base' />
+                <Spinner size={"sm"} mr="5px" bg="clique.base" />
               ) : (
                 <Box
                   onClick={async () => {
@@ -88,29 +88,29 @@ function EachComment({comment}: {comment: any}) {
                   <Icon
                     color={
                       comment?.likes?.includes(userProfile?._id)
-                        ? 'clique.base'
-                        : 'clique.white'
+                        ? "clique.base"
+                        : "clique.white"
                     }
-                    mr='5px'
-                    fontSize='20px'
+                    mr="5px"
+                    fontSize="20px"
                     as={BiLike}
                   />
                 </Box>
               )}
               <Text
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                color={"clique.white"}
+                fontFamily={"Unbounded"}
                 fontWeight={400}
-                fontSize={'smSubHead'}
-                lineHeight={'1.2'}
+                fontSize={"smSubHead"}
+                lineHeight={"1.2"}
               >
                 {comment?.countCommentLikes}
               </Text>
             </Flex>
 
-            <Flex cursor={'pointer'} mx='20px' alignItems={'center'}>
+            <Flex cursor={"pointer"} mx="20px" alignItems={"center"}>
               {dislikeInfo.isLoading ? (
-                <Spinner size={'sm'} mr='5px' bg='clique.base' />
+                <Spinner size={"sm"} mr="5px" bg="clique.base" />
               ) : (
                 <Box
                   onClick={async () => {
@@ -122,21 +122,21 @@ function EachComment({comment}: {comment: any}) {
                   <Icon
                     color={
                       comment?.dislikes?.includes(userProfile?._id)
-                        ? 'clique.base'
-                        : 'clique.white'
+                        ? "clique.base"
+                        : "clique.white"
                     }
-                    mr='5px'
-                    fontSize='smHead'
+                    mr="5px"
+                    fontSize="smHead"
                     as={BiDislike}
                   />
                 </Box>
               )}
               <Text
-                color={'clique.white'}
-                fontFamily={'Poppins'}
+                color={"clique.white"}
+                fontFamily={"Unbounded"}
                 fontWeight={400}
-                fontSize={'smSubHead'}
-                lineHeight={'1.2'}
+                fontSize={"smSubHead"}
+                lineHeight={"1.2"}
               >
                 {comment?.countCommentDislikes}
               </Text>

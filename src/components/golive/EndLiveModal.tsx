@@ -30,7 +30,7 @@ function EndLiveModal({
         bg={"clique.dangerRed"}
         color="white"
         colorScheme={"red"}
-        fontFamily={"Poppins"}
+        fontFamily={"Unbounded"}
       >
         End Live Stream
       </Button>
@@ -45,7 +45,7 @@ function EndLiveModal({
         >
           <Text
             color={"clique.white"}
-            fontFamily={"Poppins"}
+            fontFamily={"Unbounded"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.5"}
@@ -57,7 +57,7 @@ function EndLiveModal({
           <Text
             my="10px"
             color={"clique.white"}
-            fontFamily={"Poppins"}
+            fontFamily={"Unbounded"}
             fontWeight={400}
             fontSize={"smSubHead"}
             lineHeight={"1.5"}

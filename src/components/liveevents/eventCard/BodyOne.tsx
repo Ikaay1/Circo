@@ -1,12 +1,12 @@
-import moment from 'moment';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { usePayForLiveMutation } from 'redux/services/livestream/live.service';
+import moment from "moment";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAppSelector } from "redux/app/hooks";
+import { usePayForLiveMutation } from "redux/services/livestream/live.service";
 
-import { Button, Text, useToast } from '@chakra-ui/react';
+import { Button, Text, useToast } from "@chakra-ui/react";
 
-const NProgress = require('nprogress');
+const NProgress = require("nprogress");
 
 function BodyOne({
   setStep,
@@ -17,7 +17,7 @@ function BodyOne({
 }) {
   const router = useRouter();
   const userProfile = useAppSelector(
-    (store) => store.app.userReducer.userProfile,
+    (store) => store.app.userReducer.userProfile
   );
 
   const [payForLive, payInfo] = usePayForLiveMutation();
@@ -25,50 +25,50 @@ function BodyOne({
 
   useEffect(() => {
     if (!userProfile?._id) {
-      window.location.replace('/login');
+      window.location.replace("/login");
     }
   }, [userProfile?._id, router]);
 
   return (
     <>
       <Text
-        mt='20px'
-        color={'clique.base'}
-        fontFamily={'Poppins'}
+        mt="20px"
+        color={"clique.base"}
+        fontFamily={"Unbounded"}
         fontWeight={400}
-        fontSize={'smSubHead'}
-        lineHeight={'1.3'}
-        textTransform={'uppercase'}
-        mr='5px'
+        fontSize={"smSubHead"}
+        lineHeight={"1.3"}
+        textTransform={"uppercase"}
+        mr="5px"
       >
         {event?.eventId?.title}
-        {': '}
-        {moment(event?.eventId?.schedule).format('MMM Do YYYY h:mm a')}
+        {": "}
+        {moment(event?.eventId?.schedule).format("MMM Do YYYY h:mm a")}
       </Text>
       <Text
-        mt='20px'
-        color={'clique.white'}
-        fontFamily={'Poppins'}
+        mt="20px"
+        color={"clique.white"}
+        fontFamily={"Unbounded"}
         fontWeight={400}
-        fontSize={'smSubHead'}
-        lineHeight={'1.5'}
-        mr='5px'
+        fontSize={"smSubHead"}
+        lineHeight={"1.5"}
+        mr="5px"
       >
-        <Text color={'clique.base'} as='span'>
+        <Text color={"clique.base"} as="span">
           About:
-        </Text>{' '}
+        </Text>{" "}
         {event?.eventId?.description}
       </Text>
       <Button
-        mt={'50px'}
-        w='full'
-        size='lg'
+        mt={"50px"}
+        w="full"
+        size="lg"
         onClick={async () => {
           NProgress.start();
-          console.log('I was pushed');
+          console.log("I was pushed");
           if (
             event?.eventId?.fee === 0 ||
-            event?.eventId?.fee === '0' ||
+            event?.eventId?.fee === "0" ||
             !event?.eventId?.fee ||
             event?.paid.includes(userProfile?._id) ||
             event?.streamerId?._id === userProfile?._id
@@ -84,41 +84,41 @@ function BodyOne({
             if (res?.data) {
               router.push(`/stream/${event?.eventId?._id}`);
               toast({
-                title: 'Payment Successful',
-                description: 'You have successfully paid for this event',
-                status: 'success',
+                title: "Payment Successful",
+                description: "You have successfully paid for this event",
+                status: "success",
                 duration: 3000,
                 isClosable: true,
-                position: 'top-right',
+                position: "top-right",
               });
             } else {
               toast({
-                title: 'Error',
+                title: "Error",
                 description: res?.error
                   ? res.error?.data?.message
-                  : 'Something went wrong',
-                status: 'error',
+                  : "Something went wrong",
+                status: "error",
                 duration: 3000,
                 isClosable: true,
-                position: 'top-right',
+                position: "top-right",
               });
             }
           }
 
           NProgress.done();
         }}
-        bg='clique.base'
-        color='clique.white'
-        rounded={'full'}
-        colorScheme='purple'
+        bg="clique.base"
+        color="clique.white"
+        rounded={"full"}
+        colorScheme="purple"
         isLoading={payInfo.isLoading}
       >
         {event?.eventId?.fee === 0 ||
-        event?.eventId?.fee === '0' ||
+        event?.eventId?.fee === "0" ||
         !event?.eventId?.fee ||
         event?.paid.includes(userProfile?._id) ||
         event?.streamerId?._id === userProfile?._id
-          ? 'Join Stream'
+          ? "Join Stream"
           : `Purchase Ticket`}
       </Button>
     </>
