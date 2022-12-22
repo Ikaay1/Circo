@@ -6,6 +6,7 @@ import { useCreateContentMutation } from "redux/services/content.service";
 
 import {
   Box,
+  Checkbox,
   Divider,
   Flex,
   Grid,
@@ -43,6 +44,7 @@ function UploadPage({ url, name }: Props) {
   const [thumbNail, setThumbNail] = useState<string | Blob>("");
   const [imageError, setImageError] = useState<string>("");
   const [createContent, createContentStatus] = useCreateContentMutation();
+  const [isFree, setIsFree] = useState<boolean>(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,6 +71,7 @@ function UploadPage({ url, name }: Props) {
       formData.append("ageRange", state.ageRange);
       formData.append("file", file);
       formData.append("thumbNail", thumbNail);
+      formData.append("isFree", isFree.toString());
       await createContent(formData);
       router.push("/home");
     } catch (error: any) {
@@ -227,6 +230,15 @@ function UploadPage({ url, name }: Props) {
                   </GridItem>
                 );
               })}
+
+              <Checkbox
+                checked={isFree}
+                onChange={(e: any) => {
+                  setIsFree(e.target.checked);
+                }}
+              >
+                <Text>Free video</Text>
+              </Checkbox>
             </Grid>
           </Box>
         </Flex>

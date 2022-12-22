@@ -36,7 +36,7 @@ function VideoPlayer({
 
   useEffect(() => {
     const length = videoIdsList.length;
-    console.log(length, "video list");
+    console.log(length, " video list");
     console.log(currentVideoIndex, "current video index");
 
     if (currentVideoIndex === 0 && length > 1) {
@@ -44,7 +44,7 @@ function VideoPlayer({
       setNextVideoIndex(currentVideoIndex + 1);
       return;
     } else if (currentVideoIndex === length - 1 && length > 1) {
-      setNextVideoIndex(null);
+      setNextVideoIndex(0);
       setPrevVideoIndex(currentVideoIndex - 1);
       return;
     } else if (length === 1) {
