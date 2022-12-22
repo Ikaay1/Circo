@@ -55,7 +55,7 @@ function UploadModal() {
         variant="ghost"
         rounded={"full"}
         bg="clique.base"
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         size={"sm"}
         onClick={onOpen}
       >
@@ -121,7 +121,7 @@ function UploadModal() {
                       <Icon as={UploadIcon} fontSize="70px" />
                       <Text
                         textAlign={"center"}
-                        fontFamily={"Unbounded"}
+                        fontFamily={"Poppins"}
                         fontWeight={500}
                         fontSize="smHead"
                         mt="14"

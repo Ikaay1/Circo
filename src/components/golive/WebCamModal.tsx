@@ -69,7 +69,7 @@ function WebCamModal({ setState }: { setState: any }) {
           <Icon as={WebCamIcon} fontSize="head" />
           <Text
             fontSize="subHead"
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={500}
             pl="5"
           >

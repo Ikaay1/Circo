@@ -68,7 +68,7 @@ const SideMenu = ({ click, menuList, create }: Props) => {
             <Icon as={icon} fontSize={create ? "sm2" : "l"} />
             <Text
               fontSize={create ? "sm2" : "xsl"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               pl="5"
             >

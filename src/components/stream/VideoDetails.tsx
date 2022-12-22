@@ -6,7 +6,7 @@ function VideoDetails({ stream }: { stream: any }) {
     <Box mt="20px">
       <Text
         textAlign={"left"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="smHead"
@@ -40,7 +40,7 @@ function VideoDetails({ stream }: { stream: any }) {
             <Text
               noOfLines={2}
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize="subHead"
               textTransform={"uppercase"}
@@ -54,7 +54,7 @@ function VideoDetails({ stream }: { stream: any }) {
               mt="5px"
               noOfLines={2}
               color={"clique.darkGrey"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize="smSubHead"
               lineHeight={"1.2"}
@@ -75,7 +75,7 @@ function VideoDetails({ stream }: { stream: any }) {
         mt="5px"
         noOfLines={2}
         color={"clique.darkGrey"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={400}
         fontSize="smSubHead"
         lineHeight={"1.2"}
@@ -85,7 +85,7 @@ function VideoDetails({ stream }: { stream: any }) {
       <Text
         mt="5px"
         color={"clique.white"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={400}
         fontSize="smSubHead"
         lineHeight={"1.5"}

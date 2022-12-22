@@ -61,7 +61,7 @@ function EventModal({ event }: { event: any }) {
             <Text
               pt="10px"
               textAlign={"center"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               textTransform={"capitalize"}
               fontSize="smHead"
@@ -70,7 +70,7 @@ function EventModal({ event }: { event: any }) {
             </Text>
             <Text
               textAlign={"center"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               textTransform={"capitalize"}
               fontSize="smSubHead"

@@ -40,7 +40,7 @@ function SubScribeModal({
         <ModalContent m="0" p="40px" rounded={"20px"} bg="clique.primaryBg">
           <Text
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"head"}
             lineHeight={"1.5"}
@@ -52,7 +52,7 @@ function SubScribeModal({
           <Text
             my="10px"
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.5"}

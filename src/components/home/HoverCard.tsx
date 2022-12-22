@@ -98,7 +98,7 @@ function HoverCard({
           <Text
             noOfLines={1}
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"16px"}
             lineHeight={"1.2"}
@@ -110,7 +110,7 @@ function HoverCard({
             mt="5px"
             noOfLines={2}
             color={"clique.darkGrey"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"14px"}
             lineHeight={"1.2"}
@@ -122,7 +122,7 @@ function HoverCard({
               <Text
                 noOfLines={2}
                 color={"clique.darkGrey"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"14px"}
                 lineHeight={"1.2"}
@@ -146,7 +146,7 @@ function HoverCard({
                 pl="10px"
                 noOfLines={2}
                 color={"clique.darkGrey"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"14px"}
                 lineHeight={"1.2"}

@@ -99,7 +99,7 @@ const PlaylistSide = ({
           )}
 
           <Text
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontSize="sm2"
             lineHeight="28px"
             color="clique.white"
@@ -109,7 +109,7 @@ const PlaylistSide = ({
             {playlist?.name}
           </Text>
           <Text
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontSize="smSubHead"
             lineHeight="24px"
             color="clique.secondaryGrey2"

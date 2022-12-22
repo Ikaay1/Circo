@@ -59,7 +59,7 @@ const ProfileContents = () => {
           <Tabs
             variant={"unstyled"}
             minW="full"
-            fontFamily="Unbounded"
+            fontFamily="Poppins"
             color={"clique.white"}
           >
             <TabPanels>

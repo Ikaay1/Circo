@@ -81,7 +81,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
             <Text
               py="30px"
               textAlign={"center"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               textTransform={"capitalize"}
               fontSize="smHead"
@@ -91,7 +91,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
             <Text
               mt="5px"
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize={" smSubHead"}
               lineHeight={"1.3"}
@@ -101,7 +101,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
             <Text
               mt="15px"
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize={"smSubHead"}
               lineHeight={"1.5"}
@@ -147,7 +147,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                           <Checkbox {...field} mr="10px" />
                           <Text
                             color={"clique.white"}
-                            fontFamily={"Unbounded"}
+                            fontFamily={"Poppins"}
                             fontWeight={400}
                             fontSize={"smSubHead"}
                             lineHeight={"1"}
@@ -168,7 +168,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                           <Checkbox {...field} mr="10px" />
                           <Text
                             color={"clique.white"}
-                            fontFamily={"Unbounded"}
+                            fontFamily={"Poppins"}
                             fontWeight={400}
                             fontSize={"smSubHead"}
                             lineHeight={"1"}
@@ -191,7 +191,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                           <Checkbox {...field} mr="10px" />
                           <Text
                             color={"clique.white"}
-                            fontFamily={"Unbounded"}
+                            fontFamily={"Poppins"}
                             fontWeight={400}
                             fontSize={"smSubHead"}
                             lineHeight={"1"}
@@ -214,7 +214,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                           <Checkbox {...field} mr="10px" />
                           <Text
                             color={"clique.white"}
-                            fontFamily={"Unbounded"}
+                            fontFamily={"Poppins"}
                             fontWeight={400}
                             fontSize={"smSubHead"}
                             lineHeight={"1"}
@@ -240,7 +240,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                           <Checkbox {...field} mr="10px" />
                           <Text
                             color={"clique.white"}
-                            fontFamily={"Unbounded"}
+                            fontFamily={"Poppins"}
                             fontWeight={400}
                             fontSize={"smSubHead"}
                             lineHeight={"1"}
@@ -263,7 +263,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                           <Checkbox {...field} mr="10px" />
                           <Text
                             color={"clique.white"}
-                            fontFamily={"Unbounded"}
+                            fontFamily={"Poppins"}
                             fontWeight={400}
                             fontSize={"smSubHead"}
                             lineHeight={"1"}

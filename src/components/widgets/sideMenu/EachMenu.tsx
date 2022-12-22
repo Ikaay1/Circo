@@ -53,7 +53,7 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
       >
         <Icon as={icon} mr="15px" />
         <Text
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
         >

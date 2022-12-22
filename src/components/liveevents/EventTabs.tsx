@@ -20,7 +20,7 @@ function EventTabs() {
     <Tabs
       variant={"unstyled"}
       minW="full"
-      fontFamily="Unbounded"
+      fontFamily="Poppins"
       color={"clique.white"}
       isLazy
     >

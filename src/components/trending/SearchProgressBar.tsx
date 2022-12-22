@@ -8,10 +8,10 @@ function SearchProgressBar({ searchWord }: { searchWord: SearchInterface }) {
   return (
     <Box mb="15px">
       <Flex justifyContent={"space-between"}>
-        <Text fontSize={"smSubHead"} fontFamily={"Unbounded"}>
+        <Text fontSize={"smSubHead"} fontFamily={"Poppins"}>
           {searchWord.word}
         </Text>
-        <Text fontFamily={"Unbounded"} fontSize={"smSubHead"}>
+        <Text fontFamily={"Poppins"} fontSize={"smSubHead"}>
           {searchWord.count}
         </Text>
       </Flex>
