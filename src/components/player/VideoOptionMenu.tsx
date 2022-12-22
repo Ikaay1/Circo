@@ -86,7 +86,7 @@ function VideoOptionMenu({ player, video }: any) {
         <Icon fontSize="28px" mx="30px" cursor={"pointer"} as={OptionsIcon} />
       </MenuButton>
       <MenuList
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         p="30px"
         pr="60px"
         bg="clique.black"

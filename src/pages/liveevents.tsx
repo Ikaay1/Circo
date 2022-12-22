@@ -30,7 +30,7 @@ function Index() {
             pl="20px"
             _before={{ ...purpleBoxStyle, background: "clique.base" }}
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={500}
             textTransform={"capitalize"}
             fontSize="head"

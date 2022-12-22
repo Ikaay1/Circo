@@ -16,7 +16,7 @@ function TrendingBox() {
         pl="20px"
         _before={purpleBoxStyle}
         color={"clique.white"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="head"

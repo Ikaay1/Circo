@@ -57,7 +57,7 @@ function CamCommentSection({
       <Flex w="full" alignItems={"center"} justifyContent="space-between">
         <Text
           textAlign={"left"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
           fontSize="smHead"

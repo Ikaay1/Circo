@@ -31,7 +31,7 @@ function TagSection({
         variant="ghost"
         rounded={"full"}
         bg={categoryId === "all" ? "clique.base" : "clique.grey"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         size={"sm"}
         fontWeight={400}
         px="20px"
@@ -48,7 +48,7 @@ function TagSection({
           variant="ghost"
           rounded={"full"}
           bg={categoryId === eachCategory._id ? "clique.base" : "clique.grey"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           size={"sm"}
           px="20px"
           fontWeight={400}

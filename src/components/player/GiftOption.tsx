@@ -19,7 +19,7 @@ function GiftOption({ props, id, title, price, icon }: any) {
       />
 
       <Image mx="20px" py="5px" w="30px" src={icon} alt="svg for gift types" />
-      <Text fontFamily={"Unbounded"}>
+      <Text fontFamily={"Poppins"}>
         {title}
         <Text as="span" color="clique.text">
           (₦{price})

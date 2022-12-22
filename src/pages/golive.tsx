@@ -41,7 +41,7 @@ function Index({}: Props) {
                 pt="20px"
                 position={"relative"}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
                 fontSize="head"
@@ -59,7 +59,7 @@ function Index({}: Props) {
                 pt="20px"
                 position={"relative"}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
                 fontSize="head"
@@ -77,7 +77,7 @@ function Index({}: Props) {
                 pt="20px"
                 position={"relative"}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
                 fontSize="head"
@@ -94,7 +94,7 @@ function Index({}: Props) {
                 pt="20px"
                 position={"relative"}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
                 fontSize="head"
@@ -112,7 +112,7 @@ function Index({}: Props) {
                 pt="20px"
                 position={"relative"}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
                 fontSize="head"
@@ -129,7 +129,7 @@ function Index({}: Props) {
                 pt="20px"
                 position={"relative"}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
                 fontSize="head"

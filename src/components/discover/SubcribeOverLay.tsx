@@ -52,7 +52,7 @@ function SubcribeOverLay({ isHover, user }: { isHover: boolean; user: any }) {
                 />
               )}
               <Text
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontSize="head"
                 fontWeight={700}
                 color={"clique.black"}

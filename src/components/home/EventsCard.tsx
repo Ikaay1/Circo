@@ -24,7 +24,7 @@ function EventsCard({ onOpen, event }: any) {
           maxW={"35%"}
           noOfLines={2}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
           lineHeight={"1.2"}
@@ -59,7 +59,7 @@ function EventsCard({ onOpen, event }: any) {
           px="10px"
           noOfLines={2}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
           lineHeight={"1.2"}
@@ -71,7 +71,7 @@ function EventsCard({ onOpen, event }: any) {
           pl="10px"
           noOfLines={2}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
           lineHeight={"1.2"}

@@ -15,7 +15,7 @@ function BodyTwo({ setStep }: { setStep: (step: number) => void }) {
       <Text
         mt="10px"
         color={"clique.white"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={400}
         fontSize={"smSubHead"}
         lineHeight={"1.5"}

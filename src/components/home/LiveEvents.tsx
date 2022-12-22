@@ -40,7 +40,7 @@ function LiveEvents() {
     >
       <Text
         textAlign={"center"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="smHead"

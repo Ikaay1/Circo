@@ -103,7 +103,7 @@ function Header({ upload }: Props) {
             borderColor={"clique.inputBorder"}
             rounded="full"
             type="tel"
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             _placeholder={{
               color: "clique.white",
             }}
@@ -141,7 +141,7 @@ function Header({ upload }: Props) {
           variant="ghost"
           rounded={"full"}
           bg="clique.base"
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           size={"sm"}
           onClick={() => router.push("/golive")}
         >

@@ -34,7 +34,7 @@ function EachSubscribe({
         )}
         <Text
           color={path === "/" + name ? "clique.base" : "clique.whiteGrey"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
         >

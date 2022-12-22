@@ -65,7 +65,7 @@ function EachComment({ comment }: { comment: commentInterface }) {
           <Text
             noOfLines={2}
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.2"}
@@ -79,7 +79,7 @@ function EachComment({ comment }: { comment: commentInterface }) {
           <Text
             noOfLines={2}
             color={"clique.darkGrey"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"smSubHead"}
             lineHeight={"1.2"}
@@ -91,7 +91,7 @@ function EachComment({ comment }: { comment: commentInterface }) {
         <Text mt="5px" color={"clique.white"}>
           <pre
             style={{
-              fontFamily: "Unbounded",
+              fontFamily: "Poppins",
               lineHeight: "1.3",
               fontSize: "14px",
             }}
@@ -120,7 +120,7 @@ function EachComment({ comment }: { comment: commentInterface }) {
               )}
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
@@ -148,7 +148,7 @@ function EachComment({ comment }: { comment: commentInterface }) {
               )}
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}

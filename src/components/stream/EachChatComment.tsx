@@ -44,7 +44,7 @@ function EachChatComment({ comment }: { comment: any }) {
             mr="10px"
             noOfLines={2}
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.2"}
@@ -54,7 +54,7 @@ function EachChatComment({ comment }: { comment: any }) {
           <Text
             noOfLines={2}
             color={"clique.darkGrey"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"smSubHead"}
             lineHeight={"1.2"}
@@ -66,7 +66,7 @@ function EachChatComment({ comment }: { comment: any }) {
         <Text
           mt="5px"
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
           lineHeight={"1.3"}
@@ -96,7 +96,7 @@ function EachChatComment({ comment }: { comment: any }) {
               </Box>
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
@@ -126,7 +126,7 @@ function EachChatComment({ comment }: { comment: any }) {
               </Box>
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}

@@ -41,7 +41,7 @@ function RecordingCard({ event }: { event: any }) {
             <Text
               noOfLines={1}
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize={"16px"}
               lineHeight={"1.2"}
@@ -53,7 +53,7 @@ function RecordingCard({ event }: { event: any }) {
               mt="5px"
               noOfLines={2}
               color={"clique.darkGrey"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize={"14px"}
               lineHeight={"1.2"}
@@ -64,7 +64,7 @@ function RecordingCard({ event }: { event: any }) {
               <Text
                 noOfLines={2}
                 color={"clique.darkGrey"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"14px"}
                 lineHeight={"1.2"}
@@ -88,7 +88,7 @@ function RecordingCard({ event }: { event: any }) {
                 pl="10px"
                 noOfLines={2}
                 color={"clique.darkGrey"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"14px"}
                 lineHeight={"1.2"}

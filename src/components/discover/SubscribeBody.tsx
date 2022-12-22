@@ -49,7 +49,7 @@ function SubscribeBody({ user }: { user: any }) {
 
             <Text
               mt="5px"
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontSize="smSubHead"
               color={"clique.white"}
             >
@@ -66,7 +66,7 @@ function SubscribeBody({ user }: { user: any }) {
           <Text
             noOfLines={2}
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.2"}
@@ -80,7 +80,7 @@ function SubscribeBody({ user }: { user: any }) {
             pl="10px"
             noOfLines={2}
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.2"}

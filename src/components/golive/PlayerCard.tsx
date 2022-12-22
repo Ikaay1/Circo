@@ -153,7 +153,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         <Text
           position={"relative"}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
           fontSize="smSubHead"
@@ -164,7 +164,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           <Text
             position={"relative"}
             color={"clique.primaryBlue"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={500}
             fontSize="smSubHead"
           >
@@ -191,7 +191,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           mt="10px"
           position={"relative"}
           color={"clique.secondaryGrey2"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
           fontSize="smSubHead"
@@ -201,7 +201,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         <Text
           position={"relative"}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           fontSize="smSubHead"
           textTransform={"uppercase"}
@@ -212,7 +212,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           mt="10px"
           position={"relative"}
           color={"clique.secondaryGrey2"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
           fontSize="smSubHead"
@@ -222,7 +222,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         <Text
           position={"relative"}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           fontSize="smSubHead"
           textTransform={"uppercase"}
@@ -235,7 +235,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             <Text
               mt="10px"
               color={"clique.secondaryGrey2"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
               textAlign={"center"}
@@ -245,7 +245,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             <Text
               textAlign={"center"}
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
               textTransform={"uppercase"}
@@ -259,7 +259,7 @@ function PlayerCard({ streamDetails, setState }: any) {
               position={"relative"}
               textAlign={"center"}
               color={"clique.secondaryGrey2"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
             >
@@ -269,7 +269,7 @@ function PlayerCard({ streamDetails, setState }: any) {
               position={"relative"}
               color={"clique.white"}
               textAlign={"center"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
               textTransform={"uppercase"}
@@ -282,7 +282,7 @@ function PlayerCard({ streamDetails, setState }: any) {
               mt="10px"
               textAlign={"center"}
               color={"clique.secondaryGrey2"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
             >
@@ -291,7 +291,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             <Text
               textAlign={"center"}
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
               textTransform={"uppercase"}
@@ -318,7 +318,7 @@ function PlayerCard({ streamDetails, setState }: any) {
               bg={"clique.green"}
               color="white"
               colorScheme={"green"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
             >
               Start Live Stream
             </Button>
@@ -336,7 +336,7 @@ function PlayerCard({ streamDetails, setState }: any) {
               bg={"clique.grey"}
               color="white"
               colorScheme={"gray"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
             >
               Not available
             </Button>

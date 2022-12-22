@@ -34,7 +34,7 @@ function BodyOne({
       <Text
         mt="20px"
         color={"clique.base"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={400}
         fontSize={"smSubHead"}
         lineHeight={"1.3"}
@@ -48,7 +48,7 @@ function BodyOne({
       <Text
         mt="20px"
         color={"clique.white"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={400}
         fontSize={"smSubHead"}
         lineHeight={"1.5"}
