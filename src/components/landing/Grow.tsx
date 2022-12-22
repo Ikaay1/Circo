@@ -156,8 +156,8 @@ const Grow = () => {
                           color='clique.white'
                         >
                           {i !== 2
-                            ? 'Clique Wallet credited with'
-                            : 'Clique Wallet debited with'}{' '}
+                            ? 'Circo Wallet credited with'
+                            : 'Circo Wallet debited with'}{' '}
                           <Text
                             display={'inline'}
                             color={i !== 2 ? '#22C55E' : '#D52B2B'}

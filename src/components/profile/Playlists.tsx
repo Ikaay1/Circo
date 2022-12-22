@@ -26,7 +26,7 @@ import {
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import EmptyState from '@components/emptyState/EmptyState';
-import { scrollBarStyle } from '@constants/utils';
+import { scrollBarStyle3 } from '@constants/utils';
 import AddPlaylistIcon from '@icons/AddPlaylistIcon';
 import TrashIcon from '@icons/TrashIcon';
 
@@ -248,7 +248,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
           bottom='0'
           minH='100vh'
           overflowY={'scroll'}
-          sx={scrollBarStyle}
+          sx={scrollBarStyle3}
           m='0'
           py='30px'
           position={'absolute'}

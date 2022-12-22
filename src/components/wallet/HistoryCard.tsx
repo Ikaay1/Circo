@@ -31,7 +31,7 @@ function HistoryCard({credit, amount, onClick, duration}: Props) {
         <Icon as={iconArg} fontSize='3xl' mr='2' />
 
         <Text fontSize={'smSubHead'}>
-          Clique Wallet {credit ? 'credited ' : 'debited'} with
+        Circo Wallet {credit ? 'credited ' : 'debited'} with
           <span style={{color: `${credit ? '#22C55E' : '#BA1A1A'}`}}>
             {' ' + '₦' + amount}
           </span>
