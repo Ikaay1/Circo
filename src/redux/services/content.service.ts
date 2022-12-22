@@ -241,6 +241,17 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
+
+    getCounts: builder.query<any, any>({
+      query: () => ({
+        url: `like/likesCount`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -265,4 +276,5 @@ export const {
   useGetSearchHistoryQuery,
   useExpiredSubscriptionMutation,
   useDeleteContentMutation,
+  useGetCountsQuery,
 } = contentApi;

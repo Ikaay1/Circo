@@ -19,12 +19,6 @@ function Account({}: Props) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <Box>
       <Text fontSize={'smSubHead'} mb='3'>

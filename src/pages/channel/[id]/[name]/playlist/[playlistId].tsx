@@ -16,12 +16,6 @@ const Playlist = () => {
   const {data, isLoading} = useGetSinglePlaylistQuery(id);
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
       <Header upload={onOpen} />

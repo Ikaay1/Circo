@@ -1,7 +1,5 @@
 import HomeLayout from 'layouts/HomeLayout';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
 import { useFlutterwavePaymentMutation } from 'redux/services/bank.service';
 import { useGetUserWalletQuery } from 'redux/services/wallet.service';
 
@@ -20,20 +18,12 @@ import { scrollBarStyle, scrollBarStyle3 } from '@constants/utils';
 type Props = {};
 
 function Wallet({}: Props) {
-  const router = useRouter();
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
   const {data, isFetching, refetch, isError} = useGetUserWalletQuery('');
   const [amount, setAmount] = useState<string | number>('');
-  const {userProfile, token} = useAppSelector((store) => store.app.userReducer);
 
   const [flutterwave, flutterwaveStatus] = useFlutterwavePaymentMutation();
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
 
   const {
     isOpen: isBeneIsOpen,
@@ -57,10 +47,6 @@ function Wallet({}: Props) {
     setModalInfo(info);
     isReceiptOnOpen();
   };
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
 
   return (
     <HomeLayout>

@@ -6,12 +6,6 @@ export const useRoutingChannel = () => {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   const handleRouting = (id: string) => {
     if (
       router.query.name === 'content' ||
