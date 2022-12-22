@@ -18,16 +18,25 @@ function Index() {
   const toast = useToast();
   const router = useRouter();
   const {id, userId} = router.query;
-  const {data, isLoading, refetch} = useGetContentQuery(id);
-  const {data: userData, isFetching} = useGetUserQuery(userId);
+  const {data, isLoading, refetch, error} = useGetContentQuery<any>(id);
+  const {data: userData, isFetching, isError} = useGetUserQuery(userId);
   const [view] = useCreateViewMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
+    if (error) {
+      toast({
+        title: error?.data?.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      router.push('/home');
+    } else {
+      console.log('data', data);
     }
-  }, [userProfile?._id, router]);
+  }, [data, error]);
 
   useEffect(() => {
     if (userData && userData?.data?._id !== userProfile?._id) {
@@ -63,11 +72,13 @@ function Index() {
 
   return (
     <>
-      {isLoading || !data || isFetching ? (
-        <Box h='90vh'>
-          <CliqueLoader />
-        </Box>
-      ) : (
+      {isLoading ||
+        (!userData && (
+          <Box h='90vh'>
+            <CliqueLoader />
+          </Box>
+        ))}
+      {userData && !isLoading && !isFetching && data?.data && (
         <HomeLayout>
           <Flex>
             <Box
@@ -94,12 +105,14 @@ function Index() {
               }}
             >
               <VideoPlayer
-                video={data.data.preference.video}
-                videoIdsList={data.data.preference.allVideos}
+                video={data?.data?.preference?.video}
+                videoIdsList={data?.data?.preference?.allVideos}
               />
               <VideoDetails
-                video={data.data.preference.video}
-                subscribers={data.data.preference.video.uploader_id.subscribers}
+                video={data?.data?.preference?.video}
+                subscribers={
+                  data?.data?.preference?.video?.uploader_id?.subscribers
+                }
               />
             </Box>
             {/* @ts-ignore */}

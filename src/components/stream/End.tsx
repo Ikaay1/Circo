@@ -51,7 +51,7 @@ function End() {
       bg={"clique.dangerRed"}
       color="white"
       colorScheme={"red"}
-      fontFamily={"Unbounded"}
+      fontFamily={"Poppins"}
     >
       End Live Stream
     </Button>

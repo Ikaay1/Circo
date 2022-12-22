@@ -44,7 +44,7 @@ function CommentSection({ streamDetails }: any) {
     >
       <Text
         textAlign={"left"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="smHead"

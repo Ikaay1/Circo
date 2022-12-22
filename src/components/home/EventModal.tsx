@@ -70,7 +70,7 @@ function EventModal({ event }: any) {
             <Box bg="clique.lightGrey" rounded={"10px"} p="20px">
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 fontSize={"smSubHead"}
                 lineHeight={"1.3"}
@@ -80,7 +80,7 @@ function EventModal({ event }: any) {
               </Text>
               <Text
                 color={"clique.base"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 fontSize={"smSubHead"}
                 lineHeight={"1.3"}
@@ -91,7 +91,7 @@ function EventModal({ event }: any) {
               <Text
                 mt="20px"
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.3"}
@@ -110,7 +110,7 @@ function EventModal({ event }: any) {
               >
                 <Text
                   color={"clique.white"}
-                  fontFamily={"Unbounded"}
+                  fontFamily={"Poppins"}
                   fontWeight={400}
                   fontSize={"smSubHead"}
                   lineHeight={"1.3"}
@@ -123,7 +123,7 @@ function EventModal({ event }: any) {
                 </Text>
 
                 <Button
-                  fontFamily={"Unbounded"}
+                  fontFamily={"Poppins"}
                   rounded="full"
                   bg={"clique.darkGrey"}
                   color="clique.black "

@@ -30,7 +30,7 @@ function EventCard({ onOpen, event }: { onOpen: () => void; event: any }) {
         <Text
           noOfLines={1}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           fontSize={"smSubHead"}
           lineHeight={"1.2"}
@@ -41,7 +41,7 @@ function EventCard({ onOpen, event }: { onOpen: () => void; event: any }) {
         <Text
           noOfLines={2}
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={500}
           fontSize={"smSubHead"}
           lineHeight={"1.2"}

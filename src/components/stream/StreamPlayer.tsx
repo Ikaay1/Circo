@@ -105,7 +105,7 @@ function StreamPlayer({ stream }: any) {
 
                   <Text
                     color={"clique.white"}
-                    fontFamily={"Unbounded"}
+                    fontFamily={"Poppins"}
                     fontWeight={400}
                     fontSize={"smSubHead"}
                     lineHeight={"1.2"}
@@ -146,7 +146,7 @@ function StreamPlayer({ stream }: any) {
 
                   <Text
                     color={"clique.white"}
-                    fontFamily={"Unbounded"}
+                    fontFamily={"Poppins"}
                     fontWeight={400}
                     fontSize={"smSubHead"}
                     lineHeight={"1.2"}

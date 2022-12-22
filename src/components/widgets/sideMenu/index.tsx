@@ -70,7 +70,7 @@ function Index() {
             <>
               <Text
                 pl="60px"
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
               >
@@ -115,7 +115,7 @@ function Index() {
       >
         <Text
           mr="10px"
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={400}
           textTransform={"capitalize"}
           fontSize={"smSubHead"}

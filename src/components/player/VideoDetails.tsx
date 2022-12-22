@@ -27,7 +27,7 @@ function VideoDetails({
     <Box mt="20px">
       <Text
         textAlign={"left"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={500}
         textTransform={"capitalize"}
         fontSize="smHead"
@@ -69,7 +69,7 @@ function VideoDetails({
             <Text
               noOfLines={2}
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize="subHead"
               lineHeight={"1.2"}
@@ -93,7 +93,7 @@ function VideoDetails({
               mt="5px"
               noOfLines={2}
               color={"clique.darkGrey"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize="smSubHead"
               lineHeight={"1.2"}
@@ -119,7 +119,7 @@ function VideoDetails({
         mt="5px"
         noOfLines={2}
         color={"clique.darkGrey"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={400}
         fontSize="smSubHead"
         lineHeight={"1.2"}
@@ -129,7 +129,7 @@ function VideoDetails({
       <Text
         mt="5px"
         color={"clique.white"}
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontWeight={400}
         fontSize="smSubHead"
         lineHeight={"1.5"}

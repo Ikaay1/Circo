@@ -71,7 +71,7 @@ function Control({
               mt="5px"
               minW={"100px"}
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize={"smSubHead"}
               lineHeight={"1"}
@@ -82,7 +82,7 @@ function Control({
               mt="5px"
               minW={"100px"}
               color={"clique.white"}
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontWeight={400}
               fontSize={"smSubHead"}
               lineHeight={"1"}
@@ -132,7 +132,7 @@ function Control({
               )}
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
@@ -167,7 +167,7 @@ function Control({
               )}
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}

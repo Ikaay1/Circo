@@ -31,7 +31,7 @@ function CreatorAvatarBox({ user }: { user: any }) {
       )}
       <Text
         mt="5px"
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         fontSize="smSubHead"
         color={"clique.lightGrey"}
         noOfLines={1}

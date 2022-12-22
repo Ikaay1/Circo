@@ -18,7 +18,7 @@ function GoLiveTab({ state }: { state: string }) {
       // isLazy
       variant={"unstyled"}
       minW="full"
-      fontFamily="Unbounded"
+      fontFamily="Poppins"
       color={"clique.white"}
       index={tabIndex}
       onChange={(index) => setTabIndex(index)}

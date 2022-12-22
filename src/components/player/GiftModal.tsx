@@ -38,7 +38,7 @@ function GiftModal({ video }: { video: contentData }) {
         <ModalContent m="0" p="40px" rounded={"20px"} bg="clique.primaryBg">
           <Text
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"smSubHead"}
             lineHeight={"1"}

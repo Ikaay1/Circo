@@ -38,7 +38,7 @@ function DiscoverCard({ video }: { video: contentData }) {
           position={"relative"}
           w="60%"
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={700}
           textTransform={"capitalize"}
           fontSize="bigHead"
@@ -71,7 +71,7 @@ function DiscoverCard({ video }: { video: contentData }) {
 
           <Box>
             <Text
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontSize="subHead"
               color={"clique.white"}
             >
@@ -81,7 +81,7 @@ function DiscoverCard({ video }: { video: contentData }) {
               <Text
                 noOfLines={2}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"subHead"}
                 lineHeight={"1.2"}
@@ -105,7 +105,7 @@ function DiscoverCard({ video }: { video: contentData }) {
                 pl="10px"
                 noOfLines={2}
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"subHead"}
                 lineHeight={"1.2"}

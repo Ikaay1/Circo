@@ -73,7 +73,7 @@ function TrendCard({
 
           <Box>
             <Text
-              fontFamily={"Unbounded"}
+              fontFamily={"Poppins"}
               fontSize="smSubHead"
               color={"clique.lightGrey"}
               noOfLines={1}
@@ -84,7 +84,7 @@ function TrendCard({
               <Text
                 noOfLines={2}
                 color={"clique.lightGrey"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
@@ -108,7 +108,7 @@ function TrendCard({
                 pl="10px"
                 noOfLines={2}
                 color={"clique.lightGrey"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
@@ -122,7 +122,7 @@ function TrendCard({
         <Text
           mt="5px"
           color={"clique.black"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={700}
           textTransform={"capitalize"}
           fontSize="head"
@@ -132,7 +132,7 @@ function TrendCard({
         </Text>
 
         <Text
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontSize="smSubHead"
           color={"clique.lightGrey"}
           noOfLines={4}

@@ -22,7 +22,7 @@ function EachComment({ comment }: { comment: any }) {
           <Text
             noOfLines={2}
             color={"clique.white"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
             lineHeight={"1.2"}
@@ -35,7 +35,7 @@ function EachComment({ comment }: { comment: any }) {
           <Text
             noOfLines={2}
             color={"clique.darkGrey"}
-            fontFamily={"Unbounded"}
+            fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"smSubHead"}
             lineHeight={"1.2"}
@@ -47,7 +47,7 @@ function EachComment({ comment }: { comment: any }) {
         <Text
           mt="5px"
           color={"clique.white"}
-          fontFamily={"Unbounded"}
+          fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
           lineHeight={"1.3"}
@@ -60,7 +60,7 @@ function EachComment({ comment }: { comment: any }) {
               <Icon color="clique.white" mr="5px" fontSize="20px" as={BiLike} />
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}
@@ -78,7 +78,7 @@ function EachComment({ comment }: { comment: any }) {
               />
               <Text
                 color={"clique.white"}
-                fontFamily={"Unbounded"}
+                fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
                 lineHeight={"1.2"}

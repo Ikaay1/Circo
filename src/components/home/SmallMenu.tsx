@@ -23,7 +23,7 @@ function SmallMenu({ playbackId }: { playbackId?: string }) {
         <Icon as={HiOutlineDotsVertical} />
       </MenuButton>
       <MenuList
-        fontFamily={"Unbounded"}
+        fontFamily={"Poppins"}
         p="10px"
         pr="20px"
         bg="clique.black"
