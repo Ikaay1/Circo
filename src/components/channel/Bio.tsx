@@ -38,12 +38,6 @@ const Bio = ({
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [state, setState] = useState('');
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <>
       <Box

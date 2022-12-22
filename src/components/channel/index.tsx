@@ -84,7 +84,7 @@ const Index = ({
 
           {router.query.name === 'analytics' && (
             <Box mt={'10rem'} px='1.35rem'>
-              <Analytics />
+              <Analytics subscribe={channelData?.data?.channel?.subscribe} />
             </Box>
           )}
         </Box>

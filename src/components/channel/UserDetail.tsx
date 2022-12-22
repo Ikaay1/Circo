@@ -58,12 +58,6 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
     onClose: channelOnClose,
   } = useDisclosure();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <>
       <Box position='relative'>

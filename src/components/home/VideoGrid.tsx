@@ -23,12 +23,6 @@ function VideoGrid({
   const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <>
       <SimpleGrid

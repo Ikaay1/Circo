@@ -50,12 +50,6 @@ const EditProfile = () => {
     profile: userProfile?.photo ? userProfile?.photo : '',
   });
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   const handleFileChange = (
     event: ChangeEvent<HTMLInputElement>,
     cover: boolean,
