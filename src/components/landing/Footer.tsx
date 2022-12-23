@@ -9,7 +9,7 @@ const Footer = () => {
     <>
       <Box display={{lg: 'flex'}} justifyContent={{lg: 'space-between'}}>
         <Box>
-          <Box
+          {/* <Box
             display={'flex'}
             alignItems='center'
             fontWeight={'700'}
@@ -21,12 +21,17 @@ const Footer = () => {
             color='clique.black3'
           >
             <Image
-              src='/assets/clique-logo.png'
+              src='/assets/Circo-05.svg'
+              // src='/assets/clique-logo.png'
+              border={'1px solid red'}
               alt='clique-logo'
               w={{base: '32.02px', lg: '45.39px'}}
               h={{base: '36.16px', lg: '51.24px'}}
             />
             <Link href='/'>CIRCO</Link>
+          </Box> */}
+          <Box w='200px' cursor={'pointer'} maxW='200px' minW='200px'>
+            <Image alt='circo logo' w='100px' src='/assets/Circo.png' />
           </Box>
           <Text
             fontSize={{base: 'smSubHead', lg: 'smHead'}}

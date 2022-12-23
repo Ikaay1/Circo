@@ -236,7 +236,7 @@ export const contactInfoData: {
   },
   {
     image: 'message',
-    detail: 'info@circo.co',
+    detail: 'info@circo.africa',
   },
 ];
 
