@@ -743,6 +743,7 @@ export interface contentData {
   category_id: string;
   uploader_userName: string;
   channel_id?: any;
+  isFree: boolean;
 }
 
 export interface uploaderId {

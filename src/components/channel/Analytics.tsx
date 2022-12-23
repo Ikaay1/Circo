@@ -31,8 +31,8 @@ const Analytics = ({
   };
 
   const diff =
-    subscribe[subscribe?.length - 1].count -
-    subscribe[subscribe?.length - 2].count;
+    subscribe[subscribe?.length - 1]?.count -
+    subscribe[subscribe?.length - 2]?.count;
 
   return (
     <Box>
@@ -48,18 +48,20 @@ const Analytics = ({
           </Text>
           <Box display={'flex'} alignItems='center'>
             <Text fontSize='smHead2' lineHeight='36px' color='clique.white'>
-              {diff}
+              {diff ? diff : '-'}
             </Text>
-            <Box
-              backgroundColor={diff > 1 ? 'clique.lightGreen' : 'clique.wine'}
-              borderRadius='50%'
-              display={'flex'}
-              justifyContent='center'
-              alignItems={'center'}
-              ml='2'
-            >
-              <Icon as={diff > 1 ? UpIcon : FallIcon} />
-            </Box>
+            {diff ? (
+              <Box
+                backgroundColor={diff > 1 ? 'clique.lightGreen' : 'clique.wine'}
+                borderRadius='50%'
+                display={'flex'}
+                justifyContent='center'
+                alignItems={'center'}
+                ml='2'
+              >
+                <Icon as={diff > 1 ? UpIcon : FallIcon} />
+              </Box>
+            ) : null}
           </Box>
           <Text
             fontSize='smSubHead'
