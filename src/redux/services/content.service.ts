@@ -252,6 +252,15 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+
+    deleteContentComment: builder.mutation({
+      query: (id) => ({
+        url: `comment/delete/${id}`,
+        method: 'DELETE',
+        // credentials: 'include',
+      }),
+      invalidatesTags: ['Content'],
+    }),
   }),
 });
 
@@ -277,4 +286,5 @@ export const {
   useExpiredSubscriptionMutation,
   useDeleteContentMutation,
   useGetCountsQuery,
+  useDeleteContentCommentMutation,
 } = contentApi;

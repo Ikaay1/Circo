@@ -15,16 +15,13 @@ const Navbar = ({
     <Box display='flex' justifyContent={'space-between'} alignItems='center'>
       <Box display={'flex'} alignItems='center'>
         <Box
-          display={'flex'}
-          alignItems='center'
-          marginRight={{lg: '5.5rem'}}
-          fontWeight={{lg: '700'}}
-          fontSize='smHead2'
-          letterSpacing='0.709173px'
-          color='clique.white'
+          w='200px'
+          cursor={'pointer'}
+          onClick={() => router.push('/')}
+          maxW='200px'
+          minW='200px'
         >
-          <Image src='/assets/clique-logo.png' alt='clique-logo' />
-          <Link href='/'>CIRCO</Link>
+          <Image alt='circo logo' w='100px' src='/assets/Circo-Logo.png' />
         </Box>
         <Text
           display={{base: 'none', lg: 'block'}}

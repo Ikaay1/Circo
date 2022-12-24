@@ -19,7 +19,7 @@ type Props = {
   buttonText: string;
   header: string;
   description: string;
-  onClick: () => void;
+  onClick: any;
   isLoading: boolean;
   //   name: string;
 };
