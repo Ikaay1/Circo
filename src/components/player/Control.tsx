@@ -40,9 +40,11 @@ function Control({
   nextVideoIndex,
   prevVideoIndex,
   videoIdsList,
+  currentVideoIndex,
 }: any) {
   console.log(prevVideoIndex, "prevVideoIndex");
   console.log(nextVideoIndex, "nextVideoIndex");
+  console.log(currentVideoIndex, "current video index");
   const router = useRouter();
   const [like, likeInfo] = useLikeContentMutation();
   const [dislike, dislikeInfo] = useDislikeContentMutation();
