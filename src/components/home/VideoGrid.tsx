@@ -23,12 +23,6 @@ function VideoGrid({
   const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <>
       <SimpleGrid
@@ -46,7 +40,7 @@ function VideoGrid({
                   key={video._id}
                   thumbWidth={thumbWidth}
                   isSubscribed={
-                    video.uploader_id?._id === userProfile?._id
+                    video.uploader_id?._id === userProfile?._id || video?.isFree
                       ? true
                       : video?.uploader_id?.subscribers?.find(
                           (theId) => theId === userProfile?._id,
@@ -67,7 +61,7 @@ function VideoGrid({
                   key={video._id}
                   thumbWidth={thumbWidth}
                   isSubscribed={
-                    video.uploader_id?._id === userProfile?._id
+                    video.uploader_id?._id === userProfile?._id || video?.isFree
                       ? true
                       : video?.uploader_id?.subscribers?.find(
                           (theId) => theId === userProfile?._id,

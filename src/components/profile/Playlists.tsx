@@ -48,12 +48,6 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
   const toast = useToast();
   const [playlistId, setPlaylistId] = useState('');
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   let content;
   if (isLoading || !data) {
     content = (

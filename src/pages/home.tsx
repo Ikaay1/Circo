@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { useCategoryQuery } from 'redux/services/category.service';
 import { useGetContentsQuery } from 'redux/services/content.service';
+import { useExpiredSubscriptionMutation } from 'redux/services/user.service';
 import { useDepositToWalletMutation } from 'redux/services/wallet.service';
 
 import { Box, Divider, Flex } from '@chakra-ui/react';
@@ -36,12 +37,20 @@ function Index() {
     limit: 7,
     categoryId,
   });
+  const [expiredSub] = useExpiredSubscriptionMutation();
+
+  console.log(data);
 
   useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
+    const expired = async () => {
+      const res: any = await expiredSub({});
+      console.log(res?.data?.data);
+      if (res?.data?.data) {
+        window.location.replace('/home');
+      }
+    };
+    expired();
+  }, []);
 
   useEffect(() => {
     const deposit = async () => {

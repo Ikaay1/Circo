@@ -40,12 +40,6 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
   const toast = useToast();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   const handleAdd = async (id: string) => {
     const res: any = await addVideo({
       videoId,

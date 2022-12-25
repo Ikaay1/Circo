@@ -34,12 +34,6 @@ const PlaylistList = ({item, i, playlist, videoId}: Props) => {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const {isOpen, onOpen, onClose} = useDisclosure();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   const handleDelete = async (playlistId: string, videoId: string) => {
     setShow(false);
     await deleteVideo({playlistId, videoId});

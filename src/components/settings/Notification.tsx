@@ -60,12 +60,6 @@ const Notification = ({isLoading, data, onClick}: Props) => {
   });
   const router = useRouter();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace('/login');
-    }
-  }, [userProfile?._id, router]);
-
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({...prev, [e.target.name]: e.target.checked}));
     if (e.target.name === 'allNotifications') {

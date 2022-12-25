@@ -241,6 +241,26 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
+
+    getCounts: builder.query<any, any>({
+      query: () => ({
+        url: `like/likesCount`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
+
+    deleteContentComment: builder.mutation({
+      query: (id) => ({
+        url: `comment/delete/${id}`,
+        method: 'DELETE',
+        // credentials: 'include',
+      }),
+      invalidatesTags: ['Content'],
+    }),
   }),
 });
 
@@ -265,4 +285,6 @@ export const {
   useGetSearchHistoryQuery,
   useExpiredSubscriptionMutation,
   useDeleteContentMutation,
+  useGetCountsQuery,
+  useDeleteContentCommentMutation,
 } = contentApi;
