@@ -6,6 +6,7 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
+  useCreateSpaceMutation,
 } from "redux/services/livestream/live.service";
 import { setWebCamStream } from "redux/slices/streamSlice";
 import * as Yup from "yup";
@@ -43,6 +44,7 @@ function WebCamModal({ setState }: { setState: any }) {
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
+  const [createSpace, createSpaceInfo] = useCreateSpaceMutation();
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -145,15 +147,19 @@ function WebCamModal({ setState }: { setState: any }) {
                       position: "top-right",
                     });
 
+                    const createSpaceRes: any = await createSpace("webcam");
+                    console.log(createSpaceRes);
+
                     dispatch(
                       setWebCamStream({
                         payload: {
                           ...createLive?.data?.data?.livestream,
+                          ...createSpaceRes?.data?.data,
                         },
                       })
                     );
                     router.push(
-                      `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}`
+                      `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}/?spaceId=${createSpaceRes?.data?.data?.spaces.id}&token=${createSpaceRes.data?.data?.token}`
                     );
                   } else {
                     toast({
