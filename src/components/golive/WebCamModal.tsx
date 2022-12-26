@@ -35,8 +35,7 @@ import AddIcon from "@icons/AddIcon";
 import WebCamIcon from "@icons/WebCamIcon";
 
 import DetailCard from "./DetailCard";
-import SelectField from "./SelectField";
-import Stream from "./Stream";
+import SelectField from "./SelectField"; 
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
