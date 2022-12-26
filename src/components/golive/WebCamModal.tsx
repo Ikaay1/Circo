@@ -147,8 +147,10 @@ function WebCamModal({ setState }: { setState: any }) {
                       position: "top-right",
                     });
 
-                    const createSpaceRes: any = await createSpace("webcam");
-                    console.log(createSpaceRes);
+                    const createSpaceRes: any = await createSpace({
+                      muxStreamId:
+                        createLive.data?.data?.livestream?.muxStreamId,
+                    });
 
                     dispatch(
                       setWebCamStream({
@@ -159,7 +161,7 @@ function WebCamModal({ setState }: { setState: any }) {
                       })
                     );
                     router.push(
-                      `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}/?spaceId=${createSpaceRes?.data?.data?.spaces.id}&token=${createSpaceRes.data?.data?.token}`
+                      `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}`
                     );
                   } else {
                     toast({

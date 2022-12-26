@@ -19,6 +19,7 @@
     "@emotion/styled": "^11",
     "@mux/mux-player-react": "^1.3.0",
     "@mux/mux-video-react": "^0.7.0",
+    "@mux/spaces-web": "^1.0.0",
     "@paystack/inline-js": "^2.12.6",
     "@reduxjs/toolkit": "^1.8.6",
     "@types/react-infinite-scroller": "^1.2.3",

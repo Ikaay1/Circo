@@ -37,9 +37,19 @@ export const liveAPI = createApi({
     }),
 
     createSpace: builder.mutation<any, any>({
-      query: () => ({
+      query: (body) => ({
         url: `livestream/create-mux-spaces`,
         method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    startBroadCast: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `livestream/space-broadcast`,
+        method: "POST",
+        body: body,
       }),
       invalidatesTags: ["Live"],
     }),
@@ -191,4 +201,5 @@ export const {
   usePayForLiveMutation,
   useGetUserLiveStreamQuery,
   useCreateSpaceMutation,
+  useStartBroadCastMutation,
 } = liveAPI;
