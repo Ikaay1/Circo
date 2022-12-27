@@ -2,7 +2,7 @@
 import HomeLayout from "layouts/HomeLayout";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Skeleton } from "@chakra-ui/react";
+import { Box, Flex, Skeleton, useToast } from "@chakra-ui/react";
 import StreamPlayer from "@components/stream/StreamPlayer";
 import {
   useCreateViewMutation,
@@ -18,12 +18,27 @@ function Index() {
   const { data, isFetching, isLoading, refetch } = useGetStreamQuery(
     id as string
   );
+
+  const toast = useToast();
   const [createView, info] = useCreateViewMutation();
 
   useEffect(() => {
     if (data?.data) {
       createView({ streamId: data?.data?.stream?._id });
     }
+  }, [data]);
+
+  useEffect(() => {
+    if (data?.data?.stream?.status !== "ongoing") {
+      router.push(`liveevents`);
+    }
+
+    toast({
+      title: "Stream " + data?.data?.stream?.status,
+      status: "info",
+      duration: 5000,
+      isClosable: true,
+    });
   }, [data]);
 
   useEffect(() => {
