@@ -6,6 +6,7 @@ import { useCategoryQuery } from "redux/services/category.service";
 import {
   useCreateEventMutation,
   useCreateLiveStreamMutation,
+  useCreateSpaceMutation,
 } from "redux/services/livestream/live.service";
 import { setWebCamStream } from "redux/slices/streamSlice";
 import * as Yup from "yup";
@@ -34,8 +35,7 @@ import AddIcon from "@icons/AddIcon";
 import WebCamIcon from "@icons/WebCamIcon";
 
 import DetailCard from "./DetailCard";
-import SelectField from "./SelectField";
-import Stream from "./Stream";
+import SelectField from "./SelectField"; 
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,6 +43,7 @@ function WebCamModal({ setState }: { setState: any }) {
   const { data, isLoading } = useCategoryQuery("");
   const [createEvent, createEventInfo] = useCreateEventMutation();
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
+  const [createSpace, createSpaceInfo] = useCreateSpaceMutation();
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -145,15 +146,21 @@ function WebCamModal({ setState }: { setState: any }) {
                       position: "top-right",
                     });
 
+                    const createSpaceRes: any = await createSpace({
+                      muxStreamId:
+                        createLive.data?.data?.livestream?.muxStreamId,
+                    });
+
                     dispatch(
                       setWebCamStream({
                         payload: {
                           ...createLive?.data?.data?.livestream,
+                          ...createSpaceRes?.data?.data,
                         },
                       })
                     );
                     router.push(
-                      `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}`
+                      `/stream/webcam/${createLive.data?.data?.livestream?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}`
                     );
                   } else {
                     toast({

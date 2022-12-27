@@ -37,7 +37,6 @@ function VideoPlayer({
   useEffect(() => {
     const length = videoIdsList.length;
     console.log(length, " video list");
-    console.log(currentVideoIndex, "current video index");
 
     if (currentVideoIndex === 0 && length > 1) {
       setPrevVideoIndex(null);
@@ -51,6 +50,9 @@ function VideoPlayer({
       setNextVideoIndex(null);
       setPrevVideoIndex(null);
       return;
+    } else {
+      setNextVideoIndex(currentVideoIndex + 1);
+      setPrevVideoIndex(currentVideoIndex - 1);
     }
   }, [currentVideoIndex, videoIdsList]);
 
@@ -145,6 +147,7 @@ function VideoPlayer({
           video={video}
           nextVideoIndex={nextVideoIndex}
           prevVideoIndex={prevVideoIndex}
+          currentVideoIndex={currentVideoIndex}
           videoIdsList={videoIdsList}
         />
       </Flex>

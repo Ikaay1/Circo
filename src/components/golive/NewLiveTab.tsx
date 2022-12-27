@@ -14,7 +14,7 @@ function NewLiveTab({ state, setState }: { state: string; setState: any }) {
       fontFamily="Poppins"
       color={"clique.white"}
       index={tabIndex}
-      onChange={(index) => setTabIndex(index)}
+      onChange={(index: any) => setTabIndex(index)}
     >
       <TabList bg="clique.primaryBg" py="10px">
         <CliqueTab>Streaming details </CliqueTab>
