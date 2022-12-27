@@ -77,12 +77,6 @@ function PlayerCard({ streamDetails, setState }: any) {
             })
           );
         }
-
-        window.location.replace(
-          `/golive/?refreshed=${
-            streamId === streamDetails?._id ? "truer" : "true"
-          }`
-        );
       } else {
         toast({
           title: "Error",
@@ -139,7 +133,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           }}
           streamType="live:dvr"
           autoPlay
-          muted
+          muted={false}
           loading="page"
         />
       </Box>
