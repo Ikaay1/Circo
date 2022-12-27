@@ -479,6 +479,27 @@ export const scrollBarStyle2 = {
   },
 };
 
+export const scrollBarStyle4 = {
+  '&::-webkit-scrollbar': {
+    width: '5px',
+    height: '12px',
+    // rounded: 'full',
+    // height: '20px',
+  },
+  '&::-webkit-scrollbar-track': {
+    boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+    webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+  },
+  '&::-webkit-scrollbar-thumb': {
+    bg: 'clique.base',
+    outline: 'none',
+    borderRadius: '20px',
+    background: 'clique.base',
+    backgroundClip: 'content-box',
+    borderTop: '10px solid transparent',
+  },
+};
+
 export const scrollBarStyle3 = {
   '&::-webkit-scrollbar': {
     width: '5px',
