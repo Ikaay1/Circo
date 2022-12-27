@@ -14,6 +14,7 @@ function LiveEvents() {
 
   return (
     <Box
+      display={{ base: "none", md: "block" }}
       w="250px"
       maxW="250px"
       minW="250px"
