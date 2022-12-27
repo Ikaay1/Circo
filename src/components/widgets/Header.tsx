@@ -2,7 +2,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsBroadcast } from "react-icons/bs";
-import { MdAddCircleOutline, MdOutlineNotificationsNone } from "react-icons/md";
+import {
+  MdAddCircleOutline,
+  MdMenuOpen,
+  MdOutlineClose,
+  MdOutlineNotificationsNone,
+} from "react-icons/md";
 import { useAppSelector } from "redux/app/hooks";
 
 import {
@@ -27,7 +32,10 @@ type Props = {
 
 function Header({ upload }: Props) {
   const profile = useAppSelector((store) => store.app.userReducer.userProfile);
-  const [searchWidth, setSearchWidth] = useState("300px");
+  const [searchWidth, setSearchWidth] = useState({
+    base: "150px",
+    lg: "300px",
+  });
   const router = useRouter();
   const [search, setSearch] = useState("");
 
@@ -45,12 +53,14 @@ function Header({ upload }: Props) {
     }
   };
 
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <Flex
       alignItems={"center"}
       justifyContent="space-between"
       bg={"clique.black"}
-      px="50px"
+      px={{ base: "20px", lg: "50px" }}
       py="20px"
       h="10vh"
       minH={"10vh"}
@@ -59,13 +69,17 @@ function Header({ upload }: Props) {
     >
       {/* First div  */}
       <Box
-        w="200px"
+        w={{ base: "70px", lg: "200px" }}
         cursor={"pointer"}
         onClick={() => router.push("/home")}
-        maxW="200px"
-        minW="200px"
+        maxW={{ base: "70px", lg: "200px" }}
+        minW={{ base: "70px", lg: "200px" }}
       >
-        <Image alt="circo logo" w="100px" src="/assets/Circo-Logo.png" />
+        <Image
+          alt="circo logo"
+          w={{ base: "full", lg: "100px" }}
+          src="/assets/Circo-Logo.png"
+        />
       </Box>
 
       {/* Second div */}
@@ -75,7 +89,7 @@ function Header({ upload }: Props) {
         alignItems={"center"}
         justifyContent={"space-between"}
       >
-        <InputGroup w={searchWidth} transition="all 1s ease">
+        <InputGroup w={searchWidth} transition="all 1s ease" mr="10px">
           <InputLeftElement px="20px">
             <Icon
               fontSize={"smHead"}
@@ -83,17 +97,18 @@ function Header({ upload }: Props) {
               as={AiOutlineSearch}
               cursor={"pointer"}
               onClick={() => {
-                if (search) {
-                  router.push(`/search/${search}`);
-                }
+                setSearchWidth({ base: "150px", lg: "500px" });
+                // if (search) {
+                //   router.push(`/search/${search}`);
+                // }
               }}
             />
           </InputLeftElement>
           <Input
             onKeyPress={(e) => _handleKeyDown(e)}
             bg="clique.inputBg"
-            onFocus={() => setSearchWidth("500px")}
-            onBlur={() => setSearchWidth("300px")}
+            onFocus={() => setSearchWidth({ base: "150px", lg: "500px" })}
+            onBlur={() => setSearchWidth({ base: "150px", lg: "300px" })}
             _focus={{
               boxShadow: "none",
               border: " 3px solid ",
@@ -116,6 +131,7 @@ function Header({ upload }: Props) {
         <HStack alignItems={"center"}>
           <NotificationModal />
           <Flex
+            display={{ base: "none", lg: "flex" }}
             alignItems={"center"}
             justifyContent="center"
             p="2px"
@@ -131,11 +147,19 @@ function Header({ upload }: Props) {
               onClick={() => router.push("/profile/1/content")}
             />
           </Flex>
+
+          <Icon
+            cursor={"pointer"}
+            onClick={() => setShowMenu(!showMenu)}
+            display={{ base: "flex", lg: "none" }}
+            as={!showMenu ? MdMenuOpen : MdOutlineClose}
+            fontSize="30px"
+          />
         </HStack>
       </Flex>
 
       {/* third div */}
-      <HStack w="300px" spacing={"20px"}>
+      <HStack w="300px" spacing={"20px"} display={{ base: "none", lg: "flex" }}>
         <Button
           rightIcon={<Icon fontSize={"lg"} as={BsBroadcast} />}
           variant="ghost"
