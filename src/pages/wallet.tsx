@@ -50,20 +50,20 @@ function Wallet({}: Props) {
 
   return (
     <HomeLayout>
-      <Flex>
+      <Flex flexDirection={{base: 'column', lg: 'row'}}>
         <SideMenu />
         {isFetching || !data ? (
-          <Box w='100%' h='90vh'>
+          <Box h='90vh' marginX='auto'>
             <CliqueLoader />
           </Box>
         ) : (
           <>
             <Box
               maxH={'90vh'}
-              pb='50px'
+              pb={{base: '20px', lg: '50px'}}
               px={'2'}
               pl={{xl: '100px'}}
-              w='62%'
+              w={{base: '100%', lg: '62%'}}
               overflowY={'scroll'}
               overflowX={'hidden'}
               sx={scrollBarStyle3}
@@ -81,7 +81,7 @@ function Wallet({}: Props) {
               pb='40px'
               px='2'
               pr={{xl: '100px'}}
-              w='38%'
+              w={{base: '100%', lg: '38%'}}
               overflowY={'scroll'}
               overflowX={'hidden'}
               sx={scrollBarStyle}

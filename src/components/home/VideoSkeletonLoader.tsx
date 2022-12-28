@@ -15,7 +15,7 @@ const VideoSkeletonLoader = () => {
       bg='clique.blackGrey'
       columns={{base: 1, lg: 3, mlg: 3, xl: 4}}
       spacing={'30px'}
-      width={'calc(100vw - 560px)'}
+      width={{base: '100%', lg: 'calc(100vw - 560px)'}}
     >
       {[1, 2, 3, 4, 5, 6].map((num) => (
         <Box key={num} w='full'>

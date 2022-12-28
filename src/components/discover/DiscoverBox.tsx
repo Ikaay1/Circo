@@ -17,19 +17,23 @@ function DiscoverBox() {
   console.log(data);
 
   return (
-    <SimpleGrid columns={2} spacing='50px'>
+    <SimpleGrid columns={{base: 1, lg: 2}} spacing='50px'>
       {isFetching ? (
         <>
           {[1, 2, 3, 4].map((num) => (
-            <Box key={num} h='280px' position={'relative'}>
+            <Box
+              key={num}
+              h={{base: '190px', lg: '280px'}}
+              position={'relative'}
+            >
               <Skeleton h='100%' rounded={'20px'} w='100%' />
               <Box position='absolute' top={'5%'} left='13%' w='60%'>
-                <Box>
+                <Box display={{base: 'none', lg: 'block'}}>
                   <Skeleton w='100%' height='30px' />
                   <Skeleton w='100%' my={'.6rem'} height='30px' />
                   <Skeleton w='100%' height='30px' />
                 </Box>
-                <Flex mt='3rem'>
+                <Flex mt='3rem' display={{base: 'none', lg: 'block'}}>
                   <SkeletonCircle size='20' mr='.5rem' />
                 </Flex>
               </Box>

@@ -1,26 +1,31 @@
-import React from "react";
-import { useGetTrendingQuery } from "redux/services/content.service";
+import React from 'react';
+import { useGetTrendingQuery } from 'redux/services/content.service';
 
-import { Box, Flex, Skeleton, Text } from "@chakra-ui/react";
-import { purpleBoxStyle } from "@constants/utils";
+import { Box, Flex, Skeleton, Text } from '@chakra-ui/react';
+import { purpleBoxStyle } from '@constants/utils';
 
-import { contentData } from "../../constants/utils";
-import TrendCard from "./TrendCard";
+import { contentData } from '../../constants/utils';
+import TrendCard from './TrendCard';
 
 function TrendingBox() {
-  const { data, isFetching } = useGetTrendingQuery({ page: 1, limit: 4 });
+  const {data, isFetching} = useGetTrendingQuery({page: 1, limit: 4});
   return (
-    <Box minW={"70%"} maxW="70%" h="100%">
+    <Box
+      minW={{base: '100%', lg: '70%'}}
+      maxW={{base: '100%', lg: '70%'}}
+      h='100%'
+      mt={{base: '1.8rem', lg: '0'}}
+    >
       <Text
-        position={"relative"}
-        pl="20px"
+        position={'relative'}
+        pl='20px'
         _before={purpleBoxStyle}
-        color={"clique.white"}
-        fontFamily={"Poppins"}
+        color={'clique.white'}
+        fontFamily={'Poppins'}
         fontWeight={500}
-        textTransform={"capitalize"}
-        fontSize="head"
-        lineHeight={"1"}
+        textTransform={'capitalize'}
+        fontSize='head'
+        lineHeight={'1'}
       >
         Trending
       </Text>
@@ -28,17 +33,17 @@ function TrendingBox() {
         <>
           {[1, 2, 3, 4].map((num) => (
             <Flex
-              cursor={"pointer"}
-              position={"relative"}
-              alignItems={"center"}
-              rounded={"20px"}
-              px="50px"
-              py="20px"
-              mt="30px"
-              h="220px"
+              cursor={'pointer'}
+              position={'relative'}
+              alignItems={'center'}
+              rounded={'20px'}
+              px={{lg: '50px'}}
+              py='20px'
+              mt='30px'
+              h='220px'
               key={num}
             >
-              <Skeleton h="100%" rounded={"20px"} w="100%" />
+              <Skeleton h='100%' rounded={'20px'} w='100%' />
             </Flex>
           ))}
         </>
@@ -52,7 +57,7 @@ function TrendingBox() {
                   video={video}
                 />
               </Box>
-            )
+            ),
           )}
         </>
       )}

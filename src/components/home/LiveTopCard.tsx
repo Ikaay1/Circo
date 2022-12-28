@@ -53,52 +53,50 @@ function LiveTopCard() {
       <HStack px='20px' overflowX={'auto'} sx={scrollBarStyle4}>
         {isFetching &&
           [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((i) => (
-            <SkeletonCircle key={i} size={'14'} />
+            <SkeletonCircle flexShrink={0} key={i} size={'14'} />
           ))}
         {data &&
-          [...data?.data, ...data?.data, ...data?.data].map(
-            (event: any, i: number) => (
-              <Flex
-                flexShrink={0}
-                onClick={() => {
-                  NProgress.start();
+          data?.data.map((event: any, i: number) => (
+            <Flex
+              flexShrink={0}
+              onClick={() => {
+                NProgress.start();
 
-                  if (
-                    event?.eventId?.fee === 0 ||
-                    event?.eventId?.fee === '0' ||
-                    !event?.eventId?.fee ||
-                    event?.paid.includes(userProfile?._id) ||
-                    event?.streamerId?._id === userProfile?._id
-                  ) {
-                    router.push(`/stream/${event?.eventId?._id}`);
-                  } else {
-                    //call paystack
-                  }
+                if (
+                  event?.eventId?.fee === 0 ||
+                  event?.eventId?.fee === '0' ||
+                  !event?.eventId?.fee ||
+                  event?.paid.includes(userProfile?._id) ||
+                  event?.streamerId?._id === userProfile?._id
+                ) {
+                  router.push(`/stream/${event?.eventId?._id}`);
+                } else {
+                  //call paystack
+                }
 
-                  NProgress.done();
-                }}
-                cursor='pointer'
-                key={i}
-                alignItems={'center'}
-                justifyContent='center'
-                p='4px'
-                border={'4px solid'}
-                borderColor='clique.base'
-                rounded='full'
-              >
-                <Avatar
-                  p='0'
-                  size='md'
-                  name={
-                    event?.streamerId?.firstName +
-                    ' ' +
-                    event?.streamerId?.lastName
-                  }
-                  src={event?.streamerId?.photo}
-                />
-              </Flex>
-            ),
-          )}
+                NProgress.done();
+              }}
+              cursor='pointer'
+              key={i}
+              alignItems={'center'}
+              justifyContent='center'
+              p='4px'
+              border={'4px solid'}
+              borderColor='clique.base'
+              rounded='full'
+            >
+              <Avatar
+                p='0'
+                size='md'
+                name={
+                  event?.streamerId?.firstName +
+                  ' ' +
+                  event?.streamerId?.lastName
+                }
+                src={event?.streamerId?.photo}
+              />
+            </Flex>
+          ))}
       </HStack>
     </Flex>
   );

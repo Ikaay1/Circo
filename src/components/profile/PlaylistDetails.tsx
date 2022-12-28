@@ -43,7 +43,13 @@ const PlaylistDetails = ({
 }) => {
   console.log('playlist', playlist);
   return (
-    <Box display={'flex'} px='1.4rem' py='2rem' gap='25px'>
+    <Box
+      display={'flex'}
+      px='1.4rem'
+      py={{lg: '2rem'}}
+      mt={{base: '2.5rem', lg: 0}}
+      gap='25px'
+    >
       <Box flex='5'>
         {isLoading ? (
           <Flex flexDirection={'column'} gap='2'>

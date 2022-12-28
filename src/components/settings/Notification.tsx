@@ -74,7 +74,7 @@ const Notification = ({isLoading, data, onClick}: Props) => {
   return (
     <>
       {isLoading ? (
-        <Box maxW={'50%'}>
+        <Box maxW={{base: '100%', lg: '50%'}}>
           <Box mb='5'>
             <Skeleton h='3' width='75%' mb='5' />
             <Skeleton h='3' width='95%' mb='5' />
@@ -101,7 +101,7 @@ const Notification = ({isLoading, data, onClick}: Props) => {
         </Box>
       ) : (
         <Box>
-          <Box maxW={'50%'}>
+          <Box maxW={{base: '100%', lg: '50%'}}>
             <Text fontSize={'smSubHead'} mb='5'>
               Notifications
             </Text>
@@ -188,7 +188,7 @@ const Notification = ({isLoading, data, onClick}: Props) => {
           </Box>
           <Divider my='7'></Divider>
 
-          <Box maxW={'50%'}>
+          <Box maxW={{base: '100%', lg: '50%'}}>
             <Text fontSize={'smSubHead'} mb='5'>
               Referral
             </Text>
