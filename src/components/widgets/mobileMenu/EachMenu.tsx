@@ -18,7 +18,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
   return (
     <>
       {type === "subMenu" ? (
-        <AccordionItem border={"none"} pl="30px">
+        <AccordionItem border={"none"} pl="0px">
           <AccordionButton
             p="0"
             position={"relative"}
@@ -54,7 +54,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
                   : "clique.whiteGrey"
               }
             >
-              <Icon ml="20px" mr="15px" as={icon} />
+              <Icon ml="50px" mr="15px" as={icon} />
               <Text
                 fontFamily={"Poppins"}
                 fontWeight={500}

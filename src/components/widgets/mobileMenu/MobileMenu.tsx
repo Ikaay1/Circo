@@ -41,8 +41,9 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
           top="10vh"
           minW="100vw"
           minH={"90vh"}
-          px="20px"
           zIndex={1000}
+          pl="0px"
+          pr="30px"
           bg="clique.black"
           shadow="md"
         >
