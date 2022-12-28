@@ -19,7 +19,13 @@ const EmptyState = (props: Props) => {
         alt='empty state'
         mx='auto'
       />
-      <Text mx='auto' noOfLines={2} maxW='25%' textAlign={'center'} mt='7'>
+      <Text
+        mx='auto'
+        noOfLines={2}
+        maxW={{base: '80%', lg: '25%'}}
+        textAlign={'center'}
+        mt='7'
+      >
         {props.msg}
       </Text>
     </Flex>

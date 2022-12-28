@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import EmptyState from '@components/emptyState/EmptyState';
 import VideoGrid from '@components/home/VideoGrid';
+import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
 import CardLoader from '@components/liveevents/CardLoad';
 import Playlists from '@components/profile/Playlists';
 import { channelNav, contentData } from '@constants/utils';
@@ -53,11 +54,15 @@ const Contents = ({
 
   return (
     <>
-      <Box borderBottom={'1px solid rgba(255, 255, 255, 0.1)'} display='flex'>
+      <Box
+        borderBottom={'1px solid rgba(255, 255, 255, 0.1)'}
+        display='flex'
+        justifyContent={{base: 'space-between', lg: 'flex-start'}}
+      >
         {channelNav.map(({title, name}) =>
           name === 'live' && path === 'subscribe' ? null : (
             <Text
-              mr={'3rem'}
+              mr={{lg: '3rem'}}
               lineHeight='24px'
               color='clique.white'
               pb={'.8rem'}
@@ -80,11 +85,16 @@ const Contents = ({
 
       {route === 'live' && path !== 'subscribe' && (
         <Box mt={'2.3rem'}>
-          <SimpleGrid columns={{base: 3, lg: 4, mlg: 4, xl: 5}} spacing='30px'>
-            {isFetching &&
-              [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-                <CardLoader key={i} />
-              ))}
+          <SimpleGrid columns={{base: 1, lg: 4, mlg: 4, xl: 5}} spacing='30px'>
+            {isFetching && (
+              <>
+                {[1, 2, 3, 4].map((i) => (
+                  <Box mt='1.2rem' key={i}>
+                    <CardLoader />
+                  </Box>
+                ))}
+              </>
+            )}
             {!isFetching &&
               data &&
               data.data.map((event: any) => (
@@ -92,7 +102,9 @@ const Contents = ({
               ))}
           </SimpleGrid>{' '}
           {data && data?.data?.length === 0 && (
-            <EmptyState msg='Oops! You have no live recording available' />
+            <Box h={{base: '30vh', lg: '100%'}}>
+              <EmptyState msg='Oops! You have no live recording available' />
+            </Box>
           )}
           {isError && <EmptyState msg='Oops! something went wrong' />}
         </Box>
@@ -101,23 +113,9 @@ const Contents = ({
       {route === 'upload' && (
         <>
           {isLoading ? (
-            <HStack spacing='12px' mt='2.3rem'>
-              {[1, 2, 3, 4].map((num) => (
-                <Box key={num} h={'100%'} w={{lg: '230px', xl: '310px'}}>
-                  <Skeleton h='150px' borderRadius='10px' />
-                  <Flex mt={'.5rem'} alignItems='center' w='100%'>
-                    <SkeletonCircle size='10' mr='.5rem' />
-                    <Box w='100%'>
-                      <Skeleton w='100%' height='10px' />
-                      <Skeleton w='100%' my={'3px'} height='10px' />
-                      <Skeleton w='100%' height='10px' />
-                    </Box>
-                  </Flex>
-                </Box>
-              ))}
-            </HStack>
+            <VideoSkeletonLoader />
           ) : !isLoading && videos?.length === 0 ? (
-            <Box mt='2.3rem'>
+            <Box h={{base: '30vh', lg: '100%'}} mt='2.3rem'>
               <EmptyState msg='Oops! No post yet. Upload a video!' />
             </Box>
           ) : (

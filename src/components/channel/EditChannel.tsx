@@ -144,13 +144,14 @@ const EditChannel = ({data}: {data?: Channel}) => {
         {(props) => (
           <Form>
             <Box
-              display='flex'
+              display={{lg: 'flex'}}
               justifyContent={'space-between'}
-              mt='6'
-              pl='8'
-              pr='11'
+              mt={{base: '6rem', lg: '6'}}
+              px={{base: '5'}}
+              pl={{lg: '8'}}
+              pr={{lg: '11'}}
             >
-              <Box w='55%' h='' pb='20'>
+              <Box w={{lg: '55%'}} h='' pb={{base: '0', lg: '20'}}>
                 <Text
                   fontWeight='600'
                   fontSize='subHead'

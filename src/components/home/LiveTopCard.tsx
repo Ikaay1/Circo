@@ -52,7 +52,7 @@ function LiveTopCard() {
       </Text>
       <HStack px='20px' overflowX={'auto'} sx={scrollBarStyle4}>
         {isFetching &&
-          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((i) => (
+          [1, 2, 3].map((i) => (
             <SkeletonCircle flexShrink={0} key={i} size={'14'} />
           ))}
         {data &&
