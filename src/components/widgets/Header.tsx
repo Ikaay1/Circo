@@ -176,7 +176,7 @@ function Header({ upload }: Props) {
         </Button>
         <UploadModal />
       </HStack>
-      <MobileMenu isOpen={showMenu} />
+      <MobileMenu isOpen={showMenu} close={() => setShowMenu(!showMenu)} />
     </Flex>
   );
 }

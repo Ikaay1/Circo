@@ -323,6 +323,11 @@ export const mobileMenu: {
   name: string;
   icon: any;
   type: string;
+  subMenu?: {
+    name: string;
+    icon: any;
+    route: string;
+  }[];
 }[] = [
   {
     name: "home",
@@ -342,7 +347,19 @@ export const mobileMenu: {
   {
     name: "profile",
     icon: ProfileIcon,
-    type: "menu",
+    type: "subMenu",
+    subMenu: [
+      {
+        name: "Content",
+        route: "content",
+        icon: ContentIcon,
+      },
+      {
+        name: "Edit Profile Details",
+        route: "edit",
+        icon: DiscoverIcon,
+      },
+    ],
   },
   {
     name: "wallet",

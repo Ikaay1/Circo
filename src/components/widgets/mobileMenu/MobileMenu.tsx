@@ -11,7 +11,7 @@ import { mobileMenu } from "@constants/utils";
 import React from "react";
 import EachMenu from "./EachMenu";
 
-function MobileMenu({ isOpen }: { isOpen: boolean }) {
+function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
   return (
     <SlideFade in={isOpen} offsetX="-20px" offsetY="0">
       <Box
@@ -35,6 +35,7 @@ function MobileMenu({ isOpen }: { isOpen: boolean }) {
               icon={item.icon}
               type={item.type}
               item={item}
+              close={close}
             />
           ))}
         </Accordion>
