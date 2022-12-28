@@ -63,7 +63,14 @@ function EachMenu({ name, icon, type, item, close }: any) {
                 {name}
               </Text>
             </Flex>
-            <AccordionIcon />
+            <AccordionIcon
+              color={
+                path.split("/")[1] ===
+                item.route.replace(/\s/g, "").toLowerCase()
+                  ? "clique.base"
+                  : "clique.whiteGrey"
+              }
+            />
           </AccordionButton>
 
           <AccordionPanel ml="30px">
