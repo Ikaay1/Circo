@@ -88,7 +88,8 @@ function Header({ upload }: Props) {
       {/* Second div */}
       <Flex
         w="full"
-        px="30px"
+        px={{ base: "0px", lg: "30px" }}
+        pl={{ base: "30px", lg: "30px" }}
         alignItems={"center"}
         justifyContent={"space-between"}
       >
@@ -176,7 +177,7 @@ function Header({ upload }: Props) {
         </Button>
         <UploadModal />
       </HStack>
-      <MobileMenu isOpen={showMenu} />
+      <MobileMenu isOpen={showMenu} close={() => setShowMenu(!showMenu)} />
     </Flex>
   );
 }

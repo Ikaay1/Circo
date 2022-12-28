@@ -323,47 +323,90 @@ export const mobileMenu: {
   name: string;
   icon: any;
   type: string;
+  route?: string;
+  subMenu?: {
+    name: string;
+    icon: any;
+    route: string;
+  }[];
 }[] = [
   {
     name: "home",
     icon: HomeIcon,
     type: "menu",
+    route: "home",
   },
   {
     name: "discover",
     icon: DiscoverIcon,
     type: "menu",
+    route: "discover",
   },
   {
     name: "trending",
     icon: TrendingIcon,
     type: "menu",
+    route: "trending",
   },
   {
     name: "profile",
     icon: ProfileIcon,
-    type: "menu",
+    type: "subMenu",
+    route: "profile",
+    subMenu: [
+      {
+        name: "Content",
+        route: "content",
+        icon: ContentIcon,
+      },
+      {
+        name: "Edit Profile Details",
+        route: "edit",
+        icon: DiscoverIcon,
+      },
+    ],
   },
   {
     name: "wallet",
     icon: WalletIcon,
     type: "menu",
+    route: "wallet",
   },
   {
     name: "Live Events",
     icon: LiveIcon,
     type: "menu",
+    route: "liveevents",
   },
 
   {
     name: "Your channel",
+    route: "channel",
     icon: ChannelIcon,
-    type: "menu",
+    type: "subMenu",
+    subMenu: [
+      {
+        name: "Content",
+        route: "content",
+        icon: ContentIcon,
+      },
+      {
+        name: "Edit Channel Details",
+        route: "edit",
+        icon: DiscoverIcon,
+      },
+      {
+        name: "Channel Analytics",
+        route: "analytics",
+        icon: AnalyticsIcon,
+      },
+    ],
   },
   {
     name: "settings",
     icon: SettingsIcon,
     type: "menu",
+    route: "settings",
   },
 ];
 export const menuWithOutLive: {
