@@ -36,7 +36,7 @@ export default function CustumField({
         >
           <Box
             position={'relative'}
-            width='520px'
+            width={{base: '100%', lg: '520px'}}
             height='50px'
             mt='.8rem'
             mx='auto'

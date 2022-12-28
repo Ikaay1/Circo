@@ -63,7 +63,7 @@ function Index({current, onClick}: SettingsProps) {
         <Text>Settings</Text>
       </Box>
       <Box
-        pl='170px'
+        pl={{base: '20px', lg: '170px'}}
         pr='12'
         height={'100%'}
         overflowY='scroll'

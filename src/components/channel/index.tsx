@@ -38,7 +38,9 @@ const Index = ({
   return (
     <>
       {(isLoading && channelLoading) || (!data && !channelData) ? (
-        <CliqueLoader />
+        <Box h='90vh' marginX='auto'>
+          <CliqueLoader />
+        </Box>
       ) : (
         <Box
           height={'100%'}
@@ -65,7 +67,7 @@ const Index = ({
             />
           )}
           {des && (
-            <Box mt={'6rem'} px='1.35rem'>
+            <Box mt={{base: '1rem', lg: '6rem'}} px='1.35rem'>
               <ChannelContents
                 videos={data}
                 id={channelData?.data?.channel?.userId}
@@ -83,7 +85,7 @@ const Index = ({
           )}
 
           {router.query.name === 'analytics' && (
-            <Box mt={'10rem'} px='1.35rem'>
+            <Box mt={{base: '2.4rem', lg: '10rem'}} px='1.35rem'>
               <Analytics subscribe={channelData?.data?.channel?.subscribe} />
             </Box>
           )}

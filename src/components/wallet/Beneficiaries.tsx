@@ -12,7 +12,7 @@ type Props = {
 
 function Beneficiaries({onClick, hasBeneficiary, walletData}: Props) {
   return (
-    <Box pr='2' pt='6'>
+    <Box pr='2' pl={{base: '2', lg: '0'}} pt={{lg: '6'}}>
       <BeneficiariesCard
         walletData={walletData}
         onClick={onClick}

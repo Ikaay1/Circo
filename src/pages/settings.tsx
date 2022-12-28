@@ -7,6 +7,8 @@ import SideMenu from '@components/settings/SideMenu';
 import Header from '@components/widgets/Header';
 import { scrollBarStyle3, settingsMenu } from '@constants/utils';
 
+import { scrollBarStyle } from '../constants/utils';
+
 const Settings = () => {
   const [state, setState] = useState<string>('account');
   const [code, setCode] = useState<string>('');
@@ -28,17 +30,17 @@ const Settings = () => {
   return (
     <HomeLayout>
       <Box h={{lg: '90vh'}} display='flex' bg='clique.primaryBg'>
-        <Box flex='1' h='100%'>
+        <Box flex='1' h='100%' display={{base: 'none', lg: 'block'}}>
           <SideMenu
             click={(route) => setState(route)}
             menuList={settingsMenu}
           />
         </Box>
         <Box
-          flex='4.4'
+          flex={{lg: '4.4'}}
           h='100%'
           maxH={'90vh'}
-          pb='12'
+          pb={{base: '5', lg: '12'}}
           overflowY={'scroll'}
           overflowX={'hidden'}
           sx={scrollBarStyle3}

@@ -102,15 +102,17 @@ function Index() {
           <SideMenu />
           <Box
             maxH={'90vh'}
-            pb={{base: '0px', lg: '50px'}}
-            px={{base: '0px', lg: '30px'}}
+            pb={{base: '20px', lg: '50px'}}
+            px={{base: '20px', lg: '30px'}}
             w={{base: '100%', lg: 'calc(100vw - 500px)'}}
             overflowY={'scroll'}
             overflowX={'hidden'}
             sx={scrollBarStyle3}
           >
             {!categories.data ? (
-              <CliqueLoader />
+              <Box h='90vh'>
+                <CliqueLoader />
+              </Box>
             ) : (
               <>
                 <LiveTopCard />
@@ -128,7 +130,7 @@ function Index() {
                     {isFetching && page === 1 ? (
                       <VideoSkeletonLoader />
                     ) : !isFetching && !contents.length ? (
-                      <Box mt='20px' height='65%'>
+                      <Box mt='20px' height={{base: '70vh', lg: '65%'}}>
                         <EmptyState msg='Oops!. No video here' />
                       </Box>
                     ) : (

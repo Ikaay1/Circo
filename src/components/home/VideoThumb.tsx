@@ -135,7 +135,7 @@ function VideoThumb({
                 userName={video?.uploader_id?.userName}
               />
               <Box
-                h={{base: '300px', lg: '130px', mlg: '180px'}}
+                h={{base: '200px', lg: '130px', mlg: '180px'}}
                 bgImage={`url(${video?.thumbNail})`}
                 bgSize='cover'
                 bgPosition='center'
