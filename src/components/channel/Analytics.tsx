@@ -75,11 +75,11 @@ const Analytics = ({
           <Line options={options} data={data} />
         </Box>
       </Box>
-      <Flex marginTop={'2rem'} justifyContent='space-between'>
+      <SimpleGrid columns={{base: 1, lg: 2}} spacing={{base: 1, lg: 10}}>
         {analyticsData.map(({text1, text2}, i) => (
-          <SimpleGrid
-            // alignItems={"center"}
-            columns={2}
+          <Flex
+            alignItems={'center'}
+            justifyContent='space-between'
             marginTop='1rem'
             key={text1}
             bg='clique.blackGrey'
@@ -87,15 +87,15 @@ const Analytics = ({
             py='2'
             textAlign={'center'}
           >
-            <Text fontSize='sm' lineHeight='24px' color='clique.secondaryGrey2'>
+            <Text fontSize='sm' color='clique.secondaryGrey2'>
               {text1}
             </Text>
-            <Text fontSize='smHead' lineHeight='24px' color='clique.white'>
+            <Text fontSize='smHead' color='clique.white'>
               {i === 0 ? countsData?.count?.likes : countsData?.count?.views}
             </Text>
-          </SimpleGrid>
+          </Flex>
         ))}
-      </Flex>
+      </SimpleGrid>
     </Box>
   );
 };

@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
+=======
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { Dispatch, SetStateAction } from 'react';
+>>>>>>> 35aacf6d9e8f1157a4e7a5b8f903a74366189bbd
 
 import { Box, Image, Text } from "@chakra-ui/react";
 import { sideBarData } from "@constants/utils";
@@ -11,6 +17,7 @@ const Sidebar = ({
   showSideBar: boolean;
   setShowSideBar: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const router = useRouter();
   return (
     <Box
       bg="#171717"
@@ -28,23 +35,17 @@ const Sidebar = ({
     >
       <Box display={"flex"} justifyContent="space-between" mt={"1.5rem"}>
         <Box
-          display={"flex"}
-          alignItems="center"
-          fontWeight={"700"}
-          fontSize={{ base: "subHead", lg: "smHead2" }}
-          letterSpacing={{
-            base: "0.500386px",
-            lg: "0.709173px",
-          }}
-          color="clique.white"
+          w={{base: '70px', lg: '200px'}}
+          cursor={'pointer'}
+          onClick={() => router.push('/')}
+          maxW={{base: '70px', lg: '200px'}}
+          minW={{base: '70px', lg: '200px'}}
         >
           <Image
-            src="/assets/clique-logo.png"
-            alt="clique-logo"
-            width={{ base: "32.02px", lg: "45.39px" }}
-            height={{ base: "36.16px", lg: "51.24px" }}
+            alt='circo logo'
+            w={{base: 'full', lg: '100px'}}
+            src='/assets/Circo-Logo.png'
           />
-          <Link href="/">CIRCO</Link>
         </Box>
         <Image
           onClick={() => setShowSideBar(false)}

@@ -51,7 +51,13 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
   let content;
   if (isLoading || !data) {
     content = (
-      <HStack spacing='24px'>
+      <SimpleGrid
+        autoColumns={'300px'}
+        mt='20px'
+        columns={{base: 1, lg: 3, mlg: 3, xl: 4}}
+        w={'100%'}
+        spacing={'30px'}
+      >
         {[1, 2, 3].map((i) => (
           <Flex
             key={i}
@@ -60,17 +66,25 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
             flexDirection={'column'}
             p='1'
           >
-            <Skeleton w='300px' h='100%' borderRadius={'7px'} />
+            <Skeleton
+              w={{base: '100%', lg: '300px'}}
+              h='100%'
+              borderRadius={'7px'}
+            />
             <Flex align={'center'} mt='1'>
               <SkeletonCircle size='10' mr='1' />
               <Skeleton w='70px' h='20px' borderRadius={'3px'} />
             </Flex>
           </Flex>
         ))}
-      </HStack>
+      </SimpleGrid>
     );
   } else if (!isLoading && data?.data?.playlists.length === 0) {
-    content = <EmptyState msg='Oops! No playlist here yet.' />;
+    content = (
+      <Box h={{base: '30vh', lg: '100%'}}>
+        <EmptyState msg='Oops! No playlist here yet.' />
+      </Box>
+    );
   } else {
     content = (
       <SimpleGrid
@@ -84,8 +98,8 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
           <>
             <Box key={each?._id} position='relative'>
               <Box
-                h={{lg: '130px', mlg: '180px'}}
-                maxH='200px'
+                h={{base: '150px', lg: '130px', mlg: '180px'}}
+                maxH={{lg: '200px'}}
                 position={'relative'}
                 cursor={'pointer'}
                 onClick={() =>

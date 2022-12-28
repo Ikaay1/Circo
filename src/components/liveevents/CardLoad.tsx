@@ -1,12 +1,13 @@
-import { Box, Skeleton } from "@chakra-ui/react";
-import React from "react";
+import React from 'react';
+
+import { Box, Skeleton } from '@chakra-ui/react';
 
 function CardLoader() {
   return (
     <Skeleton
-      w={{ lg: "220px", mlg: "280px", xl: "full" }}
-      h={{ lg: "180px", mlg: "200px" }}
-      rounded={"10px"}
+      w={{base: '100%', lg: '220px', mlg: '280px', xl: 'full'}}
+      h={{base: '180', mlg: '200px'}}
+      rounded={'10px'}
     />
   );
 }

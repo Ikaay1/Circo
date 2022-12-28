@@ -143,11 +143,11 @@ const SubscribeChannel = () => {
     <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
       <>
         <Header upload={onOpen} />
-        <Box h={{lg: '90vh'}} display='flex'>
-          <Box flex='1.3' h='100%'>
+        <Box h='90vh' display={{lg: 'flex'}}>
+          <Box flex='1.3' h='100%' display={{base: 'none', lg: 'block'}}>
             <SideMenu />
           </Box>
-          <Box flex='5.5' h='100%'>
+          <Box flex={{lg: '5.5'}} h='100%'>
             <Index
               channelData={channelData}
               data={contents}

@@ -196,14 +196,19 @@ const EditProfile = () => {
       >
         {(props) => (
           <Form>
-            <Flex justifyContent={'end'} mt='5' mr='5'>
+            <Flex justifyContent={'end'} mt={{base: '7rem', lg: '5'}} mr='5'>
               <Btn
                 submit={true}
                 text='Save Changes'
                 isLoading={props.isSubmitting}
               ></Btn>
             </Flex>
-            <VStack mt='100px' justify={'center'} alignSelf='center'>
+            <VStack
+              mt={{base: '50px', lg: '100px'}}
+              justify={'center'}
+              alignSelf='center'
+              paddingX='1rem'
+            >
               <CustumField
                 name='First name'
                 sideContent='Edit'
@@ -238,11 +243,22 @@ const EditProfile = () => {
       >
         {(props) => (
           <Form>
-            <VStack mt='100px' justifyContent={'center'}>
-              <Box pr='35%'>
+            <VStack
+              mt={{base: '70px', lg: '100px'}}
+              justifyContent={{lg: 'center'}}
+              alignItems={{base: 'start', lg: 'center'}}
+              paddingX='1rem'
+            >
+              <Box pr={{lg: '35%'}}>
                 <Text>Change Password</Text>
               </Box>
-              <VStack mt='100px' justify={'center'} alignSelf='center' mb='12'>
+              <VStack
+                mt='100px'
+                justifyContent={{lg: 'center'}}
+                alignSelf={{lg: 'center'}}
+                mb='12'
+                w={{base: '100%'}}
+              >
                 <CustumField
                   name='Old Password'
                   nameValue='oldPassword'
@@ -260,7 +276,7 @@ const EditProfile = () => {
                 />
               </VStack>
 
-              <Box pr='27%' mx='auto' pt='5%'>
+              <Box pr={{lg: '27%'}} mx={{lg: 'auto'}} pt='5%'>
                 <Btn
                   submit={true}
                   text='Change password'

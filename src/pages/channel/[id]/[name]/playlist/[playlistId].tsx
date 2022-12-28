@@ -19,9 +19,9 @@ const Playlist = () => {
   return (
     <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
       <Header upload={onOpen} />
-      <Box h={{lg: '90vh'}} display='flex'>
+      <Box h='90vh' display='flex' flexDirection={{base: 'column', lg: 'row'}}>
         <Box
-          flex='1.3'
+          flex={{lg: '1.3'}}
           h='100%'
           px='5'
           borderRight={'1px solid rgba(255, 255, 255, 0.1)'}
@@ -32,7 +32,12 @@ const Playlist = () => {
             id={data?.data?.playlist?.userId._id}
           />
         </Box>
-        <Box flex='5.5' h='100%' overflowY='scroll' sx={scrollBarStyle3}>
+        <Box
+          flex={{lg: '5.5'}}
+          h='100%'
+          overflowY='scroll'
+          sx={scrollBarStyle3}
+        >
           <PlaylistDetails
             playlist={data?.data?.playlist}
             isLoading={isLoading}

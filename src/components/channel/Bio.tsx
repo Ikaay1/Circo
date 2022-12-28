@@ -45,10 +45,10 @@ const Bio = ({
         ml='1rem'
         mr={'2rem'}
         display='flex'
-        justifyContent={'space-between'}
+        justifyContent={{base: 'end', lg: 'space-between'}}
         alignItems='flex-start'
       >
-        <Box w='40%'>
+        <Box w='40%' display={{base: 'none', lg: 'block'}}>
           <Text
             fontWeight='600'
             fontSize='subHead'
@@ -69,7 +69,11 @@ const Bio = ({
         </Box>
         {showSubscribe && (
           <Box>
-            <Box display={'flex'} alignItems='center'>
+            <Box
+              display='flex'
+              alignItems='center'
+              mt={{base: '9rem', lg: '0'}}
+            >
               <Box
                 mr='.5rem'
                 cursor='pointer'
@@ -109,6 +113,25 @@ const Bio = ({
             )}
           </Box>
         )}
+      </Box>
+      <Box w='100%' padding='1rem' display={{lg: 'none'}} mt='1rem'>
+        <Text
+          fontWeight='600'
+          fontSize='subHead'
+          lineHeight='24px'
+          color='clique.secondaryGrey2'
+        >
+          Bio
+        </Text>
+        <Text
+          fontWeight='400'
+          fontSize='smSubHead'
+          lineHeight='24px'
+          color='clique.secondaryGrey2'
+          pr='1rem'
+        >
+          {bio}
+        </Text>
       </Box>
       <Modal onClose={onClose} isOpen={isOpen}>
         <ModalOverlay />

@@ -31,9 +31,11 @@ const Referral = () => {
   return (
     <Box display={'flex'} justifyContent='space-between' alignItems={'center'}>
       <CliqueLogo />
-      <ShowAuthImage />
+      <Box display={{base: 'none', lg: 'block'}}>
+        <ShowAuthImage />
+      </Box>
       <Box
-        marginLeft={{base: '40%', xl: '50%'}}
+        marginLeft={{base: '0', xl: '50%'}}
         minW={{base: '60%', xl: '50%'}}
         py='50px'
       >

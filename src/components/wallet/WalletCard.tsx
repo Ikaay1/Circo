@@ -1,4 +1,12 @@
-import { Box, Divider, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Divider,
+	Flex,
+	Grid,
+	GridItem,
+	SimpleGrid,
+	Text,
+} from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 
 type Props = {
@@ -42,8 +50,8 @@ export default function WalletCard({
         </Text>
       </Box>
       <Divider bg='clique.blackGrey' mb='3'></Divider>
-      <Grid templateColumns='repeat(5, 1fr)' gap={10}>
-        <GridItem colSpan={3}>
+      <SimpleGrid columns={{base: 2, lg: 3}} gap={10}>
+        <GridItem colSpan={{base: 3, lg: 1}}>
           <Flex flexDirection='column' justifyContent='space-between'>
             <Text color='clique.text' fontSize={'smSubHead'} mb='7'>
               Balance
@@ -53,10 +61,10 @@ export default function WalletCard({
               ₦{walletData.balance}
             </Text>
             <Btn
-              text='Add money to wallet'
+              text='Fund wallet'
               bg='linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)'
               onClick={onClick}
-              maxW='70%'
+              maxW={'100%'}
               disabled={flutterwaveStatus.isLoading}
             ></Btn>
           </Flex>
@@ -89,7 +97,7 @@ export default function WalletCard({
             </Text>
           </Flex>
         </GridItem>
-      </Grid>
+      </SimpleGrid>
     </Box>
   );
 }
