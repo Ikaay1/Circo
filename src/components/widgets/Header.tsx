@@ -25,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import NotificationModal from "@components/notification/NotificationModal";
 import UploadModal from "@components/upload/UploadModal";
+import MobileMenu from "./mobileMenu/MobileMenu";
 
 type Props = {
   upload?: () => void;
@@ -66,6 +67,8 @@ function Header({ upload }: Props) {
       minH={"10vh"}
       maxH={"10vh"}
       w="100%"
+      maxW={"100%"}
+      overflow="hidden"
     >
       {/* First div  */}
       <Box
@@ -173,6 +176,7 @@ function Header({ upload }: Props) {
         </Button>
         <UploadModal />
       </HStack>
+      <MobileMenu isOpen={showMenu} />
     </Flex>
   );
 }
