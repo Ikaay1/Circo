@@ -10,10 +10,10 @@ import EventCard from "./EventCard";
 function LiveEventPage({ state, setState }: { state: string; setState: any }) {
   const { data, isFetching } = useGetLiveStreamQuery("");
   return (
-    <Box w="full">
-      <Flex w="full" justifyContent="right">
+    <Box w="full" pb={{ base: "140px", lg: "0" }}>
+      <Flex w="full" justifyContent="right" pt={{ base: "20px", lg: "0" }}>
         <AuthButton
-          w="300px"
+          w={{ base: "100%", lg: "300px" }}
           name={"Create New Event"}
           h="60px"
           fontSize="subHead"

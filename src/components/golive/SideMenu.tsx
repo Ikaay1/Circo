@@ -26,7 +26,7 @@ const SideMenu = ({ click }: Props) => {
       height="100%"
       h="90vh"
       minH="90vh"
-      maxH="90vh"
+      maxH="90vh" display={{ base: "none", lg: "block" }}
     >
       {goliveMenu.map(({ name, icon, route }, i) => (
         <Flex

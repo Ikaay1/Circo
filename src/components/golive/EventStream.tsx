@@ -17,11 +17,7 @@ import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useAppDispatch } from "redux/app/hooks";
 import { useCategoryQuery } from "redux/services/category.service";
-import {
-  useCreateEventMutation,
-  useCreateLiveStreamMutation,
-  useUpdateEventMutation,
-} from "redux/services/livestream/live.service";
+import { useUpdateEventMutation } from "redux/services/livestream/live.service";
 import { setSelectedStream, setStreamDetails } from "redux/slices/streamSlice";
 import * as Yup from "yup";
 import DetailCard from "./DetailCard";
@@ -75,6 +71,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
           id: event?.eventId?._id,
           body: formData,
         });
+
         if (res.data) {
           toast({
             title: "Stream Updated",
@@ -108,10 +105,12 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
       {(props) => (
         <Form>
           <Flex w="full">
-            <Box w="50%">
+            <Box w={{ base: "full", lg: "50%" }}>
               <Text fontSize="smSubHead" color="clique.text">
                 Live details
               </Text>
+
+
 
               <Box>
                 <DetailCard input={true} name="title" label="Live title" />

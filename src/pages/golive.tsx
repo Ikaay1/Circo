@@ -20,21 +20,22 @@ function Index({}: Props) {
   return (
     <Box>
       <Header />
-      <Box h={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
+      <Box minH={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
         <Box flex="1" h="100%">
           <SideMenu click={(route) => setState(route)} />
         </Box>
         <Box
-          maxW={"calc(100vw - 250px)"}
-          minW={"calc(100vw - 250px)"}
+          maxW={{ base: "100%", lg: "calc(100vw - 250px)" }}
+          minW={{ base: "100%", lg: "calc(100vw - 250px)" }}
           px="30px"
           h="100%"
-          maxH={"90vh"}
+          maxH={{ base: "", lg: "90vh" }}
           pb="12"
           overflowY={"scroll"}
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
+          
           {refreshed === "true" && state !== "stream" && (
             <Box>
               <Text
