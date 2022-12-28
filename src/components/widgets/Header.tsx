@@ -88,7 +88,8 @@ function Header({ upload }: Props) {
       {/* Second div */}
       <Flex
         w="full"
-        px="30px"
+        px={{ base: "0px", lg: "30px" }}
+        pl={{ base: "30px", lg: "30px" }}
         alignItems={"center"}
         justifyContent={"space-between"}
       >
