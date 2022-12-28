@@ -28,7 +28,7 @@ function VideoGrid({
       <SimpleGrid
         columns={{base: 1, lg: 3, mlg: 3, xl: 4}}
         mt='20px'
-        w={width}
+        w={{base: '100%', lg: width}}
         spacing={'30px'}
       >
         {videos?.map((video, i) => {
