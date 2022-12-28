@@ -5,13 +5,25 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Divider,
+  Flex,
+  Icon,
   SlideFade,
+  Text,
 } from "@chakra-ui/react";
 import { mobileMenu } from "@constants/utils";
 import React from "react";
+import { HiOutlineLogout } from "react-icons/hi";
+import { useAppDispatch } from "redux/app/hooks";
+import { logout } from "redux/slices/authSlice";
 import EachMenu from "./EachMenu";
 
 function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = "/login";
+  };
   return (
     <SlideFade in={isOpen} offsetX="-20px" offsetY="0">
       <Box
@@ -39,6 +51,31 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
             />
           ))}
         </Accordion>
+        <Box px="50px" py="20px">
+          <Divider />
+        </Box>
+        <Flex
+          onClick={handleLogout}
+          transition={"all 0.2s ease-in-out"}
+          _hover={{
+            color: "clique.base",
+          }}
+          cursor={"pointer"}
+          justifyContent={"left"}
+          alignItems="center"
+          pl="50px"
+        >
+          <Text
+            mr="10px"
+            fontFamily={"Poppins"}
+            fontWeight={400}
+            textTransform={"capitalize"}
+            fontSize={"smSubHead"}
+          >
+            logout
+          </Text>
+          <Icon fontSize={"head"} as={HiOutlineLogout} />
+        </Flex>
       </Box>
     </SlideFade>
   );

@@ -25,7 +25,8 @@ function EachMenu({ name, icon, type, item, close }: any) {
             _before={{
               content: '""',
               display:
-                path.split("/")[1] === name.replace(/\s/g, "").toLowerCase()
+                path.split("/")[1] ===
+                item.route.replace(/\s/g, "").toLowerCase()
                   ? "block"
                   : "none",
               position: "absolute",
@@ -47,7 +48,8 @@ function EachMenu({ name, icon, type, item, close }: any) {
               alignItems={"center"}
               color={
                 //matches any of the subMenu items
-                path.split("/")[1] === name.replace(/\s/g, "").toLowerCase()
+                path.split("/")[1] ===
+                item.route.replace(/\s/g, "").toLowerCase()
                   ? "clique.base"
                   : "clique.whiteGrey"
               }
@@ -71,7 +73,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
                 mt="5px"
                 cursor={"pointer"}
                 onClick={() => {
-                  router.push(`/${name}/1/${subItem.route}`);
+                  router.push(`/${item.route}/1/${subItem.route}`);
                   close();
                 }}
                 h="40px"
@@ -100,7 +102,9 @@ function EachMenu({ name, icon, type, item, close }: any) {
                   transition={"all 0.2s ease-in-out"}
                   color={
                     path.split("/")[3] ===
-                    subItem.route.replace(/\s/g, "").toLowerCase()
+                      subItem.route.replace(/\s/g, "").toLowerCase() &&
+                    path.split("/")[1] ===
+                      item.route.replace(/\s/g, "").toLowerCase()
                       ? "clique.base"
                       : "clique.whiteGrey"
                   }
