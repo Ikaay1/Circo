@@ -18,7 +18,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
   return (
     <>
       {type === "subMenu" ? (
-        <AccordionItem border={"none"} pl="0px">
+        <AccordionItem border={"none"} >
           <AccordionButton
             p="0"
             position={"relative"}
@@ -73,7 +73,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
             />
           </AccordionButton>
 
-          <AccordionPanel ml="30px">
+          <AccordionPanel ml="50px">
             {item.subMenu.map((subItem: any) => (
               <Flex
                 key={subItem.name}
