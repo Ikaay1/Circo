@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import Link from "next/link";
-import React, { Dispatch, SetStateAction } from "react";
-=======
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { Dispatch, SetStateAction } from 'react';
->>>>>>> 35aacf6d9e8f1157a4e7a5b8f903a74366189bbd
 
 import { Box, Image, Text } from "@chakra-ui/react";
 import { sideBarData } from "@constants/utils";
