@@ -15,9 +15,16 @@ import io from "socket.io-client";
 function Index() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, isFetching, isLoading, refetch } = useGetStreamQuery(
-    id as string
+  const [livestreamId, setLivestreamId] = useState<string | undefined>(
+    undefined
   );
+  useEffect(() => {
+    if (id) {
+      setLivestreamId(id as string);
+    }
+  }, [id]);
+  const { data, isFetching, isLoading, refetch } =
+    useGetStreamQuery(livestreamId);
 
   const toast = useToast();
   const [createView, info] = useCreateViewMutation();
@@ -30,7 +37,7 @@ function Index() {
 
   useEffect(() => {
     if (data?.data?.stream?.status !== "ongoing") {
-      router.push(`liveevents`);
+      // router.push(`/liveevents`);
     }
 
     toast({
@@ -52,7 +59,7 @@ function Index() {
   return (
     <HomeLayout>
       <Flex
-        mb={{ base: "20px", lg: "0px" }}
+        pb={{ base: "20px", lg: "0px" }}
         w="full"
         flexDir={{ base: "column", lg: "row" }}
       >
