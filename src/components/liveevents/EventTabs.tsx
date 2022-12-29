@@ -62,7 +62,7 @@ function EventTabs() {
         <CliqueTabPanel>
           {isFetching ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
             >
               <>
@@ -73,7 +73,7 @@ function EventTabs() {
             </SimpleGrid>
           ) : data && data.data.length > 0 ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
             >
               {data.data.map((event: any) => (
@@ -81,7 +81,10 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={"calc(100vw - 250px)"} h="60vh">
+            <Box
+              w={{ base: "100%", lg: "calc(100vw - 250px)" }}
+              h={{ lg: "60vh" }}
+            >
               <EmptyState msg="No events yet" />
             </Box>
           )}
@@ -89,7 +92,7 @@ function EventTabs() {
         <CliqueTabPanel>
           {isFetching ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
               w="full"
             >
@@ -101,7 +104,7 @@ function EventTabs() {
             </SimpleGrid>
           ) : data && data.data.length > 0 ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
               w="full"
             >
@@ -110,7 +113,10 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={"calc(100vw - 250px)"} h="60vh">
+            <Box
+              w={{ base: "100%", lg: "calc(100vw - 250px)" }}
+              h={{ lg: "60vh" }}
+            >
               <EmptyState msg="No unpaid events yet" />
             </Box>
           )}
@@ -118,7 +124,7 @@ function EventTabs() {
         <CliqueTabPanel>
           {isFetching ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
               w="full"
             >
@@ -130,7 +136,7 @@ function EventTabs() {
             </SimpleGrid>
           ) : data && data.data.length > 0 ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
               w="full"
             >
@@ -139,7 +145,10 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={"calc(100vw - 250px)"} h="60vh">
+            <Box
+              w={{ base: "100%", lg: "calc(100vw - 250px)" }}
+              h={{ lg: "60vh" }}
+            >
               <EmptyState msg="No paid events yet" />
             </Box>
           )}
@@ -147,7 +156,7 @@ function EventTabs() {
         <CliqueTabPanel>
           {isFetching ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
               w="full"
             >
@@ -159,7 +168,7 @@ function EventTabs() {
             </SimpleGrid>
           ) : data && data.data.length > 0 ? (
             <SimpleGrid
-              columns={{ base: 3, lg: 3, mlg: 4, xl: 5 }}
+              columns={{ base: 1, lg: 3, mlg: 4, xl: 5 }}
               spacing="30px"
               w="full"
             >
@@ -168,7 +177,10 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={"calc(100vw - 250px)"} h="60vh">
+            <Box
+              w={{ base: "100%", lg: "calc(100vw - 250px)" }}
+              h={{ lg: "60vh" }}
+            >
               <EmptyState msg="No ongoing events yet" />
             </Box>
           )}

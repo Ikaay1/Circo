@@ -36,16 +36,18 @@ function Index() {
   }, [data]);
 
   useEffect(() => {
-    if (data?.data?.stream?.status !== "ongoing") {
-      // router.push(`/liveevents`);
-    }
+    if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
+      router.push(`/liveevents`);
 
-    toast({
-      title: "Stream " + data?.data?.stream?.status,
-      status: "info",
-      duration: 5000,
-      isClosable: true,
-    });
+      toast({
+        title: "Stream " + data?.data?.stream?.status,
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+
+      return;
+    }
   }, [data]);
 
   useEffect(() => {

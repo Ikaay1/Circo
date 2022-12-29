@@ -13,13 +13,13 @@ import { purpleBoxStyle, scrollBarStyle3 } from "@constants/utils";
 function Index() {
   return (
     <HomeLayout>
-      <Flex w="full">
+      <Flex w="full" bg="clique.primaryBg">
         <SideMenu />
         <Box
-          maxH={"90vh"}
+          maxH={{ base: "auto", lg: "90vh" }}
           pb="50px"
           px="30px"
-          maxW={"calc(100vw - 250px)"}
+          maxW={{ base: "100%", lg: "calc(100vw - 250px)" }}
           overflowY={"scroll"}
           overflowX={"hidden"}
           sx={scrollBarStyle3}
