@@ -6,10 +6,10 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 function EventCard({onOpen, event}: {onOpen: () => void; event: any}) {
   return (
     <Flex
-      minW={{lg: '220px', mlg: '280px', xl: 'full'}}
+      minW={{base: 'full', lg: '220px', mlg: '280px', xl: 'full'}}
       rounded={'10px'}
       alignItems='flex-end'
-      h={{base: '180px', mlg: '200px'}}
+      h={{base: '200px', lg: '180px', mlg: '200px'}}
       bg='clique.lightGrey'
       bgImage={`url(${event?.eventId?.thumbNails[0]})`}
       bgSize={'cover'}

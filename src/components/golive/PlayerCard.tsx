@@ -117,7 +117,7 @@ function PlayerCard({ streamDetails, setState }: any) {
   };
 
   return (
-    <Box w="450px" maxW="450px" rounded={"10px"}>
+    <Box w={{ base: "full", lg: "450px" }} maxW="450px" rounded={"10px"}>
       <Box h="300px">
         <MuxPlayer
           style={{ height: "100%", maxWidth: "100%" }}
@@ -163,7 +163,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             fontSize="smSubHead"
           >
             {`${process.env.NEXT_PUBLIC_FEURL}`}stream/
-            {streamDetails?._id}
+            <Text as="span"> {streamDetails?._id}</Text>
           </Text>
 
           <Button

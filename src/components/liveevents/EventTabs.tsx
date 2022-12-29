@@ -87,7 +87,7 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={'calc(100vw - 250px)'} h='60vh'>
+            <Box w={{base: '100%', lg: 'calc(100vw - 250px)'}} h={{lg: '60vh'}}>
               <EmptyState msg='No events yet' />
             </Box>
           )}
@@ -116,7 +116,7 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={'calc(100vw - 250px)'} h='60vh'>
+            <Box w={{base: '100%', lg: 'calc(100vw - 250px)'}} h={{lg: '60vh'}}>
               <EmptyState msg='No unpaid events yet' />
             </Box>
           )}
@@ -145,7 +145,7 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={'calc(100vw - 250px)'} h='60vh'>
+            <Box w={{base: '100%', lg: 'calc(100vw - 250px)'}} h={{lg: '60vh'}}>
               <EmptyState msg='No paid events yet' />
             </Box>
           )}
@@ -174,7 +174,7 @@ function EventTabs() {
               ))}
             </SimpleGrid>
           ) : (
-            <Box w={'calc(100vw - 250px)'} h='60vh'>
+            <Box w={{base: '100%', lg: 'calc(100vw - 250px)'}} h={{lg: '60vh'}}>
               <EmptyState msg='No ongoing events yet' />
             </Box>
           )}

@@ -15,9 +15,16 @@ import io from "socket.io-client";
 function Index() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, isFetching, isLoading, refetch } = useGetStreamQuery(
-    id as string
+  const [livestreamId, setLivestreamId] = useState<string | undefined>(
+    undefined
   );
+  useEffect(() => {
+    if (id) {
+      setLivestreamId(id as string);
+    }
+  }, [id]);
+  const { data, isFetching, isLoading, refetch } =
+    useGetStreamQuery(livestreamId);
 
   const toast = useToast();
   const [createView, info] = useCreateViewMutation();
@@ -29,16 +36,18 @@ function Index() {
   }, [data]);
 
   useEffect(() => {
-    if (data?.data?.stream?.status !== "ongoing") {
-      router.push(`liveevents`);
-    }
+    if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
+      router.push(`/liveevents`);
 
-    toast({
-      title: "Stream " + data?.data?.stream?.status,
-      status: "info",
-      duration: 5000,
-      isClosable: true,
-    });
+      toast({
+        title: "Stream " + data?.data?.stream?.status,
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+
+      return;
+    }
   }, [data]);
 
   useEffect(() => {
@@ -51,13 +60,17 @@ function Index() {
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <HomeLayout>
-      <Flex>
+      <Flex
+        pb={{ base: "20px", lg: "0px" }}
+        w="full"
+        flexDir={{ base: "column", lg: "row" }}
+      >
         <Box
-          maxH={"90vh"}
+          maxH={{ base: "", lg: "90vh" }}
           pb="50px"
-          px="30px"
-          maxW={"calc(100vw - 400px)"}
-          w={"calc(100vw - 400px)"}
+          px={{ base: "20px", lg: "30px" }}
+          maxW={{ base: "full", lg: "calc(100vw - 400px)" }}
+          w={{ base: "full", lg: "calc(100vw - 400px)" }}
           overflowY={"scroll"}
           overflowX={"hidden"}
           sx={{
@@ -77,14 +90,18 @@ function Index() {
         >
           {isLoading ? (
             <Flex w="100%" justify={"space-between"}>
-              <Skeleton h="580px" rounded="20px" w="100%" />
+              <Skeleton
+                h={{ base: "400px", lg: "580px" }}
+                rounded="20px"
+                w="100%"
+              />
             </Flex>
           ) : (
             <StreamPlayer stream={data?.data?.stream} />
           )}
 
           {isLoading ? (
-            <Skeleton h="580px" mt="10px" rounded="20px" w="100%" />
+            <Skeleton h="40px" mt="10px" rounded="20px" w="100%" />
           ) : (
             <VideoDetails stream={data?.data?.stream} />
           )}

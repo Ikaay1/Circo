@@ -5,9 +5,12 @@ import PlayerCard from "./PlayerCard";
 
 function Monitor({ streamDetails, setState }: any) {
   return (
-    <Flex justifyContent={"space-between"}>
+    <Flex
+      justifyContent={"space-between"}
+      flexDir={{ base: "column", lg: "row" }}
+    >
       <PlayerCard setState={setState} streamDetails={streamDetails} />
-      <CommentSection  streamDetails={streamDetails} />
+      <CommentSection streamDetails={streamDetails} />
     </Flex>
   );
 }

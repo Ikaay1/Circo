@@ -31,13 +31,14 @@ function CommentSection({ streamDetails }: any) {
 
   return (
     <Box
-      w="450px"
-      maxW="450px"
+      w={{ base: "full", lg: "450px" }}
+      maxW={{ base: "full", lg: "450px" }}
       px="20px"
       pb="80px"
-      minW="400px"
+      minW={{ base: "full", lg: "400px" }}
       bg="clique.black"
       pt={"20px"}
+      mt={{ base: "20px", lg: "0px" }}
       sx={scrollBarStyle}
       maxH="90vh"
       overflowY="scroll"

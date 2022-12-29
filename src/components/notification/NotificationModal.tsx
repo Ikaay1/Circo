@@ -100,7 +100,7 @@ function NotificationModal() {
       <Modal
         motionPreset="slideInBottom"
         scrollBehavior="inside"
-        size="lg"
+        size={{ base: "full", lg: "lg" }}
         isOpen={isOpen}
         onClose={onClose}
       >
@@ -114,8 +114,9 @@ function NotificationModal() {
           pb="30px"
           mt="70px"
           px="20px"
-          right={"250px"}
+          right={{ base: "0", lg: "250px" }}
           pos="absolute"
+          top={{ base: "10vh", lg: "0" }}
           bg="clique.primaryBg"
         >
           <ModalHeader

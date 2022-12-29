@@ -13,6 +13,7 @@ import * as Yup from "yup";
 
 import {
   Box,
+  Button,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -35,7 +36,7 @@ import AddIcon from "@icons/AddIcon";
 import WebCamIcon from "@icons/WebCamIcon";
 
 import DetailCard from "./DetailCard";
-import SelectField from "./SelectField"; 
+import SelectField from "./SelectField";
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,6 +51,7 @@ function WebCamModal({ setState }: { setState: any }) {
   return (
     <>
       <Flex
+        display={{ base: "none", lg: "flex" }}
         mt="5px"
         cursor={"pointer"}
         onClick={() => {
@@ -79,15 +81,27 @@ function WebCamModal({ setState }: { setState: any }) {
         </Flex>
       </Flex>
 
+      <Button
+        display={{ base: "flex", lg: "none" }}
+        size={"sm"}
+        onClick={() => {
+          onOpen();
+        }}
+        color={isOpen ? "clique.base" : "clique.white"}
+      >
+        Webcam
+      </Button>
+
       <Modal size={"3xl"} isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay /> <ModalOverlay />
         <ModalContent
           m={0}
+          mx={{ base: "20px", lg: "0" }}
           bg="clique.black"
           maxH={"90vh"}
           borderColor="clique.black"
           borderRadius="xl"
-          px="60px"
+          px={{ base: "0", md: "60px" }}
           py="30px"
           overflowY={"scroll"}
           sx={scrollBarStyle}
@@ -255,7 +269,7 @@ function WebCamModal({ setState }: { setState: any }) {
                                       gap="2"
                                       py={4}
                                       border="1px"
-                                      width="40%"
+                                      width={{ base: "100%", md: "40%" }}
                                       borderRadius={"10px"}
                                       borderColor="clique.secondaryGrey2"
                                       borderStyle="dashed"
