@@ -140,6 +140,7 @@ const Bio = ({
             position='absolute'
             left={'50%'}
             transform={'translate(-50%, 60%)'}
+            w={{base: '100%', lg: 'auto'}}
           >
             <CopyBox
               link={

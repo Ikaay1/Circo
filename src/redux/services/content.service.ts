@@ -233,15 +233,6 @@ export const contentApi = createApi({
       invalidatesTags: ['Content'],
     }),
 
-    deleteContent: builder.mutation({
-      query: (id) => ({
-        url: `content/delete-video/${id}`,
-        method: 'DELETE',
-        // credentials: 'include',
-      }),
-      invalidatesTags: ['Content'],
-    }),
-
     getCounts: builder.query<any, any>({
       query: () => ({
         url: `like/likesCount`,
@@ -284,7 +275,6 @@ export const {
   useGetTrendingQuery,
   useGetSearchHistoryQuery,
   useExpiredSubscriptionMutation,
-  useDeleteContentMutation,
   useGetCountsQuery,
   useDeleteContentCommentMutation,
 } = contentApi;

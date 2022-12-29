@@ -238,6 +238,7 @@ function BeneficiaryModal({
         borderRadius='xl'
         pt='3'
         pb='4'
+        w={{base: '100%'}}
       >
         <ModalHeader alignSelf='center' fontSize={'subHead'}>
           {type === 'add' ? 'Add' : 'Change'} Beneficiary

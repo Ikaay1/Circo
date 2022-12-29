@@ -36,7 +36,20 @@ export const bankApi = createApi({
       }),
       invalidatesTags: ['Bank'],
     }),
+
+    deleteContent: builder.mutation({
+      query: (id) => ({
+        url: `content/delete-video/${id}`,
+        method: 'DELETE',
+        // credentials: 'include',
+      }),
+      invalidatesTags: ['Bank'],
+    }),
   }),
 });
 
-export const {useGetBanksQuery, useFlutterwavePaymentMutation} = bankApi;
+export const {
+  useGetBanksQuery,
+  useFlutterwavePaymentMutation,
+  useDeleteContentMutation,
+} = bankApi;

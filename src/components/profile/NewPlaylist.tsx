@@ -175,7 +175,7 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
           background='clique.purple'
           borderRadius='50px'
           fontWeight='500'
-          fontSize='smHead2'
+          fontSize={{base: 'sm2', lg: 'smHead'}}
           lineHeight='36px'
           display='flex'
           alignItems='center'

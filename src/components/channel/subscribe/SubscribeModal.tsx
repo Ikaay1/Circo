@@ -44,6 +44,7 @@ function SubscribeModal({
         borderRadius='xl'
         pt='3'
         pb='10'
+        w={{base: '100%'}}
       >
         <ModalHeader alignSelf='center' mb='2' fontSize={'smHead'}>
           Subscription

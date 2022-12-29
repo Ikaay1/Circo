@@ -251,8 +251,8 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
       >
         <ModalOverlay />
         <ModalContent
-          maxW='400px'
-          w='400px'
+          maxW={{base: '340px', lg: '400px'}}
+          w={{base: '340px', lg: '400px'}}
           bottom='0'
           minH='100vh'
           overflowY={'scroll'}

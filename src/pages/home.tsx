@@ -44,7 +44,7 @@ function Index() {
   useEffect(() => {
     const expired = async () => {
       const res: any = await expiredSub({});
-      console.log(res?.data?.data);
+      console.log('Expired', res?.data?.data);
       if (res?.data?.data) {
         window.location.replace('/home');
       }
