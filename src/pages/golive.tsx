@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import EventTab from "@components/golive/EventTab";
 import GoLiveTab from "@components/golive/GoLiveTab";
 import LiveEventPage from "@components/golive/LiveEventPage";
@@ -9,6 +9,7 @@ import NewLiveTab from "@components/golive/NewLiveTab";
 import SideMenu from "@components/golive/SideMenu";
 import Header from "@components/widgets/Header";
 import { scrollBarStyle } from "@constants/utils";
+import WebCamModal from "@components/golive/WebCamModal";
 
 type Props = {};
 
@@ -35,7 +36,27 @@ function Index({}: Props) {
           overflowX={"hidden"}
           sx={scrollBarStyle}
         >
-          
+          <Flex
+            display={{ base: "flex", lg: "none" }}
+            justifyContent={"space-between"}
+            pb="20px"
+          >
+            <Button
+              size={"sm"}
+              onClick={() => setState("stream")}
+              color={state === "stream" ? "clique.base" : "clique.white"}
+            >
+              Stream Now
+            </Button>
+            <Button
+              size={"sm"}
+              onClick={() => setState("liveevent")}
+              color={state === "liveevent" ? "clique.base" : "clique.white"}
+            >
+              Schedule Stream
+            </Button>
+            <WebCamModal setState={setState} />
+          </Flex>
           {refreshed === "true" && state !== "stream" && (
             <Box>
               <Text
@@ -53,7 +74,6 @@ function Index({}: Props) {
               <EventTab setState={setState} />
             </Box>
           )}
-
           {refreshed === "truer" && state !== "stream" && (
             <Box>
               <Text
@@ -106,7 +126,6 @@ function Index({}: Props) {
               <LiveEventPage setState={setState} state={state} />
             </Box>
           )}
-
           {state === "create" && (
             <Box>
               <Text

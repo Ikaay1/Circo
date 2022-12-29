@@ -104,13 +104,11 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
     >
       {(props) => (
         <Form>
-          <Flex w="full">
+          <Flex w="full" flexDir={{ base: "column", lg: "row" }}>
             <Box w={{ base: "full", lg: "50%" }}>
               <Text fontSize="smSubHead" color="clique.text">
                 Live details
               </Text>
-
-
 
               <Box>
                 <DetailCard input={true} name="title" label="Live title" />
@@ -184,7 +182,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
                 </Field>
               </Box>
 
-              <Text fontSize={"subHead"} mb="4">
+              <Text mt={{ base: "20px", lg: "0" }} fontSize={"subHead"} mb="4">
                 Other Parameters
               </Text>
 
@@ -216,8 +214,13 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
               </Grid>
             </Box>
 
-            <Flex w="50%" px="40px" flexDir={"column"} justify="space-between">
-              <Box>
+            <Flex
+              w={{ base: "full", lg: "50%" }}
+              px={{ base: "0", lg: "40px" }}
+              flexDir={"column"}
+              justify="space-between"
+            >
+              <Box mt={{ base: "20px", lg: "0" }}>
                 <Text fontSize="smSubHead" color="clique.text">
                   Live fee per ticket
                 </Text>
@@ -233,7 +236,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
 
                 <Flex alignItems={"center"} justifyContent="space-between">
                   <DetailCard
-                    w="48%"
+                    w={{ base: "full", lg: "48%" }}
                     input={true}
                     name="schedule"
                     type="date"
@@ -242,7 +245,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
                 </Flex>
               </Box>
 
-              <Box w="100%">
+              <Box w="100%" pt={{ base: "20px", lg: "0" }}>
                 <AuthButton
                   name={"Save"}
                   h="60px"

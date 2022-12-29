@@ -112,8 +112,8 @@ function NewStream({
     >
       {(props) => (
         <Form>
-          <Flex w="full">
-            <Box w="50%">
+          <Flex w="full" flexDir={{ base: "column", lg: "row" }}>
+            <Box w={{ base: "full", lg: "50%" }}>
               <Text fontSize="smSubHead" color="clique.text">
                 Live details
               </Text>
@@ -223,7 +223,13 @@ function NewStream({
               </Grid>
             </Box>
 
-            <Flex w="50%" px="40px" flexDir={"column"} justify="space-between">
+            <Flex
+              mt={{ base: "20px", lg: "0" }}
+              w={{ base: "full", lg: "50%" }}
+              px={{ base: 0, lg: "40px" }}
+              flexDir={"column"}
+              justify="space-between"
+            >
               {state === "create" ? (
                 <Box>
                   <Text fontSize="smSubHead" color="clique.text">
@@ -259,7 +265,7 @@ function NewStream({
               ) : (
                 <Box></Box>
               )}
-              <Box w="100%">
+              <Box w="100%" pt={{ base: "10px", lg: "0" }}>
                 <AuthButton
                   name={"Save"}
                   h="60px"
