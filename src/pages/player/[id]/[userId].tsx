@@ -82,13 +82,13 @@ function Index() {
         ))}
       {userData && !isLoading && !isFetching && data?.data && (
         <HomeLayout>
-          <Flex>
+          <Box display={{lg: 'flex'}}>
             <Box
               maxH={'90vh'}
-              pb='50px'
-              px='30px'
-              maxW={'calc(100vw - 400px)'}
-              w={'calc(100vw - 400px)'}
+              pb={{base: '30px', lg: '50px'}}
+              px={{base: '20px', lg: '30px'}}
+              maxW={{base: '100%', lg: 'calc(100vw - 400px)'}}
+              w={{base: '100%', lg: 'calc(100vw - 400px)'}}
               overflowY={'scroll'}
               overflowX={'hidden'}
               sx={{
@@ -119,7 +119,7 @@ function Index() {
             </Box>
             {/* @ts-ignore */}
             <CommentSection id={id} />
-          </Flex>
+          </Box>
         </HomeLayout>
       )}
     </>
