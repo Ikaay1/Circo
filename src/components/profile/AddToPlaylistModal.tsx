@@ -81,6 +81,7 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
         borderRadius='xl'
         pt='3'
         pb='10'
+        w={{base: '100%'}}
       >
         <ModalHeader alignSelf='center' fontSize={'subHead'}>
           Add to Playlist

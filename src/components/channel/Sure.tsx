@@ -42,6 +42,7 @@ function Sure({
         borderRadius='xl'
         pt='3'
         pb='10'
+        w={{base: '100%', lg: '100%'}}
       >
         <ModalHeader alignSelf='center' mb='2' fontSize={'smHead'}>
           {header}
@@ -63,7 +64,7 @@ function Sure({
             <Flex justifyContent={'space-between'}>
               <Btn
                 text='Cancel'
-                style={{width: '200px'}}
+                w={{base: '150px', lg: '200px'}}
                 py='6'
                 bg='transparent'
                 border='1px solid white'
@@ -71,7 +72,7 @@ function Sure({
               ></Btn>
               <Btn
                 text={buttonText}
-                style={{width: '200px'}}
+                w={{base: '150px', lg: '200px'}}
                 py='6'
                 bg='clique.secondaryRed'
                 onClick={onClick}

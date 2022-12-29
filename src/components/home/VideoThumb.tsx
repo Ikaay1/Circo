@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useDeleteContentMutation } from 'redux/services/bank.service';
 import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
 
 import {
@@ -18,6 +19,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import CopyBox from '@components/channel/CopyBox';
+import Sure from '@components/channel/Sure';
 import AddToPlaylistModal from '@components/profile/AddToPlaylistModal';
 import PlaylistAddIcon from '@icons/PlaylistAddIcon';
 import ShareE from '@icons/ShareE';
@@ -54,8 +56,14 @@ function VideoThumb({
     onOpen: onOpenPlay,
     onClose: onClosePlay,
   } = useDisclosure();
+  const {
+    isOpen: isOpenSure,
+    onOpen: onOpenSure,
+    onClose: onCloseSure,
+  } = useDisclosure();
   const [isHover, setIsHover] = React.useState(false);
   const {handleRouting} = useRoutingChannel();
+  const [deleteContent, deleteContentStatus] = useDeleteContentMutation();
   const router = useRouter();
   const [show, setShow] = React.useState(false);
   const handleClick = async (i: number) => {
@@ -64,20 +72,27 @@ function VideoThumb({
     } else if (i === 1) {
       onOpenPlay();
     } else {
-      await API.delete(`${baseUrl}content/delete-video/${video._id}`);
-      toast({
-        title: 'Video successfully deleted',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
-      // router.reload();
-      setContents((prevContents: contentData[]) =>
-        prevContents.filter((content) => content._id !== video._id),
-      );
+      onOpenSure();
     }
   };
+
+  const handleDeleteContent = async () => {
+    const res = await deleteContent(video._id);
+    console.log('res', res);
+    onCloseSure();
+    toast({
+      title: 'Video successfully deleted',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position: 'top-right',
+    });
+    // router.reload();
+    setContents((prevContents: contentData[]) =>
+      prevContents.filter((content) => content._id !== video._id),
+    );
+  };
+
   return (
     <>
       <Box position={'relative'} ref={lastElementRef}>
@@ -294,6 +309,15 @@ function VideoThumb({
         onClose={onClosePlay}
         videoId={video._id}
       />
+      <Sure
+        isOpen={isOpenSure}
+        onClose={onCloseSure}
+        buttonText='Delete'
+        header='Delete Content'
+        description='Are you sure you want to delete this content?'
+        onClick={handleDeleteContent}
+        isLoading={deleteContentStatus.isLoading}
+      />
       <Modal onClose={onCloseCopy} isOpen={isOpenCopy}>
         <ModalOverlay />
         <ModalContent>
@@ -301,6 +325,7 @@ function VideoThumb({
             position='absolute'
             left={'50%'}
             transform={'translate(-50%, 60%)'}
+            w={{base: '100%', lg: 'auto'}}
           >
             <CopyBox link={`player/${video._id}/${video.uploader_id._id}`} />
           </Box>
