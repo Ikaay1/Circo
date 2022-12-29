@@ -16,7 +16,7 @@ type Props = {
   input: boolean;
   name: string;
   type?: string;
-  w?: string;
+  w?: any;
   fee?: boolean;
 };
 
@@ -64,7 +64,11 @@ export default function DetailCard({
                   id="title"
                   placeholder={`Enter ${name}`}
                   type={
-                    type === "date" ? "datetime-local" : type === "time" ? "time" : "text"
+                    type === "date"
+                      ? "datetime-local"
+                      : type === "time"
+                      ? "time"
+                      : "text"
                   }
                 />
               </InputGroup>

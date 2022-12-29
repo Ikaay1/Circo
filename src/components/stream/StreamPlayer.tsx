@@ -36,9 +36,9 @@ function StreamPlayer({ stream }: any) {
   return (
     <Flex
       pos={"relative"}
-      h={"580px"}
-      maxH={"580px"}
-      borderRadius="20px"
+      h={{ base: "400px", lg: "580px" }}
+      maxH={{ base: "400px", lg: "580px" }}
+      borderRadius={{ base: "10px", lg: "20px" }}
       id="video"
       overflow={"hidden"}
       bg="black"

@@ -155,15 +155,16 @@ function Stream({
     >
       {(props) => (
         <Form>
-          <Flex w="full">
-            <Box w="50%">
+          <Flex w="full" flexDir={{ base: "column", lg: "row" }}>
+            <Box w={{ base: "full", lg: "50%" }}>
               <Text fontSize="smSubHead" color="clique.text">
                 Live details
               </Text>
 
-              <Box>
+              <Box w="100%">
                 <DetailCard input={true} name="title" label="Live title" />
                 <DetailCard
+                  w="full"
                   input={false}
                   name="description"
                   label="Description"
@@ -267,7 +268,12 @@ function Stream({
               </Grid>
             </Box>
 
-            <Flex w="50%" px="40px" flexDir={"column"} justify="space-between">
+            <Flex
+              w={{ base: "full", lg: "50%" }}
+              px="40px"
+              flexDir={"column"}
+              justify="space-between"
+            >
               {state === "liveevent" ? (
                 <Box>
                   <Text fontSize="smSubHead" color="clique.text">
@@ -303,7 +309,7 @@ function Stream({
               ) : (
                 <Box></Box>
               )}
-              <Box w="100%">
+              <Box w="100%" pt="20px">
                 <AuthButton
                   name={"Save"}
                   h="60px"

@@ -22,12 +22,13 @@ function StreamKey({ streamDetails }: any) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <Flex>
-      <Box w="50%">
+    <Flex flexDir={{ base: "column", lg: "row" }} pb="150px">
+      <Box w={{ base: "full", lg: "50%" }}>
         <Text mt="20px" fontSize="smSubHead" color="clique.text">
           Stream key
         </Text>
         <Grid
+          
           templateColumns="repeat(15, 1fr)"
           mt="10px"
           justifyContent={"space-between"}

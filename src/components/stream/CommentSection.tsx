@@ -33,15 +33,15 @@ function CommentSection({}: {}) {
   return (
     <Box
       pos={"relative"}
-      w="400px"
-      maxW="400px"
+      w={{ base: "full", md: "400px" }}
+      maxW={{ base: "full", md: "400px" }}
       px="20px"
       pb="80px"
-      minW="400px"
+      minW={{ base: "full", md: "400px" }}
       bg="clique.black"
-      h="90vh"
-      minH="90vh"
-      maxH="90vh"
+      h={{ base: "auto", lg: "90vh" }}
+      minH={{ base: "auto", lg: "90vh" }}
+      maxH={{ base: "auto", lg: "90vh" }}
       pt={"20px"}
       overflowY="scroll"
       sx={scrollBarStyle}

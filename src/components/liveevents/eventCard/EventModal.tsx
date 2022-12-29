@@ -39,8 +39,8 @@ function EventModal({ event }: { event: any }) {
       >
         <ModalOverlay />
         <ModalContent
-          maxW="400px"
-          w="400px"
+          maxW={{ base: "70%", lg: "400px" }}
+          w={{ base: "70%", lg: "400px" }}
           bottom="0"
           minH="100vh"
           overflowY={"scroll"}
@@ -51,7 +51,7 @@ function EventModal({ event }: { event: any }) {
           right={0}
           bg="clique.black"
         >
-          <Box px="50px">
+          <Box px={{ base: "10px", lg: "50px" }}>
             <Image
               w="full"
               alt="event flyer"

@@ -833,9 +833,9 @@ export const API = axios.create({ baseURL: baseUrl });
 API.interceptors.request.use((req) => {
   if (store.getState().app.userReducer.token) {
     if (req.headers) {
-      req.headers.Authorization = `Bearer ${
-        store.getState().app.userReducer.token
-      }`;
+      // req.headers.Authorization = `Bearer ${
+      //   store.getState().app.userReducer.token
+      // }`;
     }
   }
   return req;
