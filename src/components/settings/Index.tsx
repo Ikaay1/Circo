@@ -13,19 +13,17 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import TermsService from "./TermsService";
 import { AiFillSetting } from "react-icons/ai";
 
-export type SettingsProps = {
-  current: string;
-  onClick: (code: string) => void;
-  showSidebar: boolean;
-  setShowSidebar: (value: boolean) => void;
-};
-
 function Index({
   current,
   onClick,
   showSideMenu,
   setShowSideMenu,
-}: SettingsProps) {
+}: {
+  current: string;
+  onClick: (code: string) => void;
+  showSideMenu: boolean;
+  setShowSideMenu: any;
+}) {
   const { isLoading, data } = useGetPreferenceQuery("");
   let active;
   switch (current) {

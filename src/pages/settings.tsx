@@ -1,13 +1,9 @@
 import HomeLayout from "layouts/HomeLayout";
 import { useState } from "react";
-
 import { Box, useClipboard, useDisclosure, useToast } from "@chakra-ui/react";
 import Index from "@components/settings/Index";
 import SideMenu from "@components/settings/SideMenu";
-import Header from "@components/widgets/Header";
 import { scrollBarStyle3, settingsMenu } from "@constants/utils";
-
-import { scrollBarStyle } from "../constants/utils";
 
 const Settings = () => {
   const [state, setState] = useState<string>("account");
@@ -27,7 +23,7 @@ const Settings = () => {
     });
   };
 
-  const [showSideMenu, setShowSideMenu] = useState<boolean>(false);
+  const [showSideMenu, setShowSideMenu] = useState(false);
   return (
     <HomeLayout>
       <Box h={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
@@ -49,6 +45,7 @@ const Settings = () => {
             />
           </Box>
         </Box>
+
         <Box
           display={{ base: "none", lg: "block" }}
           flex="1"
@@ -63,6 +60,7 @@ const Settings = () => {
             menuList={settingsMenu}
           />
         </Box>
+
         <Box
           flex={{ lg: "4.4" }}
           h="100%"
@@ -76,7 +74,7 @@ const Settings = () => {
             setShowSideMenu={setShowSideMenu}
             showSideMenu={showSideMenu}
             current={state as string}
-            onClick={(code) => handleCopied(code)}
+            onClick={(code:string) => handleCopied(code)}
           />
         </Box>
       </Box>
