@@ -1,30 +1,36 @@
-import React from 'react';
-import { useGetPreferenceQuery } from 'redux/services/settings.service';
+import React from "react";
+import { useGetPreferenceQuery } from "redux/services/settings.service";
 
-import { Box, Text } from '@chakra-ui/react';
-import { scrollBarStyle } from '@constants/utils';
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import { scrollBarStyle } from "@constants/utils";
 
-import Account from './Account';
-import CommunityGuidlines from './CommunityGuidlines';
-import CopyrightPolicy from './CopyrightPolicy';
-import Faq from './Faq';
-import Notification from './Notification';
-import PrivacyPolicy from './PrivacyPolicy';
-import TermsService from './TermsService';
+import Account from "./Account";
+import CommunityGuidlines from "./CommunityGuidlines";
+import CopyrightPolicy from "./CopyrightPolicy";
+import Faq from "./Faq";
+import Notification from "./Notification";
+import PrivacyPolicy from "./PrivacyPolicy";
+import TermsService from "./TermsService";
+import { AiFillSetting } from "react-icons/ai";
 
-export type SettingsProps = {
+function Index({
+  current,
+  onClick,
+  showSideMenu,
+  setShowSideMenu,
+}: {
   current: string;
   onClick: (code: string) => void;
-};
-
-function Index({current, onClick}: SettingsProps) {
-  const {isLoading, data} = useGetPreferenceQuery('');
+  showSideMenu: boolean;
+  setShowSideMenu: any;
+}) {
+  const { isLoading, data } = useGetPreferenceQuery("");
   let active;
   switch (current) {
-    case 'account':
+    case "account":
       active = <Account />;
       break;
-    case 'notification':
+    case "notification":
       active = (
         <Notification
           onClick={onClick}
@@ -33,19 +39,19 @@ function Index({current, onClick}: SettingsProps) {
         />
       );
       break;
-    case 'copyright':
+    case "copyright":
       active = <CopyrightPolicy />;
       break;
-    case 'terms':
+    case "terms":
       active = <TermsService />;
       break;
-    case 'guidlines':
+    case "guidlines":
       active = <CommunityGuidlines />;
       break;
-    case 'privacy':
+    case "privacy":
       active = <PrivacyPolicy />;
       break;
-    case 'faqs':
+    case "faqs":
       active = <Faq />;
       break;
     default:
@@ -53,20 +59,30 @@ function Index({current, onClick}: SettingsProps) {
   }
   return (
     <Box>
-      <Box
-        borderBottom={'1px solid #232323'}
-        height='12vh'
-        paddingLeft={'5'}
-        py='6'
-        mb='3'
+      <Flex
+        borderBottom={"1px solid #232323"}
+        height="12vh"
+        paddingLeft={"5"}
+        py="6"
+        mb="3"
+        justifyContent="space-between"
       >
         <Text>Settings</Text>
-      </Box>
+        <Flex pr="20px" display={{ base: "flex", lg: "none" }}>
+          <Icon
+            as={AiFillSetting}
+            mr="10px"
+            fontSize="2xl"
+            onClick={() => setShowSideMenu(!showSideMenu)}
+          />
+          <Text>Menu</Text>
+        </Flex>
+      </Flex>
       <Box
-        pl={{base: '20px', lg: '170px'}}
-        pr='12'
-        height={'100%'}
-        overflowY='scroll'
+        pl={{ base: "20px", lg: "170px" }}
+        pr="12"
+        height={"100%"}
+        overflowY="scroll"
         sx={scrollBarStyle}
       >
         {active}
