@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useAppSelector } from "redux/app/hooks";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
-
+import io from "socket.io-client";
 import {
   Box,
   Button,
@@ -20,14 +20,16 @@ import NewChatComment from "./NewChatComment";
 
 function CamCommentSection({
   setClose,
-  data,
+
   id,
 }: {
   setClose: any;
-  data: any;
   id: string;
 }) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
+
+  const { data, isLoading, isFetching, refetch } =
+    useGetStreamCommentsQuery(id);
   const router = useRouter();
 
   useEffect(() => {
@@ -35,6 +37,15 @@ function CamCommentSection({
       window.location.replace("/login");
     }
   }, [userProfile?._id, router]);
+
+  useEffect(() => {
+    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
+      "commentchange",
+      (data: any) => {
+        refetch();
+      }
+    );
+  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
 
   return (
     <Box

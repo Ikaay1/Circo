@@ -17,7 +17,6 @@ function Index() {
   const [startBroadCast, startInfo] = useStartBroadCastMutation();
   const { streamKey, token, spaceId, id, broadcastId }: any = router.query;
   const [close, setClose] = useState(false);
-  const { data, isLoading, isFetching } = useGetStreamCommentsQuery(id);
 
   const spaceRef: any = useRef(null);
   const [localParticipant, setLocalParticipant] = useState<any>(null);
@@ -95,11 +94,7 @@ function Index() {
             Live chat
           </Button>
         ) : (
-          <CamCommentSection
-            id={id as string}
-            data={data}
-            setClose={setClose}
-          />
+          <CamCommentSection id={id as string} setClose={setClose} />
         )}
 
         <End />
