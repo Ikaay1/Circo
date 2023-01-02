@@ -12,14 +12,19 @@ type Props = {
   click?: (route: string) => void;
   menuList: SideMenu[];
   create?: boolean;
+  setShowSideMenu?: (value: boolean) => void;
 };
 
-const SideMenu = ({ click, menuList, create }: Props) => {
+const SideMenu = ({ click, menuList, create, setShowSideMenu }: Props) => {
   const handleClick = (route: string) => {
     if (click) {
       click(route);
     }
     setState(route);
+
+    if (setShowSideMenu) {
+      setShowSideMenu(false);
+    }
   };
   let currentState = "";
   create ? (currentState = "channel") : (currentState = "account");
