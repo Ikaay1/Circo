@@ -17,7 +17,6 @@ function Index() {
   const [startBroadCast, startInfo] = useStartBroadCastMutation();
   const { streamKey, token, spaceId, id, broadcastId }: any = router.query;
   const [close, setClose] = useState(false);
-  const { data, isLoading, isFetching } = useGetStreamCommentsQuery(id);
 
   const spaceRef: any = useRef(null);
   const [localParticipant, setLocalParticipant] = useState<any>(null);
@@ -25,9 +24,16 @@ function Index() {
 
   useEffect(() => {
     if (!spaceId || !token) return;
-    console.log(token);
 
     const space = new Space(token);
+
+    space.on(SpaceEvent.ParticipantJoined, (participant) => {
+      console.log("Participant joined", participant);
+    });
+
+    space.on(SpaceEvent.ParticipantLeft, (participant) => {
+      console.log("Participant left", participant);
+    });
 
     spaceRef.current = space;
   }, [spaceId, token]);
@@ -52,8 +58,6 @@ function Index() {
       broadcastId: broadcastId,
       spaceId: spaceId,
     });
-
-    console.log(startRes);
   }, [spaceId, broadcastId]);
 
   useEffect(() => {
@@ -95,11 +99,7 @@ function Index() {
             Live chat
           </Button>
         ) : (
-          <CamCommentSection
-            id={id as string}
-            data={data}
-            setClose={setClose}
-          />
+          <CamCommentSection id={id as string} setClose={setClose} />
         )}
 
         <End />

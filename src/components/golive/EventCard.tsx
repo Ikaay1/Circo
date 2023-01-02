@@ -3,13 +3,20 @@ import React from "react";
 import dayjs from "dayjs";
 import { useAppDispatch } from "redux/app/hooks";
 import { setSelectedStream } from "redux/slices/streamSlice";
+import { useRouter } from "next/router";
 
 function EventCard({ event, setState }: any) {
   const dispatch = useAppDispatch();
-
+  const router = useRouter();
   return (
     <Flex
       onClick={() => {
+        if (event?.space) {
+          router.push(
+            `/stream/webcam/${event?.eventId?._id}/?streamKey=${event?.streamKey}&spaceId=${event?.space?.id}&token=${event?.token}&muxStreamId=${event?.muxStreamId}&broadcastId=${event?.broadcast?.id}`
+          );
+          return;
+        }
         dispatch(
           setSelectedStream({
             payload: { ...event },

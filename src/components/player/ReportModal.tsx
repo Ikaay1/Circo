@@ -32,12 +32,10 @@ function ReportModal({ comment }: { comment: commentInterface }) {
         reports.push(key);
       }
     }
-    console.log(reports);
     if (!reports.length) {
       toast.error("Please check your report(s)");
       return;
     }
-    console.log(comment._id);
     await reportComment({ commentId: comment._id, reports });
     theToast({
       title: "Comment reported successfully",
@@ -120,8 +118,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                   "Violence or dangerous organizations": false,
                   "Bullying or harassment": false,
                 }}
-                onSubmit={(values, actions) => {
-                  console.log("values", values);
+                onSubmit={(values, actions) => { 
                   handleReport(values);
                   actions.resetForm();
                   actions.setValues({
