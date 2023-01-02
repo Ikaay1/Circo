@@ -13,7 +13,7 @@ function EventCard({ event, setState }: any) {
       onClick={() => {
         if (event?.space) {
           router.push(
-            `/stream/webcam/${event?._id}/?streamKey=${event?.space?.id}&token=${event?.token}&muxStreamId=${event?.muxStreamId}&broadcastId=${event?.broadcast?.id}`
+            `/stream/webcam/${event?.eventId?._id}/?streamKey=${event?.streamKey}&spaceId=${event?.space?.id}&token=${event?.token}&muxStreamId=${event?.muxStreamId}&broadcastId=${event?.broadcast?.id}`
           );
           return;
         }
