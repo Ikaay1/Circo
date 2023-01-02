@@ -47,7 +47,6 @@ function StreamPlayer({ stream }: any) {
       <MuxPlayer
         style={{ height: "87%", maxWidth: "100%" }}
         onError={(err) => {
-          console.log(err);
           //retry logic
         }}
         onWaiting={() => {

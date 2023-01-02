@@ -68,13 +68,13 @@ function Index({
         justifyContent="space-between"
       >
         <Text>Settings</Text>
-        <Flex pr="20px" display={{ base: "flex", lg: "none" }}>
-          <Icon
-            as={AiFillSetting}
-            mr="10px"
-            fontSize="2xl"
-            onClick={() => setShowSideMenu(!showSideMenu)}
-          />
+        <Flex
+          pr="20px"
+          display={{ base: "flex", lg: "none" }}
+          onClick={() => setShowSideMenu(!showSideMenu)}
+          alignItems="center"
+        >
+          <Icon as={AiFillSetting} mr="10px" fontSize="2xl" />
           <Text>Menu</Text>
         </Flex>
       </Flex>

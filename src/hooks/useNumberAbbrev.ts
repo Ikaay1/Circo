@@ -24,7 +24,6 @@ export const useNumberAbbrev = () => {
           i++;
         }
 
-        // console.log(number);
         // Add the letter for the abbreviation
         number += abbrev[i] as any;
         // We are done... stop
@@ -32,7 +31,6 @@ export const useNumberAbbrev = () => {
       }
     }
 
-    // console.log('abbrNum(' + orig + ', ' + dec + ') = ' + number);
     return number;
   }
   return abbrNum;

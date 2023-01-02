@@ -14,11 +14,11 @@ import React from "react";
 function EachMenu({ name, icon, type, item, close }: any) {
   const router = useRouter();
   const path = router.asPath;
-  console.log(path.split("/")[3]);
+
   return (
     <>
       {type === "subMenu" ? (
-        <AccordionItem border={"none"} >
+        <AccordionItem border={"none"}>
           <AccordionButton
             p="0"
             position={"relative"}

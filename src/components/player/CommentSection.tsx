@@ -18,9 +18,7 @@ function CommentSection({ id }: { id: string | string[] | undefined }) {
     if (comment.trim().length) {
       setComment("");
       postCommentOnContent({ videoId: id, comment: comment.trim() }).then(
-        () => {
-          console.log("commented");
-        }
+        () => {}
       );
       refetch();
     }
