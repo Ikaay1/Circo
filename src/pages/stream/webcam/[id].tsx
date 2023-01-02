@@ -24,9 +24,16 @@ function Index() {
 
   useEffect(() => {
     if (!spaceId || !token) return;
-    console.log(token);
 
     const space = new Space(token);
+
+    space.on(SpaceEvent.ParticipantJoined, (participant) => {
+      console.log("Participant joined", participant);
+    });
+
+    space.on(SpaceEvent.ParticipantLeft, (participant) => {
+      console.log("Participant left", participant);
+    });
 
     spaceRef.current = space;
   }, [spaceId, token]);
@@ -51,8 +58,6 @@ function Index() {
       broadcastId: broadcastId,
       spaceId: spaceId,
     });
-
-    console.log(startRes);
   }, [spaceId, broadcastId]);
 
   useEffect(() => {

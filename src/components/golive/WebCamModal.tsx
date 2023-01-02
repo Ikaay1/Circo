@@ -220,9 +220,7 @@ function WebCamModal({ setState }: { setState: any }) {
                           type={"file"}
                           visibility={"hidden"}
                           onChange={(e: any) => {
-                            console.log("sdf");
                             props.setFieldValue("thumbNail", e.target.files[0]);
-                            console.log(props.values.thumbNail);
                           }}
                           id={"thumbNail"}
                         />

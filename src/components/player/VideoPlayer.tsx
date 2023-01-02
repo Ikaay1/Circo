@@ -36,7 +36,6 @@ function VideoPlayer({
 
   useEffect(() => {
     const length = videoIdsList.length;
-    console.log(length, " video list");
 
     if (currentVideoIndex === 0 && length > 1) {
       setPrevVideoIndex(null);

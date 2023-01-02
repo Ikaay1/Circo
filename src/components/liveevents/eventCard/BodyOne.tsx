@@ -65,7 +65,7 @@ function BodyOne({
         size="lg"
         onClick={async () => {
           NProgress.start();
-          console.log("I was pushed");
+
           if (
             event?.eventId?.fee === 0 ||
             event?.eventId?.fee === "0" ||
