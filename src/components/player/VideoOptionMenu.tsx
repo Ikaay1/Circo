@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
-import { useSaveVideoMutation } from 'redux/services/content.service';
+import {
+	useSaveVideoMutation,
+	useUnSaveVideoMutation,
+} from 'redux/services/content.service';
 import { useGetUserQuery } from 'redux/services/user.service';
 import { setUser } from 'redux/slices/authSlice';
 
@@ -25,6 +28,7 @@ function VideoOptionMenu({player, video}: any) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [isLoop, setIsLoop] = React.useState<any>(null);
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
+  const [unSaveVideo, unSaveVideoStatus] = useUnSaveVideoMutation();
   const {data, refetch} = useGetUserQuery(userProfile?._id);
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -68,7 +72,7 @@ function VideoOptionMenu({player, video}: any) {
       });
       refetch();
     } else {
-      await API.delete(`${baseUrl}unsave/${video._id}`);
+      await unSaveVideo(video._id);
       toast({
         title: 'You have successfully unsaved this video',
         status: 'success',
