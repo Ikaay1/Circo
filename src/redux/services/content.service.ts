@@ -165,6 +165,15 @@ export const contentApi = createApi({
       invalidatesTags: ['Content'],
     }),
 
+    unSaveVideo: builder.mutation({
+      query: (id) => ({
+        url: `unsave/${id}`,
+        method: 'DELETE',
+        // credentials: 'include',
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
     reportComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `report`,
@@ -277,4 +286,5 @@ export const {
   useExpiredSubscriptionMutation,
   useGetCountsQuery,
   useDeleteContentCommentMutation,
+  useUnSaveVideoMutation,
 } = contentApi;

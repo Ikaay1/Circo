@@ -37,7 +37,7 @@ const Exclusive = () => {
           your daily contents and real time events.
         </Text>
         <Box
-          display={{base: 'none', lg: 'flex'}}
+          // display={{base: 'none', lg: 'flex'}}
           alignItems={'center'}
           marginTop={'2.2rem'}
         >
@@ -66,6 +66,7 @@ const Exclusive = () => {
           }}
           alignItems={'center'}
           marginTop='2.7rem'
+          gap='10px'
         >
           <DownloadButtons baseWidth='150px' height='50px' />
         </Box>
