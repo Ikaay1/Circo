@@ -10,6 +10,7 @@ import {
   Button,
   Flex,
   Text,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 
@@ -17,6 +18,7 @@ import { contentData } from "../../constants/utils";
 import { useRoutingChannel } from "../../hooks/useRoutingChannel";
 import SmallPlayer from "./SmallPlayer";
 import SubScribeModal from "./SubScribeModal";
+import Color from "@constants/color";
 
 function HoverCard({
   setIsHover,
@@ -55,7 +57,7 @@ function HoverCard({
       rounded="20px"
       overflow={"hidden"}
       zIndex={100}
-      bg="clique.secondaryGrey1"
+      bg={useColorModeValue("clique.white", "clique.secondaryGrey1")}
       w="calc(100% + 20px)"
       transform={"translateX(-10px)"}
     >
@@ -97,7 +99,7 @@ function HoverCard({
         <Box>
           <Text
             noOfLines={1}
-            color={"clique.white"}
+            color={Color().blackAndWhite}
             fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"16px"}

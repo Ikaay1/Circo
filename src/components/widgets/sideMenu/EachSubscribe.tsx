@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import { Avatar, Box, Flex, Icon, Link, Text } from "@chakra-ui/react";
+import Color from "@constants/color";
 
 function EachSubscribe({
   name,
@@ -33,7 +34,9 @@ function EachSubscribe({
           />
         )}
         <Text
-          color={path === "/" + name ? "clique.base" : "clique.whiteGrey"}
+          color={
+            path === "/" + name ? "clique.base" : Color().whiteGreyAndBlack
+          }
           fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}

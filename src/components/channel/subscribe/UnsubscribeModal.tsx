@@ -10,8 +10,10 @@ import {
   Skeleton,
   SkeletonText,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
+import Color from "@constants/color";
 
 type Props = {
   isOpen: boolean;
@@ -32,8 +34,8 @@ function UnsubscribeModal({
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
       <ModalOverlay />
       <ModalContent
-        bg="clique.black"
-        borderColor="clique.black"
+        bg={Color().blackAndWhite}
+        borderColor={Color().blackAndWhite}
         borderRadius="xl"
         pt="3"
         pb="10"

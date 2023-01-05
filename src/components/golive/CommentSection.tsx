@@ -10,11 +10,13 @@ import {
   SkeletonCircle,
   Spinner,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import EachComment from "@components/stream/EachComment";
 import { scrollBarStyle } from "@constants/utils";
 
 import NewComment from "./NewComment";
+import Color from "@constants/color";
 
 function CommentSection({ streamDetails }: any) {
   const router = useRouter();
@@ -36,7 +38,7 @@ function CommentSection({ streamDetails }: any) {
       px="20px"
       pb="80px"
       minW={{ base: "full", lg: "400px" }}
-      bg="clique.black"
+      bg={Color().blackAndWhite}
       pt={"20px"}
       mt={{ base: "20px", lg: "0px" }}
       sx={scrollBarStyle}

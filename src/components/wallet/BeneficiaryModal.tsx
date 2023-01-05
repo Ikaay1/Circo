@@ -22,12 +22,14 @@ import {
   Select,
   Spinner,
   Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
 import CliqueLoader from "@components/home/CliqueLoader";
 import { banks } from "@constants/utils";
 import TapIcon from "@icons/TapIcon";
+import Color from "@constants/color";
 
 type Props = {
   isOpen: boolean;
@@ -226,8 +228,8 @@ function BeneficiaryModal({
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent
-        bg="clique.black"
-        borderColor="clique.black"
+        bg={Color().whiteAndBlack}
+        borderColor={Color().whiteAndBlack}
         borderRadius="xl"
         pt="3"
         pb="4"

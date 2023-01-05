@@ -1,8 +1,16 @@
 import { useRouter } from "next/router";
 import React from "react";
 
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Icon,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import HomeIcon from "@icons/HomeIcon";
+import Color from "@constants/color";
 
 function EachMenu({ name, icon }: { name: string; icon: any }) {
   const router = useRouter();
@@ -47,7 +55,7 @@ function EachMenu({ name, icon }: { name: string; icon: any }) {
         color={
           path === "/" + name.replace(/\s/g, "").toLowerCase()
             ? "clique.base"
-            : "clique.whiteGrey"
+            : Color().blackAndWhite
         }
         alignItems={"center"}
       >

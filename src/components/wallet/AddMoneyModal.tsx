@@ -18,8 +18,10 @@ import {
   ModalOverlay,
   SkeletonCircle,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
+import Color from "@constants/color";
 
 type Props = {
   isOpen: boolean;
@@ -99,8 +101,8 @@ function AddMoneyModal({
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent
-        bg="clique.black"
-        borderColor="clique.black"
+        bg={Color().whiteAndBlack}
+        borderColor={Color().whiteAndBlack}
         borderRadius="xl"
         pt="3"
         pb="10"

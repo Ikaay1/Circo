@@ -5,10 +5,12 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { TbDownload } from "react-icons/tb";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import Color from "@constants/color";
 
 function SmallMenu({ playbackId }: { playbackId?: string }) {
   return (
@@ -26,7 +28,7 @@ function SmallMenu({ playbackId }: { playbackId?: string }) {
         fontFamily={"Poppins"}
         p="10px"
         pr="20px"
-        bg="clique.black"
+        bg={Color().whiteAndBlack}
         border={"none"}
       >
         <MenuItem

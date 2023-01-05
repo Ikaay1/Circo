@@ -22,10 +22,14 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import NotificationModal from "@components/notification/NotificationModal";
 import UploadModal from "@components/upload/UploadModal";
 import MobileMenu from "./mobileMenu/MobileMenu";
+import Color from "@constants/color";
+import SimpleSwitch from "@components/settings/SimpleSwitch";
 
 type Props = {
   upload?: () => void;
@@ -55,12 +59,13 @@ function Header({ upload }: Props) {
   };
 
   const [showMenu, setShowMenu] = useState(false);
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Flex
       alignItems={"center"}
       justifyContent="space-between"
-      bg={"clique.black"}
+      bg={Color().whiteAndBlack}
       px={{ base: "20px", lg: "50px" }}
       py="20px"
       h="10vh"
@@ -97,7 +102,7 @@ function Header({ upload }: Props) {
           <InputLeftElement px="20px">
             <Icon
               fontSize={"smHead"}
-              color="clique.white"
+              color={Color().blackAndWhite}
               as={AiOutlineSearch}
               cursor={"pointer"}
               onClick={() => {
@@ -110,7 +115,7 @@ function Header({ upload }: Props) {
           </InputLeftElement>
           <Input
             onKeyPress={(e) => _handleKeyDown(e)}
-            bg="clique.inputBg"
+            bg={useColorModeValue(" clique.primaryWhiteBg", "clique.inputBg")}
             onFocus={() => setSearchWidth({ base: "150px", lg: "500px" })}
             onBlur={() => setSearchWidth({ base: "150px", lg: "300px" })}
             _focus={{
@@ -124,7 +129,7 @@ function Header({ upload }: Props) {
             type="tel"
             fontFamily={"Poppins"}
             _placeholder={{
-              color: "clique.white",
+              color: Color().blackAndWhite,
             }}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -169,13 +174,20 @@ function Header({ upload }: Props) {
           variant="ghost"
           rounded={"full"}
           bg="clique.base"
+          color="clique.white"
           fontFamily={"Poppins"}
           size={"sm"}
           onClick={() => router.push("/golive")}
         >
           Go live
         </Button>
-        <UploadModal />
+        <UploadModal />{" "}
+        <SimpleSwitch
+          text=" "
+          isChecked={colorMode === "light" ? true : false}
+          name="lightOrDark"
+          onChange={toggleColorMode}
+        />
       </HStack>
       <MobileMenu isOpen={showMenu} close={() => setShowMenu(!showMenu)} />
     </Flex>
