@@ -16,7 +16,7 @@ function Index() {
   const router = useRouter();
   const [startBroadCast, startInfo] = useStartBroadCastMutation();
   const { streamKey, token, spaceId, id, broadcastId }: any = router.query;
-  const [close, setClose] = useState(false);
+  const [close, setClose] = useState(true);
 
   const spaceRef: any = useRef(null);
   const [localParticipant, setLocalParticipant] = useState<any>(null);
