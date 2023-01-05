@@ -8,6 +8,7 @@ import {
   Icon,
   Text,
 } from "@chakra-ui/react";
+import Color from "@constants/color";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -51,7 +52,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
                 path.split("/")[1] ===
                 item.route.replace(/\s/g, "").toLowerCase()
                   ? "clique.base"
-                  : "clique.whiteGrey"
+                  : Color().blackAndWhite
               }
             >
               <Icon ml="50px" mr="15px" as={icon} />
@@ -68,7 +69,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
                 path.split("/")[1] ===
                 item.route.replace(/\s/g, "").toLowerCase()
                   ? "clique.base"
-                  : "clique.whiteGrey"
+                  : Color().blackAndWhite
               }
             />
           </AccordionButton>
@@ -113,7 +114,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
                     path.split("/")[1] ===
                       item.route.replace(/\s/g, "").toLowerCase()
                       ? "clique.base"
-                      : "clique.whiteGrey"
+                      : Color().blackAndWhite
                   }
                   alignItems={"center"}
                 >
@@ -168,7 +169,7 @@ function EachMenu({ name, icon, type, item, close }: any) {
             color={
               path === "/" + name.replace(/\s/g, "").toLowerCase()
                 ? "clique.base"
-                : "clique.whiteGrey"
+                : Color().blackAndWhite
             }
             alignItems={"center"}
           >

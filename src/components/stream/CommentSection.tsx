@@ -4,11 +4,19 @@ import { useAppSelector } from "redux/app/hooks";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
 import io from "socket.io-client";
 
-import { Box, Flex, Skeleton, SkeletonCircle, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { scrollBarStyle } from "@constants/utils";
 
 import EachComment from "./EachComment";
 import NewComment from "./NewComment";
+import Color from "@constants/color";
 
 function CommentSection({}: {}) {
   const router = useRouter();
@@ -23,12 +31,11 @@ function CommentSection({}: {}) {
     }
   }, [userProfile?._id, router]);
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
-      "commentchange",
-      (data: any) => {
-        refetch();
-      }
-    );
+    io(process.env.NEXT_PUBLIC_BASEURL!, {
+      forceNew: false,
+    }).on("commentchange", (data: any) => {
+      refetch();
+    });
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <Box
@@ -38,7 +45,7 @@ function CommentSection({}: {}) {
       px="20px"
       pb="80px"
       minW={{ base: "full", md: "400px" }}
-      bg="clique.black"
+      bg={Color().whiteAndBlack}
       h={{ base: "auto", lg: "90vh" }}
       minH={{ base: "auto", lg: "90vh" }}
       maxH={{ base: "auto", lg: "90vh" }}

@@ -22,7 +22,6 @@ const NProgress = require("nprogress");
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
   const toast = useToast();
-  const [isTokenFound, setTokenFound] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -52,6 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   const socket = io(process.env.NEXT_PUBLIC_BASEURL!);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

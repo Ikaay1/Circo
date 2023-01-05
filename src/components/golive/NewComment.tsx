@@ -6,10 +6,12 @@ import {
   InputGroup,
   InputRightElement,
   Spinner,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import { usePostCommentOnStreamMutation } from "redux/services/livestream/streamComment.service";
+import Color from "@constants/color";
 
 function NewComment({ id, profile }: { id: string; profile: any }) {
   const [comment, setComment] = React.useState("");
@@ -17,7 +19,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
 
   const toast = useToast();
   return (
-    <Flex px="20px" bg="clique.black" py="20px" w="full"  >
+    <Flex px="20px" bg={Color().whiteAndBlack} py="20px" w="full">
       <AvataWithSpace
         name={profile?.firstName + " " + profile?.lastName}
         url={profile?.avatar}

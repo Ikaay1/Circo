@@ -12,8 +12,12 @@ import {
   Icon,
   SlideFade,
   Text,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import SimpleSwitch from "@components/settings/SimpleSwitch";
 import UploadModal from "@components/upload/UploadModal";
+import Color from "@constants/color";
 import { mobileMenu } from "@constants/utils";
 import { useRouter } from "next/router";
 import React from "react";
@@ -30,6 +34,7 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
     window.location.href = "/login";
   };
   const router = useRouter();
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
       <Box
@@ -48,7 +53,7 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
         zIndex={1000}
         pl="0px"
         pr="30px"
-        bg="clique.black"
+        bg={Color().whiteAndBlack}
         shadow="md"
       >
         <Accordion allowToggle>
@@ -73,6 +78,7 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
             variant="ghost"
             rounded={"full"}
             bg="clique.base"
+            color="clique.white"
             fontFamily={"Poppins"}
             size={"sm"}
             onClick={() => router.push("/golive")}
@@ -81,6 +87,7 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
           </Button>
           <UploadModal />
         </HStack>
+
         <Flex
           onClick={handleLogout}
           transition={"all 0.2s ease-in-out"}
@@ -102,6 +109,15 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
             logout
           </Text>
           <Icon fontSize={"head"} as={HiOutlineLogout} />
+        </Flex>
+
+        <Flex pl="50px" pt={"10px"} justifyContent={"left"}>
+          <SimpleSwitch
+            text=" "
+            isChecked={colorMode === "light" ? true : false}
+            name="lightOrDark"
+            onChange={toggleColorMode}
+          />
         </Flex>
       </Box>
     </>

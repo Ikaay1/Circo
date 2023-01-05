@@ -9,7 +9,9 @@ import {
   Th,
   Thead,
   Tr,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import Color from "@constants/color";
 import { scrollBarStyle2 } from "@constants/utils";
 
 type Props = {
@@ -18,7 +20,7 @@ type Props = {
 
 function WithdrawalCard({ walletData }: Props) {
   return (
-    <Box bg="clique.black" borderRadius="xl" py="7" mb="5" px="5">
+    <Box bg={Color().whiteAndBlack} borderRadius="xl" py="7" mb="5" px="5">
       <Text fontSize={"smHead"} mb="2">
         Withdrawal
       </Text>

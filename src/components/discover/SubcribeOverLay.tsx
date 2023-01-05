@@ -2,8 +2,17 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useSubscribeMutation } from "redux/services/user.service";
 
-import { Avatar, Box, Button, Flex, SlideFade, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  SlideFade,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
+import Color from "@constants/color";
 
 function SubcribeOverLay({ isHover, user }: { isHover: boolean; user: any }) {
   const router = useRouter();
@@ -55,7 +64,7 @@ function SubcribeOverLay({ isHover, user }: { isHover: boolean; user: any }) {
                 fontFamily={"Poppins"}
                 fontSize="head"
                 fontWeight={700}
-                color={"clique.black"}
+                color={Color().blackAndWhite}
               >
                 {user.userName}
               </Text>

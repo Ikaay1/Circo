@@ -19,11 +19,13 @@ import {
   ModalHeader,
   ModalOverlay,
   Skeleton,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { scrollBarStyle } from "@constants/utils";
 
 import AccordionNotification from "./AccordionNotification";
+import Color from "@constants/color";
 
 function NotificationModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -54,12 +56,11 @@ function NotificationModal() {
     [loading, hasMore]
   );
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
-      "newnotification",
-      (data: any) => {
-        refetch();
-      }
-    );
+    io(process.env.NEXT_PUBLIC_BASEURL!, {
+      forceNew: false,
+    }).on("newnotification", (data: any) => {
+      refetch();
+    });
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
 
   return (
@@ -71,13 +72,19 @@ function NotificationModal() {
         alignItems={"center"}
         justifyContent="center"
         p="3px"
-        bg="clique.grey"
+        bg={useColorModeValue("clique.lightPrimaryBg", "clique.grey")}
         rounded="full"
       >
         <Avatar
           p="0"
-          bg="clique.grey"
-          icon={<Icon fontSize={"smHead2"} as={MdOutlineNotificationsNone} />}
+          bg={useColorModeValue("clique.lightPrimaryBg", "clique.grey")}
+          icon={
+            <Icon
+              fontSize={"smHead2"}
+              color={Color().blackAndWhite}
+              as={MdOutlineNotificationsNone}
+            />
+          }
           size="sm"
         >
           {data?.data?.unread > 0 && (

@@ -23,7 +23,7 @@ function HomeLayout({children, upload, toggleView}: IHomeLayoutProps) {
       w='100vw'
       h={toggleView ? '' : '100vh'}
       // overflowY={"hidden"}
-      bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}
+      bg={useColorModeValue('clique.lightPrimaryBg', 'clique.primaryBg')}
     >
       <Header upload={upload} />
       {children}

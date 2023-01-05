@@ -30,6 +30,7 @@ import { API, baseUrl, contentData } from "../../constants/utils";
 import { useRoutingChannel } from "../../hooks/useRoutingChannel";
 import HoverCard from "./HoverCard";
 import SubScribeModal from "./SubScribeModal";
+import Color from "@constants/color";
 
 function VideoThumb({
   video,
@@ -172,7 +173,7 @@ function VideoThumb({
               <Box w="calc(100% - 40px)">
                 <Text
                   noOfLines={1}
-                  color={"clique.white"}
+                  color={Color().blackAndWhite}
                   fontFamily={"Poppins"}
                   fontWeight={400}
                   fontSize={"16px"}
