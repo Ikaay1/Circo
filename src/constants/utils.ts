@@ -867,22 +867,6 @@ export interface uploaderId {
   photo?: string;
 }
 
-export default interface commentInterface {
-  _id: string;
-  commenterId: {
-    photo: string;
-    firstName: string;
-    lastName: string;
-    _id: string;
-  };
-  comment: {
-    comment: string;
-    likes: string[];
-    dislikes: string[];
-  };
-  createdAt: string;
-}
-
 export default interface replyInterface {
   _id: string;
   reply: string;
@@ -897,6 +881,23 @@ export default interface replyInterface {
   countReplyLikes: number;
   countReplyDislikes: number;
   createdAt: string;
+}
+
+export default interface commentInterface {
+  _id: string;
+  commenterId: {
+    photo: string;
+    firstName: string;
+    lastName: string;
+    _id: string;
+  };
+  comment: {
+    comment: string;
+    likes: string[];
+    dislikes: string[];
+  };
+  createdAt: string;
+  replies: replyInterface[];
 }
 
 export const banks = [

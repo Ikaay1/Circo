@@ -24,7 +24,7 @@ import TrashIcon from '@icons/TrashIcon';
 
 import replyInterface from '../../constants/utils';
 
-function EachComment({
+function EachReply({
   reply,
   commentId,
 }: {
@@ -59,7 +59,14 @@ function EachComment({
   }, [userProfile?._id, router]);
 
   return (
-    <Flex mt='15px' bg='clique.ashGrey' rounded='10px' p='20px'>
+    <Flex
+      w='85%'
+      ml='auto'
+      mt='15px'
+      bg='clique.ashGrey'
+      rounded='10px'
+      p='20px'
+    >
       <Box
         mr='20px'
         cursor={'pointer'}
@@ -83,7 +90,7 @@ function EachComment({
       <Box>
         <Flex alignItems={'center'}>
           <Text
-            noOfLines={2}
+            noOfLines={1}
             color={'clique.white'}
             fontFamily={'Poppins'}
             fontWeight={400}
@@ -178,14 +185,16 @@ function EachComment({
             </Flex>
           </Flex>
           {/* <ReportModal comment={comment} /> */}
-          <Box
-            cursor='pointer'
-            onClick={() => {
-              onOpen();
-            }}
-          >
-            <Icon as={TrashIcon} />
-          </Box>
+          {reply.replierId._id === userProfile?._id && (
+            <Box
+              cursor='pointer'
+              onClick={() => {
+                onOpen();
+              }}
+            >
+              <Icon as={TrashIcon} />
+            </Box>
+          )}
         </Flex>
       </Box>
       <Sure
@@ -201,4 +210,4 @@ function EachComment({
   );
 }
 
-export default EachComment;
+export default EachReply;

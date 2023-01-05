@@ -72,6 +72,18 @@ export const contentApi = createApi({
       invalidatesTags: ['Content'],
     }),
 
+    replyComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment/reply`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
     getUserContents: builder.query<any, any>({
       query: ({page, limit}) => ({
         url: `content/channel/?page=${page}&limit=${limit}`,
@@ -326,4 +338,5 @@ export const {
   useLikeReplyMutation,
   useDislikeReplyMutation,
   useDeleteReplyMutation,
+  useReplyCommentMutation,
 } = contentApi;

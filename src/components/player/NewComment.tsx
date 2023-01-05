@@ -18,22 +18,24 @@ function NewComment({
   setComment,
   comment,
   postInfo,
+  fixed,
 }: {
   handleComment: () => void;
   setComment: React.Dispatch<React.SetStateAction<string>>;
   comment: string;
   postInfo: any;
+  fixed?: string;
 }) {
   const profile = useAppSelector((state) => state.app.userReducer.userProfile);
   return (
     <Flex
-      pos={'fixed'}
+      pos={fixed !== 'yes' ? 'fixed' : 'static'}
       bottom='0'
       right={'0'}
-      px='20px'
-      bg='clique.black'
-      py='20px'
-      w='400px'
+      px={fixed !== 'yes' ? '20px' : 0}
+      bg={fixed !== 'yes' ? 'clique.black' : 'transparent'}
+      py={fixed !== 'yes' ? '20px' : 0}
+      w={fixed !== 'yes' ? '400px' : '100%'}
     >
       <AvataWithSpace
         name={profile?.firstName + ' ' + profile?.lastName}
@@ -56,7 +58,7 @@ function NewComment({
             color: 'clique.white',
             fontSize: 'smSubHead',
           }}
-          placeholder='Enter Comment...'
+          placeholder={fixed !== 'yes' ? 'Enter Comment...' : 'Enter Reply...'}
           bg='clique.ashGrey'
           border={'none'}
           _focus={{border: 'none', boxShadow: 'none'}}
