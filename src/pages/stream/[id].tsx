@@ -53,7 +53,6 @@ function Index() {
   useEffect(() => {
     io(process.env.NEXT_PUBLIC_BASEURL!, {
       forceNew: false,
-      autoConnect: false,
     }).on("newviewer", (data: any) => {
       refetch();
     });

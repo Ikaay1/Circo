@@ -41,7 +41,6 @@ function CamCommentSection({
   useEffect(() => {
     io(process.env.NEXT_PUBLIC_BASEURL!, {
       forceNew: false,
-      autoConnect: false,
     }).on("commentchange", (data: any) => {
       refetch();
     });

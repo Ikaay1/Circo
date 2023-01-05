@@ -26,12 +26,14 @@ function CommentSection({ id }: { id: string | string[] | undefined }) {
   };
 
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, {
-      forceNew: false,
-      autoConnect: false,
-    }).on("newplayercomment", (data: any) => {
-      refetch();
-    });
+    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
+      "newplayercomment",
+      (data: any) => {
+        console.log("newplayercomment");
+
+        refetch();
+      }
+    );
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <>

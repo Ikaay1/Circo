@@ -58,7 +58,6 @@ function NotificationModal() {
   useEffect(() => {
     io(process.env.NEXT_PUBLIC_BASEURL!, {
       forceNew: false,
-      autoConnect: false,
     }).on("newnotification", (data: any) => {
       refetch();
     });
