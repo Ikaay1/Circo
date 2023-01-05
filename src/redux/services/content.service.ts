@@ -72,6 +72,18 @@ export const contentApi = createApi({
       invalidatesTags: ['Content'],
     }),
 
+    replyComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment/reply`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
     getUserContents: builder.query<any, any>({
       query: ({page, limit}) => ({
         url: `content/channel/?page=${page}&limit=${limit}`,
@@ -141,9 +153,33 @@ export const contentApi = createApi({
       invalidatesTags: ['Content'],
     }),
 
+    likeReply: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment/reply/like`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
     dislikeContentComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment/dislike`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
+    dislikeReply: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment/reply/dislike`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -261,6 +297,18 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
+
+    deleteReply: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `comment/reply/delete`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
   }),
 });
 
@@ -287,4 +335,8 @@ export const {
   useGetCountsQuery,
   useDeleteContentCommentMutation,
   useUnSaveVideoMutation,
+  useLikeReplyMutation,
+  useDislikeReplyMutation,
+  useDeleteReplyMutation,
+  useReplyCommentMutation,
 } = contentApi;
