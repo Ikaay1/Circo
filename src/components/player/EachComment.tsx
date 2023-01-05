@@ -226,11 +226,16 @@ function EachComment({comment}: {comment: commentInterface}) {
               <Text
                 fontSize={'sm'}
                 mt='.5rem'
-                color={'clique.base'}
+                color={'clique.white'}
                 cursor='pointer'
                 onClick={() => setShow((prevShow) => !prevShow)}
               >
-                {!show ? 'Show replies' : 'Hide replies'}
+                {!show ? 'Show replies' : 'Hide replies'}{' '}
+                <Text
+                  color='clique.base'
+                  fontWeight={'bold'}
+                  as='span'
+                >{`(${comment?.replies?.length})`}</Text>
               </Text>
             </>
           )}
