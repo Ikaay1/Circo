@@ -12,11 +12,13 @@ import {
   Skeleton,
   SkeletonCircle,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { menu, scrollBarStyle, subcribees } from "@constants/utils";
 
 import EachMenu from "./EachMenu";
 import EachSubscribe from "./EachSubscribe";
+import Color from "@constants/color";
 
 function Index() {
   const dispatch = useAppDispatch();
@@ -33,13 +35,18 @@ function Index() {
       w="250px"
       maxW="250px"
       minW="250px"
-      bg="clique.black"
+      bg={Color().whiteAndBlack}
       h="90vh"
       minH="90vh"
       maxH="90vh"
       py={"20px"}
       overflowY="scroll"
-      sx={scrollBarStyle}
+      sx={{
+        ...scrollBarStyle,
+        "&::-webkit-scrollbar-thumb": {
+          bg: Color().lightAndPrimary,
+        },
+      }}
     >
       {menu.map(
         (

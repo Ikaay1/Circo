@@ -7,8 +7,9 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  Stack, Text
+  Stack, Text, useColorModeValue
 } from "@chakra-ui/react";
+import Color from "@constants/color";
 import CalenderIcon from "@icons/CalenderIcon";
 
 type Props = {
@@ -21,8 +22,8 @@ function AddMoneyModal({ isOpen, onClose }: Props) {
     <>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalContent
-          bg="clique.black"
-          borderColor="clique.black"
+          bg={Color().whiteAndBlack}
+          borderColor={Color().whiteAndBlack}
           borderRadius="xl"
           pt="3"
           py="10"

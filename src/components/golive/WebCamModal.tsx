@@ -26,6 +26,7 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
+  useColorModeValue,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -37,6 +38,7 @@ import WebCamIcon from "@icons/WebCamIcon";
 
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
+import Color from "@constants/color";
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -97,9 +99,9 @@ function WebCamModal({ setState }: { setState: any }) {
         <ModalContent
           m={0}
           mx={{ base: "20px", lg: "0" }}
-          bg="clique.black"
+          bg={Color().whiteAndBlack}
           maxH={"90vh"}
-          borderColor="clique.black"
+          borderColor={Color().whiteAndBlack}
           borderRadius="xl"
           px={{ base: "0", md: "60px" }}
           py="30px"

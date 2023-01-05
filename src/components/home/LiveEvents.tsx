@@ -1,4 +1,11 @@
-import { Box, Divider, Skeleton, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Skeleton,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import Color from "@constants/color";
 import React from "react";
 import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
 import EventModal from "./EventModal";
@@ -18,7 +25,7 @@ function LiveEvents() {
       w="250px"
       maxW="250px"
       minW="250px"
-      bg="clique.black"
+      bg={Color().whiteAndBlack}
       h="90vh"
       minH="90vh"
       maxH="90vh"

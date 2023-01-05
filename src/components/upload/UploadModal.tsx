@@ -13,10 +13,12 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
+  useColorModeValue,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import UploadIcon from "@icons/UploadIcon";
+import Color from "@constants/color";
 
 function UploadModal() {
   const toast = useToast();
@@ -51,6 +53,7 @@ function UploadModal() {
   return (
     <>
       <Button
+        color="clique.white"
         rightIcon={<Icon fontSize={"lg"} as={MdAddCircleOutline} />}
         variant="ghost"
         rounded={"full"}
@@ -64,8 +67,8 @@ function UploadModal() {
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg="clique.modalOverlay" />
         <ModalContent
-          bg="clique.black"
-          borderColor="clique.black"
+          bg={Color().whiteAndBlack}
+          borderColor={Color().whiteAndBlack}
           borderRadius="xl"
         >
           <ModalBody>

@@ -1,9 +1,10 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import dayjs from "dayjs";
 import { useAppDispatch } from "redux/app/hooks";
 import { setSelectedStream } from "redux/slices/streamSlice";
 import { useRouter } from "next/router";
+import Color from "@constants/color";
 
 function EventCard({ event, setState }: any) {
   const dispatch = useAppDispatch();
@@ -34,7 +35,7 @@ function EventCard({ event, setState }: any) {
       <Box
         w="80px"
         h="80px"
-        bg="clique.black"
+        bg={Color().whiteAndBlack}
         bgImage={`url(${event?.eventId?.thumbNails[0]})`}
         rounded={"5px"}
         bgRepeat="no-repeat"

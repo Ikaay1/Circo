@@ -14,11 +14,13 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
+  useColorModeValue,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 
 import commentInterface from "../../constants/utils";
+import Color from "@constants/color";
 
 function ReportModal({ comment }: { comment: commentInterface }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,7 +75,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
           p="0"
           position={"absolute"}
           right={0}
-          bg="clique.black"
+          bg={Color().whiteAndBlack}
         >
           <Box px="50px">
             <Text
@@ -118,7 +120,7 @@ function ReportModal({ comment }: { comment: commentInterface }) {
                   "Violence or dangerous organizations": false,
                   "Bullying or harassment": false,
                 }}
-                onSubmit={(values, actions) => { 
+                onSubmit={(values, actions) => {
                   handleReport(values);
                   actions.resetForm();
                   actions.setValues({
