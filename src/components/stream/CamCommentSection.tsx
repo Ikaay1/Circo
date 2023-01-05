@@ -39,17 +39,18 @@ function CamCommentSection({
   }, [userProfile?._id, router]);
 
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
-      "commentchange",
-      (data: any) => {
-        refetch();
-      }
-    );
+    io(process.env.NEXT_PUBLIC_BASEURL!, {
+      forceNew: false,
+      autoConnect: false,
+    }).on("commentchange", (data: any) => {
+      refetch();
+    });
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
 
   return (
     <Box
       pos={"absolute"}
+      zIndex={100}
       w="400px"
       right="0"
       top="10vh"
@@ -57,7 +58,7 @@ function CamCommentSection({
       px="20px"
       pb="80px"
       minW="400px"
-      bg="clique.chat"
+      bg={{ base: "clique.primaryBg", lg: "clique.chat" }}
       h="90vh"
       minH="90vh"
       maxH="90vh"

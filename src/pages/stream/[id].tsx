@@ -51,12 +51,12 @@ function Index() {
   }, [data]);
 
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
-      "newviewer",
-      (data: any) => {
-        refetch();
-      }
-    );
+    io(process.env.NEXT_PUBLIC_BASEURL!, {
+      forceNew: false,
+      autoConnect: false,
+    }).on("newviewer", (data: any) => {
+      refetch();
+    });
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <HomeLayout>

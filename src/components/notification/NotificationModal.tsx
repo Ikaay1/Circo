@@ -54,12 +54,12 @@ function NotificationModal() {
     [loading, hasMore]
   );
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, { forceNew: false }).on(
-      "newnotification",
-      (data: any) => {
-        refetch();
-      }
-    );
+    io(process.env.NEXT_PUBLIC_BASEURL!, {
+      forceNew: false,
+      autoConnect: false,
+    }).on("newnotification", (data: any) => {
+      refetch();
+    });
   }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
 
   return (

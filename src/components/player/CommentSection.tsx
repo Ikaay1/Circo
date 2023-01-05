@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useGetContentCommentsQuery,
   usePostCommentOnContentMutation,
@@ -8,6 +8,7 @@ import { Box, Text } from "@chakra-ui/react";
 
 import EachComment from "./EachComment";
 import NewComment from "./NewComment";
+import { io } from "socket.io-client";
 
 function CommentSection({ id }: { id: string | string[] | undefined }) {
   const { data, isLoading, refetch } = useGetContentCommentsQuery(id);
@@ -24,6 +25,14 @@ function CommentSection({ id }: { id: string | string[] | undefined }) {
     }
   };
 
+  useEffect(() => {
+    io(process.env.NEXT_PUBLIC_BASEURL!, {
+      forceNew: false,
+      autoConnect: false,
+    }).on("newplayercomment", (data: any) => {
+      refetch();
+    });
+  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
   return (
     <>
       {isLoading || !data ? (
