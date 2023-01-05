@@ -5,9 +5,9 @@ import { BiDislike, BiLike } from 'react-icons/bi';
 import { VscReport } from 'react-icons/vsc';
 import { useAppSelector } from 'redux/app/hooks';
 import {
-	useDeleteContentCommentMutation,
-	useDislikeContentCommentMutation,
-	useLikeContentCommentMutation,
+	useDeleteReplyMutation,
+	useDislikeReplyMutation,
+	useLikeReplyMutation,
 } from 'redux/services/content.service';
 
 import {
@@ -22,27 +22,32 @@ import Sure from '@components/channel/Sure';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
 import TrashIcon from '@icons/TrashIcon';
 
-import commentInterface from '../../constants/utils';
-import ReportModal from './ReportModal';
+import replyInterface from '../../constants/utils';
 
-function EachComment({comment}: {comment: commentInterface}) {
+function EachComment({
+  reply,
+  commentId,
+}: {
+  reply: replyInterface;
+  commentId: string;
+}) {
   const router = useRouter();
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const [likeComment, likeInfo] = useLikeContentCommentMutation();
-  const [dislikeComment, dislikeInfo] = useDislikeContentCommentMutation();
-  const [deleteComment, deleteCommentStatus] =
-    useDeleteContentCommentMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-  const handleLikeComment = async (id: string) => {
-    await likeComment({commentId: id});
+  const [likeReply, likeInfo] = useLikeReplyMutation();
+  const [dislikeReply, dislikeInfo] = useDislikeReplyMutation();
+  const [deleteReply, deleteReplyStatus] = useDeleteReplyMutation();
+
+  const handleLikeReply = async (replyId: string) => {
+    await likeReply({commentId, replyId});
   };
 
-  const handleDislikeComment = async (id: string) => {
-    await dislikeComment({commentId: id});
+  const handleReply = async (replyId: string) => {
+    await dislikeReply({commentId, replyId});
   };
 
-  const handleDeleteComment = async (id: string) => {
-    await deleteComment(id);
+  const handleDeleteReply = async (replyId: string) => {
+    await deleteReply({commentId, replyId});
 
     onClose();
   };
@@ -60,19 +65,15 @@ function EachComment({comment}: {comment: commentInterface}) {
         cursor={'pointer'}
         onClick={() =>
           router.push(
-            userProfile?._id === comment?.commenterId?._id
+            userProfile?._id === reply?.replierId?._id
               ? '/channel/1/content'
-              : `/channel/subscribe/${comment?.commenterId?._id}`,
+              : `/channel/subscribe/${reply?.replierId?._id}`,
           )
         }
       >
         <AvataWithSpace
-          name={
-            comment?.commenterId?.firstName +
-            ' ' +
-            comment?.commenterId?.lastName
-          }
-          url={comment?.commenterId?.photo}
+          name={reply?.replierId?.firstName + ' ' + reply?.replierId?.lastName}
+          url={reply?.replierId?.photo}
           size='40px'
           borderThickness='2px'
           borderColor='clique.base'
@@ -91,9 +92,9 @@ function EachComment({comment}: {comment: commentInterface}) {
             mr='20px'
           >
             {`${
-              comment.commenterId.firstName[0].toUpperCase() +
-              comment.commenterId.firstName.slice(1)
-            } ${comment.commenterId.lastName[0].toUpperCase()}`}
+              reply.replierId.firstName[0].toUpperCase() +
+              reply.replierId.firstName.slice(1)
+            } ${reply.replierId.lastName[0].toUpperCase()}`}
           </Text>
           <Text
             noOfLines={2}
@@ -103,7 +104,7 @@ function EachComment({comment}: {comment: commentInterface}) {
             fontSize={'smSubHead'}
             lineHeight={'1.2'}
           >
-            {moment(comment.createdAt).fromNow()}
+            {moment(reply.createdAt).fromNow()}
           </Text>
         </Flex>
 
@@ -115,7 +116,7 @@ function EachComment({comment}: {comment: commentInterface}) {
               fontSize: '14px',
             }}
           >
-            {comment.comment.comment}
+            {reply.reply}
           </pre>
         </Text>
         <Flex alignItems={'center'} justifyContent='space-between' mt='15px'>
@@ -124,10 +125,10 @@ function EachComment({comment}: {comment: commentInterface}) {
               {likeInfo.isLoading ? (
                 <Spinner size={'sm'} mr='5px' bg='clique.base' />
               ) : (
-                <Box onClick={() => handleLikeComment(comment._id)}>
+                <Box onClick={() => handleLikeReply(reply._id)}>
                   <Icon
                     color={
-                      comment.comment.likes.includes(userProfile?._id)
+                      reply.likes.includes(userProfile?._id)
                         ? 'clique.base'
                         : 'clique.white'
                     }
@@ -144,7 +145,7 @@ function EachComment({comment}: {comment: commentInterface}) {
                 fontSize={'smSubHead'}
                 lineHeight={'1.2'}
               >
-                {comment.comment.likes.length}
+                {reply.likes.length}
               </Text>
             </Flex>
 
@@ -152,10 +153,10 @@ function EachComment({comment}: {comment: commentInterface}) {
               {dislikeInfo.isLoading ? (
                 <Spinner size={'sm'} mr='5px' bg='clique.base' />
               ) : (
-                <Box onClick={() => handleDislikeComment(comment._id)}>
+                <Box onClick={() => handleReply(reply._id)}>
                   <Icon
                     color={
-                      comment.comment.dislikes.includes(userProfile?._id)
+                      reply.dislikes.includes(userProfile?._id)
                         ? 'clique.base'
                         : 'clique.white'
                     }
@@ -172,11 +173,11 @@ function EachComment({comment}: {comment: commentInterface}) {
                 fontSize={'smSubHead'}
                 lineHeight={'1.2'}
               >
-                {comment.comment.dislikes.length}
+                {reply.dislikes.length}
               </Text>
             </Flex>
           </Flex>
-          <ReportModal comment={comment} />
+          {/* <ReportModal comment={comment} /> */}
           <Box
             cursor='pointer'
             onClick={() => {
@@ -192,9 +193,9 @@ function EachComment({comment}: {comment: commentInterface}) {
         onClose={onClose}
         buttonText='Delete'
         header=''
-        description='Are you sure you want to delete this comment?'
-        onClick={() => handleDeleteComment(comment._id)}
-        isLoading={deleteCommentStatus.isLoading}
+        description='Are you sure you want to delete this reply?'
+        onClick={() => handleDeleteReply(reply._id)}
+        isLoading={deleteReplyStatus.isLoading}
       />
     </Flex>
   );
