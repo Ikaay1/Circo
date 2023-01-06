@@ -67,7 +67,7 @@ function UploadModal() {
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg="clique.modalOverlay" />
         <ModalContent
-          bg={Color().whiteAndBlack}
+          bg={"clique.black"}
           borderColor={Color().whiteAndBlack}
           borderRadius="xl"
         >
@@ -128,6 +128,7 @@ function UploadModal() {
                         fontWeight={500}
                         fontSize="smHead"
                         mt="14"
+                        color={"clique.white"}
                       >
                         {isDragging
                           ? "Drop the file here"
