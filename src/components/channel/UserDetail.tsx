@@ -182,7 +182,7 @@ const UserDetail = ({ data, id }: { data?: Channel; id: string }) => {
                 fontWeight="600"
                 fontSize="head"
                 lineHeight="32px"
-                color="clique.white"
+                color={value}
                 textAlign={"center"}
                 mx="auto"
               >
