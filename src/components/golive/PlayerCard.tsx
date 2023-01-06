@@ -5,8 +5,10 @@ import {
   HStack,
   Icon,
   Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
+import Color from "@constants/color";
 import MuxPlayer from "@mux/mux-player-react/lazy";
 import React, { useEffect } from "react";
 import { BiCopy } from "react-icons/bi";
@@ -115,7 +117,7 @@ function PlayerCard({ streamDetails, setState }: any) {
       }
     }
   };
-
+  const value = useColorModeValue("clique.white", "clique.secondaryGrey1");
   return (
     <Box w={{ base: "full", lg: "450px" }} maxW="450px" rounded={"10px"}>
       <Box h="300px">
@@ -137,16 +139,10 @@ function PlayerCard({ streamDetails, setState }: any) {
           loading="page"
         />
       </Box>
-      <Box
-        roundedBottom={"10px"}
-        bg="clique.secondaryGrey1"
-        px="15px"
-        pt="10px"
-        pb="30px"
-      >
+      <Box roundedBottom={"10px"} bg={value} px="15px" pt="10px" pb="30px">
         <Text
           position={"relative"}
-          color={"clique.white"}
+    color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
@@ -194,7 +190,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         </Text>
         <Text
           position={"relative"}
-          color={"clique.white"}
+    color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={500}
           fontSize="smSubHead"
@@ -215,7 +211,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         </Text>
         <Text
           position={"relative"}
-          color={"clique.white"}
+    color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={500}
           fontSize="smSubHead"
@@ -238,7 +234,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             </Text>
             <Text
               textAlign={"center"}
-              color={"clique.white"}
+        color={Color().blackAndWhite}
               fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
@@ -261,7 +257,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             </Text>
             <Text
               position={"relative"}
-              color={"clique.white"}
+        color={Color().blackAndWhite}
               textAlign={"center"}
               fontFamily={"Poppins"}
               fontWeight={500}
@@ -284,7 +280,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             </Text>
             <Text
               textAlign={"center"}
-              color={"clique.white"}
+        color={Color().blackAndWhite}
               fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
@@ -328,7 +324,7 @@ function PlayerCard({ streamDetails, setState }: any) {
               rounded="full"
               isDisabled={true}
               bg={"clique.grey"}
-              color="white"
+              color={Color().blackAndWhite}
               colorScheme={"gray"}
               fontFamily={"Poppins"}
             >

@@ -16,10 +16,11 @@ import { persistor, store } from "../redux/app/store";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { io } from "socket.io-client";
+import { Chakra } from "../components/widgets/Chakara";
 
 const NProgress = require("nprogress");
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: any) {
   const [showChild, setShowChild] = useState(false);
   const toast = useToast();
   const router = useRouter();
@@ -55,16 +56,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ChakraProvider theme={theme}>
+        <Chakra cookies={pageProps.cookies}>
           <Layout>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <Component {...pageProps} />
             <Toaster />
           </Layout>
-        </ChakraProvider>
+        </Chakra>
       </PersistGate>
     </Provider>
   );
 }
 
 export default MyApp;
+export { getServerSideProps } from "../components/widgets/Chakara";

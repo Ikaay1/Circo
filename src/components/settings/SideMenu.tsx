@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import Color from "@constants/color";
 
 export type SideMenu = {
   name: string;
@@ -67,7 +68,7 @@ const SideMenu = ({ click, menuList, create, setShowSideMenu }: Props) => {
               color: "clique.base",
             }}
             transition={"all 0.2s ease-in-out"}
-            color={state === route ? "clique.base" : "clique.whiteGrey"}
+            color={state === route ? "clique.base" : Color().blackAndWhite}
             alignItems={"center"}
           >
             <Icon as={icon} fontSize={create ? "sm2" : "l"} />

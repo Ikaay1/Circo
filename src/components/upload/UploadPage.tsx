@@ -16,6 +16,7 @@ import {
   Link,
   Select,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import Btn from "@components/Button/Btn";
@@ -85,6 +86,7 @@ function UploadPage({ url, name }: Props) {
     }
   }, [imageError]);
 
+  const valueC = useColorModeValue("clique.white", "clique.secondaryGrey1");
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <Flex
@@ -203,7 +205,7 @@ function UploadPage({ url, name }: Props) {
                   <GridItem w="100%" key={i}>
                     <Select
                       placeholder={each.placeholder}
-                      bg="clique.secondaryGrey1"
+                      bg={valueC}
                       borderColor="clique.secondaryGrey1"
                       size="md"
                       height={"40px"}
@@ -276,7 +278,7 @@ function UploadPage({ url, name }: Props) {
               <video width="100%" height={"60px"} src={url} controls />
             </Box>
             <Box
-              bg="clique.secondaryGrey1"
+              bg={valueC}
               pl="5"
               pt="2"
               pr="6"

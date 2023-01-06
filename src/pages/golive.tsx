@@ -10,6 +10,7 @@ import SideMenu from "@components/golive/SideMenu";
 import Header from "@components/widgets/Header";
 import { scrollBarStyle } from "@constants/utils";
 import WebCamModal from "@components/golive/WebCamModal";
+import Color from "@constants/color";
 
 type Props = {};
 
@@ -21,7 +22,7 @@ function Index({}: Props) {
   return (
     <Box>
       <Header />
-      <Box minH={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
+      <Box minH={{ lg: "90vh" }} display="flex" bg={Color().lightAndPrimary}>
         <Box flex="1" h="100%">
           <SideMenu click={(route) => setState(route)} />
         </Box>
@@ -44,14 +45,16 @@ function Index({}: Props) {
             <Button
               size={"sm"}
               onClick={() => setState("stream")}
-              color={state === "stream" ? "clique.base" : "clique.white"}
+              color={state === "stream" ? "clique.base" : Color().blackAndWhite}
             >
               Stream Now
             </Button>
             <Button
               size={"sm"}
               onClick={() => setState("liveevent")}
-              color={state === "liveevent" ? "clique.base" : "clique.white"}
+              color={
+                state === "liveevent" ? "clique.base" : Color().blackAndWhite
+              }
             >
               Schedule Stream
             </Button>
@@ -79,7 +82,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -97,7 +100,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -114,7 +117,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -131,7 +134,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -148,7 +151,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}

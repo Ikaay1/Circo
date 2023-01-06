@@ -28,7 +28,7 @@ function EventCard({ event, setState }: any) {
       cursor="pointer"
       alignItems={"center"}
       mt="20px"
-      bg="clique.blackGrey"
+      bg={useColorModeValue("clique.white", "clique.blackGrey")}
       p="10px"
       rounded={"5px"}
     >
@@ -46,7 +46,7 @@ function EventCard({ event, setState }: any) {
 
       <Box>
         <Text
-          color={"clique.white"}
+          color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"16px"}

@@ -1,4 +1,5 @@
-import { Box, Button, GridItem } from "@chakra-ui/react";
+import { Box, Button, GridItem, useColorModeValue } from "@chakra-ui/react";
+import Color from "@constants/color";
 import React, { useEffect } from "react";
 
 function CopyButton({ value }: { value: string }) {
@@ -16,6 +17,7 @@ function CopyButton({ value }: { value: string }) {
       }, 1500);
     }
   }, [isCopied]);
+  const valueC = useColorModeValue("clique.white", "clique.secondaryGrey1");
   return (
     <GridItem
       colSpan={3}
@@ -24,12 +26,13 @@ function CopyButton({ value }: { value: string }) {
         handleCopy(value);
       }}
     >
-      <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+      <Box bg={valueC} px="2" py="3" borderRadius={"10px"}>
         <Button
           _hover={{
             bg: "none",
           }}
           bg="none"
+          color={Color().blackAndWhite}
         >
           {isCopied ? "Copied" : "Copy"}
         </Button>

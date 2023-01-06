@@ -8,7 +8,9 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import Color from "@constants/color";
 import React from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useAppSelector } from "redux/app/hooks";
@@ -20,7 +22,7 @@ function EventKey() {
   const streamDetails = useAppSelector(
     (state) => state.app.stream.selectedStream
   );
-
+  const value = useColorModeValue("clique.white", "clique.secondaryGrey1");
   return (
     <Flex>
       <Box w="50%">
@@ -33,9 +35,10 @@ function EventKey() {
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
+                  color={Color().blackAndWhite}
                   border={"none"}
                   isReadOnly
                   type={showPassword ? "text" : "password"}
@@ -64,9 +67,10 @@ function EventKey() {
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
+                  color={Color().blackAndWhite}
                   border={"none"}
                   isReadOnly
                   type={"text"}
@@ -87,9 +91,10 @@ function EventKey() {
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
+                  color={Color().blackAndWhite}
                   border={"none"}
                   isReadOnly
                   type={"text"}
@@ -111,9 +116,10 @@ function EventKey() {
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
+                  color={Color().blackAndWhite}
                   border={"none"}
                   isReadOnly
                   type={"text"}

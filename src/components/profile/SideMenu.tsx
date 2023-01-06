@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Icon } from "@chakra-ui/react";
 
 import { MenuData } from "../../constants/interface";
+import Color from "@constants/color";
 
 const SideMenu = ({ menu }: { menu: MenuData[] }) => {
   const router = useRouter();
@@ -13,6 +14,7 @@ const SideMenu = ({ menu }: { menu: MenuData[] }) => {
       pt={{ lg: "5rem" }}
       height="100%"
       borderRight={"1px solid rgba(255, 255, 255, 0.1)"}
+      bg={Color().whiteAndBlack}
     >
       {menu.map(({ name, icon, route }, i) => (
         <Box
@@ -30,7 +32,7 @@ const SideMenu = ({ menu }: { menu: MenuData[] }) => {
           whiteSpace="nowrap"
           display={{ lg: "flex" }}
           color={
-            router.query.name === route ? "clique.base" : "clique.whiteGrey"
+            router.query.name === route ? "clique.base" : Color().blackAndWhite
           }
           _hover={{
             color: "clique.base",

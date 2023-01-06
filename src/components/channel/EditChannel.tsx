@@ -11,6 +11,7 @@ import {
   FormControl,
   Select,
   Text,
+  useColorModeValue,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -72,6 +73,8 @@ const EditChannel = ({ data }: { data?: Channel }) => {
     profileRef.current.click();
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const value = useColorModeValue("clique.white", "clique.secondaryGrey1");
 
   const onSubmit = async (
     values: UpdateChannel,
@@ -181,7 +184,7 @@ const EditChannel = ({ data }: { data?: Channel }) => {
                     >
                       <Select
                         placeholder={"Category"}
-                        bg="clique.secondaryGrey1"
+                        bg={value}
                         borderColor="clique.secondaryGrey1"
                         size="md"
                         height={"40px"}

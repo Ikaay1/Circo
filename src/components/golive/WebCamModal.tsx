@@ -68,7 +68,7 @@ function WebCamModal({ setState }: { setState: any }) {
             color: "clique.base",
           }}
           transition={"all 0.2s ease-in-out"}
-          color={isOpen ? "clique.base" : "clique.whiteGrey"}
+          color={isOpen ? "clique.base" : Color().blackAndWhite}
           alignItems={"center"}
         >
           <Icon as={WebCamIcon} fontSize="head" />

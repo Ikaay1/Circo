@@ -1,6 +1,7 @@
 import { TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import CliqueTab from "@components/widgets/CliqueTab";
 import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
+import Color from "@constants/color";
 import React, { useState } from "react";
 import NewStream from "./NewStream";
 
@@ -12,11 +13,11 @@ function NewLiveTab({ state, setState }: { state: string; setState: any }) {
       variant={"unstyled"}
       minW="full"
       fontFamily="Poppins"
-      color={"clique.white"}
+      color={Color().blackAndWhite}
       index={tabIndex}
       onChange={(index: any) => setTabIndex(index)}
     >
-      <TabList bg="clique.primaryBg" py="10px">
+      <TabList bg={Color().lightAndPrimary} py="10px">
         <CliqueTab>Streaming details </CliqueTab>
       </TabList>
       <TabPanels>

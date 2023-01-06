@@ -61,11 +61,12 @@ function Index({
     <Box>
       <Flex
         borderBottom={"1px solid #232323"}
-        height="12vh"
+        height={{ base: "", lg: "12vh" }}
         paddingLeft={"5"}
-        py="6"
+        py={{ base: "20px", lg: "6" }}
         mb="3"
         justifyContent="space-between"
+        alignItems="center"
       >
         <Text>Settings</Text>
         <Flex

@@ -18,14 +18,14 @@ const Home: NextPage = () => {
 
   const token = useAppSelector((state) => state.app.userReducer.token);
   const router = useRouter();
-  
+
   useEffect(() => {
     if (token) {
       router.push("/home");
     }
   }, [token, router]);
   return (
-    <Box overflowX={"hidden"}>
+    <Box overflowX={"hidden"} bg="clique.primaryBg">
       <Box
         marginTop={{ base: "2.5rem", sm: "3.5rem", lg: "1.8rem" }}
         px={{ base: "1rem", sm: "2rem", lg: "5rem" }}
