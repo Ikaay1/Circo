@@ -20,6 +20,7 @@ import Playlists from "@components/profile/Playlists";
 import { channelNav, contentData } from "@constants/utils";
 
 import RecordingCard from "./RecordingCard";
+import Color from "@constants/color";
 
 const Contents = ({
   videos,
@@ -63,7 +64,7 @@ const Contents = ({
             <Text
               mr={{ lg: "3rem" }}
               lineHeight="24px"
-              color="clique.white"
+              color={Color().blackAndWhite}
               pb={".8rem"}
               borderBottom={route === name ? "4px solid #892CDC" : "none"}
               cursor={"pointer"}
