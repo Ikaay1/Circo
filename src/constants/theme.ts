@@ -92,7 +92,7 @@ const breakpoints = {
 
 //initial config
 const config: ThemeConfig = {
-  initialColorMode: "dark",
+  initialColorMode: "system",
   useSystemColorMode: true,
 };
 
