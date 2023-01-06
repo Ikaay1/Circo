@@ -16,7 +16,7 @@ import { persistor, store } from "../redux/app/store";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { io } from "socket.io-client";
-import { Chakra } from "./Chakara";
+import { Chakra } from "../components/widgets/Chakara";
 
 const NProgress = require("nprogress");
 
@@ -69,4 +69,4 @@ function MyApp({ Component, pageProps }: any) {
 }
 
 export default MyApp;
-export { getServerSideProps } from "./Chakara";
+export { getServerSideProps } from "../components/widgets/Chakara";
