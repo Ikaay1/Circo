@@ -4,6 +4,7 @@ import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { goliveMenu, settingsMenu } from "@constants/utils";
 import WebCamModal from "./WebCamModal";
 import { useRouter } from "next/router";
+import Color from "@constants/color";
 
 type Props = {
   click: (route: string) => void;
@@ -26,7 +27,9 @@ const SideMenu = ({ click }: Props) => {
       height="100%"
       h="90vh"
       minH="90vh"
-      maxH="90vh" display={{ base: "none", lg: "block" }}
+      maxH="90vh"
+      bg={Color().whiteAndBlack}
+      display={{ base: "none", lg: "block" }}
     >
       {goliveMenu.map(({ name, icon, route }, i) => (
         <Flex
@@ -56,7 +59,7 @@ const SideMenu = ({ click }: Props) => {
               color: "clique.base",
             }}
             transition={"all 0.2s ease-in-out"}
-            color={state === route ? "clique.base" : "clique.whiteGrey"}
+            color={state === route ? "clique.base" : Color().blackAndWhite}
             alignItems={"center"}
           >
             <Icon as={icon} fontSize="head" />

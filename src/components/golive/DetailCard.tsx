@@ -7,7 +7,9 @@ import {
   InputLeftElement,
   Text,
   Textarea,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import Color from "@constants/color";
 import { Field } from "formik";
 import React from "react";
 
@@ -28,15 +30,9 @@ export default function DetailCard({
   w,
   fee,
 }: Props) {
+  const value = useColorModeValue("clique.white", "clique.secondaryGrey1");
   return (
-    <Box
-      w={w}
-      bg="clique.secondaryGrey1"
-      px="2"
-      py="3"
-      mt="10px"
-      borderRadius={"10px"}
-    >
+    <Box w={w} bg={value} px="2" py="3" mt="10px" borderRadius={"10px"}>
       <Text
         px="16px"
         fontSize={"smSubHead"}
@@ -59,9 +55,10 @@ export default function DetailCard({
                 <Input
                   pl={fee && "25px"}
                   variant="filled"
-                  bg="clique.secondaryGrey1"
+                  bg={value}
                   {...field}
                   id="title"
+                  color={Color().blackAndWhite}
                   placeholder={`Enter ${name}`}
                   type={
                     type === "date"
@@ -81,10 +78,11 @@ export default function DetailCard({
           {({ field, form }: any) => (
             <FormControl isInvalid={form.errors[name] && form.touched[name]}>
               <Textarea
+                color={Color().blackAndWhite}
                 placeholder={`Enter ${name}`}
                 {...field}
                 variant="filled"
-                bg="clique.secondaryGrey1"
+                bg={value}
               />
               <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
             </FormControl>

@@ -10,6 +10,7 @@ import SideMenu from "@components/golive/SideMenu";
 import Header from "@components/widgets/Header";
 import { scrollBarStyle } from "@constants/utils";
 import WebCamModal from "@components/golive/WebCamModal";
+import Color from "@constants/color";
 
 type Props = {};
 
@@ -21,7 +22,7 @@ function Index({}: Props) {
   return (
     <Box>
       <Header />
-      <Box minH={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
+      <Box minH={{ lg: "90vh" }} display="flex" bg={Color().lightAndPrimary}>
         <Box flex="1" h="100%">
           <SideMenu click={(route) => setState(route)} />
         </Box>

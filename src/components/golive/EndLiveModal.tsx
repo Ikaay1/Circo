@@ -7,6 +7,7 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
+import Color from "@constants/color";
 import React from "react";
 
 function EndLiveModal({
@@ -28,7 +29,7 @@ function EndLiveModal({
           onOpen();
         }}
         bg={"clique.dangerRed"}
-        color="white"
+        color={Color().blackAndWhite}
         colorScheme={"red"}
         fontFamily={"Poppins"}
       >
@@ -41,10 +42,10 @@ function EndLiveModal({
           m="0"
           py="40px"
           rounded={"20px"}
-          bg="clique.primaryBg"
+          bg={Color().lightAndPrimary}
         >
           <Text
-            color={"clique.white"}
+            color={Color().blackAndWhite}
             fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
@@ -56,7 +57,7 @@ function EndLiveModal({
 
           <Text
             my="10px"
-            color={"clique.white"}
+            color={Color().blackAndWhite}
             fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"smSubHead"}
@@ -73,7 +74,7 @@ function EndLiveModal({
               size="md"
               bg="none"
               w="120px"
-              color="clique.white"
+              color={Color().blackAndWhite}
               border={"1px solid #fff"}
               onClick={onClose}
               rounded={"full"}
@@ -91,7 +92,7 @@ function EndLiveModal({
               size="md"
               isLoading={loading}
               bg="clique.red"
-              color="clique.white"
+              color={Color().blackAndWhite}
               border={"1px solid "}
               borderColor="clique.red"
               rounded={"full"}

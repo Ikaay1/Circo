@@ -3,12 +3,25 @@ import React from "react";
 import { BiDislike, BiLike } from "react-icons/bi";
 import { VscReport } from "react-icons/vsc";
 
-import { Avatar, Box, Flex, Icon, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Icon,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
+import Color from "@constants/color";
 
 function EachComment({ comment }: { comment: any }) {
   return (
-    <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
+    <Flex
+      mt="15px"
+      bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
+      rounded="10px"
+      p="20px"
+    >
       <AvataWithSpace
         name="Prosper Otemuyiwa"
         url="https://bit.ly/prosper-baba"
@@ -21,7 +34,7 @@ function EachComment({ comment }: { comment: any }) {
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Text
             noOfLines={2}
-            color={"clique.white"}
+            color={Color().blackAndWhite}
             fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
@@ -46,7 +59,7 @@ function EachComment({ comment }: { comment: any }) {
 
         <Text
           mt="5px"
-          color={"clique.white"}
+          color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
@@ -59,7 +72,7 @@ function EachComment({ comment }: { comment: any }) {
             <Flex cursor={"pointer"} alignItems={"center"}>
               <Icon color="clique.white" mr="5px" fontSize="20px" as={BiLike} />
               <Text
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
@@ -77,7 +90,7 @@ function EachComment({ comment }: { comment: any }) {
                 as={BiDislike}
               />
               <Text
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}

@@ -19,7 +19,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
 
   const toast = useToast();
   return (
-    <Flex px="20px" bg={Color().whiteAndBlack} py="20px" w="full">
+    <Flex px="20px" bg={Color().lightAndPrimary} py="20px" w="full">
       <AvataWithSpace
         name={profile?.firstName + " " + profile?.lastName}
         url={profile?.avatar}
@@ -34,14 +34,14 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           rounded={"10px"}
           p="5px"
           px="10px"
-          color={"clique.white"}
+          color={Color().blackAndWhite}
           fontSize={"smSubHead"}
           _placeholder={{
-            color: "clique.white",
+            color: Color().blackAndWhite,
             fontSize: "smSubHead",
           }}
           placeholder="Enter Comment..."
-          bg="clique.ashGrey"
+          bg={useColorModeValue("clique.white", "clique.ashGrey")}
           border={"none"}
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}

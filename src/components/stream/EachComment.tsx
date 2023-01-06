@@ -8,8 +8,16 @@ import {
   useLikeStreamCommentMutation,
 } from "redux/services/livestream/streamComment.service";
 
-import { Box, Flex, Icon, Spinner, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Icon,
+  Spinner,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
+import Color from "@constants/color";
 
 function EachComment({ comment }: { comment: any }) {
   const router = useRouter();
@@ -26,7 +34,12 @@ function EachComment({ comment }: { comment: any }) {
   }, [userProfile?._id, router]);
 
   return (
-    <Flex mt="15px" bg="clique.ashGrey" rounded="10px" p="20px">
+    <Flex
+      mt="15px"
+      bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
+      rounded="10px"
+      p="20px"
+    >
       <AvataWithSpace
         name={
           comment?.commentUser?.firstName + " " + comment?.commentUser?.lastName
@@ -42,7 +55,7 @@ function EachComment({ comment }: { comment: any }) {
           <Text
             mr="10px"
             noOfLines={2}
-            color={"clique.white"}
+            color={Color().blackAndWhite}
             fontFamily={"Poppins"}
             fontWeight={400}
             fontSize={"subHead"}
@@ -64,7 +77,7 @@ function EachComment({ comment }: { comment: any }) {
 
         <Text
           mt="5px"
-          color={"clique.white"}
+          color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
@@ -89,7 +102,7 @@ function EachComment({ comment }: { comment: any }) {
                     color={
                       comment?.likes?.includes(userProfile?._id)
                         ? "clique.base"
-                        : "clique.white"
+                        : Color().blackAndWhite
                     }
                     mr="5px"
                     fontSize="20px"
@@ -98,7 +111,7 @@ function EachComment({ comment }: { comment: any }) {
                 </Box>
               )}
               <Text
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
@@ -123,7 +136,7 @@ function EachComment({ comment }: { comment: any }) {
                     color={
                       comment?.dislikes?.includes(userProfile?._id)
                         ? "clique.base"
-                        : "clique.white"
+                        : Color().blackAndWhite
                     }
                     mr="5px"
                     fontSize="smHead"
@@ -132,7 +145,7 @@ function EachComment({ comment }: { comment: any }) {
                 </Box>
               )}
               <Text
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}

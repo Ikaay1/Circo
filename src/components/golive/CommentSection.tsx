@@ -38,7 +38,7 @@ function CommentSection({ streamDetails }: any) {
       px="20px"
       pb="80px"
       minW={{ base: "full", lg: "400px" }}
-      bg={Color().blackAndWhite}
+      bg={Color().whiteAndBlack}
       pt={"20px"}
       mt={{ base: "20px", lg: "0px" }}
       sx={scrollBarStyle}

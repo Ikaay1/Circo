@@ -12,6 +12,7 @@ import {
   RadioGroup,
   Select,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -20,7 +21,7 @@ import CopyButton from "./CopyButton";
 
 function StreamKey({ streamDetails }: any) {
   const [showPassword, setShowPassword] = React.useState(false);
-
+  const value = useColorModeValue("clique.white", "clique.secondaryGrey1");
   return (
     <Flex flexDir={{ base: "column", lg: "row" }} pb="150px">
       <Box w={{ base: "full", lg: "50%" }}>
@@ -28,13 +29,12 @@ function StreamKey({ streamDetails }: any) {
           Stream key
         </Text>
         <Grid
-          
           templateColumns="repeat(15, 1fr)"
           mt="10px"
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
                   border={"none"}
@@ -65,7 +65,7 @@ function StreamKey({ streamDetails }: any) {
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
                   border={"none"}
@@ -88,7 +88,7 @@ function StreamKey({ streamDetails }: any) {
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
                   border={"none"}
@@ -112,7 +112,7 @@ function StreamKey({ streamDetails }: any) {
           justifyContent={"space-between"}
         >
           <GridItem colSpan={12} mr="16px">
-            <Box bg="clique.secondaryGrey1" px="2" py="3" borderRadius={"10px"}>
+            <Box bg={value} px="2" py="3" borderRadius={"10px"}>
               <InputGroup border={"none"}>
                 <Input
                   border={"none"}
@@ -128,25 +128,7 @@ function StreamKey({ streamDetails }: any) {
         </Grid>
       </Box>
 
-      <Box px="50px">
-        {/* <Text mt="20px" fontSize="smSubHead" color="clique.text">
-          Stream latency
-        </Text> */}
-
-        {/* <RadioGroup
-          defaultValue="1"
-          colorScheme="clique"
-          color="clique.text"
-          mt="10px"
-        >
-          <Box>
-            <Radio value={"1"}>Normal Latency</Radio>
-          </Box>
-          <Box>
-            <Radio value="2">Normal Latency</Radio>
-          </Box>
-        </RadioGroup> */}
-      </Box>
+      <Box px="50px"></Box>
     </Flex>
   );
 }
