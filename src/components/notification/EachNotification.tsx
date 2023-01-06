@@ -6,6 +6,7 @@ import {
   Flex,
   Icon,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import React from "react";
@@ -25,12 +26,13 @@ function EachNotification({
   const [readNotification, info] = useReadNotificationMutation();
   const route = useRouter();
 
+  const value = useColorModeValue("clique.white", "clique.blackGrey");
   return (
     <AccordionItem
       ref={lastElementRef}
       mb={"10px"}
       border={"none"}
-      bg="clique.blackGrey"
+      bg={value}
       rounded={"10px"}
     >
       <Box>

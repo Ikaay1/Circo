@@ -45,14 +45,16 @@ function Index({}: Props) {
             <Button
               size={"sm"}
               onClick={() => setState("stream")}
-              color={state === "stream" ? "clique.base" : "clique.white"}
+              color={state === "stream" ? "clique.base" : Color().blackAndWhite}
             >
               Stream Now
             </Button>
             <Button
               size={"sm"}
               onClick={() => setState("liveevent")}
-              color={state === "liveevent" ? "clique.base" : "clique.white"}
+              color={
+                state === "liveevent" ? "clique.base" : Color().blackAndWhite
+              }
             >
               Schedule Stream
             </Button>
@@ -80,7 +82,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -98,7 +100,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -115,7 +117,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -132,7 +134,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}
@@ -149,7 +151,7 @@ function Index({}: Props) {
               <Text
                 pt="20px"
                 position={"relative"}
-                color={"clique.white"}
+                color={Color().blackAndWhite}
                 fontFamily={"Poppins"}
                 fontWeight={500}
                 textTransform={"capitalize"}

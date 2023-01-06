@@ -124,7 +124,7 @@ function NotificationModal() {
           right={{ base: "0", lg: "250px" }}
           pos="absolute"
           top={{ base: "10vh", lg: "0" }}
-          bg="clique.primaryBg"
+          bg={Color().lightAndPrimary}
         >
           <ModalHeader
             display="flex"
