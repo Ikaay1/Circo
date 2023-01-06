@@ -86,7 +86,11 @@ function Header({ upload }: Props) {
         <Image
           alt="circo logo"
           w={{ base: "full", lg: "100px" }}
-          src="/assets/Circo-Logo.png"
+          src={
+            colorMode === "dark"
+              ? "/assets/Circo-Logo.png"
+              : "/assets/Circo.png"
+          }
         />
       </Box>
 

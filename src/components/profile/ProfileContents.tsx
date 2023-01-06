@@ -16,6 +16,7 @@ import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
 import { profileNav } from "@constants/utils";
 
 import Playlists from "./Playlists";
+import Color from "@constants/color";
 
 const ProfileContents = () => {
   const [route, setRoute] = useState("paid");
@@ -45,7 +46,7 @@ const ProfileContents = () => {
           <Text
             mr={{ lg: "3rem" }}
             lineHeight="24px"
-            color="clique.white"
+            color={Color().blackAndWhite}
             pb={".8rem"}
             borderBottom={route === name ? "4px solid #892CDC" : "none"}
             cursor={"pointer"}

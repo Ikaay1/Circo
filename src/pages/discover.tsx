@@ -12,6 +12,7 @@ import {
   scrollBarStyle2,
   scrollBarStyle3,
 } from "@constants/utils";
+import Color from "@constants/color";
 
 function Index() {
   const { data, isFetching } = useGetSuggestedUsersQuery({
@@ -38,7 +39,7 @@ function Index() {
             position={"relative"}
             pl="20px"
             _before={{ ...purpleBoxStyle, background: "clique.base" }}
-            color={"clique.white"}
+            color={Color().blackAndWhite}
             fontFamily={"Poppins"}
             fontWeight={500}
             textTransform={"capitalize"}
@@ -53,7 +54,7 @@ function Index() {
             position={"relative"}
             pl="20px"
             _before={{ ...purpleBoxStyle, background: "clique.base" }}
-            color={"clique.white"}
+            color={Color().blackAndWhite}
             fontFamily={"Poppins"}
             fontWeight={500}
             textTransform={"capitalize"}

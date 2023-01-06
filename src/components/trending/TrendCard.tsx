@@ -2,7 +2,14 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import React from "react";
 
-import { Avatar, Box, Flex, Image, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Image,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 
 import { contentData } from "../../constants/utils";
@@ -122,7 +129,7 @@ function TrendCard({
 
         <Text
           mt="5px"
-          color={Color().whiteAndBlack}
+          color="clique.black"
           fontFamily={"Poppins"}
           fontWeight={700}
           textTransform={"capitalize"}
