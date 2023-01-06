@@ -4,6 +4,7 @@ import { Box, useClipboard, useDisclosure, useToast } from "@chakra-ui/react";
 import Index from "@components/settings/Index";
 import SideMenu from "@components/settings/SideMenu";
 import { scrollBarStyle3, settingsMenu } from "@constants/utils";
+import Color from "@constants/color";
 
 const Settings = () => {
   const [state, setState] = useState<string>("account");
@@ -26,7 +27,7 @@ const Settings = () => {
   const [showSideMenu, setShowSideMenu] = useState(false);
   return (
     <HomeLayout>
-      <Box h={{ lg: "90vh" }} display="flex" bg="clique.primaryBg">
+      <Box h={{ lg: "90vh" }} display="flex" bg={Color().lightAndPrimary}>
         <Box
           flex="1"
           h="100%"
@@ -35,7 +36,7 @@ const Settings = () => {
           transform={showSideMenu ? "translateX(0)" : "translateX(-100%)"}
           position={{ base: "fixed", lg: "relative" }}
           zIndex={100}
-          bg="clique.primaryBg"
+          bg={Color().lightAndPrimary}
         >
           <Box display={{ base: "block", lg: "none" }}>
             <SideMenu
@@ -53,7 +54,7 @@ const Settings = () => {
           transition="all 0.3s ease-in-out"
           position={{ base: "fixed", lg: "relative" }}
           zIndex={100}
-          bg="clique.primaryBg"
+          bg={Color().lightAndPrimary}
         >
           <SideMenu
             click={(route) => setState(route)}
@@ -74,7 +75,7 @@ const Settings = () => {
             setShowSideMenu={setShowSideMenu}
             showSideMenu={showSideMenu}
             current={state as string}
-            onClick={(code:string) => handleCopied(code)}
+            onClick={(code: string) => handleCopied(code)}
           />
         </Box>
       </Box>

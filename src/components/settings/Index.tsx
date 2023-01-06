@@ -67,7 +67,7 @@ function Index({
         mb="3"
         justifyContent="space-between"
       >
-        <Text>Settings</Text>
+        <Text >Settings</Text>
         <Flex
           pr="20px"
           display={{ base: "flex", lg: "none" }}
