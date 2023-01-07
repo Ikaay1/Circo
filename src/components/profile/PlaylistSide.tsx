@@ -102,7 +102,7 @@ const PlaylistSide = ({
             fontFamily={'Poppins'}
             fontSize='sm2'
             lineHeight='28px'
-            color='clique.white'
+            // color='clique.white'
             textAlign={'center'}
             mt='1.1rem'
           >
@@ -167,7 +167,7 @@ const PlaylistSide = ({
                   }
                   fontSize={'subHead'}
                   mb={{base: '2', lg: '3'}}
-                  color='clique.white'
+                  // color='clique.white'
                 >
                   {each.name}
                 </Text>

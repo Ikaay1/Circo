@@ -7,6 +7,7 @@ import { Box, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import PlaylistDetails from '@components/profile/PlaylistDetails';
 import PlaylistSide from '@components/profile/PlaylistSide';
 import Header from '@components/widgets/Header';
+import Color from '@constants/color';
 import { scrollBarStyle3 } from '@constants/utils';
 
 const Playlist = () => {
@@ -17,7 +18,7 @@ const Playlist = () => {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   return (
-    <Box bg={useColorModeValue('clique.primaryBg', 'clique.primaryBg')}>
+    <Box bg={Color().whiteAndBlack}>
       <Header upload={onOpen} />
       <Box h='90vh' display='flex' flexDirection={{base: 'column', lg: 'row'}}>
         <Box
