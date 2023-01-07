@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Image, useColorMode } from '@chakra-ui/react';
 
 export const CliqueLogo = () => {
   const router = useRouter();
+  const {colorMode, toggleColorMode} = useColorMode();
   return (
     <Box
       w={{base: '70px', lg: '200px'}}
@@ -20,7 +21,9 @@ export const CliqueLogo = () => {
       <Image
         alt='circo logo'
         w={{base: 'full', lg: '100px'}}
-        src='/assets/Circo-Logo.png'
+        src={
+          colorMode === 'dark' ? '/assets/Circo-Logo.png' : '/assets/Circo.png'
+        }
       />
     </Box>
   );

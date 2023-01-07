@@ -7,6 +7,7 @@ import AuthInput from '@components/auth/AuthInput';
 import CliqueLogo from '@components/auth/CliqueLogo';
 import ShowAuthHeader from '@components/auth/ShowAuthHeader';
 import ShowAuthImage from '@components/auth/ShowAuthImage';
+import Color from '@constants/color';
 
 const Referral = () => {
   const [otp, setOtp] = useState('');
@@ -29,7 +30,12 @@ const Referral = () => {
   };
 
   return (
-    <Box display={'flex'} justifyContent='space-between' alignItems={'center'}>
+    <Box
+      display={'flex'}
+      justifyContent='space-between'
+      alignItems={'center'}
+      // backgroundColor={Color().whiteAndBlack}
+    >
       <CliqueLogo />
       <Box display={{base: 'none', lg: 'block'}}>
         <ShowAuthImage />

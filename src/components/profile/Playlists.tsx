@@ -162,7 +162,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                 fontSize='subHead'
                 lineHeight='17px'
                 letterSpacing='-0.05em'
-                color='clique.white'
+                // color='clique.white'
                 mt='.7rem'
               >
                 {each?.userId?.photo ? (
@@ -228,7 +228,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
           alignItems={'center'}
           fontSize='head'
           lineHeight='32px'
-          color='clique.white'
+          // color='clique.white'
         >
           New Playlist
           <Box

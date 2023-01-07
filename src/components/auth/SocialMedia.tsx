@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Box, Image, Text } from '@chakra-ui/react';
+import Color from '@constants/color';
 import { socialMediaIconsData } from '@constants/utils';
 
 export const SocialMedia = ({
@@ -44,7 +45,11 @@ export const SocialMedia = ({
         textAlign={'center'}
         marginTop={'1.7rem'}
       >
-        <Text display={'inline'} marginRight='.25rem'>
+        <Text
+          display={'inline'}
+          marginRight='.25rem'
+          color={Color().blackAndWhite}
+        >
           {haveAccount}
         </Text>
         <span style={{color: '#892cdc'}}>
