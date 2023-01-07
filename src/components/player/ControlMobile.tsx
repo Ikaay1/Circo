@@ -95,6 +95,7 @@ function ControlMobile({
             <Icon
               fontSize='smHead'
               cursor={'pointer'}
+              color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoUnmute}
               mx='7px'
@@ -103,6 +104,7 @@ function ControlMobile({
             <Icon
               fontSize='smHead'
               cursor={'pointer'}
+              color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoMute}
               mx='7px'
@@ -189,6 +191,7 @@ function ControlMobile({
             <Icon
               fontSize='35px'
               cursor='pointer'
+              color={'clique.white'}
               as={BsPauseFill}
               onClick={
                 playerRef.current
@@ -203,6 +206,7 @@ function ControlMobile({
             <Icon
               fontSize='bigHead'
               cursor='pointer'
+              color={'clique.white'}
               as={BsFillPlayFill}
               onClick={
                 playerRef.current
@@ -244,6 +248,7 @@ function ControlMobile({
                 const video: any = document.getElementById('video');
                 video.requestFullscreen();
               }}
+              color={'clique.white'}
               as={BsFullscreen}
             />
           ) : (
@@ -254,6 +259,7 @@ function ControlMobile({
                 setIsFullScreen(!isFullScreen);
                 document.exitFullscreen();
               }}
+              color={'clique.white'}
               as={MdFullscreenExit}
             />
           )}

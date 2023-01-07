@@ -92,6 +92,7 @@ function VideoOptionMenu({player, video}: any) {
           mx={{base: '10px', lg: '30px'}}
           cursor={'pointer'}
           as={OptionsIcon}
+          color={'clique.white'}
         />
       </MenuButton>
       <MenuList

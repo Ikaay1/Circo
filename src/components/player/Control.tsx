@@ -98,6 +98,7 @@ function Control({
                 cursor={'pointer'}
                 onClick={() => setIsMuted(!isMuted)}
                 as={GoUnmute}
+                color={'clique.white'}
               />
             ) : (
               <Icon
@@ -105,6 +106,7 @@ function Control({
                 cursor={'pointer'}
                 onClick={() => setIsMuted(!isMuted)}
                 as={GoMute}
+                color={'clique.white'}
               />
             )}{' '}
             <Flex ml='30px' alignItems={'center'}>
@@ -199,6 +201,7 @@ function Control({
                 fontSize='35px'
                 cursor='pointer'
                 as={BsPauseFill}
+                color={'clique.white'}
                 onClick={
                   playerRef.current
                     ? () => {
@@ -214,6 +217,7 @@ function Control({
                 fontSize='bigHead'
                 cursor='pointer'
                 as={BsFillPlayFill}
+                color={'clique.white'}
                 onClick={
                   playerRef.current
                     ? () => {
@@ -256,11 +260,13 @@ function Control({
                   video.requestFullscreen();
                 }}
                 as={BsFullscreen}
+                color={'clique.white'}
               />
             ) : (
               <Icon
                 fontSize='smHead'
                 cursor={'pointer'}
+                color={'clique.white'}
                 onClick={() => {
                   setIsFullScreen(!isFullScreen);
                   document.exitFullscreen();
