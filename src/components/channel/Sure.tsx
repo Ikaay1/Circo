@@ -44,7 +44,12 @@ function Sure({
         pb='10'
         w={{base: '100%', lg: '100%'}}
       >
-        <ModalHeader alignSelf='center' mb='2' fontSize={'smHead'}>
+        <ModalHeader
+          alignSelf='center'
+          mb='2'
+          fontSize={'smHead'}
+          color='clique.white'
+        >
           {header}
         </ModalHeader>
 
@@ -68,6 +73,7 @@ function Sure({
                 py='6'
                 bg='transparent'
                 border='1px solid white'
+                color='clique.white'
                 onClick={onClose}
               ></Btn>
               <Btn
@@ -77,6 +83,7 @@ function Sure({
                 bg='clique.secondaryRed'
                 onClick={onClick}
                 isLoading={isLoading}
+                color='clique.white'
               ></Btn>
             </Flex>
           </Flex>

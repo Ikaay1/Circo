@@ -106,7 +106,7 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
                   w='80px'
                   borderRadius='10px'
                 />
-                <Text alignSelf={'end'} ml='7'>
+                <Text alignSelf={'end'} ml='7' color={'clique.white'}>
                   {data?.data?.playlists[0]?.name}
                 </Text>
               </Flex>
@@ -131,7 +131,12 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
                     w='80px'
                     borderRadius='10px'
                   />
-                  <Text alignSelf={'end'} ml='7' fontSize={'subHead'}>
+                  <Text
+                    alignSelf={'end'}
+                    ml='7'
+                    fontSize={'subHead'}
+                    color='clique.white'
+                  >
                     {each.name}
                   </Text>
                 </Flex>
