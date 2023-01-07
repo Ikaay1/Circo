@@ -95,7 +95,7 @@ const PlaylistList = ({item, i, playlist, videoId}: Props) => {
                 fontWeight='500'
                 fontSize='smSubHead'
                 lineHeight='28px'
-                color='clique.white'
+                // color='clique.white'
                 mb='.5rem'
                 cursor='pointer'
                 onClick={() =>
@@ -155,6 +155,9 @@ const PlaylistList = ({item, i, playlist, videoId}: Props) => {
             <Box
               cursor={'pointer'}
               onClick={() => setShow((prevShow) => !prevShow)}
+              bg='clique.black'
+              p='3px'
+              borderRadius={'5px'}
             >
               <Icon as={MoreIcon} />
             </Box>

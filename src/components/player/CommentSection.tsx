@@ -63,6 +63,7 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
             fontWeight={500}
             textTransform={'capitalize'}
             fontSize='smHead'
+            color={'clique.white'}
           >
             Comments
           </Text>

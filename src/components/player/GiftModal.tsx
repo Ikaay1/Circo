@@ -31,6 +31,7 @@ function GiftModal({video}: {video: contentData}) {
         onClick={onOpen}
         fontSize='bigHead'
         cursor={'pointer'}
+        color={'clique.white'}
         as={CliqueGiftIcon}
       />
       <Modal size={'xl'} isOpen={isOpen} isCentered onClose={onClose}>

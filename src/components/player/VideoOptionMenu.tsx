@@ -87,7 +87,13 @@ function VideoOptionMenu({player, video}: any) {
   return (
     <Menu closeOnSelect>
       <MenuButton aria-label='Options'>
-        <Icon fontSize='28px' mx='30px' cursor={'pointer'} as={OptionsIcon} />
+        <Icon
+          fontSize='28px'
+          mx={{base: '10px', lg: '30px'}}
+          cursor={'pointer'}
+          as={OptionsIcon}
+          color={'clique.white'}
+        />
       </MenuButton>
       <MenuList
         fontFamily={'Poppins'}
