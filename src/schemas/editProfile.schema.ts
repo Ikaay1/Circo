@@ -1,9 +1,9 @@
-import * as yup from "yup";
+import * as yup from 'yup';
 
 export const editProfileSchema = yup.object().shape({
-  firstName: yup.string().min(3).max(30),
-  lastName: yup.string().min(3).max(30),
-  email: yup.string().email().min(3),
+  firstName: yup.string().min(3).max(30).required(),
+  lastName: yup.string().min(3).max(30).required(),
+  email: yup.string().email().min(3).required(),
   // dob: yup.string(),
-  username: yup.string().min(5).max(30),
+  username: yup.string().min(5).max(30).required(),
 });

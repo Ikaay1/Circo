@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Box, Icon, Select, Text } from '@chakra-ui/react';
+import { Box, Icon, Input, Select, Text, useColorMode } from '@chakra-ui/react';
+import Color from '@constants/color';
+import Padlock from '@icons/Padlock';
 import PasswordIcon from '@icons/PasswordIcon';
 
 const AuthInput = ({
@@ -19,10 +21,11 @@ const AuthInput = ({
   ageRange,
   setAgeRange,
 }: any) => {
+  const {colorMode, toggleColorMode} = useColorMode();
   return (
     <>
       {!option ? (
-        <input
+        <Input
           value={theState}
           onChange={(e) => setTheState(e.target.value)}
           className='input'
@@ -45,12 +48,20 @@ const AuthInput = ({
           }
           required={referral ? false : true}
           placeholder={name}
+          color={Color().blackAndWhite}
+          backgroundColor={Color().whiteAndBlack}
+          _placeholder={{
+            color: Color().blackAndWhite,
+          }}
+          borderWidth={'1px'}
+          borderColor={Color().blackAndWhite}
         />
       ) : (
         <Select
           value={ageRange}
-          bg='clique.secondaryGrey1'
-          border={'none'}
+          bg={Color().whiteAndBlack}
+          borderWidth={'1px'}
+          borderColor={Color().blackAndWhite}
           borderRadius='15px'
           //   pl="1.3rem"
           _focus={{boxShadow: 'none'}}
@@ -73,8 +84,10 @@ const AuthInput = ({
         top='6%'
         left={'4.5%'}
         fontSize='sm'
-        color='clique.white'
+        color={Color().blackAndWhite}
         className='placeholder small'
+        backgroundColor={Color().whiteAndBlack}
+        zIndex='99'
       >
         {name}
       </Text>
@@ -82,11 +95,15 @@ const AuthInput = ({
         <Box
           position='absolute'
           right={'4.5%'}
-          bottom='26%'
+          top='15%'
           cursor={'pointer'}
           onClick={handleShowPassword}
         >
-          <Icon as={PasswordIcon} />
+          {colorMode === 'dark' ? (
+            <Icon as={Padlock} />
+          ) : (
+            <Icon as={PasswordIcon} />
+          )}
         </Box>
       )}
     </>

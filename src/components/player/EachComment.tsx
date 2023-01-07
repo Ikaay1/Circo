@@ -39,6 +39,7 @@ function EachComment({comment}: {comment: commentInterface}) {
   const [reply, setReply] = useState('');
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [replyComment, replyCommentStatus] = useReplyCommentMutation();
+  console.log('comment', comment);
 
   const handleReply = async () => {
     if (reply.trim().length) {
@@ -108,9 +109,9 @@ function EachComment({comment}: {comment: commentInterface}) {
                 mr='20px'
               >
                 {`${
-                  comment.commenterId.firstName[0].toUpperCase() +
+                  comment.commenterId.firstName[0]?.toUpperCase() +
                   comment.commenterId.firstName.slice(1)
-                } ${comment.commenterId.lastName[0].toUpperCase()}`}
+                } ${comment.commenterId.lastName[0]?.toUpperCase()}`}
               </Text>
               <Text
                 noOfLines={2}
@@ -244,6 +245,7 @@ function EachComment({comment}: {comment: commentInterface}) {
             mt='.5rem'
             ml='1rem'
             cursor='pointer'
+            color={'clique.white'}
             onClick={() => setShow((prevShow) => !prevShow)}
           >
             Reply

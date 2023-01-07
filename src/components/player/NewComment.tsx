@@ -96,7 +96,7 @@ function NewComment({
               alt=''
             />
             {postInfo.isLoading ? (
-              <Spinner />
+              <Spinner borderColor={'clique.white'} />
             ) : (
               <Image
                 onClick={handleComment}

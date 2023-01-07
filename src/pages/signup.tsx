@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useAppSelector } from 'redux/app/hooks';
 import { usePreSignupMutation } from 'redux/services/auth.service';
 
-import { Box, Text, useToast } from '@chakra-ui/react';
+import { Box, Input, Text, useToast } from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import AuthInput from '@components/auth/AuthInput';
 import CliqueLogo from '@components/auth/CliqueLogo';
 import ShowAuthHeader from '@components/auth/ShowAuthHeader';
 import ShowAuthImage from '@components/auth/ShowAuthImage';
 import SocialMedia from '@components/auth/SocialMedia';
+import Color from '@constants/color';
 import { signUpInputData } from '@constants/utils';
 
 import { SignUpDataInterface } from '../constants/interface';
@@ -95,7 +96,12 @@ const Signup = () => {
     }
   }, [token, router]);
   return (
-    <Box display={'flex'} justifyContent='space-between' alignItems={'center'}>
+    <Box
+      display={'flex'}
+      justifyContent='space-between'
+      alignItems={'center'}
+      // backgroundColor={Color().whiteAndBlack}
+    >
       <CliqueLogo />
       <Box display={{base: 'none', lg: 'block'}}>
         <ShowAuthImage />
@@ -117,41 +123,59 @@ const Signup = () => {
               marginTop={'.5rem'}
             >
               <Box width='48%' height='57px' position='relative'>
-                <input
+                <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   className='input'
                   type={'text'}
                   required={true}
                   placeholder='Firstname'
+                  color={Color().blackAndWhite}
+                  backgroundColor={Color().whiteAndBlack}
+                  _placeholder={{
+                    color: Color().blackAndWhite,
+                  }}
+                  borderWidth={'1px'}
+                  borderColor={Color().blackAndWhite}
                 />
                 <Text
                   position='absolute'
                   top='6%'
                   left={'4.5%'}
                   fontSize='sm'
-                  color='clique.white'
                   className='placeholder small'
+                  color={Color().blackAndWhite}
+                  backgroundColor={Color().whiteAndBlack}
+                  zIndex='99'
                 >
                   Firstname
                 </Text>
               </Box>
               <Box width='48%' height='57px' position='relative'>
-                <input
+                <Input
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   className='input'
                   type={'text'}
                   required={true}
                   placeholder='Lastname'
+                  color={Color().blackAndWhite}
+                  backgroundColor={Color().whiteAndBlack}
+                  _placeholder={{
+                    color: Color().blackAndWhite,
+                  }}
+                  borderWidth={'1px'}
+                  borderColor={Color().blackAndWhite}
                 />
                 <Text
                   position='absolute'
                   top='6%'
                   left={'4.5%'}
                   fontSize='sm'
-                  color='clique.white'
                   className='placeholder small'
+                  color={Color().blackAndWhite}
+                  backgroundColor={Color().whiteAndBlack}
+                  zIndex='99'
                 >
                   Lastname
                 </Text>
@@ -202,6 +226,7 @@ const Signup = () => {
               display={'flex'}
               justifyContent={'center'}
               marginTop={'1.6rem'}
+              color={Color().blackAndWhite}
             >
               <label
                 className='remember'
@@ -210,10 +235,19 @@ const Signup = () => {
                   cursor: 'pointer',
                 }}
               >
-                <input type='checkbox' required={true} name='' />I agree to
-                the&nbsp;
+                <input
+                  color={Color().blackAndWhite}
+                  type='checkbox'
+                  required={true}
+                  name=''
+                />
+                <Box color={Color().blackAndWhite} as='span'>
+                  I agree to the&nbsp;
+                </Box>
                 <span style={{color: '#892cdc'}}>Terms & Conditions&nbsp;</span>
-                and&nbsp;
+                <Box color={Color().blackAndWhite} as='span'>
+                  and&nbsp;
+                </Box>
                 <span style={{color: '#892cdc'}}>Privacy Policy</span>
               </label>
             </Box>
