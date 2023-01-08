@@ -68,14 +68,15 @@ function AddMoneyModal({
     }
     onClose();
     const res: any = await flutterwave({amount: Number(amount)});
+    console.log(res);
 
     if ('data' in res) {
       setAmount('');
-      // localStorage.setItem('okay', JSON.stringify(amount));
-      window.open('/wallet');
+      localStorage.setItem('okay', JSON.stringify(amount));
+      window.open(res.data.data.data.link);
     } else {
       chakraToast({
-        title: res.error?.data?.message || 'Something went wrong',
+        title: res?.error?.data?.message || 'Something went wrong',
         status: 'error',
         duration: 3000,
         isClosable: true,
