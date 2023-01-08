@@ -75,7 +75,7 @@ function Index() {
     ) {
       window.location.replace('/home');
     }
-  }, [tx_ref, depositToWallet, router]);
+  }, [tx_ref]);
 
   const {loading, hasMore, contents} = useGetContents({
     data,
