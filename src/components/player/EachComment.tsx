@@ -17,10 +17,12 @@ import {
 	Icon,
 	Spinner,
 	Text,
+	useColorModeValue,
 	useDisclosure,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
+import Color from '@constants/color';
 import TrashIcon from '@icons/TrashIcon';
 
 import commentInterface from '../../constants/utils';
@@ -71,7 +73,12 @@ function EachComment({comment}: {comment: commentInterface}) {
 
   return (
     <>
-      <Box mt='15px' bg='clique.ashGrey' rounded='10px' p='20px'>
+      <Box
+        mt='15px'
+        bg={useColorModeValue('clique.lightPrimaryBg', 'clique.ashGrey')}
+        rounded='10px'
+        p='20px'
+      >
         <Flex>
           <Box
             mr='20px'
@@ -101,7 +108,6 @@ function EachComment({comment}: {comment: commentInterface}) {
             <Flex alignItems={'center'}>
               <Text
                 noOfLines={2}
-                color={'clique.white'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
                 fontSize={'subHead'}
@@ -125,7 +131,7 @@ function EachComment({comment}: {comment: commentInterface}) {
               </Text>
             </Flex>
 
-            <Text mt='5px' color={'clique.white'}>
+            <Text mt='5px'>
               <pre
                 style={{
                   fontFamily: 'Poppins',
@@ -151,7 +157,7 @@ function EachComment({comment}: {comment: commentInterface}) {
                         color={
                           comment.comment.likes.includes(userProfile?._id)
                             ? 'clique.base'
-                            : 'clique.white'
+                            : ''
                         }
                         mr='5px'
                         fontSize='20px'
@@ -160,7 +166,6 @@ function EachComment({comment}: {comment: commentInterface}) {
                     </Box>
                   )}
                   <Text
-                    color={'clique.white'}
                     fontFamily={'Poppins'}
                     fontWeight={400}
                     fontSize={'smSubHead'}
@@ -179,7 +184,7 @@ function EachComment({comment}: {comment: commentInterface}) {
                         color={
                           comment.comment.dislikes.includes(userProfile?._id)
                             ? 'clique.base'
-                            : 'clique.white'
+                            : ''
                         }
                         mr='5px'
                         fontSize='smHead'
@@ -188,7 +193,6 @@ function EachComment({comment}: {comment: commentInterface}) {
                     </Box>
                   )}
                   <Text
-                    color={'clique.white'}
                     fontFamily={'Poppins'}
                     fontWeight={400}
                     fontSize={'smSubHead'}
@@ -205,6 +209,9 @@ function EachComment({comment}: {comment: commentInterface}) {
                   onClick={() => {
                     onOpen();
                   }}
+                  bg='clique.black'
+                  px='2px'
+                  borderRadius={'5px'}
                 >
                   <Icon as={TrashIcon} />
                 </Box>
@@ -227,7 +234,6 @@ function EachComment({comment}: {comment: commentInterface}) {
               <Text
                 fontSize={'sm'}
                 mt='.5rem'
-                color={'clique.white'}
                 cursor='pointer'
                 onClick={() => setShow((prevShow) => !prevShow)}
               >
@@ -245,7 +251,6 @@ function EachComment({comment}: {comment: commentInterface}) {
             mt='.5rem'
             ml='1rem'
             cursor='pointer'
-            color={'clique.white'}
             onClick={() => setShow((prevShow) => !prevShow)}
           >
             Reply

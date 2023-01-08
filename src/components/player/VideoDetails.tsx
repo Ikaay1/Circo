@@ -110,10 +110,23 @@ function VideoDetails({
             p='.6rem 1.2rem'
             rounded='full'
             fontWeight={400}
-            bg={'clique.grey'}
+            bg={
+              subscribers.includes(userProfile._id)
+                ? 'clique.grey'
+                : 'clique.base'
+            }
             color='clique.white'
+            onClick={
+              !subscribers.includes(userProfile._id)
+                ? () =>
+                    router.push(`/channel/subscribe/${video.uploader_id._id}`)
+                : () => {}
+            }
+            cursor={
+              !subscribers.includes(userProfile._id) ? 'pointer' : 'default'
+            }
           >
-            Subscribed
+            {subscribers.includes(userProfile._id) ? 'Subscribed' : 'Subscribe'}
           </Box>
         )}
       </Flex>

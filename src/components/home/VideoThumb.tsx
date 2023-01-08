@@ -230,7 +230,7 @@ function VideoThumb({
                   </Text>
                 </Flex>
               </Box>
-              <Flex bg='clique.black' p='3px' borderRadius={'5px'} h='100%'>
+              <Flex bg='clique.black' p='2px' borderRadius={'5px'} h='100%'>
                 <Icon
                   as={VideoSideIcon}
                   fontSize='25px'

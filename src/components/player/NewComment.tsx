@@ -18,6 +18,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
+import Color from '@constants/color';
 
 function NewComment({
   handleComment,
@@ -43,9 +44,10 @@ function NewComment({
         bottom='0'
         right={'0'}
         px={fixed !== 'yes' ? '20px' : 0}
-        bg={fixed !== 'yes' ? 'clique.black' : 'transparent'}
+        // bg={fixed !== 'yes' ? 'clique.black' : 'transparent'}
+        bg={Color().whiteAndBlack}
         py={fixed !== 'yes' ? '20px' : 0}
-        w={fixed !== 'yes' ? '400px' : '100%'}
+        w={{base: '100%', lg: fixed !== 'yes' ? '400px' : '100%'}}
       >
         <AvataWithSpace
           name={profile?.firstName + ' ' + profile?.lastName}
