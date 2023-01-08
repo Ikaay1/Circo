@@ -16,6 +16,7 @@ import {
 	Icon,
 	Spinner,
 	Text,
+	useColorModeValue,
 	useDisclosure,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
@@ -63,7 +64,7 @@ function EachReply({
       w='85%'
       ml='auto'
       mt='15px'
-      bg='clique.ashGrey'
+      bg={useColorModeValue('clique.lightPrimaryBg', 'clique.ashGrey')}
       rounded='10px'
       p='20px'
     >
@@ -91,7 +92,6 @@ function EachReply({
         <Flex alignItems={'center'}>
           <Text
             noOfLines={1}
-            color={'clique.white'}
             fontFamily={'Poppins'}
             fontWeight={400}
             fontSize={'subHead'}
@@ -115,7 +115,7 @@ function EachReply({
           </Text>
         </Flex>
 
-        <Text mt='5px' color={'clique.white'}>
+        <Text mt='5px'>
           <pre
             style={{
               fontFamily: 'Poppins',
@@ -137,7 +137,7 @@ function EachReply({
                     color={
                       reply.likes.includes(userProfile?._id)
                         ? 'clique.base'
-                        : 'clique.white'
+                        : ''
                     }
                     mr='5px'
                     fontSize='20px'
@@ -146,7 +146,6 @@ function EachReply({
                 </Box>
               )}
               <Text
-                color={'clique.white'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
                 fontSize={'smSubHead'}
@@ -165,7 +164,7 @@ function EachReply({
                     color={
                       reply.dislikes.includes(userProfile?._id)
                         ? 'clique.base'
-                        : 'clique.white'
+                        : ''
                     }
                     mr='5px'
                     fontSize='smHead'
@@ -174,7 +173,6 @@ function EachReply({
                 </Box>
               )}
               <Text
-                color={'clique.white'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
                 fontSize={'smSubHead'}
@@ -191,6 +189,9 @@ function EachReply({
               onClick={() => {
                 onOpen();
               }}
+              bg='clique.black'
+              px='2px'
+              borderRadius={'5px'}
             >
               <Icon as={TrashIcon} />
             </Box>

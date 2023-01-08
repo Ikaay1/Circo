@@ -13,6 +13,7 @@ import CliqueLoader from '@components/home/CliqueLoader';
 import CommentSection from '@components/player/CommentSection';
 import VideoDetails from '@components/player/VideoDetails';
 import VideoPlayer from '@components/player/VideoPlayer';
+import { scrollBarStyle3 } from '@constants/utils';
 
 function Index() {
   const toast = useToast();
@@ -90,20 +91,22 @@ function Index() {
               w={{base: '100%', lg: 'calc(100vw - 400px)'}}
               overflowY={'scroll'}
               overflowX={'hidden'}
-              sx={{
-                '&::-webkit-scrollbar': {
-                  width: '8px',
-                  rounded: 'full',
-                },
-                '&::-webkit-scrollbar-track': {
-                  boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-                  webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-                },
-                '&::-webkit-scrollbar-thumb': {
-                  bg: 'clique.primaryBg',
-                  outline: 'none',
-                },
-              }}
+              // sx={{
+              //   '&::-webkit-scrollbar': {
+              //     width: '8px',
+              //     rounded: 'full',
+              //   },
+              //   '&::-webkit-scrollbar-track': {
+              //     boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+              //     webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+              //   },
+              //   '&::-webkit-scrollbar-thumb': {
+              //     bg: 'clique.primaryBg',
+              //     outline: 'none',
+              //   },
+              // }}
+
+              sx={scrollBarStyle3}
             >
               <VideoPlayer
                 video={data?.data?.preference?.video}
