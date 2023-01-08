@@ -6,8 +6,8 @@ import { useAppSelector } from 'redux/app/hooks';
 import { useCategoryQuery } from 'redux/services/category.service';
 import { useGetContentsQuery } from 'redux/services/content.service';
 import { useExpiredSubscriptionMutation } from 'redux/services/user.service';
-import { useDepositToWalletMutation } from 'redux/services/wallet.service';
 
+// import { useDepositToWalletMutation } from 'redux/services/wallet.service';
 import { Box, Divider, Flex } from '@chakra-ui/react';
 import EmptyState from '@components/emptyState/EmptyState';
 import CliqueLoader from '@components/home/CliqueLoader';
@@ -24,8 +24,8 @@ import useGetContents from '../hooks/useGetContents';
 function Index() {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
-  const {tx_ref} = router.query;
+  // const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
+  // const {tx_ref} = router.query;
 
   const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
@@ -39,9 +39,6 @@ function Index() {
   });
   const [expiredSub] = useExpiredSubscriptionMutation();
 
-  console.log('tx_ref', tx_ref);
-  console.log('okay', localStorage.getItem('okay')!);
-
   useEffect(() => {
     const expired = async () => {
       const res: any = await expiredSub({});
@@ -53,33 +50,33 @@ function Index() {
     expired();
   }, []);
 
-  useEffect(() => {
-    const deposit = async () => {
-      console.log('entered deposit');
-      depositToWallet({
-        amount: Number(JSON.parse(localStorage.getItem('okay')!)),
-        description: 'Funding wallet',
-        reference: `${tx_ref}`,
-      })
-        .then(() => {
-          console.log('done deposit');
-          localStorage.removeItem('okay');
-        })
-        .catch(() => {
-          localStorage.removeItem('okay');
-        });
-      window.location.replace('/home');
-    };
-    if (tx_ref && localStorage.getItem('okay')) {
-      deposit();
-      localStorage.removeItem('okay');
-    } else if (
-      !localStorage.getItem('okay') &&
-      router.asPath.includes('status')
-    ) {
-      window.location.replace('/home');
-    }
-  }, [tx_ref, depositToWallet, router]);
+  // useEffect(() => {
+  //   const deposit = async () => {
+  //     console.log('entered deposit');
+  //     depositToWallet({
+  //       amount: Number(JSON.parse(localStorage.getItem('okay')!)),
+  //       description: 'Funding wallet',
+  //       reference: `${tx_ref}`,
+  //     })
+  //       .then(() => {
+  //         console.log('done deposit');
+  //         localStorage.removeItem('okay');
+  //       })
+  //       .catch(() => {
+  //         localStorage.removeItem('okay');
+  //       });
+  //     // window.location.replace('/home');
+  //   };
+  //   if (tx_ref && localStorage.getItem('okay')) {
+  //     deposit();
+  //     localStorage.removeItem('okay');
+  //   } else if (
+  //     !localStorage.getItem('okay') &&
+  //     router.asPath.includes('status')
+  //   ) {
+  //     // window.location.replace('/home');
+  //   }
+  // }, [tx_ref, depositToWallet, router]);
 
   const {loading, hasMore, contents} = useGetContents({
     data,

@@ -19,6 +19,7 @@ import {
 	SkeletonCircle,
 	Text,
 	useColorModeValue,
+	useToast,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 import Color from '@constants/color';
@@ -46,6 +47,7 @@ function AddMoneyModal({
 }: Props) {
   const {token} = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
+  const chakraToast = useToast();
 
   useEffect(() => {
     if (!amount) {
@@ -69,9 +71,19 @@ function AddMoneyModal({
 
     if ('data' in res) {
       setAmount('');
-
-      localStorage.setItem('okay', JSON.stringify(amount));
-      window.open(res.data?.data?.data?.link);
+      // localStorage.setItem('okay', JSON.stringify(amount));
+      window.open('/wallet');
+    } else {
+      chakraToast({
+        title: res.error?.data?.message || 'Something went wrong',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      setTimeout(() => {
+        window.open('/wallet');
+      }, 1000);
     }
     // handleFlutterPayment({
     //   callback: async (response) => {
