@@ -20,7 +20,11 @@ function Index() {
   const router = useRouter();
   const {id, userId} = router.query;
   const {data, isLoading, refetch, error} = useGetContentQuery<any>(id);
-  const {data: userData, isFetching, isError} = useGetUserQuery(userId);
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    isError,
+  } = useGetUserQuery(userId);
   const [view] = useCreateViewMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
@@ -75,12 +79,13 @@ function Index() {
   return (
     <>
       {isLoading ||
-        (!userData && (
-          <Box h='90vh'>
+        isUserLoading ||
+        (!data?.data && (
+          <Box h='90vh' w='100%'>
             <CliqueLoader />
           </Box>
         ))}
-      {userData && !isLoading && !isFetching && data?.data && (
+      {userData && !isLoading && !isUserLoading && data?.data && (
         <HomeLayout>
           <Box display={{lg: 'flex'}}>
             <Box

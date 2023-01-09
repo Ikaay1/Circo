@@ -44,6 +44,18 @@ export const authApi = createApi({
       invalidatesTags: ['Auth'],
     }),
 
+    socialSignup: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `social-signup`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
+
     verifyEmail: builder.mutation<any, any>({
       query: (body) => ({
         url: `forgot-password`,
@@ -89,4 +101,5 @@ export const {
   useVerifyEmailMutation,
   useVerifyLinkCodeMutation,
   useChangePasswordMutation,
+  useSocialSignupMutation,
 } = authApi;

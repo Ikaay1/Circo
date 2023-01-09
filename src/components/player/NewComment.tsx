@@ -15,6 +15,7 @@ import {
 	ModalOverlay,
 	Spinner,
 	Textarea,
+	useColorModeValue,
 	useDisclosure,
 } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
@@ -64,16 +65,19 @@ function NewComment({
             rounded={'10px'}
             p='5px'
             px='10px'
-            color={'clique.white'}
+            // color={'clique.white'}
             fontSize={'smSubHead'}
             _placeholder={{
-              color: 'clique.white',
+              color: useColorModeValue(
+                'clique.ashGrey',
+                'clique.lightPrimaryBg',
+              ),
               fontSize: 'smSubHead',
             }}
             placeholder={
               fixed !== 'yes' ? 'Enter Comment...' : 'Enter Reply...'
             }
-            bg='clique.ashGrey'
+            bg={useColorModeValue('clique.lightPrimaryBg', 'clique.ashGrey')}
             border={'none'}
             _focus={{border: 'none', boxShadow: 'none'}}
             value={comment}
@@ -88,7 +92,7 @@ function NewComment({
             cursor={'pointer'}
             h='100%'
             roundedRight='10px'
-            bg='clique.ashGrey'
+            bg={useColorModeValue('clique.lightPrimaryBg', 'clique.ashGrey')}
           >
             <Image
               onClick={onOpen}

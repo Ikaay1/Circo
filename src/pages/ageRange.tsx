@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useVerifyEmailMutation } from 'redux/services/auth.service';
 
@@ -12,20 +12,23 @@ import ShowAuthImage from '@components/auth/ShowAuthImage';
 import Color from '@constants/color';
 
 const ConfirmEmail = () => {
-  const [email, setEmail] = useState('');
-  const [verifyEmail, verifyEmailStatus] = useVerifyEmailMutation();
+  const [ageRange, setAgeRange] = useState('');
   const router = useRouter();
 
-  const handleVerifyEmail = async () => {
-    const res: any = await verifyEmail({email});
-    if ('data' in res) {
-      toast.success('Please check your email, a link has been sent there');
-    } else {
-      toast.error(res.error?.data?.message);
-      if (res.error?.data?.message.includes('Google Sign up')) {
-        router.push('/login');
-      }
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem('userData')!)) {
+      router.push('login');
     }
+  }, []);
+
+  const handleAgeRange = () => {
+    const data = JSON.parse(localStorage.getItem('userData')!);
+    const userData = {
+      ...data,
+      ageRange,
+    };
+    localStorage.setItem('userData', JSON.stringify(userData));
+    router.push('/interests');
   };
 
   return (
@@ -47,35 +50,27 @@ const ConfirmEmail = () => {
         <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
           <ShowAuthHeader
             header='Change Password'
-            detail='Enter your Circo email address to change password'
+            detail='Please select an age range'
           />
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleVerifyEmail();
+              handleAgeRange();
             }}
             className='login-form'
           >
             <Box position='relative' height='57px' marginTop={'.5rem'}>
               <AuthInput
-                email={true}
-                name={'Email'}
-                theState={email}
-                setTheState={setEmail}
+                name={'Age Range'}
+                option={['18 and above', 'Below 18']}
+                ageRange={ageRange}
+                setAgeRange={setAgeRange}
               />
             </Box>
-            <Text
-              color='clique.secondaryGrey2'
-              textAlign='center'
-              marginTop='5.5rem'
-            >
-              You will receive an email with a link to verify your account then,
-              you can change your password
-            </Text>
             <AuthButton
               {...{marginTop: '.8rem'}}
               name='Next'
-              status={verifyEmailStatus}
+              // status={verifyEmailStatus}
             />
           </form>
         </Box>

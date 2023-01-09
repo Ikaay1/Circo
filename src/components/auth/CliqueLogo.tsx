@@ -11,12 +11,13 @@ export const CliqueLogo = () => {
     <Box
       w={{base: '70px', lg: '200px'}}
       cursor={'pointer'}
-      onClick={() => router.push('/')}
+      onClick={() => router.push('/login')}
       maxW={{base: '70px', lg: '200px'}}
       minW={{base: '70px', lg: '200px'}}
-      position={'absolute'}
+      position={'fixed'}
       top='4%'
       left='5%'
+      zIndex={99}
     >
       <Image
         alt='circo logo'
