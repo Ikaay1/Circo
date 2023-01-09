@@ -13,7 +13,7 @@ import { setCredentials } from 'redux/slices/authSlice';
 
 import { Box, Button, Image, Text } from '@chakra-ui/react';
 import Color from '@constants/color';
-import { getDecodedOAuthJwtGoogle } from '@constants/googleDecode';
+// import { getDecodedOAuthJwtGoogle } from '@constants/googleDecode';
 import { socialMediaIconsData } from '@constants/utils';
 // import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
