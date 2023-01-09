@@ -51,6 +51,42 @@ export const streamCommentAPI = createApi({
       invalidatesTags: ["Live"],
     }),
 
+    replyStreamComment: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `livestream/comment/reply`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    likeCommentReply: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `livestream/comment/reply/like`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
+    dislikeCommentReply: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `livestream/comment/reply/dislike`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Live"],
+    }),
+
     dislikeStreamComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `livestream/comment/dislike`,
@@ -70,4 +106,7 @@ export const {
   usePostCommentOnStreamMutation,
   useLikeStreamCommentMutation,
   useDislikeStreamCommentMutation,
+  useReplyStreamCommentMutation,
+  useLikeCommentReplyMutation,
+  useDislikeCommentReplyMutation,
 } = streamCommentAPI;
