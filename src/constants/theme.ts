@@ -92,8 +92,8 @@ const breakpoints = {
 
 //initial config
 const config: ThemeConfig = {
-  initialColorMode: "system",
-  useSystemColorMode: true,
+  initialColorMode: "light",
+  useSystemColorMode: false,
 };
 
 //font sizes

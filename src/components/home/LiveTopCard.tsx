@@ -27,17 +27,12 @@ function LiveTopCard() {
     (store) => store.app.userReducer.userProfile
   );
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <Flex
       alignItems={"center"}
       maxW={{ base: "100%", lg: "calc(100vw - 560px)" }}
       my="10px"
+      display={data?.data.length === 0 ? "none" : "flex"}
     >
       <Text
         position={"relative"}
