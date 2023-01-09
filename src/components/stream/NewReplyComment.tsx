@@ -28,7 +28,7 @@ function NewReplyComment({ id }: { id: string }) {
       bottom="0"
       right={"0"}
       px="0"
-      bg={Color().whiteAndBlack}
+      // bg={Color().whiteAndBlack}
       py="0"
       w="100%"
     >
@@ -46,14 +46,14 @@ function NewReplyComment({ id }: { id: string }) {
           rounded={"10px"}
           p="5px"
           px="10px"
-          color={"clique.white"}
+          color={Color().blackAndWhite}
           fontSize={"smSubHead"}
           _placeholder={{
-            color: "clique.white",
+            color: Color().blackAndWhite,
             fontSize: "smSubHead",
           }}
           placeholder="Enter Comment..."
-          bg="clique.ashGrey"
+          bg={Color().lightAndPrimary}
           border={"none"}
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}
@@ -84,7 +84,7 @@ function NewReplyComment({ id }: { id: string }) {
           cursor={"pointer"}
           h="100%"
           roundedRight="10px"
-          bg="clique.ashGrey"
+          bg={Color().whiteAndBlack}
           onClick={async () => {
             const post: any = await replyStreamComment({
               commentId: id,

@@ -18,26 +18,15 @@ import {
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import Color from "@constants/color";
-import NewComment from "@components/player/NewComment";
-import { useReplyCommentMutation } from "redux/services/content.service";
 import EachReply from "@components/stream/EachReply";
 import NewReplyComment from "./NewReplyComment";
 
 function EachComment({ comment }: { comment: any }) {
-  const [reply, setReply] = useState("");
   const router = useRouter();
-  const { id } = router.query;
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const [show, setShow] = useState(false);
   const [likeStreamComment, likeInfo] = useLikeStreamCommentMutation();
   const [dislikeStreamComment, dislikeInfo] = useDislikeStreamCommentMutation();
-  const [replyComment, replyCommentStatus] = useReplyCommentMutation();
-  const handleReply = async () => {};
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
 
   return (
     <Box position={"relative"}>
