@@ -1,0 +1,66 @@
+import { Field } from "formik";
+import React from "react";
+
+import {
+  Box,
+  FormControl,
+  FormErrorMessage,
+  Input,
+  Text,
+  Textarea,
+  useColorModeValue,
+} from "@chakra-ui/react";
+
+type Props = {
+  name: string;
+  nameValue: string;
+  textArea: boolean;
+  variant?: "small" | "medium" | "large";
+};
+
+export default function CustumField({
+  name,
+  nameValue,
+  textArea,
+  variant,
+}: Props) {
+  const value = useColorModeValue("clique.white", "clique.secondaryGrey1");
+
+  return (
+    <Field name={nameValue}>
+      {({ field, form: { touched, errors } }: any) => (
+        <FormControl isInvalid={errors[field.name] && touched[field.name]}>
+          <Box
+            bg={value}
+            px="2"
+            py="3"
+            mb="5"
+            borderRadius={"10px"}
+            w={variant === "small" ? "70%" : "100%"}
+          >
+            <Text
+              fontSize={"smSubHead"}
+              fontWeight="400"
+              mb="1"
+              color={"clique.secondaryGrey2"}
+            >
+              {name}
+            </Text>
+            {textArea ? (
+              <Textarea
+                variant="filled"
+                bg={value}
+                name={nameValue}
+                {...field}
+              />
+            ) : (
+              <Input variant="filled" bg={value} name="name" {...field} />
+            )}
+
+            <FormErrorMessage>{errors[field.name]}</FormErrorMessage>
+          </Box>
+        </FormControl>
+      )}
+    </Field>
+  );
+}
