@@ -148,7 +148,7 @@ function VideoThumb({
                 isOpen={isOpen}
                 onOpen={onOpen}
                 id={video?.uploader_id?._id}
-                userName={video?.uploader_id?.userName}
+                userName={video?.channel_id?.name}
               />
               <Box
                 h={{base: '200px', lg: '130px', mlg: '180px'}}

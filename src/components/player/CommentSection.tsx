@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
 	useGetContentCommentsQuery,
 	usePostCommentOnContentMutation,
@@ -6,12 +6,29 @@ import {
 
 import { Box, Flex, Skeleton, SkeletonCircle, Text } from '@chakra-ui/react';
 import Color from '@constants/color';
+import {
+	scrollBarStyle,
+	scrollBarStyle2,
+	scrollBarStyle3,
+	scrollBarStyle4,
+} from '@constants/utils';
 
 import EachComment from './EachComment';
 import NewComment from './NewComment';
 
 function CommentSection({id}: {id: string | string[] | undefined}) {
-  const {data, isLoading, refetch} = useGetContentCommentsQuery(id);
+  const [page, setPage] = useState(1);
+  const [comments, setComments] = useState<any[]>([]);
+  const [hasMore, setHasMore] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [clicked, setClicked] = useState(true);
+  const [forReply, setForReply] = useState(false);
+  const {data, isLoading, refetch, isFetching} = useGetContentCommentsQuery({
+    id,
+    page,
+    limit: 10,
+  });
+  const dummy = useRef(null);
   const [postCommentOnContent, postCommentOnContentStatus] =
     usePostCommentOnContentMutation();
   const [comment, setComment] = useState('');
@@ -24,6 +41,44 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
       refetch();
     }
   };
+
+  useEffect(() => {
+    if (isFetching && !isLoading && clicked) {
+      setLoading(true);
+    }
+  }, [isFetching]);
+
+  useEffect(() => {
+    if (!page && !forReply) {
+      //@ts-ignore
+      dummy.current.scrollIntoView({behavior: 'smooth'});
+    }
+  }, [comments.length]);
+
+  useEffect(() => {
+    if (!isFetching && data && clicked) {
+      setComments((prevComments) => [
+        ...prevComments,
+        ...data.data.comments.comments,
+      ]);
+      setLoading(false);
+      setClicked(false);
+      setHasMore(page < data.data.comments.totalPages);
+    }
+  }, [isFetching]);
+
+  useEffect(() => {
+    if (!isFetching && data && !clicked) {
+      setPage(NaN);
+    }
+  }, [isFetching]);
+
+  useEffect(() => {
+    if (!isFetching && data && !clicked && !page) {
+      setComments(data.data.comments.comments);
+      setHasMore(false);
+    }
+  }, [page, isFetching]);
 
   return (
     <Box
@@ -83,9 +138,49 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
         ))}
 
       {data &&
-        data.data.comments.map((comment: any) => (
-          <EachComment key={comment._id} comment={comment} />
-        ))}
+        comments.length &&
+        comments.map((comment: any, i: number) => {
+          return (
+            <EachComment
+              setForReply={setForReply}
+              key={comment._id}
+              comment={comment}
+            />
+          );
+        })}
+      <div ref={dummy} />
+      {hasMore && (
+        <Text
+          color='clique.base'
+          onClick={() => {
+            setPage((prevPage) => prevPage + 1);
+            setClicked(true);
+          }}
+          mb='1rem'
+          mt='1rem'
+          fontSize={'smSubHead'}
+          fontWeight='bold'
+          cursor={'pointer'}
+        >
+          Show more comments
+        </Text>
+      )}
+      {loading && (
+        <Flex
+          mb='1.7rem'
+          w='full'
+          mt='15px'
+          bg='clique.ashGrey'
+          rounded='10px'
+          p='20px'
+        >
+          <SkeletonCircle minH='40px' minW='40px' mr='20px' />
+          <Box w='full'>
+            <Skeleton h='15px' />
+            <Skeleton h='15px' mt='5px' />
+          </Box>
+        </Flex>
+      )}
       <NewComment
         handleComment={handleComment}
         setComment={setComment}

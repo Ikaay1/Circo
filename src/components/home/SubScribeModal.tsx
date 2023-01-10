@@ -1,22 +1,23 @@
-import { Field, Form, Formik } from "formik";
-import React from "react";
+import { Field, Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  Icon,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
-import CliqueGiftIcon from "@icons/CliqueGiftIcon";
+	Box,
+	Button,
+	Checkbox,
+	Flex,
+	FormControl,
+	Icon,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	Text,
+	useDisclosure,
+} from '@chakra-ui/react';
+import CliqueGiftIcon from '@icons/CliqueGiftIcon';
 
-import { useRoutingChannel } from "../../hooks/useRoutingChannel";
+import { useRoutingChannel } from '../../hooks/useRoutingChannel';
 
 function SubScribeModal({
   isOpen,
@@ -31,54 +32,62 @@ function SubScribeModal({
   id: string;
   userName: string;
 }) {
-  const { handleRouting } = useRoutingChannel();
+  const {handleRouting} = useRoutingChannel();
+  const router = useRouter();
 
   return (
     <>
-      <Modal size={"2xl"} isOpen={isOpen} isCentered onClose={onClose}>
+      <Modal size={'2xl'} isOpen={isOpen} isCentered onClose={onClose}>
         <ModalOverlay />
-        <ModalContent m="0" p="40px" rounded={"20px"} bg="clique.primaryBg">
+        <ModalContent m='0' p='40px' rounded={'20px'} bg='clique.primaryBg'>
           <Text
-            color={"clique.white"}
-            fontFamily={"Poppins"}
+            color={'clique.white'}
+            fontFamily={'Poppins'}
             fontWeight={400}
-            fontSize={"head"}
-            lineHeight={"1.5"}
-            textAlign="center"
+            fontSize={'head'}
+            lineHeight={'1.5'}
+            textAlign='center'
           >
             Subscribe
           </Text>
 
           <Text
-            my="10px"
-            color={"clique.white"}
-            fontFamily={"Poppins"}
+            my='10px'
+            color={'clique.white'}
+            fontFamily={'Poppins'}
             fontWeight={400}
-            fontSize={"subHead"}
-            lineHeight={"1.5"}
-            textAlign="center"
+            fontSize={'subHead'}
+            lineHeight={'1.5'}
+            textAlign='center'
           >
             You are not subscribed to
-            <Text as="span" color="clique.base">
-              {" " + userName}
+            <Text as='span' color='clique.base'>
+              {' ' + userName}
             </Text>
-            . Subscribe to the channel and have access to permium content,
-            videos and exclusive live shows.
+            {router.asPath.includes('channel/subscribe')
+              ? '. Please click on the subscribe button above to subscribe.'
+              : '. Subscribe to the channel and have access to permium content, videos and exclusive live shows.'}
           </Text>
 
-          <Flex justifyContent={"center"}>
+          <Flex justifyContent={'center'}>
             <Button
-              mt={"30px"}
-              w="70%"
-              size="lg"
-              bg="clique.base"
-              color="clique.white"
-              rounded={"full"}
+              mt={'30px'}
+              w='70%'
+              size='lg'
+              bg='clique.base'
+              color='clique.white'
+              rounded={'full'}
               fontWeight={400}
-              colorScheme="purple"
-              onClick={() => handleRouting(id)}
+              colorScheme='purple'
+              onClick={
+                router.asPath.includes('channel/subscribe')
+                  ? onClose
+                  : () => handleRouting(id)
+              }
             >
-              Go to Channel
+              {router.asPath.includes('channel/subscribe')
+                ? 'Okay'
+                : 'Go to Channel'}
             </Button>
           </Flex>
         </ModalContent>

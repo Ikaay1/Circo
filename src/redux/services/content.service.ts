@@ -50,8 +50,16 @@ export const contentApi = createApi({
     }),
 
     getContentComments: builder.query<any, any>({
-      query: (id) => ({
-        url: `comment/${id}`,
+      query: ({
+        id,
+        page,
+        limit,
+      }: {
+        id: string;
+        page: number;
+        limit: number;
+      }) => ({
+        url: `comment/${id}?page=${page}&limit=${limit}`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
