@@ -30,7 +30,7 @@ import TickIcon from '../assets/icons/TickIcon';
 import { useCategoryQuery } from '../redux/services/category.service';
 
 const Interests = () => {
-  const {data, isLoading} = useCategoryQuery('');
+  const {data, isLoading, error} = useCategoryQuery('');
   const dispatch = useAppDispatch();
   const [categories, setCategories] = useState<string[]>([]);
   const [social, setSocial] = useState<string>(
@@ -39,8 +39,13 @@ const Interests = () => {
   const router = useRouter();
   const {colorMode, toggleColorMode} = useColorMode();
 
+  console.log('cat', data);
+  console.log('err', error);
+
   const [signup, signUpStatus] = useSignupMutation();
   const [socialSignup, socialSignupStatus] = useSocialSignupMutation();
+
+  console.log('social', social);
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem('userData')!)) {
@@ -78,7 +83,7 @@ const Interests = () => {
       }
       return;
     }
-    if (JSON.parse(localStorage.getItem('userData')!)?.social === 'GOOGLE') {
+    if (JSON.parse(localStorage.getItem('userData')!)?.social !== 'NULL') {
       let userData = JSON.parse(localStorage.getItem('userData')!);
       userData = {
         ...userData,
@@ -86,6 +91,7 @@ const Interests = () => {
       };
 
       const res: any = await socialSignup(userData);
+      console.log('res', res);
 
       localStorage.removeItem('userData');
       if ('data' in res) {
@@ -201,7 +207,7 @@ const Interests = () => {
                 w='380px'
                 name="Let's go!"
                 onClick={handleSignUp}
-                status={signUpStatus}
+                status={social === 'NULL' ? signUpStatus : socialSignupStatus}
               />
             </Box>
             <Box display={{lg: 'none'}}>
@@ -209,7 +215,7 @@ const Interests = () => {
                 w='100%'
                 name="Let's go!"
                 onClick={handleSignUp}
-                status={!social ? signUpStatus : socialSignupStatus}
+                status={social === 'NULL' ? signUpStatus : socialSignupStatus}
               />
             </Box>
           </Box>
