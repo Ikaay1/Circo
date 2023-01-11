@@ -6,10 +6,10 @@ import FacebookLogin, {
 	ReactFacebookFailureResponse,
 	ReactFacebookLoginInfo,
 } from 'react-facebook-login';
-// import GoogleLogin, {
-// 	GoogleLoginResponse,
-// 	GoogleLoginResponseOffline,
-// } from 'react-google-login';
+import GoogleLogin, {
+	GoogleLoginResponse,
+	GoogleLoginResponseOffline,
+} from 'react-google-login';
 import { toast } from 'react-hot-toast';
 import { useAppDispatch } from 'redux/app/hooks';
 import { useLoginMutation } from 'redux/services/auth.service';
@@ -19,8 +19,9 @@ import { Box, Button, Image, Text } from '@chakra-ui/react';
 import Color from '@constants/color';
 // import { getDecodedOAuthJwtGoogle } from '@constants/googleDecode';
 import { socialMediaIconsData } from '@constants/utils';
+
 // import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+// import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
 export const SocialMedia = ({
   haveAccount,
@@ -33,28 +34,16 @@ export const SocialMedia = ({
   const [login, loginStatus] = useLoginMutation();
   const dispatch = useAppDispatch();
 
-  // const responseGoogle = async (response: any) => {
-  //   if (response?.profileObj) {
-
-  //   }
-  // };
-
-  // const responseError = (error: any) => {
-  //   console.log(error);
-  //   // toast.error(error?.error);
-  // };
-
-  const loginGoogle = async (credentialResponse: CredentialResponse) => {
-    const realUserData: any = jwt_decode(credentialResponse?.credential!);
-    console.log(realUserData);
-    if (realUserData?.email) {
-      const {family_name, given_name, picture, email} = realUserData;
+  const responseGoogle = async (response: any) => {
+    console.log(response?.profileObj);
+    if (response?.profileObj) {
+      const {familyName, givenName, imageUrl, email} = response?.profileObj;
       const data = {
-        firstName: family_name.trim(),
-        lastName: given_name.trim(),
+        firstName: familyName.trim(),
+        lastName: givenName.trim(),
         userName: email.split('@')[0].trim(),
         email: email.toLowerCase().trim(),
-        photo: picture,
+        photo: imageUrl,
         social: 'GOOGLE',
       };
       localStorage.setItem('userData', JSON.stringify(data));
@@ -80,6 +69,47 @@ export const SocialMedia = ({
     }
   };
 
+  const responseError = (error: any) => {
+    console.log(error);
+    // toast.error(error?.error);
+  };
+
+  // const loginGoogle = async (credentialResponse: CredentialResponse) => {
+  //   const realUserData: any = jwt_decode(credentialResponse?.credential!);
+  //   console.log(realUserData);
+  //   if (realUserData?.email) {
+  //     const {family_name, given_name, picture, email} = realUserData;
+  //     const data = {
+  //       firstName: family_name.trim(),
+  //       lastName: given_name.trim(),
+  //       userName: email.split('@')[0].trim(),
+  //       email: email.toLowerCase().trim(),
+  //       photo: picture,
+  //       social: 'GOOGLE',
+  //     };
+  //     localStorage.setItem('userData', JSON.stringify(data));
+  //     if (router.asPath === '/signup') {
+  //       router.push(`/ageRange`);
+  //     } else {
+  //       const userData = {
+  //         userNameOrEmail: email,
+  //       };
+  //       const res: any = await login(userData);
+
+  //       if ('data' in res) {
+  //         dispatch(
+  //           setCredentials({
+  //             payload: res.data,
+  //           }),
+  //         );
+  //         router.push('/home');
+  //       } else {
+  //         toast.error(res.error?.data?.message);
+  //       }
+  //     }
+  //   }
+  // };
+
   const responseFacebook = (response: any) => {
     console.log(response);
     // Login failed
@@ -97,19 +127,19 @@ export const SocialMedia = ({
     // }
   };
 
-  // useEffect(() => {
-  //   const gapi = import('gapi-script').then((pack) => pack.gapi);
-  //   async function start() {
-  //     const d = await gapi;
-  //     d.client.init({
-  //       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-  //       scope: 'email',
-  //       plugin_name: 'chat',
-  //     });
-  //   }
+  useEffect(() => {
+    const gapi = import('gapi-script').then((pack) => pack.gapi);
+    async function start() {
+      const d = await gapi;
+      d.client.init({
+        clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+        scope: 'email',
+        plugin_name: 'chat',
+      });
+    }
 
-  //   gapi.then((d) => d.load('client:auth2', start));
-  // }, []);
+    gapi.then((d) => d.load('client:auth2', start));
+  }, []);
 
   return (
     <Box marginTop={'2.5rem'}>
@@ -141,7 +171,7 @@ export const SocialMedia = ({
             />
           </Box> */}
         {/* // ))} */}
-        {/* <GoogleLogin
+        <GoogleLogin
           clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
           render={(renderProps) => (
             <Button
@@ -157,6 +187,7 @@ export const SocialMedia = ({
               alignItems={'center'}
               cursor='pointer'
               border='none'
+              mx='auto'
             >
               <Image
                 src={`/assets/google.png`}
@@ -169,14 +200,14 @@ export const SocialMedia = ({
           onSuccess={(response) => responseGoogle(response)}
           onFailure={(error) => responseError(error)}
           cookiePolicy='single_host_origin'
-        /> */}
+        />
         <Box display={'flex'} justifyContent={'center'}>
-          <GoogleLogin
+          {/* <GoogleLogin
             onSuccess={(credentialResponse) => loginGoogle(credentialResponse)}
             onError={() => {
               console.log('Login Failed');
             }}
-          />
+          /> */}
         </Box>
         <Box mt='1rem' display={'flex'} justifyContent={'center'}>
           <FacebookLogin
