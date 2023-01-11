@@ -28,7 +28,7 @@ const Navbar = ({
           letterSpacing='0.5px'
           color='clique.white'
         >
-          <Link href='/about'>About</Link>
+          <Link href='/'>About</Link>
         </Text>
       </Box>
       <Box display={{base: 'none', lg: 'flex'}} alignItems='center'>
