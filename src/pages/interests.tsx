@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAppDispatch } from 'redux/app/hooks';
-import { useSignupMutation } from 'redux/services/auth.service';
+import {
+	useSignupMutation,
+	useSocialSignupMutation,
+} from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
 import {
@@ -30,35 +33,76 @@ const Interests = () => {
   const {data, isLoading} = useCategoryQuery('');
   const dispatch = useAppDispatch();
   const [categories, setCategories] = useState<string[]>([]);
+  const [social, setSocial] = useState<string>(
+    JSON.parse(localStorage.getItem('userData')!)?.social,
+  );
   const router = useRouter();
   const {colorMode, toggleColorMode} = useColorMode();
 
   const [signup, signUpStatus] = useSignupMutation();
+  const [socialSignup, socialSignupStatus] = useSocialSignupMutation();
+
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem('userData')!)) {
+      router.push('login');
+    }
+  }, []);
 
   const handleSignUp = async () => {
     if (!categories.length) {
       toast.error('Please choose your interests');
       return;
     }
-    let userData = JSON.parse(localStorage.getItem('userData')!);
-    userData = {
-      ...userData,
-      interests: categories,
-    };
 
-    const res: any = await signup(userData);
+    if (JSON.parse(localStorage.getItem('userData')!)?.social === 'NULL') {
+      let userData = JSON.parse(localStorage.getItem('userData')!);
+      userData = {
+        ...userData,
+        interests: categories,
+      };
 
-    localStorage.removeItem('userData');
-    if ('data' in res) {
-      dispatch(
-        setCredentials({
-          payload: res.data,
-        }),
-      );
-      router.push('/home');
+      const res: any = await signup(userData);
+
       localStorage.removeItem('userData');
-    } else {
-      toast.error(res.error?.data?.message);
+      if ('data' in res) {
+        dispatch(
+          setCredentials({
+            payload: res.data,
+          }),
+        );
+        router.push('/home');
+        localStorage.removeItem('userData');
+      } else {
+        console.log(res.error);
+        toast.error(res.error?.data?.message);
+      }
+      return;
+    }
+    if (JSON.parse(localStorage.getItem('userData')!)?.social === 'GOOGLE') {
+      let userData = JSON.parse(localStorage.getItem('userData')!);
+      userData = {
+        ...userData,
+        interests: categories,
+      };
+
+      const res: any = await socialSignup(userData);
+
+      localStorage.removeItem('userData');
+      if ('data' in res) {
+        dispatch(
+          setCredentials({
+            payload: res.data,
+          }),
+        );
+        router.push('/home');
+        localStorage.removeItem('userData');
+      } else {
+        localStorage.removeItem('userData');
+        console.log(res.error);
+        toast.error(res.error?.data?.message);
+        router.push('/signup');
+      }
+      return;
     }
   };
 
@@ -165,7 +209,7 @@ const Interests = () => {
                 w='100%'
                 name="Let's go!"
                 onClick={handleSignUp}
-                status={signUpStatus}
+                status={!social ? signUpStatus : socialSignupStatus}
               />
             </Box>
           </Box>

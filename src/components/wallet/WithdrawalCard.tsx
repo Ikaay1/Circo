@@ -73,7 +73,7 @@ function WithdrawalCard({walletData}: Props) {
       )}
       <Text color='clique.red' fontSize='xsl' textAlign='center' mt='3'>
         Note: Withdrawal is automated by Clique and is sent to your added
-        beneficiary account on the 01st of every month.
+        beneficiary account on the 25th of every month.
       </Text>
     </Box>
   );
