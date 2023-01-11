@@ -90,7 +90,7 @@ export const liveAPI = createApi({
 
     getAllLiveStream: builder.query<any, any>({
       query: (type) => ({
-        url: `livestream/?paid=${type?.paid}&ongoing=${type?.ongoing}`,
+        url: `livestream/?paid=${type?.paid}&ongoing=${type?.ongoing}&search=${type?.search}`,
         method: "GET",
       }),
       providesTags: ["Live"],

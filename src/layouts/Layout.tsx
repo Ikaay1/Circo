@@ -17,7 +17,7 @@ const Layout = ({ children }: { children: any }) => {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        <link rel="icon" href="/assets/Circo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/assets/favi.svg" type="image/svg+xml" />
       </Head>
       <Box>{children}</Box>
     </Box>

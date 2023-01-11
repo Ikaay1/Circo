@@ -1,7 +1,14 @@
 import React from "react";
 import { useGetAllLiveStreamQuery } from "redux/services/livestream/live.service";
 
-import { Box, SimpleGrid, TabList, TabPanels, Tabs } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  SimpleGrid,
+  TabList,
+  TabPanels,
+  Tabs,
+} from "@chakra-ui/react";
 import EmptyState from "@components/emptyState/EmptyState";
 import CliqueTab from "@components/widgets/CliqueTab";
 import CliqueTabPanel from "@components/widgets/CliqueTabPanel";
@@ -14,10 +21,13 @@ import Color from "@constants/color";
 function EventTabs() {
   const [paid, setPaid] = React.useState("");
   const [ongoing, setOngoing] = React.useState("");
+  const [search, setSearch] = React.useState("");
   const { data, isFetching } = useGetAllLiveStreamQuery({
     paid,
     ongoing,
+    search,
   });
+
   return (
     <Tabs
       variant={"unstyled"}
@@ -36,6 +46,7 @@ function EventTabs() {
           onClick={() => {
             setPaid("");
             setOngoing("");
+            setSearch("");
           }}
         >
           All Events
@@ -44,6 +55,7 @@ function EventTabs() {
           onClick={() => {
             setPaid("false");
             setOngoing("");
+            setSearch("");
           }}
         >
           Free Events
@@ -52,6 +64,7 @@ function EventTabs() {
           onClick={() => {
             setPaid("true");
             setOngoing("");
+            setSearch("");
           }}
         >
           Paid Events
@@ -60,11 +73,28 @@ function EventTabs() {
           onClick={() => {
             setPaid("");
             setOngoing("true");
+            setSearch("");
           }}
         >
           Ongoing Events
         </CliqueTab>
       </TabList>
+
+      <Input
+        w="200px"
+        rounded={"full"}
+        _focus={{
+          boxShadow: "none",
+          outline: "none",
+          border: "1px solid grey",
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            setSearch(e.currentTarget.value);
+          }
+        }}
+        placeholder={"search live event"}
+      />
       <TabPanels>
         <CliqueTabPanel>
           {isFetching ? (
