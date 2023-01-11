@@ -62,9 +62,7 @@ function MyApp({Component, pageProps}: any) {
       <PersistGate loading={null} persistor={persistor}>
         <Chakra cookies={pageProps.cookies}>
           <GoogleOAuthProvider
-            clientId={
-              '75252957257-5i6nhuvt2643qo64oo76vg3a9ba4sp5g.apps.googleusercontent.com'
-            }
+            clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
           >
             <Layout>
               <ColorModeScript
