@@ -2,6 +2,10 @@ import jwt_decode from 'jwt-decode';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import FacebookLogin, {
+	ReactFacebookFailureResponse,
+	ReactFacebookLoginInfo,
+} from 'react-facebook-login';
 // import GoogleLogin, {
 // 	GoogleLoginResponse,
 // 	GoogleLoginResponseOffline,
@@ -76,6 +80,23 @@ export const SocialMedia = ({
     }
   };
 
+  const responseFacebook = (response: any) => {
+    console.log(response);
+    // Login failed
+    if (response.status === 'unknown') {
+      // alert("Login failed!");
+      // setLogin(false);
+      // return false;
+    }
+    // setData(response);
+    // setPicture(response.picture.data.url);
+    // if (response.accessToken) {
+    //   setLogin(true);
+    // } else {
+    //   setLogin(false);
+    // }
+  };
+
   // useEffect(() => {
   //   const gapi = import('gapi-script').then((pack) => pack.gapi);
   //   async function start() {
@@ -93,7 +114,11 @@ export const SocialMedia = ({
   return (
     <Box marginTop={'2.5rem'}>
       <Text textAlign={'center'}>Or</Text>
-      <Box marginTop={'2.5rem'} display={'flex'} justifyContent={'center'}>
+      <Box
+        marginTop={'2.5rem'}
+        // display={'flex'}
+        // justifyContent={'space-between'}
+      >
         {/* {socialMediaIconsData.map((iconData) => ( */}
         {/* <Box
             width='77px'
@@ -145,12 +170,24 @@ export const SocialMedia = ({
           onFailure={(error) => responseError(error)}
           cookiePolicy='single_host_origin'
         /> */}
-        <GoogleLogin
-          onSuccess={(credentialResponse) => loginGoogle(credentialResponse)}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
+        <Box display={'flex'} justifyContent={'center'}>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => loginGoogle(credentialResponse)}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+        </Box>
+        <Box mt='1rem' display={'flex'} justifyContent={'center'}>
+          <FacebookLogin
+            appId={process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
+            autoLoad={false}
+            fields='name,email,picture'
+            scope='public_profile,email,user_friends'
+            callback={(response) => responseFacebook(response)}
+            icon='fa-facebook'
+          />
+        </Box>
       </Box>
       <Box
         fontSize='sm2'
