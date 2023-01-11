@@ -49,16 +49,17 @@ export const SocialMedia = ({
     console.log(realUserData);
     if (realUserData?.email) {
       const {family_name, given_name, picture, email} = realUserData;
-      const data = {
-        firstName: family_name.trim(),
-        lastName: given_name.trim(),
-        userName: email.split('@')[0].trim(),
-        email: email.toLowerCase().trim(),
-        photo: picture,
-        social: 'GOOGLE',
-      };
-      localStorage.setItem('userData', JSON.stringify(data));
+
       if (router.asPath === '/signup') {
+        const data = {
+          firstName: family_name.trim(),
+          lastName: given_name.trim(),
+          userName: email.split('@')[0].trim(),
+          email: email.toLowerCase().trim(),
+          photo: picture,
+          social: 'GOOGLE',
+        };
+        localStorage.setItem('userData', JSON.stringify(data));
         router.push(`/ageRange`);
       } else {
         const userData = {
@@ -80,13 +81,42 @@ export const SocialMedia = ({
     }
   };
 
-  const responseFacebook = (response: any) => {
+  const responseFacebook = async (response: any) => {
     console.log(response);
     // Login failed
-    if (response.status === 'unknown') {
+    if (response?.accessToken) {
       // alert("Login failed!");
       // setLogin(false);
       // return false;
+      const {name, picture, email} = response;
+      if (router.asPath === '/signup') {
+        const data = {
+          firstName: name.split(' ')[0].trim(),
+          lastName: name.split(' ')[1].trim(),
+          userName: email.split('@')[0].trim(),
+          email: email.toLowerCase().trim(),
+          photo: picture?.data?.url,
+          social: 'FACEBOOK',
+        };
+        localStorage.setItem('userData', JSON.stringify(data));
+        router.push(`/ageRange`);
+      } else {
+        const userData = {
+          userNameOrEmail: email,
+        };
+        const res: any = await login(userData);
+
+        if ('data' in res) {
+          dispatch(
+            setCredentials({
+              payload: res.data,
+            }),
+          );
+          router.push('/home');
+        } else {
+          toast.error(res.error?.data?.message);
+        }
+      }
     }
     // setData(response);
     // setPicture(response.picture.data.url);
@@ -110,6 +140,8 @@ export const SocialMedia = ({
 
   //   gapi.then((d) => d.load('client:auth2', start));
   // }, []);
+
+  console.log('App-id', process.env.NEXT_PUBLIC_FACEBOOK_APPID);
 
   return (
     <Box marginTop={'2.5rem'}>
