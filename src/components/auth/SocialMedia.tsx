@@ -2,6 +2,10 @@ import jwt_decode from 'jwt-decode';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import FacebookLogin, {
+	ReactFacebookFailureResponse,
+	ReactFacebookLoginInfo,
+} from 'react-facebook-login';
 // import GoogleLogin, {
 // 	GoogleLoginResponse,
 // 	GoogleLoginResponseOffline,
@@ -45,16 +49,17 @@ export const SocialMedia = ({
     console.log(realUserData);
     if (realUserData?.email) {
       const {family_name, given_name, picture, email} = realUserData;
-      const data = {
-        firstName: family_name.trim(),
-        lastName: given_name.trim(),
-        userName: email.split('@')[0].trim(),
-        email: email.toLowerCase().trim(),
-        photo: picture,
-        social: 'GOOGLE',
-      };
-      localStorage.setItem('userData', JSON.stringify(data));
+
       if (router.asPath === '/signup') {
+        const data = {
+          firstName: family_name.trim(),
+          lastName: given_name.trim(),
+          userName: email.split('@')[0].trim(),
+          email: email.toLowerCase().trim(),
+          photo: picture,
+          social: 'GOOGLE',
+        };
+        localStorage.setItem('userData', JSON.stringify(data));
         router.push(`/ageRange`);
       } else {
         const userData = {
@@ -76,6 +81,52 @@ export const SocialMedia = ({
     }
   };
 
+  const responseFacebook = async (response: any) => {
+    console.log(response);
+    // Login failed
+    if (response?.accessToken) {
+      // alert("Login failed!");
+      // setLogin(false);
+      // return false;
+      const {name, picture, email} = response;
+      if (router.asPath === '/signup') {
+        const data = {
+          firstName: name.split(' ')[0].trim(),
+          lastName: name.split(' ')[1].trim(),
+          userName: email.split('@')[0].trim(),
+          email: email.toLowerCase().trim(),
+          photo: picture?.data?.url,
+          social: 'FACEBOOK',
+        };
+        localStorage.setItem('userData', JSON.stringify(data));
+        router.push(`/ageRange`);
+      } else {
+        const userData = {
+          userNameOrEmail: email,
+        };
+        const res: any = await login(userData);
+
+        if ('data' in res) {
+          dispatch(
+            setCredentials({
+              payload: res.data,
+            }),
+          );
+          router.push('/home');
+        } else {
+          toast.error(res.error?.data?.message);
+        }
+      }
+    }
+    // setData(response);
+    // setPicture(response.picture.data.url);
+    // if (response.accessToken) {
+    //   setLogin(true);
+    // } else {
+    //   setLogin(false);
+    // }
+  };
+
   // useEffect(() => {
   //   const gapi = import('gapi-script').then((pack) => pack.gapi);
   //   async function start() {
@@ -90,10 +141,16 @@ export const SocialMedia = ({
   //   gapi.then((d) => d.load('client:auth2', start));
   // }, []);
 
+  console.log('App-id', process.env.NEXT_PUBLIC_FACEBOOK_APPID);
+
   return (
     <Box marginTop={'2.5rem'}>
       <Text textAlign={'center'}>Or</Text>
-      <Box marginTop={'2.5rem'} display={'flex'} justifyContent={'center'}>
+      <Box
+        marginTop={'2.5rem'}
+        // display={'flex'}
+        // justifyContent={'space-between'}
+      >
         {/* {socialMediaIconsData.map((iconData) => ( */}
         {/* <Box
             width='77px'
@@ -145,12 +202,24 @@ export const SocialMedia = ({
           onFailure={(error) => responseError(error)}
           cookiePolicy='single_host_origin'
         /> */}
-        <GoogleLogin
-          onSuccess={(credentialResponse) => loginGoogle(credentialResponse)}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
+        <Box display={'flex'} justifyContent={'center'}>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => loginGoogle(credentialResponse)}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+        </Box>
+        <Box mt='1rem' display={'flex'} justifyContent={'center'}>
+          <FacebookLogin
+            appId={process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
+            autoLoad={false}
+            fields='name,email,picture'
+            scope='public_profile,email,user_friends'
+            callback={(response) => responseFacebook(response)}
+            icon='fa-facebook'
+          />
+        </Box>
       </Box>
       <Box
         fontSize='sm2'

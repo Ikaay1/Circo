@@ -10,6 +10,7 @@ import {
 	Skeleton,
 	SkeletonText,
 	Text,
+	useColorModeValue,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 import GoodIcon from '@icons/WalletIcon copy';
@@ -39,8 +40,8 @@ function SubscribeModal({
     <Modal isOpen={isOpen} onClose={onClose} isCentered size='xl'>
       <ModalOverlay />
       <ModalContent
-        bg='clique.black'
-        borderColor='clique.black'
+        bg={useColorModeValue('clique.white', 'clique.ashGrey')}
+        // borderColor='clique.black'
         borderRadius='xl'
         pt='3'
         pb='10'

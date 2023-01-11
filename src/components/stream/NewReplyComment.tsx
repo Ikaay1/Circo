@@ -22,6 +22,7 @@ function NewReplyComment({ id }: { id: string }) {
   const [replyStreamComment, postInfo] = useReplyStreamCommentMutation();
 
   const toast = useToast();
+
   return (
     <Flex
       position={"static"}
