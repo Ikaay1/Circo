@@ -77,6 +77,7 @@ const EditProfile = () => {
     values: UpdateProfile,
     {setSubmitting}: FormikHelpers<UpdateProfile>,
   ) => {
+    console.log('entered for submit');
     const myFormData = new FormData();
     myFormData.append('firstName', values.firstName);
     myFormData.append('lastName', values.lastName);

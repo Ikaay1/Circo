@@ -44,7 +44,13 @@ const Footer = () => {
           </Text>
           <Box display={'flex'} mt={{base: '.85rem'}}>
             <Image marginRight={'2rem'} src='/assets/instagram.png' alt='' />
-            <Image src='/assets/fb.png' alt='' />
+            <a
+              href='https://web.facebook.com/profile.php?id=100089370518977'
+              target={'_blank'}
+              rel='noreferrer'
+            >
+              <Image src='/assets/fb.png' alt='' />
+            </a>
           </Box>
         </Box>
         <Box mt={{base: '3.8rem', lg: '0'}}>
@@ -59,7 +65,7 @@ const Footer = () => {
               Contact Info
             </Text>
             <Box>
-              {contactInfoData.map(({image, detail}) => (
+              {contactInfoData.map(({image, detail}, i) => (
                 <Box display={'flex'} mt='1.2rem' key={image}>
                   <Image
                     src={`/assets/${image}.png`}
@@ -79,7 +85,11 @@ const Footer = () => {
                       lg: '150%',
                     }}
                     color='clique.black2'
-                    w={{base: '180px'}}
+                    w={{
+                      base: '180px',
+                      lg: i === 2 ? '110px' : '180px',
+                      xl: '180px',
+                    }}
                   >
                     {detail}
                   </Text>
