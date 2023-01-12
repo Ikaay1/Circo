@@ -290,7 +290,7 @@ function WebCamModal({ setState }: { setState: any }) {
                         </Field>
                       </Box>
 
-                      <Text fontSize={"subHead"} mb="4">
+                      <Text fontSize={"subHead"} mb="4" mt="20px">
                         Other Parameters
                       </Text>
 
