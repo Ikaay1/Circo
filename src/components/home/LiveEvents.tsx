@@ -13,6 +13,8 @@ import EventModal from "./EventModal";
 function LiveEvents() {
   const { data, isFetching } = useGetAllLiveStreamQuery({
     paid: "true",
+    ongoing: "",
+    search: "",
   });
 
   const filteredData = data?.data?.filter(
