@@ -101,12 +101,16 @@ function BeneficiaryModal({
     ) {
       confirm();
     }
-  }, [
-    beneficiaryData.accountNumber,
-    confirmAccount,
-    beneficiaryData.bankName,
-    toast,
-  ]);
+    if (
+      beneficiaryData.accountNumber.length > 10 ||
+      beneficiaryData.accountNumber.length < 10
+    ) {
+      setBeneficiaryData((prevBeneficiaryData) => ({
+        ...prevBeneficiaryData,
+        accountName: '',
+      }));
+    }
+  }, [beneficiaryData.accountNumber, beneficiaryData.bankName]);
 
   useEffect(() => {
     if (type === 'change') {
@@ -285,10 +289,16 @@ function BeneficiaryModal({
                 value={beneficiaryData.bankName}
                 onChange={(e) => handleChange(e)}
                 outline='none'
-                color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                color='clique.secondaryGrey2'
               >
                 {data?.data?.data?.map((bank: any) => (
-                  <option value={`${bank.name}#${bank.code}`} key={bank.id}>
+                  <option
+                    style={{
+                      color: colorMode !== 'dark' ? 'black' : 'white',
+                    }}
+                    value={`${bank.name}#${bank.code}`}
+                    key={bank.id}
+                  >
                     {bank.name}
                   </option>
                 ))}
@@ -321,6 +331,9 @@ function BeneficiaryModal({
                 outline='none'
                 border='none'
                 color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                _hover={{
+                  backgroundColor: 'transparent',
+                }}
               />
             </Box>
 
@@ -354,11 +367,14 @@ function BeneficiaryModal({
                   outline='none'
                   border='none'
                   color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                  _hover={{
+                    backgroundColor: 'transparent',
+                  }}
                 />
               </Box>
               {loading2 && (
                 <Box display='flex' alignItems={'center'}>
-                  <Spinner />
+                  <Spinner color={'clique.white'} />
                 </Box>
               )}
             </Box>
@@ -389,6 +405,9 @@ function BeneficiaryModal({
                 outline='none'
                 border='none'
                 color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                _hover={{
+                  backgroundColor: 'transparent',
+                }}
               />
             </Box>
             <Box
@@ -418,6 +437,9 @@ function BeneficiaryModal({
                 outline='none'
                 border='none'
                 color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                _hover={{
+                  backgroundColor: 'transparent',
+                }}
               />
             </Box>
             <Box px='7'>

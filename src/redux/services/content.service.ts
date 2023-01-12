@@ -286,6 +286,18 @@ export const contentApi = createApi({
       invalidatesTags: ['Content'],
     }),
 
+    subscribeToUserChannel: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `wallet/transfer/subscribe`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Content'],
+    }),
+
     getCounts: builder.query<any, any>({
       query: () => ({
         url: `like/likesCount`,
@@ -347,4 +359,5 @@ export const {
   useDislikeReplyMutation,
   useDeleteReplyMutation,
   useReplyCommentMutation,
+  useSubscribeToUserChannelMutation,
 } = contentApi;

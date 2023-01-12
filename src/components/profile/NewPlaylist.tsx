@@ -155,6 +155,7 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
           </Text>
           <Box mt='1rem'>
             <TextArea
+              color='clique.white'
               placeholder='Playlist name'
               width='100%'
               height='195px'
