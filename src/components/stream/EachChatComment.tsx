@@ -28,11 +28,7 @@ function EachChatComment({ comment }: { comment: any }) {
       <Box mt="5px" rounded="10px" px="20px" pt="20px">
         <Flex>
           <AvataWithSpace
-            name={
-              comment?.commentUser?.firstName +
-              " " +
-              comment?.commentUser?.lastName
-            }
+            name={comment?.commentUser?.name ?? "NA"}
             url={comment?.commentUser?.photo}
             mr="20px"
             size="40px"
@@ -50,7 +46,7 @@ function EachChatComment({ comment }: { comment: any }) {
                 fontSize={"subHead"}
                 lineHeight={"1.2"}
               >
-                {comment?.commentUser?.userName ?? " NA "}
+                {comment?.commentUser?.name ?? " NA "}
               </Text>
               <Text
                 noOfLines={2}

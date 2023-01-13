@@ -244,7 +244,7 @@ function WebCamModal({ setState }: { setState: any }) {
                             >
                               <label htmlFor={"thumbNail"}>
                                 {props.values.thumbNail ? (
-                                  <Box mt="7">
+                                  <Box mt="7" mb="4">
                                     <Box
                                       bgImage={
                                         "url(" +
@@ -290,7 +290,7 @@ function WebCamModal({ setState }: { setState: any }) {
                         </Field>
                       </Box>
 
-                      <Text fontSize={"subHead"} mb="4" mt="20px">
+                      <Text fontSize={"subHead"} mb="4">
                         Other Parameters
                       </Text>
 
