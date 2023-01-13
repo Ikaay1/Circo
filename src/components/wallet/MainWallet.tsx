@@ -35,6 +35,7 @@ function MainWallet({
           flutterwaveStatus={flutterwaveStatus}
         />
         <TransactionHistory
+          walletData={walletData}
           onClick={onSort}
           click={(info) => click(info)}
           transactionHistory={transactionHistory}

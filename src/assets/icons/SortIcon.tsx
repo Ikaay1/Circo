@@ -11,29 +11,29 @@ function SortIcon(props: Props) {
         width='24'
         height='24'
         viewBox='0 0 24 24'
-        fill='none'
+        fill='#a248e8'
         xmlns='http://www.w3.org/2000/svg'
       >
         <path
           d='M3 7H21'
-          stroke='white'
-          strokeOpacity='0.4'
-          strokeWidth='1.5'
+          stroke='#a248e8'
+          strokeOpacity='1'
+          strokeWidth='2.5'
           strokeLinecap='round'
         />
         <path
-          opacity='0.34'
+          opacity='1'
           d='M6 12H18'
-          stroke='white'
-          strokeOpacity='0.4'
-          strokeWidth='1.5'
+          stroke='#a248e8'
+          strokeOpacity='1'
+          strokeWidth='2.5'
           strokeLinecap='round'
         />
         <path
           d='M10 17H14'
-          stroke='white'
-          strokeOpacity='0.4'
-          strokeWidth='1.5'
+          stroke='#a248e8'
+          strokeOpacity='1'
+          strokeWidth='2.5'
           strokeLinecap='round'
         />
       </svg>

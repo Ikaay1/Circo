@@ -11,10 +11,11 @@ type Props = {
   onClick: () => void;
   click: (info: ReceiptInfo) => void;
   transactionHistory: any[];
+  walletData: any;
 };
 
 const TransactionHistory = (props: Props) => {
-  const {transactionHistory} = props;
+  const {transactionHistory, walletData} = props;
   return (
     <Box bg={Color().whiteAndBlack} borderRadius='xl' p='5'>
       <Flex justifyContent={'space-between'} pb='4'>
@@ -55,6 +56,17 @@ const TransactionHistory = (props: Props) => {
               />
             );
           })
+        ) : walletData?.transaction_history?.length &&
+          !transactionHistory?.length ? (
+          <Text
+            mt='2.5rem'
+            textAlign={'center'}
+            color='clique.purple'
+            opacity={0.9}
+            fontWeight={'bold'}
+          >
+            You don&apos;t have any transaction history within this range
+          </Text>
         ) : (
           <Text
             mt='2.5rem'
