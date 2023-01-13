@@ -53,7 +53,7 @@ const Footer = () => {
             </a>
           </Box>
         </Box>
-        <Box mt={{base: '3.8rem', lg: '0'}}>
+        <Box w={{lg: '180px'}} mt={{base: '3.8rem', lg: '0'}}>
           <Box>
             <Text
               fontWeight='600'
@@ -87,8 +87,8 @@ const Footer = () => {
                     color='clique.black2'
                     w={{
                       base: '180px',
-                      lg: i === 2 ? '110px' : '180px',
-                      xl: '180px',
+                      // lg: i === 2 ? '110px' : '180px',
+                      // xl: '180px',
                     }}
                   >
                     {detail}
@@ -131,7 +131,7 @@ const Footer = () => {
             </Box>
           </Box>
         </Box>
-        <Box mt={{base: '3.4rem', lg: '0'}} w={{lg: '704px'}}>
+        <Box mt={{base: '3.4rem', lg: '0'}} w={{lg: '650px', xl: '720px'}}>
           <Text
             fontWeight='600'
             fontSize={{base: 'sm2', lg: 'head'}}

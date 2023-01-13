@@ -94,7 +94,11 @@ const Login = () => {
                 </Box>
               </div>
             ))}
-            <Box display={'flex'} justifyContent={'space-between'}>
+            <Box
+              display={'flex'}
+              justifyContent={'space-between'}
+              alignItems={'center'}
+            >
               <label className='remember'>
                 <input type='checkbox' name='' />
                 Remember me?
