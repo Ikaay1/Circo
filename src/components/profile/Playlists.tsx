@@ -264,7 +264,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
           py='30px'
           position={'absolute'}
           right={0}
-          bg='clique.black'
+          // bg='clique.black'
         >
           <NewPlaylist onClose={onClose} />
         </ModalContent>

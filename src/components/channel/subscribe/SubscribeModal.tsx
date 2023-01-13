@@ -22,6 +22,7 @@ type Props = {
   isLoading: boolean;
   bio: string;
   fee: number;
+  info: string;
   status?: {
     isLoading: boolean;
   };
@@ -34,6 +35,7 @@ function SubscribeModal({
   isLoading,
   bio,
   fee,
+  info,
   status,
 }: Props) {
   return (
@@ -72,8 +74,10 @@ function SubscribeModal({
               )}
             </Text>
 
-            {HighLightArray.map((each) => {
-              return <HighLight text={each} key={each} />;
+            {info?.split('\n').map((each) => {
+              if (each.trim().length) {
+                return <HighLight text={each} key={each} />;
+              }
             })}
             {!isLoading && (
               <Box sx={{paddingRight: '100px', paddingLeft: '100px'}} mt='10'>
