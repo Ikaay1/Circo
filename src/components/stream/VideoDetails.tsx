@@ -27,11 +27,7 @@ function VideoDetails({ stream }: { stream: any }) {
             <Avatar
               p="0"
               size="md"
-              name={
-                stream?.streamerId?.firstName +
-                " " +
-                stream?.streamerId?.lastName
-              }
+              name={stream?.streamerId?.name ?? "NA"}
               src={stream?.streamerId?.photo}
             />
           </Flex>
@@ -46,9 +42,7 @@ function VideoDetails({ stream }: { stream: any }) {
               textTransform={"uppercase"}
               lineHeight={"1.2"}
             >
-              {stream?.streamerId?.firstName +
-                " " +
-                stream?.streamerId?.lastName}
+              {stream?.streamerId?.name ?? "NA"}
             </Text>
             <Text
               mt="5px"
