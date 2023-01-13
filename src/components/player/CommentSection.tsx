@@ -4,7 +4,15 @@ import {
 	usePostCommentOnContentMutation,
 } from 'redux/services/content.service';
 
-import { Box, Flex, Skeleton, SkeletonCircle, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Flex,
+	Skeleton,
+	SkeletonCircle,
+	Text,
+	useColorMode,
+	useColorModeValue,
+} from '@chakra-ui/react';
 import Color from '@constants/color';
 import {
 	scrollBarStyle,
@@ -29,6 +37,7 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
     limit: 10,
   });
   const dummy = useRef(null);
+  const {colorMode, toggleColorMode} = useColorMode();
   const [postCommentOnContent, postCommentOnContentStatus] =
     usePostCommentOnContentMutation();
   const [comment, setComment] = useState('');
@@ -118,36 +127,40 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
       >
         Comments
       </Text>
+      {/* bg={useColorModeValue('clique.lightPrimaryBg', 'clique.ashGrey')} */}
+      {isLoading
+        ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+            <Flex
+              bg={
+                colorMode === 'dark'
+                  ? 'clique.ashGrey'
+                  : 'clique.lightPrimaryBg'
+              }
+              key={i}
+              w='full'
+              mt='15px'
+              rounded='10px'
+              p='20px'
+            >
+              <SkeletonCircle minH='40px' minW='40px' mr='20px' />
+              <Box w='full'>
+                <Skeleton h='15px' />
+                <Skeleton h='15px' mt='5px' />
+              </Box>
+            </Flex>
+          ))
+        : data &&
+          comments.length &&
+          comments.map((comment: any, i: number) => {
+            return (
+              <EachComment
+                setForReply={setForReply}
+                key={comment._id}
+                comment={comment}
+              />
+            );
+          })}
 
-      {isLoading &&
-        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-          <Flex
-            key={i}
-            w='full'
-            mt='15px'
-            bg='clique.ashGrey'
-            rounded='10px'
-            p='20px'
-          >
-            <SkeletonCircle minH='40px' minW='40px' mr='20px' />
-            <Box w='full'>
-              <Skeleton h='15px' />
-              <Skeleton h='15px' mt='5px' />
-            </Box>
-          </Flex>
-        ))}
-
-      {data &&
-        comments.length &&
-        comments.map((comment: any, i: number) => {
-          return (
-            <EachComment
-              setForReply={setForReply}
-              key={comment._id}
-              comment={comment}
-            />
-          );
-        })}
       <div ref={dummy} />
       {hasMore && (
         <Text

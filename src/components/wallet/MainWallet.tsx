@@ -15,6 +15,7 @@ type Props = {
   flutterwaveStatus: {
     isLoading: boolean;
   };
+  transactionHistory: any[];
 };
 
 function MainWallet({
@@ -23,6 +24,7 @@ function MainWallet({
   click,
   walletData,
   flutterwaveStatus,
+  transactionHistory,
 }: Props) {
   return (
     <Flex pt='7' flexDirection='column' gap='5' w='100%'>
@@ -36,6 +38,7 @@ function MainWallet({
           walletData={walletData}
           onClick={onSort}
           click={(info) => click(info)}
+          transactionHistory={transactionHistory}
         />
       </>
     </Flex>

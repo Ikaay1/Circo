@@ -22,6 +22,7 @@ function Wallet({}: Props) {
   const [modalInfo, setModalInfo] = useState<ReceiptInfo>();
   const {data, isFetching, refetch, isError} = useGetUserWalletQuery('');
   const [amount, setAmount] = useState<string | number>('');
+  const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
 
   const [flutterwave, flutterwaveStatus] = useFlutterwavePaymentMutation();
 
@@ -47,6 +48,12 @@ function Wallet({}: Props) {
     setModalInfo(info);
     isReceiptOnOpen();
   };
+
+  useEffect(() => {
+    if (data) {
+      setTransactionHistory(data?.data?.transaction_history);
+    }
+  }, [data]);
 
   return (
     <HomeLayout>
@@ -74,6 +81,7 @@ function Wallet({}: Props) {
                 click={(info) => handleClick(info)}
                 walletData={data?.data}
                 flutterwaveStatus={flutterwaveStatus}
+                transactionHistory={transactionHistory}
               />
             </Box>
             <Box
@@ -116,7 +124,13 @@ function Wallet({}: Props) {
           data?.data?.beneficiary?.accountNumber ? data?.data?.beneficiary : ''
         }
       />
-      <SortModal isOpen={isSortIsOpen} onClose={isSortOnClose} />
+      <SortModal
+        setTransactionHistory={setTransactionHistory}
+        transactionHistory={transactionHistory}
+        walletTransaction={data?.data?.transaction_history}
+        isOpen={isSortIsOpen}
+        onClose={isSortOnClose}
+      />
       <TransactionRecieptModal
         isOpen={isReceiptIsOpen}
         onClose={isReceiptOnClose}
