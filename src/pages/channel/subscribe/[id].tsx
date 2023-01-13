@@ -174,6 +174,7 @@ const SubscribeChannel = () => {
           onClick={subscribeHandler}
           bio={channelData?.data?.channel?.bio}
           fee={channelData?.data?.channel?.subscriptionFee}
+          info={channelData?.data?.channel?.subscriptionInfo}
           isLoading={isLoading}
           status={subcribeToUserChannnelStatus}
         />

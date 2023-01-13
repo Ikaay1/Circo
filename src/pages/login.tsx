@@ -123,7 +123,7 @@ const Login = () => {
               Need help? send a mail to
             </Text>
             <span style={{color: '#892cdc'}}>
-              <a href='mailto: support@Circo.com'>support@circo.com</a>
+              <a href='mailto: support@Circo.com'>support@circo.africa</a>
             </span>
           </Box>
         </Box>
