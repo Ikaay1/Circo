@@ -128,14 +128,7 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
 
       {isLoading
         ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-            <Flex
-              key={i}
-              w='full'
-              mt='15px'
-              bg={useColorModeValue('clique.lightPrimaryBg', 'clique.ashGrey')}
-              rounded='10px'
-              p='20px'
-            >
+            <Flex key={i} w='full' mt='15px' rounded='10px' p='20px'>
               <SkeletonCircle minH='40px' minW='40px' mr='20px' />
               <Box w='full'>
                 <Skeleton h='15px' />
