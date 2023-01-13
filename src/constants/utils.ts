@@ -228,7 +228,7 @@ export const contactInfoData: {
 }[] = [
   {
     image: "location",
-    detail: "2715 Ash Dr. San Jose, Ikoyi Link Bridge 83475",
+    detail: "Admiralty Road 23, Lekki phase 1, Lagos",
   },
   {
     image: "call",
