@@ -4,7 +4,14 @@ import {
 	usePostCommentOnContentMutation,
 } from 'redux/services/content.service';
 
-import { Box, Flex, Skeleton, SkeletonCircle, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Flex,
+	Skeleton,
+	SkeletonCircle,
+	Text,
+	useColorModeValue,
+} from '@chakra-ui/react';
 import Color from '@constants/color';
 import {
 	scrollBarStyle,
@@ -125,7 +132,7 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
             key={i}
             w='full'
             mt='15px'
-            bg='clique.ashGrey'
+            bg={useColorModeValue('clique.lightPrimaryBg', 'clique.ashGrey')}
             rounded='10px'
             p='20px'
           >

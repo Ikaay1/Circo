@@ -21,6 +21,7 @@ import {
 	SkeletonCircle,
 	SkeletonText,
 	Text,
+	useColorModeValue,
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
@@ -264,7 +265,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
           py='30px'
           position={'absolute'}
           right={0}
-          // bg='clique.black'
+          bg={useColorModeValue('clique.lightPrimaryBg', 'clique.black')}
         >
           <NewPlaylist onClose={onClose} />
         </ModalContent>
