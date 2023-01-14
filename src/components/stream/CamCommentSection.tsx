@@ -17,15 +17,9 @@ import { scrollBarStyle } from "@constants/utils";
 
 import EachChatComment from "./EachChatComment";
 import NewChatComment from "./NewChatComment";
+import Color from "@constants/color";
 
-function CamCommentSection({
-  setClose,
-
-  id,
-}: {
-  setClose: any;
-  id: string;
-}) {
+function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
   const { data, isLoading, isFetching, refetch } =
@@ -72,6 +66,7 @@ function CamCommentSection({
           fontWeight={500}
           textTransform={"capitalize"}
           fontSize="smHead"
+          color={Color().blackAndWhite}
         >
           Live Chat
         </Text>
