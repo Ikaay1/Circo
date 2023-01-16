@@ -35,7 +35,9 @@ function Index({}: Props) {
           pb="12"
           overflowY={"scroll"}
           overflowX={"hidden"}
-          sx={scrollBarStyle}
+          sx={{
+            ...scrollBarStyle,
+          }}
         >
           <Flex
             display={{ base: "flex", lg: "none" }}
