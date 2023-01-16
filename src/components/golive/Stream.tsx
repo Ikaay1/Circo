@@ -192,7 +192,7 @@ function Stream({
                     >
                       <label htmlFor={"thumbnail"}>
                         {props.values.thumbNail ? (
-                          <Box mt="7">
+                          <Box mt="7" mb="4">
                             {" "}
                             <Box
                               bgImage={

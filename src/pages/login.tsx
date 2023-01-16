@@ -118,10 +118,10 @@ const Login = () => {
               name='Login'
             />
           </form>
-          <SocialMedia
+          {/* <SocialMedia
             haveAccount={"Don't have an account?"}
             text={'Sign Up'}
-          />
+          /> */}
           <Box mt='.35rem' textAlign={'center'}>
             <Text display={'inline'} marginRight='.25rem'>
               Need help? send a mail to

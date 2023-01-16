@@ -22,6 +22,8 @@ function LiveTopCard() {
   const router = useRouter();
   const { data, isFetching } = useGetAllLiveStreamQuery({
     ongoing: "true",
+    search: "",
+    paid: "",
   });
   const userProfile = useAppSelector(
     (store) => store.app.userReducer.userProfile
