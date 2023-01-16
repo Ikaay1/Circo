@@ -82,7 +82,7 @@ export const SocialMedia = ({
           firstName: name.split(' ')[0].trim(),
           lastName: name.split(' ')[1].trim(),
           userName: email.split('@')[0].trim(),
-          email: email.toLowerCase().trim(),
+          email: email ? email.toLowerCase().trim() : '',
           photo: picture?.data?.url,
           social: 'FACEBOOK',
         };

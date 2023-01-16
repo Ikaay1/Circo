@@ -149,9 +149,8 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
               </Box>
             </Flex>
           ))
-        : data &&
-          comments.length &&
-          comments.map((comment: any, i: number) => {
+        : data && comments.length
+        ? comments.map((comment: any, i: number) => {
             return (
               <EachComment
                 setForReply={setForReply}
@@ -159,7 +158,8 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
                 comment={comment}
               />
             );
-          })}
+          })
+        : null}
 
       <div ref={dummy} />
       {hasMore && (
