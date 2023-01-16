@@ -143,6 +143,7 @@ function EachComment({
             </Flex>
 
             <Text mt='5px'>
+              {/* {comment.comment.comment.split('\n\n')} */}
               <pre
                 style={{
                   fontFamily: 'Poppins',
