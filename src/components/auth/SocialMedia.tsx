@@ -25,6 +25,7 @@ export const SocialMedia = ({
 
   const loginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      console.log('entered login');
       let userInfo = await axios.get(
         'https://www.googleapis.com/oauth2/v3/userinfo',
         {
@@ -66,6 +67,9 @@ export const SocialMedia = ({
           }
         }
       }
+    },
+    onError(errorResponse) {
+      console.log(errorResponse);
     },
   });
 
