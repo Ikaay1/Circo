@@ -43,7 +43,13 @@ function BodyOne({
       >
         {event?.eventId?.title}
         {": "}
-        {moment(event?.eventId?.schedule).format("MMM Do YYYY h:mm a")}
+        {moment(
+          event?.eventId?.schedule === undefined
+            ? event?.eventId?.schedule
+            : event?.eventId?.schedule === ""
+            ? Date.now()
+            : event?.eventId?.schedule
+        ).format("MMM Do YYYY h:mm a")}
       </Text>
       <Text
         mt="20px"
