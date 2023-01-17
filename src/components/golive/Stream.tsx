@@ -262,7 +262,6 @@ function Stream({
                   <SelectField name="ageRange" placeholder="Select Age Range">
                     <option value={"18 and above"}>18 and above</option>
                     <option value={"Below 18"}>Below 18</option>{" "}
-                    <option value={"ALL"}>All</option>
                   </SelectField>
                 </GridItem>
               </Grid>

@@ -93,7 +93,7 @@ function EventTabs() {
             setSearch(e.currentTarget.value);
           }
         }}
-        placeholder={"search live event"}
+        placeholder={"Search live event"}
       />
       <TabPanels>
         <CliqueTabPanel>

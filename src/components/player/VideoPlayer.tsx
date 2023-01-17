@@ -11,6 +11,7 @@ import { contentData } from "@constants/utils";
 
 import Control from "./Control";
 import ControlMobile from "./ControlMobile";
+import { useRouter } from "next/router";
 
 const { Player, ControlBar, BigPlayButton } = require("video-react");
 
@@ -23,6 +24,7 @@ function VideoPlayer({
     _id: string;
   }[];
 }) {
+  const router = useRouter();
   const currentVideoIndex = videoIdsList.findIndex(
     (videoId) => videoId?._id === video._id
   );
@@ -105,8 +107,9 @@ function VideoPlayer({
               return;
             }
             if (nextVideoIndex !== null) {
-              playerRef.current.load();
-              playerRef.current.play();
+              router.push(
+                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
+              );
             }
           }}
         >
