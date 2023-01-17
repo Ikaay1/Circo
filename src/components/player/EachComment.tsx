@@ -142,6 +142,15 @@ function EachComment({
               </Text>
             </Flex>
 
+            {/* <div
+              style={{
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'b',
+                marginTop: '5px',
+              }}
+            >
+              {comment.comment.comment}
+            </div> */}
             <Text mt='5px'>
               {/* {comment.comment.comment.split('\n\n')} */}
               <pre

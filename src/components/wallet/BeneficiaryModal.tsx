@@ -408,6 +408,7 @@ function BeneficiaryModal({
                 _hover={{
                   backgroundColor: 'transparent',
                 }}
+                autoComplete='off'
               />
             </Box>
             <Box
@@ -440,6 +441,7 @@ function BeneficiaryModal({
                 _hover={{
                   backgroundColor: 'transparent',
                 }}
+                autoComplete='off'
               />
             </Box>
             <Box px='7'>
