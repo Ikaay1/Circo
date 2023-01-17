@@ -245,125 +245,90 @@ function BeneficiaryModal({
           {type === 'add' ? 'Add' : 'Change'} Beneficiary
         </ModalHeader>
         <ModalBody>
-          <Flex flexDirection={'column'}>
-            <Btn
-              size='lg'
-              py='12'
-              borderRadius='16px'
-              leftIcon={<Icon as={TapIcon} color='white' />}
-              text='Tap to receive OTP in your mail'
-              fontSize={'smSubHead'}
-              isLoading={loading}
-              disabled={disabled}
-              onClick={handleSendOTP}
-            />
-            {show && (
-              <Text fontSize='smSubHead' my='1rem' mb='.5rem'>
-                You will be able to request for another OTP after 20 seconds
-              </Text>
-            )}
-
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-              mt='4'
-            >
-              <Text
+          <form autoComplete='off'>
+            <Flex flexDirection={'column'}>
+              <Btn
+                size='lg'
+                py='12'
+                borderRadius='16px'
+                leftIcon={<Icon as={TapIcon} color='white' />}
+                text='Tap to receive OTP in your mail'
                 fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                Select Bank
-              </Text>
-              <Select
-                bg='clique.secondaryGrey1'
-                size='sm'
-                border='none'
-                placeholder='Select Bank'
-                name='bankName'
-                required={true}
-                value={beneficiaryData.bankName}
-                onChange={(e) => handleChange(e)}
-                outline='none'
-                color='clique.secondaryGrey2'
-              >
-                {data?.data?.data?.map((bank: any) => (
-                  <option
-                    style={{
-                      color: colorMode !== 'dark' ? 'black' : 'white',
-                    }}
-                    value={`${bank.name}#${bank.code}`}
-                    key={bank.id}
-                  >
-                    {bank.name}
-                  </option>
-                ))}
-              </Select>
-            </Box>
-
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                Account number
-              </Text>
-              <Input
-                name='accountNumber'
-                variant='filled'
-                size='sm'
-                bg='clique.secondaryGrey1'
-                required={true}
-                value={beneficiaryData.accountNumber}
-                onChange={(e) => handleChange(e)}
-                outline='none'
-                border='none'
-                color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
-                _hover={{
-                  backgroundColor: 'transparent',
-                }}
+                isLoading={loading}
+                disabled={disabled}
+                onClick={handleSendOTP}
               />
-            </Box>
+              {show && (
+                <Text fontSize='smSubHead' my='1rem' mb='.5rem'>
+                  You will be able to request for another OTP after 20 seconds
+                </Text>
+              )}
 
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-              display={'flex'}
-              justifyContent={'space-between'}
-            >
-              <Box width='90%'>
+              <Box
+                bg='clique.secondaryGrey1'
+                px='2'
+                pt='1'
+                borderRadius={'10px'}
+                width='full'
+                mb='4'
+                mt='4'
+              >
                 <Text
                   fontSize={'smSubHead'}
                   fontWeight='400'
                   color={'clique.secondaryGrey2'}
                 >
-                  Account Name
+                  Select Bank
+                </Text>
+                <Select
+                  bg='clique.secondaryGrey1'
+                  size='sm'
+                  border='none'
+                  placeholder='Select Bank'
+                  name='bankName'
+                  required={true}
+                  value={beneficiaryData.bankName}
+                  onChange={(e) => handleChange(e)}
+                  outline='none'
+                  color='clique.secondaryGrey2'
+                >
+                  {data?.data?.data?.map((bank: any) => (
+                    <option
+                      style={{
+                        color: colorMode !== 'dark' ? 'black' : 'white',
+                      }}
+                      value={`${bank.name}#${bank.code}`}
+                      key={bank.id}
+                    >
+                      {bank.name}
+                    </option>
+                  ))}
+                </Select>
+              </Box>
+
+              <Box
+                bg='clique.secondaryGrey1'
+                px='2'
+                pt='1'
+                borderRadius={'10px'}
+                width='full'
+                mb='4'
+              >
+                <Text
+                  fontSize={'smSubHead'}
+                  fontWeight='400'
+                  color={'clique.secondaryGrey2'}
+                >
+                  Account number
                 </Text>
                 <Input
-                  name='accountName'
+                  name='accountNumber'
                   variant='filled'
                   size='sm'
                   bg='clique.secondaryGrey1'
                   required={true}
-                  value={beneficiaryData.accountName}
-                  readOnly={true}
-                  width='100%'
+                  value={beneficiaryData.accountNumber}
+                  onChange={(e) => handleChange(e)}
                   outline='none'
                   border='none'
                   color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
@@ -372,87 +337,126 @@ function BeneficiaryModal({
                   }}
                 />
               </Box>
-              {loading2 && (
-                <Box display='flex' alignItems={'center'}>
-                  <Spinner color={'clique.white'} />
-                </Box>
-              )}
-            </Box>
 
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
-              >
-                OTP
-              </Text>
-              <Input
-                variant='filled'
-                name='otp_code'
-                size='sm'
+              <Box
                 bg='clique.secondaryGrey1'
-                required={true}
-                value={beneficiaryData.otp_code}
-                onChange={(e) => handleChange(e)}
-                outline='none'
-                border='none'
-                color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
-                _hover={{
-                  backgroundColor: 'transparent',
-                }}
-                autoComplete='off'
-              />
-            </Box>
-            <Box
-              bg='clique.secondaryGrey1'
-              px='2'
-              pt='1'
-              borderRadius={'10px'}
-              width='full'
-              mb='4'
-            >
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.secondaryGrey2'}
+                px='2'
+                pt='1'
+                borderRadius={'10px'}
+                width='full'
+                mb='4'
+                display={'flex'}
+                justifyContent={'space-between'}
               >
-                Password
-              </Text>
-              <Input
-                variant='filled'
-                size='sm'
+                <Box width='90%'>
+                  <Text
+                    fontSize={'smSubHead'}
+                    fontWeight='400'
+                    color={'clique.secondaryGrey2'}
+                  >
+                    Account Name
+                  </Text>
+                  <Input
+                    name='accountName'
+                    variant='filled'
+                    size='sm'
+                    bg='clique.secondaryGrey1'
+                    required={true}
+                    value={beneficiaryData.accountName}
+                    readOnly={true}
+                    width='100%'
+                    outline='none'
+                    border='none'
+                    color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                    _hover={{
+                      backgroundColor: 'transparent',
+                    }}
+                  />
+                </Box>
+                {loading2 && (
+                  <Box display='flex' alignItems={'center'}>
+                    <Spinner color={'clique.white'} />
+                  </Box>
+                )}
+              </Box>
+
+              <Box
                 bg='clique.secondaryGrey1'
-                type='password'
-                name='password'
-                required={true}
-                value={beneficiaryData.password}
-                onChange={(e) => handleChange(e)}
-                outline='none'
-                border='none'
-                color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
-                _hover={{
-                  backgroundColor: 'transparent',
-                }}
-                autoComplete='off'
-              />
-            </Box>
-            <Box px='7'>
-              <Btn
-                text={type === 'add' ? 'Add beneficiary' : 'Change beneficiary'}
-                style={{width: '100%'}}
-                onClick={handleCreateBeneficiary}
-                isLoading={addBeneficiaryStatus.isLoading}
-              ></Btn>
-            </Box>
-          </Flex>
+                px='2'
+                pt='1'
+                borderRadius={'10px'}
+                width='full'
+                mb='4'
+              >
+                <Text
+                  fontSize={'smSubHead'}
+                  fontWeight='400'
+                  color={'clique.secondaryGrey2'}
+                >
+                  OTP
+                </Text>
+                <Input
+                  variant='filled'
+                  name='otp_code'
+                  size='sm'
+                  bg='clique.secondaryGrey1'
+                  required={true}
+                  value={beneficiaryData.otp_code}
+                  onChange={(e) => handleChange(e)}
+                  outline='none'
+                  border='none'
+                  color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                  _hover={{
+                    backgroundColor: 'transparent',
+                  }}
+                  autoComplete='off'
+                />
+              </Box>
+              <Box
+                bg='clique.secondaryGrey1'
+                px='2'
+                pt='1'
+                borderRadius={'10px'}
+                width='full'
+                mb='4'
+              >
+                <Text
+                  fontSize={'smSubHead'}
+                  fontWeight='400'
+                  color={'clique.secondaryGrey2'}
+                >
+                  Password
+                </Text>
+                <Input
+                  variant='filled'
+                  size='sm'
+                  bg='clique.secondaryGrey1'
+                  type='password'
+                  name='password'
+                  required={true}
+                  value={beneficiaryData.password}
+                  onChange={(e) => handleChange(e)}
+                  outline='none'
+                  border='none'
+                  color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                  _hover={{
+                    backgroundColor: 'transparent',
+                  }}
+                  autoComplete='off'
+                />
+              </Box>
+              <Box px='7'>
+                <Btn
+                  text={
+                    type === 'add' ? 'Add beneficiary' : 'Change beneficiary'
+                  }
+                  style={{width: '100%'}}
+                  onClick={handleCreateBeneficiary}
+                  isLoading={addBeneficiaryStatus.isLoading}
+                ></Btn>
+              </Box>
+            </Flex>
+          </form>
         </ModalBody>
       </ModalContent>
     </Modal>
