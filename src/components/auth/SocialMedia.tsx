@@ -5,7 +5,10 @@ import React from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { toast } from 'react-hot-toast';
 import { useAppDispatch } from 'redux/app/hooks';
-import { useLoginMutation } from 'redux/services/auth.service';
+import {
+	useLoginMutation,
+	useSocialPreSignupMutation,
+} from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
 import { Box, Button, Image, Text } from '@chakra-ui/react';
@@ -21,6 +24,7 @@ export const SocialMedia = ({
 }) => {
   const router = useRouter();
   const [login, loginStatus] = useLoginMutation();
+  const [socialPreSignup, socialPreSignupStatus] = useSocialPreSignupMutation();
   const dispatch = useAppDispatch();
 
   const loginGoogle = useGoogleLogin({
@@ -37,18 +41,22 @@ export const SocialMedia = ({
       console.log(userInfo);
       if (userInfo?.data?.email) {
         const {family_name, given_name, picture, email} = userInfo.data;
-
         if (router.asPath === '/signup') {
-          const data = {
-            firstName: family_name.trim(),
-            lastName: given_name.trim(),
-            userName: email.split('@')[0].trim(),
-            email: email.toLowerCase().trim(),
-            photo: picture,
-            social: 'GOOGLE',
-          };
-          localStorage.setItem('userData', JSON.stringify(data));
-          router.push(`/ageRange`);
+          const res: any = await socialPreSignup({email});
+          if ('data' in res) {
+            const data = {
+              firstName: family_name.trim(),
+              lastName: given_name.trim(),
+              userName: email.split('@')[0].trim(),
+              email: email.toLowerCase().trim(),
+              photo: picture,
+              social: 'GOOGLE',
+            };
+            localStorage.setItem('userData', JSON.stringify(data));
+            router.push(`/ageRange`);
+          } else {
+            toast.error(res.error?.data?.message);
+          }
         } else {
           const userData = {
             userNameOrEmail: email,
@@ -78,16 +86,21 @@ export const SocialMedia = ({
     if (response?.accessToken) {
       const {name, picture, email} = response;
       if (router.asPath === '/signup') {
-        const data = {
-          firstName: name.split(' ')[0].trim(),
-          lastName: name.split(' ')[1].trim(),
-          userName: email.split('@')[0].trim(),
-          email: email ? email.toLowerCase().trim() : '',
-          photo: picture?.data?.url,
-          social: 'FACEBOOK',
-        };
-        localStorage.setItem('userData', JSON.stringify(data));
-        router.push(`/ageRange`);
+        const res: any = await socialPreSignup({email});
+        if ('data' in res) {
+          const data = {
+            firstName: name.split(' ')[0].trim(),
+            lastName: name.split(' ')[1].trim(),
+            userName: email.split('@')[0].trim(),
+            email: email ? email.toLowerCase().trim() : '',
+            photo: picture?.data?.url,
+            social: 'FACEBOOK',
+          };
+          localStorage.setItem('userData', JSON.stringify(data));
+          router.push(`/ageRange`);
+        } else {
+          toast.error(res.error?.data?.message);
+        }
       } else {
         const userData = {
           userNameOrEmail: email,
