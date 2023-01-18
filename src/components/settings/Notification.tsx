@@ -4,7 +4,14 @@ import { TbCopy } from "react-icons/tb";
 import { useAppSelector } from "redux/app/hooks";
 import { useUpdatePreferenceMutation } from "redux/services/settings.service";
 
-import { Box, Divider, Flex, Skeleton, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Skeleton,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 
 import SimpleSwitch from "./SimpleSwitch";
 
@@ -12,6 +19,7 @@ type Props = {
   onClick: (code: string) => void;
   data: Notification;
   isLoading: boolean;
+  isFetching: boolean;
 };
 
 type Notification = {
@@ -42,11 +50,23 @@ const defaultState = {
   allNotifications: true,
 };
 
-const Notification = ({ isLoading, data, onClick }: Props) => {
+const Notification = ({ isLoading, data, onClick, isFetching }: any) => {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const [updatePreference] = useUpdatePreferenceMutation();
+  const [updatePreference, info] = useUpdatePreferenceMutation();
   const [state, setState] = useState({
-    allNotifications: false,
+    allNotifications:
+      data &&
+      data?.likeMyPost === true &&
+      data?.commentOnMyPost === true &&
+      data?.likeMyComment === true &&
+      data?.mentionMe === true &&
+      data?.newSubcriber === true &&
+      data?.receivePayment === true &&
+      data?.walletCredits === true &&
+      data?.walletsDebits === true &&
+      data?.liveStreamStarted === true
+        ? true
+        : false,
     likeMyPost: data ? data?.likeMyPost : false,
     commentOnMyPost: data ? data?.commentOnMyPost : false,
     likeMyComment: data ? data?.likeMyComment : false,
@@ -63,11 +83,39 @@ const Notification = ({ isLoading, data, onClick }: Props) => {
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({ ...prev, [e.target.name]: e.target.checked }));
     if (e.target.name === "allNotifications") {
-      const apiState: Notification = { ...defaultState };
-      delete apiState.allNotifications;
-      await updatePreference(apiState);
-      setState(defaultState);
+      if (e.target.checked) {
+        const apiState: Notification = { ...defaultState };
+        delete apiState.allNotifications;
+        setState(defaultState);
+        await updatePreference(apiState);
+      } else {
+        const apiState: any = { ...defaultState };
+        delete apiState.allNotifications;
+        Object.keys(apiState).forEach((key) => {
+          apiState[key] = false;
+        });
+        setState(apiState);
+        await updatePreference(apiState);
+      }
     } else {
+      if (e.target.checked === false) {
+        setState((prev) => ({ ...prev, allNotifications: false }));
+      } else if (
+        state.likeMyPost &&
+        state.commentOnMyPost &&
+        state.likeMyComment &&
+        state.mentionMe &&
+        state.newSubcriber &&
+        state.receivePayment &&
+        state.walletCredits &&
+        state.walletsDebits &&
+        state.liveStreamStarted
+      ) {
+        setState((prev) => ({ ...prev, allNotifications: true }));
+      } else {
+        setState((prev) => ({ ...prev, allNotifications: false }));
+      }
+
       await updatePreference({ [e.target.name]: e.target.checked });
     }
   };
@@ -111,6 +159,8 @@ const Notification = ({ isLoading, data, onClick }: Props) => {
               Manage your Clique notifications here
             </Text>
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="All Notifications"
               onChange={handleChange}
               isChecked={state.allNotifications}
@@ -120,24 +170,32 @@ const Notification = ({ isLoading, data, onClick }: Props) => {
               CONTENT
             </Text>
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="Likes my post"
               isChecked={state.likeMyPost}
               name="likeMyPost"
               onChange={handleChange}
             />
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="Comment on my post"
               isChecked={state.commentOnMyPost}
               name="commentOnMyPost"
               onChange={handleChange}
             />
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="Likes my comment"
               isChecked={state.likeMyComment}
               name="likeMyComment"
               onChange={handleChange}
             />
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="Mentions me"
               isChecked={state.mentionMe}
               name="mentionMe"
@@ -147,18 +205,24 @@ const Notification = ({ isLoading, data, onClick }: Props) => {
               GENERAL
             </Text>
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="New subscriber"
               isChecked={state.newSubcriber}
               name="newSubcriber"
               onChange={handleChange}
             />
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="Receive payment"
               isChecked={state.receivePayment}
               name="receivePayment"
               onChange={handleChange}
             />
             <SimpleSwitch
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               text="Wallet credits"
               isChecked={state.walletCredits}
               name="walletCredits"
@@ -169,11 +233,15 @@ const Notification = ({ isLoading, data, onClick }: Props) => {
               isChecked={state.walletsDebits}
               name="walletsDebits"
               onChange={handleChange}
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
             />
             <SimpleSwitch
               text="Live stream started"
               isChecked={state.liveStreamStarted}
               name="liveStreamStarted"
+              isFetching={isFetching}
+              isUpdating={info.isLoading}
               onChange={handleChange}
             />
           </Box>
