@@ -24,7 +24,7 @@ function Index({
   showSideMenu: boolean;
   setShowSideMenu: any;
 }) {
-  const { isLoading, data } = useGetPreferenceQuery("");
+  const { isLoading, data, isFetching } = useGetPreferenceQuery("");
   let active;
   switch (current) {
     case "account":
@@ -36,6 +36,7 @@ function Index({
           onClick={onClick}
           data={data?.data?.preference}
           isLoading={isLoading}
+          isFetching={isFetching}
         />
       );
       break;
