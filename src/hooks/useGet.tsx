@@ -27,7 +27,7 @@ const useGet = ({
         setHasMore(false);
       }
     }
-  }, [data, page, isFetching, fetchNumber]);
+  }, [data, page, fetchNumber]);
 
   useEffect(() => {
     if (!hasMore) return;
