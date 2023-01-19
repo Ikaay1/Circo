@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import '../styles/globals.css';
 
+import devtools from 'devtools-detect';
+// import useConsoleOpen from 'hooks/useConsoleOpen';
 import Layout from 'layouts/Layout';
 import Router, { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -28,6 +30,7 @@ function MyApp({Component, pageProps}: any) {
   const [showChild, setShowChild] = useState(false);
   const toast = useToast();
   const router = useRouter();
+  // const consoleOpen = useConsoleOpen();
 
   useEffect(() => {
     NProgress.configure({showSpinner: false});
@@ -47,6 +50,10 @@ function MyApp({Component, pageProps}: any) {
     setShowChild(true);
   }, []);
 
+  useEffect(() => {
+    console.log('Is DevTools open:', devtools.isOpen);
+  }, [devtools.isOpen]);
+
   if (!showChild) {
     return null;
   }
@@ -56,6 +63,24 @@ function MyApp({Component, pageProps}: any) {
   }
 
   const socket = io(process.env.NEXT_PUBLIC_BASEURL!);
+
+  // document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  // document.onkeydown = function (e) {
+  //   //@ts-ignore
+  //   if (event?.keyCode == 123) {
+  //     return false;
+  //   }
+  //   if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+  //     return false;
+  //   }
+  //   if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+  //     return false;
+  //   }
+  //   if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+  //     return false;
+  //   }
+  // };
 
   return (
     <Provider store={store}>
