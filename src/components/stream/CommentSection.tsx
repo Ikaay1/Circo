@@ -25,6 +25,13 @@ function CommentSection({}: {}) {
   const { data, isLoading, isFetching, refetch } =
     useGetStreamCommentsQuery(id);
   const value = useColorModeValue("clique.white", "clique.blackGrey");
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      window.location.replace("/login");
+    }
+  }, [userProfile?._id, router]);
+
   useEffect(() => {
     io(process.env.NEXT_PUBLIC_BASEURL!, {
       forceNew: false,

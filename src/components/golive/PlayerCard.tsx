@@ -142,7 +142,7 @@ function PlayerCard({ streamDetails, setState }: any) {
       <Box roundedBottom={"10px"} bg={value} px="15px" pt="10px" pb="30px">
         <Text
           position={"relative"}
-    color={Color().blackAndWhite}
+          color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={500}
           textTransform={"capitalize"}
@@ -190,7 +190,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         </Text>
         <Text
           position={"relative"}
-    color={Color().blackAndWhite}
+          color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={500}
           fontSize="smSubHead"
@@ -211,7 +211,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         </Text>
         <Text
           position={"relative"}
-    color={Color().blackAndWhite}
+          color={Color().blackAndWhite}
           fontFamily={"Poppins"}
           fontWeight={500}
           fontSize="smSubHead"
@@ -234,7 +234,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             </Text>
             <Text
               textAlign={"center"}
-        color={Color().blackAndWhite}
+              color={Color().blackAndWhite}
               fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"
@@ -257,7 +257,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             </Text>
             <Text
               position={"relative"}
-        color={Color().blackAndWhite}
+              color={Color().blackAndWhite}
               textAlign={"center"}
               fontFamily={"Poppins"}
               fontWeight={500}
@@ -280,7 +280,7 @@ function PlayerCard({ streamDetails, setState }: any) {
             </Text>
             <Text
               textAlign={"center"}
-        color={Color().blackAndWhite}
+              color={Color().blackAndWhite}
               fontFamily={"Poppins"}
               fontWeight={500}
               fontSize="smSubHead"

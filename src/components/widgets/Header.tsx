@@ -44,12 +44,6 @@ function Header({ upload }: Props) {
   const router = useRouter();
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    if (!profile?._id) {
-      router.push("/login");
-    }
-  }, [profile?._id, router]);
-
   const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (search) {
