@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
 import { useToast } from "@chakra-ui/react";
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
+import { logout } from "redux/slices/authSlice";
 
 const ProtectedRoute = (WrappedComponent: any) => {
   return function Auth(props: any) {
@@ -26,7 +27,9 @@ const ProtectedRoute = (WrappedComponent: any) => {
             duration: 5000,
             isClosable: true,
           });
-          Router.push(`/login`);
+
+          dispatch(logout());
+          window.location.href = "/login";
         }
       }
 

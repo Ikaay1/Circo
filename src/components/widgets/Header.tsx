@@ -30,6 +30,7 @@ import UploadModal from "@components/upload/UploadModal";
 import MobileMenu from "./mobileMenu/MobileMenu";
 import Color from "@constants/color";
 import SimpleSwitch from "@components/settings/SimpleSwitch";
+import ProtectedRoute from "layouts/ProtectedRoute";
 
 type Props = {
   upload?: () => void;
@@ -37,19 +38,13 @@ type Props = {
 
 function Header({ upload }: Props) {
   const profile = useAppSelector((store) => store.app.userReducer.channel);
-  const userP = useAppSelector((store) => store.app.userReducer.userProfile);
+
   const [searchWidth, setSearchWidth] = useState({
     base: "150px",
     lg: "300px",
   });
   const router = useRouter();
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    if (!userP?._id) {
-      router.push("/login");
-    }
-  }, [userP?._id, router]);
 
   const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -199,4 +194,4 @@ function Header({ upload }: Props) {
   );
 }
 
-export default Header;
+export default ProtectedRoute(Header);
