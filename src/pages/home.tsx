@@ -100,6 +100,8 @@ function Index() {
     [loading, hasMore],
   );
 
+  console.log(contents);
+
   return (
     <>
       <HomeLayout>

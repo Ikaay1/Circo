@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDeleteContentMutation } from 'redux/services/bank.service';
 import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
 
@@ -27,7 +27,13 @@ import ShareE from '@icons/ShareE';
 import TrashIcon from '@icons/TrashIcon';
 import VideoSideIcon from '@icons/VideoSideIcon';
 
-import { API, baseUrl, contentData } from '../../constants/utils';
+import {
+	API,
+	baseUrl,
+	contentData,
+	createObjectURL,
+	decrypt,
+} from '../../constants/utils';
 import { useRoutingChannel } from '../../hooks/useRoutingChannel';
 import HoverCard from './HoverCard';
 import SubScribeModal from './SubScribeModal';
@@ -67,6 +73,7 @@ function VideoThumb({
   const [deleteContent, deleteContentStatus] = useDeleteContentMutation();
   const router = useRouter();
   const [show, setShow] = React.useState(false);
+  const [url, setUrl] = React.useState('');
   const handleClick = async (i: number) => {
     if (i === 0) {
       onOpenCopy();
@@ -94,10 +101,20 @@ function VideoThumb({
     );
   };
 
+  useEffect(() => {
+    async function display(videoStream: string) {
+      let blob = await fetch(videoStream).then((r) => r.blob());
+      var videoUrl = createObjectURL(blob);
+      setUrl(videoUrl);
+    }
+
+    display(decrypt(video?.video));
+  }, []);
+
   return (
     <>
       <Box position={'relative'} ref={lastElementRef}>
-        {isHover && !isOpen ? (
+        {isHover && !isOpen && url ? (
           <ScaleFade reverse unmountOnExit in={isHover}>
             <HoverCard
               setIsHover={setIsHover}
@@ -107,6 +124,7 @@ function VideoThumb({
               video={video}
               name={video?.channel_id?.name ?? 'Not Available'}
               photo={video?.channel_id?.photo}
+              url={url}
             />
           </ScaleFade>
         ) : (
