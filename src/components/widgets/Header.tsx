@@ -37,12 +37,19 @@ type Props = {
 
 function Header({ upload }: Props) {
   const profile = useAppSelector((store) => store.app.userReducer.channel);
+  const userP = useAppSelector((store) => store.app.userReducer.userProfile);
   const [searchWidth, setSearchWidth] = useState({
     base: "150px",
     lg: "300px",
   });
   const router = useRouter();
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    if (!userP?._id) {
+      router.push("/login");
+    }
+  }, [userP?._id, router]);
 
   const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
