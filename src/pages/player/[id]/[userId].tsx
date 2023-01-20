@@ -13,7 +13,7 @@ import CliqueLoader from '@components/home/CliqueLoader';
 import CommentSection from '@components/player/CommentSection';
 import VideoDetails from '@components/player/VideoDetails';
 import VideoPlayer from '@components/player/VideoPlayer';
-import { scrollBarStyle3 } from '@constants/utils';
+import { createObjectURL, decrypt, scrollBarStyle3 } from '@constants/utils';
 
 function Index() {
   const toast = useToast();
@@ -27,6 +27,7 @@ function Index() {
   } = useGetUserQuery(userId);
   const [view] = useCreateViewMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const [url, setUrl] = React.useState('');
 
   useEffect(() => {
     if (error) {
@@ -76,16 +77,28 @@ function Index() {
     }
   }, [data, view, userProfile?._id, refetch]);
 
+  useEffect(() => {
+    async function display(videoStream: string) {
+      let blob = await fetch(videoStream).then((r) => r.blob());
+      var videoUrl = createObjectURL(blob);
+      setUrl(videoUrl);
+    }
+    if (data?.data?.preference?.video?.video) {
+      display(decrypt(data?.data?.preference?.video?.video));
+    }
+  }, [data?.data?.preference?.video?.video]);
+
   return (
     <>
       {isLoading ||
         isUserLoading ||
-        (!data?.data && (
+        !data?.data ||
+        (!url && (
           <Box h='90vh' w='100%'>
             <CliqueLoader />
           </Box>
         ))}
-      {userData && !isLoading && !isUserLoading && data?.data && (
+      {userData && !isLoading && !isUserLoading && data?.data && url && (
         <HomeLayout>
           <Box display={{lg: 'flex'}}>
             <Box
@@ -116,6 +129,7 @@ function Index() {
               <VideoPlayer
                 video={data?.data?.preference?.video}
                 videoIdsList={data?.data?.preference?.allVideos}
+                url={url}
               />
               <VideoDetails
                 video={data?.data?.preference?.video}

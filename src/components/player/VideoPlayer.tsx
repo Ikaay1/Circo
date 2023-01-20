@@ -18,11 +18,13 @@ const {Player, ControlBar, BigPlayButton} = require('video-react');
 function VideoPlayer({
   video,
   videoIdsList,
+  url,
 }: {
   video: contentData;
   videoIdsList: {
     _id: string;
   }[];
+  url: string;
 }) {
   const router = useRouter();
   const currentVideoIndex = videoIdsList.findIndex(
@@ -68,17 +70,6 @@ function VideoPlayer({
   const [isPlay, setIsPlay] = React.useState(true);
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   const playerRef: any = React.useRef(null);
-  const [url, setUrl] = React.useState('');
-
-  useEffect(() => {
-    async function display(videoStream: string) {
-      let blob = await fetch(videoStream).then((r) => r.blob());
-      var videoUrl = createObjectURL(blob);
-      setUrl(videoUrl);
-    }
-
-    display(decrypt(video.video));
-  }, []);
 
   useEffect(() => {
     if (playerRef.current) {

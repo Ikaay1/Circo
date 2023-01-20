@@ -6,21 +6,10 @@ import { contentData, createObjectURL, decrypt } from '../../constants/utils';
 
 const {Player, ControlBar, BigPlayButton} = require('video-react');
 
-function SmallPlayer({video}: {video: contentData}) {
+function SmallPlayer({video, url}: {video: contentData; url: string}) {
   const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
   const [totalDuration, setTotalDuration] = React.useState(0);
   const playerRef: any = React.useRef(null);
-  const [url, setUrl] = React.useState('');
-
-  useEffect(() => {
-    async function display(videoStream: string) {
-      let blob = await fetch(videoStream).then((r) => r.blob());
-      var videoUrl = createObjectURL(blob);
-      setUrl(videoUrl);
-    }
-
-    display(decrypt(video.video));
-  }, []);
 
   useEffect(() => {
     if (playerRef.current) {
