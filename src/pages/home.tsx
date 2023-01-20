@@ -100,7 +100,7 @@ function Index() {
     [loading, hasMore],
   );
 
-  console.log(contents);
+  console.log(data);
 
   return (
     <>
