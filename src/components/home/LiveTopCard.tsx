@@ -86,11 +86,7 @@ function LiveTopCard() {
               <Avatar
                 p="0"
                 size="md"
-                name={
-                  event?.streamerId?.firstName +
-                  " " +
-                  event?.streamerId?.lastName
-                }
+                name={event?.streamerId?.name}
                 src={event?.streamerId?.photo}
               />
             </Flex>
