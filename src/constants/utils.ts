@@ -1230,5 +1230,5 @@ export const decrypt = (video: string) => {
     video,
     process.env.NEXT_PUBLIC_SECRET!,
   );
-  return decryptedBytes.toString(CryptoJS.enc.Utf8);
+  return JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
 };
