@@ -1226,9 +1226,6 @@ export function createObjectURL(object: any) {
 }
 
 export const decrypt = (video: string) => {
-  let decryptedBytes = CryptoJS.AES.decrypt(
-    video,
-    process.env.NEXT_PUBLIC_SECRET!,
-  );
+  let decryptedBytes = CryptoJS.AES.decrypt(video, 'circo_clique_secret_key');
   return JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
 };
