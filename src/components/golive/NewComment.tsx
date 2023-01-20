@@ -12,17 +12,21 @@ import {
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import { usePostCommentOnStreamMutation } from "redux/services/livestream/streamComment.service";
 import Color from "@constants/color";
+import { useAppSelector } from "redux/app/hooks";
 
 function NewComment({ id, profile }: { id: string; profile: any }) {
   const [comment, setComment] = React.useState("");
   const [postCommentOnStream, postInfo] = usePostCommentOnStreamMutation();
+  const userProfile = useAppSelector(
+    (state) => state.app.userReducer.userProfile
+  );
 
   const toast = useToast();
   return (
     <Flex px="20px" bg={Color().lightAndPrimary} py="20px" w="full">
       <AvataWithSpace
-        name={profile?.firstName + " " + profile?.lastName}
-        url={profile?.avatar}
+        name={userProfile?.channel?.name}
+        url={userProfile?.channel?.photo}
         mr="20px"
         size="40px"
         borderThickness="2px"

@@ -36,7 +36,7 @@ type Props = {
 };
 
 function Header({ upload }: Props) {
-  const profile = useAppSelector((store) => store.app.userReducer.userProfile);
+  const profile = useAppSelector((store) => store.app.userReducer.channel);
   const [searchWidth, setSearchWidth] = useState({
     base: "150px",
     lg: "300px",
@@ -154,7 +154,7 @@ function Header({ upload }: Props) {
             <Avatar
               p="0"
               size="sm"
-              name={profile?.firstName + " " + profile?.lastName}
+              name={profile?.name}
               src={profile?.photo}
               cursor="pointer"
               onClick={() => router.push("/profile/1/content")}

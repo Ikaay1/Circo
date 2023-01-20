@@ -74,7 +74,7 @@ function Index() {
           overflowX={"hidden"}
           sx={{
             "&::-webkit-scrollbar": {
-              width: "8px",
+              width: "4px",
               rounded: "full",
             },
             "&::-webkit-scrollbar-track": {
@@ -82,7 +82,7 @@ function Index() {
               webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
             },
             "&::-webkit-scrollbar-thumb": {
-              bg: "clique.primaryBg",
+              bg: "clique.base",
               outline: "none",
             },
           }}

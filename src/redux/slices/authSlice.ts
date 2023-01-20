@@ -5,11 +5,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface IUserProps {
   token: null | string;
   userProfile: null | any;
+  channel: null | any;
 }
 
 const initialState: IUserProps = {
   token: null,
   userProfile: null,
+  channel: null,
 };
 
 export const userSlice = createSlice({
@@ -22,6 +24,7 @@ export const userSlice = createSlice({
     ) => {
       state.token = payload.token;
       state.userProfile = payload.data;
+      state.channel = payload.data?.channel;
     },
     setUser: (
       state,

@@ -24,12 +24,7 @@ function CommentSection({}: {}) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const { data, isLoading, isFetching, refetch } =
     useGetStreamCommentsQuery(id);
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
+  const value = useColorModeValue("clique.white", "clique.blackGrey");
   useEffect(() => {
     io(process.env.NEXT_PUBLIC_BASEURL!, {
       forceNew: false,
@@ -51,7 +46,13 @@ function CommentSection({}: {}) {
       maxH={{ base: "auto", lg: "90vh" }}
       pt={"20px"}
       overflowY="scroll"
-      sx={scrollBarStyle}
+      sx={{
+        ...scrollBarStyle,
+
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "clique.base",
+        },
+      }}
     >
       <Text
         textAlign={"left"}
@@ -65,14 +66,7 @@ function CommentSection({}: {}) {
 
       {isLoading &&
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-          <Flex
-            key={i}
-            w="full"
-            mt="15px"
-            bg="clique.ashGrey"
-            rounded="10px"
-            p="20px"
-          >
+          <Flex key={i} w="full" mt="15px" bg={value} rounded="10px" p="20px">
             <SkeletonCircle minH="40px" minW="40px" mr="20px" />
             <Box w="full">
               <Skeleton h="15px" />
