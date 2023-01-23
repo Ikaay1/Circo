@@ -85,7 +85,7 @@ export const SocialMedia = ({
     console.log(response);
     if (response?.accessToken) {
       const {name, picture, email} = response;
-      if (router.asPath === '/signup') {
+      if (router.asPath.includes('/signup')) {
         const res: any = await socialPreSignup({email});
         if ('data' in res) {
           const data = {
@@ -100,6 +100,7 @@ export const SocialMedia = ({
           router.push(`/ageRange`);
         } else {
           toast.error(res.error?.data?.message);
+          window.location.replace('/signup');
         }
       } else {
         const userData = {
@@ -116,6 +117,7 @@ export const SocialMedia = ({
           router.push('/home');
         } else {
           toast.error(res.error?.data?.message);
+          window.location.replace('/login');
         }
       }
     }
