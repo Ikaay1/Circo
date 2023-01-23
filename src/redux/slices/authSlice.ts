@@ -35,9 +35,16 @@ export const userSlice = createSlice({
     logout: () => {
       return initialState;
     },
+    setChannel: (
+      state,
+      { payload: { payload } }: PayloadAction<{ payload: any }>
+    ) => {
+      state.channel = payload.data.channel;
+    },
   },
 });
 
-export const { setCredentials, setUser, logout } = userSlice.actions;
+export const { setCredentials, setUser, logout, setChannel } =
+  userSlice.actions;
 
 export default userSlice.reducer;

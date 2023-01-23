@@ -139,9 +139,8 @@ function NotificationModal() {
             justifyContent="space-between"
             mb="10px"
           >
-            <Box w="100px"></Box>
+            <Box w="120px"></Box>
             <Flex alignItems="center">
-              
               Notification{" "}
               <Icon
                 ml="5px"
@@ -153,15 +152,17 @@ function NotificationModal() {
                 rounded={"5px"}
               />
             </Flex>
-            <Flex w="100px" justifyContent={"right"}>
+            <Flex w="120px" justifyContent={"right"}>
               {" "}
               <Button
                 onClick={() => readAll()}
-                fontSize={"smSubHead"}
+                fontSize={"sm"}
+                fontWeight="normal"
                 isLoading={readInfo?.isLoading}
                 size={"sm"}
+                px="10px"
               >
-                Read All
+                Mark all as read
               </Button>
             </Flex>
           </ModalHeader>
