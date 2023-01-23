@@ -2,12 +2,16 @@ import useGetNotifications from "hooks/useGetNotifications";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoSettings } from "react-icons/go";
 import { MdOutlineNotificationsNone } from "react-icons/md";
-import { useGetNotificationQuery } from "redux/services/notification.service";
+import {
+  useGetNotificationQuery,
+  useReadAllMutation,
+} from "redux/services/notification.service";
 import io from "socket.io-client";
 
 import {
   Avatar,
   AvatarBadge,
+  Box,
   Button,
   Flex,
   Icon,
@@ -30,6 +34,7 @@ import Color from "@constants/color";
 function NotificationModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [page, setPage] = useState(1);
+  const [readAll, readInfo] = useReadAllMutation();
   const { data, isLoading, isFetching, refetch } = useGetNotificationQuery({
     page,
   });
@@ -131,19 +136,34 @@ function NotificationModal() {
             alignItems={"center"}
             textAlign={"center"}
             fontSize={"smSubHead"}
-            justifyContent="center"
-            mb="20px"
+            justifyContent="space-between"
+            mb="10px"
           >
-            Notification{" "}
-            <Icon
-              ml="5px"
-              as={GoSettings}
-              bg="clique.base"
-              color="clique.primaryBg"
-              p="2px"
-              fontSize={"smHead"}
-              rounded={"5px"}
-            />{" "}
+            <Box w="100px"></Box>
+            <Flex alignItems="center">
+              
+              Notification{" "}
+              <Icon
+                ml="5px"
+                as={GoSettings}
+                bg="clique.base"
+                color="clique.primaryBg"
+                p="2px"
+                fontSize={"smHead"}
+                rounded={"5px"}
+              />
+            </Flex>
+            <Flex w="100px" justifyContent={"right"}>
+              {" "}
+              <Button
+                onClick={() => readAll()}
+                fontSize={"smSubHead"}
+                isLoading={readInfo?.isLoading}
+                size={"sm"}
+              >
+                Read All
+              </Button>
+            </Flex>
           </ModalHeader>
 
           {isLoading &&
