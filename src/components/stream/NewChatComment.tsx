@@ -7,6 +7,7 @@ import {
   InputRightElement,
   Spinner,
   Textarea,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
@@ -51,7 +52,7 @@ function NewChatComment({ id, profile }: { id: string; profile: any }) {
             fontSize: "smSubHead",
           }}
           placeholder="Enter Comment..."
-          bg="clique.ashGrey"
+          bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
           border={"none"}
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}
