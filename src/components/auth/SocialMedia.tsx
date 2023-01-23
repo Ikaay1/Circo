@@ -85,7 +85,7 @@ export const SocialMedia = ({
     console.log(response);
     if (response?.accessToken) {
       const {name, picture, email} = response;
-      if (router.asPath === '/signup') {
+      if (router.asPath.includes('/signup')) {
         const res: any = await socialPreSignup({email});
         if ('data' in res) {
           const data = {
