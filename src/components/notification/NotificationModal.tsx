@@ -11,6 +11,7 @@ import io from "socket.io-client";
 import {
   Avatar,
   AvatarBadge,
+  Box,
   Button,
   Flex,
   Icon,
@@ -135,31 +136,36 @@ function NotificationModal() {
             alignItems={"center"}
             textAlign={"center"}
             fontSize={"smSubHead"}
-            justifyContent="center"
-            mb="0px"
+            justifyContent="space-between"
+            mb="10px"
           >
-            Notification{" "}
-            <Icon
-              ml="5px"
-              as={GoSettings}
-              bg="clique.base"
-              color="clique.primaryBg"
-              p="2px"
-              fontSize={"smHead"}
-              rounded={"5px"}
-            />
+            <Box w="100px"></Box>
+            <Flex alignItems="center">
+              
+              Notification{" "}
+              <Icon
+                ml="5px"
+                as={GoSettings}
+                bg="clique.base"
+                color="clique.primaryBg"
+                p="2px"
+                fontSize={"smHead"}
+                rounded={"5px"}
+              />
+            </Flex>
+            <Flex w="100px" justifyContent={"right"}>
+              {" "}
+              <Button
+                onClick={() => readAll()}
+                fontSize={"smSubHead"}
+                isLoading={readInfo?.isLoading}
+                size={"sm"}
+              >
+                Read All
+              </Button>
+            </Flex>
           </ModalHeader>
-          <Flex justifyContent={"right"} px="0px" w="full" pb="20px">
-            {" "}
-            <Button
-              onClick={() => readAll()}
-              fontSize={"smSubHead"}
-              isLoading={readInfo?.isLoading}
-              size={"sm"}
-            >
-              Read All
-            </Button>
-          </Flex>
+
           {isLoading &&
             [1, 2, 3, 4, 5].map((i) => (
               <Skeleton key={i} h="50px" rounded="10px" mb="10px" />
