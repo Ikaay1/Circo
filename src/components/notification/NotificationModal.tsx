@@ -2,7 +2,10 @@ import useGetNotifications from "hooks/useGetNotifications";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoSettings } from "react-icons/go";
 import { MdOutlineNotificationsNone } from "react-icons/md";
-import { useGetNotificationQuery } from "redux/services/notification.service";
+import {
+  useGetNotificationQuery,
+  useReadAllMutation,
+} from "redux/services/notification.service";
 import io from "socket.io-client";
 
 import {
@@ -30,6 +33,7 @@ import Color from "@constants/color";
 function NotificationModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [page, setPage] = useState(1);
+  const [readAll, readInfo] = useReadAllMutation();
   const { data, isLoading, isFetching, refetch } = useGetNotificationQuery({
     page,
   });
@@ -132,7 +136,7 @@ function NotificationModal() {
             textAlign={"center"}
             fontSize={"smSubHead"}
             justifyContent="center"
-            mb="20px"
+            mb="0px"
           >
             Notification{" "}
             <Icon
@@ -143,9 +147,19 @@ function NotificationModal() {
               p="2px"
               fontSize={"smHead"}
               rounded={"5px"}
-            />{" "}
+            />
           </ModalHeader>
-
+          <Flex justifyContent={"right"} px="0px" w="full" pb="20px">
+            {" "}
+            <Button
+              onClick={() => readAll()}
+              fontSize={"smSubHead"}
+              isLoading={readInfo?.isLoading}
+              size={"sm"}
+            >
+              Read All
+            </Button>
+          </Flex>
           {isLoading &&
             [1, 2, 3, 4, 5].map((i) => (
               <Skeleton key={i} h="50px" rounded="10px" mb="10px" />

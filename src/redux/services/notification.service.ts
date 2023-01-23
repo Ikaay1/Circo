@@ -37,8 +37,22 @@ export const notificationApi = createApi({
       }),
       invalidatesTags: ["Notification"],
     }),
+
+    readAll: builder.mutation<any, void>({
+      query: () => ({
+        url: `notifications/read-all`,
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      invalidatesTags: ["Notification"],
+    }),
   }),
 });
 
-export const { useGetNotificationQuery, useReadNotificationMutation } =
-  notificationApi;
+export const {
+  useGetNotificationQuery,
+  useReadNotificationMutation,
+  useReadAllMutation,
+} = notificationApi;
