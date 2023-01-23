@@ -100,6 +100,7 @@ export const SocialMedia = ({
           router.push(`/ageRange`);
         } else {
           toast.error(res.error?.data?.message);
+          window.location.replace('/signup');
         }
       } else {
         const userData = {
@@ -116,6 +117,7 @@ export const SocialMedia = ({
           router.push('/home');
         } else {
           toast.error(res.error?.data?.message);
+          window.location.replace('/login');
         }
       }
     }
