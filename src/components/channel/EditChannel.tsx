@@ -23,6 +23,7 @@ import { SerializedError } from "@reduxjs/toolkit";
 
 // import { setChannel } from "redux/slices/channelSlice";
 import { Channel } from "./UserDetail";
+import { setChannel } from "redux/slices/authSlice";
 
 interface UpdateChannel {
   name: string;
@@ -100,6 +101,9 @@ const EditChannel = ({ data }: { data?: Channel }) => {
         position: "top-right",
       });
       setSubmitting(false);
+
+      dispatch(setChannel({payload: res.data}));
+
     } else if (res.error) {
       toast({
         title: res.error?.data?.message,
