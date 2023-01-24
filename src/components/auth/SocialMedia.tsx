@@ -197,11 +197,18 @@ export const SocialMedia = ({
         >
           {haveAccount}
         </Text>
-        <span style={{color: '#892cdc'}}>
-          <Link href={text === 'Login here' ? '/login' : '/signup'}>
-            {text}
-          </Link>
-        </span>
+        <Box
+          as='span'
+          color='clique.purple'
+          onClick={() =>
+            'Login here'
+              ? window.location.replace('/login')
+              : window.location.replace('/signup')
+          }
+          cursor='pointer'
+        >
+          {text}
+        </Box>
       </Box>
     </Box>
   );
