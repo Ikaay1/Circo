@@ -197,18 +197,20 @@ export const SocialMedia = ({
         >
           {haveAccount}
         </Text>
-        <Box
-          as='span'
-          color='clique.purple'
-          onClick={() =>
-            'Login here'
-              ? window.location.replace('/login')
-              : window.location.replace('/signup')
-          }
-          cursor='pointer'
-        >
-          {text}
-        </Box>
+        <a>
+          <Box
+            as='span'
+            color='clique.purple'
+            onClick={
+              router.asPath.includes('/signup')
+                ? () => window.location.replace('/login')
+                : () => window.location.replace('/signup')
+            }
+            cursor='pointer'
+          >
+            {text}
+          </Box>
+        </a>
       </Box>
     </Box>
   );
