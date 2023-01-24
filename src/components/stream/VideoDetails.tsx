@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import Color from "@constants/color";
 
 function VideoDetails({ stream }: { stream: any }) {
   return (
@@ -35,7 +36,7 @@ function VideoDetails({ stream }: { stream: any }) {
           <Box>
             <Text
               noOfLines={2}
-              color={"clique.white"}
+              color={Color().blackAndWhite}
               fontFamily={"Poppins"}
               fontWeight={400}
               fontSize="subHead"
@@ -78,7 +79,7 @@ function VideoDetails({ stream }: { stream: any }) {
       </Text>{" "}
       <Text
         mt="5px"
-        color={"clique.white"}
+        color={Color().blackAndWhite}
         fontFamily={"Poppins"}
         fontWeight={400}
         fontSize="smSubHead"
