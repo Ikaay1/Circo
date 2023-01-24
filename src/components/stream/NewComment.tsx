@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputRightElement,
   Spinner,
+  Textarea,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
@@ -39,14 +40,15 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
       />
 
       <InputGroup>
-        <Input
+        <Textarea
+          rows={2}
           rounded={"10px"}
           p="5px"
           px="10px"
-          color={"clique.white"}
+          // color={"clique.white"}
           fontSize={"smSubHead"}
           _placeholder={{
-            color: "clique.white",
+            color: useColorModeValue("clique.ashGrey", "clique.lightPrimaryBg"),
             fontSize: "smSubHead",
           }}
           placeholder="Enter Comment..."
@@ -81,7 +83,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           cursor={"pointer"}
           h="100%"
           roundedRight="10px"
-          bg="clique.ashGrey"
+          bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
           onClick={async () => {
             const post: any = await postCommentOnStream({
               streamId: id,
