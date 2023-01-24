@@ -89,7 +89,7 @@ function WebCamModal({ setState }: { setState: any }) {
         onClick={() => {
           onOpen();
         }}
-        color={isOpen ? "clique.base" : "clique.white"}
+        color={isOpen ? "clique.base" : Color().blackAndWhite}
       >
         Webcam
       </Button>
