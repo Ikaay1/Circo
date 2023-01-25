@@ -1,36 +1,37 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-import { BsBroadcast } from "react-icons/bs";
+import ProtectedRoute from 'layouts/ProtectedRoute';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { BsBroadcast } from 'react-icons/bs';
 import {
-  MdAddCircleOutline,
-  MdMenuOpen,
-  MdOutlineClose,
-  MdOutlineNotificationsNone,
-} from "react-icons/md";
-import { useAppSelector } from "redux/app/hooks";
+	MdAddCircleOutline,
+	MdMenuOpen,
+	MdOutlineClose,
+	MdOutlineNotificationsNone,
+} from 'react-icons/md';
+import { useAppSelector } from 'redux/app/hooks';
 
 import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import NotificationModal from "@components/notification/NotificationModal";
-import UploadModal from "@components/upload/UploadModal";
-import MobileMenu from "./mobileMenu/MobileMenu";
-import Color from "@constants/color";
-import SimpleSwitch from "@components/settings/SimpleSwitch";
-import ProtectedRoute from "layouts/ProtectedRoute";
+	Avatar,
+	AvatarBadge,
+	Box,
+	Button,
+	Flex,
+	HStack,
+	Icon,
+	Image,
+	Input,
+	InputGroup,
+	InputLeftElement,
+	useColorMode,
+	useColorModeValue,
+} from '@chakra-ui/react';
+import NotificationModal from '@components/notification/NotificationModal';
+import SimpleSwitch from '@components/settings/SimpleSwitch';
+import UploadModal from '@components/upload/UploadModal';
+import Color from '@constants/color';
+
+import MobileMenu from './mobileMenu/MobileMenu';
 
 type Props = {
   upload?: () => void;
@@ -126,7 +127,7 @@ function Header({ upload }: Props) {
             border={" 3px solid "}
             borderColor={"clique.inputBorder"}
             rounded="full"
-            type="tel"
+            type="text"
             fontFamily={"Poppins"}
             _placeholder={{
               color: Color().blackAndWhite,
