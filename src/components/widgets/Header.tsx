@@ -1,54 +1,51 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-import { BsBroadcast } from "react-icons/bs";
+import ProtectedRoute from 'layouts/ProtectedRoute';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { BsBroadcast } from 'react-icons/bs';
 import {
-  MdAddCircleOutline,
-  MdMenuOpen,
-  MdOutlineClose,
-  MdOutlineNotificationsNone,
-} from "react-icons/md";
-import { useAppSelector } from "redux/app/hooks";
+	MdAddCircleOutline,
+	MdMenuOpen,
+	MdOutlineClose,
+	MdOutlineNotificationsNone,
+} from 'react-icons/md';
+import { useAppSelector } from 'redux/app/hooks';
 
 import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import NotificationModal from "@components/notification/NotificationModal";
-import UploadModal from "@components/upload/UploadModal";
-import MobileMenu from "./mobileMenu/MobileMenu";
-import Color from "@constants/color";
-import SimpleSwitch from "@components/settings/SimpleSwitch";
+	Avatar,
+	AvatarBadge,
+	Box,
+	Button,
+	Flex,
+	HStack,
+	Icon,
+	Image,
+	Input,
+	InputGroup,
+	InputLeftElement,
+	useColorMode,
+	useColorModeValue,
+} from '@chakra-ui/react';
+import NotificationModal from '@components/notification/NotificationModal';
+import SimpleSwitch from '@components/settings/SimpleSwitch';
+import UploadModal from '@components/upload/UploadModal';
+import Color from '@constants/color';
+
+import MobileMenu from './mobileMenu/MobileMenu';
 
 type Props = {
   upload?: () => void;
 };
 
 function Header({ upload }: Props) {
-  const profile = useAppSelector((store) => store.app.userReducer.userProfile);
+  const profile = useAppSelector((store) => store.app.userReducer.channel);
+
   const [searchWidth, setSearchWidth] = useState({
     base: "150px",
     lg: "300px",
   });
   const router = useRouter();
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    if (!profile?._id) {
-      router.push("/login");
-    }
-  }, [profile?._id, router]);
 
   const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -130,7 +127,7 @@ function Header({ upload }: Props) {
             border={" 3px solid "}
             borderColor={"clique.inputBorder"}
             rounded="full"
-            type="tel"
+            type="text"
             fontFamily={"Poppins"}
             _placeholder={{
               color: Color().blackAndWhite,
@@ -154,7 +151,7 @@ function Header({ upload }: Props) {
             <Avatar
               p="0"
               size="sm"
-              name={profile?.firstName + " " + profile?.lastName}
+              name={profile?.name}
               src={profile?.photo}
               cursor="pointer"
               onClick={() => router.push("/profile/1/content")}
@@ -198,4 +195,4 @@ function Header({ upload }: Props) {
   );
 }
 
-export default Header;
+export default ProtectedRoute(Header);

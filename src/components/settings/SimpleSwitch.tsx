@@ -6,15 +6,30 @@ type Props = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
   isChecked: boolean;
   name: string;
+  isFetching?: boolean;
+  isUpdating?: boolean;
 };
 
-function SimpleSwitch({ text, onChange, name, isChecked }: Props) {
+function SimpleSwitch({
+  text,
+  onChange,
+  name,
+  isChecked,
+  isFetching,
+  isUpdating,
+}: Props) {
   return (
     <Flex justifyContent="space-between" mt="3">
       <Text fontSize={"smSubHead"} color="clique.text">
         {text}
       </Text>
-      <Switch size="md" onChange={onChange} isChecked={isChecked} name={name} />
+      <Switch
+        size="md"
+        isDisabled={isFetching || isUpdating ? true : false}
+        onChange={onChange}
+        isChecked={isChecked}
+        name={name}
+      />
     </Flex>
   );
 }

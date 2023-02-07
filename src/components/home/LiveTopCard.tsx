@@ -22,6 +22,8 @@ function LiveTopCard() {
   const router = useRouter();
   const { data, isFetching } = useGetAllLiveStreamQuery({
     ongoing: "true",
+    search: "",
+    paid: "",
   });
   const userProfile = useAppSelector(
     (store) => store.app.userReducer.userProfile
@@ -84,11 +86,7 @@ function LiveTopCard() {
               <Avatar
                 p="0"
                 size="md"
-                name={
-                  event?.streamerId?.firstName +
-                  " " +
-                  event?.streamerId?.lastName
-                }
+                name={event?.streamerId?.name}
                 src={event?.streamerId?.photo}
               />
             </Flex>

@@ -17,7 +17,7 @@ import { useAppSelector } from "redux/app/hooks";
 
 function NewReplyComment({ id }: { id: string }) {
   const router = useRouter();
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
+  const { channel } = useAppSelector((store) => store.app.userReducer);
   const [comment, setComment] = React.useState("");
   const [replyStreamComment, postInfo] = useReplyStreamCommentMutation();
 
@@ -34,8 +34,8 @@ function NewReplyComment({ id }: { id: string }) {
       w="100%"
     >
       <AvataWithSpace
-        name={userProfile?.firstName + " " + userProfile?.lastName}
-        url={userProfile?.photo}
+        name={channel?.name}
+        url={channel?.photo}
         mr="20px"
         size="40px"
         borderThickness="2px"

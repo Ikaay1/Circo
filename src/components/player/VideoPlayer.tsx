@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import {
@@ -7,7 +8,7 @@ import {
 	SliderFilledTrack,
 	SliderTrack,
 } from '@chakra-ui/react';
-import { contentData } from '@constants/utils';
+import { contentData, createObjectURL, decrypt } from '@constants/utils';
 
 import Control from './Control';
 import ControlMobile from './ControlMobile';
@@ -17,12 +18,15 @@ const {Player, ControlBar, BigPlayButton} = require('video-react');
 function VideoPlayer({
   video,
   videoIdsList,
+  url,
 }: {
   video: contentData;
   videoIdsList: {
     _id: string;
   }[];
+  url: string;
 }) {
+  const router = useRouter();
   const currentVideoIndex = videoIdsList.findIndex(
     (videoId) => videoId?._id === video._id,
   );
@@ -33,6 +37,10 @@ function VideoPlayer({
 
   const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
     null,
+  );
+
+  const [isLoop, setIsLoop] = React.useState<any>(
+    localStorage.getItem('loop') === 'true' ? true : false,
   );
 
   useEffect(() => {
@@ -72,6 +80,7 @@ function VideoPlayer({
       });
     }
   }, []);
+
   return (
     <Flex
       pos={'relative'}
@@ -92,8 +101,20 @@ function VideoPlayer({
           autoPlay={true}
           fluid={false}
           width='100%'
-          src={video.video}
+          src={url}
           height='100%'
+          onEnded={() => {
+            if (isLoop) {
+              playerRef.current.seek(0);
+              playerRef.current.play();
+              return;
+            }
+            if (nextVideoIndex !== null) {
+              router.push(
+                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
+              );
+            }
+          }}
         >
           <ControlBar
             className='my-class'
@@ -150,6 +171,8 @@ function VideoPlayer({
             prevVideoIndex={prevVideoIndex}
             currentVideoIndex={currentVideoIndex}
             videoIdsList={videoIdsList}
+            isLoop={isLoop}
+            setIsLoop={setIsLoop}
           />
         </Box>
 

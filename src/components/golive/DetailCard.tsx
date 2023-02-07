@@ -60,6 +60,13 @@ export default function DetailCard({
                   id="title"
                   color={Color().blackAndWhite}
                   placeholder={`Enter ${name}`}
+                  min={
+                    type === "date"
+                      ? new Date()
+                          .toISOString()
+                          .slice(0, new Date().toISOString().lastIndexOf(":"))
+                      : undefined
+                  }
                   type={
                     type === "date"
                       ? "datetime-local"
@@ -92,3 +99,6 @@ export default function DetailCard({
     </Box>
   );
 }
+
+
+

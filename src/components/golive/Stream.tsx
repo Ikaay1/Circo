@@ -192,7 +192,7 @@ function Stream({
                     >
                       <label htmlFor={"thumbnail"}>
                         {props.values.thumbNail ? (
-                          <Box mt="7">
+                          <Box mt="7" mb="4">
                             {" "}
                             <Box
                               bgImage={
@@ -262,7 +262,7 @@ function Stream({
                   <SelectField name="ageRange" placeholder="Select Age Range">
                     <option value={"18 and above"}>18 and above</option>
                     <option value={"Below 18"}>Below 18</option>{" "}
-                    <option value={"ALL"}>All</option>
+                    <option value={"ALL"}>All</option>{" "}
                   </SelectField>
                 </GridItem>
               </Grid>

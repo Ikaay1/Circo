@@ -1,24 +1,24 @@
-import moment from "moment";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useAppSelector } from "redux/app/hooks";
-import { useSubscribeMutation } from "redux/services/user.service";
+import moment from 'moment';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useSubscribeMutation } from 'redux/services/user.service';
 
 import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  Text,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
+	Avatar,
+	Box,
+	Button,
+	Flex,
+	Text,
+	useColorModeValue,
+	useDisclosure,
+} from '@chakra-ui/react';
+import Color from '@constants/color';
 
-import { contentData } from "../../constants/utils";
-import { useRoutingChannel } from "../../hooks/useRoutingChannel";
-import SmallPlayer from "./SmallPlayer";
-import SubScribeModal from "./SubScribeModal";
-import Color from "@constants/color";
+import { contentData } from '../../constants/utils';
+import { useRoutingChannel } from '../../hooks/useRoutingChannel';
+import SmallPlayer from './SmallPlayer';
+import SubScribeModal from './SubScribeModal';
 
 function HoverCard({
   setIsHover,
@@ -28,6 +28,7 @@ function HoverCard({
   name,
   userId,
   photo,
+  url
 }: {
   setIsHover: any;
   isSubscribed: boolean;
@@ -36,6 +37,7 @@ function HoverCard({
   video: contentData;
   name: string;
   photo: string;
+  url: string;
 }) {
   const router = useRouter();
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
@@ -70,7 +72,7 @@ function HoverCard({
           }
         }}
       >
-        <SmallPlayer video={video} />
+        <SmallPlayer url={url} video={video} />
       </Box>
       <Flex p="15px">
         {photo ? (

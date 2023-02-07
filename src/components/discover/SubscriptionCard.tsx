@@ -11,7 +11,7 @@ function SubscriptionCard({user}: any) {
   return (
     <Flex
       cursor={'pointer'}
-      minW='420px'
+      w='420px'
       mr='20px'
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}

@@ -1,26 +1,19 @@
-import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import FacebookLogin, {
-	ReactFacebookFailureResponse,
-	ReactFacebookLoginInfo,
-} from 'react-facebook-login';
-// import GoogleLogin, {
-// 	GoogleLoginResponse,
-// 	GoogleLoginResponseOffline,
-// } from 'react-google-login';
+import React from 'react';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { toast } from 'react-hot-toast';
 import { useAppDispatch } from 'redux/app/hooks';
-import { useLoginMutation } from 'redux/services/auth.service';
+import {
+	useLoginMutation,
+	useSocialPreSignupMutation,
+} from 'redux/services/auth.service';
 import { setCredentials } from 'redux/slices/authSlice';
 
 import { Box, Button, Image, Text } from '@chakra-ui/react';
 import Color from '@constants/color';
-// import { getDecodedOAuthJwtGoogle } from '@constants/googleDecode';
-import { socialMediaIconsData } from '@constants/utils';
-// import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 
 export const SocialMedia = ({
   haveAccount,
@@ -31,75 +24,84 @@ export const SocialMedia = ({
 }) => {
   const router = useRouter();
   const [login, loginStatus] = useLoginMutation();
+  const [socialPreSignup, socialPreSignupStatus] = useSocialPreSignupMutation();
   const dispatch = useAppDispatch();
 
-  // const responseGoogle = async (response: any) => {
-  //   if (response?.profileObj) {
-
-  //   }
-  // };
-
-  // const responseError = (error: any) => {
-  //   console.log(error);
-  //   // toast.error(error?.error);
-  // };
-
-  const loginGoogle = async (credentialResponse: CredentialResponse) => {
-    const realUserData: any = jwt_decode(credentialResponse?.credential!);
-    console.log(realUserData);
-    if (realUserData?.email) {
-      const {family_name, given_name, picture, email} = realUserData;
-
-      if (router.asPath === '/signup') {
-        const data = {
-          firstName: family_name.trim(),
-          lastName: given_name.trim(),
-          userName: email.split('@')[0].trim(),
-          email: email.toLowerCase().trim(),
-          photo: picture,
-          social: 'GOOGLE',
-        };
-        localStorage.setItem('userData', JSON.stringify(data));
-        router.push(`/ageRange`);
-      } else {
-        const userData = {
-          userNameOrEmail: email,
-        };
-        const res: any = await login(userData);
-
-        if ('data' in res) {
-          dispatch(
-            setCredentials({
-              payload: res.data,
-            }),
-          );
-          router.push('/home');
+  const loginGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log('entered login');
+      let userInfo = await axios.get(
+        'https://www.googleapis.com/oauth2/v3/userinfo',
+        {
+          headers: {
+            Authorization: `Bearer ${tokenResponse?.access_token}`,
+          },
+        },
+      );
+      console.log(userInfo);
+      if (userInfo?.data?.email) {
+        const {family_name, given_name, picture, email} = userInfo.data;
+        if (router.asPath === '/signup') {
+          const res: any = await socialPreSignup({email});
+          if ('data' in res) {
+            const data = {
+              firstName: family_name.trim(),
+              lastName: given_name.trim(),
+              userName: email.split('@')[0].trim(),
+              email: email.toLowerCase().trim(),
+              photo: picture,
+              social: 'GOOGLE',
+            };
+            localStorage.setItem('userData', JSON.stringify(data));
+            router.push(`/ageRange`);
+          } else {
+            toast.error(res.error?.data?.message);
+          }
         } else {
-          toast.error(res.error?.data?.message);
+          const userData = {
+            userNameOrEmail: email,
+          };
+          const res: any = await login(userData);
+
+          if ('data' in res) {
+            dispatch(
+              setCredentials({
+                payload: res.data,
+              }),
+            );
+            router.push('/home');
+          } else {
+            toast.error(res.error?.data?.message);
+          }
         }
       }
-    }
-  };
+    },
+    onError(errorResponse) {
+      console.log(errorResponse);
+    },
+  });
 
   const responseFacebook = async (response: any) => {
     console.log(response);
-    // Login failed
     if (response?.accessToken) {
-      // alert("Login failed!");
-      // setLogin(false);
-      // return false;
       const {name, picture, email} = response;
-      if (router.asPath === '/signup') {
-        const data = {
-          firstName: name.split(' ')[0].trim(),
-          lastName: name.split(' ')[1].trim(),
-          userName: email.split('@')[0].trim(),
-          email: email.toLowerCase().trim(),
-          photo: picture?.data?.url,
-          social: 'FACEBOOK',
-        };
-        localStorage.setItem('userData', JSON.stringify(data));
-        router.push(`/ageRange`);
+      if (router.asPath.includes('/signup')) {
+        const res: any = await socialPreSignup({email});
+        if ('data' in res) {
+          const data = {
+            firstName: name.split(' ')[0].trim(),
+            lastName: name.split(' ')[1].trim(),
+            userName: email.split('@')[0].trim(),
+            email: email ? email.toLowerCase().trim() : '',
+            photo: picture?.data?.url,
+            social: 'FACEBOOK',
+          };
+          localStorage.setItem('userData', JSON.stringify(data));
+          router.push(`/ageRange`);
+        } else {
+          toast.error(res.error?.data?.message);
+          router.push('/signup');
+        }
       } else {
         const userData = {
           userNameOrEmail: email,
@@ -115,70 +117,52 @@ export const SocialMedia = ({
           router.push('/home');
         } else {
           toast.error(res.error?.data?.message);
+          router.push('/login');
         }
       }
     }
-    // setData(response);
-    // setPicture(response.picture.data.url);
-    // if (response.accessToken) {
-    //   setLogin(true);
-    // } else {
-    //   setLogin(false);
-    // }
   };
-
-  // useEffect(() => {
-  //   const gapi = import('gapi-script').then((pack) => pack.gapi);
-  //   async function start() {
-  //     const d = await gapi;
-  //     d.client.init({
-  //       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-  //       scope: 'email',
-  //       plugin_name: 'chat',
-  //     });
-  //   }
-
-  //   gapi.then((d) => d.load('client:auth2', start));
-  // }, []);
-
-  console.log('App-id', process.env.NEXT_PUBLIC_FACEBOOK_APPID);
 
   return (
     <Box marginTop={'2.5rem'}>
       <Text textAlign={'center'}>Or</Text>
       <Box
         marginTop={'2.5rem'}
-        // display={'flex'}
-        // justifyContent={'space-between'}
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
       >
-        {/* {socialMediaIconsData.map((iconData) => ( */}
-        {/* <Box
-            width='77px'
-            height='77px'
-            background='clique.secondaryGrey4'
-            boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
-            borderRadius='42px'
-            display={'flex'}
-            justifyContent='center'
-            alignItems={'center'}
-            marginRight={iconData !== 'facebook' ? '2.5rem' : ''}
-            cursor='pointer'
-            key={iconData}
-          >
-            <Image
-              src={`/assets/${iconData}.png`}
-              alt={`${iconData} icon`}
-              width={'47px'}
-              height={'47px'}
-            />
-          </Box> */}
-        {/* // ))} */}
-        {/* <GoogleLogin
-          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+        <Button
+          onClick={() => loginGoogle()}
+          width='77px'
+          height='77px'
+          background='clique.secondaryGrey4'
+          boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
+          borderRadius='42px'
+          display={'flex'}
+          justifyContent='center'
+          alignItems={'center'}
+          cursor='pointer'
+          border='none'
+          mr='.8rem'
+        >
+          <Image
+            src={`/assets/google.png`}
+            alt={`google icon`}
+            width={'47px'}
+            height={'47px'}
+          />
+        </Button>
+        <FacebookLogin
+          appId={process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
+          autoLoad={false}
+          fields='name,email,picture'
+          scope='public_profile,email,user_friends'
+          callback={(response) => responseFacebook(response)}
+          icon='fa-facebook'
           render={(renderProps) => (
             <Button
               onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
               width='77px'
               height='77px'
               background='clique.secondaryGrey4'
@@ -191,35 +175,14 @@ export const SocialMedia = ({
               border='none'
             >
               <Image
-                src={`/assets/google.png`}
-                alt={`google icon`}
+                src={`/assets/facebook.png`}
+                alt={`facebook icon`}
                 width={'47px'}
                 height={'47px'}
               />
             </Button>
           )}
-          onSuccess={(response) => responseGoogle(response)}
-          onFailure={(error) => responseError(error)}
-          cookiePolicy='single_host_origin'
-        /> */}
-        <Box display={'flex'} justifyContent={'center'}>
-          <GoogleLogin
-            onSuccess={(credentialResponse) => loginGoogle(credentialResponse)}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
-        </Box>
-        <Box mt='1rem' display={'flex'} justifyContent={'center'}>
-          <FacebookLogin
-            appId={process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
-            autoLoad={false}
-            fields='name,email,picture'
-            scope='public_profile,email,user_friends'
-            callback={(response) => responseFacebook(response)}
-            icon='fa-facebook'
-          />
-        </Box>
+        />
       </Box>
       <Box
         fontSize='sm2'
@@ -234,11 +197,20 @@ export const SocialMedia = ({
         >
           {haveAccount}
         </Text>
-        <span style={{color: '#892cdc'}}>
-          <Link href={text === 'Login here' ? '/login' : '/signup'}>
+        <a>
+          <Box
+            as='span'
+            color='clique.purple'
+            onClick={
+              router.asPath.includes('/signup')
+                ? () => window.location.replace('/login')
+                : () => window.location.replace('/signup')
+            }
+            cursor='pointer'
+          >
             {text}
-          </Link>
-        </span>
+          </Box>
+        </a>
       </Box>
     </Box>
   );

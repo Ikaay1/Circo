@@ -6,17 +6,19 @@ import {
   InputGroup,
   InputRightElement,
   Spinner,
+  Textarea,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import { usePostCommentOnStreamMutation } from "redux/services/livestream/streamComment.service";
 import Color from "@constants/color";
+import { useAppSelector } from "redux/app/hooks";
 
 function NewComment({ id, profile }: { id: string; profile: any }) {
   const [comment, setComment] = React.useState("");
   const [postCommentOnStream, postInfo] = usePostCommentOnStreamMutation();
-
+  const userProfile = useAppSelector((state) => state.app.userReducer);
   const toast = useToast();
   return (
     <Flex
@@ -29,8 +31,8 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
       w="400px"
     >
       <AvataWithSpace
-        name={profile?.firstName + " " + profile?.lastName}
-        url={profile?.photo}
+        name={userProfile?.channel?.name}
+        url={userProfile?.channel?.photo}
         mr="20px"
         size="40px"
         borderThickness="2px"
@@ -38,18 +40,19 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
       />
 
       <InputGroup>
-        <Input
+        <Textarea
+          rows={2}
           rounded={"10px"}
           p="5px"
           px="10px"
-          color={"clique.white"}
+          // color={"clique.white"}
           fontSize={"smSubHead"}
           _placeholder={{
-            color: "clique.white",
+            color: useColorModeValue("clique.ashGrey", "clique.lightPrimaryBg"),
             fontSize: "smSubHead",
           }}
           placeholder="Enter Comment..."
-          bg="clique.ashGrey"
+          bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
           border={"none"}
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}
@@ -80,7 +83,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           cursor={"pointer"}
           h="100%"
           roundedRight="10px"
-          bg="clique.ashGrey"
+          bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
           onClick={async () => {
             const post: any = await postCommentOnStream({
               streamId: id,

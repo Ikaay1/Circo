@@ -47,7 +47,7 @@ function StreamPlayer({ stream }: any) {
       <MuxPlayer
         style={{ height: "87%", maxWidth: "100%" }}
         onError={(err) => {
-          //retry logic
+          console.log(err);
         }}
         onWaiting={() => {
           Nprogress.start();

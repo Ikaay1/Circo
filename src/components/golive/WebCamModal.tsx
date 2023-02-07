@@ -89,7 +89,7 @@ function WebCamModal({ setState }: { setState: any }) {
         onClick={() => {
           onOpen();
         }}
-        color={isOpen ? "clique.base" : "clique.white"}
+        color={isOpen ? "clique.base" : Color().blackAndWhite}
       >
         Webcam
       </Button>
@@ -244,7 +244,7 @@ function WebCamModal({ setState }: { setState: any }) {
                             >
                               <label htmlFor={"thumbNail"}>
                                 {props.values.thumbNail ? (
-                                  <Box mt="7">
+                                  <Box mt="7" mb="4">
                                     <Box
                                       bgImage={
                                         "url(" +
@@ -323,7 +323,7 @@ function WebCamModal({ setState }: { setState: any }) {
                           <SelectField name="ageRange" placeholder="Age Range">
                             <option value={"18 and above"}>18 and above</option>
                             <option value={"Below 18"}>Below 18</option>{" "}
-                            <option value={"ALL"}>All</option>
+                            <option value={"ALL"}>All</option>{" "}
                           </SelectField>
                         </GridItem>
                         <GridItem colSpan={4}>

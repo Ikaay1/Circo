@@ -88,12 +88,17 @@ function EventTabs() {
           outline: "none",
           border: "1px solid grey",
         }}
+        onChange={(e) => {
+          if (e.currentTarget.value === "") {
+            setSearch(e.currentTarget.value);
+          }
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             setSearch(e.currentTarget.value);
           }
         }}
-        placeholder={"search live event"}
+        placeholder={"Search live event"}
       />
       <TabPanels>
         <CliqueTabPanel>

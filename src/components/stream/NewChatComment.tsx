@@ -7,15 +7,17 @@ import {
   InputRightElement,
   Spinner,
   Textarea,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import { usePostCommentOnStreamMutation } from "redux/services/livestream/streamComment.service";
+import { useAppSelector } from "redux/app/hooks";
 
 function NewChatComment({ id, profile }: { id: string; profile: any }) {
   const [comment, setComment] = React.useState("");
   const [postCommentOnStream, postInfo] = usePostCommentOnStreamMutation();
-
+  const userProfile = useAppSelector((state) => state.app.userReducer);
   const toast = useToast();
   return (
     <Flex
@@ -29,8 +31,8 @@ function NewChatComment({ id, profile }: { id: string; profile: any }) {
       pl="40px"
     >
       <AvataWithSpace
-        name={profile?.firstName + " " + profile?.lastName}
-        url={profile?.photo}
+        name={userProfile?.channel?.name}
+        url={userProfile?.channel?.photo}
         mr="20px"
         size="40px"
         borderThickness="2px"
@@ -50,7 +52,7 @@ function NewChatComment({ id, profile }: { id: string; profile: any }) {
             fontSize: "smSubHead",
           }}
           placeholder="Enter Comment..."
-          bg="clique.ashGrey"
+          bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
           border={"none"}
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}

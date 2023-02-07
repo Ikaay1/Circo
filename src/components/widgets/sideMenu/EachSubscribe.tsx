@@ -1,8 +1,9 @@
-import { useRouter } from "next/router";
-import React from "react";
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
 
-import { Avatar, Box, Flex, Icon, Link, Text } from "@chakra-ui/react";
-import Color from "@constants/color";
+import { Avatar, Box, Flex, Icon, Link, Text } from '@chakra-ui/react';
+import Color from '@constants/color';
 
 function EachSubscribe({
   name,
@@ -19,29 +20,30 @@ function EachSubscribe({
 }) {
   const router = useRouter();
   const path = router.pathname;
+  const {data, isLoading} = useGetIndividualChannelQuery(id);
 
   return (
-    <Link href={`/channel/subscribe/${id}`} textDecoration="none ">
-      <Flex pl="50px" mt="15px" alignItems={"center"} cursor={"pointer"}>
+    <Link href={`/channel/subscribe/${id}`} textDecoration='none '>
+      <Flex pl='50px' mt='15px' alignItems={'center'} cursor={'pointer'}>
         {imgUrl ? (
-          <Avatar size={"sm"} src={imgUrl} mr="10px" />
+          <Avatar size={'sm'} src={data?.data?.channel?.photo} mr='10px' />
         ) : (
           <Avatar
-            size="sm"
-            name={firstName + " " + lastName}
-            borderColor="clique.greenYellow"
-            mr="10px"
+            size='sm'
+            name={firstName + ' ' + lastName}
+            borderColor='clique.greenYellow'
+            mr='10px'
           />
         )}
         <Text
           color={
-            path === "/" + name ? "clique.base" : Color().whiteGreyAndBlack
+            path === '/' + name ? 'clique.base' : Color().whiteGreyAndBlack
           }
-          fontFamily={"Poppins"}
+          fontFamily={'Poppins'}
           fontWeight={500}
-          textTransform={"capitalize"}
+          textTransform={'capitalize'}
         >
-          {name}
+          {data?.data?.channel?.name}
         </Text>
       </Flex>
     </Link>

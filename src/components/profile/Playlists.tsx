@@ -21,6 +21,8 @@ import {
 	SkeletonCircle,
 	SkeletonText,
 	Text,
+	useColorMode,
+	useColorModeValue,
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
@@ -47,6 +49,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const toast = useToast();
   const [playlistId, setPlaylistId] = useState('');
+  const {colorMode, toggleColorMode} = useColorMode();
 
   let content;
   if (isLoading || !data) {
@@ -62,7 +65,11 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
           <Flex
             key={i}
             h='150px'
-            bg='clique.blackGrey'
+            bg={
+              colorMode === 'dark'
+                ? 'clique.blackGrey'
+                : 'clique.lightPrimaryBg'
+            }
             flexDirection={'column'}
             p='1'
           >
@@ -264,7 +271,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
           py='30px'
           position={'absolute'}
           right={0}
-          bg='clique.black'
+          bg={useColorModeValue('clique.lightPrimaryBg', 'clique.black')}
         >
           <NewPlaylist onClose={onClose} />
         </ModalContent>

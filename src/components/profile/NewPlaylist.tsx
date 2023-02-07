@@ -91,7 +91,6 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
             fontSize='smHead2'
             lineHeight='36px'
             letterSpacing='-0.02em'
-            color='clique.white'
             textAlign={'center'}
             mb='1rem'
           >
@@ -155,6 +154,7 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
           </Text>
           <Box mt='1rem'>
             <TextArea
+              color='clique.white'
               placeholder='Playlist name'
               width='100%'
               height='195px'

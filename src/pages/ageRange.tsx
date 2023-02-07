@@ -49,7 +49,7 @@ const ConfirmEmail = () => {
       >
         <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
           <ShowAuthHeader
-            header='Change Password'
+            header='Select Age Range'
             detail='Please select an age range'
           />
           <form

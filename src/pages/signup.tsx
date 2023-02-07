@@ -1,32 +1,32 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { usePreSignupMutation } from 'redux/services/auth.service';
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "redux/app/hooks";
+import { usePreSignupMutation } from "redux/services/auth.service";
 
-import { Box, Input, Text, useToast } from '@chakra-ui/react';
-import AuthButton from '@components/auth/AuthButton';
-import AuthInput from '@components/auth/AuthInput';
-import CliqueLogo from '@components/auth/CliqueLogo';
-import ShowAuthHeader from '@components/auth/ShowAuthHeader';
-import ShowAuthImage from '@components/auth/ShowAuthImage';
-import SocialMedia from '@components/auth/SocialMedia';
-import Color from '@constants/color';
-import { signUpInputData } from '@constants/utils';
+import { Box, Input, Text, useToast } from "@chakra-ui/react";
+import AuthButton from "@components/auth/AuthButton";
+import AuthInput from "@components/auth/AuthInput";
+import CliqueLogo from "@components/auth/CliqueLogo";
+import ShowAuthHeader from "@components/auth/ShowAuthHeader";
+import ShowAuthImage from "@components/auth/ShowAuthImage";
+import SocialMedia from "@components/auth/SocialMedia";
+import Color from "@constants/color";
+import { signUpInputData } from "@constants/utils";
 
-import { SignUpDataInterface } from '../constants/interface';
+import { SignUpDataInterface } from "../constants/interface";
 
 const Signup = () => {
   const token = useAppSelector((state) => state.app.userReducer.token);
   const toast = useToast();
   const [preSignup, preSignupStatus] = usePreSignupMutation();
   const router = useRouter();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [referralCode, setReferralCode] = useState('');
-  const [ageRange, setAgeRange] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [referralCode, setReferralCode] = useState("");
+  const [ageRange, setAgeRange] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handlePreSignup = async (e: any) => {
@@ -59,30 +59,30 @@ const Signup = () => {
     };
 
     const res: SignUpDataInterface = await preSignup(data);
-    if ('data' in res) {
+    if ("data" in res) {
       // redirect to otp page and pass all data
-      localStorage.setItem('hashedOtp', JSON.stringify(res.data.data.otp_hash));
-      localStorage.setItem('userData', JSON.stringify(allData));
+      localStorage.setItem("hashedOtp", JSON.stringify(res.data.data.otp_hash));
+      localStorage.setItem("userData", JSON.stringify(allData));
       router.push(`/otp`);
     } else if (res.error) {
       toast({
-        title: 'Error',
+        title: "Error",
         //@ts-ignore
         description: res?.error?.data?.message,
-        status: 'error',
+        status: "error",
         duration: 5000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
     } else {
       toast({
-        title: 'Error',
+        title: "Error",
         //@ts-ignore
-        description: 'Something went wrong, please try again ',
-        status: 'error',
+        description: "Something went wrong, please try again ",
+        status: "error",
         duration: 5000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
     }
   };
@@ -92,98 +92,98 @@ const Signup = () => {
   };
   useEffect(() => {
     if (token) {
-      router.push('/home');
+      router.push("/home");
     }
   }, [token, router]);
   return (
     <Box
-      display={'flex'}
-      justifyContent='space-between'
-      alignItems={'center'}
+      display={"flex"}
+      justifyContent="space-between"
+      alignItems={"center"}
       // backgroundColor={Color().whiteAndBlack}
     >
       <CliqueLogo />
-      <Box display={{base: 'none', lg: 'block'}}>
+      <Box display={{ base: "none", lg: "block" }}>
         <ShowAuthImage />
       </Box>
       <Box
-        marginLeft={{base: '0', xl: '50%'}}
-        minW={{base: '60%', xl: '50%'}}
-        py='50px'
+        marginLeft={{ base: "0", xl: "50%" }}
+        minW={{ base: "60%", xl: "50%" }}
+        py="50px"
       >
-        <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
+        <Box padding={"1rem"} width="450px" height={"100%"} margin="0 auto">
           <ShowAuthHeader
-            header='Sign Up'
-            detail='Connect to more Circos today!'
+            header="Sign Up"
+            detail="Connect to more Circos today!"
           />
-          <form onSubmit={handlePreSignup} className='login-form'>
+          <form onSubmit={handlePreSignup} className="login-form">
             <Box
-              display={'flex'}
-              justifyContent='space-between'
-              marginTop={'.5rem'}
+              display={"flex"}
+              justifyContent="space-between"
+              marginTop={".5rem"}
             >
-              <Box width='48%' height='57px' position='relative'>
+              <Box width="48%" height="57px" position="relative">
                 <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className='input'
-                  type={'text'}
+                  className="input"
+                  type={"text"}
                   required={true}
-                  placeholder='Firstname'
+                  placeholder="Firstname"
                   color={Color().blackAndWhite}
                   backgroundColor={Color().whiteAndBlack}
                   _placeholder={{
                     color: Color().blackAndWhite,
                   }}
-                  borderWidth={'1px'}
+                  borderWidth={"1px"}
                   borderColor={Color().blackAndWhite}
                 />
                 <Text
-                  position='absolute'
-                  top='6%'
-                  left={'4.5%'}
-                  fontSize='sm'
-                  className='placeholder small'
+                  position="absolute"
+                  top="6%"
+                  left={"4.5%"}
+                  fontSize="sm"
+                  className="placeholder small"
                   color={Color().blackAndWhite}
                   backgroundColor={Color().whiteAndBlack}
-                  zIndex='99'
+                  zIndex="99"
                 >
                   Firstname
                 </Text>
               </Box>
-              <Box width='48%' height='57px' position='relative'>
+              <Box width="48%" height="57px" position="relative">
                 <Input
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className='input'
-                  type={'text'}
+                  className="input"
+                  type={"text"}
                   required={true}
-                  placeholder='Lastname'
+                  placeholder="Lastname"
                   color={Color().blackAndWhite}
                   backgroundColor={Color().whiteAndBlack}
                   _placeholder={{
                     color: Color().blackAndWhite,
                   }}
-                  borderWidth={'1px'}
+                  borderWidth={"1px"}
                   borderColor={Color().blackAndWhite}
                 />
                 <Text
-                  position='absolute'
-                  top='6%'
-                  left={'4.5%'}
-                  fontSize='sm'
-                  className='placeholder small'
+                  position="absolute"
+                  top="6%"
+                  left={"4.5%"}
+                  fontSize="sm"
+                  className="placeholder small"
                   color={Color().blackAndWhite}
                   backgroundColor={Color().whiteAndBlack}
-                  zIndex='99'
+                  zIndex="99"
                 >
                   Lastname
                 </Text>
               </Box>
             </Box>
-            {signUpInputData.map(({name, image, key, inputName}) => (
+            {signUpInputData.map(({ name, image, key, inputName }) => (
               <div key={key}>
-                <Box position='relative' height='57px' marginTop={'.5rem'}>
+                <Box position="relative" height="57px" marginTop={".5rem"}>
                   <AuthInput
                     image={image}
                     name={name}
@@ -191,75 +191,77 @@ const Signup = () => {
                     theState={
                       image
                         ? password
-                        : inputName === 'referralCode'
+                        : inputName === "referralCode"
                         ? referralCode
-                        : inputName === 'userName'
+                        : inputName === "userName"
                         ? userName
                         : email
                     }
                     setTheState={
                       image
                         ? setPassword
-                        : inputName === 'referralCode'
+                        : inputName === "referralCode"
                         ? setReferralCode
-                        : inputName === 'email'
+                        : inputName === "email"
                         ? setEmail
                         : setUserName
                     }
                     showPassword={showPassword}
-                    email={inputName === 'email'}
-                    referral={inputName === 'referralCode'}
+                    email={inputName === "email"}
+                    referral={inputName === "referralCode"}
                   />
                 </Box>
               </div>
             ))}
 
-            <Box position='relative' height='57px' marginTop={'.5rem'}>
+            <Box position="relative" height="57px" marginTop={".5rem"}>
               <AuthInput
-                name={'Age Range'}
-                option={['18 and above', 'Below 18']}
+                name={"Age Range"}
+                option={["18 and above", "Below 18"]}
                 ageRange={ageRange}
                 setAgeRange={setAgeRange}
               />
             </Box>
             <Box
-              display={'flex'}
-              justifyContent={'center'}
-              marginTop={'1.6rem'}
+              display={"flex"}
+              justifyContent={"center"}
+              marginTop={"1.6rem"}
               color={Color().blackAndWhite}
             >
               <label
-                className='remember'
+                className="remember"
                 style={{
-                  color: 'white',
-                  cursor: 'pointer',
+                  color: "white",
+                  cursor: "pointer",
                 }}
               >
                 <input
                   color={Color().blackAndWhite}
-                  type='checkbox'
+                  type="checkbox"
                   required={true}
-                  name=''
+                  name=""
                 />
-                <Box color={Color().blackAndWhite} as='span'>
+                <Box color={Color().blackAndWhite} as="span">
                   I agree to the&nbsp;
                 </Box>
-                <span style={{color: '#892cdc'}}>Terms & Conditions&nbsp;</span>
-                <Box color={Color().blackAndWhite} as='span'>
+                <span style={{ color: "#892cdc" }}>
+                  Terms & Conditions&nbsp;
+                </span>
+                <Box color={Color().blackAndWhite} as="span">
                   and&nbsp;
                 </Box>
-                <span style={{color: '#892cdc'}}>Privacy Policy</span>
+                <span style={{ color: "#892cdc" }}>Privacy Policy</span>
               </label>
             </Box>
             <AuthButton
               status={preSignupStatus}
-              {...{marginTop: '1.2rem'}}
-              name='Sign Up'
+              {...{ marginTop: "1.2rem" }}
+              name="Sign Up"
             />
           </form>
           <SocialMedia
-            haveAccount={'Already have an account?'}
-            text={'Login here'}
+            haveAccount={"Already have an account?"}
+            text={"Login here"}
           />
         </Box>
       </Box>

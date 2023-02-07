@@ -35,7 +35,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
         description: event?.eventId?.description,
         thumbNail: event?.eventId?.thumbNails[0] || "",
         category: event?.eventId?.categoryId,
-        fee: event?.eventId?.paidToWatch ? event?.eventId?.fee : 0,
+        fee: event?.eventId?.fee ?? 0,
         ageRange: event?.eventId?.ageRange,
         schedule: event?.eventId?.schedule,
       }}
@@ -66,6 +66,9 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
         formData.append("paidToWatch", values.fee > 0 ? "true" : "false");
         formData.append("category", "SCHEDULE");
         formData.append("categoryId", values.category);
+        formData.append("fee", values.fee);
+        formData.append("schedule", values.schedule);
+
 
         const res: any = await updateEvent({
           id: event?.eventId?._id,
@@ -140,7 +143,7 @@ function EventStream({ event, setTabIndex }: { event: any; setTabIndex: any }) {
                     >
                       <label htmlFor={"thumbnail"}>
                         {props.values.thumbNail ? (
-                          <Box mt="7">
+                          <Box mt="7" mb="4">
                             <Box
                               bgImage={
                                 props.values.thumbNail?.name
