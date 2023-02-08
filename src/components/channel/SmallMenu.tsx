@@ -33,10 +33,7 @@ function SmallMenu({ playbackId }: { playbackId: string }) {
       >
         <MenuItem
           onClick={() => {
-            window.open(
-              `https://stream.mux.com/${playbackId}.m3mp4u8`,
-              "_blank"
-            );
+            window.open(`https://stream.mux.com/${playbackId}.m3u8`, "_blank");
           }}
           icon={<Icon as={TbDownload} />}
         >
