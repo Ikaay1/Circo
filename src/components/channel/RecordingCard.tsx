@@ -101,7 +101,7 @@ function RecordingCard({event}: {event: any}) {
           </Box>
         </Flex>
 
-        <SmallMenu playbackId={event?.playbackId} />
+        <SmallMenu streamId={event?._id} />
       </Flex>
     </Box>
   );

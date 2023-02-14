@@ -1,19 +1,19 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import {
-	Box,
-	Flex,
-	Slider,
-	SliderFilledTrack,
-	SliderTrack,
-} from '@chakra-ui/react';
-import { contentData, createObjectURL, decrypt } from '@constants/utils';
+  Box,
+  Flex,
+  Slider,
+  SliderFilledTrack,
+  SliderTrack,
+} from "@chakra-ui/react";
+import { contentData, createObjectURL, decrypt } from "@constants/utils";
 
-import Control from './Control';
-import ControlMobile from './ControlMobile';
+import Control from "./Control";
+import ControlMobile from "./ControlMobile";
 
-const {Player, ControlBar, BigPlayButton} = require('video-react');
+const { Player, ControlBar, BigPlayButton } = require("video-react");
 
 function VideoPlayer({
   video,
@@ -28,19 +28,19 @@ function VideoPlayer({
 }) {
   const router = useRouter();
   const currentVideoIndex = videoIdsList.findIndex(
-    (videoId) => videoId?._id === video._id,
+    (videoId) => videoId?._id === video._id
   );
 
   const [nextVideoIndex, setNextVideoIndex] = React.useState<number | null>(
-    null,
+    null
   );
 
   const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
-    null,
+    null
   );
 
   const [isLoop, setIsLoop] = React.useState<any>(
-    localStorage.getItem('loop') === 'true' ? true : false,
+    localStorage.getItem("loop") === "true" ? true : false
   );
 
   useEffect(() => {
@@ -83,16 +83,16 @@ function VideoPlayer({
 
   return (
     <Flex
-      pos={'relative'}
-      h={{base: '400px', lg: '580px'}}
-      maxH={{base: '400px', lg: '580px'}}
-      borderRadius='20px'
-      id='video'
-      overflow={'hidden'}
-      bg='black'
-      flexDir={'column'}
+      pos={"relative"}
+      h={{ base: "400px", lg: "580px" }}
+      maxH={{ base: "400px", lg: "580px" }}
+      borderRadius="20px"
+      id="video"
+      overflow={"hidden"}
+      bg="black"
+      flexDir={"column"}
     >
-      <Box minH='calc(100% - 80px)' borderTopRadius={'20px'}>
+      <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
         <Player
           controls={false}
           playing={isPlay}
@@ -100,9 +100,9 @@ function VideoPlayer({
           muted={isMuted}
           autoPlay={true}
           fluid={false}
-          width='100%'
+          width="100%"
           src={url}
-          height='100%'
+          height="100%"
           onEnded={() => {
             if (isLoop) {
               playerRef.current.seek(0);
@@ -111,35 +111,35 @@ function VideoPlayer({
             }
             if (nextVideoIndex !== null) {
               router.push(
-                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
+                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
               );
             }
           }}
         >
           <ControlBar
-            className='my-class'
+            className="my-class"
             autoHide={false}
             disableDefaultControls={true}
           ></ControlBar>
-          <BigPlayButton position='center' />
+          <BigPlayButton position="center" />
         </Player>
       </Box>
 
       <Flex
-        bg='clique.blackGrey'
-        overflow={'hidden'}
-        mt='auto'
-        borderBottomRadius={'20px'}
-        flexDir={'column'}
-        minH='80px'
-        h={'80px'}
-        maxH={'80px'}
-        alignItems={'center'}
-        justifyContent={'flex-start'}
+        bg="clique.blackGrey"
+        overflow={"hidden"}
+        mt="auto"
+        borderBottomRadius={"20px"}
+        flexDir={"column"}
+        minH="80px"
+        h={"80px"}
+        maxH={"80px"}
+        alignItems={"center"}
+        justifyContent={"flex-start"}
       >
         {/* progress */}
         <Slider
-          aria-label='slider-ex-1'
+          aria-label="slider-ex-1"
           defaultValue={0}
           value={
             totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
@@ -149,13 +149,13 @@ function VideoPlayer({
             playerRef.current.seek(timestamp);
           }}
         >
-          <SliderTrack h='10px' rounded='0' bg='clique.grey'>
-            <SliderFilledTrack rounded='0' bg='clique.base' />
+          <SliderTrack h="10px" rounded="0" bg="clique.grey">
+            <SliderFilledTrack rounded="0" bg="clique.base" />
           </SliderTrack>
         </Slider>
 
         {/* control */}
-        <Box display={{base: 'none', lg: 'block'}}>
+        <Box display={{ base: "none", lg: "block" }}>
           <Control
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
@@ -176,7 +176,7 @@ function VideoPlayer({
           />
         </Box>
 
-        <Box display={{lg: 'none'}}>
+        <Box display={{ lg: "none" }}>
           <ControlMobile
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
