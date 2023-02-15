@@ -24,7 +24,10 @@ import AvataWithSpace from "@components/widgets/AvataWithSpace";
 import TrashIcon from "@icons/TrashIcon";
 
 import replyInterface from "../../constants/utils";
-import { useDislikeCommentReplyMutation, useLikeCommentReplyMutation } from "redux/services/livestream/streamComment.service";
+import {
+  useDislikeCommentReplyMutation,
+  useLikeCommentReplyMutation,
+} from "redux/services/livestream/streamComment.service";
 
 function EachReply({ reply, commentId }: { reply: any; commentId: string }) {
   const router = useRouter();
@@ -46,9 +49,10 @@ function EachReply({ reply, commentId }: { reply: any; commentId: string }) {
       w="85%"
       ml="auto"
       mt="15px"
-      bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
+      bg={useColorModeValue("clique.ashGrey", "clique.ashGrey")}
       rounded="10px"
       p="20px"
+      color={"clique.darkGrey"}
     >
       <Box
         mr="20px"
@@ -62,7 +66,7 @@ function EachReply({ reply, commentId }: { reply: any; commentId: string }) {
         }
       >
         <AvataWithSpace
-          name={reply?.firstName + " " + reply?.lastName}
+          name={reply?.name}
           url={reply?.photo}
           size="40px"
           borderThickness="2px"
@@ -80,7 +84,7 @@ function EachReply({ reply, commentId }: { reply: any; commentId: string }) {
             lineHeight={"1.2"}
             mr="20px"
           >
-            {`${reply?.userName}`}
+            {`${reply?.name}`}
           </Text>
           <Text
             noOfLines={2}
