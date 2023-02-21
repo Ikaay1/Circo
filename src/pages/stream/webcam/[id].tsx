@@ -94,6 +94,7 @@ function Index() {
             size={"sm"}
             rounded="full"
             bg="clique.close"
+            color="clique.white"
             fontWeight={"400"}
           >
             Live chat

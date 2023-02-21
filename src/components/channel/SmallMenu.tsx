@@ -6,13 +6,19 @@ import {
   MenuItem,
   MenuList,
   useColorModeValue,
+  useToast,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import { TbDownload } from "react-icons/tb";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Color from "@constants/color";
+import { useDownloadLivestreamMutation } from "redux/services/livestream/live.service";
 
-function SmallMenu({ playbackId }: { playbackId: string }) {
+function SmallMenu({ streamId }: { streamId: string }) {
+  const [downloadLivestream, info] = useDownloadLivestreamMutation();
+
+  const toast = useToast();
   return (
     <Menu closeOnSelect>
       <MenuButton
@@ -32,11 +38,31 @@ function SmallMenu({ playbackId }: { playbackId: string }) {
         border={"none"}
       >
         <MenuItem
-          onClick={() => {
-            window.open(
-              `https://stream.mux.com/${playbackId}.m3mp4u8`,
-              "_blank"
-            );
+          as={Button}
+          isLoading={info.isLoading}
+          onClick={async () => {
+            try {
+              const videoUrl: any = await downloadLivestream(streamId);
+              if (videoUrl) {
+                toast({
+                  title: "Success",
+                  position: "top-right",
+                  description: "Video is downloading",
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                });
+                window.open(videoUrl?.data?.data?.video, "_blank");
+              }
+            } catch (error: any) {
+              toast({
+                title: "Error",
+                description: error.message || "Something went wrong",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+              });
+            }
           }}
           icon={<Icon as={TbDownload} />}
         >

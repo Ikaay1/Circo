@@ -45,10 +45,9 @@ function NewChatComment({ id, profile }: { id: string; profile: any }) {
           rounded={"10px"}
           p="5px"
           px="10px"
-          color={"clique.white"}
           fontSize={"smSubHead"}
           _placeholder={{
-            color: "clique.white",
+            color: useColorModeValue("clique.ashGrey", "clique.lightPrimaryBg"),
             fontSize: "smSubHead",
           }}
           placeholder="Enter Comment..."

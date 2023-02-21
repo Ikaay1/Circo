@@ -53,6 +53,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           }}
           placeholder="Enter Comment..."
           bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
+          color={useColorModeValue("clique.ashGrey", "clique.lightPrimaryBg")}
           border={"none"}
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}
