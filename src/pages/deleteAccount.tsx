@@ -69,6 +69,7 @@ const DeleteAccount = () => {
     if (values.reason && values.email && values.password) {
       const res: any = await postTicket(values);
       if ('data' in res) {
+        onClose();
         toast({
           title: 'Success',
           description: 'Request successfully submitted',
