@@ -270,6 +270,7 @@ const DeleteAccount = () => {
           </Formik>
         </Box>
       </Box>
+
       <Sure
         isOpen={isOpen}
         onClose={onClose}
