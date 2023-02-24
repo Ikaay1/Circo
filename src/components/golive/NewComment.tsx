@@ -1,4 +1,7 @@
-import React from "react";
+import React from 'react';
+import {useAppSelector} from 'redux/app/hooks';
+import {usePostCommentOnStreamMutation} from 'redux/services/livestream/streamComment.service';
+
 import {
   Flex,
   Image,
@@ -8,64 +11,62 @@ import {
   Spinner,
   useColorModeValue,
   useToast,
-} from "@chakra-ui/react";
-import AvataWithSpace from "@components/widgets/AvataWithSpace";
-import { usePostCommentOnStreamMutation } from "redux/services/livestream/streamComment.service";
-import Color from "@constants/color";
-import { useAppSelector } from "redux/app/hooks";
+} from '@chakra-ui/react';
+import AvataWithSpace from '@components/widgets/AvataWithSpace';
+import Color from '@constants/color';
 
-function NewComment({ id, profile }: { id: string; profile: any }) {
-  const [comment, setComment] = React.useState("");
+function NewComment({id, profile}: {id: string; profile: any}) {
+  const [comment, setComment] = React.useState('');
   const [postCommentOnStream, postInfo] = usePostCommentOnStreamMutation();
   const userProfile = useAppSelector(
-    (state) => state.app.userReducer.userProfile
+    (state) => state.app.userReducer.userProfile,
   );
 
   const toast = useToast();
   return (
-    <Flex px="20px" bg={Color().lightAndPrimary} py="20px" w="full">
+    <Flex px='20px' bg={Color().lightAndPrimary} py='20px' w='full'>
       <AvataWithSpace
         name={userProfile?.channel?.name}
         url={userProfile?.channel?.photo}
-        mr="20px"
-        size="40px"
-        borderThickness="2px"
-        borderColor="clique.base"
+        mr='20px'
+        size='40px'
+        borderThickness='2px'
+        borderColor='clique.base'
       />
 
       <InputGroup>
         <Input
-          rounded={"10px"}
-          p="5px"
-          px="10px"
+          rounded={'10px'}
+          p='5px'
+          px='10px'
           color={Color().blackAndWhite}
-          fontSize={"smSubHead"}
+          fontSize={'smSubHead'}
           _placeholder={{
             color: Color().blackAndWhite,
-            fontSize: "smSubHead",
+            fontSize: 'smSubHead',
           }}
-          placeholder="Enter Comment..."
-          bg={useColorModeValue("clique.white", "clique.ashGrey")}
-          border={"none"}
-          _focus={{ border: "none", boxShadow: "none" }}
+          placeholder='Enter Comment...'
+          bg={useColorModeValue('clique.white', 'clique.ashGrey')}
+          border={'none'}
+          _focus={{border: 'none', boxShadow: 'none'}}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           onKeyDown={async (e) => {
-            if (e.key === "Enter") {
+            if (e.key === 'Enter') {
               const post: any = await postCommentOnStream({
                 streamId: id,
                 commentBody: comment,
               });
 
               if (post.data) {
-                setComment("");
+                setComment('');
               } else {
                 toast({
-                  title: "Error",
-                  description: "Something went wrong",
-                  status: "error",
+                  title: 'Error',
+                  description: 'Something went wrong',
+                  status: 'error',
                   duration: 3000,
-                  position: "top-right",
+                  position: 'top-right',
                   isClosable: true,
                 });
               }
@@ -73,24 +74,24 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           }}
         />
         <InputRightElement
-          cursor={"pointer"}
-          h="100%"
-          roundedRight="10px"
-          bg="clique.ashGrey"
+          cursor={'pointer'}
+          h='100%'
+          roundedRight='10px'
+          bg='clique.ashGrey'
           onClick={async () => {
             const post: any = await postCommentOnStream({
               streamId: id,
               commentBody: comment,
             });
             if (post.data) {
-              setComment("");
+              setComment('');
             } else {
               toast({
-                title: "Error",
-                description: "Something went wrong",
-                status: "error",
+                title: 'Error',
+                description: 'Something went wrong',
+                status: 'error',
                 duration: 3000,
-                position: "top-right",
+                position: 'top-right',
                 isClosable: true,
               });
             }
@@ -99,7 +100,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           {postInfo.isLoading ? (
             <Spinner />
           ) : (
-            <Image w="25px" src="/assets/inputIcon.svg" alt="icon" />
+            <Image w='25px' src='/assets/inputIcon.svg' alt='icon' />
           )}
         </InputRightElement>
       </InputGroup>
