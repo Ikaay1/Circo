@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
 
-import { Box, Image } from '@chakra-ui/react';
+import {Box, Image} from '@chakra-ui/react';
 
 const CliqueLoader = () => {
   const router = useRouter();
@@ -12,7 +12,6 @@ const CliqueLoader = () => {
       height='100%'
       justifyContent={'center'}
       alignItems='center'
-      onClick={() => router.push('/')}
     >
       <Image
         src='/assets/circo-loader.png'

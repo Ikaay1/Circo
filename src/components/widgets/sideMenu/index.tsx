@@ -1,21 +1,21 @@
-import { useRouter } from 'next/router';
-import { HiOutlineLogout } from 'react-icons/hi';
-import { useAppDispatch } from 'redux/app/hooks';
-import { useGetSubscriptionsQuery } from 'redux/services/user.service';
-import { logout } from 'redux/slices/authSlice';
+import {useRouter} from 'next/router';
+import {HiOutlineLogout} from 'react-icons/hi';
+import {useAppDispatch} from 'redux/app/hooks';
+import {useGetSubscriptionsQuery} from 'redux/services/user.service';
+import {logout} from 'redux/slices/authSlice';
 
 import {
-	Box,
-	Divider,
-	Flex,
-	Icon,
-	Skeleton,
-	SkeletonCircle,
-	Text,
-	useColorModeValue,
+  Box,
+  Divider,
+  Flex,
+  Icon,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
-import { menu, scrollBarStyle, subcribees } from '@constants/utils';
+import {menu, scrollBarStyle, subcribees} from '@constants/utils';
 
 import EachMenu from './EachMenu';
 import EachSubscribe from './EachSubscribe';
@@ -23,6 +23,7 @@ import EachSubscribe from './EachSubscribe';
 function Index() {
   const dispatch = useAppDispatch();
   const {data, isFetching} = useGetSubscriptionsQuery({page: 1, limit: 5});
+  console.log('sub', data);
 
   const handleLogout = () => {
     dispatch(logout());

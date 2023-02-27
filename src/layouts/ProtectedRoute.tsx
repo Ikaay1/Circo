@@ -1,8 +1,10 @@
-import { useRouter } from "next/router";
-import jwtDecode from "jwt-decode";
-import { useToast } from "@chakra-ui/react";
-import { useAppDispatch, useAppSelector } from "redux/app/hooks";
-import { logout } from "redux/slices/authSlice";
+import jwtDecode from 'jwt-decode';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from 'redux/app/hooks';
+import {logout} from 'redux/slices/authSlice';
+
+import {useToast} from '@chakra-ui/react';
 
 const ProtectedRoute = (WrappedComponent: any) => {
   return function Auth(props: any) {
@@ -12,7 +14,7 @@ const ProtectedRoute = (WrappedComponent: any) => {
     const dispatch = useAppDispatch();
 
     // checks whether we are on client / browser or server.
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       if (!accessToken) {
         Router.push(`/login`);
       } else if (accessToken) {
@@ -21,15 +23,15 @@ const ProtectedRoute = (WrappedComponent: any) => {
         const currentTime = Date.now() / 1000;
         if (decodedToken.exp < currentTime) {
           toast({
-            title: "Session expired ",
-            position: "top-right",
-            status: "error",
+            title: 'Session expired ',
+            position: 'top-right',
+            status: 'error',
             duration: 5000,
             isClosable: true,
           });
 
           dispatch(logout());
-          window.location.href = "/login";
+          window.location.href = '/login';
         }
       }
 
