@@ -147,6 +147,7 @@ function EachChatComment({ comment }: { comment: any }) {
                 fontSize={"sm"}
                 mt=".5rem"
                 cursor="pointer"
+                color="clique.white"
                 onClick={() => setShow((prevShow) => !prevShow)}
               >
                 {!show ? "Show replies" : "Hide replies"}{" "}
@@ -163,6 +164,7 @@ function EachChatComment({ comment }: { comment: any }) {
             mt=".5rem"
             ml="1rem"
             cursor="pointer"
+            color="clique.white"
             onClick={() => setShow((prevShow) => !prevShow)}
           >
             Reply

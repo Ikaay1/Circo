@@ -1,16 +1,16 @@
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 
 import {
-	Avatar,
-	Box,
-	Divider,
-	Flex,
-	Link,
-	Text,
-	WrapItem,
+  Avatar,
+  Box,
+  Divider,
+  Flex,
+  Link,
+  Text,
+  WrapItem,
 } from '@chakra-ui/react';
 
 type Props = {};
@@ -32,11 +32,7 @@ function Account({}: Props) {
         <span style={{color: '#3088D9'}}> {userProfile?.email}</span>
       </Text>
 
-      <a
-        href={'https://b24-i9fnco.bitrix24.site/crm_form_dzs40/'}
-        target='_blank'
-        rel='noreferrer'
-      >
+      <Link href='/deleteAccount'>
         <Box
           color='clique.red'
           fontSize={'smSubHead'}
@@ -44,7 +40,7 @@ function Account({}: Props) {
         >
           Delete account
         </Box>
-      </a>
+      </Link>
 
       <Divider mt='1.5' mb='3'></Divider>
       <Text fontSize={'smSubHead'} mb='3'>
@@ -89,15 +85,11 @@ function Account({}: Props) {
             </Link>
           </NextLink>
 
-          <a
-            target={'_blank'}
-            href={'https://b24-i9fnco.bitrix24.site/crm_form_dzs40/'}
-            rel='noreferrer'
-          >
+          <Link href='/deleteAccount'>
             <Box color='clique.red' mb='2' _hover={{textDecoration: 'none'}}>
               Delete account
             </Box>
-          </a>
+          </Link>
         </Flex>
       </Flex>
 

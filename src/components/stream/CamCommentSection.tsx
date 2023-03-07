@@ -73,6 +73,7 @@ function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
 
         <Button
           onClick={() => setClose(true)}
+          color="clique.white"
           rightIcon={
             <Icon color="clique.white" fontSize={"16px"} as={MdOutlineClose} />
           }
