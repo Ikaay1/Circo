@@ -1,35 +1,35 @@
 import axios from 'axios';
-import { resolve } from 'path';
-import { useEffect, useState } from 'react';
-import { useGetBanksQuery } from 'redux/services/bank.service';
+import {resolve} from 'path';
+import {useEffect, useState} from 'react';
+import {useGetBanksQuery} from 'redux/services/bank.service';
 import {
-	useConfirmAccountMutation,
-	useSendOTPMutation,
+  useConfirmAccountMutation,
+  useSendOTPMutation,
 } from 'redux/services/beneficiary.service';
-import { useAddBeneficiaryMutation } from 'redux/services/wallet.service';
+import {useAddBeneficiaryMutation} from 'redux/services/wallet.service';
 import request from 'request';
 
 import {
-	Box,
-	Flex,
-	Icon,
-	Input,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalHeader,
-	ModalOverlay,
-	Select,
-	Spinner,
-	Text,
-	useColorMode,
-	useColorModeValue,
-	useToast,
+  Box,
+  Flex,
+  Icon,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Spinner,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 import CliqueLoader from '@components/home/CliqueLoader';
 import Color from '@constants/color';
-import { banks } from '@constants/utils';
+import {banks} from '@constants/utils';
 import TapIcon from '@icons/TapIcon';
 
 type Props = {
@@ -265,32 +265,51 @@ function BeneficiaryModal({
               )}
 
               <Box
-                bg='clique.secondaryGrey1'
+                // bg='clique.secondaryGrey1'
                 px='2'
-                pt='1'
+                py='3'
                 borderRadius={'10px'}
                 width='full'
                 mb='4'
                 mt='4'
+                bg={useColorModeValue(
+                  'clique.lightPrimaryBg',
+                  'clique.ashGrey',
+                )}
               >
-                <Text
+                {/* <Text
                   fontSize={'smSubHead'}
                   fontWeight='400'
                   color={'clique.secondaryGrey2'}
                 >
                   Select Bank
-                </Text>
+                </Text> */}
                 <Select
-                  bg='clique.secondaryGrey1'
+                  // bg='clique.secondaryGrey1'
                   size='sm'
                   border='none'
                   placeholder='Select Bank'
+                  _placeholder={{
+                    color: useColorModeValue(
+                      'clique.ashGrey',
+                      'clique.lightPrimaryBg',
+                    ),
+                    fontFamily: 'Poppins',
+                  }}
+                  bg={useColorModeValue(
+                    'clique.lightPrimaryBg',
+                    'clique.ashGrey',
+                  )}
+                  color={useColorModeValue(
+                    'clique.ashGrey',
+                    'clique.lightPrimaryBg',
+                  )}
                   name='bankName'
                   required={true}
                   value={beneficiaryData.bankName}
                   onChange={(e) => handleChange(e)}
                   outline='none'
-                  color='clique.secondaryGrey2'
+                  // color='clique.secondaryGrey2'
                 >
                   {data?.data?.data?.map((bank: any) => (
                     <option
@@ -307,7 +326,10 @@ function BeneficiaryModal({
               </Box>
 
               <Box
-                bg='clique.secondaryGrey1'
+                bg={useColorModeValue(
+                  'clique.lightPrimaryBg',
+                  'clique.ashGrey',
+                )}
                 px='2'
                 pt='1'
                 borderRadius={'10px'}
@@ -322,16 +344,23 @@ function BeneficiaryModal({
                   Account number
                 </Text>
                 <Input
+                  color={useColorModeValue(
+                    'clique.ashGrey',
+                    'clique.lightPrimaryBg',
+                  )}
                   name='accountNumber'
                   variant='filled'
                   size='sm'
-                  bg='clique.secondaryGrey1'
+                  bg={useColorModeValue(
+                    'clique.lightPrimaryBg',
+                    'clique.ashGrey',
+                  )}
                   required={true}
                   value={beneficiaryData.accountNumber}
                   onChange={(e) => handleChange(e)}
                   outline='none'
                   border='none'
-                  color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                  // color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
                   _hover={{
                     backgroundColor: 'transparent',
                   }}
@@ -339,7 +368,10 @@ function BeneficiaryModal({
               </Box>
 
               <Box
-                bg='clique.secondaryGrey1'
+                bg={useColorModeValue(
+                  'clique.lightPrimaryBg',
+                  'clique.ashGrey',
+                )}
                 px='2'
                 pt='1'
                 borderRadius={'10px'}
@@ -357,17 +389,32 @@ function BeneficiaryModal({
                     Account Name
                   </Text>
                   <Input
+                    _placeholder={{
+                      color: useColorModeValue(
+                        'clique.ashGrey',
+                        'clique.lightPrimaryBg',
+                      ),
+                      fontFamily: 'Poppins',
+                    }}
+                    color={useColorModeValue(
+                      'clique.ashGrey',
+                      'clique.lightPrimaryBg',
+                    )}
+                    cursor={'not-allowed'}
                     name='accountName'
                     variant='filled'
                     size='sm'
-                    bg='clique.secondaryGrey1'
+                    bg={useColorModeValue(
+                      'clique.lightPrimaryBg',
+                      'clique.ashGrey',
+                    )}
                     required={true}
                     value={beneficiaryData.accountName}
                     readOnly={true}
                     width='100%'
                     outline='none'
                     border='none'
-                    color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                    // color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
                     _hover={{
                       backgroundColor: 'transparent',
                     }}
@@ -381,7 +428,10 @@ function BeneficiaryModal({
               </Box>
 
               <Box
-                bg='clique.secondaryGrey1'
+                bg={useColorModeValue(
+                  'clique.lightPrimaryBg',
+                  'clique.ashGrey',
+                )}
                 px='2'
                 pt='1'
                 borderRadius={'10px'}
@@ -399,13 +449,27 @@ function BeneficiaryModal({
                   variant='filled'
                   name='otp_code'
                   size='sm'
-                  bg='clique.secondaryGrey1'
+                  bg={useColorModeValue(
+                    'clique.lightPrimaryBg',
+                    'clique.ashGrey',
+                  )}
+                  _placeholder={{
+                    color: useColorModeValue(
+                      'clique.ashGrey',
+                      'clique.lightPrimaryBg',
+                    ),
+                    fontFamily: 'Poppins',
+                  }}
+                  color={useColorModeValue(
+                    'clique.ashGrey',
+                    'clique.lightPrimaryBg',
+                  )}
                   required={true}
                   value={beneficiaryData.otp_code}
                   onChange={(e) => handleChange(e)}
                   outline='none'
                   border='none'
-                  color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                  // color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
                   _hover={{
                     backgroundColor: 'transparent',
                   }}
@@ -413,7 +477,10 @@ function BeneficiaryModal({
                 />
               </Box>
               <Box
-                bg='clique.secondaryGrey1'
+                bg={useColorModeValue(
+                  'clique.lightPrimaryBg',
+                  'clique.ashGrey',
+                )}
                 px='2'
                 pt='1'
                 borderRadius={'10px'}
@@ -428,9 +495,23 @@ function BeneficiaryModal({
                   Password
                 </Text>
                 <Input
+                  _placeholder={{
+                    color: useColorModeValue(
+                      'clique.ashGrey',
+                      'clique.lightPrimaryBg',
+                    ),
+                    fontFamily: 'Poppins',
+                  }}
+                  color={useColorModeValue(
+                    'clique.ashGrey',
+                    'clique.lightPrimaryBg',
+                  )}
                   variant='filled'
                   size='sm'
-                  bg='clique.secondaryGrey1'
+                  bg={useColorModeValue(
+                    'clique.lightPrimaryBg',
+                    'clique.ashGrey',
+                  )}
                   type='password'
                   name='password'
                   required={true}
@@ -438,7 +519,7 @@ function BeneficiaryModal({
                   onChange={(e) => handleChange(e)}
                   outline='none'
                   border='none'
-                  color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                  // color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
                   _hover={{
                     backgroundColor: 'transparent',
                   }}
