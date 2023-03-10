@@ -72,7 +72,7 @@ function WithdrawalCard({walletData}: Props) {
         </Text>
       )}
       <Text color='clique.red' fontSize='xsl' textAlign='center' mt='3'>
-        Note: Withdrawal is automated by Clique and is sent to your added
+        Note: Withdrawal is automated by Circo and is sent to your added
         beneficiary account on the 25th of every month.
       </Text>
     </Box>
