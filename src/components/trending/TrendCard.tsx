@@ -19,7 +19,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
   const router = useRouter();
 
   return (
-    <Flex
+    <Box
       onClick={() =>
         router.push('/player/' + video._id + '/' + video.uploader_id._id)
       }
@@ -39,10 +39,11 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
       px='30px'
       py='20px'
       mt='30px'
-      h='220px'
+      h={{lg: '220px'}}
       bg='clique.white'
+      display={{base: 'block', lg: 'flex'}}
     >
-      <Box w='300px' pr='40px' h='100%'>
+      <Box w='300px' pr='40px' h={{base: '160px', lg: '100%'}}>
         <Image
           maxH={'100%'}
           h='100%'
@@ -53,7 +54,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
         />
       </Box>
 
-      <Box w='50%'>
+      <Box w={{lg: '50%'}} mt={{base: '.6rem', lg: 0}}>
         <Flex>
           {video.uploader_id?.photo ? (
             <AvataWithSpace
@@ -144,7 +145,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           {video.description}
         </Text>
       </Box>
-    </Flex>
+    </Box>
   );
 }
 
