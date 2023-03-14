@@ -121,6 +121,7 @@ const AuthInput = ({
           transform="translateY(-50%)"
           cursor={"pointer"}
           onClick={handleShowPassword}
+          zIndex="99"
         >
           {colorMode === "dark" ? (
             <Icon as={Padlock} />
