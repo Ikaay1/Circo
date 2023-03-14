@@ -22,12 +22,17 @@ const AuthInput = ({
   setAgeRange,
 }: any) => {
   const {colorMode, toggleColorMode} = useColorMode();
+  const [isFocused, setIsFocused] = React.useState(false);
   return (
     <>
       {!option ? (
         <Input
           value={theState}
+          h='62px'
+          borderRadius='12px'
           onChange={(e) => setTheState(e.target.value)}
+          _focus={{boxShadow: 'none', border: 'none', outline: 'none'}}
+          _active={{boxShadow: 'none', border: 'none', outline: 'none'}}
           className='input'
           type={
             !i
@@ -49,23 +54,32 @@ const AuthInput = ({
           required={referral ? false : true}
           placeholder={name}
           color={Color().blackAndWhite}
-          backgroundColor={Color().whiteAndBlack}
+          backgroundColor={Color().greyAndWhite}
           _placeholder={{
             color: Color().blackAndWhite,
+            fontSize: isFocused || theState !== '' ? 'sm3' : '1rem',
+            pb: isFocused || theState !== '' ? '5px' : '0',
+            transition: 'all .3s ease',
+            transform:
+              isFocused || theState !== ''
+                ? 'translateY(-110%);  '
+                : 'translateY(0%); ',
           }}
           borderWidth={'1px'}
-          borderColor={Color().blackAndWhite}
+          borderColor={Color().greyAndWhite}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
       ) : (
         <Select
           value={ageRange}
-          bg={Color().whiteAndBlack}
+          bg={Color().greyAndWhite}
           borderWidth={'1px'}
-          borderColor={Color().blackAndWhite}
-          borderRadius='15px'
+          borderColor={Color().greyAndWhite}
+          borderRadius='12px'
           //   pl="1.3rem"
           _focus={{boxShadow: 'none'}}
-          h='57px'
+          h='60px'
           w='100%'
           onChange={(e) => setAgeRange(e.target.value)}
           className='input'
@@ -79,26 +93,35 @@ const AuthInput = ({
           ))}
         </Select>
       )}
-      <Text
-        position='absolute'
-        top='6%'
-        left={'4.5%'}
-        fontSize='sm'
-        color={Color().blackAndWhite}
-        className='placeholder small'
-        backgroundColor={Color().whiteAndBlack}
-        zIndex='99'
-      >
-        {name}
-      </Text>
+      {theState !== '' && (
+        <Text
+          position='absolute'
+          left={'4%'}
+          pt='5px'
+          fontSize='sm3'
+          color={Color().blackAndWhite}
+          transition='all .3s ease'
+          top='0%'
+          transform={
+            isFocused || theState !== ''
+              ? 'translateY(0%)'
+              : 'translateY(50%); font-size: 1rem'
+          }
+          zIndex='99'
+        >
+          {name}
+        </Text>
+      )}
+
       {image && (
         <Box
           position='absolute'
           right={'4.5%'}
-          top='15%'
+          top='50%'
+          transform='translateY(-50%)'
           cursor={'pointer'}
           onClick={handleShowPassword}
-          zIndex={99}
+          zIndex='99'
         >
           {colorMode === 'dark' ? (
             <Icon as={Padlock} />

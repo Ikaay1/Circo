@@ -1,11 +1,10 @@
 import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';
-import toast from 'react-hot-toast';
 import {useAppDispatch, useAppSelector} from 'redux/app/hooks';
 import {useLoginMutation} from 'redux/services/auth.service';
 import {setCredentials} from 'redux/slices/authSlice';
 
-import {Box, Text} from '@chakra-ui/react';
+import {Box, Text, useToast} from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import AuthInput from '@components/auth/AuthInput';
 import CliqueLogo from '@components/auth/CliqueLogo';
@@ -21,7 +20,7 @@ const Login = () => {
   const [login, loginStatus] = useLoginMutation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-
+  const toast = useToast();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -48,7 +47,14 @@ const Login = () => {
       );
       router.push('/home');
     } else {
-      toast.error(res.error?.data?.message);
+      toast({
+        title: 'Login failed',
+        description: res.error?.data?.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
     }
   };
 
@@ -98,6 +104,7 @@ const Login = () => {
               display={'flex'}
               justifyContent={'space-between'}
               alignItems={'center'}
+              mt='10px'
             >
               <label className='remember'>
                 <input type='checkbox' name='' />
