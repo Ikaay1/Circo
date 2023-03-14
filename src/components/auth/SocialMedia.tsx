@@ -193,7 +193,7 @@ export const SocialMedia = ({
         <Text
           display={'inline'}
           marginRight='.25rem'
-          color={Color().blackAndWhite}
+          color={Color().blackAndWhite2}
         >
           {haveAccount}
         </Text>
