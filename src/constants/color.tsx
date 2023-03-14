@@ -4,6 +4,7 @@ import {useColorModeValue} from '@chakra-ui/react';
 
 function Color() {
   const blackAndWhite = useColorModeValue('clique.black', 'clique.whiteGrey');
+  const blackAndWhite2 = useColorModeValue('clique.black', 'clique.white');
   const greyAndWhite = useColorModeValue(
     'clique.lightPrimaryBg',
     'clique.secondaryGrey1',
@@ -32,6 +33,7 @@ function Color() {
     blackAndWhiteGrey,
     lightAndPrimary,
     greyAndWhite,
+    blackAndWhite2,
   };
 }
 

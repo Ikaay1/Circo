@@ -298,11 +298,11 @@ const Signup = () => {
                   required={true}
                   name=''
                 />
-                <Box color={Color().blackAndWhite} as='span'>
+                <Box color={Color().blackAndWhite2} as='span'>
                   I agree to the&nbsp;
                 </Box>
                 <span style={{color: '#892cdc'}}>Terms & Conditions&nbsp;</span>
-                <Box color={Color().blackAndWhite} as='span'>
+                <Box color={Color().blackAndWhite2} as='span'>
                   and&nbsp;
                 </Box>
                 <span style={{color: '#892cdc'}}>Privacy Policy</span>
