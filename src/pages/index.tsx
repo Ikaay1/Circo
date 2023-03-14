@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 
-import { Box } from '@chakra-ui/react';
+import {Box} from '@chakra-ui/react';
 import Creative from '@components/landing/Creative';
 import Creators from '@components/landing/Creators';
 import Exclusive from '@components/landing/Exclusive';
@@ -34,14 +34,14 @@ const Home: NextPage = () => {
       </Box>
       <Box
         id='exclusive'
-        pb={'2.5rem'}
+        pb={{base: '5rem', lg: '10rem'}}
         px={{base: '1rem', sm: '2rem', lg: '5rem'}}
       >
         <Exclusive />
       </Box>
       <Box
         px={{base: '1rem', sm: '2rem', lg: '5rem'}}
-        pt={{base: '3rem', sm: '3.5rem', lg: '4rem'}}
+        pt={{base: '3rem', sm: '3.5rem', lg: '7rem'}}
         pb={{base: '4.5rem', sm: '5rem', lg: '5.5rem'}}
         bg={'white'}
       >

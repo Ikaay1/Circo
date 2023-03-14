@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Icon, Input, Select, Text, useColorMode } from '@chakra-ui/react';
+import {Box, Icon, Input, Select, Text, useColorMode} from '@chakra-ui/react';
 import Color from '@constants/color';
 import Padlock from '@icons/Padlock';
 import PasswordIcon from '@icons/PasswordIcon';
@@ -98,6 +98,7 @@ const AuthInput = ({
           top='15%'
           cursor={'pointer'}
           onClick={handleShowPassword}
+          zIndex={99}
         >
           {colorMode === 'dark' ? (
             <Icon as={Padlock} />

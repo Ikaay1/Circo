@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
-import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
-import { useLoginMutation } from 'redux/services/auth.service';
-import { setCredentials } from 'redux/slices/authSlice';
+import {useAppDispatch, useAppSelector} from 'redux/app/hooks';
+import {useLoginMutation} from 'redux/services/auth.service';
+import {setCredentials} from 'redux/slices/authSlice';
 
-import { Box, Text } from '@chakra-ui/react';
+import {Box, Text} from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import AuthInput from '@components/auth/AuthInput';
 import CliqueLogo from '@components/auth/CliqueLogo';
@@ -13,7 +13,7 @@ import ShowAuthHeader from '@components/auth/ShowAuthHeader';
 import ShowAuthImage from '@components/auth/ShowAuthImage';
 import SocialMedia from '@components/auth/SocialMedia';
 import Color from '@constants/color';
-import { loginInputData } from '@constants/utils';
+import {loginInputData} from '@constants/utils';
 
 const Login = () => {
   const token = useAppSelector((state) => state.app.userReducer.token);

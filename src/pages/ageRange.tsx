@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useVerifyEmailMutation } from 'redux/services/auth.service';
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
+import {toast} from 'react-hot-toast';
+import {useVerifyEmailMutation} from 'redux/services/auth.service';
 
-import { Box, Text } from '@chakra-ui/react';
+import {Box, Text} from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import AuthInput from '@components/auth/AuthInput';
 import CliqueLogo from '@components/auth/CliqueLogo';
@@ -68,7 +68,7 @@ const ConfirmEmail = () => {
               />
             </Box>
             <AuthButton
-              {...{marginTop: '.8rem'}}
+              {...{marginTop: '5rem'}}
               name='Next'
               // status={verifyEmailStatus}
             />
