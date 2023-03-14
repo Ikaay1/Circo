@@ -46,15 +46,14 @@ pre {
   transition: all 0.15s ease;
 }
 
-.input:focus ~ .placeholder.big,
+/* .input:focus ~ .placeholder.big,
 .input:active ~ .placeholder.big {
   display: none;
-}
-
+} */
+/* 
 .input:focus ~ .placeholder.small,
 .input:active ~ .placeholder.small {
-  transform: translateY(-12px);
-  /* background-color: #1a202c; */
+  transform: translateY(-12px); 
   display: block;
 }
 
@@ -65,17 +64,16 @@ pre {
 
 .input:focus::placeholder {
   color: transparent;
-}
+} */
 
 .placeholder.big.inactive {
   display: none;
 }
 
-.placeholder.small.inactive {
-  transform: translateY(-12px);
-  /* background-color: #1a202c; */
+/* .placeholder.small.inactive {
+  transform: translateY(-12px); 
   display: block;
-}
+} */
 
 .remember {
   font-weight: 400;

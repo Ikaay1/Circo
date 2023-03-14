@@ -95,6 +95,8 @@ const Signup = () => {
       router.push("/home");
     }
   }, [token, router]);
+  const [isFirstNameFocused, setIsFirstNameFocused] = useState(false);
+  const [isLastNameFocused, setIsLastNameFocused] = useState(false);
   return (
     <Box
       display={"flex"}
@@ -122,7 +124,7 @@ const Signup = () => {
               justifyContent="space-between"
               marginTop={".5rem"}
             >
-              <Box width="48%" height="57px" position="relative">
+              <Box width="48%" height="60px" position="relative">
                 <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -130,52 +132,100 @@ const Signup = () => {
                   type={"text"}
                   required={true}
                   placeholder="Firstname"
-                  color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
+                  backgroundColor={Color().greyAndWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
+                    opacity: "0",
                   }}
+                  h="60px"
                   borderWidth={"1px"}
-                  borderColor={Color().blackAndWhite}
+                  borderColor={Color().greyAndWhite}
+                  _focus={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  _active={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  color={Color().blackAndWhite}
+                  onFocus={() => setIsFirstNameFocused(true)}
+                  onBlur={() => setIsFirstNameFocused(false)}
                 />
                 <Text
                   position="absolute"
-                  top="6%"
-                  left={"4.5%"}
+                  top="30%"
+                  left={"8%"}
                   fontSize="sm"
                   className="placeholder small"
                   color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
+                  zIndex="99"
+                ></Text>{" "}
+                <Text
+                  position="absolute"
+                  top="0%"
+                  left={"8%"}
+                  fontSize="sm3"
+                  pt="5px"
+                  color={Color().blackAndWhite}
+                  transition="all .3s ease"
+                  transform={
+                    isFirstNameFocused || firstName !== ""
+                      ? "translateY(0%)"
+                      : "translateY(50%); font-size: 1rem"
+                  }
                   zIndex="99"
                 >
                   Firstname
                 </Text>
               </Box>
-              <Box width="48%" height="57px" position="relative">
+              <Box width="48%" height="60px" position="relative">
                 <Input
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  _focus={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  _active={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
                   className="input"
                   type={"text"}
                   required={true}
                   placeholder="Lastname"
                   color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
+                  backgroundColor={Color().greyAndWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
+                    opacity:  "0" 
                   }}
                   borderWidth={"1px"}
-                  borderColor={Color().blackAndWhite}
+                  h="60px"
+                  borderColor={Color().greyAndWhite}
+                  onFocus={() => setIsLastNameFocused(true)}
+                  onBlur={() => setIsLastNameFocused(false)}
                 />
+
                 <Text
                   position="absolute"
-                  top="6%"
-                  left={"4.5%"}
-                  fontSize="sm"
-                  className="placeholder small"
+                  top="0%"
+                  left={"8%"}
+                  fontSize="sm3"
+                  pt="5px"
                   color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
                   zIndex="99"
+                  transition="all .3s ease"
+                  transform={
+                    isLastNameFocused || lastName !== ""
+                      ? "translateY(0%)"
+                      : "translateY(50%); font-size: 1rem"
+                  }
                 >
                   Lastname
                 </Text>
@@ -183,7 +233,7 @@ const Signup = () => {
             </Box>
             {signUpInputData.map(({ name, image, key, inputName }) => (
               <div key={key}>
-                <Box position="relative" height="57px" marginTop={".5rem"}>
+                <Box position="relative" height="60px" marginTop={".5rem"}>
                   <AuthInput
                     image={image}
                     name={name}
