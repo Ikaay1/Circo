@@ -57,8 +57,13 @@ const AuthInput = ({
           backgroundColor={Color().greyAndWhite}
           _placeholder={{
             color: Color().blackAndWhite,
-            opacity: 0,
-            // color: "red",
+            fontSize: isFocused || theState !== "" ? "sm3" : "1rem",
+            pb: isFocused || theState !== "" ? "5px" : "0",
+            transition: "all .3s ease",
+            transform:
+              isFocused || theState !== ""
+                ? "translateY(-110%);  "
+                : "translateY(0%); ",
           }}
           borderWidth={"1px"}
           borderColor={Color().greyAndWhite}
@@ -88,24 +93,6 @@ const AuthInput = ({
           ))}
         </Select>
       )}
-
-      <Text
-        position="absolute"
-        left={"4%"}
-        pt="5px"
-        fontSize="sm3"
-        color={Color().blackAndWhite}
-        transition="all .3s ease"
-        top="0%"
-        transform={
-          isFocused || theState !== ""
-            ? "translateY(0%)"
-            : "translateY(50%); font-size: 1rem"
-        }
-        zIndex="99"
-      >
-        {name}
-      </Text>
 
       {image && (
         <Box
