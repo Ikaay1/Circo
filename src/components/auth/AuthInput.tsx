@@ -93,6 +93,25 @@ const AuthInput = ({
           ))}
         </Select>
       )}
+      {theState !== "" && (
+        <Text
+          position="absolute"
+          left={"4%"}
+          pt="5px"
+          fontSize="sm3"
+          color={Color().blackAndWhite}
+          transition="all .3s ease"
+          top="0%"
+          transform={
+            isFocused || theState !== ""
+              ? "translateY(0%)"
+              : "translateY(50%); font-size: 1rem"
+          }
+          zIndex="99"
+        >
+          {name}
+        </Text>
+      )}
 
       {image && (
         <Box

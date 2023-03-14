@@ -135,7 +135,15 @@ const Signup = () => {
                   backgroundColor={Color().greyAndWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
-                    opacity: "0",
+
+                    fontSize:
+                      isFirstNameFocused || firstName !== "" ? "sm3" : "1rem",
+                    pb: isFirstNameFocused || firstName !== "" ? "5px" : "0",
+                    transition: "all .3s ease",
+                    transform:
+                      isFirstNameFocused || firstName !== ""
+                        ? "translateY(-110%);  "
+                        : "translateY(0%); ",
                   }}
                   h="60px"
                   borderWidth={"1px"}
@@ -170,12 +178,8 @@ const Signup = () => {
                   fontSize="sm3"
                   pt="5px"
                   color={Color().blackAndWhite}
+                  display={firstName !== "" ? "block" : "none"}
                   transition="all .3s ease"
-                  transform={
-                    isFirstNameFocused || firstName !== ""
-                      ? "translateY(0%)"
-                      : "translateY(50%); font-size: 1rem"
-                  }
                   zIndex="99"
                 >
                   Firstname
@@ -203,7 +207,14 @@ const Signup = () => {
                   backgroundColor={Color().greyAndWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
-                    opacity:  "0" 
+                    fontSize:
+                      isLastNameFocused || lastName !== "" ? "sm3" : "1rem",
+                    pb: isLastNameFocused || lastName !== "" ? "5px" : "0",
+                    transition: "all .3s ease",
+                    transform:
+                      isLastNameFocused || lastName !== ""
+                        ? "translateY(-110%);  "
+                        : "translateY(0%); ",
                   }}
                   borderWidth={"1px"}
                   h="60px"
@@ -221,11 +232,7 @@ const Signup = () => {
                   color={Color().blackAndWhite}
                   zIndex="99"
                   transition="all .3s ease"
-                  transform={
-                    isLastNameFocused || lastName !== ""
-                      ? "translateY(0%)"
-                      : "translateY(50%); font-size: 1rem"
-                  }
+                  display={lastName !== "" ? "block" : "none"}
                 >
                   Lastname
                 </Text>
