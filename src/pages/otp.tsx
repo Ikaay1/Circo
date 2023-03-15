@@ -36,7 +36,6 @@ const Referral = () => {
       localStorage.removeItem('hashedOtp');
       router.push('/interests');
     } else {
-      console.log(res);
       toast({
         title: 'Error',
         //@ts-ignore
