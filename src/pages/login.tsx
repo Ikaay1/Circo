@@ -67,6 +67,11 @@ const Login = () => {
       router.push('/home');
     }
   }, [token, router]);
+
+  useEffect(() => {
+    localStorage.removeItem('hashedOtp');
+    localStorage.removeItem('userData');
+  }, []);
   return (
     <Box
       display={'flex'}
