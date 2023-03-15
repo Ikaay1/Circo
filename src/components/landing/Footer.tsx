@@ -1,10 +1,51 @@
 import Link from 'next/link';
-import React from 'react';
+import React, {useState} from 'react';
+import {usePostTicketFromLandingMutation} from 'redux/services/tickets.service';
 
-import { Box, Image, Text } from '@chakra-ui/react';
-import { contactInfoData, footerOthersData } from '@constants/utils';
+import {
+  Box,
+  Button,
+  Image,
+  Input,
+  Text,
+  Textarea,
+  useToast,
+} from '@chakra-ui/react';
+import {contactInfoData, footerOthersData} from '@constants/utils';
+
+import {scrollBarStyle} from '../../constants/utils';
 
 const Footer = () => {
+  const [postTicket, postTicketStatus] = usePostTicketFromLandingMutation();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [reason, setReason] = useState('');
+  const toast = useToast();
+
+  const handlePostTicket = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res: any = await postTicket({name, email, reason});
+    if ('data' in res) {
+      toast({
+        title: 'Success',
+        description: 'Message successfully sent',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    } else {
+      console.log(res?.error);
+      toast({
+        title: 'Error',
+        description: res?.error?.data?.message || 'Something went wrong',
+        status: 'error',
+        position: 'top-right',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
   return (
     <>
       <Box display={{lg: 'flex'}} justifyContent={{lg: 'space-between'}}>
@@ -141,25 +182,42 @@ const Footer = () => {
           >
             Get in touch
           </Text>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={(e) => handlePostTicket(e)}>
             <input
               type='text'
               placeholder='Your name'
               required={true}
               className='contact-input'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
-              type='text'
+              type='email'
               placeholder='Your email'
               required={true}
               className='contact-input'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <textarea
+            <Textarea
               cols={30}
               rows={10}
               placeholder='Your message'
               required={true}
-            ></textarea>
+              sx={scrollBarStyle}
+              border='none'
+              outline='none'
+              _focus={{
+                border: 'none',
+                outline: 'none',
+              }}
+              _active={{
+                border: 'none',
+                outline: 'none',
+              }}
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+            ></Textarea>
             <Box
               display={'flex'}
               justifyContent={{
@@ -170,7 +228,20 @@ const Footer = () => {
               className={'button-container'}
               mt={{base: '.7rem'}}
             >
-              <button type='submit'>Send message</button>
+              <Button
+                isLoading={postTicketStatus.isLoading}
+                type='submit'
+                fontSize='14px'
+                lineHeight='20px'
+                color='#ffffff'
+                background='clique.base'
+                borderRadius='30px'
+                width={{base: '162px', lg: '221px'}}
+                mt={{base: '.8rem', lg: '1.4rem'}}
+                height='50px'
+              >
+                Send message
+              </Button>
             </Box>
           </form>
         </Box>

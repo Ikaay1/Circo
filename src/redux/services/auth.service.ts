@@ -1,5 +1,5 @@
-import { baseUrl } from '@constants/utils';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {baseUrl} from '@constants/utils';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -79,6 +79,17 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
+    verifyAuthOtp: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `verify-auth-otp`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
 
     verifyLinkCode: builder.mutation<any, any>({
       query: (body) => ({
@@ -115,4 +126,5 @@ export const {
   useChangePasswordMutation,
   useSocialSignupMutation,
   useSocialPreSignupMutation,
+  useVerifyAuthOtpMutation,
 } = authApi;

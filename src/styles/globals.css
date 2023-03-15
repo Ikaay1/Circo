@@ -50,10 +50,10 @@ pre {
 .input:active ~ .placeholder.big {
   display: none;
 } */
-/* 
+/*
 .input:focus ~ .placeholder.small,
 .input:active ~ .placeholder.small {
-  transform: translateY(-12px); 
+  transform: translateY(-12px);
   display: block;
 }
 
@@ -71,7 +71,7 @@ pre {
 }
 
 /* .placeholder.small.inactive {
-  transform: translateY(-12px); 
+  transform: translateY(-12px);
   display: block;
 } */
 
@@ -108,29 +108,28 @@ pre {
 .contact-input ~ textarea {
   width: 290px;
   height: 55px;
-  background: #171717;
+  background: #e4e4e4;
   border-radius: 10px;
   padding-left: 1rem;
   margin-top: 0.65rem;
   display: block;
-  color: #ffffff;
+  color: #000000;
+}
+
+.contact-input::placeholder,
+.contact-input ~ textarea::placeholder {
+  color: #7c7c7c;
+}
+
+.contact-input:focus {
+  border: none;
+  outline: none;
 }
 
 .contact-input ~ textarea {
   height: 139px;
   overflow-y: scroll;
   padding-top: 1.5rem;
-}
-
-.contact-input ~ textarea + .button-container > button {
-  font-size: 14px;
-  line-height: 20px;
-  color: #ffffff;
-  background: #892cdc;
-  border-radius: 30px;
-  width: 162px;
-  height: 50px;
-  cursor: pointer;
 }
 
 .contact-input:first-child {
@@ -238,10 +237,6 @@ pre {
     height: 120px;
     overflow-y: scroll;
     padding-top: 0.9rem;
-  }
-
-  .contact-input ~ textarea + .button-container > button {
-    width: 221px;
   }
 }
 

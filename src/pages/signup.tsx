@@ -56,6 +56,7 @@ const Signup = () => {
     const data = {
       firstName: firstName.trim(),
       email: email.toLowerCase().trim(),
+      userName: userName.trim(),
     };
 
     const res: SignUpDataInterface = await preSignup(data);
@@ -64,7 +65,7 @@ const Signup = () => {
       localStorage.setItem('hashedOtp', JSON.stringify(res.data.data.otp_hash));
       localStorage.setItem('userData', JSON.stringify(allData));
       router.push(`/otp`);
-    } else if (res.error) {
+    } else if (res?.error) {
       toast({
         title: 'Error',
         //@ts-ignore
@@ -95,6 +96,12 @@ const Signup = () => {
       router.push('/home');
     }
   }, [token, router]);
+
+  useEffect(() => {
+    localStorage.removeItem('hashedOtp');
+    localStorage.removeItem('userData');
+  }, []);
+
   const [isFirstNameFocused, setIsFirstNameFocused] = useState(false);
   const [isLastNameFocused, setIsLastNameFocused] = useState(false);
   return (
