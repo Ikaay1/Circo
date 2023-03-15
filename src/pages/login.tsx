@@ -67,6 +67,11 @@ const Login = () => {
       router.push("/home");
     }
   }, [token, router]);
+
+  useEffect(() => {
+    localStorage.removeItem('hashedOtp');
+    localStorage.removeItem('userData');
+  }, []);
   return (
     <Box
       display={"flex"}
@@ -133,8 +138,8 @@ const Login = () => {
             <Text display={"inline"} marginRight=".25rem">
               Need help? send a mail to
             </Text>
-            <span style={{ color: "#892cdc" }}>
-              <a href="mailto: support@Circo.com">support@circo.africa</a>
+            <span style={{color: '#892cdc'}}>
+              <a href='mailto: support@circo.africa'>support@circo.africa</a>
             </span>
           </Box>
         </Box>
