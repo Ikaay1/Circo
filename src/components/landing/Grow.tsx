@@ -1,9 +1,12 @@
+import {useRouter} from 'next/router';
 import React from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
-import { helpGrowData, walletData } from '@constants/utils';
+import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
+import {helpGrowData, walletData} from '@constants/utils';
+import ArrowRight from '@icons/ArrowRight';
 
 const Grow = () => {
+  const router = useRouter();
   return (
     <>
       <Text
@@ -16,7 +19,7 @@ const Grow = () => {
       >
         We help you grow
       </Text>
-      <Box mt={'4.5rem'}>
+      <Box mt={'7.5rem'}>
         {helpGrowData.map(({key, header, image, bigImage}, i) => (
           <Box
             key={key}
@@ -44,6 +47,24 @@ const Grow = () => {
                 subscriber paying you, and tickets selling for each of your live
                 events, you earning will surly increase!
               </Text>
+              <Flex
+                alignItems={'center'}
+                display={{base: 'none', lg: 'flex'}}
+                mt='1rem'
+                cursor='pointer'
+                onClick={() => router.push('/signup')}
+              >
+                <Text
+                  fontFamily='Poppins'
+                  fontStyle='normal'
+                  fontWeight='500'
+                  lineHeight='20px'
+                  color='clique.white'
+                >
+                  Get Started
+                </Text>
+                <Icon height={'100%'} ml='.6rem' as={ArrowRight} />
+              </Flex>
             </Box>
             <Box
               mt='5rem'

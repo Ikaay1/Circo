@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Text } from '@chakra-ui/react';
+import {Box, Text} from '@chakra-ui/react';
 import Color from '@constants/color';
 
 export const ShowAuthHeader = ({
@@ -17,7 +17,7 @@ export const ShowAuthHeader = ({
         fontSize='medium'
         textAlign='center'
         letterSpacing='-0.02em'
-        color={Color().blackAndWhite}
+        color={Color().blackAndWhite2}
       >
         {header}
       </Text>

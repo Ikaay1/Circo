@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import {Box, Image, Text} from '@chakra-ui/react';
 
 import DownloadButtons from './DownloadButtons';
 
@@ -15,7 +15,7 @@ const Exclusive = () => {
       justifyContent={{lg: 'space-between', xl: 'space-around'}}
       alignItems={{lg: 'center'}}
     >
-      <Box w={{lg: '682px'}} h={{lg: '100%'}}>
+      <Box w={{lg: '530px'}} h={{lg: '100%'}}>
         <Text
           fontWeight={{base: '600', lg: '700'}}
           fontSize={{base: 'medium', lg: 'big2'}}
@@ -72,7 +72,7 @@ const Exclusive = () => {
         </Box>
       </Box>
       <Box
-        w={{base: '316.96px', lg: '661px'}}
+        w={{base: '316.96px', lg: '530px'}}
         h={{base: '209.07px', lg: '436px'}}
         // mx='auto'
         marginTop={'5.5rem'}
