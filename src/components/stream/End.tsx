@@ -36,6 +36,8 @@ function End() {
           dispatch(clearWebCamStream());
 
           router.push("/golive");
+
+          //turn of user  camera
         } else {
           toast({
             title: "Error",
