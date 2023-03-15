@@ -101,10 +101,10 @@ function HoverCard({
         <Box>
           <Text
             noOfLines={1}
-            color={Color().blackAndWhite}
+            color={Color().blackAndPureWhite}
             fontFamily={"Poppins"}
-            fontWeight={400}
-            fontSize={"16px"}
+            fontWeight={500}
+            fontSize={"sm2"}
             lineHeight={"1.2"}
           >
             {video.title}

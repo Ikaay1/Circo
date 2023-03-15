@@ -4,6 +4,7 @@ import React from "react";
 
 function Color() {
   const blackAndWhite = useColorModeValue("clique.black", "clique.whiteGrey");
+  const blackAndPureWhite = useColorModeValue("clique.black", "clique.white");
   const greyAndWhite = useColorModeValue(
     "clique.lightPrimaryBg",
     "clique.secondaryGrey1"
@@ -16,6 +17,10 @@ function Color() {
   );
   const blackAndWhiteGrey = useColorModeValue(
     "clique.lightPrimaryBg",
+    "clique.grey"
+  );
+  const greyAndPureWhite = useColorModeValue(
+    "clique.white",
     "clique.grey"
   );
 
@@ -32,6 +37,8 @@ function Color() {
     blackAndWhiteGrey,
     lightAndPrimary,
     greyAndWhite,
+    blackAndPureWhite,
+    greyAndPureWhite,
   };
 }
 

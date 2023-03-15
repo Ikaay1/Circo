@@ -77,6 +77,7 @@ const colors = {
     modalOverlay: "rgba(0, 0, 0, 0.8)",
     freeColor: "#E8DEF8",
     lightPrimaryBg: "#F5F6FF",
+    fadeOut: " rgba(255, 255, 255, 0.4);",
   },
 };
 
