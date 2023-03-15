@@ -1,24 +1,25 @@
-import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useSubscribeMutation } from 'redux/services/user.service';
+import moment from "moment";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useAppSelector } from "redux/app/hooks";
+import { useSubscribeMutation } from "redux/services/user.service";
 
 import {
-	Avatar,
-	Box,
-	Button,
-	Flex,
-	Text,
-	useColorModeValue,
-	useDisclosure,
-} from '@chakra-ui/react';
-import Color from '@constants/color';
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from "@chakra-ui/react";
+import Color from "@constants/color";
 
-import { contentData } from '../../constants/utils';
-import { useRoutingChannel } from '../../hooks/useRoutingChannel';
-import SmallPlayer from './SmallPlayer';
-import SubScribeModal from './SubScribeModal';
+import { contentData } from "../../constants/utils";
+import { useRoutingChannel } from "../../hooks/useRoutingChannel";
+import SmallPlayer from "./SmallPlayer";
+import SubScribeModal from "./SubScribeModal";
 
 function HoverCard({
   setIsHover,
@@ -28,7 +29,8 @@ function HoverCard({
   name,
   userId,
   photo,
-  url
+  url,
+  show,
 }: {
   setIsHover: any;
   isSubscribed: boolean;
@@ -38,6 +40,7 @@ function HoverCard({
   name: string;
   photo: string;
   url: string;
+  show: boolean;
 }) {
   const router = useRouter();
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
@@ -56,12 +59,12 @@ function HoverCard({
       onMouseLeave={() => setIsHover(false)}
       position={"absolute"}
       cursor={"pointer"}
-      rounded="20px"
+      rounded="10px"
       overflow={"hidden"}
       zIndex={100}
-      bg={useColorModeValue("clique.white", "clique.secondaryGrey1")}
-      w="calc(100% + 20px)"
-      transform={"translateX(-10px)"}
+      // bg={useColorModeValue("clique.white", "clique.secondaryGrey1")}
+      w="100%"
+      display={show ? "block" : "none"}
     >
       <Box
         onClick={() => {
@@ -74,31 +77,18 @@ function HoverCard({
       >
         <SmallPlayer url={url} video={video} />
       </Box>
-      <Flex p="15px">
-        {photo ? (
-          <Avatar
-            mr={"10px"}
-            p="0"
-            size="sm"
-            name="Prosper Otemuyiwa"
-            src={photo}
-            onClick={() => handleRouting(video?.uploader_id?._id)}
-            cursor="pointer"
-          />
-        ) : (
-          <Avatar
-            size="sm"
-            name={
-              video?.uploader_id?.firstName + " " + video?.uploader_id?.lastName
-            }
-            borderColor="clique.greenYellow"
-            onClick={() => handleRouting(video?.uploader_id?._id)}
-            cursor="pointer"
-            mr={"10px"}
-            p="0"
-          />
-        )}
-        <Box>
+      <Flex mt="15px">
+        <Avatar
+          mr={"10px"}
+          p="0"
+          size="sm"
+          name={video?.channel_id?.name ?? "Not Available"}
+          src={video?.channel_id?.photo}
+          onClick={() => handleRouting(video?.uploader_id?._id)}
+          cursor="pointer"
+        />
+
+        <Box w="calc(100%)">
           <Text
             noOfLines={1}
             color={Color().blackAndPureWhite}
@@ -107,7 +97,7 @@ function HoverCard({
             fontSize={"sm2"}
             lineHeight={"1.2"}
           >
-            {video.title}
+            {video?.title}
           </Text>
 
           <Text
@@ -119,66 +109,60 @@ function HoverCard({
             fontSize={"14px"}
             lineHeight={"1.2"}
           >
-            @{name}
+            @{video?.channel_id?.name ?? "Not Available"}
           </Text>
-          <Flex alignItems={"center"} justifyContent="space-between">
-            <Flex alignItems={"center"} mr=".8rem">
-              <Text
-                noOfLines={2}
-                color={"clique.darkGrey"}
-                fontFamily={"Poppins"}
-                fontWeight={400}
-                fontSize={"14px"}
-                lineHeight={"1.2"}
-                mr="10px"
-              >
-                {video.view} views
-              </Text>
-              <Text
-                pos={"relative"}
-                _before={{
-                  content: '""',
-                  position: "absolute",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  left: 0,
-                  width: "4px",
-                  background: "clique.darkGrey",
-                  height: "4px",
-                  rounded: "full",
-                }}
-                pl="10px"
-                noOfLines={2}
-                color={"clique.darkGrey"}
-                fontFamily={"Poppins"}
-                fontWeight={400}
-                fontSize={"14px"}
-                lineHeight={"1.2"}
-              >
-                {moment(video?.createdAt).fromNow()}
-              </Text>
-            </Flex>
-            {video.uploader_id?._id !== userProfile?._id && (
-              <>
-                {/* // <Button
-              //   color='clique.white'
-              //   bg={
-              //     video.uploader_id.subscribers.includes(userProfile?._id)
-              //       ? 'clique.grey'
-              //       : 'clique.purple'
-              //   }
-              //   rounded={'full'}
-              //   fontWeight='400'
-              //   size={'sm'}
-              // >
-              //   {video.uploader_id.subscribers.includes(userProfile?._id)
-              //     ? 'Subscribed'
-              //     : 'Subscribe'}
-              // </Button> */}
-              </>
-            )}
+          <Flex alignItems={"center"} mt="5px">
+            <Text
+              noOfLines={2}
+              color={"clique.darkGrey"}
+              fontFamily={"Poppins"}
+              fontWeight={400}
+              fontSize={"14px"}
+              lineHeight={"1.2"}
+              mr="10px"
+            >
+              {video?.view} {video?.view !== 1 ? "views" : "view"}
+            </Text>
+            <Text
+              pos={"relative"}
+              _before={{
+                content: '""',
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                left: 0,
+                width: "4px",
+                background: "clique.darkGrey",
+                height: "4px",
+                rounded: "full",
+              }}
+              pl="10px"
+              noOfLines={2}
+              color={"clique.darkGrey"}
+              fontFamily={"Poppins"}
+              fontWeight={400}
+              fontSize={"14px"}
+              lineHeight={"1.2"}
+            >
+              {moment(video?.createdAt).fromNow()}
+            </Text>
           </Flex>
         </Box>
+        <Flex p="2px" borderRadius={"5px"} h="100%">
+          {/* <Icon
+            as={VideoSideIcon}
+            fontSize="25px"
+            cursor="pointer"
+            onClick={() => {
+              if (isSubscribed) {
+                setShow(!show);
+              } else {
+                // this is the error line
+                onOpen();
+              }
+            }}
+          /> */}
+        </Flex>
       </Flex>
       <SubScribeModal
         onClose={onClose}

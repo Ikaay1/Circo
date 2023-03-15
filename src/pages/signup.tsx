@@ -99,148 +99,148 @@ const Signup = () => {
   const [isLastNameFocused, setIsLastNameFocused] = useState(false);
   return (
     <Box
-      display={'flex'}
-      justifyContent='space-between'
-      alignItems={'center'}
-      // backgroundColor={Color().whiteAndBlack}
+      display={"flex"}
+      justifyContent="space-between"
+      alignItems={"center"}
+      backgroundColor={Color().lightAndPrimary}
     >
       <CliqueLogo />
-      <Box display={{base: 'none', lg: 'block'}}>
+      <Box display={{ base: "none", lg: "block" }}>
         <ShowAuthImage />
       </Box>
       <Box
-        marginLeft={{base: '0', xl: '50%'}}
-        minW={{base: '60%', xl: '50%'}}
-        py='50px'
+        marginLeft={{ base: "0", xl: "50%" }}
+        minW={{ base: "60%", xl: "50%" }}
+        py="50px"
       >
-        <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
+        <Box padding={"1rem"} width="450px" height={"100%"} margin="0 auto">
           <ShowAuthHeader
-            header='Sign Up'
-            detail='Connect to more Circos today!'
+            header="Sign Up"
+            detail="Connect to more Circos today!"
           />
-          <form onSubmit={handlePreSignup} className='login-form'>
+          <form onSubmit={handlePreSignup} className="login-form">
             <Box
-              display={'flex'}
-              justifyContent='space-between'
-              marginTop={'.5rem'}
+              display={"flex"}
+              justifyContent="space-between"
+              marginTop={".5rem"}
             >
-              <Box width='48%' height='60px' position='relative'>
+              <Box width="48%" height="60px" position="relative">
                 <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className='input'
-                  type={'text'}
+                  className="input"
+                  type={"text"}
                   required={true}
-                  placeholder='Firstname'
+                  placeholder="Firstname"
                   backgroundColor={Color().greyAndWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
 
                     fontSize:
-                      isFirstNameFocused || firstName !== '' ? 'sm3' : '1rem',
-                    pb: isFirstNameFocused || firstName !== '' ? '5px' : '0',
-                    transition: 'all .3s ease',
+                      isFirstNameFocused || firstName !== "" ? "sm3" : "1rem",
+                    pb: isFirstNameFocused || firstName !== "" ? "5px" : "0",
+                    transition: "all .3s ease",
                     transform:
-                      isFirstNameFocused || firstName !== ''
-                        ? 'translateY(-110%);  '
-                        : 'translateY(0%); ',
+                      isFirstNameFocused || firstName !== ""
+                        ? "translateY(-110%);  "
+                        : "translateY(0%); ",
                   }}
-                  h='60px'
-                  borderWidth={'1px'}
+                  h="60px"
+                  borderWidth={"1px"}
                   borderColor={Color().greyAndWhite}
                   _focus={{
-                    boxShadow: 'none',
-                    border: 'none',
-                    outline: 'none',
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
                   }}
                   _active={{
-                    boxShadow: 'none',
-                    border: 'none',
-                    outline: 'none',
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
                   }}
                   color={Color().blackAndWhite}
                   onFocus={() => setIsFirstNameFocused(true)}
                   onBlur={() => setIsFirstNameFocused(false)}
                 />
                 <Text
-                  position='absolute'
-                  top='30%'
-                  left={'8%'}
-                  fontSize='sm'
-                  className='placeholder small'
+                  position="absolute"
+                  top="30%"
+                  left={"8%"}
+                  fontSize="sm"
+                  className="placeholder small"
                   color={Color().blackAndWhite}
-                  zIndex='99'
-                ></Text>{' '}
+                  zIndex="99"
+                ></Text>{" "}
                 <Text
-                  position='absolute'
-                  top='0%'
-                  left={'8%'}
-                  fontSize='sm3'
-                  pt='5px'
+                  position="absolute"
+                  top="0%"
+                  left={"8%"}
+                  fontSize="sm3"
+                  pt="5px"
                   color={Color().blackAndWhite}
-                  display={firstName !== '' ? 'block' : 'none'}
-                  transition='all .3s ease'
-                  zIndex='99'
+                  display={firstName !== "" ? "block" : "none"}
+                  transition="all .3s ease"
+                  zIndex="99"
                 >
                   Firstname
                 </Text>
               </Box>
-              <Box width='48%' height='60px' position='relative'>
+              <Box width="48%" height="60px" position="relative">
                 <Input
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   _focus={{
-                    boxShadow: 'none',
-                    border: 'none',
-                    outline: 'none',
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
                   }}
                   _active={{
-                    boxShadow: 'none',
-                    border: 'none',
-                    outline: 'none',
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
                   }}
-                  className='input'
-                  type={'text'}
+                  className="input"
+                  type={"text"}
                   required={true}
-                  placeholder='Lastname'
+                  placeholder="Lastname"
                   color={Color().blackAndWhite}
                   backgroundColor={Color().greyAndWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
                     fontSize:
-                      isLastNameFocused || lastName !== '' ? 'sm3' : '1rem',
-                    pb: isLastNameFocused || lastName !== '' ? '5px' : '0',
-                    transition: 'all .3s ease',
+                      isLastNameFocused || lastName !== "" ? "sm3" : "1rem",
+                    pb: isLastNameFocused || lastName !== "" ? "5px" : "0",
+                    transition: "all .3s ease",
                     transform:
-                      isLastNameFocused || lastName !== ''
-                        ? 'translateY(-110%);  '
-                        : 'translateY(0%); ',
+                      isLastNameFocused || lastName !== ""
+                        ? "translateY(-110%);  "
+                        : "translateY(0%); ",
                   }}
-                  borderWidth={'1px'}
-                  h='60px'
+                  borderWidth={"1px"}
+                  h="60px"
                   borderColor={Color().greyAndWhite}
                   onFocus={() => setIsLastNameFocused(true)}
                   onBlur={() => setIsLastNameFocused(false)}
                 />
 
                 <Text
-                  position='absolute'
-                  top='0%'
-                  left={'8%'}
-                  fontSize='sm3'
-                  pt='5px'
+                  position="absolute"
+                  top="0%"
+                  left={"8%"}
+                  fontSize="sm3"
+                  pt="5px"
                   color={Color().blackAndWhite}
-                  zIndex='99'
-                  transition='all .3s ease'
-                  display={lastName !== '' ? 'block' : 'none'}
+                  zIndex="99"
+                  transition="all .3s ease"
+                  display={lastName !== "" ? "block" : "none"}
                 >
                   Lastname
                 </Text>
               </Box>
             </Box>
-            {signUpInputData.map(({name, image, key, inputName}) => (
+            {signUpInputData.map(({ name, image, key, inputName }) => (
               <div key={key}>
-                <Box position='relative' height='60px' marginTop={'.5rem'}>
+                <Box position="relative" height="60px" marginTop={".5rem"}>
                   <AuthInput
                     image={image}
                     name={name}
@@ -248,75 +248,77 @@ const Signup = () => {
                     theState={
                       image
                         ? password
-                        : inputName === 'referralCode'
+                        : inputName === "referralCode"
                         ? referralCode
-                        : inputName === 'userName'
+                        : inputName === "userName"
                         ? userName
                         : email
                     }
                     setTheState={
                       image
                         ? setPassword
-                        : inputName === 'referralCode'
+                        : inputName === "referralCode"
                         ? setReferralCode
-                        : inputName === 'email'
+                        : inputName === "email"
                         ? setEmail
                         : setUserName
                     }
                     showPassword={showPassword}
-                    email={inputName === 'email'}
-                    referral={inputName === 'referralCode'}
+                    email={inputName === "email"}
+                    referral={inputName === "referralCode"}
                   />
                 </Box>
               </div>
             ))}
 
-            <Box position='relative' height='57px' marginTop={'.5rem'}>
+            <Box position="relative" height="57px" marginTop={".5rem"}>
               <AuthInput
-                name={'Age Range'}
-                option={['18 and above', 'Below 18']}
+                name={"Age Range"}
+                option={["18 and above", "Below 18"]}
                 ageRange={ageRange}
                 setAgeRange={setAgeRange}
               />
             </Box>
             <Box
-              display={'flex'}
-              justifyContent={'center'}
-              marginTop={'1.6rem'}
+              display={"flex"}
+              justifyContent={"center"}
+              marginTop={"1.6rem"}
               color={Color().blackAndWhite}
             >
               <label
-                className='remember'
+                className="remember"
                 style={{
-                  color: 'white',
-                  cursor: 'pointer',
+                  color: "white",
+                  cursor: "pointer",
                 }}
               >
                 <input
                   color={Color().blackAndWhite}
-                  type='checkbox'
+                  type="checkbox"
                   required={true}
-                  name=''
+                  name=""
                 />
-                <Box color={Color().blackAndWhite2} as='span'>
+                <Box color={Color().blackAndWhite2} as="span">
                   I agree to the&nbsp;
                 </Box>
-                <span style={{color: '#892cdc'}}>Terms & Conditions&nbsp;</span>
-                <Box color={Color().blackAndWhite2} as='span'>
+                <span style={{ color: "#892cdc" }}>
+                  Terms & Conditions&nbsp;
+                </span>
+                <Box color={Color().blackAndWhite2} as="span">
                   and&nbsp;
                 </Box>
-                <span style={{color: '#892cdc'}}>Privacy Policy</span>
+                <span style={{ color: "#892cdc" }}>Privacy Policy</span>
               </label>
             </Box>
             <AuthButton
               status={preSignupStatus}
-              {...{marginTop: '1.2rem'}}
-              name='Sign Up'
+              {...{ marginTop: "1.2rem" }}
+              name="Sign Up"
             />
           </form>
           <SocialMedia
-            haveAccount={'Already have an account?'}
-            text={'Login here'}
+            haveAccount={"Already have an account?"}
+            text={"Login here"}
           />
         </Box>
       </Box>

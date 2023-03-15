@@ -114,94 +114,130 @@ function VideoThumb({
   return (
     <>
       <Box position={"relative"} ref={lastElementRef}>
-        {isHover && !isOpen && url ? (
-          <ScaleFade reverse unmountOnExit in={isHover}>
-            <HoverCard
-              setIsHover={setIsHover}
-              isSubscribed={isSubscribed}
-              id={video._id}
-              userId={video.uploader_id._id}
-              video={video}
-              name={video?.channel_id?.name ?? "Not Available"}
-              photo={video?.channel_id?.photo}
-              url={url}
-            />
-          </ScaleFade>
-        ) : (
-          <Box position={"relative"}>
-            {video?.isFree && (
-              <Text
-                bg="clique.freeColor"
-                borderTopRightRadius={"8px"}
-                borderBottomLeftRadius={"8px"}
-                w="60px"
-                h="21px"
-                display={"flex"}
-                justifyContent="center"
-                alignItems={"center"}
-                color="clique.black"
-                fontWeight={"600"}
-                position="absolute"
-                top={"0"}
-                right="0"
-              >
-                Free
-              </Text>
-            )}
+        <HoverCard
+          show={isHover && !isOpen && url ? true : false}
+          setIsHover={setIsHover}
+          isSubscribed={isSubscribed}
+          id={video._id}
+          userId={video.uploader_id._id}
+          video={video}
+          name={video?.channel_id?.name ?? "Not Available"}
+          photo={video?.channel_id?.photo}
+          url={url}
+        />
 
-            <Box
-              onMouseOver={() => setIsHover(true)}
-              cursor={"pointer"}
-              w="full"
-              onClick={() => {
-                if (isSubscribed) {
-                  router.push(`/player/${video._id}/${video.uploader_id._id}`);
-                } else {
-                  onOpen();
-                }
-              }}
+        <Box
+          position={"relative"}
+          display={isHover && !isOpen && url ? "none" : "block"}
+        >
+          {video?.isFree && (
+            <Text
+              bg="clique.freeColor"
+              borderTopRightRadius={"8px"}
+              borderBottomLeftRadius={"8px"}
+              w="60px"
+              h="21px"
+              display={"flex"}
+              justifyContent="center"
+              alignItems={"center"}
+              color="clique.black"
+              fontWeight={"600"}
+              position="absolute"
+              top={"0"}
+              right="0"
             >
-              <SubScribeModal
-                onClose={onClose}
-                isOpen={isOpen}
-                onOpen={onOpen}
-                id={video?.uploader_id?._id}
-                userName={video?.channel_id?.name}
-              />
-              <Box
-                h={{ base: "200px", lg: "130px", mlg: "180px" }}
-                bgImage={`url(${video?.thumbNail})`}
-                bgSize="cover"
-                bgPosition="center"
-                rounded={"10px"}
-              />
-            </Box>
+              Free
+            </Text>
+          )}
 
-            <Flex mt="15px">
-              <Avatar
-                mr={"10px"}
-                p="0"
-                size="sm"
-                name={video?.channel_id?.name ?? "Not Available"}
-                src={video?.channel_id?.photo}
-                onClick={() => handleRouting(video?.uploader_id?._id)}
-                cursor="pointer"
-              />
+          <Box
+            onMouseOver={() => setIsHover(true)}
+            cursor={"pointer"}
+            w="full"
+            onClick={() => {
+              if (isSubscribed) {
+                router.push(`/player/${video._id}/${video.uploader_id._id}`);
+              } else {
+                onOpen();
+              }
+            }}
+          >
+            <SubScribeModal
+              onClose={onClose}
+              isOpen={isOpen}
+              onOpen={onOpen}
+              id={video?.uploader_id?._id}
+              userName={video?.channel_id?.name}
+            />
+            <Box
+              h={{ base: "200px", lg: "130px", mlg: "180px" }}
+              bgImage={`url(${video?.thumbNail})`}
+              bgSize="cover"
+              bgPosition="center"
+              rounded={"10px"}
+            />
+          </Box>
 
-              <Box w="calc(100% - 40px)">
+          <Flex mt="15px">
+            <Avatar
+              mr={"10px"}
+              p="0"
+              size="sm"
+              name={video?.channel_id?.name ?? "Not Available"}
+              src={video?.channel_id?.photo}
+              onClick={() => handleRouting(video?.uploader_id?._id)}
+              cursor="pointer"
+            />
+
+            <Box w="calc(100%)">
+              <Text
+                noOfLines={1}
+                color={Color().blackAndPureWhite}
+                fontFamily={"Poppins"}
+                fontWeight={500}
+                fontSize={"sm2"}
+                lineHeight={"1.2"}
+              >
+                {video?.title}
+              </Text>
+
+              <Text
+                mt="5px"
+                noOfLines={2}
+                color={"clique.darkGrey"}
+                fontFamily={"Poppins"}
+                fontWeight={400}
+                fontSize={"14px"}
+                lineHeight={"1.2"}
+              >
+                @{video?.channel_id?.name ?? "Not Available"}
+              </Text>
+              <Flex alignItems={"center"} mt="5px">
                 <Text
-                  noOfLines={1}
-                  color={Color().blackAndPureWhite}
+                  noOfLines={2}
+                  color={"clique.darkGrey"}
                   fontFamily={"Poppins"}
-                  fontWeight={500}
-                  fontSize={"sm2"}
+                  fontWeight={400}
+                  fontSize={"14px"}
                   lineHeight={"1.2"}
+                  mr="10px"
                 >
-                  {video?.title}
+                  {video?.view} {video?.view !== 1 ? "views" : "view"}
                 </Text>
-
                 <Text
-                  mt="5px"
+                  pos={"relative"}
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    left: 0,
+                    width: "4px",
+                    background: "clique.darkGrey",
+                    height: "4px",
+                    rounded: "full",
+                  }}
+                  pl="10px"
                   noOfLines={2}
                   color={"clique.darkGrey"}
                   fontFamily={"Poppins"}
@@ -209,121 +245,85 @@ function VideoThumb({
                   fontSize={"14px"}
                   lineHeight={"1.2"}
                 >
-                  @{video?.channel_id?.name ?? "Not Available"}
+                  {moment(video?.createdAt).fromNow()}
                 </Text>
-                <Flex alignItems={"center"} mt="5px">
-                  <Text
-                    noOfLines={2}
-                    color={"clique.darkGrey"}
-                    fontFamily={"Poppins"}
-                    fontWeight={400}
-                    fontSize={"14px"}
-                    lineHeight={"1.2"}
-                    mr="10px"
-                  >
-                    {video?.view} {video?.view !== 1 ? "views" : "view"}
-                  </Text>
-                  <Text
-                    pos={"relative"}
-                    _before={{
-                      content: '""',
-                      position: "absolute",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      left: 0,
-                      width: "4px",
-                      background: "clique.darkGrey",
-                      height: "4px",
-                      rounded: "full",
-                    }}
-                    pl="10px"
-                    noOfLines={2}
-                    color={"clique.darkGrey"}
-                    fontFamily={"Poppins"}
-                    fontWeight={400}
-                    fontSize={"14px"}
-                    lineHeight={"1.2"}
-                  >
-                    {moment(video?.createdAt).fromNow()}
-                  </Text>
-                </Flex>
-              </Box>
-              <Flex p="2px" borderRadius={"5px"} h="100%">
-                <Icon
-                  as={VideoSideIcon}
-                  fontSize="25px"
-                  cursor="pointer"
-                  onClick={() => {
-                    if (isSubscribed) {
-                      setShow(!show);
-                    } else {
-                      // this is the error line
-                      onOpen();
-                    }
-                  }}
-                />
               </Flex>
-            </Flex>
-            {show ? (
-              <Box
-                position={"absolute"}
-                bottom="0"
-                right="0.2"
-                bg="clique.darkGrey1"
-                p="3"
-                borderTopLeftRadius={15}
-                borderBottomRightRadius={"10px"}
-                pl="1"
-                sx={{
-                  transition: "all 3s ease-in-out",
+            </Box>
+            <Flex p="2px" borderRadius={"5px"} h="100%">
+              <Icon
+                as={VideoSideIcon}
+                fontSize="25px"
+                cursor="pointer"
+                onClick={() => {
+                  if (isSubscribed) {
+                    setShow(!show);
+                  } else {
+                    // this is the error line
+                    onOpen();
+                  }
                 }}
-                onMouseLeave={() => setShow(false)}
-              >
-                {router.asPath === "/channel/1/content"
-                  ? VideoSideMenu.map((each, i) => (
-                      <Flex
-                        align="center"
-                        justifyItems={"center"}
-                        mb="2"
-                        key={i}
+              />
+            </Flex>
+          </Flex>
+          {show ? (
+            <Box
+              position={"absolute"}
+              bottom="0"
+              right="0.2"
+              bg="clique.darkGrey1"
+              p="3"
+              borderTopLeftRadius={15}
+              borderBottomRightRadius={"10px"}
+              pl="1"
+              sx={{
+                transition: "all 3s ease-in-out",
+              }}
+              onMouseLeave={() => setShow(false)}
+            >
+              {router.asPath === "/channel/1/content"
+                ? VideoSideMenu.map((each, i) => (
+                    <Flex
+                      align="center"
+                      justifyItems={"center"}
+                      mb="2"
+                      key={i}
+                      cursor="pointer"
+                      onClick={() => handleClick(i)}
+                      color="clique.white"
+                    >
+                      <Icon
+                        as={each.icon}
+                        fontSize="15px"
                         cursor="pointer"
-                        onClick={() => handleClick(i)}
-                        color="clique.white"
-                      >
-                        <Icon
-                          as={each.icon}
-                          fontSize="15px"
-                          cursor="pointer"
-                        ></Icon>
-                        <Text ml="2" fontSize={"sm3"}>
-                          {each.text}
-                        </Text>
-                      </Flex>
-                    ))
-                  : VideoSideMenu2.map((each, i) => (
-                      <Flex
-                        align="center"
-                        justifyItems={"center"}
-                        mb="2"
-                        key={i}
+                      ></Icon>
+                      <Text ml="2" fontSize={"sm3"}>
+                        {each.text}
+                      </Text>
+                    </Flex>
+                  ))
+                : VideoSideMenu2.map((each, i) => (
+                    <Flex
+                      align="center"
+                      justifyItems={"center"}
+                      mb="2"
+                      key={i}
+                      cursor="pointer"
+                      onClick={() => handleClick(i)}
+                      color="clique.white"
+                    >
+                      <Icon
+                        as={each.icon}
+                        fontSize="15px"
                         cursor="pointer"
-                        onClick={() => handleClick(i)}
-                        color="clique.white"
-                      >
-                        <Icon
-                          as={each.icon}
-                          fontSize="15px"
-                          cursor="pointer"
-                        ></Icon>
-                        <Text ml="2" fontSize={"sm3"}>
-                          {each.text}
-                        </Text>
-                      </Flex>
-                    ))}
-              </Box>
-            ) : null}
-          </Box>
-        )}
+                      ></Icon>
+                      <Text ml="2" fontSize={"sm3"}>
+                        {each.text}
+                      </Text>
+                    </Flex>
+                  ))}
+            </Box>
+          ) : null}
+        </Box>
       </Box>
       <AddToPlaylistModal
         isOpen={isOpenPlay}
