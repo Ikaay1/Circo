@@ -1,16 +1,22 @@
-import { Box, Button, Flex, Icon, SlideFade } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, SlideFade, useToast } from "@chakra-ui/react";
 import CamCommentSection from "@components/stream/CamCommentSection";
 import CommentSection from "@components/stream/CommentSection";
 import End from "@components/stream/End";
 import HomeLayout from "layouts/HomeLayout";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Space, SpaceEvent, getUserMedia } from "@mux/spaces-web";
 import { AiFillWechat } from "react-icons/ai";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
 import styles from "../../../styles/demo.module.css";
 import Participant from "@components/stream/Participant";
-import { useStartBroadCastMutation } from "redux/services/livestream/live.service";
+import {
+  useEndStreamMutation,
+  useGetStreamQuery,
+  useStartBroadCastMutation,
+} from "redux/services/livestream/live.service";
+import { useAppDispatch, useAppSelector } from "redux/app/hooks";
+import { clearWebCamStream } from "redux/slices/streamSlice";
 
 function Index() {
   const router = useRouter();
@@ -63,6 +69,71 @@ function Index() {
   useEffect(() => {
     join();
   }, [spaceRef.current]);
+
+  //hadnling ending stream
+  const [endStream, endInfo] = useEndStreamMutation();
+  const streamDetails = useAppSelector(
+    (state) => state?.app?.stream?.webCamStream
+  );
+  const toast = useToast();
+  const dispatch = useAppDispatch();
+  const [livestreamId, setLivestreamId] = useState<string | undefined>(
+    undefined
+  );
+  useEffect(() => {
+    if (id) {
+      setLivestreamId(id as string);
+    }
+  }, [id]);
+  const { data, isFetching, isLoading, refetch } =
+    useGetStreamQuery(livestreamId);
+
+  useEffect(() => {
+    if (data?.data?.stream && data?.data?.stream?.status === "ended") {
+      router.back();
+
+      toast({
+        title: "Stream " + data?.data?.stream?.status,
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+
+      return;
+    }
+  }, [data]);
+  // endstream if user leaves the page
+
+  const handleEndStream = async (e: string) => {
+    const endRes: any = await endStream(e);
+    if (endRes?.data?.data) {
+      dispatch(clearWebCamStream());
+    } else {
+      console.log("error ending stream");
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("beforeunload", async (e) => {
+      e.preventDefault();
+      await handleEndStream(streamDetails?._id);
+    });
+
+    Router.events.on("routeChangeStart", async () => {
+      await handleEndStream(streamDetails?._id);
+    });
+
+    return () => {
+      Router.events.off("routeChangeStart", async () => {
+        await handleEndStream(streamDetails?._id);
+      });
+
+      window.removeEventListener("beforeunload", async (e) => {
+        e.preventDefault();
+        await handleEndStream(streamDetails?._id);
+      });
+    };
+  }, []);
 
   return (
     <HomeLayout>
