@@ -32,16 +32,16 @@ function Index() {
 
   return (
     <Box
-      display={{ base: "none", md: "block" }}
-      w="250px"
-      maxW="250px"
-      minW="250px"
+      display={{base: 'none', md: 'block'}}
+      w='250px'
+      maxW='250px'
+      minW='250px'
       bg={Color().whiteAndBlack}
-      h="90vh"
-      minH="90vh"
-      maxH="90vh"
-      py={"20px"}
-      overflowY="scroll"
+      h='90vh'
+      minH='90vh'
+      maxH='90vh'
+      py={'20px'}
+      overflowY='scroll'
       // sx={{
       //   ...scrollBarStyle,
       //   "&::-webkit-scrollbar-thumb": {
@@ -49,17 +49,17 @@ function Index() {
       //   },
       // }}
       sx={{
-        "&::-webkit-scrollbar": {
-          width: "4px",
-          rounded: "full",
+        '&::-webkit-scrollbar': {
+          width: '4px',
+          rounded: 'full',
         },
-        "&::-webkit-scrollbar-track": {
-          boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-          webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+        '&::-webkit-scrollbar-track': {
+          boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+          webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
         },
-        "&::-webkit-scrollbar-thumb": {
-          bg: "clique.grey",
-          outline: "none",
+        '&::-webkit-scrollbar-thumb': {
+          bg: 'clique.grey',
+          outline: 'none',
         },
       }}
     >
@@ -69,20 +69,20 @@ function Index() {
             name: string;
             icon: any;
           },
-          index: number
+          index: number,
         ) => (
           <EachMenu key={index} name={item.name} icon={item.icon} />
-        )
+        ),
       )}
-      <Box px="50px" py="20px">
+      <Box px='50px' py='20px'>
         <Divider />
       </Box>
       {isFetching ? (
         <>
           {[1, 2, 3].map((num) => (
-            <Flex pl="50px" key={num} mt="15px" alignItems={"center"}>
-              <SkeletonCircle size="10" mr="10px" />
-              <Skeleton w="60%" height="15px" />
+            <Flex pl='50px' key={num} mt='15px' alignItems={'center'}>
+              <SkeletonCircle size='10' mr='10px' />
+              <Skeleton w='60%' height='15px' />
             </Flex>
           ))}
         </>
@@ -91,10 +91,10 @@ function Index() {
           {data?.data?.user.length > 0 && (
             <>
               <Text
-                pl="60px"
-                fontFamily={"Poppins"}
+                pl='60px'
+                fontFamily={'Poppins'}
                 fontWeight={500}
-                textTransform={"capitalize"}
+                textTransform={'capitalize'}
               >
                 subscriptions
               </Text>
@@ -114,38 +114,43 @@ function Index() {
                     lastName={item.lastName}
                     id={item._id}
                   />
-                )
+                ),
               )}
             </>
           )}
         </>
       )}
 
-      <Box px="50px" py="20px">
+      <Box px='50px' py='20px'>
         <Divider />
       </Box>
 
       <Flex
         onClick={handleLogout}
-        transition={"all 0.2s ease-in-out"}
+        transition={'all 0.2s ease-in-out'}
         _hover={{
-          color: "clique.base",
+          color: 'clique.base',
         }}
-        cursor={"pointer"}
-        justifyContent={"center"}
-        alignItems="center"
-        color="clique.fadeOut"
+        cursor={'pointer'}
+        justifyContent={'center'}
+        alignItems='center'
+        color={useColorModeValue('clique.black', 'clique.fadeOut')}
       >
         <Text
-          mr="5px"
-          fontFamily={"Poppins"}
-          fontWeight={400}
-          textTransform={"capitalize"}
-          fontSize={"sm"}
+          mr='5px'
+          fontFamily={'Poppins'}
+          fontWeight={500}
+          textTransform={'capitalize'}
+          fontSize={'sm'}
         >
           logout
         </Text>
-        <Icon fontSize={"smHead"} as={HiOutlineLogout} />
+        <Icon
+          fontSize={'smHead'}
+          width={'24px'}
+          height={'24px'}
+          as={HiOutlineLogout}
+        />
       </Flex>
     </Box>
   );

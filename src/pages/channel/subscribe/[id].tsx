@@ -1,19 +1,20 @@
 import useGet from 'hooks/useGet';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
+import moment from 'moment';
+import {useRouter} from 'next/router';
+import {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
+import {useGetIndividualChannelQuery} from 'redux/services/channel.service';
 import {
-	useGetSingleUserContentQuery,
-	useSubscribeToUserChannelMutation,
+  useGetSingleUserContentQuery,
+  useSubscribeToUserChannelMutation,
 } from 'redux/services/content.service';
-import { useGetUserQuery } from 'redux/services/user.service';
+import {useGetUserQuery} from 'redux/services/user.service';
 
 import {
-	Box,
-	useColorModeValue,
-	useDisclosure,
-	useToast,
+  Box,
+  useColorModeValue,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import Index from '@components/channel';
 import SubscribeModal from '@components/channel/subscribe/SubscribeModal';
@@ -46,6 +47,7 @@ const SubscribeChannel = () => {
     isFetching: isUserFetching,
   } = useGetUserQuery(id);
   const [state, setState] = useState<string>();
+  const [date, setDate] = useState<string>();
 
   useEffect(() => {
     if (userProfile?._id === id) {
@@ -60,7 +62,19 @@ const SubscribeChannel = () => {
           return each._id === userProfile?._id;
         },
       );
-      buttonText ? setState('Subscribed') : setState('Subscribe');
+      if (buttonText) {
+        setState('Subscribed');
+        const dateText = userData?.data?.subscribeTime?.find(
+          (one: any) => one.id === userProfile?._id,
+        );
+        // setDate(moment(dateText?.expiresIn).fromNow());
+        const difference =
+          new Date(dateText?.expiresIn).getTime() - new Date().getTime();
+        let TotalDays = Math.floor(difference / (1000 * 3600 * 24));
+        setDate(`${TotalDays}`);
+      } else {
+        setState('Subscribe');
+      }
     }
   }, [userLoading, userData, userProfile]);
 
@@ -158,6 +172,7 @@ const SubscribeChannel = () => {
               buttonText={state}
               lastElementRef={lastElementRef}
               isFetching={isUserFetching}
+              date={date}
             />
           </Box>
         </Box>

@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 
-import { Box } from '@chakra-ui/react';
+import {Box} from '@chakra-ui/react';
 import ChannelContents from '@components/channel/ChannelContents';
 import CliqueLoader from '@components/home/CliqueLoader';
-import { contentData, scrollBarStyle, scrollBarStyle3 } from '@constants/utils';
+import {contentData, scrollBarStyle, scrollBarStyle3} from '@constants/utils';
 
 import Analytics from './Analytics';
 import Bio from './Bio';
@@ -20,6 +20,7 @@ const Index = ({
   lastElementRef,
   setContents,
   isFetching,
+  date,
 }: {
   channelData?: any;
   data?: contentData[];
@@ -30,6 +31,7 @@ const Index = ({
   lastElementRef?: any;
   setContents?: any;
   isFetching?: boolean;
+  date?: string;
 }) => {
   const router = useRouter();
   const des =
@@ -64,6 +66,7 @@ const Index = ({
               onClick={onClick as () => void}
               buttonText={buttonText}
               isFetching={isFetching}
+              date={date}
             />
           )}
           {des && (

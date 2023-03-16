@@ -207,14 +207,8 @@ const Footer = () => {
               sx={scrollBarStyle}
               border='none'
               outline='none'
-              _focus={{
-                border: 'none',
-                outline: 'none',
-              }}
-              _active={{
-                border: 'none',
-                outline: 'none',
-              }}
+              _focus={{boxShadow: 'none', border: 'none', outline: 'none'}}
+              _active={{boxShadow: 'none', border: 'none', outline: 'none'}}
               value={reason}
               onChange={(e) => setReason(e.target.value)}
             ></Textarea>

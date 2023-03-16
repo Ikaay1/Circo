@@ -1,30 +1,34 @@
-import React from "react";
+import React from 'react';
 
-import { useColorModeValue } from "@chakra-ui/react";
+import {useColorModeValue} from '@chakra-ui/react';
 
 function Color() {
-  const blackAndWhite = useColorModeValue("clique.black", "clique.whiteGrey");
-  const blackAndPureWhite = useColorModeValue("clique.black", "clique.white");
-  const blackAndWhite2 = useColorModeValue("clique.black", "clique.white");
+  const blackAndWhite = useColorModeValue('clique.black', 'clique.whiteGrey');
+  const blackAndPureWhite = useColorModeValue('clique.black', 'clique.white');
+  const blackAndWhite2 = useColorModeValue('clique.black', 'clique.white');
   const greyAndWhite = useColorModeValue(
-    "clique.lightPrimaryBg",
-    "clique.secondaryGrey1"
+    'clique.lightPrimaryBg',
+    'clique.secondaryGrey1',
   );
-  const whiteAndBlack = useColorModeValue("clique.white", "clique.black");
-  const blackAndGrey = useColorModeValue("clique.black", "clique.grey");
+  const greyAndWhite2 = useColorModeValue(
+    'clique.white',
+    'clique.secondaryGrey1',
+  );
+  const whiteAndBlack = useColorModeValue('clique.white', 'clique.black');
+  const blackAndGrey = useColorModeValue('clique.black', 'clique.grey');
   const whiteGreyAndBlack = useColorModeValue(
-    "clique.black",
-    "clique.whiteGrey"
+    'clique.black',
+    'clique.whiteGrey',
   );
   const blackAndWhiteGrey = useColorModeValue(
-    "clique.lightPrimaryBg",
-    "clique.grey"
+    'clique.lightPrimaryBg',
+    'clique.grey',
   );
-  const greyAndPureWhite = useColorModeValue("clique.white", "clique.grey");
+  const greyAndPureWhite = useColorModeValue('clique.white', 'clique.grey');
 
   const lightAndPrimary = useColorModeValue(
-    "clique.lightPrimaryBg",
-    "clique.primaryBg"
+    'clique.lightPrimaryBg',
+    'clique.primaryBg',
   );
 
   return {
@@ -38,6 +42,7 @@ function Color() {
     blackAndPureWhite,
     greyAndPureWhite,
     blackAndWhite2,
+    greyAndWhite2,
   };
 }
 

@@ -1,15 +1,14 @@
-import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import { useAppSelector } from "redux/app/hooks";
-import { useFlutterwavePaymentMutation } from "redux/services/bank.service";
-import { useGetUserQuery } from "redux/services/user.service";
+import {closePaymentModal, useFlutterwave} from 'flutterwave-react-v3';
+import {useRouter} from 'next/router';
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {toast} from 'react-hot-toast';
+import {useAppSelector} from 'redux/app/hooks';
+import {useFlutterwavePaymentMutation} from 'redux/services/bank.service';
+import {useGetUserQuery} from 'redux/services/user.service';
 import {
   useConfirmDepositMutation,
   useDepositToWalletMutation,
-} from "redux/services/wallet.service";
-import React from "react";
+} from 'redux/services/wallet.service';
 
 import {
   Box,
@@ -26,9 +25,9 @@ import {
   Text,
   useColorModeValue,
   useToast,
-} from "@chakra-ui/react";
-import Btn from "@components/Button/Btn";
-import Color from "@constants/color";
+} from '@chakra-ui/react';
+import Btn from '@components/Button/Btn';
+import Color from '@constants/color';
 
 type Props = {
   isOpen: boolean;
@@ -36,10 +35,10 @@ type Props = {
   refetch: () => void;
 };
 
-function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
+function AddMoneyModal({isOpen, onClose, refetch}: Props) {
   const [confirmDeposit, statusInfo] = useConfirmDepositMutation();
   const chakraToast = useToast();
-  const [amount, setAmount] = useState<string | number>("");
+  const [amount, setAmount] = useState<string | number>('');
   const [amountFocused, setAmountFocused] = useState(false);
 
   const user = useAppSelector((state) => state.app.userReducer.userProfile);
@@ -47,8 +46,8 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_KEY,
     amount: amount,
     tx_ref: user?._id + Math.floor(Math.random() * 1000000000) + 1 + Date.now(),
-    currency: "NGN",
-    payment_options: "card,mobilemoney,ussd",
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
     customer: {
       email: user?.email,
     },
@@ -69,16 +68,16 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
 
     console.log(res);
 
-    if ("data" in res) {
-      setAmount("");
+    if ('data' in res) {
+      setAmount('');
       refetch();
     } else {
       chakraToast({
-        title: res?.error?.data?.message || "Something went wrong",
-        status: "error",
+        title: res?.error?.data?.message || 'Something went wrong',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        position: "top-right",
+        position: 'top-right',
       });
     }
     setIsPaying(false);
@@ -95,59 +94,59 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
       <ModalContent
         bg={Color().whiteAndBlack}
         borderColor={Color().whiteAndBlack}
-        borderRadius="xl"
-        pt="3"
-        pb="10"
-        w={{ base: "100%" }}
+        borderRadius='xl'
+        pt='3'
+        pb='10'
+        w={{base: '100%'}}
         ref={initialRef}
       >
-        <ModalHeader alignSelf="center" mb="7" fontSize={"subHead"}>
+        <ModalHeader alignSelf='center' mb='7' fontSize={'subHead'}>
           How much will you like to Add?
         </ModalHeader>
 
         <ModalBody>
-          <Flex flexDirection={"column"}>
+          <Flex flexDirection={'column'}>
             <Box
-              bg="clique.secondaryGrey1"
-              px="2"
-              py="1"
-              borderRadius={"10px"}
-              width="full"
-              mb="10"
+              bg='clique.secondaryGrey1'
+              px='2'
+              py='1'
+              borderRadius={'10px'}
+              width='full'
+              mb='10'
             >
-              <Box width="full" height="60px" position="relative">
+              <Box width='full' height='60px' position='relative'>
                 <FormControl isInvalid={error}>
                   <Input
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="input"
-                    type={"number"}
+                    className='input'
+                    type={'number'}
                     required={true}
-                    placeholder="Amount"
+                    placeholder='Amount'
                     backgroundColor={Color().greyAndWhite}
                     _placeholder={{
                       color: Color().blackAndWhite,
 
-                      fontSize: amountFocused || amount !== "" ? "sm3" : "1rem",
-                      pb: amountFocused || amount !== "" ? "5px" : "0",
-                      transition: "all .3s ease",
+                      fontSize: amountFocused || amount !== '' ? 'sm3' : '1rem',
+                      pb: amountFocused || amount !== '' ? '5px' : '0',
+                      transition: 'all .3s ease',
                       transform:
-                        amountFocused || amount !== ""
-                          ? "translateY(-110%);  "
-                          : "translateY(0%); ",
+                        amountFocused || amount !== ''
+                          ? 'translateY(-110%);  '
+                          : 'translateY(0%); ',
                     }}
-                    h="60px"
-                    borderWidth={"1px"}
+                    h='60px'
+                    borderWidth={'1px'}
                     borderColor={Color().greyAndWhite}
                     _focus={{
-                      boxShadow: "none",
-                      border: "none",
-                      outline: "none",
+                      boxShadow: 'none',
+                      border: 'none',
+                      outline: 'none',
                     }}
                     _active={{
-                      boxShadow: "none",
-                      border: "none",
-                      outline: "none",
+                      boxShadow: 'none',
+                      border: 'none',
+                      outline: 'none',
                     }}
                     color={Color().blackAndWhite}
                     onFocus={() => {
@@ -165,15 +164,15 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
                   />
 
                   <Text
-                    position="absolute"
-                    top="0%"
-                    left={"4.5%"}
-                    fontSize="sm3"
-                    pt="5px"
+                    position='absolute'
+                    top='0%'
+                    left={'4.5%'}
+                    fontSize='sm3'
+                    pt='5px'
                     color={Color().blackAndWhite}
-                    display={amount !== "" ? "block" : "none"}
-                    transition="all .3s ease"
-                    zIndex="99"
+                    display={amount !== '' ? 'block' : 'none'}
+                    transition='all .3s ease'
+                    zIndex='99'
                   >
                     Amount
                   </Text>
@@ -181,14 +180,14 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
                 </FormControl>
               </Box>
             </Box>
-            <Box px="7">
+            <Box px='7'>
               <Btn
-                text="Add money to wallet"
-                style={{ width: "100%" }}
+                text='Add money to wallet'
+                style={{width: '100%'}}
                 isLoading={isPaying || statusInfo.isLoading}
                 onClick={() => {
                   if (!amount) {
-                    setError("Amount is required");
+                    setError('Amount is required');
                     return;
                   }
                   setIsPaying(true);

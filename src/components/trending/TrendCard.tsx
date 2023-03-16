@@ -1,19 +1,19 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import {
-	Avatar,
-	Box,
-	Flex,
-	Image,
-	Text,
-	useColorModeValue,
+  Avatar,
+  Box,
+  Flex,
+  Image,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
 import Color from '@constants/color';
 
-import { contentData } from '../../constants/utils';
+import {contentData} from '../../constants/utils';
 
 function TrendCard({position, video}: {position: string; video: contentData}) {
   const router = useRouter();
@@ -35,6 +35,8 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
         fontWeight: 500,
       }}
       alignItems={'center'}
+      justifyContent={'center'}
+      gap={{lg: '0 2.5rem', xl: '0 4rem'}}
       rounded={'20px'}
       px='30px'
       py='20px'
@@ -43,24 +45,29 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
       bg='clique.white'
       display={{base: 'block', lg: 'flex'}}
     >
-      <Box w='300px' pr='40px' h={{base: '160px', lg: '100%'}}>
+      <Box
+        width={{base: '100%', lg: '200px', xl: '300px'}}
+        // mr='40px'
+        h={{base: '160px', lg: '177px'}}
+      >
         <Image
           maxH={'100%'}
           h='100%'
-          w='100%'
+          width='100%'
           objectFit={'cover'}
           src={video.thumbNail}
           alt='kortyvid'
+          borderRadius='20px'
         />
       </Box>
 
-      <Box w={{lg: '50%'}} mt={{base: '.6rem', lg: 0}}>
+      <Box w={{lg: '189px', xl: '289px'}} mt={{base: '.6rem', lg: 0}}>
         <Flex>
-          {video.uploader_id?.photo ? (
+          {video?.channel_id?.photo ? (
             <AvataWithSpace
               mr='10px'
               name='Prosper Otemuyiwa'
-              url={video.uploader_id.photo}
+              url={video?.channel_id.photo}
               size='45px'
               borderColor='clique.brown'
               borderThickness='3px'
@@ -83,7 +90,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
               color={'clique.lightGrey'}
               noOfLines={1}
             >
-              {video.uploader_id?.userName}
+              {video?.channel_id?.name}
             </Text>
             <Flex mt='5px' alignItems={'center'}>
               <Text
@@ -131,7 +138,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           fontWeight={700}
           textTransform={'capitalize'}
           fontSize='head'
-          noOfLines={2}
+          noOfLines={1}
         >
           {video.title}
         </Text>
@@ -140,7 +147,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           fontFamily={'Poppins'}
           fontSize='smSubHead'
           color={'clique.lightGrey'}
-          noOfLines={4}
+          noOfLines={3}
         >
           {video.description}
         </Text>
