@@ -36,6 +36,8 @@ export const bankApi = createApi({
       }),
       invalidatesTags: ['Bank'],
     }),
+    
+    
 
     deleteContent: builder.mutation({
       query: (id) => ({

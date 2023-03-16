@@ -5,7 +5,10 @@ import { toast } from "react-hot-toast";
 import { useAppSelector } from "redux/app/hooks";
 import { useFlutterwavePaymentMutation } from "redux/services/bank.service";
 import { useGetUserQuery } from "redux/services/user.service";
-import { useDepositToWalletMutation } from "redux/services/wallet.service";
+import {
+  useConfirmDepositMutation,
+  useDepositToWalletMutation,
+} from "redux/services/wallet.service";
 import React from "react";
 
 import {
@@ -34,7 +37,7 @@ type Props = {
 };
 
 function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
-  const [flutterwave, flutterwaveStatus] = useFlutterwavePaymentMutation();
+  const [confirmDeposit, statusInfo] = useConfirmDepositMutation();
   const chakraToast = useToast();
   const [amount, setAmount] = useState<string | number>("");
   const [amountFocused, setAmountFocused] = useState(false);
@@ -56,8 +59,13 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
   const [isPaying, setIsPaying] = useState(false);
   const [error, setError] = useState<any>(null);
 
-  const handleDeposit = async (trx: string) => {
-    const res: any = await flutterwave({ amount: Number(amount) });
+  const handleDeposit = async (response: any) => {
+    const res: any = await confirmDeposit({
+      amount: Number(amount),
+      transactionId: response?.transaction_id,
+      currency: response?.currency,
+      tx_ref: response?.tx_ref,
+    });
 
     console.log(res);
 
@@ -73,7 +81,7 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
         position: "top-right",
       });
     }
-    setIsPaying(true);
+    setIsPaying(false);
     onClose();
   };
   return (
@@ -177,7 +185,7 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
               <Btn
                 text="Add money to wallet"
                 style={{ width: "100%" }}
-                isLoading={isPaying}
+                isLoading={isPaying || statusInfo.isLoading}
                 onClick={() => {
                   if (!amount) {
                     setError("Amount is required");
@@ -186,7 +194,7 @@ function AddMoneyModal({ isOpen, onClose, refetch }: Props) {
                   setIsPaying(true);
                   handleFlutterPayment({
                     callback: (response) => {
-                      handleDeposit(response.tx_ref);
+                      handleDeposit(response);
 
                       closePaymentModal();
                     },
