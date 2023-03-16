@@ -51,7 +51,7 @@ export default function CustumField({
               borderRadius='12px'
               _focus={{boxShadow: 'none', border: 'none', outline: 'none'}}
               _active={{boxShadow: 'none', border: 'none', outline: 'none'}}
-              className='input'
+              // className='input'
               type={type ? (show ? 'text' : 'password') : 'text'}
               placeholder={name}
               color={Color().blackAndWhite}

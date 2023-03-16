@@ -33,7 +33,7 @@ const AuthInput = ({
           onChange={(e) => setTheState(e.target.value)}
           _focus={{boxShadow: 'none', border: 'none', outline: 'none'}}
           _active={{boxShadow: 'none', border: 'none', outline: 'none'}}
-          className='input'
+          // className='input'
           type={
             !i
               ? image
@@ -54,7 +54,7 @@ const AuthInput = ({
           required={referral ? false : true}
           placeholder={name}
           color={Color().blackAndWhite}
-          backgroundColor={Color().greyAndWhite}
+          backgroundColor={Color().greyAndWhite2}
           _placeholder={{
             color: Color().blackAndWhite,
             fontSize: isFocused || theState !== '' ? 'sm3' : '1rem',
@@ -66,16 +66,16 @@ const AuthInput = ({
                 : 'translateY(0%); ',
           }}
           borderWidth={'1px'}
-          borderColor={Color().greyAndWhite}
+          borderColor={Color().greyAndWhite2}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
       ) : (
         <Select
           value={ageRange}
-          bg={Color().greyAndWhite}
+          bg={Color().greyAndWhite2}
           borderWidth={'1px'}
-          borderColor={Color().greyAndWhite}
+          borderColor={Color().greyAndWhite2}
           borderRadius='12px'
           //   pl="1.3rem"
           _focus={{boxShadow: 'none'}}
