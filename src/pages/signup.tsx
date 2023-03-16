@@ -120,22 +120,24 @@ const Signup = () => {
         minW={{base: '60%', xl: '50%'}}
         py='50px'
       >
-        <Box padding={'1rem'} width='450px' height={'100%'} margin='0 auto'>
+        <Box
+          padding={'1rem'}
+          width={{base: 'full', md: '450px'}}
+          height={'100%'}
+          margin='0 auto'
+        >
           <ShowAuthHeader
             header='Sign Up'
             detail='Connect to more Circos today!'
           />
           <form onSubmit={handlePreSignup} className='login-form'>
-            <Box
-              display={'flex'}
-              justifyContent='space-between'
-              marginTop={'.5rem'}
-            >
+            <Box display={'flex'} justifyContent='space-between' mt='30px'>
               <Box width='48%' height='60px' position='relative'>
                 <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className='input'
+                  // className='input'
+                  borderRadius='12px'
                   type={'text'}
                   required={true}
                   placeholder='Firstname'
@@ -171,15 +173,6 @@ const Signup = () => {
                 />
                 <Text
                   position='absolute'
-                  top='30%'
-                  left={'8%'}
-                  fontSize='sm'
-                  className='placeholder small'
-                  color={Color().blackAndWhite}
-                  zIndex='99'
-                ></Text>{' '}
-                <Text
-                  position='absolute'
                   top='0%'
                   left={'8%'}
                   fontSize='sm3'
@@ -206,7 +199,7 @@ const Signup = () => {
                     border: 'none',
                     outline: 'none',
                   }}
-                  className='input'
+                  // className='input'
                   type={'text'}
                   required={true}
                   placeholder='Lastname'

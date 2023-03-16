@@ -69,8 +69,8 @@ const Login = () => {
   }, [token, router]);
 
   useEffect(() => {
-    localStorage.removeItem('hashedOtp');
-    localStorage.removeItem('userData');
+    localStorage.removeItem("hashedOtp");
+    localStorage.removeItem("userData");
   }, []);
   return (
     <Box
@@ -88,7 +88,12 @@ const Login = () => {
         minW={{ base: "60%", xl: "50%" }}
         py="50px"
       >
-        <Box padding={"1rem"} width="450px" height={"100%"} margin="0 auto">
+        <Box
+          padding={"1rem"}
+          width={{ base: "full", md: "450px" }}
+          height={"100%"}
+          margin="0 auto"
+        >
           <ShowAuthHeader header="Login" detail="Welcome, join the Circo!" />
           <form onSubmit={handleLogin} className="login-form">
             {loginInputData.map(({ name, image, key }) => (
@@ -134,12 +139,17 @@ const Login = () => {
             haveAccount={"Don't have an account?"}
             text={"Sign Up"}
           />
-          <Box mt=".35rem" textAlign={"center"}>
+          <Box
+            fontSize="subHead"
+            fontWeight={500}
+            mt=".35rem"
+            textAlign={"center"}
+          >
             <Text display={"inline"} marginRight=".25rem">
               Need help? send a mail to
             </Text>
-            <span style={{color: '#892cdc'}}>
-              <a href='mailto: support@circo.africa'>support@circo.africa</a>
+            <span style={{ color: "#892cdc" }}>
+              <a href="mailto: support@circo.africa">support@circo.africa</a>
             </span>
           </Box>
         </Box>

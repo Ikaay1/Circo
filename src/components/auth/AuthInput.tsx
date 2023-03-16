@@ -85,6 +85,9 @@ const AuthInput = ({
           className='input'
           required={true}
           placeholder={'Select ' + name}
+          _placeholder={{
+            color: Color().blackAndWhite,
+          }}
         >
           {option.map((item: any, i: number) => (
             <option key={i} value={item}>
@@ -93,7 +96,7 @@ const AuthInput = ({
           ))}
         </Select>
       )}
-      {theState !== '' && (
+      {theState !== '' && !option && (
         <Text
           position='absolute'
           left={'4%'}

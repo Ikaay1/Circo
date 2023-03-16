@@ -13,16 +13,9 @@ import Color from "@constants/color";
 type Props = {
   onClick: () => void;
   walletData: any;
-  flutterwaveStatus: {
-    isLoading: boolean;
-  };
 };
 
-export default function WalletCard({
-  onClick,
-  walletData,
-  flutterwaveStatus,
-}: Props) {
+export default function WalletCard({ onClick, walletData }: Props) {
   const handleMoneyIn = () => {
     let num = 0;
     walletData?.transaction_history?.forEach((history: any) => {
@@ -66,7 +59,6 @@ export default function WalletCard({
               bg="linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)"
               onClick={onClick}
               maxW={"100%"}
-              disabled={flutterwaveStatus.isLoading}
             ></Btn>
           </Flex>
         </GridItem>
