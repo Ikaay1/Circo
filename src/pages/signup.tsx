@@ -141,6 +141,7 @@ const Signup = () => {
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   className="input"
+                  borderRadius="12px"
                   type={"text"}
                   required={true}
                   placeholder="Firstname"
@@ -220,6 +221,7 @@ const Signup = () => {
                         ? "translateY(-110%);  "
                         : "translateY(0%); ",
                   }}
+                  borderRadius="12px"
                   borderWidth={"1px"}
                   h="60px"
                   borderColor={Color().greyAndWhite}
