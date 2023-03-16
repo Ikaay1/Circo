@@ -1,20 +1,18 @@
-import { useGetUserWalletQuery } from 'redux/services/wallet.service';
+import { useGetUserWalletQuery } from "redux/services/wallet.service";
 
-import { Box, Flex } from '@chakra-ui/react';
-import CliqueLoader from '@components/home/CliqueLoader';
-import { ReceiptInfo } from '@constants/interface';
+import { Box, Flex } from "@chakra-ui/react";
+import CliqueLoader from "@components/home/CliqueLoader";
+import { ReceiptInfo } from "@constants/interface";
 
-import TransactionHistory from './TransactionHistory';
-import WalletCard from './WalletCard';
+import TransactionHistory from "./TransactionHistory";
+import WalletCard from "./WalletCard";
 
 type Props = {
   onClick: () => void;
   click: (info: ReceiptInfo) => void;
   onSort: () => void;
   walletData: any;
-  flutterwaveStatus: {
-    isLoading: boolean;
-  };
+
   transactionHistory: any[];
 };
 
@@ -23,17 +21,12 @@ function MainWallet({
   onSort,
   click,
   walletData,
-  flutterwaveStatus,
   transactionHistory,
 }: Props) {
   return (
-    <Flex pt='7' flexDirection='column' gap='5' w='100%'>
+    <Flex pt="7" flexDirection="column" gap="5" w="100%">
       <>
-        <WalletCard
-          walletData={walletData}
-          onClick={onClick}
-          flutterwaveStatus={flutterwaveStatus}
-        />
+        <WalletCard walletData={walletData} onClick={onClick} />
         <TransactionHistory
           walletData={walletData}
           onClick={onSort}
