@@ -1,29 +1,29 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 import {
-	useAddVideoMutation,
-	useGetPlaylistQuery,
+  useAddVideoMutation,
+  useGetPlaylistQuery,
 } from 'redux/services/playlist.service';
-import { useGetUserQuery } from 'redux/services/user.service';
+import {useGetUserQuery} from 'redux/services/user.service';
 
 import {
-	Avatar,
-	Box,
-	Flex,
-	Image,
-	Input,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalHeader,
-	ModalOverlay,
-	Skeleton,
-	SkeletonCircle,
-	Text,
-	useToast,
-	WrapItem,
+  Avatar,
+  Box,
+  Flex,
+  Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  useToast,
+  WrapItem,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 
@@ -94,22 +94,24 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
                 Recent
               </Text>
 
-              <Flex
-                cursor={'pointer'}
-                onClick={() => handleAdd(data?.data?.playlists[0]?._id)}
-              >
-                <Image
-                  src={data?.data?.playlists[0]?.cover}
-                  alt='playlist cover'
-                  objectFit={'cover'}
-                  h='80px'
-                  w='80px'
-                  borderRadius='10px'
-                />
-                <Text alignSelf={'end'} ml='7' color={'clique.white'}>
-                  {data?.data?.playlists[0]?.name}
-                </Text>
-              </Flex>
+              {data?.data?.playlists[0]?._id && (
+                <Flex
+                  cursor={'pointer'}
+                  onClick={() => handleAdd(data?.data?.playlists[0]?._id)}
+                >
+                  <Image
+                    src={data?.data?.playlists[0]?.cover}
+                    alt='playlist cover'
+                    objectFit={'cover'}
+                    h='80px'
+                    w='80px'
+                    borderRadius='10px'
+                  />
+                  <Text alignSelf={'end'} ml='7' color={'clique.white'}>
+                    {data?.data?.playlists[0]?.name}
+                  </Text>
+                </Flex>
+              )}
             </Box>
 
             <Text mb='2' color='clique.secondaryGrey2' fontSize={'subHead'}>
