@@ -22,7 +22,7 @@ function EventsCard({ onOpen, event }: any) {
       >
         <Text
           maxW={"35%"}
-          noOfLines={2}
+          noOfLines={1}
           color={"clique.white"}
           fontFamily={"Poppins"}
           fontWeight={400}
