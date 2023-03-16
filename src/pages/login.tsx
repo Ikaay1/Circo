@@ -139,7 +139,12 @@ const Login = () => {
             haveAccount={"Don't have an account?"}
             text={"Sign Up"}
           />
-          <Box mt=".35rem" textAlign={"center"}>
+          <Box
+            fontSize="subHead"
+            fontWeight={500}
+            mt=".35rem"
+            textAlign={"center"}
+          >
             <Text display={"inline"} marginRight=".25rem">
               Need help? send a mail to
             </Text>

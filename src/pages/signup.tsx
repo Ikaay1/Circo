@@ -131,11 +131,7 @@ const Signup = () => {
             detail="Connect to more Circos today!"
           />
           <form onSubmit={handlePreSignup} className="login-form">
-            <Box
-              display={"flex"}
-              justifyContent="space-between"
-              marginTop={".5rem"}
-            >
+            <Box display={"flex"} justifyContent="space-between" mt="30px">
               <Box width="48%" height="60px" position="relative">
                 <Input
                   value={firstName}
