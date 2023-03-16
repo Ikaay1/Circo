@@ -1,25 +1,25 @@
-import { closePaymentModal, useFlutterwave } from 'flutterwave-react-v3';
-import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useAppSelector } from 'redux/app/hooks';
-import { useFlutterwavePaymentMutation } from 'redux/services/bank.service';
-import { useGetUserQuery } from 'redux/services/user.service';
-import { useDepositToWalletMutation } from 'redux/services/wallet.service';
+import {closePaymentModal, useFlutterwave} from 'flutterwave-react-v3';
+import {useRouter} from 'next/router';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {toast} from 'react-hot-toast';
+import {useAppSelector} from 'redux/app/hooks';
+import {useFlutterwavePaymentMutation} from 'redux/services/bank.service';
+import {useGetUserQuery} from 'redux/services/user.service';
+import {useDepositToWalletMutation} from 'redux/services/wallet.service';
 
 import {
-	Box,
-	Flex,
-	Input,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalHeader,
-	ModalOverlay,
-	SkeletonCircle,
-	Text,
-	useColorModeValue,
-	useToast,
+  Box,
+  Flex,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  SkeletonCircle,
+  Text,
+  useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 import Color from '@constants/color';
@@ -140,7 +140,7 @@ function AddMoneyModal({
                 fontWeight='400'
                 color={'clique.secondaryGrey2'}
               >
-                Amount
+                Amount(₦)
               </Text>
               <Input
                 variant='filled'
@@ -150,6 +150,8 @@ function AddMoneyModal({
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
                 color='clique.white'
+                _focus={{boxShadow: 'none', border: 'none', outline: 'none'}}
+                _active={{boxShadow: 'none', border: 'none', outline: 'none'}}
               />
             </Box>
             <Box px='7'>

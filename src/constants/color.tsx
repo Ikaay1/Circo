@@ -9,6 +9,10 @@ function Color() {
     'clique.lightPrimaryBg',
     'clique.secondaryGrey1',
   );
+  const greyAndWhite2 = useColorModeValue(
+    'clique.white',
+    'clique.secondaryGrey1',
+  );
   const whiteAndBlack = useColorModeValue('clique.white', 'clique.black');
   const blackAndGrey = useColorModeValue('clique.black', 'clique.grey');
   const whiteGreyAndBlack = useColorModeValue(
@@ -34,6 +38,7 @@ function Color() {
     lightAndPrimary,
     greyAndWhite,
     blackAndWhite2,
+    greyAndWhite2,
   };
 }
 

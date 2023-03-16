@@ -1,16 +1,16 @@
-import { Form, Formik, FormikHelpers } from 'formik';
-import { useRouter } from 'next/router';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
+import {Form, Formik, FormikHelpers} from 'formik';
+import {useRouter} from 'next/router';
+import {ChangeEvent, useEffect, useRef, useState} from 'react';
+import {useAppDispatch, useAppSelector} from 'redux/app/hooks';
 import {
-	useChangePasswordMutation,
-	useUpdateProfileMutation,
+  useChangePasswordMutation,
+  useUpdateProfileMutation,
 } from 'redux/services/user.service';
-import { setUser } from 'redux/slices/authSlice';
-import { changePasswordSchema } from 'schemas/changePassword.schema';
-import { editProfileSchema } from 'schemas/editProfile.schema';
+import {setUser} from 'redux/slices/authSlice';
+import {changePasswordSchema} from 'schemas/changePassword.schema';
+import {editProfileSchema} from 'schemas/editProfile.schema';
 
-import { Box, Flex, Text, useToast, VStack } from '@chakra-ui/react';
+import {Box, Flex, Text, useToast, VStack} from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 import Uploaders from '@components/channel/Uploaders';
 
@@ -192,7 +192,7 @@ const EditProfile = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
-        validationSchema={editProfileSchema}
+        // validationSchema={editProfileSchema}
       >
         {(props) => (
           <Form>
@@ -221,7 +221,8 @@ const EditProfile = () => {
               />
               <CustumField
                 name='Username'
-                sideContent='(Username can only be changed 2 times a year)'
+                // sideContent='(Username can only be changed 2 times a year)'
+                sideContent='Edit'
                 nameValue='username'
               />
               {/* <CustumField name="Email" sideContent="Edit" nameValue="email" /> */}

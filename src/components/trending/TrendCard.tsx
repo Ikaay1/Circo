@@ -1,19 +1,19 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import {
-	Avatar,
-	Box,
-	Flex,
-	Image,
-	Text,
-	useColorModeValue,
+  Avatar,
+  Box,
+  Flex,
+  Image,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
 import Color from '@constants/color';
 
-import { contentData } from '../../constants/utils';
+import {contentData} from '../../constants/utils';
 
 function TrendCard({position, video}: {position: string; video: contentData}) {
   const router = useRouter();
@@ -43,7 +43,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
       bg='clique.white'
       display={{base: 'block', lg: 'flex'}}
     >
-      <Box w='300px' pr='40px' h={{base: '160px', lg: '100%'}}>
+      <Box w='300px' pr='40px' h={{base: '160px', lg: '177px'}}>
         <Image
           maxH={'100%'}
           h='100%'
@@ -51,6 +51,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           objectFit={'cover'}
           src={video.thumbNail}
           alt='kortyvid'
+          borderRadius='20px'
         />
       </Box>
 
@@ -131,7 +132,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           fontWeight={700}
           textTransform={'capitalize'}
           fontSize='head'
-          noOfLines={2}
+          noOfLines={1}
         >
           {video.title}
         </Text>
@@ -140,7 +141,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           fontFamily={'Poppins'}
           fontSize='smSubHead'
           color={'clique.lightGrey'}
-          noOfLines={4}
+          noOfLines={3}
         >
           {video.description}
         </Text>
