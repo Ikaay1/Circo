@@ -1,19 +1,21 @@
 import HomeLayout from 'layouts/HomeLayout';
-import { useRouter } from 'next/router';
-import React, { useCallback, useRef, useState } from 'react';
-import { useCategoryQuery } from 'redux/services/category.service';
-import { useGetContentsBySearchQuery } from 'redux/services/content.service';
+import {useRouter} from 'next/router';
+import React, {useCallback, useRef, useState} from 'react';
+import {useCategoryQuery} from 'redux/services/category.service';
+import {useGetContentsBySearchQuery} from 'redux/services/content.service';
 
-import { Box, Divider, Flex } from '@chakra-ui/react';
+import {Box, Divider, Flex} from '@chakra-ui/react';
 import EmptyState from '@components/emptyState/EmptyState';
 import CliqueLoader from '@components/home/CliqueLoader';
 import LiveEvents from '@components/home/LiveEvents';
 import LiveTopCard from '@components/home/LiveTopCard';
+import RecentSearches from '@components/home/RecentSearches';
 import TagSection from '@components/home/TagSection';
+import UserSearchResult from '@components/home/UserSearchResult';
 import VideoGrid from '@components/home/VideoGrid';
 import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
 import SideMenu from '@components/widgets/sideMenu';
-import { scrollBarStyle3 } from '@constants/utils';
+import {scrollBarStyle3} from '@constants/utils';
 
 import useGetContents from '../../hooks/useGetContents';
 
@@ -80,6 +82,9 @@ function Search() {
                   setPage={setPage}
                 />
                 <Divider />
+
+                <RecentSearches />
+                <UserSearchResult />
 
                 {
                   <>

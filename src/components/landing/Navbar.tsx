@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { Dispatch, SetStateAction } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
+import {useRouter} from 'next/router';
+import React, {Dispatch, SetStateAction} from 'react';
+import {AiOutlineMenu} from 'react-icons/ai';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import {Box, Image, Text} from '@chakra-ui/react';
 
 const Navbar = ({
   setShowSideBar,
@@ -23,13 +23,13 @@ const Navbar = ({
         >
           <Image alt='circo logo' w='100px' src='/assets/Circo-Logo.png' />
         </Box>
-        <Text
+        {/* <Text
           display={{base: 'none', lg: 'block'}}
           letterSpacing='0.5px'
           color='clique.white'
         >
           <a href='#exclusive'>About</a>
-        </Text>
+        </Text> */}
       </Box>
       <Box display={{base: 'none', lg: 'flex'}} alignItems='center'>
         <Text letterSpacing='0.5px' color='clique.white'>
