@@ -4,19 +4,28 @@ import moment from "moment";
 
 function EventsCard({ onOpen, event }: any) {
   return (
-    <Box onClick={onOpen} cursor="pointer" p="10px">
-      <Image
-        w="100%"
-        src={event?.eventId?.thumbNails[0]}
-        borderTopRadius={"10px"}
-        alt="burnaboys event"
-      />
+    <Box
+      onClick={onOpen}
+      cursor="pointer"
+      maxH={"298px"}
+      minH={"298px"}
+      bg={`url(${event?.eventId?.thumbNails[0]})`}
+      bgSize="cover"
+      bgPos="center"
+      bgRepeat="no-repeat"
+      borderRadius={"10px"}
+      position={"relative"}
+      mt="10px"
+    >
       <Flex
+        position={"absolute"}
+        bottom={0}
+        w={"100%"}
         px="10px"
         py="10px"
         alignItems={"center"}
         justifyContent={"space-between"}
-        borderBottomRadius={"10px"}
+        rounded={"10px"}
         backdropFilter={"blur(8.62963px)"}
         bg="linear-gradient(151.47deg, rgba(0, 0, 0, 0.71) -17.86%, rgba(186, 159, 0, 0.56) 217.73%)"
       >
