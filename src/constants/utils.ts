@@ -1,16 +1,16 @@
 import axios from 'axios';
 import {
-	CategoryScale,
-	Chart as ChartJS,
-	Legend,
-	LinearScale,
-	LineElement,
-	PointElement,
-	Title,
-	Tooltip,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
 } from 'chart.js';
 import CryptoJS from 'crypto-js';
-import { store } from 'redux/app/store';
+import {store} from 'redux/app/store';
 
 import AccountIcon from '@icons/AccountIcon';
 import ChannelIcon from '@icons/ChannelIcon';
@@ -34,7 +34,7 @@ import VideoContent from '@icons/VideoContent';
 import WalletIcon from '@icons/WalletIcon';
 
 import AnalyticsIcon from '../assets/icons/AnalyticsIcon';
-import { MenuData } from './interface';
+import {MenuData} from './interface';
 
 export const loginInputData: (
   | {
@@ -876,6 +876,10 @@ export default interface replyInterface {
     firstName: string;
     lastName: string;
     _id: string;
+    channel_id: {
+      name: string;
+      photo: string;
+    };
   };
   likes: string[];
   dislikes: string[];
@@ -891,6 +895,10 @@ export default interface commentInterface {
     firstName: string;
     lastName: string;
     _id: string;
+    channel_id: {
+      name: string;
+      photo: string;
+    };
   };
   comment: {
     comment: string;

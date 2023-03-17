@@ -1,23 +1,23 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { BiDislike, BiLike } from 'react-icons/bi';
-import { VscReport } from 'react-icons/vsc';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
+import {BiDislike, BiLike} from 'react-icons/bi';
+import {VscReport} from 'react-icons/vsc';
+import {useAppSelector} from 'redux/app/hooks';
 import {
-	useDeleteReplyMutation,
-	useDislikeReplyMutation,
-	useLikeReplyMutation,
+  useDeleteReplyMutation,
+  useDislikeReplyMutation,
+  useLikeReplyMutation,
 } from 'redux/services/content.service';
 
 import {
-	Box,
-	Flex,
-	Icon,
-	Spinner,
-	Text,
-	useColorModeValue,
-	useDisclosure,
+  Box,
+  Flex,
+  Icon,
+  Spinner,
+  Text,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
@@ -80,8 +80,8 @@ function EachReply({
         }
       >
         <AvataWithSpace
-          name={reply?.replierId?.firstName + ' ' + reply?.replierId?.lastName}
-          url={reply?.replierId?.photo}
+          name={reply?.replierId?.channel_id?.name}
+          url={reply?.replierId?.channel_id?.photo}
           size='40px'
           borderThickness='2px'
           borderColor='clique.base'
@@ -189,7 +189,6 @@ function EachReply({
               onClick={() => {
                 onOpen();
               }}
-              bg='clique.black'
               px='2px'
               borderRadius={'5px'}
             >

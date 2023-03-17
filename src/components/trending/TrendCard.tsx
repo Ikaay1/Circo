@@ -36,19 +36,19 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
       }}
       alignItems={'center'}
       justifyContent={'center'}
-      gap={{lg: '0 2.5rem', xl: '0 4rem'}}
+      gap={{lg: '0 1.5rem', xl: '0 4rem'}}
       rounded={'20px'}
       px='30px'
       py='20px'
       mt='30px'
-      h={{lg: '220px'}}
+      h={{lg: '200px', xl: '220px'}}
       bg='clique.white'
       display={{base: 'block', lg: 'flex'}}
     >
       <Box
-        width={{base: '100%', lg: '200px', xl: '300px'}}
+        width={{base: '100%', lg: '220px', xl: '300px'}}
         // mr='40px'
-        h={{base: '160px', lg: '177px'}}
+        h={{base: '160px', lg: '130px', xl: '177px'}}
       >
         <Image
           maxH={'100%'}
@@ -61,7 +61,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
         />
       </Box>
 
-      <Box w={{lg: '189px', xl: '289px'}} mt={{base: '.6rem', lg: 0}}>
+      <Box w={{lg: '190px', xl: '289px'}} mt={{base: '.6rem', lg: 0}}>
         <Flex>
           {video?.channel_id?.photo ? (
             <AvataWithSpace
@@ -94,7 +94,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
             </Text>
             <Flex mt='5px' alignItems={'center'}>
               <Text
-                noOfLines={2}
+                noOfLines={1}
                 color={'clique.lightGrey'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
@@ -118,7 +118,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
                   rounded: 'full',
                 }}
                 pl='10px'
-                noOfLines={2}
+                noOfLines={1}
                 color={'clique.lightGrey'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
