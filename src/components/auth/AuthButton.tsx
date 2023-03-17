@@ -18,7 +18,9 @@ const AuthButton = ({
   return (
     <Button
       type="submit"
-      background={bg ? bg : "clique.purple"}
+      background={
+        bg ? bg : "linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)"
+      }
       borderRadius="50px"
       width={w ? w : "100%;"}
       height={h ? h : "55px;"}

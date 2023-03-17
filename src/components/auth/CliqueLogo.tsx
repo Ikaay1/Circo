@@ -11,7 +11,7 @@ export const CliqueLogo = () => {
     <Box
       w={{base: '70px', lg: '200px'}}
       cursor={'pointer'}
-      onClick={() => router.push('/login')}
+      onClick={() => router.push('/')}
       maxW={{base: '70px', lg: '200px'}}
       minW={{base: '70px', lg: '200px'}}
       position={'fixed'}
