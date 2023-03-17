@@ -106,7 +106,7 @@ function HoverCard({
             color={"clique.darkGrey"}
             fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={"14px"}
+            fontSize={"smSubHead"}
             lineHeight={"1.2"}
           >
             @{video?.channel_id?.name ?? "Not Available"}
@@ -117,7 +117,7 @@ function HoverCard({
               color={"clique.darkGrey"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"14px"}
+              fontSize={"sm"}
               lineHeight={"1.2"}
               mr="10px"
             >
@@ -141,7 +141,7 @@ function HoverCard({
               color={"clique.darkGrey"}
               fontFamily={"Poppins"}
               fontWeight={400}
-              fontSize={"14px"}
+              fontSize={"sm"}
               lineHeight={"1.2"}
             >
               {moment(video?.createdAt).fromNow()}
