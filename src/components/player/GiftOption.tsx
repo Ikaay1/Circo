@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {Box, Flex, Image, Text} from '@chakra-ui/react';
+import Color from '@constants/color';
 
 function GiftOption({props, id, title, price, icon}: any) {
   return (
@@ -11,7 +12,7 @@ function GiftOption({props, id, title, price, icon}: any) {
         props.setFieldValue('selected', price);
       }}
       cursor={'pointer'}
-      bg='clique.blackGrey'
+      bg={Color().whiteAndBlackGrey}
       p='10px'
     >
       <CustomCheckBox
@@ -19,8 +20,8 @@ function GiftOption({props, id, title, price, icon}: any) {
       />
 
       <Image mx='20px' py='5px' w='30px' src={icon} alt='svg for gift types' />
-      <Text fontFamily={'Poppins'} color='clique.white'>
-        {title}
+      <Text fontFamily={'Poppins'} color={Color().blackAndPureWhite}>
+        {title}{' '}
         <Text as='span' color='clique.text'>
           (₦{price})
         </Text>

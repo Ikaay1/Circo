@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useSubscribeMutation } from 'redux/services/user.service';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
+import {useSubscribeMutation} from 'redux/services/user.service';
 
-import { Avatar, Box, Button, Flex, Text, WrapItem } from '@chakra-ui/react';
+import {Avatar, Box, Button, Flex, Text, WrapItem} from '@chakra-ui/react';
 import Color from '@constants/color';
 
-import { contentData } from '../../constants/utils';
+import {contentData} from '../../constants/utils';
 
 function VideoDetails({
   video,
@@ -52,7 +52,7 @@ function VideoDetails({
                 name={
                   video.uploader_id.firstName + ' ' + video.uploader_id.lastName
                 }
-                src={video.uploader_id.photo}
+                src={video?.channel_id?.photo}
                 cursor='pointer'
                 onClick={
                   video.uploader_id._id === userProfile._id
@@ -88,7 +88,11 @@ function VideoDetails({
               } ${
                 video.uploader_id.lastName[0].toUpperCase() +
                 video.uploader_id.lastName.slice(1)
-              }`}
+              }`}{' '}
+              <Box
+                as='span'
+                fontSize='sm'
+              >{`(${video?.channel_id?.name})`}</Box>
             </Text>
             <Text
               mt='5px'

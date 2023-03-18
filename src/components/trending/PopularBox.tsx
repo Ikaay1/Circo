@@ -1,16 +1,16 @@
 import React from 'react';
-import { useGetSearchHistoryQuery } from 'redux/services/content.service';
-import { useGetPopularCreatorsQuery } from 'redux/services/user.service';
+import {useGetSearchHistoryQuery} from 'redux/services/content.service';
+import {useGetPopularCreatorsQuery} from 'redux/services/user.service';
 
 import {
-	Box,
-	SimpleGrid,
-	Skeleton,
-	SkeletonCircle,
-	Text,
+  Box,
+  SimpleGrid,
+  Skeleton,
+  SkeletonCircle,
+  Text,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
-import { purpleBoxStyle } from '@constants/utils';
+import {purpleBoxStyle} from '@constants/utils';
 
 import SearchInterface from '../../constants/interface';
 import CreatorAvatarBox from './CreatorAvatarBox';
@@ -111,7 +111,10 @@ function PopularBox() {
             {searchData?.data?.preference?.search.map(
               (searchWord: SearchInterface) => (
                 <Box key={searchWord._id}>
-                  <SearchProgressBar searchWord={searchWord} />
+                  <SearchProgressBar
+                    highest={searchData?.data?.preference?.search[0]?.count}
+                    searchWord={searchWord}
+                  />
                 </Box>
               ),
             )}
