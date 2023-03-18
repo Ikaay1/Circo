@@ -141,7 +141,7 @@ const Signup = () => {
                   type={"text"}
                   required={true}
                   placeholder="Firstname"
-                  backgroundColor={Color().greyAndWhite}
+                  backgroundColor={Color().greyAndPureWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
 
@@ -156,7 +156,7 @@ const Signup = () => {
                   }}
                   h="60px"
                   borderWidth={"1px"}
-                  borderColor={Color().greyAndWhite}
+                  borderColor={Color().greyAndPureWhite}
                   _focus={{
                     boxShadow: "none",
                     border: "none",
@@ -205,7 +205,7 @@ const Signup = () => {
                   required={true}
                   placeholder="Lastname"
                   color={Color().blackAndWhite}
-                  backgroundColor={Color().greyAndWhite}
+                  backgroundColor={Color().greyAndPureWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
                     fontSize:
@@ -220,7 +220,7 @@ const Signup = () => {
                   borderRadius="12px"
                   borderWidth={"1px"}
                   h="60px"
-                  borderColor={Color().greyAndWhite}
+                  borderColor={Color().greyAndPureWhite}
                   onFocus={() => setIsLastNameFocused(true)}
                   onBlur={() => setIsLastNameFocused(false)}
                 />
