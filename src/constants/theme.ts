@@ -121,6 +121,8 @@ const fontSizes = {
   big2: '48px',
   //18px
   sm2: '18px',
+  //17px
+  seventeen: '17px',
   //40px
   big3: '40px',
   //6.5px
