@@ -105,3 +105,4 @@ const Referral = () => {
 };
 
 export default Referral;
+export { getServerSideProps } from "../components/widgets/Chakara";

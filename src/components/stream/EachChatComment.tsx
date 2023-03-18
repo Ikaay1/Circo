@@ -140,7 +140,7 @@ function EachChatComment({ comment }: { comment: any }) {
             </Flex>
           </Box>
         </Flex>
-        <Flex>
+        {/* <Flex>
           {comment?.replies?.length > 0 && (
             <>
               <Text
@@ -169,7 +169,7 @@ function EachChatComment({ comment }: { comment: any }) {
           >
             Reply
           </Text>
-        </Flex>
+        </Flex> */}
       </Box>{" "}
       {show && (
         <Box mt=".5rem">

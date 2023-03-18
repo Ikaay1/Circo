@@ -329,3 +329,4 @@ const Signup = () => {
 };
 
 export default Signup;
+export { getServerSideProps } from "../components/widgets/Chakara";

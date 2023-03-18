@@ -129,3 +129,4 @@ function Wallet({}: Props) {
 }
 
 export default Wallet;
+export { getServerSideProps } from "../components/widgets/Chakara";

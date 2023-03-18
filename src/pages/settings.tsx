@@ -84,3 +84,4 @@ const Settings = () => {
 };
 
 export default Settings;
+export { getServerSideProps } from "../components/widgets/Chakara";
