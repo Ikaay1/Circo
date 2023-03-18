@@ -85,7 +85,7 @@ function MyApp({ Component, pageProps }: any) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Chakra cookies={pageProps.cookies}>
+        <Chakra cookies={pageProps.cookies} theme={theme}>
           <GoogleOAuthProvider
             // clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
             clientId="75252957257-5i6nhuvt2643qo64oo76vg3a9ba4sp5g.apps.googleusercontent.com"
@@ -105,4 +105,3 @@ function MyApp({ Component, pageProps }: any) {
 }
 
 export default MyApp;
-export { getServerSideProps } from "../components/widgets/Chakara";

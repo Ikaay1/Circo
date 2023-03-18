@@ -159,3 +159,4 @@ const Login = () => {
 };
 
 export default Login;
+export { getServerSideProps } from "../components/widgets/Chakara";

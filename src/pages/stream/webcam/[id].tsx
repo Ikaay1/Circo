@@ -89,16 +89,8 @@ function Index() {
     useGetStreamQuery(livestreamId);
 
   useEffect(() => {
-    if (data?.data?.stream && data?.data?.stream?.status === "ended") {
-      router.back();
-
-      toast({
-        title: "Stream " + data?.data?.stream?.status,
-        status: "info",
-        duration: 5000,
-        isClosable: true,
-        position: "top-right",
-      });
+    if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
+      router.push("/golive");
 
       return;
     }
@@ -181,3 +173,4 @@ function Index() {
 }
 
 export default Index;
+export { getServerSideProps } from "../../../components/widgets/Chakara";

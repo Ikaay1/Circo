@@ -23,3 +23,4 @@ function Upload({}: Props) {
 }
 
 export default Upload;
+export { getServerSideProps } from "../components/widgets/Chakara";

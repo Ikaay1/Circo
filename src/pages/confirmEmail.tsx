@@ -91,3 +91,4 @@ const ConfirmEmail = () => {
 };
 
 export default ConfirmEmail;
+export { getServerSideProps } from "../components/widgets/Chakara";
