@@ -135,10 +135,10 @@ const SubscribeChannel = () => {
       isSubOnClose();
       setState("Subscribed");
       window.location.reload();
-    } else if (res.error) {
+    } else if (res.error?.data?.message) {
       toast({
-        title: res.error.data.message,
-        status: "error",
+        title: res.error?.data?.message,
+        status: 'error',
         duration: 3000,
         isClosable: true,
         position: "top-right",
