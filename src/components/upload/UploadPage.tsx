@@ -12,6 +12,7 @@ import {
   Grid,
   GridItem,
   Icon,
+  Image,
   Input,
   Link,
   Select,
@@ -107,9 +108,17 @@ function UploadPage({url, name}: Props) {
           <Text fontSize={'smHead'} mb='5'>
             Your video preview
           </Text>
-          <Box borderRadius={'10px'} overflow='hidden'>
-            <video width='100%' height={'60px'} src={url} />
-          </Box>
+          {thumbNail && typeof thumbNail !== 'string' ? (
+            <Box borderRadius={'10px'} overflow='hidden'>
+              <Image
+                width='100%'
+                height={'140px'}
+                src={`${URL.createObjectURL(thumbNail as Blob)}`}
+                alt='thumbnail'
+                objectFit={'cover'}
+              />
+            </Box>
+          ) : null}
           <Text fontWeight={600} fontSize='smSubHead' mb='3' mt='4'>
             {state.title}
           </Text>
@@ -207,7 +216,7 @@ function UploadPage({url, name}: Props) {
                     <Select
                       placeholder={each.placeholder}
                       bg={valueC}
-                      borderColor='clique.secondaryGrey1'
+                      // borderColor='clique.secondaryGrey1'
                       size='md'
                       height={'40px'}
                       onChange={(e) =>
@@ -303,12 +312,14 @@ function UploadPage({url, name}: Props) {
               </Box>
             </Box>
           </Box>
-          <Btn
-            text='Upload'
-            submit={true}
-            isLoading={createContentStatus.isLoading}
-            mt='2rem'
-          />
+          <Flex justifyContent={'center'} mt='2rem'>
+            <Btn
+              text='Upload'
+              submit={true}
+              isLoading={createContentStatus.isLoading}
+              w='300px'
+            />
+          </Flex>
         </Flex>
       </Flex>
     </form>
