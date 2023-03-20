@@ -82,7 +82,7 @@ function GiftModal({
                 }
                 const res: any = await giftUser({
                   amount: Number(values.selected),
-                  description: 'Payment for gifting',
+                  description: 'Gift',
                   receiversId: video.uploader_id._id,
                 });
                 if ('data' in res) {

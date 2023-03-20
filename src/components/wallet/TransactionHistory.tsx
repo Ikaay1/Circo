@@ -1,11 +1,11 @@
-import moment from 'moment';
+import moment from "moment";
 
-import { Box, Divider, Flex, Icon, Text, VStack } from '@chakra-ui/react';
-import Color from '@constants/color';
-import { ReceiptInfo } from '@constants/interface';
-import SortIcon from '@icons/SortIcon';
+import { Box, Divider, Flex, Icon, Text, VStack } from "@chakra-ui/react";
+import Color from "@constants/color";
+import { ReceiptInfo } from "@constants/interface";
+import SortIcon from "@icons/SortIcon";
 
-import HistoryCard from './HistoryCard';
+import HistoryCard from "./HistoryCard";
 
 type Props = {
   onClick: () => void;
@@ -15,28 +15,37 @@ type Props = {
 };
 
 const TransactionHistory = (props: Props) => {
-  const {transactionHistory, walletData} = props;
+  const { transactionHistory, walletData } = props;
   return (
-    <Box bg={Color().whiteAndBlack} borderRadius='xl' p='5'>
-      <Flex justifyContent={'space-between'} pb='4'>
-        <Text fontSize={'subHead'}>Recent Transaction History</Text>
-        <Icon as={SortIcon} onClick={props.onClick} sx={{cursor: 'pointer'}} />
+    <Box bg={Color().whiteAndBlack} borderRadius="xl" p="5">
+      <Flex justifyContent={"space-between"} pb="4">
+        <Text fontSize={"subHead"}>Recent Transaction History</Text>
+        <Icon
+          as={SortIcon}
+          onClick={props.onClick}
+          sx={{ cursor: "pointer" }}
+        />
       </Flex>
-      <Divider mb='2'></Divider>
-      <VStack spacing={1} align='stretch'>
+      <Divider mb="2"></Divider>
+      <VStack spacing={1} align="stretch">
         {transactionHistory?.length ? (
           transactionHistory?.map((each: any) => {
             const info: ReceiptInfo = {
               name:
-                each.type === 'deposit'
-                  ? each.recipient
-                  : each.type === 'transferIn'
+                each.type === "deposit"
+                  ? each.sender
+                  : each.type === "transferIn" ||
+                    each.type === "transferInLive" ||
+                    each.type === "transferInGift"
                   ? each.sender
                   : each.recipient,
               from:
-                each.type === 'deposit' || each.type === 'transferIn'
-                  ? 'From'
-                  : 'To',
+                each.type === "deposit" ||
+                each.type === "transferIn" ||
+                each.type === "transferInLive" ||
+                each.type === "transferInGift"
+                  ? "From"
+                  : "To",
               duration: moment(each.date).fromNow(),
               date: each.date.slice(0, 10),
               reference: each.reference,
@@ -44,10 +53,14 @@ const TransactionHistory = (props: Props) => {
             };
             return (
               <HistoryCard
+                item={each}
                 key={each._reference}
                 amount={each.amount}
                 credit={
-                  each.type === 'deposit' || each.type === 'transferIn'
+                  each.type === "deposit" ||
+                  each.type === "transferIn" ||
+                  each.type === "transferInLive" ||
+                  each.type === "transferInGift"
                     ? true
                     : false
                 }
@@ -59,21 +72,21 @@ const TransactionHistory = (props: Props) => {
         ) : walletData?.transaction_history?.length &&
           !transactionHistory?.length ? (
           <Text
-            mt='2.5rem'
-            textAlign={'center'}
-            color='clique.purple'
+            mt="2.5rem"
+            textAlign={"center"}
+            color="clique.purple"
             opacity={0.9}
-            fontWeight={'bold'}
+            fontWeight={"bold"}
           >
             You don&apos;t have any transaction history within this range
           </Text>
         ) : (
           <Text
-            mt='2.5rem'
-            textAlign={'center'}
-            color='clique.purple'
+            mt="2.5rem"
+            textAlign={"center"}
+            color="clique.purple"
             opacity={0.9}
-            fontWeight={'bold'}
+            fontWeight={"bold"}
           >
             You don&apos;t have any transaction history yet
           </Text>

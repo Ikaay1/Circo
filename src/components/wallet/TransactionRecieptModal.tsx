@@ -66,6 +66,7 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
                 fontSize='xsl'
               >
                 {info?.from}
+                
               </Text>
 
               <Text
