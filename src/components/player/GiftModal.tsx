@@ -60,7 +60,7 @@ function GiftModal({
             lineHeight={'1'}
             textAlign='center'
           >
-            Select a Clique gift for{' '}
+            Select a Circo gift for{' '}
             <Text as='span' color='clique.base'>
               {video?.channel_id?.name}
             </Text>
