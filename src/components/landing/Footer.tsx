@@ -34,6 +34,9 @@ const Footer = () => {
         isClosable: true,
         position: 'top-right',
       });
+      setReason('');
+      setEmail('');
+      setName('');
     } else {
       console.log(res?.error);
       toast({

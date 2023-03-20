@@ -115,6 +115,8 @@ const fontSizes = {
   xs: '0.5rem',
   //12px
   sm: '12px',
+  //12px
+  sm4: '13px',
   //36px
   medium: '36px',
   //48px

@@ -98,7 +98,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
                 color={'clique.lightGrey'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={'smSubHead'}
+                fontSize={{lg: 'sm3', xl: 'smSubHead'}}
                 lineHeight={'1.2'}
                 mr='10px'
               >
@@ -122,7 +122,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
                 color={'clique.lightGrey'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={'smSubHead'}
+                fontSize={{lg: 'sm3', xl: 'smSubHead'}}
                 lineHeight={'1.2'}
               >
                 {moment(video?.createdAt).fromNow()}
@@ -137,7 +137,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           fontFamily={'Poppins'}
           fontWeight={700}
           textTransform={'capitalize'}
-          fontSize='head'
+          fontSize={{lg: 'smHead', xl: 'head'}}
           noOfLines={1}
         >
           {video.title}
@@ -145,7 +145,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
 
         <Text
           fontFamily={'Poppins'}
-          fontSize='smSubHead'
+          fontSize={{lg: 'sm4', xl: 'smSubHead'}}
           color={'clique.lightGrey'}
           noOfLines={3}
         >
