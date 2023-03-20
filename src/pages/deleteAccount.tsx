@@ -93,7 +93,7 @@ const DeleteAccount = () => {
   };
 
   return (
-    <Box px='2rem' py='1.5rem'>
+    <Box px={{base: '1rem', lg: '2rem'}} py='1.5rem'>
       <Link href='/home'>
         <Image
           src='/assets/circo-web.png'
@@ -104,7 +104,7 @@ const DeleteAccount = () => {
         />
       </Link>
 
-      <Box width='550px' mx='auto' mt='4rem'>
+      <Box width={{base: '100%', lg: '550px'}} mx='auto' mt='4rem'>
         <Text
           fontFamily='Poppins'
           fontStyle='normal'
@@ -141,8 +141,8 @@ const DeleteAccount = () => {
                       isInvalid={errors[field.name] && touched[field.name]}
                     >
                       <Textarea
-                        width='550px'
-                        height='204px'
+                        width={{base: '100%', lg: '550px'}}
+                        height={{base: '170px', lg: '204px'}}
                         background='#F1F1F1'
                         borderRadius='15px'
                         placeholder='Reason for deletion'
@@ -173,8 +173,8 @@ const DeleteAccount = () => {
                         isInvalid={errors[field.name] && touched[field.name]}
                       >
                         <Input
-                          width='550px'
-                          height='80px'
+                          width={{base: '100%', lg: '550px'}}
+                          height={{base: '55px', lg: '80px'}}
                           background='#F1F1F1'
                           borderRadius='15px'
                           placeholder='Email'
@@ -208,8 +208,8 @@ const DeleteAccount = () => {
                         isInvalid={errors[field.name] && touched[field.name]}
                       >
                         <Input
-                          width='550px'
-                          height='80px'
+                          width={{base: '100%', lg: '550px'}}
+                          height={{base: '55px', lg: '80px'}}
                           background='#F1F1F1'
                           borderRadius='15px'
                           placeholder='Password'
@@ -257,8 +257,8 @@ const DeleteAccount = () => {
                   delete your account
                 </Text>
                 <Button
-                  width='550px'
-                  height='80px'
+                  width={{base: '100%', lg: '550px'}}
+                  height={{base: '55px', lg: '80px'}}
                   background='clique.dangerRed'
                   borderRadius='50px'
                   mt='.7rem'
