@@ -107,9 +107,9 @@ const Bio = ({
             {router.asPath !== '/channel/1/content' && date && (
               <Text
                 w='190px'
-                textAlign={'right'}
+                textAlign={'center'}
                 fontSize={'smSubHead'}
-                color={'clique.secondaryRed'}
+                color={Number(date) > 5 ? 'clique.base' : 'clique.seconDaryRed'}
                 mt='.4rem'
                 ml='auto'
               >
