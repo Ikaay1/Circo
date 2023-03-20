@@ -144,7 +144,7 @@ function EventModal({ event }: any) {
                     } else {
                       const res: any = await payForLive({
                         eventId: event?.eventId?._id,
-                        description: `Payment for live event with id ${event?.eventId?._id}`,
+                        description: `Payment for live event w ${event?.eventId?.title}`,
                         amount: event?.eventId?.fee,
                         receiversId: event?.streamerId?._id,
                       });
