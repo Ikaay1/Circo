@@ -25,6 +25,7 @@ function LiveEvents() {
     <Box
       display={{ base: "none", md: "block" }}
       w="250px"
+      px="10px"
       maxW="250px"
       minW="250px"
       bg={Color().whiteAndBlack}

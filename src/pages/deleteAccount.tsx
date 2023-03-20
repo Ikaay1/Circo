@@ -286,3 +286,4 @@ const DeleteAccount = () => {
 };
 
 export default DeleteAccount;
+export { getServerSideProps } from "../components/widgets/Chakara";

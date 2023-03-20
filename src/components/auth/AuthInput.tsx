@@ -54,7 +54,7 @@ const AuthInput = ({
           required={referral ? false : true}
           placeholder={name}
           color={Color().blackAndWhite}
-          backgroundColor={Color().greyAndWhite}
+          backgroundColor={Color().greyAndPureWhite}
           _placeholder={{
             color: Color().blackAndWhite,
             fontSize: isFocused || theState !== "" ? "sm3" : "1rem",
@@ -66,16 +66,16 @@ const AuthInput = ({
                 : "translateY(0%); ",
           }}
           borderWidth={"1px"}
-          borderColor={Color().greyAndWhite}
+          borderColor={Color().greyAndPureWhite}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
       ) : (
         <Select
           value={ageRange}
-          bg={Color().greyAndWhite2}
+          bg={Color().greyAndPureWhite}
           borderWidth={"1px"}
-          borderColor={Color().greyAndWhite}
+          borderColor={Color().greyAndPureWhite}
           borderRadius="12px"
           //   pl="1.3rem"
           _focus={{ boxShadow: "none" }}
