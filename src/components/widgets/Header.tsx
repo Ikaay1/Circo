@@ -73,7 +73,7 @@ function Header({upload}: Props) {
 
   const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      if (search) {
+      if (search?.length) {
         router.push(`/search/${search}`);
       }
     }
@@ -146,10 +146,16 @@ function Header({upload}: Props) {
             _focus={{
               boxShadow: 'none',
               border: ' 3px solid ',
-              borderColor: 'clique.inputBorder',
+              borderColor: useColorModeValue(
+                'clique.secondaryGrey5',
+                ' clique.inputBorder',
+              ),
             }}
-            border={' 3px solid '}
-            borderColor={'clique.inputBorder'}
+            border={' 2px solid '}
+            borderColor={useColorModeValue(
+              'clique.secondaryGrey5',
+              ' clique.inputBorder',
+            )}
             rounded='full'
             type='text'
             fontFamily={'Poppins'}

@@ -1,7 +1,8 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
+import {useVerifyAuthOtpMutation} from 'redux/services/auth.service';
 
-import { Box } from '@chakra-ui/react';
+import {Box, useToast} from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import AuthInput from '@components/auth/AuthInput';
 import CliqueLogo from '@components/auth/CliqueLogo';
@@ -11,6 +12,8 @@ import Color from '@constants/color';
 
 const Referral = () => {
   const [otp, setOtp] = useState('');
+  const [verifyOtp, veriftOtpStatus] = useVerifyAuthOtpMutation();
+  const toast = useToast();
 
   const router = useRouter();
 
@@ -18,16 +21,51 @@ const Referral = () => {
     e.preventDefault();
     const allData = JSON.parse(localStorage.getItem('userData')!);
     const hashedOtp = JSON.parse(localStorage.getItem('hashedOtp')!);
-    const userData = {
-      ...allData,
+    const res: any = await verifyOtp({
       otp_code: otp.trim(),
       otp_hash: `${hashedOtp}`,
-      social: 'NULL',
-    };
-    localStorage.setItem('userData', JSON.stringify(userData));
-    localStorage.removeItem('hashedOtp');
-    router.push('/interests');
+    });
+    if ('data' in res) {
+      const userData = {
+        ...allData,
+        otp_code: otp.trim(),
+        otp_hash: `${hashedOtp}`,
+        social: 'NULL',
+      };
+      localStorage.setItem('userData', JSON.stringify(userData));
+      localStorage.removeItem('hashedOtp');
+      router.push('/interests');
+    } else {
+      toast({
+        title: 'Error',
+        //@ts-ignore
+        description: res?.error?.data?.errors?.otp_code
+          ? res?.error?.data?.errors?.otp_code
+          : res?.error?.data?.message
+          ? res?.error?.data?.message
+          : 'Something went wrong, please try again ',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    }
   };
+
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem('hashedOtp')!)) {
+      toast({
+        title: 'Error',
+        //@ts-ignore
+        description: 'Please sign up with your details first',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      router.push('/signup');
+    }
+  }, []);
 
   return (
     <Box
@@ -54,7 +92,11 @@ const Referral = () => {
             <Box position='relative' height='57px' marginTop={'.5rem'}>
               <AuthInput name={'OTP'} theState={otp} setTheState={setOtp} />
             </Box>
-            <AuthButton {...{marginTop: '6.5rem'}} name='Next' />
+            <AuthButton
+              status={veriftOtpStatus}
+              {...{marginTop: '6.5rem'}}
+              name='Next'
+            />
           </form>
         </Box>
       </Box>
@@ -63,3 +105,4 @@ const Referral = () => {
 };
 
 export default Referral;
+export { getServerSideProps } from "../components/widgets/Chakara";

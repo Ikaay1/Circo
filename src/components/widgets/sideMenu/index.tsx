@@ -134,17 +134,23 @@ function Index() {
         cursor={'pointer'}
         justifyContent={'center'}
         alignItems='center'
+        color={useColorModeValue('clique.black', 'clique.fadeOut')}
       >
         <Text
-          mr='10px'
+          mr='5px'
           fontFamily={'Poppins'}
-          fontWeight={400}
+          fontWeight={500}
           textTransform={'capitalize'}
-          fontSize={'smSubHead'}
+          fontSize={'sm'}
         >
           logout
         </Text>
-        <Icon fontSize={'head'} as={HiOutlineLogout} />
+        <Icon
+          fontSize={'smHead'}
+          width={'24px'}
+          height={'24px'}
+          as={HiOutlineLogout}
+        />
       </Flex>
     </Box>
   );

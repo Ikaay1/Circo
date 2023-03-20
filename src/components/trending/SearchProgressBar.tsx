@@ -1,10 +1,16 @@
 import React from 'react';
 
-import { Box, Flex, Progress, Text } from '@chakra-ui/react';
+import {Box, Flex, Progress, Text} from '@chakra-ui/react';
 
 import SearchInterface from '../../constants/interface';
 
-function SearchProgressBar({searchWord}: {searchWord: SearchInterface}) {
+function SearchProgressBar({
+  searchWord,
+  highest,
+}: {
+  searchWord: SearchInterface;
+  highest: string;
+}) {
   return (
     <Box mb='15px'>
       <Flex justifyContent={'space-between'}>
@@ -20,7 +26,7 @@ function SearchProgressBar({searchWord}: {searchWord: SearchInterface}) {
         colorScheme='yellow'
         size={'sm'}
         rounded={'full'}
-        value={50}
+        value={(searchWord.count / Number(highest)) * 100}
         color='red'
         background='clique.progressBg'
         sx={{

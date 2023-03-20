@@ -24,12 +24,10 @@ function TagSection({
       px={{ base: "10px", lg: "0px" }}
       // position={'sticky'}
       top="0"
-      // bg='clique.primaryBg'
       alignItems={"center"}
       maxW="100%"
       overflowX={"auto"}
       sx={scrollBarStyle4}
-      bg={Color().whiteAndBlack}
     >
       <Button
         variant="ghost"
@@ -57,7 +55,7 @@ function TagSection({
           bg={
             categoryId === eachCategory._id
               ? "clique.base"
-              : Color().blackAndWhiteGrey
+              : Color().greyAndPureWhite
           }
           fontFamily={"Poppins"}
           size={"sm"}

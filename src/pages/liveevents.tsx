@@ -47,3 +47,4 @@ function Index() {
 }
 
 export default Index;
+export { getServerSideProps } from "../components/widgets/Chakara";

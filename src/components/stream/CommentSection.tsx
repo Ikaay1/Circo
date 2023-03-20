@@ -27,12 +27,6 @@ function CommentSection({}: {}) {
   const value = useColorModeValue("clique.white", "clique.blackGrey");
 
   useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
-
-  useEffect(() => {
     io(process.env.NEXT_PUBLIC_BASEURL!, {
       forceNew: false,
     }).on("commentchange", (data: any) => {

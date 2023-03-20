@@ -1,53 +1,68 @@
-import { Field, Form, Formik } from 'formik';
+import {Field, Form, Formik} from 'formik';
 import React from 'react';
-import { useGiftUserMutation } from 'redux/services/wallet.service';
+import {useGiftUserMutation} from 'redux/services/wallet.service';
 
 import {
-	Box,
-	Button,
-	Checkbox,
-	Flex,
-	FormControl,
-	Icon,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	Text,
-	useDisclosure,
-	useToast,
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  Icon,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
+import Color from '@constants/color';
 import CliqueGiftIcon from '@icons/CliqueGiftIcon';
 
-import { contentData } from '../../constants/utils';
+import {contentData} from '../../constants/utils';
 import GiftOption from './GiftOption';
 
-function GiftModal({video}: {video: contentData}) {
+function GiftModal({
+  video,
+  isFullScreen,
+}: {
+  video: contentData;
+  isFullScreen: boolean;
+}) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [giftUser, giftUserStatus] = useGiftUserMutation();
   const toast = useToast();
   return (
     <>
-      <Icon
-        onClick={onOpen}
-        fontSize='bigHead'
-        cursor={'pointer'}
-        color={'clique.white'}
-        as={CliqueGiftIcon}
-      />
+      {!isFullScreen && (
+        <Icon
+          onClick={onOpen}
+          fontSize='bigHead'
+          cursor={'pointer'}
+          color={'clique.white'}
+          as={CliqueGiftIcon}
+        />
+      )}
+
       <Modal size={'xl'} isOpen={isOpen} isCentered onClose={onClose}>
         <ModalOverlay />
-        <ModalContent m='0' p='40px' rounded={'20px'} bg='clique.primaryBg'>
+        <ModalContent
+          m='0'
+          p='40px'
+          rounded={'20px'}
+          bg={Color().lightAndPrimary}
+        >
           <Text
-            color={'clique.white'}
+            color={Color().blackAndPureWhite}
             fontFamily={'Poppins'}
             fontWeight={400}
             fontSize={'smSubHead'}
             lineHeight={'1'}
             textAlign='center'
           >
-            Select a Clique gift for{' '}
+            Select a Circo gift for{' '}
             <Text as='span' color='clique.base'>
-              {video?.uploader_userName}
+              {video?.channel_id?.name}
             </Text>
           </Text>
 
@@ -106,7 +121,7 @@ function GiftModal({video}: {video: contentData}) {
                     props={props}
                     title='Emerald'
                     price='1000'
-                    icon='/gift2.svg'
+                    icon='/gift3.svg'
                     id='2'
                   />
 
@@ -114,14 +129,14 @@ function GiftModal({video}: {video: contentData}) {
                     props={props}
                     title='Sopphire'
                     price='5000'
-                    icon='/gift3.svg'
+                    icon='/gift5.svg'
                     id='3'
                   />
                   <GiftOption
                     props={props}
                     title='Diamond'
                     price='10000'
-                    icon='/gift1.svg'
+                    icon='/gift6.svg'
                     id='4'
                   />
                   <Flex justifyContent={'center'}>

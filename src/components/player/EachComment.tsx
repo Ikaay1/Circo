@@ -1,24 +1,24 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { BiDislike, BiLike } from 'react-icons/bi';
-import { VscReport } from 'react-icons/vsc';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
+import {BiDislike, BiLike} from 'react-icons/bi';
+import {VscReport} from 'react-icons/vsc';
+import {useAppSelector} from 'redux/app/hooks';
 import {
-	useDeleteContentCommentMutation,
-	useDislikeContentCommentMutation,
-	useLikeContentCommentMutation,
-	useReplyCommentMutation,
+  useDeleteContentCommentMutation,
+  useDislikeContentCommentMutation,
+  useLikeContentCommentMutation,
+  useReplyCommentMutation,
 } from 'redux/services/content.service';
 
 import {
-	Box,
-	Flex,
-	Icon,
-	Spinner,
-	Text,
-	useColorModeValue,
-	useDisclosure,
+  Box,
+  Flex,
+  Icon,
+  Spinner,
+  Text,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
@@ -103,12 +103,8 @@ function EachComment({
             }
           >
             <AvataWithSpace
-              name={
-                comment?.commenterId?.firstName +
-                ' ' +
-                comment?.commenterId?.lastName
-              }
-              url={comment?.commenterId?.photo}
+              name={comment?.commenterId?.channel_id?.name}
+              url={comment?.commenterId?.channel_id?.photo}
               size='40px'
               borderThickness='2px'
               borderColor='clique.base'
@@ -230,7 +226,6 @@ function EachComment({
                   onClick={() => {
                     onOpen();
                   }}
-                  bg='clique.black'
                   px='2px'
                   borderRadius={'5px'}
                 >

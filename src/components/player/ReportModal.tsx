@@ -1,22 +1,22 @@
-import { Field, Form, Formik } from 'formik';
+import {Field, Form, Formik} from 'formik';
 import React from 'react';
-import { toast } from 'react-hot-toast';
-import { VscReport } from 'react-icons/vsc';
-import { useReportCommentMutation } from 'redux/services/content.service';
+import {toast} from 'react-hot-toast';
+import {VscReport} from 'react-icons/vsc';
+import {useReportCommentMutation} from 'redux/services/content.service';
 
 import {
-	Box,
-	Button,
-	Checkbox,
-	FormControl,
-	Icon,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	Text,
-	useColorModeValue,
-	useDisclosure,
-	useToast,
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  Icon,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
 
@@ -89,7 +89,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
             </Text>
             <Text
               mt='5px'
-              color={'clique.white'}
               fontFamily={'Poppins'}
               fontWeight={400}
               fontSize={' smSubHead'}
@@ -99,7 +98,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
             </Text>{' '}
             <Text
               mt='15px'
-              color={'clique.white'}
               fontFamily={'Poppins'}
               fontWeight={400}
               fontSize={'smSubHead'}
@@ -144,7 +142,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
                         >
                           <Checkbox {...field} mr='10px' />
                           <Text
-                            color={'clique.white'}
                             fontFamily={'Poppins'}
                             fontWeight={400}
                             fontSize={'smSubHead'}
@@ -165,7 +162,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
                         >
                           <Checkbox {...field} mr='10px' />
                           <Text
-                            color={'clique.white'}
                             fontFamily={'Poppins'}
                             fontWeight={400}
                             fontSize={'smSubHead'}
@@ -188,7 +184,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
                         >
                           <Checkbox {...field} mr='10px' />
                           <Text
-                            color={'clique.white'}
                             fontFamily={'Poppins'}
                             fontWeight={400}
                             fontSize={'smSubHead'}
@@ -211,7 +206,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
                         >
                           <Checkbox {...field} mr='10px' />
                           <Text
-                            color={'clique.white'}
                             fontFamily={'Poppins'}
                             fontWeight={400}
                             fontSize={'smSubHead'}
@@ -237,7 +231,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
                         >
                           <Checkbox {...field} mr='10px' />
                           <Text
-                            color={'clique.white'}
                             fontFamily={'Poppins'}
                             fontWeight={400}
                             fontSize={'smSubHead'}
@@ -260,7 +253,6 @@ function ReportModal({comment}: {comment: commentInterface}) {
                         >
                           <Checkbox {...field} mr='10px' />
                           <Text
-                            color={'clique.white'}
                             fontFamily={'Poppins'}
                             fontWeight={400}
                             fontSize={'smSubHead'}

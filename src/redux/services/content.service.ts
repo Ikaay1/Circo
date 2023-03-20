@@ -1,7 +1,7 @@
-import { store } from 'redux/app/store';
+import {store} from 'redux/app/store';
 
-import { baseUrl } from '@constants/utils';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {baseUrl} from '@constants/utils';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const contentApi = createApi({
   reducerPath: 'contentApi',
@@ -240,6 +240,28 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+    getUsersBySearch: builder.query<any, any>({
+      query: (search) => {
+        return {
+          url: `content/searchUser?search=${search}`,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+      },
+      providesTags: ['Content'],
+    }),
+    getUsersSearch: builder.query<any, any>({
+      query: (search) => ({
+        url: `content/userSearch?search=${search}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
 
     getDiscover: builder.query<any, any>({
       query: ({page, limit}) => ({
@@ -360,4 +382,6 @@ export const {
   useDeleteReplyMutation,
   useReplyCommentMutation,
   useSubscribeToUserChannelMutation,
+  useGetUsersBySearchQuery,
+  useGetUsersSearchQuery,
 } = contentApi;

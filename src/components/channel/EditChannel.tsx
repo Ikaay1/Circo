@@ -102,8 +102,7 @@ const EditChannel = ({ data }: { data?: Channel }) => {
       });
       setSubmitting(false);
 
-      dispatch(setChannel({payload: res.data}));
-
+      dispatch(setChannel({ payload: res.data }));
     } else if (res.error) {
       toast({
         title: res.error?.data?.message,

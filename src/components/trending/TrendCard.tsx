@@ -1,25 +1,25 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import {
-	Avatar,
-	Box,
-	Flex,
-	Image,
-	Text,
-	useColorModeValue,
+  Avatar,
+  Box,
+  Flex,
+  Image,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
 import Color from '@constants/color';
 
-import { contentData } from '../../constants/utils';
+import {contentData} from '../../constants/utils';
 
 function TrendCard({position, video}: {position: string; video: contentData}) {
   const router = useRouter();
 
   return (
-    <Flex
+    <Box
       onClick={() =>
         router.push('/player/' + video._id + '/' + video.uploader_id._id)
       }
@@ -35,31 +35,39 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
         fontWeight: 500,
       }}
       alignItems={'center'}
+      justifyContent={'center'}
+      gap={{lg: '0 1.5rem', xl: '0 4rem'}}
       rounded={'20px'}
       px='30px'
       py='20px'
       mt='30px'
-      h='220px'
+      h={{lg: '200px', xl: '220px'}}
       bg='clique.white'
+      display={{base: 'block', lg: 'flex'}}
     >
-      <Box w='300px' pr='40px' h='100%'>
+      <Box
+        width={{base: '100%', lg: '220px', xl: '300px'}}
+        // mr='40px'
+        h={{base: '160px', lg: '130px', xl: '177px'}}
+      >
         <Image
           maxH={'100%'}
           h='100%'
-          w='100%'
+          width='100%'
           objectFit={'cover'}
           src={video.thumbNail}
           alt='kortyvid'
+          borderRadius='20px'
         />
       </Box>
 
-      <Box w='50%'>
+      <Box w={{lg: '190px', xl: '289px'}} mt={{base: '.6rem', lg: 0}}>
         <Flex>
-          {video.uploader_id?.photo ? (
+          {video?.channel_id?.photo ? (
             <AvataWithSpace
               mr='10px'
               name='Prosper Otemuyiwa'
-              url={video.uploader_id.photo}
+              url={video?.channel_id.photo}
               size='45px'
               borderColor='clique.brown'
               borderThickness='3px'
@@ -82,15 +90,15 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
               color={'clique.lightGrey'}
               noOfLines={1}
             >
-              {video.uploader_id?.userName}
+              {video?.channel_id?.name}
             </Text>
             <Flex mt='5px' alignItems={'center'}>
               <Text
-                noOfLines={2}
+                noOfLines={1}
                 color={'clique.lightGrey'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={'smSubHead'}
+                fontSize={{lg: 'sm3', xl: 'smSubHead'}}
                 lineHeight={'1.2'}
                 mr='10px'
               >
@@ -110,11 +118,11 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
                   rounded: 'full',
                 }}
                 pl='10px'
-                noOfLines={2}
+                noOfLines={1}
                 color={'clique.lightGrey'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={'smSubHead'}
+                fontSize={{lg: 'sm3', xl: 'smSubHead'}}
                 lineHeight={'1.2'}
               >
                 {moment(video?.createdAt).fromNow()}
@@ -129,22 +137,22 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
           fontFamily={'Poppins'}
           fontWeight={700}
           textTransform={'capitalize'}
-          fontSize='head'
-          noOfLines={2}
+          fontSize={{lg: 'smHead', xl: 'head'}}
+          noOfLines={1}
         >
           {video.title}
         </Text>
 
         <Text
           fontFamily={'Poppins'}
-          fontSize='smSubHead'
+          fontSize={{lg: 'sm4', xl: 'smSubHead'}}
           color={'clique.lightGrey'}
-          noOfLines={4}
+          noOfLines={3}
         >
           {video.description}
         </Text>
       </Box>
-    </Flex>
+    </Box>
   );
 }
 

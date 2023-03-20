@@ -1,67 +1,79 @@
-import { store } from 'redux/app/store';
+import { store } from "redux/app/store";
 
-import { baseUrl } from '@constants/utils';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseUrl } from "@constants/utils";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const walletApi = createApi({
-  reducerPath: 'walletApi',
+  reducerPath: "walletApi",
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
-    prepareHeaders: (headers, {getState}) => {
+    prepareHeaders: (headers, { getState }) => {
       const token = store.getState()?.app?.userReducer?.token;
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ['Wallet'],
+  tagTypes: ["Wallet"],
   endpoints: (builder) => ({
     depositToWallet: builder.mutation<any, any>({
       query: (body) => ({
         url: `wallet/deposit`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Wallet'],
+      invalidatesTags: ["Wallet"],
     }),
 
     getUserWallet: builder.query<any, any>({
       query: () => ({
         url: `wallet`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Wallet'],
+      providesTags: ["Wallet"],
     }),
 
     addBeneficiary: builder.mutation<any, any>({
       query: (body) => ({
         url: `wallet/create/beneficiary`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Wallet'],
+      invalidatesTags: ["Wallet"],
     }),
 
     giftUser: builder.mutation<any, any>({
       query: (body) => ({
         url: `wallet/transfer/gift`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Wallet'],
+      invalidatesTags: ["Wallet"],
+    }),
+
+    confirmDeposit: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `flutterwave/confirm`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      }),
+      invalidatesTags: ["Wallet"],
     }),
   }),
 });
@@ -71,4 +83,5 @@ export const {
   useGetUserWalletQuery,
   useAddBeneficiaryMutation,
   useGiftUserMutation,
+  useConfirmDepositMutation,
 } = walletApi;

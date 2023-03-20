@@ -1,16 +1,16 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 
 import {
-	Box,
-	Icon,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	Spinner,
-	Text,
-	useDisclosure,
+  Box,
+  Icon,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Spinner,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import ShareIcon from '@icons/ShareIcon';
@@ -24,6 +24,7 @@ const Bio = ({
   onClick,
   buttonText,
   isFetching,
+  date,
 }: {
   showSubscribe: boolean;
   bio?: string;
@@ -31,6 +32,7 @@ const Bio = ({
   onClick: () => void;
   buttonText?: string;
   isFetching?: boolean;
+  date?: string;
 }) => {
   const router = useRouter();
   const {isOpen, onOpen, onClose} = useDisclosure();
@@ -102,15 +104,16 @@ const Bio = ({
                 />
               )}
             </Box>
-            {router.asPath !== '/channel/1/content' && (
+            {router.asPath !== '/channel/1/content' && date && (
               <Text
                 w='190px'
-                textAlign={'right'}
+                textAlign={'center'}
                 fontSize={'smSubHead'}
-                color={'clique.secondaryRed'}
+                color={Number(date) > 5 ? 'clique.base' : 'clique.seconDaryRed'}
                 mt='.4rem'
+                ml='auto'
               >
-                Your subscription expires 1 month after you subscribe
+                Expires in: {date} days
               </Text>
             )}
           </Box>

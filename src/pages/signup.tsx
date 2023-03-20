@@ -56,6 +56,7 @@ const Signup = () => {
     const data = {
       firstName: firstName.trim(),
       email: email.toLowerCase().trim(),
+      userName: userName.trim(),
     };
 
     const res: SignUpDataInterface = await preSignup(data);
@@ -64,7 +65,7 @@ const Signup = () => {
       localStorage.setItem("hashedOtp", JSON.stringify(res.data.data.otp_hash));
       localStorage.setItem("userData", JSON.stringify(allData));
       router.push(`/otp`);
-    } else if (res.error) {
+    } else if (res?.error) {
       toast({
         title: "Error",
         //@ts-ignore
@@ -95,12 +96,20 @@ const Signup = () => {
       router.push("/home");
     }
   }, [token, router]);
+
+  useEffect(() => {
+    localStorage.removeItem("hashedOtp");
+    localStorage.removeItem("userData");
+  }, []);
+
+  const [isFirstNameFocused, setIsFirstNameFocused] = useState(false);
+  const [isLastNameFocused, setIsLastNameFocused] = useState(false);
   return (
     <Box
       display={"flex"}
       justifyContent="space-between"
       alignItems={"center"}
-      // backgroundColor={Color().whiteAndBlack}
+      backgroundColor={Color().lightAndPrimary}
     >
       <CliqueLogo />
       <Box display={{ base: "none", lg: "block" }}>
@@ -111,71 +120,121 @@ const Signup = () => {
         minW={{ base: "60%", xl: "50%" }}
         py="50px"
       >
-        <Box padding={"1rem"} width="450px" height={"100%"} margin="0 auto">
+        <Box
+          padding={"1rem"}
+          width={{ base: "full", md: "450px" }}
+          height={"100%"}
+          margin="0 auto"
+        >
           <ShowAuthHeader
             header="Sign Up"
             detail="Connect to more Circos today!"
           />
           <form onSubmit={handlePreSignup} className="login-form">
-            <Box
-              display={"flex"}
-              justifyContent="space-between"
-              marginTop={".5rem"}
-            >
-              <Box width="48%" height="57px" position="relative">
+            <Box display={"flex"} justifyContent="space-between" mt="30px">
+              <Box width="48%" height="60px" position="relative">
                 <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   className="input"
+                  borderRadius="12px"
                   type={"text"}
                   required={true}
                   placeholder="Firstname"
-                  color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
+                  backgroundColor={Color().greyAndPureWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
+
+                    fontSize:
+                      isFirstNameFocused || firstName !== "" ? "sm3" : "1rem",
+                    pb: isFirstNameFocused || firstName !== "" ? "5px" : "0",
+                    transition: "all .3s ease",
+                    transform:
+                      isFirstNameFocused || firstName !== ""
+                        ? "translateY(-110%);  "
+                        : "translateY(0%); ",
                   }}
+                  h="60px"
                   borderWidth={"1px"}
-                  borderColor={Color().blackAndWhite}
+                  borderColor={Color().greyAndPureWhite}
+                  _focus={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  _active={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  color={Color().blackAndWhite}
+                  onFocus={() => setIsFirstNameFocused(true)}
+                  onBlur={() => setIsFirstNameFocused(false)}
                 />
+
                 <Text
                   position="absolute"
-                  top="6%"
-                  left={"4.5%"}
-                  fontSize="sm"
-                  className="placeholder small"
+                  top="0%"
+                  left={"8%"}
+                  fontSize="sm3"
+                  pt="5px"
                   color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
+                  display={firstName !== "" ? "block" : "none"}
+                  transition="all .3s ease"
                   zIndex="99"
                 >
                   Firstname
                 </Text>
               </Box>
-              <Box width="48%" height="57px" position="relative">
+              <Box width="48%" height="60px" position="relative">
                 <Input
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  _focus={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  _active={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
                   className="input"
                   type={"text"}
                   required={true}
                   placeholder="Lastname"
                   color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
+                  backgroundColor={Color().greyAndPureWhite}
                   _placeholder={{
                     color: Color().blackAndWhite,
+                    fontSize:
+                      isLastNameFocused || lastName !== "" ? "sm3" : "1rem",
+                    pb: isLastNameFocused || lastName !== "" ? "5px" : "0",
+                    transition: "all .3s ease",
+                    transform:
+                      isLastNameFocused || lastName !== ""
+                        ? "translateY(-110%);  "
+                        : "translateY(0%); ",
                   }}
+                  borderRadius="12px"
                   borderWidth={"1px"}
-                  borderColor={Color().blackAndWhite}
+                  h="60px"
+                  borderColor={Color().greyAndPureWhite}
+                  onFocus={() => setIsLastNameFocused(true)}
+                  onBlur={() => setIsLastNameFocused(false)}
                 />
+
                 <Text
                   position="absolute"
-                  top="6%"
-                  left={"4.5%"}
-                  fontSize="sm"
-                  className="placeholder small"
+                  top="0%"
+                  left={"8%"}
+                  fontSize="sm3"
+                  pt="5px"
                   color={Color().blackAndWhite}
-                  backgroundColor={Color().whiteAndBlack}
                   zIndex="99"
+                  transition="all .3s ease"
+                  display={lastName !== "" ? "block" : "none"}
                 >
                   Lastname
                 </Text>
@@ -183,7 +242,7 @@ const Signup = () => {
             </Box>
             {signUpInputData.map(({ name, image, key, inputName }) => (
               <div key={key}>
-                <Box position="relative" height="57px" marginTop={".5rem"}>
+                <Box position="relative" height="60px" marginTop={".5rem"}>
                   <AuthInput
                     image={image}
                     name={name}
@@ -241,13 +300,13 @@ const Signup = () => {
                   required={true}
                   name=""
                 />
-                <Box color={Color().blackAndWhite} as="span">
+                <Box color={Color().blackAndWhite2} as="span">
                   I agree to the&nbsp;
                 </Box>
                 <span style={{ color: "#892cdc" }}>
                   Terms & Conditions&nbsp;
                 </span>
-                <Box color={Color().blackAndWhite} as="span">
+                <Box color={Color().blackAndWhite2} as="span">
                   and&nbsp;
                 </Box>
                 <span style={{ color: "#892cdc" }}>Privacy Policy</span>
@@ -270,3 +329,4 @@ const Signup = () => {
 };
 
 export default Signup;
+export { getServerSideProps } from "../components/widgets/Chakara";

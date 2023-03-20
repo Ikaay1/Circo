@@ -28,7 +28,19 @@ export const ticketsApi = createApi({
       }),
       invalidatesTags: ['Tickets'],
     }),
+    postTicketFromLanding: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `tickets/post/landing`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Tickets'],
+    }),
   }),
 });
 
-export const {usePostTicketMutation} = ticketsApi;
+export const {usePostTicketMutation, usePostTicketFromLandingMutation} =
+  ticketsApi;

@@ -1,27 +1,27 @@
-import { useRouter } from 'next/router';
-import { FormEvent, useEffect, useState } from 'react';
+import {useRouter} from 'next/router';
+import {FormEvent, useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
-import { useCategoryQuery } from 'redux/services/category.service';
-import { useCreateContentMutation } from 'redux/services/content.service';
+import {useCategoryQuery} from 'redux/services/category.service';
+import {useCreateContentMutation} from 'redux/services/content.service';
 
 import {
-	Box,
-	Checkbox,
-	Divider,
-	Flex,
-	Grid,
-	GridItem,
-	Icon,
-	Input,
-	Link,
-	Select,
-	Text,
-	useColorModeValue,
-	VStack,
+  Box,
+  Checkbox,
+  Divider,
+  Flex,
+  Grid,
+  GridItem,
+  Icon,
+  Input,
+  Link,
+  Select,
+  Text,
+  useColorModeValue,
+  VStack,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
-import { CategoriesInterface } from '@constants/interface';
-import { age, API, selectArr, videoDetails } from '@constants/utils';
+import {CategoriesInterface} from '@constants/interface';
+import {age, API, selectArr, videoDetails} from '@constants/utils';
 import AddIcon from '@icons/AddIcon';
 import CopyIcon from '@icons/CopyIcon';
 
@@ -105,7 +105,7 @@ function UploadPage({url, name}: Props) {
           pr='2'
         >
           <Text fontSize={'smHead'} mb='5'>
-            Your video look
+            Your video preview
           </Text>
           <Box borderRadius={'10px'} overflow='hidden'>
             <video width='100%' height={'60px'} src={url} />
@@ -139,6 +139,7 @@ function UploadPage({url, name}: Props) {
                     handleInputChangeArea={(event) =>
                       setState({...state, description: event?.target?.value})
                     }
+                    limit={each.title === 'Title' ? true : false}
                   />
                 );
               })}
