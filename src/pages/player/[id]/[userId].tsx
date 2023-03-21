@@ -1,45 +1,45 @@
-import HomeLayout from "layouts/HomeLayout";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useAppSelector } from "redux/app/hooks";
+import HomeLayout from 'layouts/HomeLayout';
+import Head from 'next/head';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 import {
   useCreateViewMutation,
   useGetContentQuery,
-} from "redux/services/content.service";
-import { useGetUserQuery } from "redux/services/user.service";
+} from 'redux/services/content.service';
+import {useGetUserQuery} from 'redux/services/user.service';
 
-import { Box, Flex, useToast } from "@chakra-ui/react";
-import CliqueLoader from "@components/home/CliqueLoader";
-import CommentSection from "@components/player/CommentSection";
-import VideoDetails from "@components/player/VideoDetails";
-import VideoPlayer from "@components/player/VideoPlayer";
-import { createObjectURL, decrypt, scrollBarStyle3 } from "@constants/utils";
-import Head from "next/head";
+import {Box, Flex, useToast} from '@chakra-ui/react';
+import CliqueLoader from '@components/home/CliqueLoader';
+import CommentSection from '@components/player/CommentSection';
+import VideoDetails from '@components/player/VideoDetails';
+import VideoPlayer from '@components/player/VideoPlayer';
+import {createObjectURL, decrypt, scrollBarStyle3} from '@constants/utils';
 
 function Index() {
   const toast = useToast();
   const router = useRouter();
-  const { id, userId } = router.query;
-  const { data, isLoading, refetch, error } = useGetContentQuery<any>(id);
+  const {id, userId} = router.query;
+  const {data, isLoading, refetch, error} = useGetContentQuery<any>(id);
   const {
     data: userData,
     isLoading: isUserLoading,
     isError,
   } = useGetUserQuery(userId);
   const [view] = useCreateViewMutation();
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const [url, setUrl] = React.useState("");
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const [url, setUrl] = React.useState('');
 
   useEffect(() => {
     if (error) {
       toast({
         title: error?.data?.message,
-        status: "error",
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        position: "top-right",
+        position: 'top-right',
       });
-      router.push("/home");
+      router.push('/home');
     } else {
     }
   }, [data, error]);
@@ -49,15 +49,15 @@ function Index() {
       if (userData && userData?.data?._id !== userProfile?._id) {
         if (
           !userData?.data?.subscribers?.find(
-            (subscriber: { _id: string }) => subscriber._id === userProfile._id
+            (subscriber: {_id: string}) => subscriber._id === userProfile._id,
           )
         ) {
           toast({
-            title: "You are not subscribed to this content uploader",
-            status: "error",
+            title: 'You are not subscribed to this content uploader',
+            status: 'error',
             duration: 3000,
             isClosable: true,
-            position: "top-right",
+            position: 'top-right',
           });
           setTimeout(() => {
             window.location.replace(`/channel/subscribe/${userId}`);
@@ -69,7 +69,7 @@ function Index() {
 
   useEffect(() => {
     const createView = async () => {
-      await view({ video_id: data.data.preference.video._id });
+      await view({video_id: data.data.preference.video._id});
     };
     if (data) {
       if (data.data.preference.video.uploader_id._id !== userProfile?._id) {
@@ -95,27 +95,28 @@ function Index() {
         isUserLoading ||
         !data?.data ||
         (!url && (
-          <Box h="90vh" w="100%">
+          <Box h='90vh' w='100%'>
             <CliqueLoader />
           </Box>
         ))}
       <Head>
         <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2071647719246163'
+          crossOrigin='anonymous'
         ></script>
       </Head>
       {userData && !isLoading && !isUserLoading && data?.data && url && (
         <HomeLayout>
-          <Box display={{ lg: "flex" }}>
+          <Box display={{lg: 'flex'}}>
             <Box
-              maxH={"90vh"}
-              pb={{ base: "30px", lg: "50px" }}
-              px={{ base: "10px", lg: "30px" }}
-              maxW={{ base: "100%", lg: "calc(100vw - 400px)" }}
-              w={{ base: "100%", lg: "calc(100vw - 400px)" }}
-              overflowY={"scroll"}
-              overflowX={"hidden"}
+              maxH={'90vh'}
+              pb={{base: '30px', lg: '50px'}}
+              px={{base: '10px', lg: '30px'}}
+              maxW={{base: '100%', lg: 'calc(100vw - 400px)'}}
+              w={{base: '100%', lg: 'calc(100vw - 400px)'}}
+              overflowY={'scroll'}
+              overflowX={'hidden'}
               // sx={{
               //   '&::-webkit-scrollbar': {
               //     width: '8px',
@@ -156,4 +157,4 @@ function Index() {
 
 export default Index;
 
-export { getServerSideProps } from "../../../components/widgets/Chakara";
+export {getServerSideProps} from '../../../components/widgets/Chakara';
