@@ -12,6 +12,8 @@ import { contentData, createObjectURL, decrypt } from "@constants/utils";
 
 import Control from "./Control";
 import ControlMobile from "./ControlMobile";
+import BigAd from "./BigAd";
+import SmallAd from "./SmallAd";
 
 const { Player, ControlBar, BigPlayButton } = require("video-react");
 
@@ -81,6 +83,9 @@ function VideoPlayer({
     }
   }, []);
 
+  const [isAd, setIsAd] = React.useState(true);
+  const [isSmallAd, setIsSmallAd] = React.useState(false);
+
   return (
     <Flex
       pos={"relative"}
@@ -92,38 +97,51 @@ function VideoPlayer({
       bg="black"
       flexDir={"column"}
     >
-      <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
-        <Player
-          controls={false}
-          playing={isPlay}
-          ref={playerRef}
-          muted={isMuted}
-          autoPlay={true}
-          fluid={false}
-          width="100%"
-          src={url}
-          height="100%"
-          onEnded={() => {
-            if (isLoop) {
-              playerRef.current.seek(0);
-              playerRef.current.play();
-              return;
-            }
-            if (nextVideoIndex !== null) {
-              router.push(
-                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
-              );
-            }
-          }}
-        >
-          <ControlBar
-            className="my-class"
-            autoHide={false}
-            disableDefaultControls={true}
-          ></ControlBar>
-          <BigPlayButton position="center" />
-        </Player>
-      </Box>
+      {video?.isFree && !isSmallAd && isAd && (
+        <BigAd
+          setIsAd={setIsAd}
+          setIsSmallAd={setIsSmallAd}
+          playerRef={playerRef}
+        />
+      )}
+      {
+        <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
+          <Player
+            controls={false}
+            playing={isPlay && !isAd}
+            ref={playerRef}
+            muted={isMuted}
+            autoPlay={true}
+            fluid={false}
+            width="100%"
+            src={url}
+            height="100%"
+            onEnded={() => {
+              if (isLoop) {
+                playerRef.current.seek(0);
+                playerRef.current.play();
+                return;
+              }
+              setIsAd(true);
+              if (nextVideoIndex !== null) {
+                router.push(
+                  `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
+                );
+              }
+            }}
+          >
+            {video?.isFree && isSmallAd && (
+              <SmallAd setIsSmallAd={setIsSmallAd} />
+            )}
+            <ControlBar
+              className="my-class"
+              autoHide={false}
+              disableDefaultControls={true}
+            ></ControlBar>
+            <BigPlayButton position="center" />
+          </Player>
+        </Box>
+      }
 
       <Flex
         bg="clique.blackGrey"
