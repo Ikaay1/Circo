@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
+import { Adsense } from "@ctrl/react-adsense";
 
 function BigAd({
   setIsAd,
@@ -26,9 +27,10 @@ function BigAd({
       minH="calc(100% - 80px)"
       pos="absolute"
       zIndex="2"
-      w="full"
-      p="20px"
-    ></Box>
+      w="full" 
+    >
+      <Adsense client="ca-pub-7640562161899788" slot="7259870550" />
+    </Box>
   );
 }
 

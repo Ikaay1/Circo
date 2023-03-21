@@ -104,44 +104,43 @@ function VideoPlayer({
           playerRef={playerRef}
         />
       )}
-      {
-        <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
-          <Player
-            controls={false}
-            playing={isPlay && !isAd}
-            ref={playerRef}
-            muted={isMuted}
-            autoPlay={true}
-            fluid={false}
-            width="100%"
-            src={url}
-            height="100%"
-            onEnded={() => {
-              if (isLoop) {
-                playerRef.current.seek(0);
-                playerRef.current.play();
-                return;
-              }
-              setIsAd(true);
-              if (nextVideoIndex !== null) {
-                router.push(
-                  `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
-                );
-              }
-            }}
-          >
-            {video?.isFree && isSmallAd && (
-              <SmallAd setIsSmallAd={setIsSmallAd} />
-            )}
-            <ControlBar
-              className="my-class"
-              autoHide={false}
-              disableDefaultControls={true}
-            ></ControlBar>
-            <BigPlayButton position="center" />
-          </Player>
-        </Box>
-      }
+
+      <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
+        <Player
+          controls={false}
+          playing={isPlay && !isAd}
+          ref={playerRef}
+          muted={isMuted}
+          autoPlay={true}
+          fluid={false}
+          width="100%"
+          src={url}
+          height="100%"
+          onEnded={() => {
+            if (isLoop) {
+              playerRef.current.seek(0);
+              playerRef.current.play();
+              return;
+            }
+            setIsAd(true);
+            if (nextVideoIndex !== null) {
+              router.push(
+                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
+              );
+            }
+          }}
+        >
+          {video?.isFree && isSmallAd && (
+            <SmallAd setIsSmallAd={setIsSmallAd} />
+          )}
+          <ControlBar
+            className="my-class"
+            autoHide={false}
+            disableDefaultControls={true}
+          ></ControlBar>
+          <BigPlayButton position="center" />
+        </Player>
+      </Box>
 
       <Flex
         bg="clique.blackGrey"
