@@ -38,7 +38,25 @@ function NewComment({
 }) {
   const channel = useAppSelector((state) => state.app.userReducer.channel);
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const [row, setRow] = useState(2);
+  const [rows, setRows] = useState(1);
+  const _handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    console.log(e.which);
+    if (e.key === 'Enter') {
+      console.log('ent');
+      setRows((prevRow) => prevRow + 1);
+    }
+  };
+  const _handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    console.log(e.which);
+    if (
+      e.key.toLowerCase() === 'backspace' ||
+      e.key.toLowerCase() === 'delete'
+    ) {
+      console.log('del');
+      const lines = comment.split('\n').length;
+      setRows(lines);
+    }
+  };
 
   return (
     <>
@@ -63,7 +81,9 @@ function NewComment({
 
         <InputGroup>
           <Textarea
-            rows={row}
+            onKeyPress={(e) => _handleKeyPress(e)}
+            onKeyDown={(e) => _handleKeyDown(e)}
+            rows={rows}
             rounded={'10px'}
             p='5px'
             px='10px'
@@ -75,6 +95,7 @@ function NewComment({
                 'clique.lightPrimaryBg',
               ),
               fontSize: 'smSubHead',
+              transform: 'translateY(29%)',
             }}
             placeholder={
               fixed !== 'yes' ? 'Enter Comment...' : 'Enter Reply...'
@@ -84,8 +105,6 @@ function NewComment({
             _focus={{border: 'none', boxShadow: 'none'}}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            onFocus={() => setRow(5)}
-            onBlur={() => setRow(2)}
             transition={'all .5s ease'}
             // onKeyDown={async (e) => {
             //   if (e.key === 'Enter') {

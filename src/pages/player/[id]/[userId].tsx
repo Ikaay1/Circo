@@ -1,4 +1,5 @@
 import HomeLayout from 'layouts/HomeLayout';
+import Head from 'next/head';
 import {useRouter} from 'next/router';
 import React, {useEffect} from 'react';
 import {useAppSelector} from 'redux/app/hooks';
@@ -98,6 +99,13 @@ function Index() {
             <CliqueLoader />
           </Box>
         ))}
+      <Head>
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2071647719246163'
+          crossOrigin='anonymous'
+        ></script>
+      </Head>
       {userData && !isLoading && !isUserLoading && data?.data && url && (
         <HomeLayout>
           <Box display={{lg: 'flex'}}>
