@@ -18,8 +18,8 @@ function BigAd({
 
       setTimeout(() => {
         setIsSmallAd(true);
-      }, 10000);
-    }, 10000);
+      }, 5000);
+    }, 5000);
   }, [playerRef]);
 
   return (
