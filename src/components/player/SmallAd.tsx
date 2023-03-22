@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import {Box} from '@chakra-ui/react';
-import {Adsense} from '@ctrl/react-adsense';
+import { Box } from "@chakra-ui/react";
+import { Adsense } from "@ctrl/react-adsense";
 
 function SmallAd({
   setIsSmallAd,
@@ -15,9 +15,16 @@ function SmallAd({
   }, []);
 
   return (
-    <Box bg='blue' pos='absolute' zIndex='2' bottom='0' minH='  80px' w='full'>
-      {' '}
-      <Adsense client='ca-pub-2071647719246163' slot='7595819867' />
+    <Box
+      bg="blue"
+      pos="absolute"
+      zIndex="2"
+      bottom="0"
+      minH="80px"
+      h="80px"
+      w="full"
+    >
+      {/* <Adsense client="ca-pub-2071647719246163" slot="7595819867" /> */}
     </Box>
   );
 }
