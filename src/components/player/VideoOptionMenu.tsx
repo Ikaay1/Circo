@@ -16,6 +16,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  Tooltip,
   useToast,
 } from "@chakra-ui/react";
 import DownloadIcon from "@icons/DownloadIcon";
