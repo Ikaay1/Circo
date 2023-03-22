@@ -120,7 +120,7 @@ const SubscribeChannel = () => {
       amount: channelData?.data?.channel?.subscriptionFee
         ? channelData?.data?.channel?.subscriptionFee
         : 0,
-      description: "Payment for subscription",
+      description: "Channel Subscription",
       receiversId: channelData?.data?.channel?.userId,
     });
     if ("data" in res) {

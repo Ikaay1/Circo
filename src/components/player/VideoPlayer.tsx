@@ -12,6 +12,8 @@ import { contentData, createObjectURL, decrypt } from "@constants/utils";
 
 import Control from "./Control";
 import ControlMobile from "./ControlMobile";
+import BigAd from "./BigAd";
+import SmallAd from "./SmallAd";
 
 const { Player, ControlBar, BigPlayButton } = require("video-react");
 
@@ -81,6 +83,9 @@ function VideoPlayer({
     }
   }, []);
 
+  const [isAd, setIsAd] = React.useState(true);
+  const [isSmallAd, setIsSmallAd] = React.useState(false);
+
   return (
     <Flex
       pos={"relative"}
@@ -92,10 +97,18 @@ function VideoPlayer({
       bg="black"
       flexDir={"column"}
     >
+      {video?.isFree && !isSmallAd && isAd && (
+        <BigAd
+          setIsAd={setIsAd}
+          setIsSmallAd={setIsSmallAd}
+          playerRef={playerRef}
+        />
+      )}
+
       <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
         <Player
           controls={false}
-          playing={isPlay}
+          playing={isPlay && !isAd}
           ref={playerRef}
           muted={isMuted}
           autoPlay={true}
@@ -109,6 +122,7 @@ function VideoPlayer({
               playerRef.current.play();
               return;
             }
+            setIsAd(true);
             if (nextVideoIndex !== null) {
               router.push(
                 `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
@@ -116,6 +130,9 @@ function VideoPlayer({
             }
           }}
         >
+          {video?.isFree && isSmallAd && (
+            <SmallAd setIsSmallAd={setIsSmallAd} />
+          )}
           <ControlBar
             className="my-class"
             autoHide={false}
