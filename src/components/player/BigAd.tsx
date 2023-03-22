@@ -24,7 +24,7 @@ function BigAd({
 
   return (
     <Box bg='red' minH='calc(100% - 80px)' pos='absolute' zIndex='2' w='full'>
-      <Adsense client='ca-pub-2071647719246163' slot='7595819867' />
+      {/* <Adsense client='ca-pub-2071647719246163' slot='7595819867' /> */}
     </Box>
   );
 }
