@@ -100,19 +100,16 @@ function Index() {
               </Text>
               {data?.data?.user.map(
                 (item: {
-                  userName: string;
-                  firstName: string;
-                  lastName: string;
-                  photo: any;
+                  channel_id: {
+                    photo: string;
+                    name: string;
+                  };
                   _id: string;
                 }) => (
                   <EachSubscribe
                     key={item._id}
-                    name={item.userName}
-                    imgUrl={item.photo}
-                    firstName={item.firstName}
-                    lastName={item.lastName}
                     id={item._id}
+                    channel_id={item.channel_id}
                   />
                 ),
               )}

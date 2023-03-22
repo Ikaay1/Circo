@@ -1,7 +1,7 @@
-import { store } from 'redux/app/store';
+import {store} from 'redux/app/store';
 
-import { baseUrl } from '@constants/utils';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {baseUrl} from '@constants/utils';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -73,8 +73,8 @@ export const userApi = createApi({
     }),
 
     getPopularCreators: builder.query<any, any>({
-      query: ({page, limit}) => ({
-        url: `content/popular-creators?page=${page}&limit=${limit}`,
+      query: () => ({
+        url: `content/popular-creators`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
