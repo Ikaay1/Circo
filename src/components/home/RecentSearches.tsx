@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {useGetUsersSearchQuery} from 'redux/services/content.service';
 
 import {Box, Flex, Icon, Text} from '@chakra-ui/react';
+import Color from '@constants/color';
 import CloseIcon from '@icons/CloseIcon';
 
 const RecentSearches = () => {
@@ -28,12 +29,11 @@ const RecentSearches = () => {
           key={each?._id}
         >
           <Text
-            background='clique.blackGrey'
+            background={Color().whiteAndBlackGrey}
             borderRadius='30px'
             fontFamily="'Poppins'"
             fontStyle='normal'
             lineHeight='20px'
-            color='#FFFFFF'
             py='.4rem'
             px='.8rem'
           >

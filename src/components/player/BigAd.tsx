@@ -24,6 +24,7 @@ function BigAd({
         pos='absolute'
         right='0'
         cursor={'pointer'}
+        color='clique.white'
       />
     </Box>
   );

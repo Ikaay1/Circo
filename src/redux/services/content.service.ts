@@ -113,6 +113,16 @@ export const contentApi = createApi({
       }),
       providesTags: ['Content'],
     }),
+    getSearchSuggestion: builder.query<any, any>({
+      query: (search) => ({
+        url: `content/searchSuggestions?search=${search}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
 
     createView: builder.mutation<any, any>({
       query: (body) => ({
@@ -384,4 +394,5 @@ export const {
   useSubscribeToUserChannelMutation,
   useGetUsersBySearchQuery,
   useGetUsersSearchQuery,
+  useGetSearchSuggestionQuery,
 } = contentApi;
