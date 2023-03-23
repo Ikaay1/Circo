@@ -111,7 +111,11 @@ function UploadPage({url, name}: Props) {
           </Text>
           <UploadPreview
             title={state.title}
-            thumbNail={URL.createObjectURL(thumbNail as Blob)}
+            thumbNail={
+              thumbNail &&
+              typeof thumbNail !== 'string' &&
+              URL.createObjectURL(thumbNail as Blob)
+            }
             isFree={isFree}
           />
         </Box>
