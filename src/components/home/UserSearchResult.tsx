@@ -4,6 +4,7 @@ import {useAppSelector} from 'redux/app/hooks';
 import {useGetUsersBySearchQuery} from 'redux/services/content.service';
 
 import {Avatar, Box, Button, Flex, Skeleton, Text} from '@chakra-ui/react';
+import Color from '@constants/color';
 
 const UserSearchResult = () => {
   const router = useRouter();
@@ -51,7 +52,7 @@ const UserSearchResult = () => {
                 alignItems={'center'}
                 mt='1.1rem'
                 width={{base: '100%', lg: '600px'}}
-                background='clique.blackGrey'
+                background={Color().whiteAndBlackGrey}
                 borderRadius='14px'
                 px='1.4rem'
                 py='.65rem'
@@ -100,7 +101,6 @@ const UserSearchResult = () => {
                       fontStyle='normal'
                       fontSize={{base: 'subHead', lg: 'smHead2'}}
                       lineHeight='34px'
-                      color={'clique.white'}
                       noOfLines={1}
                     >
                       {user?.firstName + ' ' + user?.lastName}

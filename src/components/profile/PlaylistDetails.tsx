@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
+import {useRouter} from 'next/router';
 
-import { Box, Flex, Skeleton, VStack } from "@chakra-ui/react";
+import {Box, Flex, Skeleton, VStack} from '@chakra-ui/react';
 
-import PlaylistList from "./PlaylistList";
+import PlaylistList from './PlaylistList';
 
 export type Playlist = {
   cover: string;
@@ -12,6 +12,12 @@ export type Playlist = {
   userId: {
     photo: string;
     _id: string;
+    channel_id: {
+      photo: string;
+      name: string;
+    };
+    firstName: string;
+    lastName: string;
   };
   videos: Videos[];
   _id: string;
@@ -43,22 +49,22 @@ const PlaylistDetails = ({
 }) => {
   return (
     <Box
-      display={"flex"}
-      px="1.4rem"
-      py={{ lg: "2rem" }}
-      mt={{ base: "2.5rem", lg: 0 }}
-      gap="25px"
+      display={'flex'}
+      px='1.4rem'
+      py={{lg: '2rem'}}
+      mt={{base: '2.5rem', lg: 0}}
+      gap='25px'
     >
-      <Box flex="5">
+      <Box flex='5'>
         {isLoading ? (
-          <Flex flexDirection={"column"} gap="2">
+          <Flex flexDirection={'column'} gap='2'>
             {[1, 2, 3, 4].map((each, i) => {
               return (
                 <Flex key={i}>
-                  <Skeleton h="100px" w="100px" borderRadius="10px" mr="2" />
-                  <VStack my="auto">
-                    <Skeleton w="70px" height="20px" mb="3" />
-                    <Skeleton w="70px" height="10px" />
+                  <Skeleton h='100px' w='100px' borderRadius='10px' mr='2' />
+                  <VStack my='auto'>
+                    <Skeleton w='70px' height='20px' mb='3' />
+                    <Skeleton w='70px' height='10px' />
                   </VStack>
                 </Flex>
               );
@@ -92,8 +98,8 @@ const PlaylistDetails = ({
                 ))
             ) : (
               <Box>
-                No video on this playlist yet.{" "}
-                <span style={{ color: "#892CDC" }}>
+                No video on this playlist yet.{' '}
+                <span style={{color: '#892CDC'}}>
                   Click on the three dots below any video to add the video to a
                   playlist.
                 </span>

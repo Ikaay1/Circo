@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { TbCopy } from "react-icons/tb";
-import { useAppSelector } from "redux/app/hooks";
-import { useUpdatePreferenceMutation } from "redux/services/settings.service";
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
+import {TbCopy} from 'react-icons/tb';
+import {useAppSelector} from 'redux/app/hooks';
+import {useUpdatePreferenceMutation} from 'redux/services/settings.service';
 
 import {
   Box,
@@ -11,9 +11,9 @@ import {
   Skeleton,
   Text,
   useColorMode,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import SimpleSwitch from "./SimpleSwitch";
+import SimpleSwitch from './SimpleSwitch';
 
 type Props = {
   onClick: (code: string) => void;
@@ -50,8 +50,8 @@ const defaultState = {
   allNotifications: true,
 };
 
-const Notification = ({ isLoading, data, onClick, isFetching }: any) => {
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
+const Notification = ({isLoading, data, onClick, isFetching}: any) => {
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [updatePreference, info] = useUpdatePreferenceMutation();
   const [state, setState] = useState({
     allNotifications:
@@ -81,15 +81,15 @@ const Notification = ({ isLoading, data, onClick, isFetching }: any) => {
   const router = useRouter();
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState((prev) => ({ ...prev, [e.target.name]: e.target.checked }));
-    if (e.target.name === "allNotifications") {
+    setState((prev) => ({...prev, [e.target.name]: e.target.checked}));
+    if (e.target.name === 'allNotifications') {
       if (e.target.checked) {
-        const apiState: Notification = { ...defaultState };
+        const apiState: Notification = {...defaultState};
         delete apiState.allNotifications;
         setState(defaultState);
         await updatePreference(apiState);
       } else {
-        const apiState: any = { ...defaultState };
+        const apiState: any = {...defaultState};
         delete apiState.allNotifications;
         Object.keys(apiState).forEach((key) => {
           apiState[key] = false;
@@ -99,7 +99,7 @@ const Notification = ({ isLoading, data, onClick, isFetching }: any) => {
       }
     } else {
       if (e.target.checked === false) {
-        setState((prev) => ({ ...prev, allNotifications: false }));
+        setState((prev) => ({...prev, allNotifications: false}));
       } else if (
         state.likeMyPost &&
         state.commentOnMyPost &&
@@ -111,37 +111,37 @@ const Notification = ({ isLoading, data, onClick, isFetching }: any) => {
         state.walletsDebits &&
         state.liveStreamStarted
       ) {
-        setState((prev) => ({ ...prev, allNotifications: true }));
+        setState((prev) => ({...prev, allNotifications: true}));
       } else {
-        setState((prev) => ({ ...prev, allNotifications: false }));
+        setState((prev) => ({...prev, allNotifications: false}));
       }
 
-      await updatePreference({ [e.target.name]: e.target.checked });
+      await updatePreference({[e.target.name]: e.target.checked});
     }
   };
 
-  const { colorMode, toggleColorMode } = useColorMode();
+  const {colorMode, toggleColorMode} = useColorMode();
   return (
     <>
       {isLoading ? (
-        <Box maxW={{ base: "100%", lg: "50%" }}>
-          <Box mb="5">
-            <Skeleton h="3" width="75%" mb="5" />
-            <Skeleton h="3" width="95%" mb="5" />
-            <Flex justifyContent={"space-between"}>
-              <Skeleton h="3" width="50%" /> <Skeleton h="3" width="5%" />
+        <Box maxW={{base: '100%', lg: '50%'}}>
+          <Box mb='5'>
+            <Skeleton h='3' width='75%' mb='5' />
+            <Skeleton h='3' width='95%' mb='5' />
+            <Flex justifyContent={'space-between'}>
+              <Skeleton h='3' width='50%' /> <Skeleton h='3' width='5%' />
             </Flex>
           </Box>
 
           {[1, 2, 3].map((each, i) => {
             return (
-              <Box mb="3" key={i}>
-                <Skeleton h="3" width="75%" mb="5" />
+              <Box mb='3' key={i}>
+                <Skeleton h='3' width='75%' mb='5' />
                 {[1, 2, 3, 4, 5].map((each, i) => {
                   return (
-                    <Flex justifyContent={"space-between"} key={i} mb="5">
-                      <Skeleton h="3" width="50%" />{" "}
-                      <Skeleton h="3" width="5%" />
+                    <Flex justifyContent={'space-between'} key={i} mb='5'>
+                      <Skeleton h='3' width='50%' />{' '}
+                      <Skeleton h='3' width='5%' />
                     </Flex>
                   );
                 })}
@@ -151,131 +151,131 @@ const Notification = ({ isLoading, data, onClick, isFetching }: any) => {
         </Box>
       ) : (
         <Box>
-          <Box maxW={{ base: "100%", lg: "50%" }}>
-            <Text fontSize={"smSubHead"} mb="5">
+          <Box maxW={{base: '100%', lg: '50%'}}>
+            <Text fontSize={'smSubHead'} mb='5'>
               Notifications
             </Text>
-            <Text fontSize={"subHead"}>
-              Manage your Clique notifications here
+            <Text fontSize={'subHead'}>
+              Manage your Circo notifications here
             </Text>
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="All Notifications"
+              text='All Notifications'
               onChange={handleChange}
               isChecked={state.allNotifications}
-              name="allNotifications"
+              name='allNotifications'
             />
-            <Text fontSize={"subHead"} mt="7">
+            <Text fontSize={'subHead'} mt='7'>
               CONTENT
             </Text>
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="Likes my post"
+              text='Likes my post'
               isChecked={state.likeMyPost}
-              name="likeMyPost"
+              name='likeMyPost'
               onChange={handleChange}
             />
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="Comment on my post"
+              text='Comment on my post'
               isChecked={state.commentOnMyPost}
-              name="commentOnMyPost"
+              name='commentOnMyPost'
               onChange={handleChange}
             />
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="Likes my comment"
+              text='Likes my comment'
               isChecked={state.likeMyComment}
-              name="likeMyComment"
+              name='likeMyComment'
               onChange={handleChange}
             />
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="Mentions me"
+              text='Mentions me'
               isChecked={state.mentionMe}
-              name="mentionMe"
+              name='mentionMe'
               onChange={handleChange}
             />
-            <Text fontSize={"subHead"} mt="7">
+            <Text fontSize={'subHead'} mt='7'>
               GENERAL
             </Text>
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="New subscriber"
+              text='New subscriber'
               isChecked={state.newSubcriber}
-              name="newSubcriber"
+              name='newSubcriber'
               onChange={handleChange}
             />
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="Receive payment"
+              text='Receive payment'
               isChecked={state.receivePayment}
-              name="receivePayment"
+              name='receivePayment'
               onChange={handleChange}
             />
             <SimpleSwitch
               isFetching={isFetching}
               isUpdating={info.isLoading}
-              text="Wallet credits"
+              text='Wallet credits'
               isChecked={state.walletCredits}
-              name="walletCredits"
+              name='walletCredits'
               onChange={handleChange}
             />
             <SimpleSwitch
-              text="Wallet debits"
+              text='Wallet debits'
               isChecked={state.walletsDebits}
-              name="walletsDebits"
+              name='walletsDebits'
               onChange={handleChange}
               isFetching={isFetching}
               isUpdating={info.isLoading}
             />
             <SimpleSwitch
-              text="Live stream started"
+              text='Live stream started'
               isChecked={state.liveStreamStarted}
-              name="liveStreamStarted"
+              name='liveStreamStarted'
               isFetching={isFetching}
               isUpdating={info.isLoading}
               onChange={handleChange}
             />
           </Box>
-          <Divider my="7"></Divider>
+          <Divider my='7'></Divider>
 
-          <Box maxW={"50%"}>
-            <Text fontSize={"smSubHead"}>Theme</Text>
+          <Box maxW={'50%'}>
+            <Text fontSize={'smSubHead'}>Theme</Text>
             <SimpleSwitch
-              text="Light/Dark mode"
-              isChecked={colorMode === "light" ? true : false}
-              name="lightOrDark"
+              text='Light/Dark mode'
+              isChecked={colorMode === 'light' ? true : false}
+              name='lightOrDark'
               onChange={toggleColorMode}
             />
           </Box>
-          <Divider my="7"></Divider>
+          <Divider my='7'></Divider>
 
-          <Box maxW={{ base: "100%", lg: "50%" }}>
-            <Text fontSize={"smSubHead"} mb="5">
+          <Box maxW={{base: '100%', lg: '50%'}}>
+            <Text fontSize={'smSubHead'} mb='5'>
               Referral
             </Text>
-            <Text fontSize={"subHead"} mb="6">
-              Refer a friend and earn{" "}
-              <span style={{ color: "#8758FF" }}>#1000!</span>
+            <Text fontSize={'subHead'} mb='6'>
+              Refer a friend and earn{' '}
+              <span style={{color: '#8758FF'}}>#1000!</span>
             </Text>
-            <Text color="clique.text" fontSize={"xsl"}>
+            <Text color='clique.text' fontSize={'xsl'}>
               Referral Code
             </Text>
-            <Flex justifyContent="space-between" mt="2">
-              <Text fontSize={"smSubHead"}>{userProfile?.referralCode}</Text>
+            <Flex justifyContent='space-between' mt='2'>
+              <Text fontSize={'smSubHead'}>{userProfile?.referralCode}</Text>
               <TbCopy
-                fontSize={"20"}
-                color="#8758FF"
+                fontSize={'20'}
+                color='#8758FF'
                 onClick={() => onClick(userProfile?.referralCode)}
-                cursor="pointer"
+                cursor='pointer'
               />
             </Flex>
           </Box>
