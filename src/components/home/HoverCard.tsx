@@ -1,8 +1,8 @@
-import moment from "moment";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useAppSelector } from "redux/app/hooks";
-import { useSubscribeMutation } from "redux/services/user.service";
+import moment from 'moment';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
+import {useSubscribeMutation} from 'redux/services/user.service';
 
 import {
   Avatar,
@@ -13,13 +13,13 @@ import {
   Text,
   useColorModeValue,
   useDisclosure,
-} from "@chakra-ui/react";
-import Color from "@constants/color";
+} from '@chakra-ui/react';
+import Color from '@constants/color';
 
-import { contentData } from "../../constants/utils";
-import { useRoutingChannel } from "../../hooks/useRoutingChannel";
-import SmallPlayer from "./SmallPlayer";
-import SubScribeModal from "./SubScribeModal";
+import {contentData} from '../../constants/utils';
+import {useRoutingChannel} from '../../hooks/useRoutingChannel';
+import SmallPlayer from './SmallPlayer';
+import SubScribeModal from './SubScribeModal';
 
 function HoverCard({
   setIsHover,
@@ -43,28 +43,28 @@ function HoverCard({
   show: boolean;
 }) {
   const router = useRouter();
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const {isOpen, onOpen, onClose} = useDisclosure();
   // const [subscribe, subscribeStatus] = useSubscribeMutation();
-  const { handleRouting } = useRoutingChannel();
+  const {handleRouting} = useRoutingChannel();
 
   useEffect(() => {
     if (!userProfile?._id) {
-      window.location.replace("/login");
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
 
   return (
     <Box
       onMouseLeave={() => setIsHover(false)}
-      position={"absolute"}
-      cursor={"pointer"}
-      rounded="10px"
-      overflow={"hidden"}
+      position={'absolute'}
+      cursor={'pointer'}
+      rounded='10px'
+      overflow={'hidden'}
       zIndex={100}
       // bg={useColorModeValue("clique.white", "clique.secondaryGrey1")}
-      w="100%"
-      display={show ? "block" : "none"}
+      w='100%'
+      display={show ? 'block' : 'none'}
     >
       <Box
         onClick={() => {
@@ -77,78 +77,78 @@ function HoverCard({
       >
         <SmallPlayer url={url} video={video} />
       </Box>
-      <Flex mt="15px">
+      <Flex mt='15px'>
         <Avatar
-          mr={"10px"}
-          p="0"
-          size="sm"
-          name={video?.channel_id?.name ?? "Not Available"}
+          mr={'10px'}
+          p='0'
+          size='sm'
+          name={video?.channel_id?.name ?? 'Not Available'}
           src={video?.channel_id?.photo}
           onClick={() => handleRouting(video?.uploader_id?._id)}
-          cursor="pointer"
+          cursor='pointer'
         />
 
-        <Box w="calc(100%)">
+        <Box w='calc(100%)'>
           <Text
             noOfLines={1}
             color={Color().blackAndPureWhite}
-            fontFamily={"Poppins"}
+            fontFamily={'Poppins'}
             fontWeight={500}
-            fontSize={"sm2"}
-            lineHeight={"1.2"}
+            fontSize={'sm2'}
+            lineHeight={'1.2'}
           >
             {video?.title}
           </Text>
 
           <Text
-            mt="5px"
+            mt='5px'
             noOfLines={2}
-            color={"clique.darkGrey"}
-            fontFamily={"Poppins"}
+            color={'clique.darkGrey'}
+            fontFamily={'Poppins'}
             fontWeight={400}
-            fontSize={"smSubHead"}
-            lineHeight={"1.2"}
+            fontSize={'smSubHead'}
+            lineHeight={'1.2'}
           >
-            @{video?.channel_id?.name ?? "Not Available"}
+            @{video?.channel_id?.name ?? 'Not Available'}
           </Text>
-          <Flex alignItems={"center"} mt="5px">
+          <Flex alignItems={'center'} mt='5px'>
             <Text
               noOfLines={2}
-              color={"clique.darkGrey"}
-              fontFamily={"Poppins"}
+              color={'clique.darkGrey'}
+              fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={"sm"}
-              lineHeight={"1.2"}
-              mr="10px"
+              fontSize={'sm'}
+              lineHeight={'1.2'}
+              mr='10px'
             >
-              {video?.view} {video?.view !== 1 ? "views" : "view"}
+              {video?.view} {video?.view !== 1 ? 'views' : 'view'}
             </Text>
             <Text
-              pos={"relative"}
+              pos={'relative'}
               _before={{
                 content: '""',
-                position: "absolute",
-                top: "50%",
-                transform: "translateY(-50%)",
+                position: 'absolute',
+                top: '50%',
+                transform: 'translateY(-50%)',
                 left: 0,
-                width: "4px",
-                background: "clique.darkGrey",
-                height: "4px",
-                rounded: "full",
+                width: '4px',
+                background: 'clique.darkGrey',
+                height: '4px',
+                rounded: 'full',
               }}
-              pl="10px"
+              pl='10px'
               noOfLines={2}
-              color={"clique.darkGrey"}
-              fontFamily={"Poppins"}
+              color={'clique.darkGrey'}
+              fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={"sm"}
-              lineHeight={"1.2"}
+              fontSize={'sm'}
+              lineHeight={'1.2'}
             >
               {moment(video?.createdAt).fromNow()}
             </Text>
           </Flex>
         </Box>
-        <Flex p="2px" borderRadius={"5px"} h="100%">
+        <Flex p='2px' borderRadius={'5px'} h='100%'>
           {/* <Icon
             as={VideoSideIcon}
             fontSize="25px"

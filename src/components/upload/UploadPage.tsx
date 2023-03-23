@@ -27,6 +27,7 @@ import AddIcon from '@icons/AddIcon';
 import CopyIcon from '@icons/CopyIcon';
 
 import DetailCard from './DetailCard';
+import UploadPreview from './UploadPreview';
 
 type Props = {
   url: string;
@@ -108,24 +109,15 @@ function UploadPage({url, name}: Props) {
           <Text fontSize={'smHead'} mb='5'>
             Your video preview
           </Text>
-          {thumbNail && typeof thumbNail !== 'string' ? (
-            <Box borderRadius={'10px'} overflow='hidden'>
-              <Image
-                width='100%'
-                height={'140px'}
-                src={`${URL.createObjectURL(thumbNail as Blob)}`}
-                alt='thumbnail'
-                objectFit={'cover'}
-              />
-            </Box>
-          ) : null}
-          <Text fontWeight={600} fontSize='smSubHead' mb='3' mt='4'>
-            {state.title}
-          </Text>
-          <Text fontSize='xsl' noOfLines={5}>
-            {state.description}
-            {/* <span style={{color: '#3D8EC9'}}> more...</span> */}
-          </Text>
+          <UploadPreview
+            title={state.title}
+            thumbNail={
+              thumbNail &&
+              typeof thumbNail !== 'string' &&
+              URL.createObjectURL(thumbNail as Blob)
+            }
+            isFree={isFree}
+          />
         </Box>
 
         <Flex width={{base: '100%', lg: '50%'}}>

@@ -88,10 +88,7 @@ function VideoPlayer({
   const [isSmallAd, setIsSmallAd] = React.useState(false);
 
   React.useEffect(() => {
-    if (
-      moment(currentTimestamp * 1000).format('mm:ss') === '00:00' &&
-      !isPlay
-    ) {
+    if (moment(currentTimestamp * 1000).format('mm:ss') === '00:00' && isPlay) {
       setIsAd(true);
       setTimeout(() => {
         setIsSmallAd(true);
@@ -115,6 +112,8 @@ function VideoPlayer({
           setIsAd={setIsAd}
           setIsSmallAd={setIsSmallAd}
           playerRef={playerRef}
+          setIsPlay={setIsPlay}
+          isPlay={isPlay}
         />
       )}
 
@@ -124,7 +123,7 @@ function VideoPlayer({
           playing={isPlay && !isAd}
           ref={playerRef}
           muted={isMuted}
-          autoPlay={true}
+          // autoPlay={true}
           fluid={false}
           width='100%'
           src={url}
