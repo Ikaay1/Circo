@@ -1,36 +1,31 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
-import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
 
-import { Avatar, Box, Flex, Icon, Link, Text } from '@chakra-ui/react';
+import {Avatar, Box, Flex, Icon, Link, Text} from '@chakra-ui/react';
 import Color from '@constants/color';
 
 function EachSubscribe({
-  name,
-  imgUrl,
-  firstName,
-  lastName,
   id,
+  channel_id,
 }: {
-  name: string;
-  imgUrl?: string;
-  firstName: string;
-  lastName: string;
   id: string;
+  channel_id: {
+    photo: string;
+    name: string;
+  };
 }) {
   const router = useRouter();
   const path = router.pathname;
-  const {data, isLoading} = useGetIndividualChannelQuery(id);
 
   return (
     <Link href={`/channel/subscribe/${id}`} textDecoration='none '>
       <Flex pl='50px' mt='15px' alignItems={'center'} cursor={'pointer'}>
-        {imgUrl ? (
-          <Avatar size={'sm'} src={data?.data?.channel?.photo} mr='10px' />
+        {channel_id?.photo ? (
+          <Avatar size={'sm'} src={channel_id?.photo} mr='10px' />
         ) : (
           <Avatar
             size='sm'
-            name={firstName + ' ' + lastName}
+            name={channel_id?.name}
             borderColor='clique.greenYellow'
             mr='10px'
           />
@@ -43,7 +38,7 @@ function EachSubscribe({
           fontWeight={500}
           textTransform={'capitalize'}
         >
-          {data?.data?.channel?.name}
+          {channel_id?.name}
         </Text>
       </Flex>
     </Link>

@@ -2,26 +2,26 @@ import React from 'react';
 
 import {Icon} from '@chakra-ui/react';
 
-const CloseIcon = (props: any) => {
+const SlantArrow = (props: any) => {
   return (
-    <Icon viewBox='0 0 34 34' {...props}>
+    <Icon {...props} viewBox='0 0 26 26'>
       <svg
-        width='34'
-        height='34'
+        width='26'
+        height='26'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
       >
         <path
-          d='M12.7867 21.2422L21.272 12.7569'
+          d='M15.2025 8.21937L8.76427 8.21937L8.76427 14.6576'
           stroke='CurrentColor'
-          stroke-width='1.5'
+          stroke-miterlimit='10'
           stroke-linecap='round'
           stroke-linejoin='round'
         />
         <path
-          d='M21.272 21.2431L12.7867 12.7578'
+          d='M17.7799 17.235L8.85449 8.30957'
           stroke='CurrentColor'
-          stroke-width='1.5'
+          stroke-miterlimit='10'
           stroke-linecap='round'
           stroke-linejoin='round'
         />
@@ -30,4 +30,4 @@ const CloseIcon = (props: any) => {
   );
 };
 
-export default CloseIcon;
+export default SlantArrow;

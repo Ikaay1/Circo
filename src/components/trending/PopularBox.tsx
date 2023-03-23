@@ -17,10 +17,8 @@ import CreatorAvatarBox from './CreatorAvatarBox';
 import SearchProgressBar from './SearchProgressBar';
 
 function PopularBox() {
-  const {data, isFetching} = useGetPopularCreatorsQuery({
-    page: 1,
-    limit: 6,
-  });
+  const {data, isFetching} = useGetPopularCreatorsQuery('');
+  console.log('popular', data);
   const {data: searchData, isFetching: searchIsFetching} =
     useGetSearchHistoryQuery({page: 1, limit: 8});
 
@@ -69,7 +67,7 @@ function PopularBox() {
           mt='30px'
         >
           <>
-            {data?.data?.preference?.user.map((user: any) => (
+            {data?.data?.creators?.map((user: any) => (
               <Box key={user._id}>
                 <CreatorAvatarBox user={user} />
               </Box>
