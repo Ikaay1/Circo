@@ -94,59 +94,59 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
       <ModalContent
         bg={Color().whiteAndBlack}
         borderColor={Color().whiteAndBlack}
-        borderRadius="xl"
-        pt="3"
-        pb="10"
-        w={{ base: "100%" }}
+        borderRadius='xl'
+        pt='3'
+        pb='10'
+        w={{base: '100%'}}
         ref={initialRef}
       >
-        <ModalHeader alignSelf="center" mb="7" fontSize={"subHead"}>
+        <ModalHeader alignSelf='center' mb='7' fontSize={'subHead'}>
           How much will you like to Add?
         </ModalHeader>
 
         <ModalBody>
-          <Flex flexDirection={"column"}>
+          <Flex flexDirection={'column'}>
             <Box
-              bg="clique.secondaryGrey1"
-              px="2"
-              py="1"
-              borderRadius={"10px"}
-              width="full"
-              mb="10"
+              bg='clique.secondaryGrey1'
+              px='2'
+              py='1'
+              borderRadius={'10px'}
+              width='full'
+              mb='10'
             >
-              <Box width="full" height="60px" position="relative">
+              <Box width='full' height='60px' position='relative'>
                 <FormControl isInvalid={error}>
                   <Input
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="input"
-                    type={"number"}
+                    className='input'
+                    type={'number'}
                     required={true}
-                    placeholder="Amount (Naira)"
+                    placeholder='Amount (Naira)'
                     backgroundColor={Color().greyAndWhite}
                     _placeholder={{
                       color: Color().blackAndWhite,
 
-                      fontSize: amountFocused || amount !== "" ? "sm3" : "1rem",
-                      pb: amountFocused || amount !== "" ? "5px" : "0",
-                      transition: "all .3s ease",
+                      fontSize: amountFocused || amount !== '' ? 'sm3' : '1rem',
+                      pb: amountFocused || amount !== '' ? '5px' : '0',
+                      transition: 'all .3s ease',
                       transform:
-                        amountFocused || amount !== ""
-                          ? "translateY(-110%);  "
-                          : "translateY(0%); ",
+                        amountFocused || amount !== ''
+                          ? 'translateY(-110%);  '
+                          : 'translateY(0%); ',
                     }}
-                    h="60px"
-                    borderWidth={"1px"}
+                    h='60px'
+                    borderWidth={'1px'}
                     borderColor={Color().greyAndWhite}
                     _focus={{
-                      boxShadow: "none",
-                      border: "none",
-                      outline: "none",
+                      boxShadow: 'none',
+                      border: 'none',
+                      outline: 'none',
                     }}
                     _active={{
-                      boxShadow: "none",
-                      border: "none",
-                      outline: "none",
+                      boxShadow: 'none',
+                      border: 'none',
+                      outline: 'none',
                     }}
                     color={Color().blackAndWhite}
                     onFocus={() => {
@@ -164,15 +164,15 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
                   />
 
                   <Text
-                    position="absolute"
-                    top="0%"
-                    left={"4.5%"}
-                    fontSize="sm3"
-                    pt="5px"
+                    position='absolute'
+                    top='0%'
+                    left={'4.5%'}
+                    fontSize='sm3'
+                    pt='5px'
                     color={Color().blackAndWhite}
-                    display={amount !== "" ? "block" : "none"}
-                    transition="all .3s ease"
-                    zIndex="99"
+                    display={amount !== '' ? 'block' : 'none'}
+                    transition='all .3s ease'
+                    zIndex='99'
                   >
                     Amount (Naira)
                   </Text>
@@ -180,14 +180,14 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
                 </FormControl>
               </Box>
             </Box>
-            <Box px="7">
+            <Box px='7'>
               <Btn
-                text="Add money to wallet"
-                style={{ width: "100%" }}
+                text='Add money to wallet'
+                style={{width: '100%'}}
                 isLoading={isPaying || statusInfo.isLoading}
                 onClick={() => {
                   if (!amount) {
-                    setError("Amount is required");
+                    setError('Amount is required');
                     return;
                   }
                   setIsPaying(true);
