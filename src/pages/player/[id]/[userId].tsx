@@ -39,33 +39,10 @@ function Index() {
         isClosable: true,
         position: 'top-right',
       });
-      router.push('/home');
+      router.push(`/channel/subscribe/${userId}`);
     } else {
     }
   }, [data, error]);
-
-  useEffect(() => {
-    if (data && !data?.data?.preference?.video?.isFree) {
-      if (userData && userData?.data?._id !== userProfile?._id) {
-        if (
-          !userData?.data?.subscribers?.find(
-            (subscriber: {_id: string}) => subscriber._id === userProfile._id,
-          )
-        ) {
-          toast({
-            title: 'You are not subscribed to this content uploader',
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-            position: 'top-right',
-          });
-          setTimeout(() => {
-            window.location.replace(`/channel/subscribe/${userId}`);
-          }, 1000);
-        }
-      }
-    }
-  }, [userData, userProfile?._id]);
 
   useEffect(() => {
     const createView = async () => {

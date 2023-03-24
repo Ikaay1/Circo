@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import React from 'react';
 
-import {Box, Image, Text} from '@chakra-ui/react';
+import {Box, Button, Image, Text} from '@chakra-ui/react';
 
 import DownloadButtons from './DownloadButtons';
 
@@ -41,22 +41,24 @@ const Exclusive = () => {
           alignItems={'center'}
           marginTop={'2.2rem'}
         >
-          <Text
-            marginRight={'1.3rem'}
-            background='clique.purple'
-            borderRadius='30px'
-            w='326px'
-            h='50px'
-            display='flex'
-            justifyContent={'center'}
-            alignItems={'center'}
-            fontWeight='500'
-            letterSpacing='0.5px'
-            cursor='pointer'
-            onClick={() => router.push('/signup')}
+          <Link
+            href='/signup'
+            style={{
+              marginRight: '1.3rem',
+            }}
           >
-            <Link href='/signup'>Get Started</Link>
-          </Text>
+            <Button
+              background='clique.purple'
+              borderRadius='30px'
+              w='326px'
+              h='50px'
+              fontWeight='500'
+              letterSpacing='0.5px'
+              color='clique.white'
+            >
+              Get Started
+            </Button>
+          </Link>
         </Box>
         <Box
           display={{base: 'flex', lg: 'none'}}

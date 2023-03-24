@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useRef } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 
-import { SimpleGrid } from '@chakra-ui/react';
+import {SimpleGrid} from '@chakra-ui/react';
 
-import { contentData } from '../../constants/utils';
+import {contentData} from '../../constants/utils';
 import VideoThumb from './VideoThumb';
 
 function VideoGrid({
