@@ -21,16 +21,16 @@ const AddPlaylistIcon = () => {
             <path
                 d='M4.25 8.5H12.75'
                 stroke='#1E1E1E'
-                stroke-width='1.5'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M8.5 12.75V4.25'
                 stroke='#1E1E1E'
-                stroke-width='1.5'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <defs>
                 <linearGradient

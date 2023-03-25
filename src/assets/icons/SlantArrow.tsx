@@ -14,16 +14,16 @@ const SlantArrow = (props: any) => {
         <path
           d='M15.2025 8.21937L8.76427 8.21937L8.76427 14.6576'
           stroke='CurrentColor'
-          stroke-miterlimit='10'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeMiterlimit='10'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
         <path
           d='M17.7799 17.235L8.85449 8.30957'
           stroke='CurrentColor'
-          stroke-miterlimit='10'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeMiterlimit='10'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
       </svg>
     </Icon>

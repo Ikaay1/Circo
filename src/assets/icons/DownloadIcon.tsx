@@ -22,39 +22,39 @@ const DownloadIcon = (props: any) => (
       <path
         d="M11.725 15V13.2625C11.725 11.1125 13.25 10.225 15.1125 11.3L16.6125 12.1625L18.1125 13.025C19.975 14.1 19.975 15.8625 18.1125 16.9375L16.6125 17.8L15.1125 18.6625C13.25 19.7375 11.725 18.8625 11.725 16.7V15Z"
         stroke="white"
-        stroke-opacity="0.4"
-        stroke-width="1.5"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeOpacity="0.4"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M28.75 23.75C28.75 24.6875 28.4875 25.575 28.025 26.325C27.7625 26.775 27.425 27.175 27.0375 27.5C26.1625 28.2875 25.0125 28.75 23.75 28.75C21.925 28.75 20.3375 27.775 19.475 26.325C19.0125 25.575 18.75 24.6875 18.75 23.75C18.75 22.175 19.475 20.7625 20.625 19.85C21.4875 19.1625 22.575 18.75 23.75 18.75C26.5125 18.75 28.75 20.9875 28.75 23.75Z"
         stroke="white"
-        stroke-opacity="0.4"
-        stroke-width="1.5"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeOpacity="0.4"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <g opacity="0.4">
         <path
           d="M25.6125 23.7256H21.8875"
           stroke="white"
-          stroke-opacity="0.4"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeOpacity="0.4"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M23.7503 21.9004V25.6379"
           stroke="white"
-          stroke-opacity="0.4"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeOpacity="0.4"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>
