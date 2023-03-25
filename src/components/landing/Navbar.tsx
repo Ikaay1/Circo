@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import React, {Dispatch, SetStateAction} from 'react';
 import {AiOutlineMenu} from 'react-icons/ai';
 
-import {Box, Image, Text} from '@chakra-ui/react';
+import {Box, Button, Image, Text} from '@chakra-ui/react';
 
 const Navbar = ({
   setShowSideBar,
@@ -35,23 +35,22 @@ const Navbar = ({
         <Text letterSpacing='0.5px' color='clique.white'>
           <Link href='/login'>Login</Link>
         </Text>
-        <Text
-          marginLeft={'3rem'}
-          background='clique.purple'
-          borderRadius='30px'
-          w='221px'
-          h='50px'
-          display={'flex'}
-          justifyContent='center'
-          alignItems='center'
-          cursor={'pointer'}
-          onClick={() => router.push('/signup')}
-        >
-          <Link href='signup'>Sign Up For Free</Link>
-        </Text>
+        <Link href='/signup' style={{marginLeft: '3rem'}}>
+          <Button
+            background='clique.purple'
+            borderRadius='30px'
+            w='221px'
+            h='50px'
+            color='clique.white'
+          >
+            Sign Up For Free
+          </Button>
+        </Link>
       </Box>
       <Box display={{lg: 'none'}} onClick={() => setShowSideBar(true)}>
-        <AiOutlineMenu style={{width: '29px', height: '55px'}} />
+        <AiOutlineMenu
+          style={{width: '29px', height: '55px', color: 'white'}}
+        />
       </Box>
     </Box>
   );
