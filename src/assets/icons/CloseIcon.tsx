@@ -14,16 +14,16 @@ const CloseIcon = (props: any) => {
         <path
           d='M12.7867 21.2422L21.272 12.7569'
           stroke='CurrentColor'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
         <path
           d='M21.272 21.2431L12.7867 12.7578'
           stroke='CurrentColor'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
       </svg>
     </Icon>
