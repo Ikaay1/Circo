@@ -15,7 +15,7 @@ const AccountIcon = () => (
         d="M15.1504 15.9746C15.0629 15.9621 14.9504 15.9621 14.8504 15.9746C12.6504 15.8996 10.9004 14.0996 10.9004 11.8871C10.9004 9.62461 12.7254 7.78711 15.0004 7.78711C17.2629 7.78711 19.1004 9.62461 19.1004 11.8871C19.0879 14.0996 17.3504 15.8996 15.1504 15.9746Z"
         stroke="currentColor"
         strokeOpacity="0.4"
-        strokeWidthstroke-width="1.5"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

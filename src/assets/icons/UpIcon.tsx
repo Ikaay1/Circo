@@ -12,18 +12,18 @@ const UpIcon = () => {
             <path
                 d='M12.3729 6.66934L8.46914 2.76562L4.56543 6.66934'
                 stroke='white'
-                stroke-width='1.92935'
-                stroke-miterlimit='10'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.92935'
+                strokeMiterlimit='10'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M8.46924 13.7006V2.87695'
                 stroke='white'
-                stroke-width='1.92935'
-                stroke-miterlimit='10'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.92935'
+                strokeMiterlimit='10'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
         </svg>
     );
