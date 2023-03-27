@@ -11,6 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { contentData, createObjectURL, decrypt } from "@constants/utils";
 
+import "videojs-contrib-ads";
+import "videojs-ima";
+
 import BigAd from "./BigAd";
 import Control from "./Control";
 import ControlMobile from "./ControlMobile";
@@ -114,6 +117,10 @@ function VideoPlayer({
 
   const handlePlayerReady = (player: any) => {
     playerRef.current = player;
+    const tagUrl =
+      "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=";
+
+    player.ima({ adTagUrl: tagUrl });
   };
 
   return (
