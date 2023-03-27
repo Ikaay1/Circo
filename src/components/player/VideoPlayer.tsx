@@ -1,6 +1,6 @@
-import moment from 'moment';
-import {useRouter} from 'next/router';
-import React, {useEffect} from 'react';
+import moment from "moment";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import {
   Box,
@@ -8,15 +8,19 @@ import {
   Slider,
   SliderFilledTrack,
   SliderTrack,
-} from '@chakra-ui/react';
-import {contentData, createObjectURL, decrypt} from '@constants/utils';
+} from "@chakra-ui/react";
+import { contentData, createObjectURL, decrypt } from "@constants/utils";
 
-import BigAd from './BigAd';
-import Control from './Control';
-import ControlMobile from './ControlMobile';
-import SmallAd from './SmallAd';
+import "videojs-contrib-ads";
+import "videojs-ima";
 
-const {Player, ControlBar, BigPlayButton} = require('video-react');
+import BigAd from "./BigAd";
+import Control from "./Control";
+import ControlMobile from "./ControlMobile";
+import SmallAd from "./SmallAd";
+import VIdeoJsPlayer from "./VIdeoJsPlayer";
+
+const { Player, ControlBar, BigPlayButton } = require("video-react");
 
 function VideoPlayer({
   video,
@@ -31,21 +35,21 @@ function VideoPlayer({
 }) {
   const router = useRouter();
   const currentVideoIndex = videoIdsList.findIndex(
-    (videoId) => videoId?._id === video._id,
+    (videoId) => videoId?._id === video._id
   );
 
   const [nextVideoIndex, setNextVideoIndex] = React.useState<number | null>(
-    null,
+    null
   );
 
   const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
-    null,
+    null
   );
 
   const [isLoop, setIsLoop] = React.useState<any>(
-    localStorage.getItem('loop') === 'true' ? true : false,
+    localStorage.getItem("loop") === "true" ? true : false
   );
-
+  const playerRef: any = React.useRef(null);
   useEffect(() => {
     const length = videoIdsList.length;
 
@@ -72,7 +76,6 @@ function VideoPlayer({
   const [isMuted, setIsMuted] = React.useState(false);
   const [isPlay, setIsPlay] = React.useState(true);
   const [isFullScreen, setIsFullScreen] = React.useState(false);
-  const playerRef: any = React.useRef(null);
 
   useEffect(() => {
     if (playerRef.current) {
@@ -88,7 +91,7 @@ function VideoPlayer({
   const [isSmallAd, setIsSmallAd] = React.useState(false);
 
   React.useEffect(() => {
-    if (moment(currentTimestamp * 1000).format('mm:ss') === '00:00' && isPlay) {
+    if (moment(currentTimestamp * 1000).format("mm:ss") === "00:00" && isPlay) {
       setIsAd(true);
       setTimeout(() => {
         setIsSmallAd(true);
@@ -96,29 +99,44 @@ function VideoPlayer({
     }
   }, [currentTimestamp]);
 
-  return (
-    <Flex
-      pos={'relative'}
-      h={{base: '400px', lg: '580px'}}
-      maxH={{base: '400px', lg: '580px'}}
-      borderRadius='20px'
-      id='video'
-      overflow={'hidden'}
-      bg='black'
-      flexDir={'column'}
-    >
-      {video?.isFree && isAd && (
-        <BigAd
-          setIsAd={setIsAd}
-          setIsSmallAd={setIsSmallAd}
-          playerRef={playerRef}
-          setIsPlay={setIsPlay}
-          isPlay={isPlay}
-        />
-      )}
+  const videoJsOptions = {
+    autoplay: true,
+    controls: true,
+    responsive: true,
+    fluid: true,
+    height: "100%",
+    aspectRatio: "16:9",
+    muted: isMuted,
+    sources: [
+      {
+        src: url,
+        type: "video/mp4",
+      },
+    ],
+  };
 
-      <Box minH='calc(100% - 80px)' borderTopRadius={'20px'}>
-        <Player
+  const handlePlayerReady = (player: any) => {
+    playerRef.current = player;
+    const tagUrl =
+      "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=";
+
+    player.ima({ adTagUrl: tagUrl });
+  };
+
+  return (
+    <>
+      <Flex
+        pos={"relative"}
+        h={{ base: "320px", lg: "500px" }}
+        maxH={{ base: "400px", lg: "580px" }}
+        borderTopRadius="20px"
+        id="video"
+        overflow={"hidden"}
+        bg="black"
+        flexDir={"column"}
+      >
+        <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
+          {/* <Player
           controls={false}
           playing={isPlay && !isAd}
           ref={playerRef}
@@ -151,24 +169,34 @@ function VideoPlayer({
             disableDefaultControls={true}
           ></ControlBar>
           <BigPlayButton position='center' />
-        </Player>
-      </Box>
-
+        </Player> */}
+          <VIdeoJsPlayer
+            controls={false}
+            autoplay
+            options={videoJsOptions}
+            onReady={handlePlayerReady}
+            ima={{
+              adTagUrl:
+                "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=",
+            }}
+          />
+        </Box>
+      </Flex>
       <Flex
-        bg='clique.blackGrey'
-        overflow={'hidden'}
-        mt='auto'
-        borderBottomRadius={'20px'}
-        flexDir={'column'}
-        minH='80px'
-        h={'80px'}
-        maxH={'80px'}
-        alignItems={'center'}
-        justifyContent={'flex-start'}
+        bg="clique.blackGrey"
+        overflow={"hidden"}
+        mt="auto"
+        borderBottomRadius={"20px"}
+        flexDir={"column"}
+        minH="80px"
+        h={"80px"}
+        maxH={"80px"}
+        alignItems={"center"}
+        justifyContent={"flex-start"}
       >
         {/* progress */}
         <Slider
-          aria-label='slider-ex-1'
+          aria-label="slider-ex-1"
           defaultValue={0}
           value={
             totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
@@ -178,13 +206,13 @@ function VideoPlayer({
             playerRef.current.seek(timestamp);
           }}
         >
-          <SliderTrack h='10px' rounded='0' bg='clique.grey'>
-            <SliderFilledTrack rounded='0' bg='clique.base' />
+          <SliderTrack h="10px" rounded="0" bg="clique.grey">
+            <SliderFilledTrack rounded="0" bg="clique.base" />
           </SliderTrack>
         </Slider>
 
         {/* control */}
-        <Box display={{base: 'none', lg: 'block'}}>
+        <Box display={{ base: "none", lg: "block" }}>
           <Control
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
@@ -205,7 +233,7 @@ function VideoPlayer({
           />
         </Box>
 
-        <Box display={{lg: 'none'}}>
+        <Box display={{ lg: "none" }}>
           <ControlMobile
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
@@ -224,7 +252,7 @@ function VideoPlayer({
           />
         </Box>
       </Flex>
-    </Flex>
+    </>
   );
 }
 
