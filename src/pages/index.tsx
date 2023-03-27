@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
-import Head from 'next/head';
+import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 import Creative from "@components/landing/Creative";
 import Creators from "@components/landing/Creators";
@@ -25,11 +25,13 @@ const Home: NextPage = () => {
     }
   }, [token, router]);
   return (
-    <Box overflowX={"hidden"} bg="clique.primaryBg"> <Head>
+    <Box overflowX={"hidden"} bg="clique.primaryBg">
+      {" "}
+      <Head>
         <script
           async
-          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2071647719246163'
-          crossOrigin='anonymous'
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2071647719246163"
+          crossOrigin="anonymous"
         ></script>
       </Head>
       <Box
