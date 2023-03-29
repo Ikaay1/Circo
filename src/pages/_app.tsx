@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-css-tags */
 /* eslint-disable react-hooks/exhaustive-deps */
 import "../styles/globals.css";
 
@@ -24,6 +25,7 @@ import { Chakra } from "../components/widgets/Chakara";
 import { persistor, store } from "../redux/app/store";
 
 import type { AppProps } from "next/app";
+import Head from "next/head";
 const NProgress = require("nprogress");
 
 function MyApp({ Component, pageProps }: any) {
@@ -91,6 +93,25 @@ function MyApp({ Component, pageProps }: any) {
             clientId="75252957257-5i6nhuvt2643qo64oo76vg3a9ba4sp5g.apps.googleusercontent.com"
           >
             <Layout>
+              <Head>
+                {/* <link
+                  rel="stylesheet"
+                  href="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video-js.min.css"
+                />
+                <link
+                  rel="stylesheet"
+                  href="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.css"
+                />
+                <link
+                  rel="stylesheet"
+                  href="//googleads.github.io/videojs-ima/dist/videojs.ima.css"
+                />
+
+                <Script src="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js"></Script>
+                <Script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></Script>
+                <Script src="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.min.js"></Script>
+                <sript src="videojs.ima.js"></sript> */}
+              </Head>
               <ColorModeScript
                 initialColorMode={theme.config.initialColorMode}
               />
