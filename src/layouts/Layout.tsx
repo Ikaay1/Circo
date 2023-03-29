@@ -18,10 +18,6 @@ const Layout = ({children}: {children: any}) => {
           referrerPolicy='no-referrer'
         />
         <link rel='icon' href='/assets/favi.svg' type='image/svg+xml' />
-        <script
-          async
-          src='https://www.googletagmanager.com/gtag/js?id=G-59M7LRQCT7'
-        ></script>
       </Head>
       <Box>{children}</Box>
     </Box>
