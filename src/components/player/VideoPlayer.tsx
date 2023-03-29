@@ -1,6 +1,9 @@
-import moment from "moment";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import 'videojs-contrib-ads';
+import 'videojs-ima';
+
+import moment from 'moment';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
 
 import {
   Box,
@@ -8,19 +11,16 @@ import {
   Slider,
   SliderFilledTrack,
   SliderTrack,
-} from "@chakra-ui/react";
-import { contentData, createObjectURL, decrypt } from "@constants/utils";
+} from '@chakra-ui/react';
+import {contentData, createObjectURL, decrypt} from '@constants/utils';
 
-import "videojs-contrib-ads";
-import "videojs-ima";
+import BigAd from './BigAd';
+import Control from './Control';
+import ControlMobile from './ControlMobile';
+import SmallAd from './SmallAd';
+import VideoJsPlayer from './VIdeoJsPlayer';
 
-import BigAd from "./BigAd";
-import Control from "./Control";
-import ControlMobile from "./ControlMobile";
-import SmallAd from "./SmallAd";
-import VIdeoJsPlayer from "./VIdeoJsPlayer";
-
-const { Player, ControlBar, BigPlayButton } = require("video-react");
+const {Player, ControlBar, BigPlayButton} = require('video-react');
 
 function VideoPlayer({
   video,
@@ -35,19 +35,19 @@ function VideoPlayer({
 }) {
   const router = useRouter();
   const currentVideoIndex = videoIdsList.findIndex(
-    (videoId) => videoId?._id === video._id
+    (videoId) => videoId?._id === video._id,
   );
 
   const [nextVideoIndex, setNextVideoIndex] = React.useState<number | null>(
-    null
+    null,
   );
 
   const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
-    null
+    null,
   );
 
   const [isLoop, setIsLoop] = React.useState<any>(
-    localStorage.getItem("loop") === "true" ? true : false
+    localStorage.getItem('loop') === 'true' ? true : false,
   );
   const playerRef: any = React.useRef(null);
   useEffect(() => {
@@ -87,55 +87,55 @@ function VideoPlayer({
     }
   }, []);
 
-  const [isAd, setIsAd] = React.useState(false);
-  const [isSmallAd, setIsSmallAd] = React.useState(false);
+  // const [isAd, setIsAd] = React.useState(false);
+  // const [isSmallAd, setIsSmallAd] = React.useState(false);
 
-  React.useEffect(() => {
-    if (moment(currentTimestamp * 1000).format("mm:ss") === "00:00" && isPlay) {
-      setIsAd(true);
-      setTimeout(() => {
-        setIsSmallAd(true);
-      }, 5000);
-    }
-  }, [currentTimestamp]);
+  // React.useEffect(() => {
+  //   if (moment(currentTimestamp * 1000).format('mm:ss') === '00:00' && isPlay) {
+  //     setIsAd(true);
+  //     setTimeout(() => {
+  //       setIsSmallAd(true);
+  //     }, 5000);
+  //   }
+  // }, [currentTimestamp]);
 
-  const videoJsOptions = {
-    autoplay: true,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    height: "100%",
-    aspectRatio: "16:9",
-    muted: isMuted,
-    sources: [
-      {
-        src: url,
-        type: "video/mp4",
-      },
-    ],
-  };
+  // const videoJsOptions = {
+  //   autoplay: true,
+  //   controls: true,
+  //   responsive: true,
+  //   fluid: true,
+  //   height: '100%',
+  //   aspectRatio: '16:9',
+  //   muted: isMuted,
+  //   sources: [
+  //     {
+  //       src: url,
+  //       type: 'video/mp4',
+  //     },
+  //   ],
+  // };
 
-  const handlePlayerReady = (player: any) => {
-    playerRef.current = player;
-    const tagUrl =
-      "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=";
+  // const handlePlayerReady = (player: any) => {
+  //   playerRef.current = player;
+  //   const tagUrl =
+  //     'https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=';
 
-    player.ima({ adTagUrl: tagUrl });
-  };
+  //   player.ima({adTagUrl: tagUrl});
+  // };
 
   return (
     <>
       <Flex
-        pos={"relative"}
-        h={{ base: "320px", lg: "500px" }}
-        maxH={{ base: "400px", lg: "580px" }}
-        borderTopRadius="20px"
-        id="video"
-        overflow={"hidden"}
-        bg="black"
-        flexDir={"column"}
+        pos={'relative'}
+        h={{base: '320px', lg: '500px'}}
+        maxH={{base: '400px', lg: '580px'}}
+        borderTopRadius='20px'
+        id='video'
+        overflow={'hidden'}
+        bg='black'
+        flexDir={'column'}
       >
-        <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
+        <Box minH='calc(100% - 80px)' borderTopRadius={'20px'}>
           {/* <Player
           controls={false}
           playing={isPlay && !isAd}
@@ -170,33 +170,47 @@ function VideoPlayer({
           ></ControlBar>
           <BigPlayButton position='center' />
         </Player> */}
-          <VIdeoJsPlayer
+          {/* <VIdeoJsPlayer
             controls={false}
             autoplay
             options={videoJsOptions}
-            onReady={handlePlayerReady}
+            // onReady={handlePlayerReady}
             ima={{
               adTagUrl:
-                "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=",
+                'https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=',
+            }}
+          /> */}
+          <VideoJsPlayer
+            controls
+            // autoplay
+            sources={[
+              {
+                src: 'https://www.w3schools.com/tags/movie.mp4',
+                type: 'video/mp4',
+              },
+            ]}
+            ima={{
+              adTagUrl:
+                'https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=',
             }}
           />
         </Box>
       </Flex>
       <Flex
-        bg="clique.blackGrey"
-        overflow={"hidden"}
-        mt="auto"
-        borderBottomRadius={"20px"}
-        flexDir={"column"}
-        minH="80px"
-        h={"80px"}
-        maxH={"80px"}
-        alignItems={"center"}
-        justifyContent={"flex-start"}
+        bg='clique.blackGrey'
+        overflow={'hidden'}
+        mt='auto'
+        borderBottomRadius={'20px'}
+        flexDir={'column'}
+        minH='80px'
+        h={'80px'}
+        maxH={'80px'}
+        alignItems={'center'}
+        justifyContent={'flex-start'}
       >
         {/* progress */}
         <Slider
-          aria-label="slider-ex-1"
+          aria-label='slider-ex-1'
           defaultValue={0}
           value={
             totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
@@ -206,13 +220,13 @@ function VideoPlayer({
             playerRef.current.seek(timestamp);
           }}
         >
-          <SliderTrack h="10px" rounded="0" bg="clique.grey">
-            <SliderFilledTrack rounded="0" bg="clique.base" />
+          <SliderTrack h='10px' rounded='0' bg='clique.grey'>
+            <SliderFilledTrack rounded='0' bg='clique.base' />
           </SliderTrack>
         </Slider>
 
         {/* control */}
-        <Box display={{ base: "none", lg: "block" }}>
+        <Box display={{base: 'none', lg: 'block'}}>
           <Control
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
@@ -233,7 +247,7 @@ function VideoPlayer({
           />
         </Box>
 
-        <Box display={{ lg: "none" }}>
+        <Box display={{lg: 'none'}}>
           <ControlMobile
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
