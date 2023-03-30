@@ -32,10 +32,10 @@ function AdVideoJsPlayer({ url }: { url: string }) {
           className="video-js vjs-default-skin"
           controls
           preload="auto"
-          width="640px"
           style={{ width: "100%", height: "480px" }}
           height="480px"
-          autoPlay={true}
+          autoPlay
+          loop
         >
           <source src={url} type="video/mp4" />
         </video>
