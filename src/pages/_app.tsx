@@ -84,43 +84,39 @@ function MyApp({Component, pageProps}: any) {
   // };
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Chakra cookies={pageProps.cookies} theme={theme}>
-          <GoogleOAuthProvider
-            // clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
-            clientId='75252957257-5i6nhuvt2643qo64oo76vg3a9ba4sp5g.apps.googleusercontent.com'
-          >
-            <Script
-              strategy='afterInteractive'
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-            />
-                
-            <Script
-              id='google-analytics'
-              strategy='afterInteractive'
-              dangerouslySetInnerHTML={{
-                __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-            page_path: window.location.pathname,
-          });
-        `,
-              }}
-            />
-            <Layout>
-              <ColorModeScript
-                initialColorMode={theme.config.initialColorMode}
-              />
-              <Component {...pageProps} />
-              <Toaster />
-            </Layout>
-          </GoogleOAuthProvider>
-        </Chakra>
-      </PersistGate>
-    </Provider>
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+        strategy='afterInteractive'
+      />
+      <Script id='google-analytics' strategy='afterInteractive'>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
+        `}
+      </Script>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Chakra cookies={pageProps.cookies} theme={theme}>
+            <GoogleOAuthProvider
+              // clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+              clientId='75252957257-5i6nhuvt2643qo64oo76vg3a9ba4sp5g.apps.googleusercontent.com'
+            >
+              <Layout>
+                <ColorModeScript
+                  initialColorMode={theme.config.initialColorMode}
+                />
+                <Component {...pageProps} />
+                <Toaster />
+              </Layout>
+            </GoogleOAuthProvider>
+          </Chakra>
+        </PersistGate>
+      </Provider>
+    </>
   );
 }
 
