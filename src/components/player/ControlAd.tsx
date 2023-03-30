@@ -29,7 +29,21 @@ import PrevIcon from '@icons/PrevIcon';
 import GiftModal from './GiftModal';
 import VideoOptionMenu from './VideoOptionMenu';
 
-function ControlAd() {
+function ControlAd({
+  play,
+  videoHandler,
+  setIsMuted,
+  isMuted,
+  nextVideoIndex,
+  prevVideoIndex,
+  videoIdsList,
+  video,
+  currentTimestamp,
+  totalDuration,
+  isFullScreen,
+  setIsFullScreen,
+}: any) {
+  const router = useRouter();
   return (
     <>
       <Grid
@@ -41,69 +55,75 @@ function ControlAd() {
       >
         <GridItem colSpan={2}>
           <Flex alignItems='center' pos='relative'>
-            {/* <Text
-              mt='5px'
-              minW={'100px'}
-              color={'clique.white'}
-              fontFamily={'Poppins'}
-              fontWeight={400}
-              fontSize={'smSubHead'}
-              lineHeight={'1'}
-              mr='30px'
-            ></Text> */}
-
-            <Text
-              mt='5px'
-              minW={'100px'}
-              color={'clique.white'}
-              fontFamily={'Poppins'}
-              fontWeight={400}
-              fontSize={'smSubHead'}
-              lineHeight={'1'}
-              mr='30px'
-            >
-              00:00/00:00
-            </Text>
-
-            <Tooltip
-              label='Mute'
-              bg='none'
-              hasArrow
-              color='clique.white'
-              fontSize='sm'
-              p='0'
-              mt='0'
-              placement='top'
-            >
-              <span>
-                <Icon
-                  fontSize='smHead'
-                  cursor={'pointer'}
-                  as={GoUnmute}
-                  color={'clique.white'}
-                />
-              </span>
-            </Tooltip>
-
-            {/* <Tooltip
-                label="Unute"
-                bg="none"
+            {!currentTimestamp || !totalDuration ? (
+              <Text
+                mt='5px'
+                minW={'100px'}
+                color={'clique.white'}
+                fontFamily={'Poppins'}
+                fontWeight={400}
+                fontSize={'smSubHead'}
+                lineHeight={'1'}
+                mr='30px'
+              ></Text>
+            ) : (
+              <Text
+                mt='5px'
+                minW={'100px'}
+                color={'clique.white'}
+                fontFamily={'Poppins'}
+                fontWeight={400}
+                fontSize={'smSubHead'}
+                lineHeight={'1'}
+                mr='30px'
+              >
+                {moment(currentTimestamp * 1000).format('mm:ss')} /{' '}
+                {moment(totalDuration * 1000).format('mm:ss')}
+              </Text>
+            )}
+            {!isMuted ? (
+              <Tooltip
+                label='Mute'
+                bg='none'
                 hasArrow
-                color="clique.white"
-                fontSize="sm"
-                p="0"
-                mt="0"
-                placement="top"
+                color='clique.white'
+                fontSize='sm'
+                p='0'
+                mt='0'
+                placement='top'
               >
                 <span>
                   <Icon
-                    fontSize="smHead"
-                    cursor={"pointer"}
-                    as={GoMute}
-                    color={"clique.white"}
+                    fontSize='smHead'
+                    cursor={'pointer'}
+                    onClick={() => setIsMuted(!isMuted)}
+                    as={GoUnmute}
+                    color={'clique.white'}
                   />
                 </span>
-              </Tooltip> */}
+              </Tooltip>
+            ) : (
+              <Tooltip
+                label='Unute'
+                bg='none'
+                hasArrow
+                color='clique.white'
+                fontSize='sm'
+                p='0'
+                mt='0'
+                placement='top'
+              >
+                <span>
+                  <Icon
+                    fontSize='smHead'
+                    cursor={'pointer'}
+                    onClick={() => setIsMuted(!isMuted)}
+                    as={GoMute}
+                    color={'clique.white'}
+                  />
+                </span>
+              </Tooltip>
+            )}
 
             <Flex ml='30px' alignItems={'center'}>
               <Flex
@@ -198,52 +218,63 @@ function ControlAd() {
                   fontSize='bigHead'
                   cursor='pointer'
                   as={PrevIcon}
-                  color={'clique.white'}
+                  color={prevVideoIndex !== null ? 'clique.white' : 'gray.500'}
+                  onClick={() => {
+                    if (prevVideoIndex !== null) {
+                      router.push(
+                        `/player/${videoIdsList[prevVideoIndex]?._id}/${video.uploader_id._id}`,
+                      );
+                    }
+                  }}
                 />
               </span>
             </Tooltip>
 
-            {/* <Tooltip
-              label='Pause'
-              bg='none'
-              hasArrow
-              color='clique.white'
-              fontSize='sm'
-              p='0'
-              mt='0'
-              placement='top'
-            >
-              <span>
-                <Icon
-                  fontSize='35px'
-                  cursor='pointer'
-                  as={BsPauseFill}
-                  color={'clique.white'}
-                  mx='20px'
-                />
-              </span>
-            </Tooltip> */}
-
-            <Tooltip
-              label='Play'
-              bg='none'
-              hasArrow
-              color='clique.white'
-              fontSize='sm'
-              p='0'
-              mt='0'
-              placement='top'
-            >
-              <span>
-                <Icon
-                  fontSize='bigHead'
-                  cursor='pointer'
-                  as={BsFillPlayFill}
-                  color={'clique.white'}
-                  mx='20px'
-                />
-              </span>
-            </Tooltip>
+            {play === true ? (
+              <Tooltip
+                label='Pause'
+                bg='none'
+                hasArrow
+                color='clique.white'
+                fontSize='sm'
+                p='0'
+                mt='0'
+                placement='top'
+              >
+                <span>
+                  <Icon
+                    fontSize='35px'
+                    cursor='pointer'
+                    as={BsPauseFill}
+                    color={'clique.white'}
+                    onClick={() => videoHandler('pause')}
+                    mx='20px'
+                  />
+                </span>
+              </Tooltip>
+            ) : (
+              <Tooltip
+                label='Play'
+                bg='none'
+                hasArrow
+                color='clique.white'
+                fontSize='sm'
+                p='0'
+                mt='0'
+                placement='top'
+              >
+                <span>
+                  <Icon
+                    fontSize='bigHead'
+                    cursor='pointer'
+                    as={BsFillPlayFill}
+                    onClick={() => videoHandler('play')}
+                    color={'clique.white'}
+                    mx='20px'
+                  />
+                </span>
+              </Tooltip>
+            )}
 
             <Tooltip
               label='Next'
@@ -260,7 +291,14 @@ function ControlAd() {
                   fontSize='30px'
                   cursor='pointer'
                   as={NextIcon}
-                  color={'clique.white'}
+                  color={nextVideoIndex !== null ? 'clique.white' : 'gray.500'}
+                  onClick={() => {
+                    if (nextVideoIndex !== null) {
+                      router.push(
+                        `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
+                      );
+                    }
+                  }}
                 />
               </span>
             </Tooltip>
@@ -305,46 +343,57 @@ function ControlAd() {
               color={'clique.white'}
             />
 
-            <Tooltip
-              label='Fullscreen'
-              bg='none'
-              hasArrow
-              color='clique.white'
-              fontSize='sm'
-              p='0'
-              mt='0'
-              placement='top'
-              h='100%'
-            >
-              <span>
-                <Icon
-                  fontSize='smHead'
-                  cursor={'pointer'}
-                  as={BsFullscreen}
-                  color={'clique.white'}
-                />
-              </span>
-            </Tooltip>
-
-            {/* <Tooltip
-                label="Normal"
-                bg="none"
+            {!isFullScreen ? (
+              <Tooltip
+                label='Fullscreen'
+                bg='none'
                 hasArrow
-                color="clique.white"
-                fontSize="sm"
-                p="0"
-                mt="0"
-                placement="top"
+                color='clique.white'
+                fontSize='sm'
+                p='0'
+                mt='0'
+                placement='top'
               >
                 <span>
                   <Icon
-                    fontSize="smHead"
-                    cursor={"pointer"}
-                    color={"clique.white"}
+                    fontSize='smHead'
+                    cursor={'pointer'}
+                    onClick={() => {
+                      setIsFullScreen(!isFullScreen);
+                      const video: any =
+                        document.getElementById('content_video');
+                      video.requestFullscreen();
+                    }}
+                    as={BsFullscreen}
+                    color={'clique.white'}
+                  />
+                </span>
+              </Tooltip>
+            ) : (
+              <Tooltip
+                label='Normal'
+                bg='none'
+                hasArrow
+                color='clique.white'
+                fontSize='sm'
+                p='0'
+                mt='0'
+                placement='top'
+              >
+                <span>
+                  <Icon
+                    fontSize='smHead'
+                    cursor={'pointer'}
+                    color={'clique.white'}
+                    onClick={() => {
+                      setIsFullScreen(!isFullScreen);
+                      document.exitFullscreen();
+                    }}
                     as={MdFullscreenExit}
                   />
                 </span>
-              </Tooltip> */}
+              </Tooltip>
+            )}
           </Flex>
         </GridItem>
       </Grid>

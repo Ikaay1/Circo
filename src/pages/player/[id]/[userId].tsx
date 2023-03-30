@@ -92,7 +92,11 @@ function Index() {
               sx={scrollBarStyle3}
             >
               {data?.data?.preference?.video?.isFree && (
-                <AdVideoJsPlayer url={url} />
+                <AdVideoJsPlayer
+                  url={url}
+                  video={data?.data?.preference?.video}
+                  videoIdsList={data?.data?.preference?.allVideos}
+                />
               )}
               {!data?.data?.preference?.video?.isFree && (
                 <VideoPlayer

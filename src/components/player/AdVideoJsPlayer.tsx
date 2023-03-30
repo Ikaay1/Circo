@@ -5,7 +5,7 @@ import 'video.js/dist/video-js.css';
 import Head from 'next/head';
 import Link from 'next/link';
 import Script from 'next/script';
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import videojs from 'video.js';
 
 import {
@@ -15,11 +15,80 @@ import {
   SliderFilledTrack,
   SliderTrack,
 } from '@chakra-ui/react';
+import {contentData} from '@constants/utils';
 
 import ControlAd from './ControlAd';
 import ControlMobileAd from './ControlMobileAd';
 
-function AdVideoJsPlayer({url}: {url: string}) {
+function AdVideoJsPlayer({
+  video,
+  videoIdsList,
+  url,
+}: {
+  video: contentData;
+  videoIdsList: {
+    _id: string;
+  }[];
+  url: string;
+}) {
+  const currentVideoIndex = videoIdsList.findIndex(
+    (videoId) => videoId?._id === video._id,
+  );
+  const [nextVideoIndex, setNextVideoIndex] = React.useState<number | null>(
+    null,
+  );
+
+  const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
+    null,
+  );
+  const videoRef: any = useRef(null);
+  const [play, setPlay] = useState(true);
+  const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
+  const [totalDuration, setTotalDuration] = React.useState(0);
+  const [isMuted, setIsMuted] = React.useState(false);
+  const [isFullScreen, setIsFullScreen] = React.useState(false);
+  const videoHandler = (control: string) => {
+    if (control === 'play') {
+      videoRef.current.play();
+      setPlay(true);
+    } else if (control === 'pause') {
+      videoRef.current.pause();
+      setPlay(false);
+    }
+  };
+
+  useEffect(() => {
+    const length = videoIdsList.length;
+
+    if (currentVideoIndex === 0 && length > 1) {
+      setPrevVideoIndex(null);
+      setNextVideoIndex(currentVideoIndex + 1);
+      return;
+    } else if (currentVideoIndex === length - 1 && length > 1) {
+      setNextVideoIndex(0);
+      setPrevVideoIndex(currentVideoIndex - 1);
+      return;
+    } else if (length === 1) {
+      setNextVideoIndex(null);
+      setPrevVideoIndex(null);
+      return;
+    } else {
+      setNextVideoIndex(currentVideoIndex + 1);
+      setPrevVideoIndex(currentVideoIndex - 1);
+    }
+  }, [currentVideoIndex, videoIdsList]);
+
+  useEffect(() => {
+    if (videoRef?.current) {
+      setCurrentTimestamp(videoRef?.current?.currentTime);
+      setTotalDuration(videoRef?.current?.duration);
+    }
+  }, [videoRef?.current?.currentTime, videoRef?.current?.duration]);
+
+  console.log(videoRef);
+  console.log('currentTimestamp: ' + currentTimestamp);
+  console.log(totalDuration);
+
   return (
     <>
       <Head>
@@ -40,12 +109,14 @@ function AdVideoJsPlayer({url}: {url: string}) {
         <video
           id='content_video'
           className='video-js vjs-default-skin'
-          controls
-          preload='auto'
+          controls={false}
+          // preload='auto'
           style={{width: '100%', height: '480px'}}
           height='480px'
-          autoPlay
-          loop
+          autoPlay={true}
+          // loop
+          ref={videoRef}
+          muted={isMuted}
         >
           <source src={url} type='video/mp4' />
         </video>
@@ -63,7 +134,18 @@ function AdVideoJsPlayer({url}: {url: string}) {
           justifyContent={'flex-start'}
         >
           {/* progress */}
-          <Slider aria-label='slider-ex-1' defaultValue={0}>
+          <Slider
+            aria-label='slider-ex-1'
+            defaultValue={0}
+            value={
+              totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
+            }
+            onChange={(val) => {
+              const timestamp = (val * totalDuration) / 100;
+              videoRef.current.currentTime = timestamp;
+              setCurrentTimestamp(timestamp);
+            }}
+          >
             <SliderTrack h='10px' rounded='0' bg='clique.grey'>
               <SliderFilledTrack rounded='0' bg='clique.base' />
             </SliderTrack>
@@ -72,7 +154,20 @@ function AdVideoJsPlayer({url}: {url: string}) {
           {/* control */}
 
           <Box display={{base: 'none', lg: 'block'}}>
-            <ControlAd />
+            <ControlAd
+              play={play}
+              videoHandler={videoHandler}
+              setIsMuted={setIsMuted}
+              isMuted={isMuted}
+              nextVideoIndex={nextVideoIndex}
+              prevVideoIndex={prevVideoIndex}
+              videoIdsList={videoIdsList}
+              video={video}
+              currentTimestamp={currentTimestamp}
+              totalDuration={totalDuration}
+              isFullScreen={isFullScreen}
+              setIsFullScreen={setIsFullScreen}
+            />
           </Box>
           <Box display={{lg: 'none'}}>
             <ControlMobileAd />
