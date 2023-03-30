@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-sync-scripts */
+/* eslint-disable @next/next/no-css-tags */
 /* eslint-disable react-hooks/exhaustive-deps */
 import '../styles/globals.css';
 

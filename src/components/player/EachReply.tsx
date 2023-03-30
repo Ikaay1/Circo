@@ -98,10 +98,7 @@ function EachReply({
             lineHeight={'1.2'}
             mr='20px'
           >
-            {`${
-              reply.replierId.firstName[0].toUpperCase() +
-              reply.replierId.firstName.slice(1)
-            } ${reply.replierId.lastName[0].toUpperCase()}`}
+            {`${reply?.replierId?.channel_id?.name}`}
           </Text>
           <Text
             noOfLines={2}

@@ -19,6 +19,7 @@ const Layout = ({children}: {children: any}) => {
         />
         <link rel='icon' href='/assets/favi.svg' type='image/svg+xml' />
       </Head>
+
       <Box>{children}</Box>
     </Box>
   );
