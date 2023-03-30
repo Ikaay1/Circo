@@ -43,10 +43,6 @@ function Index() {
             type="video/mp4"
           />
         </video>
-        <Script src="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js" />
-        <Script src="//imasdk.googleapis.com/js/sdkloader/ima3.js" />
-        <Script src="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.min.js" />
-        <Script src="//googleads.github.io/videojs-ima/dist/videojs.ima.js" />
 
         <Script async src="/js/player.js" />
       </Box>
