@@ -1,7 +1,6 @@
 import 'video-react/dist/video-react.css';
 
 import Head from 'next/head';
-import Script from 'next/script';
 import React from 'react';
 
 import { Box } from '@chakra-ui/react';
