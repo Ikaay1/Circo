@@ -50,7 +50,7 @@ function AdVideoJsPlayer({url}: {url: string}) {
           <source src={url} type='video/mp4' />
         </video>
 
-        <Flex
+        {/* <Flex
           bg='clique.blackGrey'
           overflow={'hidden'}
           mt='auto'
@@ -61,23 +61,23 @@ function AdVideoJsPlayer({url}: {url: string}) {
           maxH={'80px'}
           alignItems={'center'}
           justifyContent={'flex-start'}
-        >
+        > */}
           {/* progress */}
-          <Slider aria-label='slider-ex-1' defaultValue={0}>
+          {/* <Slider aria-label='slider-ex-1' defaultValue={0}>
             <SliderTrack h='10px' rounded='0' bg='clique.grey'>
               <SliderFilledTrack rounded='0' bg='clique.base' />
             </SliderTrack>
-          </Slider>
+          </Slider> */}
 
           {/* control */}
 
-          <Box display={{base: 'none', lg: 'block'}}>
+          {/* <Box display={{base: 'none', lg: 'block'}}>
             <ControlAd />
           </Box>
           <Box display={{lg: 'none'}}>
             <ControlMobileAd />
           </Box>
-        </Flex>
+        </Flex> */}
 
         <Script async src='/js/player.js' />
       </Box>
