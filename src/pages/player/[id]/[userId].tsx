@@ -22,11 +22,6 @@ function Index() {
   const router = useRouter();
   const {id, userId} = router.query;
   const {data, isLoading, refetch, error} = useGetContentQuery<any>(id);
-  const {
-    data: userData,
-    isLoading: isUserLoading,
-    isError,
-  } = useGetUserQuery(userId);
   const [view] = useCreateViewMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [url, setUrl] = React.useState('');
@@ -70,7 +65,6 @@ function Index() {
   return (
     <>
       {isLoading ||
-        isUserLoading ||
         !data?.data ||
         (!url && (
           <Box h='90vh' w='100%'>
@@ -84,7 +78,7 @@ function Index() {
           crossOrigin='anonymous'
         ></script>
       </Head>
-      {userData && !isLoading && !isUserLoading && data?.data && url && (
+      {!isLoading && data?.data && url && (
         <HomeLayout>
           <Box display={{lg: 'flex'}}>
             <Box
