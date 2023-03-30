@@ -11,15 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { contentData, createObjectURL, decrypt } from "@constants/utils";
 
-import "videojs-contrib-ads";
-import "videojs-ima";
-
-import BigAd from "./BigAd";
 import Control from "./Control";
 import ControlMobile from "./ControlMobile";
 import SmallAd from "./SmallAd";
-import VIdeoJsPlayer from "./VIdeoJsPlayer";
-import Script from "next/script";
 
 const { Player, ControlBar, BigPlayButton } = require("video-react");
 
@@ -47,7 +41,10 @@ function VideoPlayer({
     null
   );
 
-  const playerRef: any = React.useRef(null);
+  const [isLoop, setIsLoop] = React.useState<any>(
+    localStorage.getItem("loop") === "true" ? true : false
+  );
+
   useEffect(() => {
     const length = videoIdsList.length;
 
@@ -69,35 +66,151 @@ function VideoPlayer({
     }
   }, [currentVideoIndex, videoIdsList]);
 
-  return (
-    <>
-      <Flex
-        pos={"relative"}
-        borderRadius="20px"
-        id="video"
-        overflow={"hidden"}
-        bg="black"
-        alignItems={"center"}
-        w={"100%"}
-      >
-        <VIdeoJsPlayer
-          controls
-          // autoplay
-          sources={[
-            {
-              src: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
-              type: "video/mp4",
-            },
-          ]}
-          ima={{
-            adTagUrl:
-              "https://pubads.g.doubleclick.net/gampad/ads?iu=/8948849/Teste-video&description_url=https%3A%2F%2Fwww.personare.com.br&tfcd=0&npa=0&sz=400x300%7C620x350%7C640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=",
-          }}
-        />
+  const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
+  const [totalDuration, setTotalDuration] = React.useState(0);
+  const [isMuted, setIsMuted] = React.useState(false);
+  const [isPlay, setIsPlay] = React.useState(true);
+  const [isFullScreen, setIsFullScreen] = React.useState(false);
+  const playerRef: any = React.useRef(null);
 
-        <Script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></Script>
+  useEffect(() => {
+    if (playerRef.current) {
+      playerRef.current.subscribeToStateChange((state: any) => {
+        setCurrentTimestamp(state.currentTime);
+        setTotalDuration(state.duration);
+        setIsPlay(state.paused);
+      });
+    }
+  }, []);
+
+  const [isAd, setIsAd] = React.useState(false);
+  const [isSmallAd, setIsSmallAd] = React.useState(false);
+
+  React.useEffect(() => {
+    if (moment(currentTimestamp * 1000).format("mm:ss") === "00:00" && isPlay) {
+      setIsAd(true);
+      setTimeout(() => {
+        setIsSmallAd(true);
+      }, 5000);
+    }
+  }, [currentTimestamp]);
+
+  return (
+    <Flex
+      pos={"relative"}
+      h={{ base: "400px", lg: "580px" }}
+      maxH={{ base: "400px", lg: "580px" }}
+      borderRadius="20px"
+      id="video"
+      overflow={"hidden"}
+      bg="black"
+      flexDir={"column"}
+    >
+      <Box minH="calc(100% - 80px)" borderTopRadius={"20px"}>
+        <Player
+          controls={false}
+          playing={isPlay && !isAd}
+          ref={playerRef}
+          muted={isMuted}
+          autoPlay={true}
+          fluid={false}
+          width="100%"
+          src={url}
+          height="100%"
+          onEnded={() => {
+            if (isLoop) {
+              playerRef.current.seek(0);
+              playerRef.current.play();
+              return;
+            }
+            setIsAd(true);
+            if (nextVideoIndex !== null) {
+              router.push(
+                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
+              );
+            }
+          }}
+        >
+          <ControlBar
+            className="my-class"
+            autoHide={false}
+            disableDefaultControls={true}
+          ></ControlBar>
+          <BigPlayButton position="center" />
+        </Player>
+      </Box>
+
+      <Flex
+        bg="clique.blackGrey"
+        overflow={"hidden"}
+        mt="auto"
+        borderBottomRadius={"20px"}
+        flexDir={"column"}
+        minH="80px"
+        h={"80px"}
+        maxH={"80px"}
+        alignItems={"center"}
+        justifyContent={"flex-start"}
+      >
+        {/* progress */}
+        <Slider
+          aria-label="slider-ex-1"
+          defaultValue={0}
+          value={
+            totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
+          }
+          onChange={(val) => {
+            const timestamp = (val * totalDuration) / 100;
+            playerRef.current.seek(timestamp);
+          }}
+        >
+          <SliderTrack h="10px" rounded="0" bg="clique.grey">
+            <SliderFilledTrack rounded="0" bg="clique.base" />
+          </SliderTrack>
+        </Slider>
+
+        {/* control */}
+        <Box display={{ base: "none", lg: "block" }}>
+          <Control
+            currentTimestamp={currentTimestamp}
+            totalDuration={totalDuration}
+            isMuted={isMuted}
+            isPlay={isPlay}
+            isFullScreen={isFullScreen}
+            setIsFullScreen={setIsFullScreen}
+            setIsMuted={setIsMuted}
+            setIsPlay={setIsPlay}
+            playerRef={playerRef}
+            video={video}
+            nextVideoIndex={nextVideoIndex}
+            prevVideoIndex={prevVideoIndex}
+            currentVideoIndex={currentVideoIndex}
+            videoIdsList={videoIdsList}
+            isLoop={isLoop}
+            setIsLoop={setIsLoop}
+          />
+        </Box>
+
+        <Box display={{ lg: "none" }}>
+          <ControlMobile
+            currentTimestamp={currentTimestamp}
+            totalDuration={totalDuration}
+            isMuted={isMuted}
+            isPlay={isPlay}
+            isFullScreen={isFullScreen}
+            setIsFullScreen={setIsFullScreen}
+            setIsMuted={setIsMuted}
+            setIsPlay={setIsPlay}
+            playerRef={playerRef}
+            video={video}
+            nextVideoIndex={nextVideoIndex}
+            prevVideoIndex={prevVideoIndex}
+            currentVideoIndex={currentVideoIndex}
+            videoIdsList={videoIdsList}
+          />
+        </Box>
       </Flex>
-    </>
+    </Flex>
   );
 }
 

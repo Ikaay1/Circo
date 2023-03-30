@@ -111,7 +111,6 @@ function VideoThumb({
     display(decrypt(video?.video));
   }, []);
 
-  const [timeOutId, setTimeOutId] = React.useState<any>(null);
   return (
     <>
       <Box position={"relative"} ref={lastElementRef}>
@@ -153,13 +152,14 @@ function VideoThumb({
 
           <Box
             onMouseOver={() => {
-              const id = setTimeout(() => {
+              setTimeout(() => {
                 setIsHover(true);
-              }, 1000);
-              setTimeOutId(id);
+              }, 2500);
             }}
             onMouseOut={() => {
-              clearTimeout(timeOutId);
+              setTimeout(() => {
+                setIsHover(false);
+              }, 2500);
             }}
             cursor={"pointer"}
             w="full"
