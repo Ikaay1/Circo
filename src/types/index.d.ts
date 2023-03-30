@@ -3,3 +3,11 @@ export interface IHomeLayoutProps {
   upload?: () => void;
   toggleView?: boolean;
 }
+
+export {};
+
+declare global {
+  interface Window {
+    videojs: any;
+  }
+}

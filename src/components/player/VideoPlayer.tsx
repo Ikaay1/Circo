@@ -2,23 +2,24 @@ import 'videojs-contrib-ads';
 import 'videojs-ima';
 
 import moment from 'moment';
-import {useRouter} from 'next/router';
-import React, {useEffect} from 'react';
+import { useRouter } from 'next/router';
+import Script from 'next/script';
+import React, { useEffect } from 'react';
 
 import {
-  Box,
-  Flex,
-  Slider,
-  SliderFilledTrack,
-  SliderTrack,
+	Box,
+	Flex,
+	Slider,
+	SliderFilledTrack,
+	SliderTrack,
 } from '@chakra-ui/react';
-import {contentData, createObjectURL, decrypt} from '@constants/utils';
+import { contentData, createObjectURL, decrypt } from '@constants/utils';
 
 import BigAd from './BigAd';
 import Control from './Control';
 import ControlMobile from './ControlMobile';
 import SmallAd from './SmallAd';
-import VideoJsPlayer from './VIdeoJsPlayer';
+import VIdeoJsPlayer from './VIdeoJsPlayer';
 
 const {Player, ControlBar, BigPlayButton} = require('video-react');
 
@@ -46,9 +47,6 @@ function VideoPlayer({
     null,
   );
 
-  const [isLoop, setIsLoop] = React.useState<any>(
-    localStorage.getItem('loop') === 'true' ? true : false,
-  );
   const playerRef: any = React.useRef(null);
   useEffect(() => {
     const length = videoIdsList.length;
@@ -71,200 +69,33 @@ function VideoPlayer({
     }
   }, [currentVideoIndex, videoIdsList]);
 
-  const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
-  const [totalDuration, setTotalDuration] = React.useState(0);
-  const [isMuted, setIsMuted] = React.useState(false);
-  const [isPlay, setIsPlay] = React.useState(true);
-  const [isFullScreen, setIsFullScreen] = React.useState(false);
-
-  useEffect(() => {
-    if (playerRef.current) {
-      playerRef.current.subscribeToStateChange((state: any) => {
-        setCurrentTimestamp(state.currentTime);
-        setTotalDuration(state.duration);
-        setIsPlay(state.paused);
-      });
-    }
-  }, []);
-
-  // const [isAd, setIsAd] = React.useState(false);
-  // const [isSmallAd, setIsSmallAd] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   if (moment(currentTimestamp * 1000).format('mm:ss') === '00:00' && isPlay) {
-  //     setIsAd(true);
-  //     setTimeout(() => {
-  //       setIsSmallAd(true);
-  //     }, 5000);
-  //   }
-  // }, [currentTimestamp]);
-
-  // const videoJsOptions = {
-  //   autoplay: true,
-  //   controls: true,
-  //   responsive: true,
-  //   fluid: true,
-  //   height: '100%',
-  //   aspectRatio: '16:9',
-  //   muted: isMuted,
-  //   sources: [
-  //     {
-  //       src: url,
-  //       type: 'video/mp4',
-  //     },
-  //   ],
-  // };
-
-  // const handlePlayerReady = (player: any) => {
-  //   playerRef.current = player;
-  //   const tagUrl =
-  //     'https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=';
-
-  //   player.ima({adTagUrl: tagUrl});
-  // };
-
   return (
     <>
       <Flex
         pos={'relative'}
-        h={{base: '320px', lg: '500px'}}
-        maxH={{base: '400px', lg: '580px'}}
-        borderTopRadius='20px'
+        borderRadius='20px'
         id='video'
         overflow={'hidden'}
         bg='black'
-        flexDir={'column'}
-      >
-        <Box minH='calc(100% - 80px)' borderTopRadius={'20px'}>
-          {/* <Player
-          controls={false}
-          playing={isPlay && !isAd}
-          ref={playerRef}
-          muted={isMuted}
-          // autoPlay={true}
-          fluid={false}
-          width='100%'
-          src={url}
-          height='100%'
-          onEnded={() => {
-            if (isLoop) {
-              playerRef.current.seek(0);
-              playerRef.current.play();
-              return;
-            }
-            setIsAd(true);
-            if (nextVideoIndex !== null) {
-              router.push(
-                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
-              );
-            }
-          }}
-        >
-          {video?.isFree && isSmallAd && (
-            <SmallAd setIsSmallAd={setIsSmallAd} />
-          )}
-          <ControlBar
-            className='my-class'
-            autoHide={false}
-            disableDefaultControls={true}
-          ></ControlBar>
-          <BigPlayButton position='center' />
-        </Player> */}
-          {/* <VIdeoJsPlayer
-            controls={false}
-            autoplay
-            options={videoJsOptions}
-            // onReady={handlePlayerReady}
-            ima={{
-              adTagUrl:
-                'https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=',
-            }}
-          /> */}
-          <VideoJsPlayer
-            controls
-            // autoplay
-            sources={[
-              {
-                src: 'https://www.w3schools.com/tags/movie.mp4',
-                type: 'video/mp4',
-              },
-            ]}
-            ima={{
-              adTagUrl:
-                'https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=',
-            }}
-          />
-        </Box>
-      </Flex>
-      <Flex
-        bg='clique.blackGrey'
-        overflow={'hidden'}
-        mt='auto'
-        borderBottomRadius={'20px'}
-        flexDir={'column'}
-        minH='80px'
-        h={'80px'}
-        maxH={'80px'}
         alignItems={'center'}
-        justifyContent={'flex-start'}
+        w={'100%'}
       >
-        {/* progress */}
-        <Slider
-          aria-label='slider-ex-1'
-          defaultValue={0}
-          value={
-            totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
-          }
-          onChange={(val) => {
-            const timestamp = (val * totalDuration) / 100;
-            playerRef.current.seek(timestamp);
+        <VIdeoJsPlayer
+          controls
+          // autoplay
+          sources={[
+            {
+              src: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+              type: 'video/mp4',
+            },
+          ]}
+          ima={{
+            adTagUrl:
+              'https://pubads.g.doubleclick.net/gampad/ads?iu=/8948849/Teste-video&description_url=https%3A%2F%2Fwww.personare.com.br&tfcd=0&npa=0&sz=400x300%7C620x350%7C640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=',
           }}
-        >
-          <SliderTrack h='10px' rounded='0' bg='clique.grey'>
-            <SliderFilledTrack rounded='0' bg='clique.base' />
-          </SliderTrack>
-        </Slider>
+        />
 
-        {/* control */}
-        <Box display={{base: 'none', lg: 'block'}}>
-          <Control
-            currentTimestamp={currentTimestamp}
-            totalDuration={totalDuration}
-            isMuted={isMuted}
-            isPlay={isPlay}
-            isFullScreen={isFullScreen}
-            setIsFullScreen={setIsFullScreen}
-            setIsMuted={setIsMuted}
-            setIsPlay={setIsPlay}
-            playerRef={playerRef}
-            video={video}
-            nextVideoIndex={nextVideoIndex}
-            prevVideoIndex={prevVideoIndex}
-            currentVideoIndex={currentVideoIndex}
-            videoIdsList={videoIdsList}
-            isLoop={isLoop}
-            setIsLoop={setIsLoop}
-          />
-        </Box>
-
-        <Box display={{lg: 'none'}}>
-          <ControlMobile
-            currentTimestamp={currentTimestamp}
-            totalDuration={totalDuration}
-            isMuted={isMuted}
-            isPlay={isPlay}
-            isFullScreen={isFullScreen}
-            setIsFullScreen={setIsFullScreen}
-            setIsMuted={setIsMuted}
-            setIsPlay={setIsPlay}
-            playerRef={playerRef}
-            video={video}
-            nextVideoIndex={nextVideoIndex}
-            prevVideoIndex={prevVideoIndex}
-            currentVideoIndex={currentVideoIndex}
-            videoIdsList={videoIdsList}
-          />
-        </Box>
+        <Script src='//imasdk.googleapis.com/js/sdkloader/ima3.js'></Script>
       </Flex>
     </>
   );
