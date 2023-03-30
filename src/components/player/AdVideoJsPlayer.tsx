@@ -35,13 +35,9 @@ function AdVideoJsPlayer({ url }: { url: string }) {
           width="640px"
           style={{ width: "100%", height: "480px" }}
           height="480px"
-          autoPlay
-          src={url}
+          autoPlay={true}
         >
-          {/* <source
-            src="https://storage.googleapis.com/gvabox/media/samples/android.mp4"
-            type="video/mp4"
-          /> */}
+          <source src={url} type="video/mp4" />
         </video>
 
         <Script async src="/js/player.js" />
