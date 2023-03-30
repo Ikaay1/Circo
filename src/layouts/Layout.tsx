@@ -4,13 +4,12 @@ import Head from 'next/head';
 import Script from 'next/script';
 import React from 'react';
 
-import {Box} from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 const Layout = ({children}: {children: any}) => {
   return (
     <Box>
       <Head>
-        <script src='//imasdk.googleapis.com/js/sdkloader/ima3.js'></script>
         <title>Circo</title>
         <link
           rel='stylesheet'
