@@ -2,18 +2,18 @@ import 'videojs-contrib-ads';
 import 'videojs-ima';
 
 import moment from 'moment';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import Script from 'next/script';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
 import {
-	Box,
-	Flex,
-	Slider,
-	SliderFilledTrack,
-	SliderTrack,
+  Box,
+  Flex,
+  Slider,
+  SliderFilledTrack,
+  SliderTrack,
 } from '@chakra-ui/react';
-import { contentData, createObjectURL, decrypt } from '@constants/utils';
+import {contentData, createObjectURL, decrypt} from '@constants/utils';
 
 import Control from './Control';
 import ControlMobile from './ControlMobile';
@@ -90,14 +90,14 @@ function VideoPlayer({
   const [isAd, setIsAd] = React.useState(false);
   const [isSmallAd, setIsSmallAd] = React.useState(false);
 
-  React.useEffect(() => {
-    if (moment(currentTimestamp * 1000).format('mm:ss') === '00:00' && isPlay) {
-      setIsAd(true);
-      setTimeout(() => {
-        setIsSmallAd(true);
-      }, 5000);
-    }
-  }, [currentTimestamp]);
+  // React.useEffect(() => {
+  //   if (moment(currentTimestamp * 1000).format('mm:ss') === '00:00' && isPlay) {
+  //     setIsAd(true);
+  //     setTimeout(() => {
+  //       setIsSmallAd(true);
+  //     }, 5000);
+  //   }
+  // }, [currentTimestamp]);
 
   return (
     <Flex
@@ -113,7 +113,7 @@ function VideoPlayer({
       <Box minH='calc(100% - 80px)' borderTopRadius={'20px'}>
         <Player
           controls={false}
-          playing={isPlay && !isAd}
+          playing={isPlay}
           ref={playerRef}
           muted={isMuted}
           autoPlay={true}
@@ -121,19 +121,19 @@ function VideoPlayer({
           width='100%'
           src={url}
           height='100%'
-          onEnded={() => {
-            if (isLoop) {
-              playerRef.current.seek(0);
-              playerRef.current.play();
-              return;
-            }
-            setIsAd(true);
-            if (nextVideoIndex !== null) {
-              router.push(
-                `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
-              );
-            }
-          }}
+          // onEnded={() => {
+          //   if (isLoop) {
+          //     playerRef.current.seek(0);
+          //     playerRef.current.play();
+          //     return;
+          //   }
+          //   setIsAd(true);
+          //   if (nextVideoIndex !== null) {
+          //     router.push(
+          //       `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
+          //     );
+          //   }
+          // }}
         >
           <ControlBar
             className='my-class'
@@ -211,6 +211,8 @@ function VideoPlayer({
             prevVideoIndex={prevVideoIndex}
             currentVideoIndex={currentVideoIndex}
             videoIdsList={videoIdsList}
+            isLoop={isLoop}
+            setIsLoop={setIsLoop}
           />
         </Box>
       </Flex>

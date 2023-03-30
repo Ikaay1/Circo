@@ -33,6 +33,8 @@ function ControlMobile({
   prevVideoIndex,
   videoIdsList,
   currentVideoIndex,
+  isLoop,
+  setIsLoop,
 }: any) {
   const router = useRouter();
   const [like, likeInfo] = useLikeContentMutation();
@@ -60,7 +62,7 @@ function ControlMobile({
       justifyContent={'space-between'}
       alignItems='center'
     >
-      <GridItem mr='.7rem' flex='1'>
+      <GridItem mr='.7rem' flex='1' justifySelf='start'>
         <Flex alignItems='center' mr='3px' ml={'3px'}>
           {!currentTimestamp || !totalDuration ? (
             <Text
@@ -79,7 +81,7 @@ function ControlMobile({
               fontSize={'smSubHead'}
               lineHeight={'1'}
             >
-              {moment(currentTimestamp * 1000).format('mm:ss')} /{' '}
+              {moment(currentTimestamp * 1000).format('mm:ss')} <br />/{' '}
               {moment(totalDuration * 1000).format('mm:ss')}
             </Text>
           )}
@@ -103,11 +105,7 @@ function ControlMobile({
             />
           )}{' '}
           <Flex alignItems='center'>
-            <Flex
-              justifyContent={'space-between'}
-              alignItems='center'
-              mx={'3px'}
-            >
+            <Flex alignItems={'center'} flexDirection={'column'} mx={'3px'}>
               {likeInfo.isLoading ? (
                 <Spinner size={'sm'} bg='clique.base' />
               ) : (
@@ -134,7 +132,7 @@ function ControlMobile({
               </Text>
             </Flex>
 
-            <Flex alignItems='center'>
+            <Flex alignItems={'center'} flexDirection={'column'}>
               {dislikeInfo.isLoading ? (
                 <Spinner size={'sm'} bg='clique.base' />
               ) : (
@@ -163,8 +161,8 @@ function ControlMobile({
           </Flex>
         </Flex>
       </GridItem>
-      <GridItem mr='.7rem' flex='1'>
-        <Flex alignItems='center' mx='3px'>
+      <GridItem justifySelf='center' mr='.7rem' flex='1'>
+        <Flex alignItems='center'>
           <Icon
             fontSize='bigHead'
             cursor='pointer'
@@ -225,12 +223,17 @@ function ControlMobile({
           />
         </Flex>
       </GridItem>
-      <GridItem flex='1'>
+      <GridItem flex='1' justifySelf='end'>
         <Flex alignItems='center'>
           {video.uploader_id._id !== userProfile._id && (
             <GiftModal isFullScreen={isFullScreen} video={video} />
           )}
-          <VideoOptionMenu player={playerRef} video={video} />
+          <VideoOptionMenu
+            isLoop={isLoop}
+            setIsLoop={setIsLoop}
+            player={playerRef}
+            video={video}
+          />
           {!isFullScreen ? (
             <Icon
               fontSize='smHead'
