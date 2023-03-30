@@ -4,7 +4,6 @@ import "videojs-contrib-ads";
 import "videojs-ima";
 
 import "video.js/dist/video-js.css";
-import dynamic from "next/dynamic";
 import Script from "next/script";
 import { Box } from "@chakra-ui/react";
 import VideoPlayer from "@components/player/VIdeoJsPlayer";
@@ -34,21 +33,22 @@ function Index() {
           className="video-js vjs-default-skin"
           controls
           preload="auto"
-          width="640"
-          height="360"
+          width="640px"
+          style={{ width: "100%", height: "480px" }}
+          height="480px"
+          autoPlay
         >
           <source
             src="https://storage.googleapis.com/gvabox/media/samples/android.mp4"
             type="video/mp4"
           />
         </video>
-        {/* <VideoPlayer /> */}
         <Script src="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js" />
         <Script src="//imasdk.googleapis.com/js/sdkloader/ima3.js" />
         <Script src="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.min.js" />
         <Script src="//googleads.github.io/videojs-ima/dist/videojs.ima.js" />
 
-        <Script src="/js/player.js" />
+        <Script async src="/js/player.js" />
       </Box>
     </>
   );

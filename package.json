@@ -67,7 +67,7 @@
     "styled-components": "^5.3.6",
     "uuid": "^9.0.0",
     "video-react": "^0.15.0",
-    "video.js": "7.6.6",
+    "video.js": "^8.0.4",
     "videojs-contrib-ads": "6.6.5",
     "videojs-ima": "1.7.2",
     "ws": "^7.2.3",

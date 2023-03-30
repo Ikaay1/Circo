@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/no-css-tags */
 /* eslint-disable react-hooks/exhaustive-deps */
 import "../styles/globals.css";
@@ -94,7 +95,7 @@ function MyApp({ Component, pageProps }: any) {
           >
             <Layout>
               <Head>
-                {/* <link
+                <link
                   rel="stylesheet"
                   href="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video-js.min.css"
                 />
@@ -106,11 +107,18 @@ function MyApp({ Component, pageProps }: any) {
                   rel="stylesheet"
                   href="//googleads.github.io/videojs-ima/dist/videojs.ima.css"
                 />
+                {/* 
 
                 <Script src="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js"></Script>
                 <Script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></Script>
                 <Script src="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.min.js"></Script>
                 <sript src="videojs.ima.js"></sript> */}
+                <script src="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js" />
+                <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js" />
+                <script src="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.min.js" />
+                <script src="//googleads.github.io/videojs-ima/dist/videojs.ima.js" />
+
+                {/* <script src="/js/player.js" /> */}
               </Head>
               <ColorModeScript
                 initialColorMode={theme.config.initialColorMode}
