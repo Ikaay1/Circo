@@ -46,7 +46,12 @@ function GiftModal({
           mt="0"
           placement="top"
         >
-          <span>
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <Icon
               onClick={onOpen}
               fontSize="bigHead"

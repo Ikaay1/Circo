@@ -65,30 +65,34 @@ function Control({
   }, [userProfile?._id, router]);
 
   return (
-    <>
-      <Grid templateColumns="repeat(7, 1fr)" px="30px" py="25px" gap={4}>
-        <GridItem colSpan={2}>
-          <Flex alignItems="center" pos="relative">
+    <Box h="100%" mt="5px">
+      <Grid
+        templateColumns="repeat(7, 1fr)"
+        px="30px"
+        pt="5px"
+        minH="70px"
+        maxH="70px"
+        alignItems={"center"}
+        justifyItems={"center"}
+      >
+        <GridItem colSpan={2} h="70px">
+          <Flex alignItems="center" h="100%" pos="relative">
             {!currentTimestamp || !totalDuration ? (
               <Text
-                mt="5px"
                 minW={"100px"}
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
-                lineHeight={"1"}
                 mr="30px"
               ></Text>
             ) : (
               <Text
-                mt="5px"
                 minW={"100px"}
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
-                lineHeight={"1"}
                 mr="30px"
               >
                 {moment(currentTimestamp * 1000).format("mm:ss")} /{" "}
@@ -235,8 +239,8 @@ function Control({
             </Flex>
           </Flex>
         </GridItem>
-        <GridItem colSpan={3} justifySelf="center" h="35px">
-          <Flex alignItems="center">
+        <GridItem colSpan={3} justifySelf="center" h="70px" p="0" m="0">
+          <Flex alignItems="center" h="100%" p="0">
             <Tooltip
               label="Previous"
               bg="none"
@@ -250,6 +254,7 @@ function Control({
               <span>
                 <Icon
                   fontSize="bigHead"
+                  m="0"
                   cursor="pointer"
                   as={PrevIcon}
                   color={prevVideoIndex !== null ? "clique.white" : "gray.500"}
@@ -275,11 +280,20 @@ function Control({
                 mt="0"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
                     fontSize="35px"
                     cursor="pointer"
                     as={BsPauseFill}
+                    m="0"
+                    minW="35px"
+                    w="35px"
+                    maxW="35px"
                     color={"clique.white"}
                     onClick={
                       playerRef.current
@@ -304,11 +318,20 @@ function Control({
                 mt="0"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
+                    m="0"
                     fontSize="bigHead"
                     cursor="pointer"
                     as={BsFillPlayFill}
+                    minW="35px"
+                    w="35px"
+                    maxW="35px"
                     color={"clique.white"}
                     onClick={
                       playerRef.current
@@ -351,8 +374,8 @@ function Control({
             </Tooltip>
           </Flex>
         </GridItem>
-        <GridItem colSpan={2} justifySelf="end" align="center">
-          <Flex alignItems="center" h="100%" bg="red">
+        <GridItem colSpan={2} justifySelf="end" h="70px" alignItems="center">
+          <Flex alignItems="center" h="100%">
             {video.uploader_id._id !== userProfile._id && (
               <GiftModal isFullScreen={isFullScreen} video={video} />
             )}
@@ -386,7 +409,12 @@ function Control({
                 mt="0"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
                     fontSize="smHead"
                     cursor={"pointer"}
@@ -428,7 +456,7 @@ function Control({
           </Flex>
         </GridItem>
       </Grid>
-    </>
+    </Box>
   );
 }
 
