@@ -85,7 +85,7 @@ const UploadPreview = ({
                 fontWeight={500}
                 fontSize={'sm2'}
                 lineHeight={'1.2'}
-                w='70%'
+                w='190px'
               >
                 {title}
               </Text>
