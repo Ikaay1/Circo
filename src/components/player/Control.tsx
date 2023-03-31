@@ -450,16 +450,21 @@ function Control({
               <Tooltip
                 portalProps={{ containerRef: Bref }}
                 label="Minimize"
-                bg="none"
                 hasArrow
                 color="clique.white"
                 fontSize="sm"
                 p="0"
                 mt="0"
                 pl="150px"
+                textAlign="center"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
                     fontSize="smHead"
                     cursor={"pointer"}

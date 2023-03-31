@@ -160,7 +160,7 @@ function VideoPlayer({
         borderBottomRadius={"20px"}
         flexDir={"column"}
         minH="80px"
-        h={"80px"}
+        h={"80px"} 
         maxH={"80px"}
         alignItems={"center"}
         justifyContent={"flex-start"}
@@ -183,7 +183,7 @@ function VideoPlayer({
         </Slider>
 
         {/* control */}
-        <Box display={{ base: "none", lg: "block" }}>
+        <Box display={{ base: "none", lg: "block" }}  >
           <Control
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
