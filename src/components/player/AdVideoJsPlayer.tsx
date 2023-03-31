@@ -202,6 +202,7 @@ function AdVideoJsPlayer({
               isLoop={isLoop}
               setIsLoop={setIsLoop}
               videoRef={videoRef}
+              Bref={ref}
             />
           </Box>
         </Flex>
