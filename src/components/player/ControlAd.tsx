@@ -21,13 +21,11 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import CliqueGiftIcon from '@icons/CliqueGiftIcon';
 import NextIcon from '@icons/NextIcon';
-import OptionsIcon from '@icons/OptionsIcon';
 import PrevIcon from '@icons/PrevIcon';
 
 import GiftModal from './GiftModal';
-import VideoOptionMenu from './VideoOptionMenu';
+import VideoOptionMenuAd from './VideoOptionMenuAd';
 
 function ControlAd({
   play,
@@ -42,8 +40,27 @@ function ControlAd({
   totalDuration,
   isFullScreen,
   setIsFullScreen,
+  isLoop,
+  setIsLoop,
+  videoRef,
 }: any) {
   const router = useRouter();
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const [like, likeInfo] = useLikeContentMutation();
+  const [dislike, dislikeInfo] = useDislikeContentMutation();
+  const handleLike = async () => {
+    await like({video_id: video._id});
+  };
+
+  const handleDislike = async () => {
+    await dislike({video_id: video._id});
+  };
+
+  useEffect(() => {
+    if (!userProfile?._id) {
+      window.location.replace('/login');
+    }
+  }, [userProfile?._id, router]);
   return (
     <>
       <Grid
@@ -133,26 +150,34 @@ function ControlAd({
                 cursor={'pointer'}
                 alignItems={'center'}
               >
-                <Box>
-                  <Tooltip
-                    label='Like'
-                    bg='none'
-                    hasArrow
-                    color='clique.white'
-                    fontSize='sm'
-                    p='0'
-                    mt='0'
-                    placement='top'
-                  >
-                    <span>
-                      <Icon
-                        color={'clique.white'}
-                        fontSize='head'
-                        as={BiLike}
-                      />
-                    </span>
-                  </Tooltip>
-                </Box>
+                {likeInfo.isLoading ? (
+                  <Spinner size={'sm'} bg='clique.base' />
+                ) : (
+                  <Box onClick={handleLike}>
+                    <Tooltip
+                      label='Like'
+                      bg='none'
+                      hasArrow
+                      color='clique.white'
+                      fontSize='sm'
+                      p='0'
+                      mt='0'
+                      placement='top'
+                    >
+                      <span>
+                        <Icon
+                          color={
+                            video.likes.includes(userProfile?._id)
+                              ? 'clique.base'
+                              : 'clique.white'
+                          }
+                          fontSize='head'
+                          as={BiLike}
+                        />
+                      </span>
+                    </Tooltip>
+                  </Box>
+                )}
                 <Text
                   color={'clique.white'}
                   fontFamily={'Poppins'}
@@ -160,7 +185,7 @@ function ControlAd({
                   fontSize={'smSubHead'}
                   lineHeight={'1.2'}
                 >
-                  5
+                  {video.likesCount}
                 </Text>
               </Flex>
 
@@ -172,22 +197,35 @@ function ControlAd({
                 mx='10px'
                 alignItems={'center'}
               >
-                <Box>
-                  <Tooltip
-                    label='Unlike'
-                    bg='none'
-                    hasArrow
-                    color='clique.white'
-                    fontSize='sm'
-                    p='0'
-                    mt='0'
-                    placement='top'
-                  >
-                    <span>
-                      <Icon mr='5px' fontSize=' head' as={BiDislike} />
-                    </span>
-                  </Tooltip>
-                </Box>
+                {dislikeInfo.isLoading ? (
+                  <Spinner size={'sm'} mr='5px' bg='clique.base' />
+                ) : (
+                  <Box onClick={handleDislike}>
+                    <Tooltip
+                      label='Unlike'
+                      bg='none'
+                      hasArrow
+                      color='clique.white'
+                      fontSize='sm'
+                      p='0'
+                      mt='0'
+                      placement='top'
+                    >
+                      <span>
+                        <Icon
+                          color={
+                            video.dislikes.includes(userProfile?._id)
+                              ? 'clique.base'
+                              : 'clique.white'
+                          }
+                          mr='5px'
+                          fontSize=' head'
+                          as={BiDislike}
+                        />
+                      </span>
+                    </Tooltip>
+                  </Box>
+                )}
                 <Text
                   color={'clique.white'}
                   fontFamily={'Poppins'}
@@ -195,7 +233,7 @@ function ControlAd({
                   fontSize={'smSubHead'}
                   lineHeight={'1.2'}
                 >
-                  7
+                  {video.dislikesCount}
                 </Text>
               </Flex>
             </Flex>
@@ -306,41 +344,14 @@ function ControlAd({
         </GridItem>
         <GridItem colSpan={2} justifySelf='end'>
           <Flex alignItems='center' h='100%'>
-            {/* <GiftModal isFullScreen={isFullScreen} video={video} /> */}
-
-            <Tooltip
-              label='Gift'
-              bg='none'
-              hasArrow
-              color='clique.white'
-              fontSize='sm'
-              p='0'
-              mt='0'
-              placement='top'
-              h='100%'
-            >
-              <span>
-                <Icon
-                  fontSize='bigHead'
-                  cursor={'pointer'}
-                  color={'clique.white'}
-                  as={CliqueGiftIcon}
-                />
-              </span>
-            </Tooltip>
-
-            {/* <VideoOptionMenu
+            {video.uploader_id._id !== userProfile._id && (
+              <GiftModal isFullScreen={isFullScreen} video={video} />
+            )}
+            <VideoOptionMenuAd
               isLoop={isLoop}
               setIsLoop={setIsLoop}
-              player={playerRef}
+              player={videoRef}
               video={video}
-            /> */}
-            <Icon
-              fontSize='28px'
-              mx={{base: '10px', lg: '30px'}}
-              cursor={'pointer'}
-              as={OptionsIcon}
-              color={'clique.white'}
             />
 
             {!isFullScreen ? (
@@ -387,7 +398,7 @@ function ControlAd({
                     color={'clique.white'}
                     onClick={() => {
                       setIsFullScreen(!isFullScreen);
-                      document.exitFullscreen();
+                      document?.exitFullscreen();
                     }}
                     as={MdFullscreenExit}
                   />

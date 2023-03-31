@@ -41,6 +41,9 @@ function AdVideoJsPlayer({
   const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
     null,
   );
+  const [isLoop, setIsLoop] = React.useState<any>(
+    localStorage.getItem('loop') === 'true' ? true : false,
+  );
   const videoRef: any = useRef(null);
   const [play, setPlay] = useState(true);
   const [currentTimestamp, setCurrentTimestamp] = React.useState(0);
@@ -89,6 +92,17 @@ function AdVideoJsPlayer({
   console.log('currentTimestamp: ' + currentTimestamp);
   console.log(totalDuration);
 
+  React.useEffect(() => {
+    function onFullscreenChange() {
+      setIsFullScreen(Boolean(document.fullscreenElement));
+    }
+
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+
+    return () =>
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
+  }, []);
+
   return (
     <>
       <Head>
@@ -114,6 +128,8 @@ function AdVideoJsPlayer({
           style={{width: '100%', height: '480px'}}
           height='480px'
           autoPlay={true}
+          onPause={() => setPlay(false)}
+          onPlay={() => setPlay(true)}
           // loop
           ref={videoRef}
           muted={isMuted}
@@ -167,10 +183,29 @@ function AdVideoJsPlayer({
               totalDuration={totalDuration}
               isFullScreen={isFullScreen}
               setIsFullScreen={setIsFullScreen}
+              isLoop={isLoop}
+              setIsLoop={setIsLoop}
+              videoRef={videoRef}
             />
           </Box>
           <Box display={{lg: 'none'}}>
-            <ControlMobileAd />
+            <ControlMobileAd
+              play={play}
+              videoHandler={videoHandler}
+              setIsMuted={setIsMuted}
+              isMuted={isMuted}
+              nextVideoIndex={nextVideoIndex}
+              prevVideoIndex={prevVideoIndex}
+              videoIdsList={videoIdsList}
+              video={video}
+              currentTimestamp={currentTimestamp}
+              totalDuration={totalDuration}
+              isFullScreen={isFullScreen}
+              setIsFullScreen={setIsFullScreen}
+              isLoop={isLoop}
+              setIsLoop={setIsLoop}
+              videoRef={videoRef}
+            />
           </Box>
         </Flex>
 

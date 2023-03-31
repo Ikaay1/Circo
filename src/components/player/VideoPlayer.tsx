@@ -87,6 +87,17 @@ function VideoPlayer({
     }
   }, []);
 
+  React.useEffect(() => {
+    function onFullscreenChange() {
+      setIsFullScreen(Boolean(document.fullscreenElement));
+    }
+
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+
+    return () =>
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
+  }, []);
+
   const [isAd, setIsAd] = React.useState(false);
   const [isSmallAd, setIsSmallAd] = React.useState(false);
 
