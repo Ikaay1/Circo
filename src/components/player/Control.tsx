@@ -245,7 +245,7 @@ function Control({
           </Flex>
         </GridItem>
         <GridItem colSpan={3} justifySelf="center" h="70px" p="0" m="0">
-          <Flex alignItems="center" h="100%" p="0">
+          <Flex alignItems="center" h="100%">
             <Tooltip
               portalProps={{ containerRef: Bref }}
               label="Previous"
@@ -410,7 +410,6 @@ function Control({
                     setIsLoop={setIsLoop}
                     player={playerRef}
                     video={video}
-                    Bref={Bref}
                   />
                 </Flex>
               </Tooltip>

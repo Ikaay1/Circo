@@ -98,7 +98,7 @@ function AdVideoJsPlayer({
     return () =>
       document.removeEventListener("fullscreenchange", onFullscreenChange);
   }, []);
-
+  const ref = React.useRef(null);
   return (
     <>
       <Head>
@@ -182,6 +182,7 @@ function AdVideoJsPlayer({
               isLoop={isLoop}
               setIsLoop={setIsLoop}
               videoRef={videoRef}
+              Bref={ref}
             />
           </Box>
           <Box display={{ lg: "none" }}>
