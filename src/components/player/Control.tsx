@@ -44,6 +44,7 @@ function Control({
   currentVideoIndex,
   isLoop,
   setIsLoop,
+  Bref,
 }: any) {
   const router = useRouter();
   const [like, likeInfo] = useLikeContentMutation();
@@ -101,6 +102,7 @@ function Control({
             )}
             {!isMuted ? (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Mute"
                 bg="none"
                 hasArrow
@@ -122,6 +124,7 @@ function Control({
               </Tooltip>
             ) : (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Unmute"
                 bg="none"
                 hasArrow
@@ -155,6 +158,7 @@ function Control({
                 ) : (
                   <Box onClick={handleLike}>
                     <Tooltip
+                      portalProps={{ containerRef: Bref }}
                       label="Like"
                       bg="none"
                       hasArrow
@@ -202,6 +206,7 @@ function Control({
                 ) : (
                   <Box onClick={handleDislike}>
                     <Tooltip
+                      portalProps={{ containerRef: Bref }}
                       label="Dislike"
                       bg="none"
                       hasArrow
@@ -242,6 +247,7 @@ function Control({
         <GridItem colSpan={3} justifySelf="center" h="70px" p="0" m="0">
           <Flex alignItems="center" h="100%" p="0">
             <Tooltip
+              portalProps={{ containerRef: Bref }}
               label="Previous"
               bg="none"
               hasArrow
@@ -271,6 +277,7 @@ function Control({
 
             {!isPlay ? (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Pause"
                 bg="none"
                 hasArrow
@@ -309,6 +316,7 @@ function Control({
               </Tooltip>
             ) : (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Play"
                 bg="none"
                 hasArrow
@@ -347,6 +355,7 @@ function Control({
               </Tooltip>
             )}
             <Tooltip
+              portalProps={{ containerRef: Bref }}
               label="Next"
               bg="none"
               hasArrow
@@ -377,29 +386,38 @@ function Control({
         <GridItem colSpan={2} justifySelf="end" h="70px" alignItems="center">
           <Flex alignItems="center" h="100%">
             {video.uploader_id._id !== userProfile._id && (
-              <GiftModal isFullScreen={isFullScreen} video={video} />
+              <GiftModal
+                isFullScreen={isFullScreen}
+                video={video}
+                Bref={Bref}
+              />
             )}
-            <Tooltip
-              label="Settings"
-              bg="none"
-              hasArrow
-              color="clique.white"
-              fontSize="sm"
-              p="0"
-              mt="0"
-              placement="top"
-            >
-              <Flex alignItems="center">
-                <VideoOptionMenu
-                  isLoop={isLoop}
-                  setIsLoop={setIsLoop}
-                  player={playerRef}
-                  video={video}
-                />
-              </Flex>
-            </Tooltip>
+            <Flex pos="relative" mx={{ base: "10px", lg: "30px" }}>
+              <Tooltip
+                portalProps={{ containerRef: Bref }}
+                label="Settings"
+                bg="none"
+                hasArrow
+                color="clique.white"
+                fontSize="sm"
+                p="0"
+                mt="0"
+                placement="top"
+              >
+                <Flex alignItems="center">
+                  <VideoOptionMenu
+                    isLoop={isLoop}
+                    setIsLoop={setIsLoop}
+                    player={playerRef}
+                    video={video}
+                    Bref={Bref}
+                  />
+                </Flex>
+              </Tooltip>
+            </Flex>
             {!isFullScreen ? (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Fullscreen"
                 bg="none"
                 hasArrow
@@ -430,6 +448,7 @@ function Control({
               </Tooltip>
             ) : (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Minimize"
                 bg="none"
                 hasArrow
@@ -437,6 +456,7 @@ function Control({
                 fontSize="sm"
                 p="0"
                 mt="0"
+                pl="150px"
                 placement="top"
               >
                 <span>
