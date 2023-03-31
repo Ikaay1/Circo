@@ -1,5 +1,4 @@
-import 'videojs-contrib-ads';
-import 'videojs-ima';
+
 
 import moment from 'moment';
 import {useRouter} from 'next/router';
