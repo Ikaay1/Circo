@@ -26,37 +26,43 @@ import GiftOption from "./GiftOption";
 function GiftModal({
   video,
   isFullScreen,
+  Bref,
 }: {
   video: contentData;
   isFullScreen: boolean;
+  Bref: any;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [giftUser, giftUserStatus] = useGiftUserMutation();
   const toast = useToast();
   return (
     <>
-      {!isFullScreen && (
-        <Tooltip
-          label="Gift"
-          bg="none"
-          hasArrow
-          color="clique.white"
-          fontSize="sm"
-          p="0"
-          mt="0"
-          placement="top"
+      <Tooltip
+        portalProps={{ containerRef: Bref }}
+        label="Gift"
+        bg="none"
+        hasArrow
+        color="clique.white"
+        fontSize="sm"
+        p="0"
+        mt="0"
+        placement="top"
+      >
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
         >
-          <span>
-            <Icon
-              onClick={onOpen}
-              fontSize="bigHead"
-              cursor={"pointer"}
-              color={"clique.white"}
-              as={CliqueGiftIcon}
-            />
-          </span>
-        </Tooltip>
-      )}
+          <Icon
+            onClick={onOpen}
+            fontSize="bigHead"
+            cursor={"pointer"}
+            color={"clique.white"}
+            as={CliqueGiftIcon}
+          />
+        </span>
+      </Tooltip>
 
       <Modal size={"xl"} isOpen={isOpen} isCentered onClose={onClose}>
         <ModalOverlay />

@@ -1,8 +1,9 @@
 import { Field } from "formik";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Box,
+  Flex,
   FormControl,
   FormErrorMessage,
   Input,
@@ -16,6 +17,7 @@ type Props = {
   nameValue: string;
   textArea: boolean;
   variant?: "small" | "medium" | "large";
+  maxChar?: number;
 };
 
 export default function CustumField({
@@ -23,12 +25,13 @@ export default function CustumField({
   nameValue,
   textArea,
   variant,
+  maxChar,
 }: Props) {
   const value = useColorModeValue("clique.white", "clique.secondaryGrey1");
-
+  const [count, setCount] = useState(0);
   return (
     <Field name={nameValue}>
-      {({ field, form: { touched, errors } }: any) => (
+      {({ field, form: { touched, errors, setFieldValue } }: any) => (
         <FormControl isInvalid={errors[field.name] && touched[field.name]}>
           <Box
             bg={value}
@@ -47,12 +50,27 @@ export default function CustumField({
               {name}
             </Text>
             {textArea ? (
-              <Textarea
-                variant="filled"
-                bg={value}
-                name={nameValue}
-                {...field}
-              />
+              <>
+                <Textarea
+                  variant="filled"
+                  bg={value}
+                  name={nameValue}
+                  id={nameValue}
+                  onChange={(e) => {
+                    console.log(field);
+                    setCount(e.target.value.length);
+                    setFieldValue(field.name, e.target.value);
+                  }}
+                  // {...field}
+                />
+                {maxChar && (
+                
+                    <Text textAlign="right" fontSize="sm" color={count > maxChar ? "red" : ""}>
+                      {count.toString()}/{maxChar.toString()}
+                    </Text>
+                
+                )}
+              </>
             ) : (
               <Input variant="filled" bg={value} name="name" {...field} />
             )}

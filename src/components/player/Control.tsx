@@ -44,6 +44,7 @@ function Control({
   currentVideoIndex,
   isLoop,
   setIsLoop,
+  Bref,
 }: any) {
   const router = useRouter();
   const [like, likeInfo] = useLikeContentMutation();
@@ -65,36 +66,34 @@ function Control({
   }, [userProfile?._id, router]);
 
   return (
-    <>
+    <Box h="100%" mt="5px">
       <Grid
-        alignItems="center"
         templateColumns="repeat(7, 1fr)"
         px="30px"
-        py="25px"
-        gap={4}
+        pt="5px"
+        minH="70px"
+        maxH="70px"
+        alignItems={"center"}
+        justifyItems={"center"}
       >
-        <GridItem colSpan={2}>
-          <Flex alignItems="center" pos="relative">
+        <GridItem colSpan={2} h="70px">
+          <Flex alignItems="center" h="100%" pos="relative">
             {!currentTimestamp || !totalDuration ? (
               <Text
-                mt="5px"
                 minW={"100px"}
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
-                lineHeight={"1"}
                 mr="30px"
               ></Text>
             ) : (
               <Text
-                mt="5px"
                 minW={"100px"}
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
                 fontSize={"smSubHead"}
-                lineHeight={"1"}
                 mr="30px"
               >
                 {moment(currentTimestamp * 1000).format("mm:ss")} /{" "}
@@ -103,6 +102,7 @@ function Control({
             )}
             {!isMuted ? (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Mute"
                 bg="none"
                 hasArrow
@@ -124,7 +124,8 @@ function Control({
               </Tooltip>
             ) : (
               <Tooltip
-                label="Unute"
+                portalProps={{ containerRef: Bref }}
+                label="Unmute"
                 bg="none"
                 hasArrow
                 color="clique.white"
@@ -157,6 +158,7 @@ function Control({
                 ) : (
                   <Box onClick={handleLike}>
                     <Tooltip
+                      portalProps={{ containerRef: Bref }}
                       label="Like"
                       bg="none"
                       hasArrow
@@ -204,7 +206,8 @@ function Control({
                 ) : (
                   <Box onClick={handleDislike}>
                     <Tooltip
-                      label="Unlike"
+                      portalProps={{ containerRef: Bref }}
+                      label="Dislike"
                       bg="none"
                       hasArrow
                       color="clique.white"
@@ -241,10 +244,11 @@ function Control({
             </Flex>
           </Flex>
         </GridItem>
-        <GridItem colSpan={3} justifySelf="center" h="35px">
-          <Flex alignItems="center">
+        <GridItem colSpan={3} justifySelf="center" h="70px" p="0" m="0">
+          <Flex alignItems="center" h="100%">
             <Tooltip
-              label="Back"
+              portalProps={{ containerRef: Bref }}
+              label="Previous"
               bg="none"
               hasArrow
               color="clique.white"
@@ -256,6 +260,7 @@ function Control({
               <span>
                 <Icon
                   fontSize="bigHead"
+                  m="0"
                   cursor="pointer"
                   as={PrevIcon}
                   color={prevVideoIndex !== null ? "clique.white" : "gray.500"}
@@ -272,6 +277,7 @@ function Control({
 
             {!isPlay ? (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Pause"
                 bg="none"
                 hasArrow
@@ -281,11 +287,20 @@ function Control({
                 mt="0"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
                     fontSize="35px"
                     cursor="pointer"
                     as={BsPauseFill}
+                    m="0"
+                    minW="35px"
+                    w="35px"
+                    maxW="35px"
                     color={"clique.white"}
                     onClick={
                       playerRef.current
@@ -301,6 +316,7 @@ function Control({
               </Tooltip>
             ) : (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Play"
                 bg="none"
                 hasArrow
@@ -310,11 +326,20 @@ function Control({
                 mt="0"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
+                    m="0"
                     fontSize="bigHead"
                     cursor="pointer"
                     as={BsFillPlayFill}
+                    minW="35px"
+                    w="35px"
+                    maxW="35px"
                     color={"clique.white"}
                     onClick={
                       playerRef.current
@@ -330,6 +355,7 @@ function Control({
               </Tooltip>
             )}
             <Tooltip
+              portalProps={{ containerRef: Bref }}
               label="Next"
               bg="none"
               hasArrow
@@ -357,19 +383,40 @@ function Control({
             </Tooltip>
           </Flex>
         </GridItem>
-        <GridItem colSpan={2} justifySelf="end">
+        <GridItem colSpan={2} justifySelf="end" h="70px" alignItems="center">
           <Flex alignItems="center" h="100%">
             {video.uploader_id._id !== userProfile._id && (
-              <GiftModal isFullScreen={isFullScreen} video={video} />
+              <GiftModal
+                isFullScreen={isFullScreen}
+                video={video}
+                Bref={Bref}
+              />
             )}
-            <VideoOptionMenu
-              isLoop={isLoop}
-              setIsLoop={setIsLoop}
-              player={playerRef}
-              video={video}
-            />
+            <Flex pos="relative" mx={{ base: "10px", lg: "30px" }}>
+              <Tooltip
+                portalProps={{ containerRef: Bref }}
+                label="Settings"
+                bg="none"
+                hasArrow
+                color="clique.white"
+                fontSize="sm"
+                p="0"
+                mt="0"
+                placement="top"
+              >
+                <Flex alignItems="center">
+                  <VideoOptionMenu
+                    isLoop={isLoop}
+                    setIsLoop={setIsLoop}
+                    player={playerRef}
+                    video={video}
+                  />
+                </Flex>
+              </Tooltip>
+            </Flex>
             {!isFullScreen ? (
               <Tooltip
+                portalProps={{ containerRef: Bref }}
                 label="Fullscreen"
                 bg="none"
                 hasArrow
@@ -379,7 +426,12 @@ function Control({
                 mt="0"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
                     fontSize="smHead"
                     cursor={"pointer"}
@@ -395,16 +447,23 @@ function Control({
               </Tooltip>
             ) : (
               <Tooltip
-                label="Normal"
-                bg="none"
+                portalProps={{ containerRef: Bref }}
+                label="Minimize"
                 hasArrow
                 color="clique.white"
                 fontSize="sm"
                 p="0"
                 mt="0"
+                pl="150px"
+                textAlign="center"
                 placement="top"
               >
-                <span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
                     fontSize="smHead"
                     cursor={"pointer"}
@@ -421,7 +480,7 @@ function Control({
           </Flex>
         </GridItem>
       </Grid>
-    </>
+    </Box>
   );
 }
 
