@@ -115,13 +115,16 @@ function AdVideoJsPlayer({
           href="//googleads.github.io/videojs-ima/dist/videojs.ima.css"
         />
       </Head>
-      <Box>
+      <Box zIndex={-1}>
         <video
           id="content_video"
           className="video-js vjs-default-skin"
           controls={false}
-          // preload='auto'
-          style={{ width: "100%", height: "480px" }}
+          preload="auto"
+          style={{
+            width: "100%",
+            height: "480px", 
+          }}
           height="480px"
           autoPlay={true}
           onPause={() => setPlay(false)}
