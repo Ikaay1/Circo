@@ -197,18 +197,23 @@ export const helpGrowData: {
   header: string;
   image: string;
   bigImage: string;
+  details: string;
 }[] = [
   {
     key: '1',
     header: 'Increase your earning',
     image: 'microphone',
     bigImage: 'big-microphone',
+    details:
+      'Your content is your craft and we know this. Hence, we have created this platform to help you monitize your craft. With each subscriber paying you, and tickets selling for each of your live events, you earning will surly increase!',
   },
   {
     key: '2',
     header: 'Optimized for growth',
     image: 'movie-action',
     bigImage: 'big-movie-action',
+    details:
+      'The CIRCO ecosystem is designed to help you generate profit. Set up complete sales and marketing funnels with ease using the CIRCO built-in marketing tools and integrations. Our goal is to help you focus on creating mind blowing contents, while we take care of the maintenance, analytics, and more.',
   },
 ];
 
@@ -229,12 +234,12 @@ export const contactInfoData: {
 }[] = [
   {
     image: 'location',
-    detail: '2715 Ash Dr. San Jose, Ikoyi Link Bridge 83475',
+    detail: 'Admiralty Road 23, Lekki Phase 1, Lagos, Nigeria.',
   },
-  {
-    image: 'call',
-    detail: '(234) 81 5678 2341',
-  },
+  // {
+  //   image: 'call',
+  //   detail: '(234) 81 5678 2341',
+  // },
   {
     image: 'message',
     detail: 'admin@circo.africa',
@@ -245,10 +250,10 @@ export const footerOthersData: {
   key: string;
   detail: string;
 }[] = [
-  {
-    key: '1',
-    detail: 'FAQs',
-  },
+  // {
+  //   key: '1',
+  //   detail: 'FAQs',
+  // },
   {
     key: '2',
     detail: 'Privacy Policy',

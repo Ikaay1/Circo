@@ -84,13 +84,13 @@ const Exclusive = () => {
         <Image
           w={{base: '316.96px', lg: '661px'}}
           h={{base: '164px', lg: '342px'}}
-          src='/assets/video-player.png'
+          src='/assets/vid-player.png'
           alt='video player'
         />
         <Image
           w={{base: '96.86px', lg: '202px'}}
           h={{base: '209.07px', lg: '436px'}}
-          src='/assets/mobile-player.png'
+          src='/assets/mob-player.png'
           alt='video player'
           position='absolute'
           top={{base: '-9.5%', lg: 'auto'}}
