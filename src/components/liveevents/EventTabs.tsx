@@ -22,10 +22,12 @@ function EventTabs() {
   const [paid, setPaid] = React.useState("");
   const [ongoing, setOngoing] = React.useState("");
   const [search, setSearch] = React.useState("");
+  const [isAll, setIsAll] = React.useState("true");
   const { data, isFetching } = useGetAllLiveStreamQuery({
     paid,
     ongoing,
     search,
+    isAll,
   });
 
   return (
@@ -47,6 +49,7 @@ function EventTabs() {
             setPaid("");
             setOngoing("");
             setSearch("");
+            setIsAll("true");
           }}
         >
           All Events
@@ -56,6 +59,7 @@ function EventTabs() {
             setPaid("false");
             setOngoing("");
             setSearch("");
+            setIsAll("");
           }}
         >
           Free Events
@@ -65,6 +69,7 @@ function EventTabs() {
             setPaid("true");
             setOngoing("");
             setSearch("");
+            setIsAll("");
           }}
         >
           Paid Events
@@ -74,6 +79,7 @@ function EventTabs() {
             setPaid("");
             setOngoing("true");
             setSearch("");
+            setIsAll("");
           }}
         >
           Ongoing Events

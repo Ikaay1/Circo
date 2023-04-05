@@ -91,14 +91,14 @@ export const liveAPI = createApi({
     downloadLivestream: builder.mutation<any, any>({
       query: (id) => ({
         url: `livestream/download/${id}`,
-        method: "POST"
+        method: "POST",
       }),
       invalidatesTags: ["Live"],
     }),
 
     getAllLiveStream: builder.query<any, any>({
       query: (type) => ({
-        url: `livestream/?paid=${type?.paid}&ongoing=${type?.ongoing}&search=${type?.search}`,
+        url: `livestream/?paid=${type?.paid}&ongoing=${type?.ongoing}&search=${type?.search}&isAll=${type?.isAll}}`,
         method: "GET",
       }),
       providesTags: ["Live"],
