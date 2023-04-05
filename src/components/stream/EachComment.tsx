@@ -80,7 +80,7 @@ function EachComment({ comment }: { comment: any }) {
             >
               {comment?.commentBody}
             </Text>
-            <Flex
+            {/* <Flex
               alignItems={"center"}
               justifyContent="space-between"
               mt="15px"
@@ -154,8 +154,7 @@ function EachComment({ comment }: { comment: any }) {
                   </Text>
                 </Flex>
               </Flex>
-              {/* <ReportModal comment={comment} /> */}
-            </Flex>
+            </Flex> */}
           </Box>
         </Flex>
         {/* <Flex>
