@@ -392,7 +392,7 @@ function Control({
                 Bref={Bref}
               />
             )}
-            <Flex pos="relative" mx={{ base: "10px", lg: "30px" }}>
+            <Flex mx={{ base: "10px", lg: "30px" }}>
               <Tooltip
                 portalProps={{ containerRef: Bref }}
                 label="Settings"
