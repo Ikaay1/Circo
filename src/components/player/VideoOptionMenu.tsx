@@ -90,7 +90,6 @@ function VideoOptionMenu({ player, video, isLoop, setIsLoop }: any) {
       <MenuButton aria-label="Options">
         <Icon
           fontSize="28px"
-   
           cursor={"pointer"}
           as={OptionsIcon}
           color={"clique.white"}
