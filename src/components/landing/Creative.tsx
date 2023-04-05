@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import {Box, Image, Text} from '@chakra-ui/react';
 
 import DownloadButtons from './DownloadButtons';
 
@@ -41,7 +41,7 @@ const Creative = () => {
             display={{lg: 'none'}}
           />
           <Image
-            src='/assets/big-video.png'
+            src='/assets/big-vid.png'
             w={{base: '344px', lg: '100%'}}
             mx={{base: 'auto'}}
             alt=''
@@ -68,7 +68,7 @@ const Creative = () => {
               display={{lg: 'none'}}
             />
             <Image
-              src='/assets/big-mobile-video.png'
+              src='/assets/big-mobile-vid.png'
               alt=''
               display={{base: 'none', lg: 'block'}}
             />

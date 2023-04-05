@@ -23,9 +23,9 @@ const Grow = () => {
         {helpGrowData.map(({ key, header, image, bigImage, text }, i) => (
           <Box
             key={key}
-            display={{ lg: "flex" }}
-            justifyContent={{ lg: "space-between" }}
-            alignItems={{ lg: "center" }}
+            display={{lg: 'flex'}}
+            justifyContent={{lg: 'space-between'}}
+            alignItems={{lg: 'center'}}
           >
             <Box mt={"4.5rem"} w={{ lg: "40%" }} h={{ lg: "100%" }}>
               <Text
@@ -46,22 +46,22 @@ const Grow = () => {
                 {text}
               </Text>
               <Flex
-                alignItems={"center"}
-                display={{ base: "none", lg: "flex" }}
-                mt="1rem"
-                cursor="pointer"
-                onClick={() => router.push("/signup")}
+                alignItems={'center'}
+                display={{base: 'none', lg: 'flex'}}
+                mt='1rem'
+                cursor='pointer'
+                onClick={() => router.push('/signup')}
               >
                 <Text
-                  fontFamily="Poppins"
-                  fontStyle="normal"
-                  fontWeight="500"
-                  lineHeight="20px"
-                  color="clique.white"
+                  fontFamily='Poppins'
+                  fontStyle='normal'
+                  fontWeight='500'
+                  lineHeight='20px'
+                  color='clique.white'
                 >
                   Get Started
                 </Text>
-                <Icon height={"100%"} ml=".6rem" as={ArrowRight} />
+                <Icon height={'100%'} ml='.6rem' as={ArrowRight} />
               </Flex>
             </Box>
             <Box
@@ -69,117 +69,117 @@ const Grow = () => {
               position={"relative"}
               h={{ lg: "60%" }}
               w={{
-                lg: "683px",
+                lg: '683px',
               }}
-              order={{ lg: i === 1 ? "-1" : "1" }}
-              mr={{ lg: i === 1 ? "1.5rem" : "0rem" }}
+              order={{lg: i === 1 ? '-1' : '1'}}
+              mr={{lg: i === 1 ? '1.5rem' : '0rem'}}
               //
             >
               <Image
                 src={`/assets/${image}.png`}
                 alt={`${image}`}
                 w={{
-                  base: i === 0 ? "290px" : "320px",
+                  base: i === 0 ? '290px' : '320px',
                 }}
                 ml={{
-                  base: "auto",
+                  base: 'auto',
                 }}
-                mr={{ base: i === 1 ? "auto" : "" }}
-                display={{ lg: "none" }}
+                mr={{base: i === 1 ? 'auto' : ''}}
+                display={{lg: 'none'}}
               />
               <Image
                 src={`/assets/${bigImage}.png`}
                 alt={`${image}`}
                 w={{
-                  lg: i === 0 ? "600px" : "683px",
+                  lg: i === 0 ? '600px' : '683px',
                 }}
-                h={{ lg: i === 0 ? "400px" : "466px" }}
+                h={{lg: i === 0 ? '400px' : '466px'}}
                 ml={{
-                  lg: i === 0 ? "auto" : "",
+                  lg: i === 0 ? 'auto' : '',
                 }}
-                display={{ base: "none", lg: "block" }}
+                display={{base: 'none', lg: 'block'}}
               />
               {i === 0 && (
                 <Box
-                  w={{ base: "185px", lg: "422px" }}
-                  p={{ base: ".5rem", lg: "1.1rem" }}
-                  background="clique.black5"
-                  borderRadius="8.1807px"
-                  position={"absolute"}
-                  top="-15%"
-                  left={"0"}
+                  w={{base: '185px', lg: '422px'}}
+                  p={{base: '.5rem', lg: '1.1rem'}}
+                  background='clique.black5'
+                  borderRadius='8.1807px'
+                  position={'absolute'}
+                  top='-15%'
+                  left={'0'}
                 >
-                  {walletData.map(({ key, image, time, amount }, i) => (
+                  {walletData.map(({key, image, time, amount}, i) => (
                     <Box
-                      display={"flex"}
-                      justifyContent="space-between"
-                      background="clique.blackGrey"
-                      borderRadius="4.09035px"
+                      display={'flex'}
+                      justifyContent='space-between'
+                      background='clique.blackGrey'
+                      borderRadius='4.09035px'
                       p={{
-                        base: ".3rem",
-                        lg: ".7rem",
+                        base: '.3rem',
+                        lg: '.7rem',
                       }}
                       mb={{
-                        base: ".2rem",
-                        lg: ".4rem",
+                        base: '.2rem',
+                        lg: '.4rem',
                       }}
                       key={key}
                     >
-                      <Box display={"flex"}>
+                      <Box display={'flex'}>
                         <Box
                           w={{
-                            base: "16px",
-                            lg: "30px",
+                            base: '16px',
+                            lg: '30px',
                           }}
                           h={{
-                            base: "16px",
-                            lg: "30px",
+                            base: '16px',
+                            lg: '30px',
                           }}
-                          borderRadius={"50%"}
-                          display={"flex"}
-                          justifyContent="center"
-                          alignItems={"center"}
+                          borderRadius={'50%'}
+                          display={'flex'}
+                          justifyContent='center'
+                          alignItems={'center'}
                           bg={
                             i !== 2
-                              ? "rgba(133, 191, 154, 0.3)"
-                              : "rgba(195, 46, 46, 0.26)"
+                              ? 'rgba(133, 191, 154, 0.3)'
+                              : 'rgba(195, 46, 46, 0.26)'
                           }
                           mr={{
-                            base: ".15rem",
-                            lg: ".55rem",
+                            base: '.15rem',
+                            lg: '.55rem',
                           }}
                         >
                           <Image
                             src={`/assets/${image}.png`}
-                            alt="arrow up icon"
+                            alt='arrow up icon'
                             w={{
-                              base: "12px",
-                              lg: "24px",
+                              base: '12px',
+                              lg: '24px',
                             }}
                             h={{
-                              base: "12px",
-                              lg: "24px",
+                              base: '12px',
+                              lg: '24px',
                             }}
                           />
                         </Box>
 
                         <Text
                           fontSize={{
-                            base: "xs2",
-                            lg: "sm",
+                            base: 'xs2',
+                            lg: 'sm',
                           }}
                           lineHeight={{
-                            base: "8px",
-                            lg: "20px",
+                            base: '8px',
+                            lg: '20px',
                           }}
-                          color="clique.white"
+                          color='clique.white'
                         >
                           {i !== 2
-                            ? "Circo Wallet credited with"
-                            : "Circo Wallet debited with"}{" "}
+                            ? 'Circo Wallet credited with'
+                            : 'Circo Wallet debited with'}{' '}
                           <Text
-                            display={"inline"}
-                            color={i !== 2 ? "#22C55E" : "#D52B2B"}
+                            display={'inline'}
+                            color={i !== 2 ? '#22C55E' : '#D52B2B'}
                           >
                             {amount}
                           </Text>
@@ -187,14 +187,14 @@ const Grow = () => {
                       </Box>
                       <Text
                         fontSize={{
-                          base: "xs2",
-                          lg: "sm",
+                          base: 'xs2',
+                          lg: 'sm',
                         }}
                         lineHeight={{
-                          base: "8px",
-                          lg: "20px",
+                          base: '8px',
+                          lg: '20px',
                         }}
-                        color="clique.white"
+                        color='clique.white'
                       >
                         {time}
                       </Text>

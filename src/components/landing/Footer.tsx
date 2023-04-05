@@ -87,9 +87,16 @@ const Footer = () => {
             Streaming and Video platform
           </Text>
           <Box display={'flex'} mt={{base: '.85rem'}}>
-            <Image marginRight={'2rem'} src='/assets/instagram.png' alt='' />
             <a
-              href='https://web.facebook.com/profile.php?id=100089370518977'
+              style={{marginRight: '2rem'}}
+              href='https://www.instagram.com/circoafrica_/'
+              target={'_blank'}
+              rel='noreferrer'
+            >
+              <Image src='/assets/instagram.png' alt='' />
+            </a>
+            <a
+              href='https://web.facebook.com/profile.php?id=100090346278103'
               target={'_blank'}
               rel='noreferrer'
             >

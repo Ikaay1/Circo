@@ -231,13 +231,13 @@ export const contactInfoData: {
   detail: string;
 }[] = [
   {
-    image: "location",
-    detail: "2715 Ash Dr. San Jose, Ikoyi Link Bridge 83475",
+    image: 'location',
+    detail: 'Admiralty Road 23, Lekki Phase 1, Lagos, Nigeria.',
   },
-  {
-    image: "call",
-    detail: "(234) 81 5678 2341",
-  },
+  // {
+  //   image: 'call',
+  //   detail: '(234) 81 5678 2341',
+  // },
   {
     image: "message",
     detail: "admin@circo.africa",
@@ -248,10 +248,10 @@ export const footerOthersData: {
   key: string;
   detail: string;
 }[] = [
-  {
-    key: "1",
-    detail: "FAQs",
-  },
+  // {
+  //   key: '1',
+  //   detail: 'FAQs',
+  // },
   {
     key: "2",
     detail: "Privacy Policy",
