@@ -53,9 +53,9 @@ function Index() {
 
   useEffect(() => {
     async function display(videoStream: string) {
-      let blob = await fetch(videoStream).then((r) => r.blob());
-      var videoUrl = createObjectURL(blob);
-      setUrl(videoUrl);
+      // let blob = await fetch(videoStream).then((r) => r.blob());
+      // var videoUrl = createObjectURL(blob);
+      setUrl(videoStream);
     }
     if (data?.data?.preference?.video?.video) {
       display(decrypt(data?.data?.preference?.video?.video));
