@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import { useEndStreamMutation } from "redux/services/livestream/live.service";
 import { clearWebCamStream } from "redux/slices/streamSlice";
 
-function End() {
+function End({ id }: { id: string }) {
   const [endStream, endInfo] = useEndStreamMutation();
   const streamDetails = useAppSelector(
     (state) => state?.app?.stream?.webCamStream
@@ -23,7 +23,7 @@ function End() {
       mt="80px"
       rounded="full"
       onClick={async () => {
-        const endRes: any = await endStream(streamDetails?._id);
+        const endRes: any = await endStream(id);
         if (endRes?.data?.data) {
           toast({
             title: "Stream Ended",
