@@ -1,8 +1,9 @@
 import {useRouter} from 'next/router';
-import React, {ChangeEvent, Dispatch, SetStateAction, useRef} from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 import Dropzone from 'react-dropzone';
 import {MdAddCircleOutline} from 'react-icons/md';
 import {useAppDispatch} from 'redux/app/hooks';
+import {setSources} from 'redux/slices/uploadSlice';
 
 import {
   Button,
@@ -20,27 +21,12 @@ import {
 import Color from '@constants/color';
 import UploadIcon from '@icons/UploadIcon';
 
-function UploadModal({
-  isOpen,
-  onClose,
-  name,
-  url,
-  setFile,
-  setUrl,
-  setName,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  name: string;
-  url: string;
-  setFile: Dispatch<SetStateAction<string | File>>;
-  setUrl: Dispatch<SetStateAction<string>>;
-  setName: Dispatch<SetStateAction<string>>;
-}) {
+function UploadModal() {
   const toast = useToast();
   const [isDragging, setIsDragging] = React.useState(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const {isOpen, onOpen, onClose} = useDisclosure();
   const inputRef = useRef<HTMLInputElement | any>();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]?.type.includes('video')) {
@@ -54,10 +40,11 @@ function UploadModal({
       setIsDragging(false);
       return;
     }
-    setFile(event.target.files[0]);
-    setName(event.target.files[0]?.name);
-    setUrl(URL?.createObjectURL(event.target.files[0]));
+    const file = event.target.files[0];
+    const name = file?.name;
+    const url = URL?.createObjectURL(file);
     onClose();
+    dispatch(setSources({url, name}));
     router.push('/upload');
   };
   const handleChoose = () => {
@@ -66,7 +53,19 @@ function UploadModal({
 
   return (
     <>
-      <Modal isCentered isOpen={isOpen} onClose={() => {}}>
+      <Button
+        color='clique.white'
+        rightIcon={<Icon fontSize={'lg'} as={MdAddCircleOutline} />}
+        variant='ghost'
+        rounded={'full'}
+        bg='clique.base'
+        fontFamily={'Poppins'}
+        size={'sm'}
+        onClick={onOpen}
+      >
+        Upload
+      </Button>
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg='clique.modalOverlay' />
         <ModalContent
           bg={'clique.black'}
@@ -106,11 +105,8 @@ function UploadModal({
                   const file = acceptedFiles[0];
                   const name = file?.name;
                   const url = URL?.createObjectURL(file);
-
                   onClose();
-                  setFile(file!);
-                  setName(file?.name);
-                  setUrl(URL?.createObjectURL(file));
+                  dispatch(setSources({url, name}));
                   router.push('/upload');
                 }}
               >

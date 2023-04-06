@@ -1,42 +1,39 @@
-import { useRouter } from 'next/router';
-import { FormEvent, useEffect, useState } from 'react';
-import { useCategoryQuery } from 'redux/services/category.service';
-import { useCreateContentMutation } from 'redux/services/content.service';
+import {useRouter} from 'next/router';
+import {FormEvent, useEffect, useState} from 'react';
+import {useCategoryQuery} from 'redux/services/category.service';
+import {useCreateContentMutation} from 'redux/services/content.service';
 
 import {
-	Box,
-	Checkbox,
-	Divider,
-	Flex,
-	Grid,
-	GridItem,
-	Icon,
-	Image,
-	Input,
-	Link,
-	Select,
-	Text,
-	useColorModeValue,
-	useDisclosure,
-	useToast,
-	VStack,
+  Box,
+  Checkbox,
+  Divider,
+  Flex,
+  Grid,
+  GridItem,
+  Icon,
+  Image,
+  Input,
+  Link,
+  Select,
+  Text,
+  useColorModeValue,
+  useToast,
+  VStack,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
-import { CategoriesInterface } from '@constants/interface';
-import { age, API, selectArr, videoDetails } from '@constants/utils';
+import {CategoriesInterface} from '@constants/interface';
+import {age, API, selectArr, videoDetails} from '@constants/utils';
 import AddIcon from '@icons/AddIcon';
 import CopyIcon from '@icons/CopyIcon';
 
 import DetailCard from './DetailCard';
-import UploadModal from './UploadModal';
 import UploadPreview from './UploadPreview';
 
 type Props = {
   url: string;
   name: string;
 };
-function UploadPage() {
-  const {isOpen, onOpen, onClose} = useDisclosure();
+function UploadPage({url, name}: Props) {
   const [state, setState] = useState({
     title: '',
     description: '',
@@ -49,10 +46,7 @@ function UploadPage() {
   const router = useRouter();
   const {data, isLoading} = useCategoryQuery('');
   const [thumbNail, setThumbNail] = useState<string | Blob>('');
-  const [file, setFile] = useState<string | File>('');
   const [imageError, setImageError] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [url, setUrl] = useState<string>('');
   const [createContent, createContentStatus] = useCreateContentMutation();
   const [isFree, setIsFree] = useState<boolean>(false);
 
@@ -91,18 +85,9 @@ function UploadPage() {
       });
       return;
     }
-    if (!file) {
-      toast({
-        title: 'Error',
-        description: 'Please upload a video',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
-      onOpen();
-      return;
-    }
+    let file = await fetch(url)
+      .then((r) => r.blob())
+      .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
     const formData = new FormData();
     formData.append('title', state.title);
     formData.append('description', state.description);
@@ -121,7 +106,6 @@ function UploadPage() {
         isClosable: true,
         position: 'top-right',
       });
-      localStorage.removeItem('file');
       router.push('/home');
     } else {
       toast({
@@ -136,10 +120,6 @@ function UploadPage() {
   };
 
   useEffect(() => {
-    onOpen();
-  }, []);
-
-  useEffect(() => {
     if (imageError) {
       setTimeout(() => {
         setImageError('');
@@ -149,205 +129,204 @@ function UploadPage() {
 
   const valueC = useColorModeValue('clique.white', 'clique.secondaryGrey1');
   return (
-    <>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <Flex
-          gap={3}
-          pl='5'
-          pr='12'
-          mt={{base: '.7rem', lg: 'none'}}
-          height={{base: '100vh', lg: '100%'}}
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <Flex
+        gap={3}
+        pl='5'
+        pr='12'
+        mt={{base: '.7rem', lg: 'none'}}
+        height={{base: '100vh', lg: '100%'}}
+      >
+        <Box
+          display={{base: 'none', lg: 'block'}}
+          w='20%'
+          maxW='20%'
+          minW='20%'
+          pt='4'
+          pr='2'
         >
-          <Box
-            display={{base: 'none', lg: 'block'}}
-            w='20%'
-            maxW='20%'
-            minW='20%'
-            pt='4'
-            pr='2'
-          >
-            <Text fontSize={'smHead'} mb='5'>
-              Your video preview
+          <Text fontSize={'smHead'} mb='5'>
+            Your video preview
+          </Text>
+          <UploadPreview
+            title={state.title}
+            thumbNail={
+              thumbNail &&
+              typeof thumbNail !== 'string' &&
+              URL.createObjectURL(thumbNail as Blob)
+            }
+            isFree={isFree}
+          />
+        </Box>
+
+        <Flex width={{base: '100%', lg: '50%'}}>
+          <Divider orientation='vertical' bg='clique.secondaryGrey' mr='4' />
+          <Box pt='2' pb='5'>
+            <Text fontSize='head'>Video details</Text>
+
+            <VStack align='stretch' mt={4}>
+              {videoDetails.map((each) => {
+                return (
+                  <DetailCard
+                    key={each.title}
+                    title={each.title}
+                    input={each.input}
+                    value={state.title}
+                    valueArea={state.description}
+                    handleInputChange={(event) =>
+                      setState({...state, title: event?.target?.value})
+                    }
+                    handleInputChangeArea={(event) =>
+                      setState({...state, description: event?.target?.value})
+                    }
+                    limit={each.title === 'Title' ? true : false}
+                  />
+                );
+              })}
+            </VStack>
+            <Box mt='7' mb='4'>
+              <Text fontSize='smSubHead'>Thumbnail</Text>
+              <Text fontSize='xsl' color='clique.secondaryGrey2' mb='2'>
+                Select or upload a picture that shows what is your video
+              </Text>
+              <Input
+                type={'file'}
+                onChange={(e: any) => {
+                  e.target.files[0]?.type.includes('image')
+                    ? setThumbNail(e.target.files[0])
+                    : setImageError('Please choose an image');
+                }}
+                display={'none'}
+                id={'thumbnail'}
+              />{' '}
+              <label htmlFor={'thumbnail'}>
+                {thumbNail && typeof thumbNail !== 'string' ? (
+                  <Box mt='7'>
+                    {' '}
+                    <Box
+                      bgImage={'url(' + URL.createObjectURL(thumbNail) + ')'}
+                      rounded='10px'
+                      h='120px'
+                      w='250px'
+                      bgRepeat={'no-repeat'}
+                      bgSize={'cover'}
+                    ></Box>
+                  </Box>
+                ) : (
+                  <Flex gap='2' mb='4' cursor={'pointer'}>
+                    <Flex
+                      flexDirection={'column'}
+                      alignItems={'center'}
+                      justifyContent='center'
+                      gap='2'
+                      py={4}
+                      border='1px'
+                      width='40%'
+                      borderRadius={'10px'}
+                      borderColor='clique.secondaryGrey2'
+                      borderStyle='dashed'
+                    >
+                      <Icon as={AddIcon} />
+                      <Text fontSize='smSubHead'>Upload Thumbnail</Text>
+                    </Flex>
+                  </Flex>
+                )}
+              </label>
+              <Text color='red' fontSize='18px'>
+                {imageError}
+              </Text>
+            </Box>
+            <Text fontSize={'subHead'} mb='4'>
+              Other Parameters
             </Text>
-            <UploadPreview
-              title={state.title}
-              thumbNail={
-                thumbNail &&
-                typeof thumbNail !== 'string' &&
-                URL.createObjectURL(thumbNail as Blob)
-              }
-              isFree={isFree}
+
+            <Grid templateColumns='repeat(2, 1fr)' gap={4}>
+              {selectArr.map((each, i) => {
+                return (
+                  <GridItem w='100%' key={i}>
+                    <Select
+                      placeholder={each.placeholder}
+                      bg={valueC}
+                      // borderColor='clique.secondaryGrey1'
+                      size='md'
+                      height={'40px'}
+                      onChange={(e) =>
+                        i === 0
+                          ? setState((prevState) => ({
+                              ...prevState,
+                              category: e.target.value,
+                            }))
+                          : setState((prevState) => ({
+                              ...prevState,
+                              ageRange: e.target.value,
+                            }))
+                      }
+                    >
+                      {i === 0 && (
+                        <>
+                          {data?.data.map((category: CategoriesInterface) => (
+                            <option key={category._id} value={category._id}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </>
+                      )}
+                      {i === 1 && (
+                        <>
+                          {age.map((eachAge) => (
+                            <option key={eachAge} value={eachAge}>
+                              {eachAge}
+                            </option>
+                          ))}
+                        </>
+                      )}
+                    </Select>
+                  </GridItem>
+                );
+              })}
+
+              <Checkbox
+                checked={isFree}
+                onChange={(e: any) => {
+                  setIsFree(e.target.checked);
+                }}
+              >
+                <Text>Free video</Text>
+              </Checkbox>
+            </Grid>
+            <Btn
+              text='upload'
+              submit={true}
+              isLoading={createContentStatus.isLoading}
+              display={{lg: 'none'}}
+              w='100%'
+              mt='3rem'
             />
           </Box>
-
-          <Flex width={{base: '100%', lg: '50%'}}>
-            <Divider orientation='vertical' bg='clique.secondaryGrey' mr='4' />
-            <Box pt='2' pb='5'>
-              <Text fontSize='head'>Video details</Text>
-
-              <VStack align='stretch' mt={4}>
-                {videoDetails.map((each) => {
-                  return (
-                    <DetailCard
-                      key={each.title}
-                      title={each.title}
-                      input={each.input}
-                      value={state.title}
-                      valueArea={state.description}
-                      handleInputChange={(event) =>
-                        setState({...state, title: event?.target?.value})
-                      }
-                      handleInputChangeArea={(event) =>
-                        setState({...state, description: event?.target?.value})
-                      }
-                      limit={each.title === 'Title' ? true : false}
-                    />
-                  );
-                })}
-              </VStack>
-              <Box mt='7' mb='4'>
-                <Text fontSize='smSubHead'>Thumbnail</Text>
-                <Text fontSize='xsl' color='clique.secondaryGrey2' mb='2'>
-                  Select or upload a picture that shows what is your video
-                </Text>
-                <Input
-                  type={'file'}
-                  onChange={(e: any) => {
-                    e.target.files[0]?.type.includes('image')
-                      ? setThumbNail(e.target.files[0])
-                      : setImageError('Please choose an image');
-                  }}
-                  display={'none'}
-                  id={'thumbnail'}
-                />{' '}
-                <label htmlFor={'thumbnail'}>
-                  {thumbNail && typeof thumbNail !== 'string' ? (
-                    <Box mt='7'>
-                      {' '}
-                      <Box
-                        bgImage={'url(' + URL.createObjectURL(thumbNail) + ')'}
-                        rounded='10px'
-                        h='120px'
-                        w='250px'
-                        bgRepeat={'no-repeat'}
-                        bgSize={'cover'}
-                      ></Box>
-                    </Box>
-                  ) : (
-                    <Flex gap='2' mb='4' cursor={'pointer'}>
-                      <Flex
-                        flexDirection={'column'}
-                        alignItems={'center'}
-                        justifyContent='center'
-                        gap='2'
-                        py={4}
-                        border='1px'
-                        width='40%'
-                        borderRadius={'10px'}
-                        borderColor='clique.secondaryGrey2'
-                        borderStyle='dashed'
-                      >
-                        <Icon as={AddIcon} />
-                        <Text fontSize='smSubHead'>Upload Thumbnail</Text>
-                      </Flex>
-                    </Flex>
-                  )}
-                </label>
-                <Text color='red' fontSize='18px'>
-                  {imageError}
-                </Text>
-              </Box>
-              <Text fontSize={'subHead'} mb='4'>
-                Other Parameters
-              </Text>
-
-              <Grid templateColumns='repeat(2, 1fr)' gap={4}>
-                {selectArr.map((each, i) => {
-                  return (
-                    <GridItem w='100%' key={i}>
-                      <Select
-                        placeholder={each.placeholder}
-                        bg={valueC}
-                        // borderColor='clique.secondaryGrey1'
-                        size='md'
-                        height={'40px'}
-                        onChange={(e) =>
-                          i === 0
-                            ? setState((prevState) => ({
-                                ...prevState,
-                                category: e.target.value,
-                              }))
-                            : setState((prevState) => ({
-                                ...prevState,
-                                ageRange: e.target.value,
-                              }))
-                        }
-                      >
-                        {i === 0 && (
-                          <>
-                            {data?.data.map((category: CategoriesInterface) => (
-                              <option key={category._id} value={category._id}>
-                                {category.name}
-                              </option>
-                            ))}
-                          </>
-                        )}
-                        {i === 1 && (
-                          <>
-                            {age.map((eachAge) => (
-                              <option key={eachAge} value={eachAge}>
-                                {eachAge}
-                              </option>
-                            ))}
-                          </>
-                        )}
-                      </Select>
-                    </GridItem>
-                  );
-                })}
-
-                <Checkbox
-                  checked={isFree}
-                  onChange={(e: any) => {
-                    setIsFree(e.target.checked);
-                  }}
-                >
-                  <Text>Free video</Text>
-                </Checkbox>
-              </Grid>
-              <Btn
-                text='upload'
-                submit={true}
-                isLoading={createContentStatus.isLoading}
-                display={{lg: 'none'}}
-                w='100%'
-                mt='3rem'
-              />
+        </Flex>
+        <Flex
+          w='30%'
+          maxW='30%'
+          minW='30%'
+          flexDirection={'column'}
+          pb='40px'
+          gap='100px'
+          pt='65px'
+          display={{base: 'none', lg: 'block'}}
+        >
+          <Box borderRadius={'10px'} overflow='hidden'>
+            <Box>
+              <video width='100%' height={'60px'} src={url} controls />
             </Box>
-          </Flex>
-          <Flex
-            w='30%'
-            maxW='30%'
-            minW='30%'
-            flexDirection={'column'}
-            pb='40px'
-            gap='100px'
-            pt='65px'
-            display={{base: 'none', lg: 'block'}}
-          >
-            <Box borderRadius={'10px'} overflow='hidden'>
-              <Box>
-                <video width='100%' height={'60px'} src={url} controls />
-              </Box>
-              <Box
-                bg={valueC}
-                pl='5'
-                pt='2'
-                pr='6'
-                pb='8'
-                borderBottomRadius='md'
-              >
-                {/* <Box>
+            <Box
+              bg={valueC}
+              pl='5'
+              pt='2'
+              pr='6'
+              pb='8'
+              borderBottomRadius='md'
+            >
+              {/* <Box>
                 <Text fontSize={"0.75rem"}>Video link</Text>
                 <Flex justifyContent="space-between" mt="2">
                   <Link fontSize={"0.75rem"} color="clique.primaryBlue">
@@ -356,35 +335,25 @@ function UploadPage() {
                   <Icon as={CopyIcon} fontSize="70px" />
                 </Flex>
               </Box> */}
-                <Box mt='8'>
-                  <Text fontSize={'0.75rem'}>File name</Text>
-                  <Text mt='2' fontSize={'0.75rem'}>
-                    {name}
-                  </Text>
-                </Box>
+              <Box mt='8'>
+                <Text fontSize={'0.75rem'}>File name</Text>
+                <Text mt='2' fontSize={'0.75rem'}>
+                  {name}
+                </Text>
               </Box>
             </Box>
-            <Flex justifyContent={'center'} mt='2rem'>
-              <Btn
-                text='Upload'
-                submit={true}
-                isLoading={createContentStatus.isLoading}
-                w='300px'
-              />
-            </Flex>
+          </Box>
+          <Flex justifyContent={'center'} mt='2rem'>
+            <Btn
+              text='Upload'
+              submit={true}
+              isLoading={createContentStatus.isLoading}
+              w='300px'
+            />
           </Flex>
         </Flex>
-      </form>
-      <UploadModal
-        isOpen={isOpen}
-        onClose={onClose}
-        name={name}
-        url={url}
-        setFile={setFile}
-        setUrl={setUrl}
-        setName={setName}
-      />{' '}
-    </>
+      </Flex>
+    </form>
   );
 }
 
