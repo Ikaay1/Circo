@@ -45,10 +45,10 @@ function PlayerCard({ streamDetails, setState }: any) {
 
   const dispatch = useAppDispatch();
   const streamId = useAppSelector(
-    (state) => state?.app?.stream?.streamDetails?._id
+    (state) => state?.app?.stream?.streamDetails?.eventId?._id
   );
   const selectedStreamId = useAppSelector(
-    (state) => state?.app?.stream?.selectedStream?._id
+    (state) => state?.app?.stream?.selectedStream?.eventId?._id
   );
 
   const handleUpdateStream = async () => {
@@ -62,7 +62,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           isClosable: true,
           position: "top-right",
         });
-        if (streamId === streamDetails?._id) {
+        if (streamId === streamDetails?.eventId?._id) {
           dispatch(
             setStreamDetails({
               payload: {
@@ -70,7 +70,7 @@ function PlayerCard({ streamDetails, setState }: any) {
               },
             })
           );
-        } else if (selectedStreamId === streamDetails?._id) {
+        } else if (selectedStreamId === streamDetails?.eventId?._id) {
           dispatch(
             setSelectedStream({
               payload: {
@@ -90,7 +90,7 @@ function PlayerCard({ streamDetails, setState }: any) {
         });
       }
     } else {
-      const endRes: any = await endStream(streamDetails?._id);
+      const endRes: any = await endStream(streamDetails?.eventId?._id);
       if (endRes?.data?.data) {
         toast({
           title: "Stream Ended",
@@ -102,7 +102,7 @@ function PlayerCard({ streamDetails, setState }: any) {
 
         if (streamId === streamDetails?._id) {
           dispatch(clearStreamDetails());
-        } else if (selectedStreamId === streamDetails?._id) {
+        } else if (selectedStreamId === streamDetails?.eventId?._id) {
           setState("liveevent");
         }
       } else {
