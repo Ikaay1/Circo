@@ -24,7 +24,7 @@ const Creative = () => {
         color='clique.white'
         mt='.5rem'
       >
-        Channel your inner Pikaso and start creating content to be monetized
+        Channel your inner picasso  and start creating content to be monetized
       </Text>
       <Box
         mt={{base: '3rem', lg: '10rem'}}

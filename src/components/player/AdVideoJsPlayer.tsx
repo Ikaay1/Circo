@@ -115,7 +115,7 @@ function AdVideoJsPlayer({
           href="//googleads.github.io/videojs-ima/dist/videojs.ima.css"
         />
       </Head>
-      <Box zIndex={-1}>
+      <Box id="video2" ref={ref} pos={"relative"}>
         <video
           id="content_video"
           className="video-js vjs-default-skin"
@@ -123,7 +123,7 @@ function AdVideoJsPlayer({
           preload="auto"
           style={{
             width: "100%",
-            height: "480px", 
+            height: "480px",
           }}
           height="480px"
           autoPlay={true}

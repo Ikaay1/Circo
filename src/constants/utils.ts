@@ -204,7 +204,7 @@ export const helpGrowData: {
     header: "Increase your earning",
     image: "microphone",
     bigImage: "big-microphone",
-    text: "Your content is your craft and we know this. Hence, we have created this platform to help you monitize your craft. With each subscriber paying you, and tickets selling for each of your live events, you earning will surly increase!",
+    text: "Your content is your craft and we know this. Hence, we have created this platform to help you monitize your craft. With each subscriber paying you, and tickets selling for each of your live events, your earnings will surely increase!",
   },
   {
     key: "2",
