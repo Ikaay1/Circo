@@ -1,7 +1,7 @@
 import HomeLayout from 'layouts/HomeLayout';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 
 import UploadPage from '@components/upload/UploadPage';
 
@@ -23,4 +23,4 @@ function Upload({}: Props) {
 }
 
 export default Upload;
-export { getServerSideProps } from "../components/widgets/Chakara";
+export {getServerSideProps} from '../components/widgets/Chakara';

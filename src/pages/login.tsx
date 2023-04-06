@@ -49,7 +49,7 @@ const Login = () => {
     } else {
       toast({
         title: 'Login failed',
-        description: res.error?.data?.message,
+        description: res.error?.data?.message || 'Something went wrong',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -74,32 +74,32 @@ const Login = () => {
   }, []);
   return (
     <Box
-      display={"flex"}
-      justifyContent={{ base: "center", lg: "space-between" }}
-      alignItems={"center"}
+      display={'flex'}
+      justifyContent={{base: 'center', lg: 'space-between'}}
+      alignItems={'center'}
       backgroundColor={Color().lightAndPrimary}
     >
       <CliqueLogo />
-      <Box display={{ base: "none", lg: "block" }}>
+      <Box display={{base: 'none', lg: 'block'}}>
         <ShowAuthImage />
       </Box>
       <Box
-        marginLeft={{ base: "0", xl: "50%" }}
-        minW={{ base: "60%", xl: "50%" }}
-        py="50px"
-        minH={"100vh"}
+        marginLeft={{base: '0', xl: '50%'}}
+        minW={{base: '60%', xl: '50%'}}
+        py='50px'
+        minH={'100vh'}
       >
         <Box
-          padding={"1rem"}
-          width={{ base: "full", md: "450px" }}
-          height={"100%"}
-          margin="0 auto"
+          padding={'1rem'}
+          width={{base: 'full', md: '450px'}}
+          height={'100%'}
+          margin='0 auto'
         >
-          <ShowAuthHeader header="Login" detail="Welcome, join the Circo!" />
-          <form onSubmit={handleLogin} className="login-form">
-            {loginInputData.map(({ name, image, key }) => (
+          <ShowAuthHeader header='Login' detail='Welcome, join the Circo!' />
+          <form onSubmit={handleLogin} className='login-form'>
+            {loginInputData.map(({name, image, key}) => (
               <div key={key}>
-                <Box position="relative" height="57px" marginTop={"1.5rem"}>
+                <Box position='relative' height='57px' marginTop={'1.5rem'}>
                   <AuthInput
                     image={image}
                     name={name}
@@ -112,45 +112,45 @@ const Login = () => {
               </div>
             ))}
             <Box
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-              mt="10px"
+              display={'flex'}
+              justifyContent={'space-between'}
+              alignItems={'center'}
+              mt='10px'
             >
-              <label className="remember">
-                <input type="checkbox" name="" />
+              <label className='remember'>
+                <input type='checkbox' name='' />
                 Remember me?
               </label>
               <Text
-                cursor="pointer"
-                fontSize="sm"
-                color="clique.secondaryRed"
-                onClick={() => router.push("/confirmEmail")}
+                cursor='pointer'
+                fontSize='sm'
+                color='clique.secondaryRed'
+                onClick={() => router.push('/confirmEmail')}
               >
                 Forgot Password
               </Text>
             </Box>
             <AuthButton
               status={loginStatus}
-              {...{ marginTop: "4rem" }}
-              name="Login"
+              {...{marginTop: '4rem'}}
+              name='Login'
             />
           </form>
           <SocialMedia
             haveAccount={"Don't have an account?"}
-            text={"Sign Up"}
+            text={'Sign Up'}
           />
           <Box
-            fontSize="subHead"
+            fontSize='subHead'
             fontWeight={500}
-            mt=".35rem"
-            textAlign={"center"}
+            mt='.35rem'
+            textAlign={'center'}
           >
-            <Text display={"inline"} marginRight=".25rem">
+            <Text display={'inline'} marginRight='.25rem'>
               Need help? send a mail to
             </Text>
-            <span style={{ color: "#892cdc" }}>
-              <a href="mailto: admin@circo.africa">admin@circo.africa</a>
+            <span style={{color: '#892cdc'}}>
+              <a href='mailto: admin@circo.africa'>admin@circo.africa</a>
             </span>
           </Box>
         </Box>
