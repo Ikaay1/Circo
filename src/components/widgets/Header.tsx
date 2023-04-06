@@ -1,38 +1,38 @@
 import ProtectedRoute from 'layouts/ProtectedRoute';
-import {useRouter} from 'next/router';
-import React, {useEffect, useState} from 'react';
-import {AiOutlineSearch} from 'react-icons/ai';
-import {BsBroadcast} from 'react-icons/bs';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { BsBroadcast } from 'react-icons/bs';
 import {
-  MdAddCircleOutline,
-  MdMenuOpen,
-  MdOutlineClose,
-  MdOutlineNotificationsNone,
+	MdAddCircleOutline,
+	MdMenuOpen,
+	MdOutlineClose,
+	MdOutlineNotificationsNone,
 } from 'react-icons/md';
-import {useAppDispatch, useAppSelector} from 'redux/app/hooks';
-import {useGetUserQuery} from 'redux/services/user.service';
-import {logout} from 'redux/slices/authSlice';
+import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
+import { useGetUserQuery } from 'redux/services/user.service';
+import { logout } from 'redux/slices/authSlice';
 
 import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  useColorMode,
-  useColorModeValue,
-  useDisclosure,
-  useToast,
+	Avatar,
+	AvatarBadge,
+	Box,
+	Button,
+	Flex,
+	HStack,
+	Icon,
+	Image,
+	Input,
+	InputGroup,
+	InputLeftElement,
+	InputRightElement,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	useColorMode,
+	useColorModeValue,
+	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import NotificationModal from '@components/notification/NotificationModal';
 import SimpleSwitch from '@components/settings/SimpleSwitch';
@@ -250,7 +250,18 @@ function Header({upload, setShowSuggestions, showSuggestions}: Props) {
         >
           Go live
         </Button>
-        <UploadModal />{' '}
+        <Button
+        color='clique.white'
+        rightIcon={<Icon fontSize={'lg'} as={MdAddCircleOutline} />}
+        variant='ghost'
+        rounded={'full'}
+        bg='clique.base'
+        fontFamily={'Poppins'}
+        size={'sm'}
+        onClick={() => router.push('/upload')}
+      >
+        Upload
+      </Button>
         <SimpleSwitch
           text=' '
           isChecked={colorMode === 'light' ? true : false}

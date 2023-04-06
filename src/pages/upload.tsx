@@ -1,7 +1,7 @@
 import HomeLayout from 'layouts/HomeLayout';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 
 import UploadPage from '@components/upload/UploadPage';
 
@@ -9,18 +9,13 @@ type Props = {};
 
 function Upload({}: Props) {
   const router = useRouter();
-  const {name, url} = useAppSelector((store) => store.upload);
-  useEffect(() => {
-    if (!name || !url) {
-      router.back();
-    }
-  }, [name, url, router]);
+
   return (
     <HomeLayout toggleView>
-      <UploadPage url={url} name={name} />
+      <UploadPage />
     </HomeLayout>
   );
 }
 
 export default Upload;
-export { getServerSideProps } from "../components/widgets/Chakara";
+export {getServerSideProps} from '../components/widgets/Chakara';
