@@ -266,14 +266,14 @@ export const sideBarData: {
   key: string;
   detail: string;
 }[] = [
-  {
-    key: "0",
-    detail: "About",
-  },
-  {
-    key: "1",
-    detail: "FAQs",
-  },
+  // {
+  //   key: "0",
+  //   detail: "About",
+  // },
+  // {
+  //   key: "1",
+  //   detail: "FAQs",
+  // },
   {
     key: "2",
     detail: "Privacy Policy",
