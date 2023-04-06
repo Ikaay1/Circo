@@ -124,6 +124,7 @@ function VideoPlayer({
           controls={false}
           playing={isPlay}
           ref={playerRef}
+          id="video-player"
           muted={isMuted}
           autoPlay={true}
           fluid={false}

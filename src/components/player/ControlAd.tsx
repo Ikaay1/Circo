@@ -424,8 +424,7 @@ function ControlAd({
                     cursor={"pointer"}
                     onClick={() => {
                       setIsFullScreen(!isFullScreen);
-                      const video: any =
-                        document.getElementById("content_video");
+                      const video: any = document.getElementById("video2");
                       video.requestFullscreen();
                     }}
                     as={BsFullscreen}
