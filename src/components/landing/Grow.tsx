@@ -1,48 +1,49 @@
-import {useRouter} from 'next/router';
-import React from 'react';
+import { useRouter } from "next/router";
+import React from "react";
 
-import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
-import {helpGrowData, walletData} from '@constants/utils';
-import ArrowRight from '@icons/ArrowRight';
+import { Box, Flex, Icon, Image, Text } from "@chakra-ui/react";
+import { helpGrowData, walletData } from "@constants/utils";
+import ArrowRight from "@icons/ArrowRight";
 
 const Grow = () => {
   const router = useRouter();
   return (
     <>
       <Text
-        fontWeight={{base: '600', lg: '700'}}
-        fontSize={{base: 'smHead', lg: 'big2'}}
-        lineHeight='36px'
-        textAlign='center'
-        letterSpacing='-0.02em'
-        color='clique.white'
+        fontWeight={{ base: "600", lg: "700" }}
+        fontSize={{ base: "smHead", lg: "big3" }}
+        lineHeight="36px"
+        textAlign="center"
+        letterSpacing="-0.02em"
+        color="clique.white"
       >
         We help you grow
       </Text>
-      <Box mt={'7.5rem'}>
-        {helpGrowData.map(({key, header, image, bigImage, details}, i) => (
+      <Box mt={"5.5rem"}>
+        {helpGrowData.map(({ key, header, image, bigImage, text }, i) => (
           <Box
             key={key}
             display={{lg: 'flex'}}
             justifyContent={{lg: 'space-between'}}
             alignItems={{lg: 'center'}}
           >
-            <Box mt={'4.5rem'} w={{lg: '445px'}} h={{lg: '100%'}}>
+            <Box mt={"4.5rem"} w={{ lg: "40%" }} h={{ lg: "100%" }}>
               <Text
-                fontSize={{base: 'sm2', lg: 'big3'}}
-                lineHeight={{base: '28px', lg: '49px'}}
-                color='clique.white'
-                fontWeight={{lg: '600'}}
+                fontSize={{ base: "sm2", lg: "medium" }}
+                lineHeight={{ base: "28px", lg: "49px" }}
+                color="clique.white"
+                fontWeight={{ lg: "600" }}
               >
                 {header}
               </Text>
               <Text
-                fontSize={{base: 'sm', lg: 'smHead'}}
-                lineHeight={{base: '20px', lg: '150%'}}
-                color='clique.white'
-                mt={{base: '.45rem', lg: '.75'}}
+                fontSize={{ base: "sm", lg: "sm2" }}
+                lineHeight={{ base: "20px", lg: "1.6" }}
+                color="clique.white"
+                mt={{ base: ".45rem", lg: ".75" }}
+                fontWeight={"400"}
               >
-                {details}
+                {text}
               </Text>
               <Flex
                 alignItems={'center'}
@@ -64,9 +65,9 @@ const Grow = () => {
               </Flex>
             </Box>
             <Box
-              mt='5rem'
-              position={'relative'}
-              h={{lg: '466px'}}
+              mt="5rem"
+              position={"relative"}
+              h={{ lg: "60%" }}
               w={{
                 lg: '683px',
               }}
