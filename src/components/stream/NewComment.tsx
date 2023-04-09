@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Image,
@@ -20,6 +20,25 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
   const [postCommentOnStream, postInfo] = usePostCommentOnStreamMutation();
   const userProfile = useAppSelector((state) => state.app.userReducer);
   const toast = useToast();
+  const [rows, setRows] = useState(1);
+  const _handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    console.log(e.which);
+    if (e.key === "Enter") {
+      console.log("ent");
+      setRows((prevRow) => prevRow + 1);
+    }
+  };
+  const _handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    console.log(e.which);
+    if (
+      e.key.toLowerCase() === "backspace" ||
+      e.key.toLowerCase() === "delete"
+    ) {
+      console.log("del");
+      const lines = comment.split("\n").length;
+      setRows(lines);
+    }
+  };
   return (
     <Flex
       pos={"fixed"}
@@ -41,7 +60,9 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
 
       <InputGroup>
         <Textarea
-          rows={2}
+          onKeyPress={(e) => _handleKeyPress(e)}
+          onKeyDown={(e) => _handleKeyDown(e)}
+          rows={rows}
           rounded={"10px"}
           p="5px"
           px="10px"
@@ -50,6 +71,7 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           _placeholder={{
             color: useColorModeValue("clique.ashGrey", "clique.lightPrimaryBg"),
             fontSize: "smSubHead",
+            transform: "translateY(29%)",
           }}
           placeholder="Enter Comment..."
           bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
@@ -58,56 +80,60 @@ function NewComment({ id, profile }: { id: string; profile: any }) {
           _focus={{ border: "none", boxShadow: "none" }}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          onKeyDown={async (e) => {
-            if (e.key === "Enter") {
-              const post: any = await postCommentOnStream({
-                streamId: id,
-                commentBody: comment,
-              });
+          // onKeyDown={async (e) => {
+          //   if (e.key === "Enter") {
+          //     const post: any = await postCommentOnStream({
+          //       streamId: id,
+          //       commentBody: comment,
+          //     });
 
-              if (post.data) {
-                setComment("");
-              } else {
-                toast({
-                  title: "Error",
-                  description: "Something went wrong",
-                  status: "error",
-                  duration: 3000,
-                  position: "top-right",
-                  isClosable: true,
-                });
-              }
-            }
-          }}
+          //     if (post.data) {
+          //       setComment("");
+          //     } else {
+          //       toast({
+          //         title: "Error",
+          //         description: "Something went wrong",
+          //         status: "error",
+          //         duration: 3000,
+          //         position: "top-right",
+          //         isClosable: true,
+          //       });
+          //     }
+          //   }
+          // }}
         />
         <InputRightElement
           cursor={"pointer"}
           h="100%"
           roundedRight="10px"
           bg={useColorModeValue("clique.lightPrimaryBg", "clique.ashGrey")}
-          onClick={async () => {
-            const post: any = await postCommentOnStream({
-              streamId: id,
-              commentBody: comment,
-            });
-            if (post.data) {
-              setComment("");
-            } else {
-              toast({
-                title: "Error",
-                description: "Something went wrong",
-                status: "error",
-                duration: 3000,
-                position: "top-right",
-                isClosable: true,
-              });
-            }
-          }}
         >
           {postInfo.isLoading ? (
             <Spinner />
           ) : (
-            <Image w="25px" src="/assets/inputIcon.svg" alt="icon" />
+            <Image
+              onClick={async () => {
+                const post: any = await postCommentOnStream({
+                  streamId: id,
+                  commentBody: comment,
+                });
+                if (post.data) {
+                  setComment("");
+                } else {
+                  toast({
+                    title: "Error",
+                    description: "Something went wrong",
+                    status: "error",
+                    duration: 3000,
+                    position: "top-right",
+                    isClosable: true,
+                  });
+                }
+              }}
+              w="25px"
+              src="/assets/inputIcon.svg"
+              alt="icon"
+            />
           )}
         </InputRightElement>
       </InputGroup>
