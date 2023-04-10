@@ -216,7 +216,7 @@ function ControlAd({
                   <Box onClick={handleDislike}>
                     <Tooltip
                       portalProps={{containerRef: Bref}}
-                      label='Unlike'
+                      label='Dislike'
                       bg='none'
                       hasArrow
                       color='clique.white'
