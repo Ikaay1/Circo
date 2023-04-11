@@ -385,35 +385,37 @@ function Control({
         </GridItem>
         <GridItem colSpan={2} justifySelf="end" h="70px" alignItems="center">
           <Flex alignItems="center" h="100%">
-            {video.uploader_id._id !== userProfile._id && (
+            {video.uploader_id._id !== userProfile._id && !isFullScreen && (
               <GiftModal
                 isFullScreen={isFullScreen}
                 video={video}
                 Bref={Bref}
               />
             )}
-            <Flex mx={{ base: "10px", lg: "30px" }}>
-              <Tooltip
-                portalProps={{ containerRef: Bref }}
-                label="Settings"
-                bg="none"
-                hasArrow
-                color="clique.white"
-                fontSize="sm"
-                p="0"
-                mt="0"
-                placement="top"
-              >
-                <Flex alignItems="center">
-                  <VideoOptionMenu
-                    isLoop={isLoop}
-                    setIsLoop={setIsLoop}
-                    player={playerRef}
-                    video={video}
-                  />
-                </Flex>
-              </Tooltip>
-            </Flex>
+            {!isFullScreen && (
+              <Flex mx={{ base: "10px", lg: "30px" }}>
+                <Tooltip
+                  portalProps={{ containerRef: Bref }}
+                  label="Settings"
+                  bg="none"
+                  hasArrow
+                  color="clique.white"
+                  fontSize="sm"
+                  p="0"
+                  mt="0"
+                  placement="top"
+                >
+                  <Flex alignItems="center">
+                    <VideoOptionMenu
+                      isLoop={isLoop}
+                      setIsLoop={setIsLoop}
+                      player={playerRef}
+                      video={video}
+                    />
+                  </Flex>
+                </Tooltip>
+              </Flex>
+            )}
             {!isFullScreen ? (
               <Tooltip
                 portalProps={{ containerRef: Bref }}
@@ -457,6 +459,7 @@ function Control({
                 pl="150px"
                 textAlign="center"
                 placement="top"
+                bg="none"
               >
                 <span
                   style={{
