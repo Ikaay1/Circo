@@ -66,13 +66,15 @@ function ControlMobileAd({
     }
   }, [userProfile?._id, router]);
   return (
-    <Grid
-      templateColumns='repeat(7, 1fr)'
+    <Flex
+      // templateColumns='repeat(7, 1fr)'
       mt='30px'
       justifyContent={'space-between'}
       alignItems='center'
+      px='6px'
+      pr='10px'
     >
-      <GridItem mr='.7rem' flex='1' justifySelf='start'>
+      <GridItem flex='1'>
         <Flex alignItems='center' mr='3px' ml={'3px'}>
           {!currentTimestamp || !totalDuration ? (
             <Text
@@ -102,7 +104,7 @@ function ControlMobileAd({
               color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoUnmute}
-              mx='7px'
+              mx='10px'
             />
           ) : (
             <Icon
@@ -111,7 +113,7 @@ function ControlMobileAd({
               color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoMute}
-              mx='7px'
+              mx='10px'
             />
           )}{' '}
           <Flex alignItems='center'>
@@ -172,7 +174,7 @@ function ControlMobileAd({
         </Flex>
       </GridItem>
       <GridItem justifySelf='center' mr='.7rem' flex='1'>
-        <Flex alignItems='center'>
+        <Flex alignItems='center' justifyContent={'flex-end'}>
           <Icon
             fontSize='bigHead'
             cursor='pointer'
@@ -220,7 +222,7 @@ function ControlMobileAd({
         </Flex>
       </GridItem>
       <GridItem flex='1' justifySelf='end'>
-        <Flex alignItems='center'>
+        <Flex alignItems='center' justifyContent={'flex-end'}>
           {video.uploader_id._id !== userProfile._id && (
             <GiftModal isFullScreen={isFullScreen} video={video} Bref={Bref} />
           )}
@@ -257,7 +259,7 @@ function ControlMobileAd({
           )}
         </Flex>
       </GridItem>
-    </Grid>
+    </Flex>
   );
 }
 

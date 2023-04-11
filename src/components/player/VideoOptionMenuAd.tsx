@@ -89,6 +89,7 @@ function VideoOptionMenuAd({player, video, isLoop, setIsLoop}: any) {
     <Menu closeOnSelect>
       <MenuButton aria-label='Options'>
         <Icon
+          mx='7px'
           fontSize='28px'
           cursor={'pointer'}
           as={OptionsIcon}

@@ -63,6 +63,7 @@ function ControlMobile({
       justifyContent={'space-between'}
       alignItems='center'
       px='6px'
+      pr='10px'
     >
       <GridItem flex='1'>
         <Flex alignItems='center' mr='3px' ml={'3px'}>
