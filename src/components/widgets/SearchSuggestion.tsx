@@ -30,7 +30,7 @@ const SearchSuggestion = ({
       //   bg='red'
       bg={useColorModeValue('clique.white', 'clique.primaryBg')}
       zIndex={'9999'}
-      p='.7rem'
+      p={data?.data?.preference?.length ? '.7rem' : '0'}
     >
       {data?.data?.preference?.map(
         (eachSuggestion: {title: string; _id: string}) => (

@@ -26,6 +26,10 @@ function Index() {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [url, setUrl] = React.useState('');
 
+  const createView = async () => {
+    await view({video_id: data?.data?.preference?.video?._id});
+  };
+
   useEffect(() => {
     if (error) {
       toast({
@@ -41,11 +45,10 @@ function Index() {
   }, [data, error]);
 
   useEffect(() => {
-    const createView = async () => {
-      await view({video_id: data.data.preference.video._id});
-    };
     if (data) {
-      if (data.data.preference.video.uploader_id._id !== userProfile?._id) {
+      if (
+        data?.data?.preference?.video?.uploader_id?._id !== userProfile?._id
+      ) {
         createView();
       }
     }
@@ -61,6 +64,12 @@ function Index() {
       display(decrypt(data?.data?.preference?.video?.video));
     }
   }, [data?.data?.preference?.video?.video]);
+
+  useEffect(() => {
+    if (!isLoading && !data?.data?.preference) {
+      router.push('/home');
+    }
+  }, [isLoading]);
 
   return (
     <>
