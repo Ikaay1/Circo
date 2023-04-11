@@ -119,44 +119,70 @@ function AdVideoJsPlayer({
         id='video2'
         ref={ref}
         pos={'relative'}
-        h={{base: '400px', lg: '560px'}}
-        maxH={{base: '400px', lg: '560px'}}
+        h={{lg: '560px'}}
+        maxH={{lg: '560px'}}
+        borderRadius={'20px'}
       >
-        <video
-          id='content_video'
-          className='video-js vjs-default-skin'
-          controls={false}
-          preload='auto'
-          style={{
-            width: '100%',
-            minHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
-            height: isFullScreen ? 'calc(100vh- 80px)' : '480px',
-            maxHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
-          }}
-          autoPlay={true}
-          onPause={() => setPlay(false)}
-          onPlay={() => setPlay(true)}
-          // loop
-          ref={videoRef}
-          muted={isMuted}
-        >
-          <source src={url} type='video/mp4' />
-        </video>
+        <Box display={{base: 'none', lg: 'block'}}>
+          <video
+            id='content_video'
+            className='video-js vjs-default-skin'
+            controls={false}
+            preload='auto'
+            style={{
+              width: '100%',
+              minHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+              height: isFullScreen ? 'calc(100vh- 80px)' : '480px',
+              maxHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+            }}
+            autoPlay={true}
+            onPause={() => setPlay(false)}
+            onPlay={() => setPlay(true)}
+            // loop
+            ref={videoRef}
+            muted={isMuted}
+          >
+            <source src={url} type='video/mp4' />
+          </video>
+        </Box>
+        <Box display={{lg: 'none'}}>
+          <video
+            id='content_video'
+            className='video-js vjs-default-skin'
+            controls={false}
+            preload='auto'
+            style={{
+              width: '100%',
+              minHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+              height: isFullScreen ? 'calc(100vh- 80px)' : '480px',
+              maxHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+              borderRadius: '20px',
+            }}
+            autoPlay={true}
+            onPause={() => setPlay(false)}
+            onPlay={() => setPlay(true)}
+            // loop
+            ref={videoRef}
+            muted={isMuted}
+          >
+            <source src={url} type='video/mp4' />
+          </video>
+        </Box>
 
         <Flex
           bg='clique.blackGrey'
-          pos={isFullScreen ? 'relative' : 'static'}
+          pos={{base: 'absolute', lg: isFullScreen ? 'absolute' : 'static'}}
           bottom={'0'}
           w={'100%'}
           overflow={'hidden'}
           mt='auto'
           borderBottomRadius={'20px'}
           flexDir={'column'}
-          minH='80px'
-          h={'80px'}
-          maxH={'80px'}
-          alignItems={'center'}
-          justifyContent={'flex-start'}
+          minH={{lg: '80px'}}
+          h={{lg: '80px'}}
+          maxH={{lg: '80px'}}
+          // alignItems={'center'}
+          // justifyContent={'flex-start'}
         >
           {/* progress */}
           <Slider

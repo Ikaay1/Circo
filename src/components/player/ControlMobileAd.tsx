@@ -29,6 +29,7 @@ import PrevIcon from '@icons/PrevIcon';
 import GiftModal from './GiftModal';
 import VideoOptionMenu from './VideoOptionMenu';
 import VideoOptionMenuAd from './VideoOptionMenuAd';
+import VideoOptionMenuAdMobile from './VideoOptionMenuAdMobile';
 
 function ControlMobileAd({
   play,
@@ -68,21 +69,27 @@ function ControlMobileAd({
   return (
     <Flex
       // templateColumns='repeat(7, 1fr)'
-      mt='30px'
+      mt={{base: '58px', lg: '30px'}}
       justifyContent={'space-between'}
       alignItems='center'
       px='6px'
+      pb='.8rem'
       pr='10px'
     >
-      <GridItem flex='1'>
-        <Flex alignItems='center' mr='3px' ml={'3px'}>
+      <GridItem w='55%'>
+        <Flex
+          alignItems='center'
+          justifyContent={'space-between'}
+          mr='3px'
+          ml={'3px'}
+        >
           {!currentTimestamp || !totalDuration ? (
             <Text
               w='12px'
               color={'clique.white'}
               fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={'smSubHead'}
+              fontSize={'sm'}
               lineHeight={'1'}
             ></Text>
           ) : (
@@ -90,10 +97,10 @@ function ControlMobileAd({
               color={'clique.white'}
               fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={'smSubHead'}
+              fontSize={'sm'}
               lineHeight={'1'}
             >
-              {moment(currentTimestamp * 1000).format('mm:ss')} <br />/{' '}
+              {moment(currentTimestamp * 1000).format('mm:ss')}/{' '}
               {moment(totalDuration * 1000).format('mm:ss')}
             </Text>
           )}
@@ -117,7 +124,12 @@ function ControlMobileAd({
             />
           )}{' '}
           <Flex alignItems='center'>
-            <Flex alignItems={'center'} flexDirection={'column'} mx={'3px'}>
+            <Flex
+              alignItems={'center'}
+              flexDirection={'column'}
+              mx={'3px'}
+              mr='15px'
+            >
               {likeInfo.isLoading ? (
                 <Spinner size={'sm'} bg='clique.base' />
               ) : (
@@ -173,8 +185,24 @@ function ControlMobileAd({
           </Flex>
         </Flex>
       </GridItem>
-      <GridItem justifySelf='center' mr='.7rem' flex='1'>
-        <Flex alignItems='center' justifyContent={'flex-end'}>
+      <GridItem
+        position='absolute'
+        bottom='68px'
+        // border='4px solid yellow'
+        w='90vw'
+        mx='auto'
+        className='controlMobile'
+        justifySelf='center'
+        mr='.7rem'
+        flex='1'
+      >
+        <Flex
+          mx='auto'
+          w='200px'
+          alignItems='center'
+          // border='4px solid yellow'
+          justifyContent={'space-between'}
+        >
           <Icon
             fontSize='bigHead'
             cursor='pointer'
@@ -221,17 +249,27 @@ function ControlMobileAd({
           />
         </Flex>
       </GridItem>
-      <GridItem flex='1' justifySelf='end'>
-        <Flex alignItems='center' justifyContent={'flex-end'}>
+      <GridItem w='38%' justifySelf='end'>
+        <Flex alignItems='center' justifyContent={'space-between'}>
           {video.uploader_id._id !== userProfile._id && (
             <GiftModal isFullScreen={isFullScreen} video={video} Bref={Bref} />
           )}
-          <VideoOptionMenuAd
-            isLoop={isLoop}
-            setIsLoop={setIsLoop}
-            player={videoRef}
-            video={video}
-          />
+          <Box display={{base: 'none', lg: 'block'}}>
+            <VideoOptionMenuAd
+              isLoop={isLoop}
+              setIsLoop={setIsLoop}
+              player={videoRef}
+              video={video}
+            />
+          </Box>
+          <Box display={{base: 'block', lg: 'none'}}>
+            <VideoOptionMenuAdMobile
+              isLoop={isLoop}
+              setIsLoop={setIsLoop}
+              player={videoRef}
+              video={video}
+            />
+          </Box>
 
           {!isFullScreen ? (
             <Icon

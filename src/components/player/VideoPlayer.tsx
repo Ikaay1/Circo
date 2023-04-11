@@ -110,16 +110,21 @@ function VideoPlayer({
   return (
     <Flex
       pos={'relative'}
-      h={{base: '400px', lg: '580px'}}
-      maxH={{base: '400px', lg: '580px'}}
+      h={{lg: '580px'}}
+      maxH={{lg: '580px'}}
+      minH={{base: '400px', lg: ''}}
       borderRadius='20px'
       id='video'
       ref={ref}
-      overflow={'hidden'}
+      // overflow={'hidden'}
       bg='black'
       flexDir={'column'}
     >
-      <Box minH='calc(100% - 80px)' borderTopRadius={'20px'}>
+      <Box
+        h={{base: '400px', lg: ''}}
+        minH={{base: '400px', lg: 'calc(100% - 80px)'}}
+        borderTopRadius={'20px'}
+      >
         <Player
           controls={false}
           playing={isPlay}
@@ -160,11 +165,11 @@ function VideoPlayer({
         mt='auto'
         borderBottomRadius={'20px'}
         flexDir={'column'}
-        minH='80px'
-        h={'80px'}
-        maxH={'80px'}
-        alignItems={'center'}
-        justifyContent={'flex-start'}
+        minH={{lg: '80px'}}
+        h={{lg: '80px'}}
+        maxH={{lg: '80px'}}
+        // alignItems={'center'}
+        // justifyContent={'flex-start'}
       >
         {/* progress */}
         <Slider

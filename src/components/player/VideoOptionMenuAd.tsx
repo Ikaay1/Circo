@@ -19,6 +19,7 @@ import {
   Tooltip,
   useToast,
 } from '@chakra-ui/react';
+import Color from '@constants/color';
 import DownloadIcon from '@icons/DownloadIcon';
 import LoopIcon from '@icons/LoopIcon';
 import OptionsIcon from '@icons/OptionsIcon';
@@ -89,7 +90,6 @@ function VideoOptionMenuAd({player, video, isLoop, setIsLoop}: any) {
     <Menu closeOnSelect>
       <MenuButton aria-label='Options'>
         <Icon
-          mx='7px'
           fontSize='28px'
           cursor={'pointer'}
           as={OptionsIcon}
@@ -100,7 +100,7 @@ function VideoOptionMenuAd({player, video, isLoop, setIsLoop}: any) {
         fontFamily={'Poppins'}
         p='30px'
         pr='60px'
-        bg='clique.black'
+        bg={Color().greyAndWhite}
         border={'none'}
       >
         <MenuItem
