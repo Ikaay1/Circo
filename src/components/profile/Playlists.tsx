@@ -225,9 +225,6 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                       onOpenSure();
                       setPlaylistId(each?._id);
                     }}
-                    bg='clique.black'
-                    p='5px'
-                    borderRadius={'5px'}
                   >
                     <Icon
                       as={TrashIcon}
