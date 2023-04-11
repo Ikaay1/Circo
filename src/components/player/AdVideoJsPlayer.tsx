@@ -119,8 +119,8 @@ function AdVideoJsPlayer({
         id='video2'
         ref={ref}
         pos={'relative'}
-        h={{base: '480px', lg: '580px'}}
-        maxH={{base: '480px', lg: '580px'}}
+        h={{base: '400px', lg: '560px'}}
+        maxH={{base: '400px', lg: '560px'}}
       >
         <video
           id='content_video'
@@ -145,7 +145,7 @@ function AdVideoJsPlayer({
 
         <Flex
           bg='clique.blackGrey'
-          pos={'absolute'}
+          pos={isFullScreen ? 'relative' : 'static'}
           bottom={'0'}
           w={'100%'}
           overflow={'hidden'}
@@ -198,7 +198,7 @@ function AdVideoJsPlayer({
               Bref={ref}
             />
           </Box>
-          <Box display={{lg: 'none'}} w='100%'>
+          <Box display={{lg: 'none'}}>
             <ControlMobileAd
               play={play}
               videoHandler={videoHandler}
