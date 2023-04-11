@@ -115,7 +115,13 @@ function AdVideoJsPlayer({
           href='//googleads.github.io/videojs-ima/dist/videojs.ima.css'
         />
       </Head>
-      <Box id='video2' ref={ref} pos={'relative'}>
+      <Box
+        id='video2'
+        ref={ref}
+        pos={'relative'}
+        h={{base: '400px', lg: '580px'}}
+        maxH={{base: '400px', lg: '580px'}}
+      >
         <video
           id='content_video'
           className='video-js vjs-default-skin'
@@ -123,8 +129,9 @@ function AdVideoJsPlayer({
           preload='auto'
           style={{
             width: '100%',
-            minHeight: isFullScreen ? 'calc(100% - 80px)' : '480px',
-            maxHeight: isFullScreen ? 'calc(100% - 80px)' : '480px',
+            minHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+            height: isFullScreen ? 'calc(100vh- 80px)' : '480px',
+            maxHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
           }}
           autoPlay={true}
           onPause={() => setPlay(false)}
@@ -138,6 +145,9 @@ function AdVideoJsPlayer({
 
         <Flex
           bg='clique.blackGrey'
+          pos={'absolute'}
+          bottom={'0'}
+          w={'100%'}
           overflow={'hidden'}
           mt='auto'
           borderBottomRadius={'20px'}
