@@ -26,7 +26,7 @@ import OptionsIcon from '@icons/OptionsIcon';
 
 import {API, baseUrl, contentData} from '../../constants/utils';
 
-function VideoOptionMenu({player, video, isLoop, setIsLoop}: any) {
+function VideoOptionMenuAdMobile({player, video, isLoop, setIsLoop}: any) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
@@ -42,15 +42,15 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop}: any) {
     }
   }, [userProfile?._id, router]);
 
-  useEffect(() => {
-    if (player.current) {
-      player.current.subscribeToStateChange((state: any) => {
-        if (state.loop) {
-          setIsLoop(true);
-        }
-      });
-    }
-  }, [isLoop]);
+  // useEffect(() => {
+  //   if (player.current) {
+  //     player.current.subscribeToStateChange((state: any) => {
+  //       if (state.loop) {
+  //         setIsLoop(true);
+  //       }
+  //     });
+  //   }
+  // }, [isLoop]);
 
   useEffect(() => {
     if (data) {
@@ -90,7 +90,6 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop}: any) {
     <Menu closeOnSelect>
       <MenuButton aria-label='Options'>
         <Icon
-          mx='7px'
           fontSize='28px'
           cursor={'pointer'}
           as={OptionsIcon}
@@ -103,6 +102,11 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop}: any) {
         pr='60px'
         bg={Color().greyAndWhite}
         border={'none'}
+        position='fixed'
+        zIndex={'9999'}
+        top='-120px'
+        right='10px'
+        w='68vw'
       >
         <MenuItem
           icon={<Icon fontSize={'24px'} as={DownloadIcon} />}
@@ -137,4 +141,4 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop}: any) {
   );
 }
 
-export default VideoOptionMenu;
+export default VideoOptionMenuAdMobile;

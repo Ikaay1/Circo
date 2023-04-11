@@ -29,6 +29,7 @@ import PrevIcon from '@icons/PrevIcon';
 import GiftModal from './GiftModal';
 import VideoOptionMenu from './VideoOptionMenu';
 import VideoOptionMenuAd from './VideoOptionMenuAd';
+import VideoOptionMenuAdMobile from './VideoOptionMenuAdMobile';
 
 function ControlMobileAd({
   play,
@@ -49,121 +50,134 @@ function ControlMobileAd({
   Bref,
 }: any) {
   const router = useRouter();
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [like, likeInfo] = useLikeContentMutation();
   const [dislike, dislikeInfo] = useDislikeContentMutation();
   const handleLike = async () => {
-    await like({ video_id: video._id });
+    await like({video_id: video._id});
   };
 
   const handleDislike = async () => {
-    await dislike({ video_id: video._id });
+    await dislike({video_id: video._id});
   };
 
   useEffect(() => {
     if (!userProfile?._id) {
-      window.location.replace("/login");
+      window.location.replace('/login');
     }
   }, [userProfile?._id, router]);
   return (
-    <Grid
-      templateColumns="repeat(7, 1fr)"
-      mt="30px"
-      justifyContent={"space-between"}
-      alignItems="center"
+    <Flex
+      // templateColumns='repeat(7, 1fr)'
+      mt={{base: '58px', lg: '30px'}}
+      justifyContent={'space-between'}
+      alignItems='center'
+      px='6px'
+      pb='.8rem'
+      pr='10px'
     >
-      <GridItem mr=".7rem" flex="1" justifySelf="start">
-        <Flex alignItems="center" mr="3px" ml={"3px"}>
+      <GridItem w='55%'>
+        <Flex
+          alignItems='center'
+          justifyContent={'space-between'}
+          mr='3px'
+          ml={'3px'}
+        >
           {!currentTimestamp || !totalDuration ? (
             <Text
-              w="12px"
-              color={"clique.white"}
-              fontFamily={"Poppins"}
+              w='12px'
+              color={'clique.white'}
+              fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={"smSubHead"}
-              lineHeight={"1"}
+              fontSize={'sm'}
+              lineHeight={'1'}
             ></Text>
           ) : (
             <Text
-              color={"clique.white"}
-              fontFamily={"Poppins"}
+              color={'clique.white'}
+              fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={"smSubHead"}
-              lineHeight={"1"}
+              fontSize={'sm'}
+              lineHeight={'1'}
             >
-              {moment(currentTimestamp * 1000).format("mm:ss")} <br />/{" "}
-              {moment(totalDuration * 1000).format("mm:ss")}
+              {moment(currentTimestamp * 1000).format('mm:ss')}/{' '}
+              {moment(totalDuration * 1000).format('mm:ss')}
             </Text>
           )}
           {!isMuted ? (
             <Icon
-              fontSize="smHead"
-              cursor={"pointer"}
-              color={"clique.white"}
+              fontSize='smHead'
+              cursor={'pointer'}
+              color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoUnmute}
-              mx="7px"
+              mx='10px'
             />
           ) : (
             <Icon
-              fontSize="smHead"
-              cursor={"pointer"}
-              color={"clique.white"}
+              fontSize='smHead'
+              cursor={'pointer'}
+              color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoMute}
-              mx="7px"
+              mx='10px'
             />
-          )}{" "}
-          <Flex alignItems="center">
-            <Flex alignItems={"center"} flexDirection={"column"} mx={"3px"}>
+          )}{' '}
+          <Flex alignItems='center'>
+            <Flex
+              alignItems={'center'}
+              flexDirection={'column'}
+              mx={'3px'}
+              mr='15px'
+            >
               {likeInfo.isLoading ? (
-                <Spinner size={"sm"} bg="clique.base" />
+                <Spinner size={'sm'} bg='clique.base' />
               ) : (
                 <Box onClick={handleLike}>
                   <Icon
                     color={
                       video.likes.includes(userProfile?._id)
-                        ? "clique.base"
-                        : "clique.white"
+                        ? 'clique.base'
+                        : 'clique.white'
                     }
-                    fontSize="head"
+                    fontSize='head'
                     as={BiLike}
                   />
                 </Box>
               )}
               <Text
-                color={"clique.white"}
-                fontFamily={"Poppins"}
+                color={'clique.white'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"smSubHead"}
-                lineHeight={"1.2"}
+                fontSize={'smSubHead'}
+                lineHeight={'1.2'}
               >
                 {video.likesCount}
               </Text>
             </Flex>
 
-            <Flex alignItems={"center"} flexDirection={"column"}>
+            <Flex alignItems={'center'} flexDirection={'column'}>
               {dislikeInfo.isLoading ? (
-                <Spinner size={"sm"} bg="clique.base" />
+                <Spinner size={'sm'} bg='clique.base' />
               ) : (
                 <Box onClick={handleDislike}>
                   <Icon
                     color={
                       video.dislikes.includes(userProfile?._id)
-                        ? "clique.base"
-                        : "clique.white"
+                        ? 'clique.base'
+                        : 'clique.white'
                     }
-                    fontSize=" head"
+                    fontSize=' head'
                     as={BiDislike}
                   />
                 </Box>
               )}
               <Text
-                color={"clique.white"}
-                fontFamily={"Poppins"}
+                color={'clique.white'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"smSubHead"}
-                lineHeight={"1.2"}
+                fontSize={'smSubHead'}
+                lineHeight={'1.2'}
               >
                 {video.dislikesCount}
               </Text>
@@ -171,17 +185,33 @@ function ControlMobileAd({
           </Flex>
         </Flex>
       </GridItem>
-      <GridItem justifySelf="center" mr=".7rem" flex="1">
-        <Flex alignItems="center">
+      <GridItem
+        position='absolute'
+        bottom='68px'
+        // border='4px solid yellow'
+        w='90vw'
+        mx='auto'
+        className='controlMobile'
+        justifySelf='center'
+        mr='.7rem'
+        flex='1'
+      >
+        <Flex
+          mx='auto'
+          w='200px'
+          alignItems='center'
+          // border='4px solid yellow'
+          justifyContent={'space-between'}
+        >
           <Icon
-            fontSize="bigHead"
-            cursor="pointer"
+            fontSize='bigHead'
+            cursor='pointer'
             as={PrevIcon}
-            color={prevVideoIndex !== null ? "clique.white" : "gray.500"}
+            color={prevVideoIndex !== null ? 'clique.white' : 'gray.500'}
             onClick={() => {
               if (prevVideoIndex !== null) {
                 router.push(
-                  `/player/${videoIdsList[prevVideoIndex]?._id}/${video.uploader_id._id}`
+                  `/player/${videoIdsList[prevVideoIndex]?._id}/${video.uploader_id._id}`,
                 );
               }
             }}
@@ -189,75 +219,85 @@ function ControlMobileAd({
 
           {play === true ? (
             <Icon
-              fontSize="35px"
-              cursor="pointer"
-              color={"clique.white"}
+              fontSize='35px'
+              cursor='pointer'
+              color={'clique.white'}
               as={BsPauseFill}
-              onClick={() => videoHandler("pause")}
+              onClick={() => videoHandler('pause')}
             />
           ) : (
             <Icon
-              fontSize="bigHead"
-              cursor="pointer"
-              color={"clique.white"}
+              fontSize='bigHead'
+              cursor='pointer'
+              color={'clique.white'}
               as={BsFillPlayFill}
-              onClick={() => videoHandler("play")}
+              onClick={() => videoHandler('play')}
             />
           )}
           <Icon
-            fontSize="30px"
-            cursor="pointer"
+            fontSize='30px'
+            cursor='pointer'
             as={NextIcon}
-            color={nextVideoIndex !== null ? "clique.white" : "gray.500"}
+            color={nextVideoIndex !== null ? 'clique.white' : 'gray.500'}
             onClick={() => {
               if (nextVideoIndex !== null) {
                 router.push(
-                  `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
+                  `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
                 );
               }
             }}
           />
         </Flex>
       </GridItem>
-      <GridItem flex="1" justifySelf="end">
-        <Flex alignItems="center">
+      <GridItem w='38%' justifySelf='end'>
+        <Flex alignItems='center' justifyContent={'space-between'}>
           {video.uploader_id._id !== userProfile._id && (
             <GiftModal isFullScreen={isFullScreen} video={video} Bref={Bref} />
           )}
-          <VideoOptionMenuAd
-            isLoop={isLoop}
-            setIsLoop={setIsLoop}
-            player={videoRef}
-            video={video}
-          />
+          <Box display={{base: 'none', lg: 'block'}}>
+            <VideoOptionMenuAd
+              isLoop={isLoop}
+              setIsLoop={setIsLoop}
+              player={videoRef}
+              video={video}
+            />
+          </Box>
+          <Box display={{base: 'block', lg: 'none'}}>
+            <VideoOptionMenuAdMobile
+              isLoop={isLoop}
+              setIsLoop={setIsLoop}
+              player={videoRef}
+              video={video}
+            />
+          </Box>
 
           {!isFullScreen ? (
             <Icon
-              fontSize="smHead"
-              cursor={"pointer"}
+              fontSize='smHead'
+              cursor={'pointer'}
               onClick={() => {
                 setIsFullScreen(!isFullScreen);
-                const video: any = document.getElementById("content_video");
+                const video: any = document.getElementById('video2');
                 video.requestFullscreen();
               }}
-              color={"clique.white"}
+              color={'clique.white'}
               as={BsFullscreen}
             />
           ) : (
             <Icon
-              fontSize="smHead"
-              cursor={"pointer"}
+              fontSize='smHead'
+              cursor={'pointer'}
               onClick={() => {
                 setIsFullScreen(!isFullScreen);
                 document?.exitFullscreen();
               }}
-              color={"clique.white"}
+              color={'clique.white'}
               as={MdFullscreenExit}
             />
           )}
         </Flex>
       </GridItem>
-    </Grid>
+    </Flex>
   );
 }
 

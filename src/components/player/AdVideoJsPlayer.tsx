@@ -1,12 +1,12 @@
-import "videojs-contrib-ads";
-import "videojs-ima";
-import "video.js/dist/video-js.css";
+import 'videojs-contrib-ads';
+import 'videojs-ima';
+import 'video.js/dist/video-js.css';
 
-import Head from "next/head";
-import Link from "next/link";
-import Script from "next/script";
-import React, { useEffect, useRef, useState } from "react";
-import videojs from "video.js";
+import Head from 'next/head';
+import Link from 'next/link';
+import Script from 'next/script';
+import React, {useEffect, useRef, useState} from 'react';
+import videojs from 'video.js';
 
 import {
   Box,
@@ -14,11 +14,11 @@ import {
   Slider,
   SliderFilledTrack,
   SliderTrack,
-} from "@chakra-ui/react";
-import { contentData } from "@constants/utils";
+} from '@chakra-ui/react';
+import {contentData} from '@constants/utils';
 
-import ControlAd from "./ControlAd";
-import ControlMobileAd from "./ControlMobileAd";
+import ControlAd from './ControlAd';
+import ControlMobileAd from './ControlMobileAd';
 
 function AdVideoJsPlayer({
   video,
@@ -32,17 +32,17 @@ function AdVideoJsPlayer({
   url: string;
 }) {
   const currentVideoIndex = videoIdsList.findIndex(
-    (videoId) => videoId?._id === video._id
+    (videoId) => videoId?._id === video._id,
   );
   const [nextVideoIndex, setNextVideoIndex] = React.useState<number | null>(
-    null
+    null,
   );
 
   const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
-    null
+    null,
   );
   const [isLoop, setIsLoop] = React.useState<any>(
-    localStorage.getItem("loop") === "true" ? true : false
+    localStorage.getItem('loop') === 'true' ? true : false,
   );
   const videoRef: any = useRef(null);
   const [play, setPlay] = useState(true);
@@ -51,10 +51,10 @@ function AdVideoJsPlayer({
   const [isMuted, setIsMuted] = React.useState(false);
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   const videoHandler = (control: string) => {
-    if (control === "play") {
+    if (control === 'play') {
       videoRef.current.play();
       setPlay(true);
-    } else if (control === "pause") {
+    } else if (control === 'pause') {
       videoRef.current.pause();
       setPlay(false);
     }
@@ -93,74 +93,100 @@ function AdVideoJsPlayer({
       setIsFullScreen(Boolean(document.fullscreenElement));
     }
 
-    document.addEventListener("fullscreenchange", onFullscreenChange);
+    document.addEventListener('fullscreenchange', onFullscreenChange);
 
     return () =>
-      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
   }, []);
   const ref = React.useRef(null);
   return (
     <>
       <Head>
         <Link
-          rel="stylesheet"
-          href="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video-js.min.css"
+          rel='stylesheet'
+          href='//googleads.github.io/videojs-ima/node_modules/video.js/dist/video-js.min.css'
         />
         <Link
-          rel="stylesheet"
-          href="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.css"
+          rel='stylesheet'
+          href='//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.css'
         />
         <Link
-          rel="stylesheet"
-          href="//googleads.github.io/videojs-ima/dist/videojs.ima.css"
+          rel='stylesheet'
+          href='//googleads.github.io/videojs-ima/dist/videojs.ima.css'
         />
       </Head>
       <Box
-        id="video2"
+        id='video2'
         ref={ref}
-        pos={"relative"}
-        h={{ base: "400px", lg: "560px" }}
-        maxH={{ base: "400px", lg: "560px" }}
+        pos={'relative'}
+        h={{lg: '560px'}}
+        maxH={{lg: '560px'}}
+        borderRadius={'20px'}
       >
-        <video
-          id="content_video"
-          className="video-js vjs-default-skin"
-          controls={false}
-          preload="auto"
-          style={{
-            width: "100%",
-            minHeight: isFullScreen ? "calc(100vh - 80px)" : "480px",
-            height: isFullScreen ? "calc(100vh- 80px)" : "480px",
-            maxHeight: isFullScreen ? "calc(100vh - 80px)" : "480px",
-          }}
-          autoPlay={true}
-          onPause={() => setPlay(false)}
-          onPlay={() => setPlay(true)}
-          // loop
-          ref={videoRef}
-          muted={isMuted}
-        >
-          <source src={url} type="video/mp4" />
-        </video>
+        <Box display={{base: 'none', lg: 'block'}}>
+          <video
+            id='content_video'
+            className='video-js vjs-default-skin'
+            controls={false}
+            preload='auto'
+            style={{
+              width: '100%',
+              minHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+              height: isFullScreen ? 'calc(100vh- 80px)' : '480px',
+              maxHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+            }}
+            autoPlay={true}
+            onPause={() => setPlay(false)}
+            onPlay={() => setPlay(true)}
+            // loop
+            ref={videoRef}
+            muted={isMuted}
+          >
+            <source src={url} type='video/mp4' />
+          </video>
+        </Box>
+        <Box display={{lg: 'none'}}>
+          <video
+            id='content_video'
+            className='video-js vjs-default-skin'
+            controls={false}
+            preload='auto'
+            style={{
+              width: '100%',
+              minHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+              height: isFullScreen ? 'calc(100vh- 80px)' : '480px',
+              maxHeight: isFullScreen ? 'calc(100vh - 80px)' : '480px',
+              borderRadius: '20px',
+            }}
+            autoPlay={true}
+            onPause={() => setPlay(false)}
+            onPlay={() => setPlay(true)}
+            // loop
+            ref={videoRef}
+            muted={isMuted}
+          >
+            <source src={url} type='video/mp4' />
+          </video>
+        </Box>
 
         <Flex
-          bg="clique.blackGrey"
-          pos={isFullScreen ? "relative" : "static"}
-          bottom={"0"}
-          w={"100%"}
-          overflow={"hidden"}
-          mt="auto"
-          borderBottomRadius={"20px"}
-          flexDir={"column"}
-          minH="80px"
-          h={"80px"}
-          maxH={"80px"}
-          alignItems={"center"}
-          justifyContent={"flex-start"}
+          bg='clique.blackGrey'
+          pos={{base: 'absolute', lg: isFullScreen ? 'absolute' : 'static'}}
+          bottom={'0'}
+          w={'100%'}
+          overflow={'hidden'}
+          mt='auto'
+          borderBottomRadius={'20px'}
+          flexDir={'column'}
+          minH={{lg: '80px'}}
+          h={{lg: '80px'}}
+          maxH={{lg: '80px'}}
+          // alignItems={'center'}
+          // justifyContent={'flex-start'}
         >
           {/* progress */}
           <Slider
-            aria-label="slider-ex-1"
+            aria-label='slider-ex-1'
             defaultValue={0}
             value={
               totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
@@ -171,14 +197,14 @@ function AdVideoJsPlayer({
               setCurrentTimestamp(timestamp);
             }}
           >
-            <SliderTrack h="10px" rounded="0" bg="clique.grey">
-              <SliderFilledTrack rounded="0" bg="clique.base" />
+            <SliderTrack h='10px' rounded='0' bg='clique.grey'>
+              <SliderFilledTrack rounded='0' bg='clique.base' />
             </SliderTrack>
           </Slider>
 
           {/* control */}
 
-          <Box display={{ base: "none", lg: "block" }}>
+          <Box display={{base: 'none', lg: 'block'}}>
             <ControlAd
               play={play}
               videoHandler={videoHandler}
@@ -198,7 +224,7 @@ function AdVideoJsPlayer({
               Bref={ref}
             />
           </Box>
-          <Box display={{ lg: "none" }}>
+          <Box display={{lg: 'none'}}>
             <ControlMobileAd
               play={play}
               videoHandler={videoHandler}
@@ -220,7 +246,7 @@ function AdVideoJsPlayer({
           </Box>
         </Flex>
 
-        <Script async src="/js/player.js" />
+        <Script async src='/js/player.js' />
       </Box>
     </>
   );
