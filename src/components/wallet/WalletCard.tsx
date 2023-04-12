@@ -1,11 +1,11 @@
 import {
-	Box,
-	Divider,
-	Flex,
-	Grid,
-	GridItem,
-	SimpleGrid,
-	Text,
+  Box,
+  Divider,
+  Flex,
+  Grid,
+  GridItem,
+  SimpleGrid,
+  Text,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
 import Color from '@constants/color';
@@ -45,7 +45,11 @@ export default function WalletCard({onClick, walletData}: Props) {
         py='10px'
       >
         <Text fontSize={'smHead'}>Wallet</Text>
-        <Text fontSize={{base: 'sm3', lg: 'sm'}} textAlign='center'>
+        <Text
+          fontSize={{base: 'sm3', lg: 'sm'}}
+          w={{base: '200px'}}
+          textAlign='center'
+        >
           A commission fee of 20% will be applied to all subscriptions
         </Text>
       </Flex>
