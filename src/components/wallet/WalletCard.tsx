@@ -47,7 +47,7 @@ export default function WalletCard({onClick, walletData}: Props) {
         <Text fontSize={'smHead'}>Wallet</Text>
         <Text
           fontSize={{base: 'sm3', lg: 'sm'}}
-          w={{base: '200px'}}
+          w={{base: '200px', lg: 'auto'}}
           textAlign='center'
         >
           A commission fee of 20% will be applied to all subscriptions
