@@ -19,7 +19,7 @@ const VideoSkeletonLoader = () => {
       spacing={'30px'}
       width={{base: '100%', lg: 'calc(100vw - 560px)'}}
     >
-      {[1, 2, 3, 4, 5, 6].map((num) => (
+      {[1, 2, 3].map((num) => (
         <Box key={num} w='full'>
           <Skeleton h='150px' borderRadius='10px' />
           <Flex mt={'.5rem'} alignItems='center' w='100%'>
