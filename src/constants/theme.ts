@@ -1,8 +1,8 @@
-import {switchAnatomy} from '@chakra-ui/anatomy';
+import { switchAnatomy } from '@chakra-ui/anatomy';
 import {
-  createMultiStyleConfigHelpers,
-  extendTheme,
-  ThemeConfig,
+	createMultiStyleConfigHelpers,
+	extendTheme,
+	ThemeConfig,
 } from '@chakra-ui/react';
 
 const {definePartsStyle, defineMultiStyleConfig} =
@@ -115,7 +115,7 @@ const fontSizes = {
   xs: '0.5rem',
   //12px
   sm: '12px',
-  //12px
+  //13px
   sm4: '13px',
   //36px
   medium: '36px',
