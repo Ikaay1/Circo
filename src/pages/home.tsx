@@ -36,7 +36,7 @@ function Index() {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const {data, isFetching, isLoading, refetch} = useGetContentsQuery({
     page,
-    limit: 7,
+    limit: 9,
     categoryId,
   });
   const [expiredSub] = useExpiredSubscriptionMutation();
