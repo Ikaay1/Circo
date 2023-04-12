@@ -122,7 +122,7 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
                     className='input'
                     type={'number'}
                     required={true}
-                    placeholder='Amount'
+                    placeholder='Amount (Naira)'
                     backgroundColor={Color().greyAndWhite}
                     _placeholder={{
                       color: Color().blackAndWhite,
@@ -174,7 +174,7 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
                     transition='all .3s ease'
                     zIndex='99'
                   >
-                    Amount
+                    Amount (Naira)
                   </Text>
                   {error && <FormErrorMessage>{error}</FormErrorMessage>}
                 </FormControl>

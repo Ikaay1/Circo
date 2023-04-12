@@ -25,10 +25,7 @@ function Index() {
   const {data, isFetching} = useGetSubscriptionsQuery({page: 1, limit: 5});
   console.log('sub', data);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    window.location.href = '/login';
-  };
+
 
   return (
     <Box
@@ -100,19 +97,16 @@ function Index() {
               </Text>
               {data?.data?.user.map(
                 (item: {
-                  userName: string;
-                  firstName: string;
-                  lastName: string;
-                  photo: any;
+                  channel_id: {
+                    photo: string;
+                    name: string;
+                  };
                   _id: string;
                 }) => (
                   <EachSubscribe
                     key={item._id}
-                    name={item.userName}
-                    imgUrl={item.photo}
-                    firstName={item.firstName}
-                    lastName={item.lastName}
                     id={item._id}
+                    channel_id={item.channel_id}
                   />
                 ),
               )}
@@ -121,37 +115,7 @@ function Index() {
         </>
       )}
 
-      <Box px='50px' py='20px'>
-        <Divider />
-      </Box>
-
-      <Flex
-        onClick={handleLogout}
-        transition={'all 0.2s ease-in-out'}
-        _hover={{
-          color: 'clique.base',
-        }}
-        cursor={'pointer'}
-        justifyContent={'center'}
-        alignItems='center'
-        color={useColorModeValue('clique.black', 'clique.fadeOut')}
-      >
-        <Text
-          mr='5px'
-          fontFamily={'Poppins'}
-          fontWeight={500}
-          textTransform={'capitalize'}
-          fontSize={'sm'}
-        >
-          logout
-        </Text>
-        <Icon
-          fontSize={'smHead'}
-          width={'24px'}
-          height={'24px'}
-          as={HiOutlineLogout}
-        />
-      </Flex>
+  
     </Box>
   );
 }

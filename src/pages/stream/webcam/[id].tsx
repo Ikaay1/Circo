@@ -97,7 +97,7 @@ function Index() {
   }, [data]);
   // endstream if user leaves the page
 
-  const handleEndStream = async (e: string) => {
+  const handleEndStream = async (e: any) => {
     const endRes: any = await endStream(e);
     if (endRes?.data?.data) {
       dispatch(clearWebCamStream());
@@ -108,24 +108,13 @@ function Index() {
   useEffect(() => {
     window.addEventListener("beforeunload", async (e) => {
       e.preventDefault();
-      await handleEndStream(streamDetails?._id);
+      await handleEndStream(livestreamId);
     });
 
     Router.events.on("routeChangeStart", async () => {
-      await handleEndStream(streamDetails?._id);
+      await handleEndStream(livestreamId);
     });
-
-    return () => {
-      Router.events.off("routeChangeStart", async () => {
-        await handleEndStream(streamDetails?._id);
-      });
-
-      window.removeEventListener("beforeunload", async (e) => {
-        e.preventDefault();
-        await handleEndStream(streamDetails?._id);
-      });
-    };
-  }, []);
+  }, [Router]);
 
   return (
     <HomeLayout>
@@ -166,7 +155,7 @@ function Index() {
           <CamCommentSection id={id as string} setClose={setClose} />
         )}
 
-        <End />
+        <End id={id as string} />
       </Box>
     </HomeLayout>
   );

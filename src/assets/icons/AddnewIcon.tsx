@@ -12,16 +12,16 @@ const AddnewIcon = () => {
             <path
                 d='M7.5 15H22.5'
                 stroke='#892CDC'
-                stroke-width='1.5'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M15 22.5V7.5'
                 stroke='#892CDC'
-                stroke-width='1.5'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
         </svg>
     );

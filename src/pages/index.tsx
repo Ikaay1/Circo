@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
@@ -25,7 +26,21 @@ const Home: NextPage = () => {
     }
   }, [token, router]);
   return (
-    <Box overflowX={"hidden"} bg="clique.primaryBg">
+    <Box
+      overflowX={"hidden"}
+      bg="clique.primaryBg"
+      w="full"
+      maxWidth="1920px"
+      mx="auto"
+    >
+      {" "}
+      <Head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2071647719246163"
+          crossOrigin="anonymous"
+        ></script>
+      </Head>
       <Box
         marginTop={{ base: "2.5rem", sm: "3.5rem", lg: "1.8rem" }}
         px={{ base: "1rem", sm: "2rem", lg: "5rem" }}
@@ -61,13 +76,13 @@ const Home: NextPage = () => {
       >
         <Creative />
       </Box>
-      <Box
+      {/* <Box
         pt={{ base: "3rem", sm: "3.5rem", lg: "4rem" }}
         pb={{ base: "11rem", sm: "12rem", lg: "38rem" }}
         bg={"white"}
       >
         <Creators />
-      </Box>
+      </Box> */}
       <Box
         px={{ base: "1rem", sm: "2rem", lg: "5rem" }}
         pt={{ base: "2rem", sm: "3rem", lg: "4rem" }}

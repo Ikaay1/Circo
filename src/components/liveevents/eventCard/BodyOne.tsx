@@ -83,7 +83,7 @@ function BodyOne({
           } else {
             const res: any = await payForLive({
               eventId: event?.eventId?._id,
-              description: `Payment for live event ${event?.eventId?.title}`,
+              description: `${event?.eventId?.title}`,
               amount: event?.eventId?.fee,
               receiversId: event?.streamerId?._id,
             });

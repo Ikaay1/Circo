@@ -13,6 +13,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
+import Color from '@constants/color';
 import ShareIcon from '@icons/ShareIcon';
 
 import CopyBox from './CopyBox';
@@ -39,6 +40,8 @@ const Bio = ({
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [state, setState] = useState('');
 
+  const whiteAndBlack = Color().whiteAndBlack;
+  const blackAndWhite = Color().blackAndWhite2;
   return (
     <>
       <Box
@@ -46,7 +49,7 @@ const Bio = ({
         ml='1rem'
         mr={'2rem'}
         display='flex'
-        justifyContent={{base: 'end', lg: 'space-between'}}
+        justifyContent={{base: 'center', lg: 'space-between'}}
         alignItems='flex-start'
       >
         <Box w='40%' display={{base: 'none', lg: 'block'}}>
@@ -76,16 +79,13 @@ const Bio = ({
               mt={{base: '9rem', lg: '0'}}
             >
               <Box
-                mr='.5rem'
+                mr='1rem'
                 cursor='pointer'
                 onClick={() => {
                   onOpen();
                 }}
-                bg='clique.black'
-                p='5px'
-                borderRadius={'5px'}
               >
-                <Icon as={ShareIcon} />
+                <Icon as={ShareIcon} color={blackAndWhite} />
               </Box>
               {userProfile?._id === id ? null : (
                 <AuthButton
@@ -104,7 +104,7 @@ const Bio = ({
                 />
               )}
             </Box>
-            {router.asPath !== '/channel/1/content' && date && (
+            {!router.asPath.includes('/channel/1') && date && (
               <Text
                 w='190px'
                 textAlign={'center'}

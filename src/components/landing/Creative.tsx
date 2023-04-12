@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import {Box, Image, Text} from '@chakra-ui/react';
 
 import DownloadButtons from './DownloadButtons';
 
@@ -24,7 +24,7 @@ const Creative = () => {
         color='clique.white'
         mt='.5rem'
       >
-        Channel your inner Pikaso and start creating content to be monetized
+        Channel your inner Picasso  and start creating content to be monetized
       </Text>
       <Box
         mt={{base: '3rem', lg: '10rem'}}
@@ -33,19 +33,19 @@ const Creative = () => {
         mx={{lg: 'auto'}}
       >
         <Box w={{lg: '1122px'}}>
-          <Image
-            src='/assets/video.png'
+          {/* <Image
+            src='/assets/vid.png'
             w={{base: '344px', lg: '100%'}}
             mx={{base: 'auto'}}
             alt=''
             display={{lg: 'none'}}
-          />
+          /> */}
           <Image
-            src='/assets/big-video.png'
+            src='/assets/big-vid.png'
             w={{base: '344px', lg: '100%'}}
             mx={{base: 'auto'}}
             alt=''
-            display={{base: 'none', lg: 'block'}}
+            // display={{base: 'none', lg: 'block'}}
           />
         </Box>
         <Box
@@ -60,17 +60,17 @@ const Creative = () => {
             top={{lg: '-8.4%'}}
             right={{lg: '0'}}
           >
-            <Image
-              src='/assets/mobile-video.png'
+            {/* <Image
+              src='/assets/mobile-vid.png'
               w={'100%'}
               h={'100%'}
               alt=''
               display={{lg: 'none'}}
-            />
+            /> */}
             <Image
-              src='/assets/big-mobile-video.png'
+              src='/assets/big-mobile-vid.png'
               alt=''
-              display={{base: 'none', lg: 'block'}}
+              // display={{base: 'none', lg: 'block'}}
             />
           </Box>
           <Box

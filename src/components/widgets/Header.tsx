@@ -25,22 +25,32 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
+  Modal,
+  ModalContent,
+  ModalOverlay,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
   useToast,
 } from '@chakra-ui/react';
 import NotificationModal from '@components/notification/NotificationModal';
 import SimpleSwitch from '@components/settings/SimpleSwitch';
 import UploadModal from '@components/upload/UploadModal';
 import Color from '@constants/color';
+import CloseIcon from '@icons/CloseIcon';
 
 import MobileMenu from './mobileMenu/MobileMenu';
+import SearchSuggestion from './SearchSuggestion';
 
 type Props = {
   upload?: () => void;
+  setShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>;
+  showSuggestions: boolean;
 };
 
-function Header({upload}: Props) {
+function Header({upload, setShowSuggestions, showSuggestions}: Props) {
+  const {isOpen, onOpen, onClose} = useDisclosure();
   const profile = useAppSelector((store) => store.app.userReducer.channel);
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
@@ -71,6 +81,14 @@ function Header({upload}: Props) {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (search) {
+      setShowSuggestions(true);
+    } else {
+      setShowSuggestions(false);
+    }
+  }, [search]);
+
   const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (search?.length) {
@@ -94,7 +112,7 @@ function Header({upload}: Props) {
       maxH={'10vh'}
       w='100%'
       maxW={'100%'}
-      overflow='hidden'
+      // overflow='hidden'
     >
       {/* First div  */}
       <Box
@@ -131,27 +149,33 @@ function Header({upload}: Props) {
               as={AiOutlineSearch}
               cursor={'pointer'}
               onClick={() => {
-                setSearchWidth({base: '150px', lg: '500px'});
-                // if (search) {
-                //   router.push(`/search/${search}`);
-                // }
+                // setSearchWidth({base: '150px', lg: '500px'});
+                if (search) {
+                  router.push(`/search/${search}`);
+                }
               }}
             />
           </InputLeftElement>
           <Input
             onKeyPress={(e) => _handleKeyDown(e)}
             bg={useColorModeValue(' clique.primaryWhiteBg', 'clique.inputBg')}
-            onFocus={() => setSearchWidth({base: '150px', lg: '500px'})}
-            onBlur={() => setSearchWidth({base: '150px', lg: '300px'})}
+            onFocus={() => {
+              setSearchWidth({base: '150px', lg: '500px'});
+            }}
+            onBlur={
+              !search
+                ? () => setSearchWidth({base: '150px', lg: '300px'})
+                : () => {}
+            }
             _focus={{
               boxShadow: 'none',
-              border: ' 3px solid ',
+              border: '2px solid',
               borderColor: useColorModeValue(
                 'clique.secondaryGrey5',
                 ' clique.inputBorder',
               ),
             }}
-            border={' 2px solid '}
+            border={'2px solid'}
             borderColor={useColorModeValue(
               'clique.secondaryGrey5',
               ' clique.inputBorder',
@@ -166,6 +190,20 @@ function Header({upload}: Props) {
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Search'
           />
+          {search && (
+            <InputRightElement>
+              <Icon
+                fontSize={'smHead'}
+                color={Color().blackAndWhite}
+                as={CloseIcon}
+                cursor={'pointer'}
+                onClick={() => {
+                  setSearchWidth({base: '150px', lg: '300px'});
+                  setSearch('');
+                }}
+              />
+            </InputRightElement>
+          )}
         </InputGroup>
 
         <HStack alignItems={'center'}>
@@ -182,7 +220,7 @@ function Header({upload}: Props) {
               p='0'
               size='sm'
               name={profile?.name}
-              src={profile?.photo}
+              src={userProfile?.photo}
               cursor='pointer'
               onClick={() => router.push('/profile/1/content')}
             />
@@ -221,6 +259,15 @@ function Header({upload}: Props) {
         />
       </HStack>
       <MobileMenu isOpen={showMenu} close={() => setShowMenu(!showMenu)} />
+      {/* <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+        </ModalContent>
+      </Modal> */}
+
+      {showSuggestions && (
+        <SearchSuggestion search={search} setSearch={setSearch} />
+      )}
     </Flex>
   );
 }

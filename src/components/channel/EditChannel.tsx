@@ -171,6 +171,7 @@ const EditChannel = ({ data }: { data?: Channel }) => {
                     nameValue="bioDescription"
                     textArea={true}
                     variant="small"
+                    maxChar={150}
                   />
                 </Box>
 

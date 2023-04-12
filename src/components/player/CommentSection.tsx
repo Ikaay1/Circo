@@ -1,24 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
-	useGetContentCommentsQuery,
-	usePostCommentOnContentMutation,
+  useGetContentCommentsQuery,
+  usePostCommentOnContentMutation,
 } from 'redux/services/content.service';
 
 import {
-	Box,
-	Flex,
-	Skeleton,
-	SkeletonCircle,
-	Text,
-	useColorMode,
-	useColorModeValue,
+  Box,
+  Flex,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
 import {
-	scrollBarStyle,
-	scrollBarStyle2,
-	scrollBarStyle3,
-	scrollBarStyle4,
+  scrollBarStyle,
+  scrollBarStyle2,
+  scrollBarStyle3,
+  scrollBarStyle4,
 } from '@constants/utils';
 
 import EachComment from './EachComment';
@@ -95,7 +95,7 @@ function CommentSection({id}: {id: string | string[] | undefined}) {
       w={{base: '100%', lg: '400px'}}
       maxW={{base: '100%', lg: '400px'}}
       px={{base: '10px', lg: '20px'}}
-      pb={{base: '40px', lg: '80px'}}
+      pb={{base: '80px', lg: '80px'}}
       minW={{base: '100%', lg: '400px'}}
       bg={Color().whiteAndBlack}
       h={{base: 'auto', lg: '90vh'}}

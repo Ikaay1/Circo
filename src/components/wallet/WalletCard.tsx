@@ -38,11 +38,17 @@ export default function WalletCard({ onClick, walletData }: Props) {
 
   return (
     <Box bg={Color().whiteAndBlack} borderRadius="xl" p="5">
-      <Box>
-        <Text fontSize={"smHead"} mb="2">
-          Wallet
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        w="full"
+        py="10px"
+      >
+        <Text fontSize={"smHead"}>Wallet</Text>
+        <Text fontSize="sm" textAlign="center">
+          A commission fee of 20% will be applied to all subscriptions
         </Text>
-      </Box>
+      </Flex>
       <Divider bg="clique.blackGrey" mb="3"></Divider>
       <SimpleGrid columns={{ base: 2, lg: 3 }} gap={10}>
         <GridItem colSpan={{ base: 3, lg: 1 }}>

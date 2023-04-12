@@ -24,7 +24,7 @@ const CalenderIcon = () => (
         strokeWidth="2.03289"
         strokeMiterlimit="10"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.86035 10.7656H24.0599"
@@ -32,7 +32,7 @@ const CalenderIcon = () => (
         strokeWidth="2.03289"
         strokeMiterlimit="10"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M24.6248 10.1001V19.6998C24.6248 23.088 22.9308 25.3468 18.9779 25.3468H9.94283C5.98998 25.3468 4.2959 23.088 4.2959 19.6998V10.1001C4.2959 6.7119 5.98998 4.45312 9.94283 4.45312H18.9779C22.9308 4.45312 24.6248 6.7119 24.6248 10.1001Z"
@@ -40,7 +40,7 @@ const CalenderIcon = () => (
         strokeWidth="2.03289"
         strokeMiterlimit="10"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.455 15.9729H14.4651"

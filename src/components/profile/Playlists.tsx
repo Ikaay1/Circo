@@ -1,40 +1,41 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 import {
-	useDeletePlaylistMutation,
-	useGetPlaylistQuery,
+  useDeletePlaylistMutation,
+  useGetPlaylistQuery,
 } from 'redux/services/playlist.service';
 
 import {
-	Box,
-	Circle,
-	Flex,
-	HStack,
-	Icon,
-	Image,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	SimpleGrid,
-	Skeleton,
-	SkeletonCircle,
-	SkeletonText,
-	Text,
-	useColorMode,
-	useColorModeValue,
-	useDisclosure,
-	useToast,
+  Avatar,
+  Box,
+  Circle,
+  Flex,
+  HStack,
+  Icon,
+  Image,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  SimpleGrid,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import EmptyState from '@components/emptyState/EmptyState';
-import { scrollBarStyle3 } from '@constants/utils';
+import {scrollBarStyle3} from '@constants/utils';
 import AddPlaylistIcon from '@icons/AddPlaylistIcon';
 import TrashIcon from '@icons/TrashIcon';
 
 import VideoIcon from '../../assets/icons/VideoIcon';
 import NewPlaylist from './NewPlaylist';
-import { Playlist } from './PlaylistDetails';
+import {Playlist} from './PlaylistDetails';
 
 const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
   const {data, isLoading, isFetching} = useGetPlaylistQuery(id);
@@ -172,23 +173,36 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                 // color='clique.white'
                 mt='.7rem'
               >
-                {each?.userId?.photo ? (
-                  <Image
+                {newPlaylist ? (
+                  <>
+                    {each?.userId?.channel_id?.photo ? (
+                      <Image
+                        src={each?.userId?.channel_id?.photo}
+                        marginRight={'.7rem'}
+                        w='34px'
+                        h='34px'
+                        borderRadius='50%'
+                        objectFit={'cover'}
+                        alt=''
+                      />
+                    ) : (
+                      <Circle
+                        size='34px'
+                        bg='#232323'
+                        color='white'
+                        marginRight={'.7rem'}
+                      ></Circle>
+                    )}
+                  </>
+                ) : (
+                  <Avatar
                     src={each?.userId?.photo}
                     marginRight={'.7rem'}
-                    w='34px'
-                    h='34px'
-                    borderRadius='50%'
-                    objectFit={'cover'}
-                    alt=''
+                    size='sm'
+                    name={
+                      each?.userId?.firstName + ' ' + each?.userId?.lastName
+                    }
                   />
-                ) : (
-                  <Circle
-                    size='34px'
-                    bg='#232323'
-                    color='white'
-                    marginRight={'.7rem'}
-                  ></Circle>
                 )}
 
                 {each?.name}
@@ -211,9 +225,6 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                       onOpenSure();
                       setPlaylistId(each?._id);
                     }}
-                    bg='clique.black'
-                    p='5px'
-                    borderRadius={'5px'}
                   >
                     <Icon
                       as={TrashIcon}

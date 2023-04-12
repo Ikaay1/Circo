@@ -33,6 +33,9 @@ function ControlMobile({
   prevVideoIndex,
   videoIdsList,
   currentVideoIndex,
+  isLoop,
+  setIsLoop,
+  Bref,
 }: any) {
   const router = useRouter();
   const [like, likeInfo] = useLikeContentMutation();
@@ -54,21 +57,29 @@ function ControlMobile({
   }, [userProfile?._id, router]);
 
   return (
-    <Grid
-      templateColumns='repeat(7, 1fr)'
-      mt='30px'
+    <Flex
+      // templateColumns='repeat(7, 1fr)'
+      mt={{base: '50px', lg: '30px'}}
       justifyContent={'space-between'}
       alignItems='center'
+      px='6px'
+      pb='.8rem'
+      pr='10px'
     >
-      <GridItem mr='.7rem' flex='1'>
-        <Flex alignItems='center' mr='3px' ml={'3px'}>
+      <GridItem w='55%'>
+        <Flex
+          alignItems='center'
+          justifyContent={'space-between'}
+          mr='3px'
+          ml={'3px'}
+        >
           {!currentTimestamp || !totalDuration ? (
             <Text
               w='12px'
               color={'clique.white'}
               fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={'smSubHead'}
+              fontSize={'sm'}
               lineHeight={'1'}
             ></Text>
           ) : (
@@ -76,10 +87,10 @@ function ControlMobile({
               color={'clique.white'}
               fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={'smSubHead'}
+              fontSize={'sm'}
               lineHeight={'1'}
             >
-              {moment(currentTimestamp * 1000).format('mm:ss')} /{' '}
+              {moment(currentTimestamp * 1000).format('mm:ss')}/{' '}
               {moment(totalDuration * 1000).format('mm:ss')}
             </Text>
           )}
@@ -90,7 +101,7 @@ function ControlMobile({
               color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoUnmute}
-              mx='7px'
+              mx='10px'
             />
           ) : (
             <Icon
@@ -99,14 +110,15 @@ function ControlMobile({
               color={'clique.white'}
               onClick={() => setIsMuted(!isMuted)}
               as={GoMute}
-              mx='7px'
+              mx='10px'
             />
           )}{' '}
           <Flex alignItems='center'>
             <Flex
-              justifyContent={'space-between'}
-              alignItems='center'
+              alignItems={'center'}
+              flexDirection={'column'}
               mx={'3px'}
+              mr='15px'
             >
               {likeInfo.isLoading ? (
                 <Spinner size={'sm'} bg='clique.base' />
@@ -134,7 +146,7 @@ function ControlMobile({
               </Text>
             </Flex>
 
-            <Flex alignItems='center'>
+            <Flex alignItems={'center'} flexDirection={'column'}>
               {dislikeInfo.isLoading ? (
                 <Spinner size={'sm'} bg='clique.base' />
               ) : (
@@ -163,8 +175,24 @@ function ControlMobile({
           </Flex>
         </Flex>
       </GridItem>
-      <GridItem mr='.7rem' flex='1'>
-        <Flex alignItems='center' mx='3px'>
+      <GridItem
+        position='absolute'
+        bottom='68px'
+        // border='4px solid yellow'
+        w='90vw'
+        mx='auto'
+        className='controlMobile'
+        justifySelf='center'
+        mr='.7rem'
+        flex='1'
+      >
+        <Flex
+          mx='auto'
+          w='200px'
+          alignItems='center'
+          // border='4px solid yellow'
+          justifyContent={'space-between'}
+        >
           <Icon
             fontSize='bigHead'
             cursor='pointer'
@@ -225,12 +253,17 @@ function ControlMobile({
           />
         </Flex>
       </GridItem>
-      <GridItem flex='1'>
-        <Flex alignItems='center'>
+      <GridItem w='38%' justifySelf='end'>
+        <Flex alignItems='center' justifyContent={'space-between'}>
           {video.uploader_id._id !== userProfile._id && (
-            <GiftModal isFullScreen={isFullScreen} video={video} />
+            <GiftModal isFullScreen={isFullScreen} video={video} Bref={Bref} />
           )}
-          <VideoOptionMenu player={playerRef} video={video} />
+          <VideoOptionMenu
+            isLoop={isLoop}
+            setIsLoop={setIsLoop}
+            player={playerRef}
+            video={video}
+          />
           {!isFullScreen ? (
             <Icon
               fontSize='smHead'
@@ -257,7 +290,7 @@ function ControlMobile({
           )}
         </Flex>
       </GridItem>
-    </Grid>
+    </Flex>
   );
 }
 

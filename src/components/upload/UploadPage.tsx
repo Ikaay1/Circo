@@ -1,6 +1,5 @@
 import {useRouter} from 'next/router';
 import {FormEvent, useEffect, useState} from 'react';
-import toast from 'react-hot-toast';
 import {useCategoryQuery} from 'redux/services/category.service';
 import {useCreateContentMutation} from 'redux/services/content.service';
 
@@ -18,6 +17,7 @@ import {
   Select,
   Text,
   useColorModeValue,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
@@ -27,6 +27,7 @@ import AddIcon from '@icons/AddIcon';
 import CopyIcon from '@icons/CopyIcon';
 
 import DetailCard from './DetailCard';
+import UploadPreview from './UploadPreview';
 
 type Props = {
   url: string;
@@ -40,6 +41,7 @@ function UploadPage({url, name}: Props) {
     ageRange: 'Age Range',
     video: '',
   });
+  const toast = useToast();
 
   const router = useRouter();
   const {data, isLoading} = useCategoryQuery('');
@@ -50,33 +52,74 @@ function UploadPage({url, name}: Props) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      if (state.category === 'Choose Category') {
-        toast.error('Please choose a category');
-        return;
-      }
-      if (state.ageRange === 'Age Range') {
-        toast.error('Please choose an age range');
-        return;
-      }
-      if (!thumbNail) {
-        toast.error('Please upload a thumbnail');
-        return;
-      }
-      let file = await fetch(url)
-        .then((r) => r.blob())
-        .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
-      const formData = new FormData();
-      formData.append('title', state.title);
-      formData.append('description', state.description);
-      formData.append('category', state.category);
-      formData.append('ageRange', state.ageRange);
-      formData.append('file', file);
-      formData.append('thumbNail', thumbNail);
-      formData.append('isFree', isFree.toString());
-      await createContent(formData);
+    if (state.category === 'Choose Category') {
+      toast({
+        title: 'Error',
+        description: 'Please choose a category',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      return;
+    }
+    if (state.ageRange === 'Age Range') {
+      toast({
+        title: 'Error',
+        description: 'Please choose an age range',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      return;
+    }
+    if (!thumbNail) {
+      toast({
+        title: 'Error',
+        description: 'Please upload a thumbnail',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      return;
+    }
+    let file = await fetch(url)
+      .then((r) => r.blob())
+      .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
+    const formData = new FormData();
+    formData.append('title', state.title);
+    formData.append('description', state.description);
+    formData.append('category', state.category);
+    formData.append('ageRange', state.ageRange);
+    formData.append('file', file);
+    formData.append('thumbNail', thumbNail);
+    formData.append('isFree', isFree.toString());
+    // const res: any =
+    createContent(formData);
+    // if ('data' in res) {
+    setTimeout(() => {
+      toast({
+        title: 'Your video is being uploaded',
+        description: "You'll get a notification when it completes uploading",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
       router.push('/home');
-    } catch (error: any) {}
+    }, 2000);
+    // } else {
+    //   toast({
+    //     title: 'Upload failed',
+    //     description: res.error?.data?.message || 'Something went wrong',
+    //     status: 'error',
+    //     duration: 3000,
+    //     isClosable: true,
+    //     position: 'top-right',
+    //   });
+    // }
   };
 
   useEffect(() => {
@@ -108,24 +151,15 @@ function UploadPage({url, name}: Props) {
           <Text fontSize={'smHead'} mb='5'>
             Your video preview
           </Text>
-          {thumbNail && typeof thumbNail !== 'string' ? (
-            <Box borderRadius={'10px'} overflow='hidden'>
-              <Image
-                width='100%'
-                height={'140px'}
-                src={`${URL.createObjectURL(thumbNail as Blob)}`}
-                alt='thumbnail'
-                objectFit={'cover'}
-              />
-            </Box>
-          ) : null}
-          <Text fontWeight={600} fontSize='smSubHead' mb='3' mt='4'>
-            {state.title}
-          </Text>
-          <Text fontSize='xsl' noOfLines={5}>
-            {state.description}
-            {/* <span style={{color: '#3D8EC9'}}> more...</span> */}
-          </Text>
+          <UploadPreview
+            title={state.title}
+            thumbNail={
+              thumbNail &&
+              typeof thumbNail !== 'string' &&
+              URL.createObjectURL(thumbNail as Blob)
+            }
+            isFree={isFree}
+          />
         </Box>
 
         <Flex width={{base: '100%', lg: '50%'}}>
