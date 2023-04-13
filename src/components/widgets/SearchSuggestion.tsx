@@ -55,6 +55,8 @@ const SearchSuggestion = ({
                 color='#B3B3B3'
                 noOfLines={1}
                 fontSize={{base: '13px', lg: '16px'}}
+                onClick={() => router.push(`/search/${eachSuggestion.title}`)}
+                cursor={'pointer'}
               >
                 <Box as='span' color={Color().blackAndPureWhite}>
                   {eachSuggestion.title.slice(0, search?.length)}

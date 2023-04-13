@@ -37,6 +37,7 @@ function EachSubscribe({
           fontFamily={'Poppins'}
           fontWeight={500}
           textTransform={'capitalize'}
+          noOfLines={1}
         >
           {channel_id?.name}
         </Text>
