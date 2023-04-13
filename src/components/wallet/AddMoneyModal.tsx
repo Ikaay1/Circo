@@ -59,6 +59,7 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
   const [error, setError] = useState<any>(null);
 
   const handleDeposit = async (response: any) => {
+    console.log('response', response);
     const res: any = await confirmDeposit({
       amount: Number(amount),
       transactionId: response?.transaction_id,
@@ -107,7 +108,7 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
         <ModalBody>
           <Flex flexDirection={'column'}>
             <Box
-              bg='clique.secondaryGrey1'
+              // bg='clique.secondaryGrey1'
               px='2'
               py='1'
               borderRadius={'10px'}
