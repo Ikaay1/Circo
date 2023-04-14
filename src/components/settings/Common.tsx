@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import {Box, Divider, Text} from '@chakra-ui/react';
@@ -24,7 +25,18 @@ function Common(props: Props) {
       </Text>
       <Text fontSize={'xsl'} mb='10'>
         {props.main}
-        <span style={{color: '#3088D9'}}> {props.highlight}</span>
+        <span style={{color: '#3088D9'}}>
+          {' '}
+          <Link
+            href={
+              props.highlight?.includes('Terms')
+                ? '/terms-of-service'
+                : '/privacy-policy'
+            }
+          >
+            {props.highlight}
+          </Link>
+        </span>
       </Text>
       <Divider></Divider>
     </Box>
