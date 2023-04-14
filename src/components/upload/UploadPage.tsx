@@ -96,10 +96,8 @@ function UploadPage({url, name}: Props) {
     formData.append('file', file);
     formData.append('thumbNail', thumbNail);
     formData.append('isFree', isFree.toString());
-    // const res: any =
-    createContent(formData);
-    // if ('data' in res) {
-    setTimeout(() => {
+    const res: any = await createContent(formData);
+    if ('data' in res) {
       toast({
         title: 'Your video is being uploaded',
         description: "You'll get a notification when it completes uploading",
@@ -109,17 +107,16 @@ function UploadPage({url, name}: Props) {
         position: 'top-right',
       });
       router.push('/home');
-    }, 2000);
-    // } else {
-    //   toast({
-    //     title: 'Upload failed',
-    //     description: res.error?.data?.message || 'Something went wrong',
-    //     status: 'error',
-    //     duration: 3000,
-    //     isClosable: true,
-    //     position: 'top-right',
-    //   });
-    // }
+    } else {
+      toast({
+        title: 'Upload failed',
+        description: res.error?.data?.message || 'Something went wrong',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    }
   };
 
   useEffect(() => {
