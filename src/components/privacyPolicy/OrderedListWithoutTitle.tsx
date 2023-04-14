@@ -16,10 +16,16 @@ const OrderedListWithoutTitle = ({
       <Text color='purple' fontWeight={'500'}>
         {text}
       </Text>
-      <Text mt='.65rem'>{description}</Text>
+      <Text mt='.65rem' fontSize={{base: '14px', lg: '16px'}}>
+        {description}
+      </Text>
       <OrderedList mt='.7rem'>
         {array.map((each) => (
-          <ListItem mt='.19rem' key={each}>
+          <ListItem
+            mt='.19rem'
+            key={each}
+            fontSize={{base: '14px', lg: '16px'}}
+          >
             {each}
           </ListItem>
         ))}
