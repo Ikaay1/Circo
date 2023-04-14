@@ -18,7 +18,7 @@ const IntroductionFormat = ({
       <Text color='purple' fontWeight={'500'}>
         {text}
       </Text>
-      <Text mt='.65rem'>
+      <Text mt='.65rem' fontSize={{base: '14px', lg: '16px'}}>
         {description}
         {email && (
           <Box as='span' color='purple' fontWeight={'500'} cursor='pointer'>
