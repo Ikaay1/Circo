@@ -93,7 +93,7 @@ const DeleteAccount = () => {
   };
 
   return (
-    <Box px={{base: '1rem', lg: '2rem'}} py='1.5rem'>
+    <Box px={{base: '1rem', lg: '2rem'}} py='1.5rem' bg='clique.white'>
       <Link href='/home'>
         <Image
           src='/assets/circo-web.png'

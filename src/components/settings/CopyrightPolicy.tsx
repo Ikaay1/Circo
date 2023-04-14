@@ -5,10 +5,10 @@ type Props = {};
 function CopyrightPolicy({}: Props) {
   return (
     <Common
-      title="Copyright Policy"
-      subTitle="Circos copyright policy has been set to keep it’s users saftey."
-      main="Review Circos Copyright Policy"
-      highlight="sparksdclark@gmail.com"
+      title='Copyright Policy'
+      subTitle='Circos copyright policy has been set to keep it’s users safety.'
+      main='Review Circos Copyright Policy'
+      highlight='sparksdclark@gmail.com'
     />
   );
 }

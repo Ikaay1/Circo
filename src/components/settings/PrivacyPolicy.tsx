@@ -5,10 +5,10 @@ type Props = {};
 function PrivacyPolicy({}: Props) {
   return (
     <Common
-      title="Privacy Policy"
-      subTitle="Circos privacy guideliness has been set to keep it’s users saftey."
-      main="Review Circos"
-      highlight="Privacy Policy"
+      title='Privacy Policy'
+      subTitle='Circos privacy guidelines has been set to keep it’s users safety.'
+      main='Review Circos'
+      highlight='Privacy Policy'
     />
   );
 }

@@ -6,7 +6,7 @@ function TermsService({}: Props) {
   return (
     <Common
       title='Terms of Service'
-      subTitle='Circos tersm of service has been set to keep it’s users saftey.'
+      subTitle='Circos terms of service has been set to keep it’s users safety.'
       main='Review Circos'
       highlight='Terms of Service'
     />
