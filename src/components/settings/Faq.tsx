@@ -7,7 +7,7 @@ const Faq = (props: Props) => {
     <Common
       title='Help and Support'
       subTitle='To reach out to the Circo Team concerning issues, send a mail to'
-      firstHighlight='support@circo.com'
+      firstHighlight='admin@circo.africa'
       // main="Check our Frequently Asked Questions"
       // highlight="FAQs"
     />
