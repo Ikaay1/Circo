@@ -4,28 +4,15 @@ import {useAppDispatch} from 'redux/app/hooks';
 import {useGetSubscriptionsQuery} from 'redux/services/user.service';
 import {logout} from 'redux/slices/authSlice';
 
-import {
-  Box,
-  Divider,
-  Flex,
-  Icon,
-  Skeleton,
-  SkeletonCircle,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import {Box, Divider} from '@chakra-ui/react';
 import Color from '@constants/color';
-import {menu, scrollBarStyle, subcribees} from '@constants/utils';
+import {menu} from '@constants/utils';
 
 import EachMenu from './EachMenu';
-import EachSubscribe from './EachSubscribe';
+import Subscriptions from './Subscriptions';
 
 function Index() {
   const dispatch = useAppDispatch();
-  const {data, isFetching} = useGetSubscriptionsQuery({page: 1, limit: 5});
-  console.log('sub', data);
-
-
 
   return (
     <Box
@@ -74,48 +61,8 @@ function Index() {
       <Box px='50px' py='20px'>
         <Divider />
       </Box>
-      {isFetching ? (
-        <>
-          {[1, 2, 3].map((num) => (
-            <Flex pl='50px' key={num} mt='15px' alignItems={'center'}>
-              <SkeletonCircle size='10' mr='10px' />
-              <Skeleton w='60%' height='15px' />
-            </Flex>
-          ))}
-        </>
-      ) : (
-        <>
-          {data?.data?.user.length > 0 && (
-            <>
-              <Text
-                pl='60px'
-                fontFamily={'Poppins'}
-                fontWeight={500}
-                textTransform={'capitalize'}
-              >
-                subscriptions
-              </Text>
-              {data?.data?.user.map(
-                (item: {
-                  channel_id: {
-                    photo: string;
-                    name: string;
-                  };
-                  _id: string;
-                }) => (
-                  <EachSubscribe
-                    key={item._id}
-                    id={item._id}
-                    channel_id={item.channel_id}
-                  />
-                ),
-              )}
-            </>
-          )}
-        </>
-      )}
 
-  
+      <Subscriptions />
     </Box>
   );
 }

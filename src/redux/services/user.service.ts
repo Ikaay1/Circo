@@ -84,8 +84,10 @@ export const userApi = createApi({
     }),
 
     getSubscriptions: builder.query<any, any>({
-      query: ({page, limit}) => ({
-        url: `content/subscriptions?page=${page}&limit=${limit}`,
+      query: ({page, limit, search}) => ({
+        url: search
+          ? `content/subscriptions?page=${page}&limit=${limit}&search=${search}`
+          : `content/subscriptions?page=${page}&limit=${limit}`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
