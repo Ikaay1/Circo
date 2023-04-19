@@ -274,7 +274,7 @@ const Notification = ({
             </Text>
             <Text fontSize={'subHead'} mb='6'>
               Refer a friend and earn{' '}
-              <span style={{color: '#8758FF'}}>#1000!</span>
+              <span style={{color: '#8758FF'}}>₦1000!</span>
             </Text>
             <Text color='clique.text' fontSize={'xsl'}>
               Referral Code

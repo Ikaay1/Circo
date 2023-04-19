@@ -19,7 +19,7 @@ function EachSubscribe({
 
   return (
     <Link href={`/channel/subscribe/${id}`} textDecoration='none '>
-      <Flex pl='50px' mt='15px' alignItems={'center'} cursor={'pointer'}>
+      <Flex pl='30px' mt='15px' alignItems={'center'} cursor={'pointer'}>
         {channel_id?.photo ? (
           <Avatar size={'sm'} src={channel_id?.photo} mr='10px' />
         ) : (
