@@ -179,7 +179,7 @@ function UploadPage({url, name}: Props) {
                     handleInputChangeArea={(event) =>
                       setState({...state, description: event?.target?.value})
                     }
-                    limit={each.title === 'Title' ? true : false}
+                    limit={each.title === 'Title' ? 70 : 300}
                   />
                 );
               })}
