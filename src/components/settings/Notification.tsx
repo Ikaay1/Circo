@@ -50,7 +50,13 @@ const defaultState = {
   allNotifications: true,
 };
 
-const Notification = ({isLoading, data, onClick, isFetching}: any) => {
+const Notification = ({
+  isLoading,
+  data,
+  onClick,
+  isFetching,
+  setValue,
+}: any) => {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [updatePreference, info] = useUpdatePreferenceMutation();
   const [state, setState] = useState({
@@ -79,6 +85,10 @@ const Notification = ({isLoading, data, onClick, isFetching}: any) => {
     lightOrDark: data ? data?.lightOrDark : false,
   });
   const router = useRouter();
+
+  useEffect(() => {
+    setValue(userProfile?.referralCode);
+  }, [userProfile?.referralCode]);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({...prev, [e.target.name]: e.target.checked}));
