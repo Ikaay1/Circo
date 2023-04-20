@@ -57,7 +57,6 @@ const SearchResultCard = ({
         position: 'top-right',
       });
       onClose();
-      //   window.location.reload();
     } else if (res.error?.data?.message) {
       toast({
         title: res.error?.data?.message,
