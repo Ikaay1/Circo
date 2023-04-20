@@ -135,7 +135,6 @@ const SubscribeChannel = () => {
       onClose();
       isSubOnClose();
       setState('Subscribed');
-      // window.location.reload();
       setContents([]);
       setPage(1);
     } else if (res.error?.data?.message) {
