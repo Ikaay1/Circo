@@ -7,9 +7,9 @@ import {useAppSelector} from 'redux/app/hooks';
 import {useGetIndividualChannelQuery} from 'redux/services/channel.service';
 import {
   useGetSingleUserContentQuery,
+  useGetUserQuery,
   useSubscribeToUserChannelMutation,
 } from 'redux/services/content.service';
-import {useGetUserQuery} from 'redux/services/user.service';
 
 import {
   Box,
@@ -102,7 +102,7 @@ const SubscribeChannel = () => {
     page,
     limit: 3,
   });
-  const {contents, lastElementRef, loading} = useGet({
+  const {contents, lastElementRef, loading, setContents} = useGet({
     data,
     isFetching: videoFetch,
     isLoading,
@@ -135,7 +135,9 @@ const SubscribeChannel = () => {
       onClose();
       isSubOnClose();
       setState('Subscribed');
-      window.location.reload();
+      // window.location.reload();
+      setContents([]);
+      setPage(1);
     } else if (res.error?.data?.message) {
       toast({
         title: res.error?.data?.message,
@@ -165,7 +167,7 @@ const SubscribeChannel = () => {
           <Index
             channelData={channelData}
             data={contents}
-            channelLoading={channelLoading}
+            channelLoading={videoFetch}
             isLoading={isLoading}
             onClick={handleSubscription}
             buttonText={state}

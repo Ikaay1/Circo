@@ -361,6 +361,16 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
+    getUser: builder.query<any, any>({
+      query: (id) => ({
+        url: `users/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Content'],
+    }),
   }),
 });
 
@@ -395,4 +405,5 @@ export const {
   useGetUsersBySearchQuery,
   useGetUsersSearchQuery,
   useGetSearchSuggestionQuery,
+  useGetUserQuery,
 } = contentApi;
