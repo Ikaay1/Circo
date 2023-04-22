@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {useRouter} from 'next/router';
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useDeleteContentMutation} from 'redux/services/bank.service';
 import {useGetIndividualChannelQuery} from 'redux/services/channel.service';
 
@@ -74,6 +74,9 @@ function VideoThumb({
   const router = useRouter();
   const [show, setShow] = React.useState(false);
   const [url, setUrl] = React.useState('');
+  const [videoTime, setVideoTime] = useState('0:00');
+  const [loading, setLoading] = useState(true);
+  const videoRef = useRef(null);
   const handleClick = async (i: number) => {
     if (i === 0) {
       onOpenCopy();
@@ -103,13 +106,25 @@ function VideoThumb({
 
   useEffect(() => {
     async function display(videoStream: string) {
-      let blob = await fetch(videoStream).then((r) => r.blob());
-      var videoUrl = createObjectURL(blob);
-      setUrl(videoUrl);
+      // let blob = await fetch(videoStream).then((r) => r.blob());
+      // var videoUrl = createObjectURL(blob);
+      setUrl(videoStream);
     }
 
     display(decrypt(video?.video));
   }, []);
+
+  const handleLoadedMetadata = () => {
+    let vid: any = videoRef.current;
+    console.log('vid', vid);
+    if (!vid) return;
+    let minutes = parseInt(`${vid.duration / 60}`, 10);
+    let seconds = Math.round(vid.duration % 60);
+    seconds.toString().length === 1
+      ? setVideoTime(`${minutes}:0${seconds}`)
+      : setVideoTime(`${minutes}:${seconds}`);
+    setLoading(false);
+  };
 
   return (
     <>
@@ -126,29 +141,13 @@ function VideoThumb({
           url={url}
         />
 
-        <Box
-          position={'relative'}
-          display={isHover && !isOpen && url ? 'none' : 'block'}
-        >
-          {video?.isFree && (
-            <Text
-              bg='clique.freeColor'
-              borderTopRightRadius={'8px'}
-              borderBottomLeftRadius={'8px'}
-              w='60px'
-              h='21px'
-              display={'flex'}
-              justifyContent='center'
-              alignItems={'center'}
-              color='clique.black'
-              fontWeight={'600'}
-              position='absolute'
-              top={'0'}
-              right='0'
-            >
-              Free
-            </Text>
-          )}
+        <Box display={isHover && !isOpen && url ? 'none' : 'block'}>
+          <video
+            style={{display: 'none'}}
+            ref={videoRef}
+            onLoadedMetadata={handleLoadedMetadata}
+            src={url}
+          />
 
           <Box
             onMouseOver={() => {
@@ -170,6 +169,7 @@ function VideoThumb({
                 onOpen();
               }
             }}
+            position={'relative'}
           >
             <SubScribeModal
               onClose={onClose}
@@ -185,6 +185,37 @@ function VideoThumb({
               bgPosition='center'
               rounded={'10px'}
             />
+            {video?.isFree && (
+              <Text
+                bg='clique.freeColor'
+                borderTopRightRadius={'8px'}
+                borderBottomLeftRadius={'8px'}
+                w='60px'
+                h='21px'
+                display={'flex'}
+                justifyContent='center'
+                alignItems={'center'}
+                color='clique.black'
+                fontWeight={'600'}
+                position='absolute'
+                top={'0'}
+                right='0'
+              >
+                Free
+              </Text>
+            )}
+            <Text
+              position='absolute'
+              bottom={'0'}
+              right='0'
+              bg='clique.black'
+              borderTopLeftRadius='5px'
+              borderBottomLeftRadius='5px'
+              px='3px'
+              fontSize='sm4'
+            >
+              {loading ? '--:--' : videoTime}
+            </Text>
           </Box>
 
           <Flex mt='15px'>
