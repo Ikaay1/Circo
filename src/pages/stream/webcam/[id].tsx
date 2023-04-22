@@ -84,7 +84,7 @@ function Index() {
     if (id) {
       setLivestreamId(id as string);
     }
-  }, [id]);
+  }, []);
   const { data, isFetching, isLoading, refetch } =
     useGetStreamQuery(livestreamId);
 
@@ -114,7 +114,7 @@ function Index() {
     Router.events.on("routeChangeStart", async () => {
       await handleEndStream(livestreamId);
     });
-  }, [Router]);
+  }, [Router, livestreamId]);
 
   return (
     <HomeLayout>

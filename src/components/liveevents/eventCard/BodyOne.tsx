@@ -19,15 +19,10 @@ function BodyOne({
   const userProfile = useAppSelector(
     (store) => store.app.userReducer.userProfile
   );
+  const channel = useAppSelector((store) => store.app.userReducer.channel);
 
   const [payForLive, payInfo] = usePayForLiveMutation();
   const toast = useToast();
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
 
   return (
     <>
@@ -67,6 +62,7 @@ function BodyOne({
       </Text>
       <Button
         mt={"50px"}
+        display={channel?._id === event?.streamerId?._id ? "none" : "block"}
         w="full"
         size="lg"
         onClick={async () => {
