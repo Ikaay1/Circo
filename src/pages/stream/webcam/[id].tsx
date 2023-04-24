@@ -48,7 +48,7 @@ function Index() {
     if (!spaceRef.current) return;
 
     // Join the Space
-    let localParticipant = await spaceRef?.current?.join();
+    let localParticipant = await spaceRef?.current.join();
 
     // Get and publish our local tracks
     let localTracks = await getUserMedia({
