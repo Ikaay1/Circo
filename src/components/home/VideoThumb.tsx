@@ -1,22 +1,22 @@
 import moment from 'moment';
-import {useRouter} from 'next/router';
-import React, {useEffect, useRef, useState} from 'react';
-import {useDeleteContentMutation} from 'redux/services/bank.service';
-import {useGetIndividualChannelQuery} from 'redux/services/channel.service';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDeleteContentMutation } from 'redux/services/bank.service';
+import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
 
 import {
-  Avatar,
-  Box,
-  Flex,
-  Icon,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  ScaleFade,
-  Skeleton,
-  Text,
-  useDisclosure,
-  useToast,
+	Avatar,
+	Box,
+	Flex,
+	Icon,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	ScaleFade,
+	Skeleton,
+	Text,
+	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import CopyBox from '@components/channel/CopyBox';
 import Sure from '@components/channel/Sure';
@@ -28,13 +28,13 @@ import TrashIcon from '@icons/TrashIcon';
 import VideoSideIcon from '@icons/VideoSideIcon';
 
 import {
-  API,
-  baseUrl,
-  contentData,
-  createObjectURL,
-  decrypt,
+	API,
+	baseUrl,
+	contentData,
+	createObjectURL,
+	decrypt,
 } from '../../constants/utils';
-import {useRoutingChannel} from '../../hooks/useRoutingChannel';
+import { useRoutingChannel } from '../../hooks/useRoutingChannel';
 import HoverCard from './HoverCard';
 import SubScribeModal from './SubScribeModal';
 
@@ -213,7 +213,7 @@ function VideoThumb({
               borderBottomLeftRadius='5px'
               px='3px'
               fontSize='sm4'
-              color="clique.white"
+              color='clique.white'
             >
               {loading ? '--:--' : videoTime}
             </Text>
