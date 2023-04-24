@@ -213,6 +213,7 @@ function VideoThumb({
               borderBottomLeftRadius='5px'
               px='3px'
               fontSize='sm4'
+              color="clique.white"
             >
               {loading ? '--:--' : videoTime}
             </Text>
