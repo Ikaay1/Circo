@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   Button,
@@ -8,8 +8,8 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
-} from '@chakra-ui/react';
-import Color from '@constants/color';
+} from "@chakra-ui/react";
+import Color from "@constants/color";
 
 function EndLiveModal({
   streamDetails,
@@ -20,85 +20,86 @@ function EndLiveModal({
   handleClick: () => void;
   loading: boolean;
 }) {
-  const {isOpen, onOpen, onClose} = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Button
-        mt='80px'
-        rounded='full'
+        mt="80px"
+        rounded="full"
         onClick={() => {
           onOpen();
         }}
-        bg={'clique.dangerRed'}
+        bg={"clique.dangerRed"}
         color={Color().blackAndWhite}
-        colorScheme={'red'}
-        fontFamily={'Poppins'}
+        colorScheme={"red"}
+        fontFamily={"Poppins"}
       >
         End Live Stream
       </Button>
-      <Modal size={'xl'} isOpen={isOpen} isCentered onClose={onClose}>
+      <Modal size={"xl"} isOpen={isOpen} isCentered onClose={onClose}>
         <ModalOverlay />
         <ModalContent
-          px='50px'
-          m='0'
-          py='40px'
-          rounded={'20px'}
+          px="50px"
+          m="0"
+          py="40px"
+          rounded={"20px"}
           bg={Color().lightAndPrimary}
         >
           <Text
             color={Color().blackAndWhite}
-            fontFamily={'Poppins'}
+            fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={'subHead'}
-            lineHeight={'1.5'}
-            textAlign='center'
+            fontSize={"subHead"}
+            lineHeight={"1.5"}
+            textAlign="center"
           >
             End live Stream
           </Text>
 
           <Text
-            my='10px'
+            my="10px"
             color={Color().blackAndWhite}
-            fontFamily={'Poppins'}
+            fontFamily={"Poppins"}
             fontWeight={400}
-            fontSize={'smSubHead'}
-            lineHeight={'1.5'}
-            textAlign='center'
-            py='20px'
+            fontSize={"smSubHead"}
+            lineHeight={"1.5"}
+            textAlign="center"
+            py="20px"
           >
             Are you sure you want to end this live session?
           </Text>
 
-          <Flex justifyContent={'space-between'}>
+          <Flex justifyContent={"space-between"}>
             <Button
-              mt={'30px'}
-              size='md'
-              bg='none'
-              w='120px'
+              mt={"30px"}
+              size="md"
+              bg="none"
+              w="120px"
               color={Color().blackAndWhite}
-              border={'1px solid #fff'}
+              border={"1px solid #fff"}
               onClick={onClose}
-              rounded={'full'}
+              rounded={"full"}
               fontWeight={400}
-              colorScheme='whiteAlpha'
+              colorScheme="whiteAlpha"
             >
               Cancel
             </Button>
             <Button
               onClick={() => {
                 handleClick();
+                onClose();
               }}
-              mt={'30px'}
-              w='120px'
-              size='md'
+              mt={"30px"}
+              w="120px"
+              size="md"
               isLoading={loading}
-              bg='clique.red'
+              bg="clique.red"
               color={Color().blackAndWhite}
-              border={'1px solid '}
-              borderColor='clique.red'
-              rounded={'full'}
+              border={"1px solid "}
+              borderColor="clique.red"
+              rounded={"full"}
               fontWeight={400}
-              colorScheme='red'
+              colorScheme="red"
             >
               End
             </Button>
