@@ -48,13 +48,16 @@ function Index() {
     if (!spaceRef.current) return;
 
     // Join the Space
-    let localParticipant = await spaceRef.current.join();
+    let localParticipant = await spaceRef?.current?.join();
 
     // Get and publish our local tracks
     let localTracks = await getUserMedia({
       audio: true,
       video: true,
     });
+
+    console.log("localTracks", localTracks);
+
     await localParticipant.publishTracks(localTracks);
 
     // Set the local participant so it will be rendered
