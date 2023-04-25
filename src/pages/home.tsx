@@ -6,7 +6,7 @@ import {useAppSelector} from 'redux/app/hooks';
 import {useCategoryQuery} from 'redux/services/category.service';
 import {useGetContentsQuery} from 'redux/services/content.service';
 import {useExpiredSubscriptionMutation} from 'redux/services/user.service';
-import {useDepositToWalletMutation} from 'redux/services/wallet.service';
+// import {useDepositToWalletMutation} from 'redux/services/wallet.service';
 import io from 'socket.io-client';
 
 // import { useDepositToWalletMutation } from 'redux/services/wallet.service';
@@ -26,14 +26,14 @@ import useGetContents from '../hooks/useGetContents';
 function Index() {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
-  const {tx_ref} = router.query;
+  // const [depositToWallet, depositToWalletStatus] = useDepositToWalletMutation();
+  // const {tx_ref} = router.query;
 
   const [hasChannel, setHasChannel] = useState(true);
   const [numberOfTickets, setNumberOfTickets] = React.useState(2);
   const [categoryId, setCategoryId] = useState('all');
   const categories = useCategoryQuery('');
-  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  // const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const {data, isFetching, isLoading, refetch} = useGetContentsQuery({
     page,
     limit: 9,
@@ -51,32 +51,32 @@ function Index() {
     };
     expired();
   }, []);
-  console.log('tx_ref', tx_ref);
-  console.log('okay', localStorage.getItem('okay'));
+  // console.log('tx_ref', tx_ref);
+  // console.log('okay', localStorage.getItem('okay'));
 
-  useEffect(() => {
-    const deposit = async () => {
-      try {
-        await depositToWallet({
-          amount: Number(JSON.parse(localStorage.getItem('okay')!)),
-          description: 'Funded from Paystack',
-          reference: `${tx_ref}`,
-        });
-        localStorage.removeItem('okay');
-      } catch (error) {
-        localStorage.removeItem('okay');
-      }
-      window.location.replace('/home');
-    };
-    if (tx_ref && localStorage.getItem('okay')) {
-      deposit();
-    } else if (
-      !localStorage.getItem('okay') &&
-      router.asPath.includes('status')
-    ) {
-      window.location.replace('/home');
-    }
-  }, [tx_ref]);
+  // useEffect(() => {
+  //   const deposit = async () => {
+  //     try {
+  //       await depositToWallet({
+  //         amount: Number(JSON.parse(localStorage.getItem('okay')!)),
+  //         description: 'Funded from Paystack',
+  //         reference: `${tx_ref}`,
+  //       });
+  //       localStorage.removeItem('okay');
+  //     } catch (error) {
+  //       localStorage.removeItem('okay');
+  //     }
+  //     window.location.replace('/home');
+  //   };
+  //   if (tx_ref && localStorage.getItem('okay')) {
+  //     deposit();
+  //   } else if (
+  //     !localStorage.getItem('okay') &&
+  //     router.asPath.includes('status')
+  //   ) {
+  //     window.location.replace('/home');
+  //   }
+  // }, [tx_ref]);
 
   const {loading, hasMore, contents} = useGetContents({
     data,

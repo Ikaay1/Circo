@@ -8,7 +8,11 @@ const Footer = () => {
       <Divider />
       <Divider />
       <Divider />
-      <Flex justifyContent={'space-between'} mt='1rem'>
+      <Flex
+        justifyContent={'space-between'}
+        mt='1rem'
+        fontSize={{base: '14px', lg: '16px'}}
+      >
         <Box>
           <Text>© 2023 Circo Africa</Text>
           <Text>All Rights Reserved</Text>

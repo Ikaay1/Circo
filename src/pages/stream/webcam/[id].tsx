@@ -48,13 +48,16 @@ function Index() {
     if (!spaceRef.current) return;
 
     // Join the Space
-    let localParticipant = await spaceRef.current.join();
+    let localParticipant = await spaceRef?.current.join();
 
     // Get and publish our local tracks
     let localTracks = await getUserMedia({
       audio: true,
       video: true,
     });
+
+    console.log("localTracks", localTracks);
+
     await localParticipant.publishTracks(localTracks);
 
     // Set the local participant so it will be rendered
@@ -68,7 +71,7 @@ function Index() {
 
   useEffect(() => {
     join();
-  }, [spaceRef.current]);
+  }, [spaceRef?.current]);
 
   //hadnling ending stream
   const [endStream, endInfo] = useEndStreamMutation();
@@ -84,7 +87,7 @@ function Index() {
     if (id) {
       setLivestreamId(id as string);
     }
-  }, [id]);
+  }, []);
   const { data, isFetching, isLoading, refetch } =
     useGetStreamQuery(livestreamId);
 
@@ -114,7 +117,7 @@ function Index() {
     Router.events.on("routeChangeStart", async () => {
       await handleEndStream(livestreamId);
     });
-  }, [Router]);
+  }, [Router, livestreamId]);
 
   return (
     <HomeLayout>

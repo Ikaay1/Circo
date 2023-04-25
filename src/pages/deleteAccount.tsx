@@ -45,7 +45,7 @@ const DeleteAccount = () => {
 
   useEffect(() => {
     if (!accessToken) {
-      router.push(`/login`);
+      router.push(`/login?next=/deleteAccount`);
     } else if (accessToken) {
       // check if the token is expired
       const decodedToken: any = jwtDecode(accessToken);

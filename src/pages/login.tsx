@@ -24,6 +24,7 @@ const Login = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const {next}: any = router.query;
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -45,7 +46,8 @@ const Login = () => {
           payload: res.data,
         }),
       );
-      router.push('/home');
+      // next ? router.push(next) : router.push('/home');
+      console.log('next', next);
     } else {
       toast({
         title: 'Login failed',
@@ -64,7 +66,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      router.push('/home');
+      next ? router.push(next) : router.push('/home');
     }
   }, [token, router]);
 

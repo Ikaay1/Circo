@@ -160,7 +160,7 @@ const Footer = () => {
               Others
             </Text>
             <Box>
-              {footerOthersData.map(({key, detail}) => (
+              {footerOthersData.map(({key, detail, link}) => (
                 <Box display={'flex'} mt='1.2rem' key={key}>
                   <Text
                     fontSize={{
@@ -174,8 +174,11 @@ const Footer = () => {
                     }}
                     color='clique.black2'
                     w={{base: '180px'}}
+                    _hover={{
+                      textDecoration: 'underline',
+                    }}
                   >
-                    {detail}
+                    <Link href={link}>{detail}</Link>
                   </Text>
                 </Box>
               ))}

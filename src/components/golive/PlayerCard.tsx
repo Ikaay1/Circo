@@ -100,7 +100,7 @@ function PlayerCard({ streamDetails, setState }: any) {
           position: "top-right",
         });
 
-        if (streamId === streamDetails?._id) {
+        if (streamId === streamDetails?.eventId?._id) {
           dispatch(clearStreamDetails());
         } else if (selectedStreamId === streamDetails?.eventId?._id) {
           setState("liveevent");
@@ -127,16 +127,16 @@ function PlayerCard({ streamDetails, setState }: any) {
             streamDetails?.eventId?.thumbNails &&
             streamDetails?.eventId?.thumbNails[0]
           }
-          playbackId={streamDetails?.playbackId}
+          // playbackId={streamDetails?.playbackId}
+          src={`https://stream.mux.com/${streamDetails?.playbackId}.m3u8`}
           metadata={{
             video_id: streamDetails?.eventId?._id,
             video_title: streamDetails?.eventId?.title,
             viewer_user_id: streamDetails?.eventId?._id,
           }}
-          streamType="live:dvr"
+          streamType="ll-live"
           autoPlay
           muted={false}
-          loading="page"
         />
       </Box>
       <Box roundedBottom={"10px"} bg={value} px="15px" pt="10px" pb="30px">

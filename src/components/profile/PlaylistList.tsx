@@ -1,24 +1,24 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useRemoveVideoMutation } from 'redux/services/playlist.service';
+import {useRouter} from 'next/router';
+import {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
+import {useRemoveVideoMutation} from 'redux/services/playlist.service';
 
 import {
-	Box,
-	Flex,
-	Icon,
-	Image,
-	Skeleton,
-	Text,
-	useDisclosure,
-	useToast,
-	VStack,
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Skeleton,
+  Text,
+  useDisclosure,
+  useToast,
+  VStack,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import TrashIconRed from '@icons/TrashIconRed';
 
 import MoreIcon from '../../assets/icons/MoreIcon';
-import { Playlist, Videos } from './PlaylistDetails';
+import {Playlist, Videos} from './PlaylistDetails';
 
 type Props = {
   item: Videos;
@@ -168,7 +168,7 @@ const PlaylistList = ({item, i, playlist, videoId}: Props) => {
         isOpen={isOpen}
         isLoading={deleteVideoStatus.isLoading}
         onClose={onClose}
-        header='Remove song from Playlist'
+        header='Remove content from Playlist'
         description='Are you sure you want to remove this content from your playlist?'
         buttonText='Remove'
         onClick={() => {
