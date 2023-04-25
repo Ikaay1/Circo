@@ -50,7 +50,7 @@ function StreamPlayer({ stream }: any) {
           stream?.eventId?.thumbNails && stream?.eventId?.thumbNails[0]
         }
         playbackId={stream?.playbackId}
-        // src={`https://stream.mux.com/${stream?.playbackId}.m3u8`}
+        src={`https://stream.mux.com/${stream?.playbackId}.m3u8`}
         metadata={{
           video_id: stream?.eventId?._id,
           video_title: stream?.eventId?.title,
