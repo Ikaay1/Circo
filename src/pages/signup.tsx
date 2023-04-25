@@ -305,7 +305,7 @@ const Signup = () => {
                   I agree to the&nbsp;
                 </Box>
                 <span style={{color: '#892cdc'}}>
-                  <Link href='/terms-of-service'>Terms & Service</Link>&nbsp;
+                  <Link href='/terms-of-service'>Terms of Service</Link>&nbsp;
                 </span>
                 <Box color={Color().blackAndWhite2} as='span'>
                   and&nbsp;

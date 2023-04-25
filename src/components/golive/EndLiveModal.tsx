@@ -1,14 +1,15 @@
+import React from "react";
+
 import {
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  useDisclosure,
-  Text,
   Flex,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Color from "@constants/color";
-import React from "react";
 
 function EndLiveModal({
   streamDetails,
@@ -52,7 +53,7 @@ function EndLiveModal({
             lineHeight={"1.5"}
             textAlign="center"
           >
-            EndLive Stream
+            End live Stream
           </Text>
 
           <Text
@@ -86,6 +87,7 @@ function EndLiveModal({
             <Button
               onClick={() => {
                 handleClick();
+                onClose();
               }}
               mt={"30px"}
               w="120px"

@@ -31,6 +31,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import AuthButton from "@components/auth/AuthButton";
+import Color from "@constants/color";
 import { CategoriesInterface } from "@constants/interface";
 import { scrollBarStyle } from "@constants/utils";
 import AddIcon from "@icons/AddIcon";
@@ -38,7 +39,6 @@ import WebCamIcon from "@icons/WebCamIcon";
 
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
-import Color from "@constants/color";
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,6 +48,7 @@ function WebCamModal({ setState }: { setState: any }) {
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
   const [createSpace, createSpaceInfo] = useCreateSpaceMutation();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = React.useState(false);
 
   const router = useRouter();
   return (
@@ -127,6 +128,7 @@ function WebCamModal({ setState }: { setState: any }) {
                 fee: Yup.number().required("Fee Required"),
               })}
               onSubmit={async (values, { setSubmitting }) => {
+                setLoading(true);
                 const data = {
                   title: values.title,
                   description: values.description,
@@ -166,6 +168,17 @@ function WebCamModal({ setState }: { setState: any }) {
                       muxStreamId:
                         createLive.data?.data?.livestream?.muxStreamId,
                     });
+                    if (!createSpaceRes?.data?.data) {
+                      toast({
+                        title: "Space Creation Failed",
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                        position: "top-right",
+                      });
+                      setLoading(false);
+                      return;
+                    }
 
                     dispatch(
                       setWebCamStream({
@@ -197,6 +210,7 @@ function WebCamModal({ setState }: { setState: any }) {
                   });
                 }
                 setSubmitting(false);
+                setLoading(false);
               }}
             >
               {(props) => (
@@ -209,6 +223,7 @@ function WebCamModal({ setState }: { setState: any }) {
 
                       <Box>
                         <DetailCard
+                          limit={70}
                           input={true}
                           name="title"
                           label="Live title"
@@ -217,6 +232,7 @@ function WebCamModal({ setState }: { setState: any }) {
                           input={false}
                           name="description"
                           label="Description"
+                          limit={300}
                         />
                         <Input
                           type={"file"}
@@ -333,7 +349,7 @@ function WebCamModal({ setState }: { setState: any }) {
                             name={"Go Live"}
                             h="60px"
                             fontSize="subHead"
-                            status={{ isLoading: props.isSubmitting }}
+                            status={{ isLoading: loading }}
                           />
                         </GridItem>
                       </Grid>

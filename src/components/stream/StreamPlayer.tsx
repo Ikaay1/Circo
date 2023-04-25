@@ -16,10 +16,7 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import Control from "@components/player/Control";
-import MuxPlayer from "@mux/mux-player-react/lazy";
-
-const Nprogress = require("nprogress");
+import MuxPlayer from "@mux/mux-player-react";
 
 function StreamPlayer({ stream }: any) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
@@ -49,22 +46,19 @@ function StreamPlayer({ stream }: any) {
         onError={(err) => {
           console.log(err);
         }}
-        onWaiting={() => {
-          Nprogress.start();
-        }}
         placeholder={
           stream?.eventId?.thumbNails && stream?.eventId?.thumbNails[0]
         }
         playbackId={stream?.playbackId}
+        // src={`https://stream.mux.com/${stream?.playbackId}.m3u8`}
         metadata={{
           video_id: stream?.eventId?._id,
           video_title: stream?.eventId?.title,
           viewer_user_id: stream?.eventId?._id,
         }}
-        streamType="live:dvr"
+        streamType="ll-live"
         autoPlay
         muted={false}
-        loading="page"
       />
 
       <Grid

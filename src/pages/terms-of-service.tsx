@@ -7,7 +7,11 @@ import OrderedListWithoutTitle from '@components/privacyPolicy/OrderedListWithou
 
 const TermsOfService = () => {
   return (
-    <Box bg='clique.white' p='6.5rem'>
+    <Box
+      bg='clique.white'
+      p={{base: '.8rem', lg: '6.5rem'}}
+      color='clique.black'
+    >
       <Image
         src='/assets/Circo.png'
         alt='circo logo'

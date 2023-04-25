@@ -247,6 +247,7 @@ export const contactInfoData: {
 export const footerOthersData: {
   key: string;
   detail: string;
+  link: string;
 }[] = [
   // {
   //   key: '1',
@@ -255,16 +256,19 @@ export const footerOthersData: {
   {
     key: '2',
     detail: 'Privacy Policy',
+    link: '/privacy-policy',
   },
   {
     key: '3',
     detail: 'Terms of Service',
+    link: '/terms-of-service',
   },
 ];
 
 export const sideBarData: {
   key: string;
   detail: string;
+  link: string;
 }[] = [
   // {
   //   key: "0",
@@ -277,10 +281,12 @@ export const sideBarData: {
   {
     key: '2',
     detail: 'Privacy Policy',
+    link: '/privacy-policy',
   },
   {
     key: '3',
     detail: 'Terms of Service',
+    link: '/terms-of-service',
   },
 ];
 

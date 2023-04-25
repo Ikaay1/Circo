@@ -1,19 +1,19 @@
-import axios from "axios";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { toast } from "react-hot-toast";
-import { useAppDispatch } from "redux/app/hooks";
+import axios from 'axios';
+import Link from 'next/link';
+import {useRouter} from 'next/router';
+import React from 'react';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import {toast} from 'react-hot-toast';
+import {useAppDispatch} from 'redux/app/hooks';
 import {
   useLoginMutation,
   useSocialPreSignupMutation,
-} from "redux/services/auth.service";
-import { setCredentials } from "redux/slices/authSlice";
+} from 'redux/services/auth.service';
+import {setCredentials} from 'redux/slices/authSlice';
 
-import { Box, Button, Image, Text } from "@chakra-ui/react";
-import Color from "@constants/color";
-import { useGoogleLogin } from "@react-oauth/google";
+import {Box, Button, Image, Text} from '@chakra-ui/react';
+import Color from '@constants/color';
+import {useGoogleLogin} from '@react-oauth/google';
 
 export const SocialMedia = ({
   haveAccount,
@@ -26,33 +26,35 @@ export const SocialMedia = ({
   const [login, loginStatus] = useLoginMutation();
   const [socialPreSignup, socialPreSignupStatus] = useSocialPreSignupMutation();
   const dispatch = useAppDispatch();
+  const {next}: any = router.query;
 
   const loginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log("entered login");
+      console.log('entered login');
       let userInfo = await axios.get(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
+        'https://www.googleapis.com/oauth2/v3/userinfo',
         {
           headers: {
             Authorization: `Bearer ${tokenResponse?.access_token}`,
           },
-        }
+        },
       );
       console.log(userInfo);
       if (userInfo?.data?.email) {
-        const { family_name, given_name, picture, email } = userInfo.data;
-        if (router.asPath === "/signup") {
-          const res: any = await socialPreSignup({ email });
-          if ("data" in res) {
+        const {family_name, given_name, picture, email} = userInfo.data;
+        console.log('userInfo', userInfo);
+        if (router.asPath === '/signup') {
+          const res: any = await socialPreSignup({email});
+          if ('data' in res) {
             const data = {
-              firstName: family_name.trim(),
+              firstName: family_name ? family_name.trim() : given_name.trim(),
               lastName: given_name.trim(),
-              userName: email.split("@")[0].trim(),
+              userName: email.split('@')[0].trim(),
               email: email.toLowerCase().trim(),
               photo: picture,
-              social: "GOOGLE",
+              social: 'GOOGLE',
             };
-            localStorage.setItem("userData", JSON.stringify(data));
+            localStorage.setItem('userData', JSON.stringify(data));
             router.push(`/ageRange`);
           } else {
             toast.error(res.error?.data?.message);
@@ -63,13 +65,13 @@ export const SocialMedia = ({
           };
           const res: any = await login(userData);
 
-          if ("data" in res) {
+          if ('data' in res) {
             dispatch(
               setCredentials({
                 payload: res.data,
-              })
+              }),
             );
-            router.push("/home");
+            next ? router.push(next) : router.push('/home');
           } else {
             toast.error(res.error?.data?.message);
           }
@@ -84,23 +86,23 @@ export const SocialMedia = ({
   const responseFacebook = async (response: any) => {
     console.log(response);
     if (response?.accessToken) {
-      const { name, picture, email } = response;
-      if (router.asPath.includes("/signup")) {
-        const res: any = await socialPreSignup({ email });
-        if ("data" in res) {
+      const {name, picture, email} = response;
+      if (router.asPath.includes('/signup')) {
+        const res: any = await socialPreSignup({email});
+        if ('data' in res) {
           const data = {
-            firstName: name.split(" ")[0].trim(),
-            lastName: name.split(" ")[1].trim(),
-            userName: email.split("@")[0].trim(),
-            email: email ? email.toLowerCase().trim() : "",
+            firstName: name.split(' ')[0].trim(),
+            lastName: name.split(' ')[1].trim(),
+            userName: email.split('@')[0].trim(),
+            email: email ? email.toLowerCase().trim() : '',
             photo: picture?.data?.url,
-            social: "FACEBOOK",
+            social: 'FACEBOOK',
           };
-          localStorage.setItem("userData", JSON.stringify(data));
+          localStorage.setItem('userData', JSON.stringify(data));
           router.push(`/ageRange`);
         } else {
           toast.error(res.error?.data?.message);
-          router.push("/signup");
+          router.push('/signup');
         }
       } else {
         const userData = {
@@ -108,108 +110,108 @@ export const SocialMedia = ({
         };
         const res: any = await login(userData);
 
-        if ("data" in res) {
+        if ('data' in res) {
           dispatch(
             setCredentials({
               payload: res.data,
-            })
+            }),
           );
-          router.push("/home");
+          next ? router.push(next) : router.push('/home');
         } else {
           toast.error(res.error?.data?.message);
-          router.push("/login");
+          router.push('/login');
         }
       }
     }
   };
 
   return (
-    <Box marginTop={"20px"}>
-      <Text textAlign={"center"}>Or</Text>
+    <Box marginTop={'20px'}>
+      <Text textAlign={'center'}>Or</Text>
       <Box
-        marginTop={"20px"}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
+        marginTop={'20px'}
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
       >
         <Button
           onClick={() => loginGoogle()}
-          width="60px"
-          height="60px"
-          background="clique.secondaryGrey4"
-          boxShadow="0px 2.8px 14px rgba(0, 0, 0, 0.25)"
-          borderRadius="42px"
-          display={"flex"}
-          justifyContent="center"
-          alignItems={"center"}
-          cursor="pointer"
-          border="none"
-          mr="30px"
-          p="0"
+          width='60px'
+          height='60px'
+          background='clique.secondaryGrey4'
+          boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
+          borderRadius='42px'
+          display={'flex'}
+          justifyContent='center'
+          alignItems={'center'}
+          cursor='pointer'
+          border='none'
+          mr='30px'
+          p='0'
         >
           <Image
             src={`/assets/google.png`}
             alt={`google icon`}
-            width={"27px"}
-            height={"27px"}
+            width={'27px'}
+            height={'27px'}
           />
         </Button>
         <FacebookLogin
           appId={process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
           autoLoad={false}
-          fields="name,email,picture"
-          scope="public_profile,email,user_friends"
+          fields='name,email,picture'
+          scope='public_profile,email,user_friends'
           callback={(response) => responseFacebook(response)}
-          icon="fa-facebook"
+          icon='fa-facebook'
           render={(renderProps) => (
             <Button
               onClick={renderProps.onClick}
-              width="60px"
-              height="60px"
-              background="clique.secondaryGrey4"
-              boxShadow="0px 2.8px 14px rgba(0, 0, 0, 0.25)"
-              borderRadius="42px"
-              display={"flex"}
-              justifyContent="center"
-              alignItems={"center"}
-              cursor="pointer"
-              border="none"
-              p="0"
+              width='60px'
+              height='60px'
+              background='clique.secondaryGrey4'
+              boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
+              borderRadius='42px'
+              display={'flex'}
+              justifyContent='center'
+              alignItems={'center'}
+              cursor='pointer'
+              border='none'
+              p='0'
             >
               <Image
                 src={`/assets/facebook.png`}
                 alt={`facebook icon`}
-                width={"37px"}
-                height={"37px"}
+                width={'37px'}
+                height={'37px'}
               />
             </Button>
           )}
         />
       </Box>
       <Box
-        fontSize="subHead"
+        fontSize='subHead'
         fontWeight={500}
-        color="clique.white"
-        textAlign={"center"}
-        marginTop={"1.7rem"}
+        color='clique.white'
+        textAlign={'center'}
+        marginTop={'1.7rem'}
       >
         <Text
-          display={"inline"}
-          marginRight=".25rem"
+          display={'inline'}
+          marginRight='.25rem'
           color={Color().blackAndWhite2}
         >
           {haveAccount}
         </Text>
         <a>
           <Box
-            as="span"
-            color="clique.purple"
+            as='span'
+            color='clique.purple'
             onClick={
-              router.asPath.includes("/signup")
-                ? () => window.location.replace("/login")
-                : () => window.location.replace("/signup")
+              router.asPath.includes('/signup')
+                ? () => window.location.replace('/login')
+                : () => window.location.replace('/signup')
             }
-            cursor="pointer"
+            cursor='pointer'
           >
             {text}
           </Box>

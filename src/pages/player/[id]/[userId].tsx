@@ -100,11 +100,18 @@ function Index() {
               overflowX={'hidden'}
               sx={scrollBarStyle3}
             >
-              {data?.data?.preference?.video?.isFree && (
+              {/* {data?.data?.preference?.video?.isFree && (
                 <AdVideoJsPlayer
                   url={url}
                   video={data?.data?.preference?.video}
                   videoIdsList={data?.data?.preference?.allVideos}
+                />
+              )} */}
+              {data?.data?.preference?.video?.isFree && (
+                <VideoPlayer
+                  video={data?.data?.preference?.video}
+                  videoIdsList={data?.data?.preference?.allVideos}
+                  url={url}
                 />
               )}
               {!data?.data?.preference?.video?.isFree && (

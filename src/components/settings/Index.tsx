@@ -1,28 +1,30 @@
-import React from "react";
-import { useGetPreferenceQuery } from "redux/services/settings.service";
+import React, { Dispatch, SetStateAction } from 'react';
+import { AiFillSetting } from 'react-icons/ai';
+import { useGetPreferenceQuery } from 'redux/services/settings.service';
 
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
-import { scrollBarStyle } from "@constants/utils";
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { scrollBarStyle } from '@constants/utils';
 
-import Account from "./Account";
-import CommunityGuidlines from "./CommunityGuidlines";
-import CopyrightPolicy from "./CopyrightPolicy";
-import Faq from "./Faq";
-import Notification from "./Notification";
-import PrivacyPolicy from "./PrivacyPolicy";
-import TermsService from "./TermsService";
-import { AiFillSetting } from "react-icons/ai";
+import Account from './Account';
+import CommunityGuidlines from './CommunityGuidlines';
+import CopyrightPolicy from './CopyrightPolicy';
+import Faq from './Faq';
+import Notification from './Notification';
+import PrivacyPolicy from './PrivacyPolicy';
+import TermsService from './TermsService';
 
 function Index({
   current,
   onClick,
   showSideMenu,
   setShowSideMenu,
+  setValue
 }: {
   current: string;
   onClick: (code: string) => void;
   showSideMenu: boolean;
   setShowSideMenu: any;
+  setValue: Dispatch<SetStateAction<string>>
 }) {
   const { isLoading, data, isFetching } = useGetPreferenceQuery("");
   let active;
@@ -37,6 +39,7 @@ function Index({
           data={data?.data?.preference}
           isLoading={isLoading}
           isFetching={isFetching}
+          setValue={setValue}
         />
       );
       break;
