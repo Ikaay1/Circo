@@ -71,7 +71,7 @@ function Index() {
 
   useEffect(() => {
     join();
-  }, [spaceRef.current]);
+  }, [spaceRef?.current]);
 
   //hadnling ending stream
   const [endStream, endInfo] = useEndStreamMutation();
