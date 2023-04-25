@@ -176,7 +176,7 @@ function WebCamModal({ setState }: { setState: any }) {
                         isClosable: true,
                         position: "top-right",
                       });
-
+                      setLoading(false);
                       return;
                     }
 
