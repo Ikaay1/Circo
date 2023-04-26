@@ -3,7 +3,6 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import React from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import {toast} from 'react-hot-toast';
 import {useAppDispatch} from 'redux/app/hooks';
 import {
   useLoginMutation,
@@ -11,7 +10,7 @@ import {
 } from 'redux/services/auth.service';
 import {setCredentials} from 'redux/slices/authSlice';
 
-import {Box, Button, Image, Text} from '@chakra-ui/react';
+import {Box, Button, Image, Text, useToast} from '@chakra-ui/react';
 import Color from '@constants/color';
 import {useGoogleLogin} from '@react-oauth/google';
 
@@ -27,6 +26,7 @@ export const SocialMedia = ({
   const [socialPreSignup, socialPreSignupStatus] = useSocialPreSignupMutation();
   const dispatch = useAppDispatch();
   const {next}: any = router.query;
+  const toast = useToast();
 
   const loginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -57,7 +57,14 @@ export const SocialMedia = ({
             localStorage.setItem('userData', JSON.stringify(data));
             router.push(`/ageRange`);
           } else {
-            toast.error(res.error?.data?.message);
+            toast({
+              title: 'Error',
+              description: res.error?.data?.message || 'Something went wrong',
+              status: 'error',
+              duration: 3000,
+              position: 'top-right',
+              isClosable: true,
+            });
           }
         } else {
           const userData = {
@@ -73,7 +80,14 @@ export const SocialMedia = ({
             );
             next ? router.push(next) : router.push('/home');
           } else {
-            toast.error(res.error?.data?.message);
+            toast({
+              title: 'Error',
+              description: res.error?.data?.message || 'Something went wrong',
+              status: 'error',
+              duration: 3000,
+              position: 'top-right',
+              isClosable: true,
+            });
           }
         }
       }
@@ -88,37 +102,76 @@ export const SocialMedia = ({
     if (response?.accessToken) {
       const {name, picture, email} = response;
       if (router.asPath.includes('/signup')) {
-        const res: any = await socialPreSignup({email});
-        if ('data' in res) {
-          const data = {
-            firstName: name.split(' ')[0].trim(),
-            lastName: name.split(' ')[1].trim(),
-            userName: email.split('@')[0].trim(),
-            email: email ? email.toLowerCase().trim() : '',
-            photo: picture?.data?.url,
-            social: 'FACEBOOK',
-          };
-          localStorage.setItem('userData', JSON.stringify(data));
-          router.push(`/ageRange`);
+        if (email) {
+          const res: any = await socialPreSignup({email});
+          if ('data' in res) {
+            const data = {
+              firstName: name.split(' ')[0].trim(),
+              lastName: name.split(' ')[1].trim(),
+              userName: email.split('@')[0].trim(),
+              email: email.toLowerCase().trim(),
+              photo: picture?.data?.url,
+              social: 'FACEBOOK',
+            };
+            localStorage.setItem('userData', JSON.stringify(data));
+            router.push(`/ageRange`);
+          } else {
+            toast({
+              title: 'Error',
+              description: res.error?.data?.message || 'Something went wrong',
+              status: 'error',
+              duration: 3000,
+              position: 'top-right',
+              isClosable: true,
+            });
+            router.push('/signup');
+          }
         } else {
-          toast.error(res.error?.data?.message);
+          toast({
+            title: 'Error',
+            description:
+              'No email registered to this facebook account. Please use a facebook account that has an email registered to it to signup',
+            status: 'error',
+            duration: 3000,
+            position: 'top-right',
+            isClosable: true,
+          });
           router.push('/signup');
         }
       } else {
-        const userData = {
-          userNameOrEmail: email,
-        };
-        const res: any = await login(userData);
-
-        if ('data' in res) {
-          dispatch(
-            setCredentials({
-              payload: res.data,
-            }),
-          );
-          next ? router.push(next) : router.push('/home');
+        if (email) {
+          const userData = {
+            userNameOrEmail: email,
+          };
+          const res: any = await login(userData);
+          if ('data' in res) {
+            dispatch(
+              setCredentials({
+                payload: res.data,
+              }),
+            );
+            next ? router.push(next) : router.push('/home');
+          } else {
+            toast({
+              title: 'Error',
+              description: res.error?.data?.message || 'Something went wrong',
+              status: 'error',
+              duration: 3000,
+              position: 'top-right',
+              isClosable: true,
+            });
+            router.push('/login');
+          }
         } else {
-          toast.error(res.error?.data?.message);
+          toast({
+            title: 'Error',
+            description:
+              'No email registered to this facebook account. Please use a facebook account that has an email registered to it and one you hve signed up with to login',
+            status: 'error',
+            duration: 3000,
+            position: 'top-right',
+            isClosable: true,
+          });
           router.push('/login');
         }
       }
