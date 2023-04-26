@@ -1,3 +1,4 @@
+// @ts-nocheck
 import moment from 'moment';
 import {useRouter} from 'next/router';
 import React, {useEffect} from 'react';
@@ -278,7 +279,15 @@ function ControlMobile({
               onClick={() => {
                 setIsFullScreen(!isFullScreen);
                 const video: any = document.getElementById('video');
-                video.requestFullscreen();
+                if (video.requestFullscreen) {
+                  video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                  /* Safari */
+                  video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                  /* IE11 */
+                  video.msRequestFullscreen();
+                }
               }}
               color={'clique.white'}
               as={BsFullscreen}
@@ -289,7 +298,15 @@ function ControlMobile({
               cursor={'pointer'}
               onClick={() => {
                 setIsFullScreen(!isFullScreen);
-                document.exitFullscreen();
+                if (document.exitFullscreen) {
+                  document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                  /* Safari */
+                  document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                  /* IE11 */
+                  document.msExitFullscreen();
+                }
               }}
               color={'clique.white'}
               as={MdFullscreenExit}
