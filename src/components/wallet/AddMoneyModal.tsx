@@ -191,6 +191,8 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
                     setError('Amount is required');
                     return;
                   }
+                  onClose();
+                  setAmount('');
                   setIsPaying(true);
                   handleFlutterPayment({
                     callback: (response) => {
