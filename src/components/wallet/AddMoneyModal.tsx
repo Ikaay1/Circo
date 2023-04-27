@@ -32,10 +32,11 @@ import Color from '@constants/color';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  onOpen: () => void;
   refetch: () => void;
 };
 
-function AddMoneyModal({isOpen, onClose, refetch}: Props) {
+function AddMoneyModal({isOpen, onClose, refetch, onOpen}: Props) {
   const [confirmDeposit, statusInfo] = useConfirmDepositMutation();
   const chakraToast = useToast();
   const [amount, setAmount] = useState<string | number>('');
@@ -192,16 +193,16 @@ function AddMoneyModal({isOpen, onClose, refetch}: Props) {
                     return;
                   }
                   onClose();
-                  setAmount('');
                   setIsPaying(true);
                   handleFlutterPayment({
                     callback: (response) => {
                       handleDeposit(response);
-
+                      onOpen();
                       closePaymentModal();
                     },
                     onClose: () => {
                       setIsPaying(false);
+                      onOpen();
                     },
                   });
                 }}
