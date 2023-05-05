@@ -112,7 +112,6 @@ function Header({upload, setShowSuggestions, showSuggestions}: Props) {
       maxH={'10vh'}
       w='100%'
       maxW={'100%'}
-      position={'relative'}
       // overflow='hidden'
     >
       {/* First div  */}
