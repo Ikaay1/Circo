@@ -103,7 +103,7 @@ function UploadPage({url, name}: Props) {
         title: 'Your video is being uploaded',
         description: "You'll get a notification when it completes uploading",
         status: 'success',
-        duration: 3000,
+        duration: 9000,
         isClosable: true,
         position: 'top-right',
       });
@@ -362,4 +362,5 @@ function UploadPage({url, name}: Props) {
 }
 
 export default UploadPage;
+
 
