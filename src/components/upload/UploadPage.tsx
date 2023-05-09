@@ -1,28 +1,28 @@
-import {useRouter} from 'next/router';
-import {FormEvent, useEffect, useState} from 'react';
-import {useCategoryQuery} from 'redux/services/category.service';
-import {useCreateContentMutation} from 'redux/services/content.service';
+import { useRouter } from 'next/router';
+import { FormEvent, useEffect, useState } from 'react';
+import { useCategoryQuery } from 'redux/services/category.service';
+import { useCreateContentMutation } from 'redux/services/content.service';
 
 import {
-  Box,
-  Checkbox,
-  Divider,
-  Flex,
-  Grid,
-  GridItem,
-  Icon,
-  Image,
-  Input,
-  Link,
-  Select,
-  Text,
-  useColorModeValue,
-  useToast,
-  VStack,
+	Box,
+	Checkbox,
+	Divider,
+	Flex,
+	Grid,
+	GridItem,
+	Icon,
+	Image,
+	Input,
+	Link,
+	Select,
+	Text,
+	useColorModeValue,
+	useToast,
+	VStack,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
-import {CategoriesInterface} from '@constants/interface';
-import {age, API, selectArr, videoDetails} from '@constants/utils';
+import { CategoriesInterface } from '@constants/interface';
+import { age, API, selectArr, videoDetails } from '@constants/utils';
 import AddIcon from '@icons/AddIcon';
 import CopyIcon from '@icons/CopyIcon';
 
@@ -96,8 +96,9 @@ function UploadPage({url, name}: Props) {
     formData.append('file', file);
     formData.append('thumbNail', thumbNail);
     formData.append('isFree', isFree.toString());
-    const res: any = await createContent(formData);
-    if ('data' in res) {
+    const res: any = createContent(formData);
+    // if ('data' in res) {
+    setTimeout(() => {
       toast({
         title: 'Your video is being uploaded',
         description: "You'll get a notification when it completes uploading",
@@ -107,16 +108,19 @@ function UploadPage({url, name}: Props) {
         position: 'top-right',
       });
       router.push('/home');
-    } else {
-      toast({
-        title: 'Upload failed',
-        description: res.error?.data?.message || 'Something went wrong',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
-    }
+    }, 2000);
+
+    // }
+    // else {
+    //   toast({
+    //     title: 'Upload failed',
+    //     description: res.error?.data?.message || 'Something went wrong',
+    //     status: 'error',
+    //     duration: 3000,
+    //     isClosable: true,
+    //     position: 'top-right',
+    //   });
+    // }
   };
 
   useEffect(() => {
@@ -358,3 +362,4 @@ function UploadPage({url, name}: Props) {
 }
 
 export default UploadPage;
+
