@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import HomeLayout from 'layouts/HomeLayout';
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
-import { useCategoryQuery } from 'redux/services/category.service';
-import { useGetContentsQuery } from 'redux/services/content.service';
-import { useExpiredSubscriptionMutation } from 'redux/services/user.service';
-// import {useDepositToWalletMutation} from 'redux/services/wallet.service';
-import io from 'socket.io-client';
+import {useRouter} from 'next/router';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
+import {useCategoryQuery} from 'redux/services/category.service';
+import {useGetContentsQuery} from 'redux/services/content.service';
+import {useExpiredSubscriptionMutation} from 'redux/services/user.service';
 
+// import {useDepositToWalletMutation} from 'redux/services/wallet.service';
+// import io from 'socket.io-client';
 // import { useDepositToWalletMutation } from 'redux/services/wallet.service';
-import { Box, Divider, Flex } from '@chakra-ui/react';
+import {Box, Divider, Flex} from '@chakra-ui/react';
 import EmptyState from '@components/emptyState/EmptyState';
 import CliqueLoader from '@components/home/CliqueLoader';
 import LiveEvents from '@components/home/LiveEvents';
@@ -19,7 +19,7 @@ import TagSection from '@components/home/TagSection';
 import VideoGrid from '@components/home/VideoGrid';
 import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
 import SideMenu from '@components/widgets/sideMenu';
-import { scrollBarStyle3 } from '@constants/utils';
+import {scrollBarStyle3} from '@constants/utils';
 
 import useGetContents from '../hooks/useGetContents';
 
@@ -36,7 +36,7 @@ function Index() {
   // const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const {data, isFetching, isLoading, refetch} = useGetContentsQuery({
     page,
-    limit: 9,
+    limit: 6,
     categoryId,
   });
   const [expiredSub] = useExpiredSubscriptionMutation();
@@ -84,6 +84,7 @@ function Index() {
     page,
     isLoading,
     categoryId,
+    fetchNumber: 6,
   });
 
   const observerRef: any = useRef();
@@ -93,7 +94,7 @@ function Index() {
       if (observerRef.current) observerRef.current.disconnect();
       observerRef.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          setPage((prevPage) => prevPage + 1);
+          setPage((prevPage: number) => prevPage + 1);
         }
       });
       if (node) observerRef.current.observe(node);
@@ -167,4 +168,3 @@ function Index() {
 export default Index;
 
 export {getServerSideProps} from '../components/widgets/Chakara';
-

@@ -1,44 +1,45 @@
 import ProtectedRoute from 'layouts/ProtectedRoute';
-import {useRouter} from 'next/router';
-import React, {useEffect, useState} from 'react';
-import {AiOutlineSearch} from 'react-icons/ai';
-import {BsBroadcast} from 'react-icons/bs';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { BsBroadcast } from 'react-icons/bs';
 import {
-  MdAddCircleOutline,
-  MdMenuOpen,
-  MdOutlineClose,
-  MdOutlineNotificationsNone,
+	MdAddCircleOutline,
+	MdMenuOpen,
+	MdOutlineClose,
+	MdOutlineNotificationsNone,
 } from 'react-icons/md';
-import {useAppDispatch, useAppSelector} from 'redux/app/hooks';
-import {useGetUserQuery} from 'redux/services/user.service';
-import {logout} from 'redux/slices/authSlice';
+import { useAppDispatch, useAppSelector } from 'redux/app/hooks';
+import { useGetUserQuery } from 'redux/services/user.service';
+import { logout } from 'redux/slices/authSlice';
 
 import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  useColorMode,
-  useColorModeValue,
-  useDisclosure,
-  useToast,
+	Avatar,
+	AvatarBadge,
+	Box,
+	Button,
+	Flex,
+	HStack,
+	Icon,
+	Image,
+	Input,
+	InputGroup,
+	InputLeftElement,
+	InputRightElement,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	useColorMode,
+	useColorModeValue,
+	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import NotificationModal from '@components/notification/NotificationModal';
 import SimpleSwitch from '@components/settings/SimpleSwitch';
 import UploadModal from '@components/upload/UploadModal';
 import Color from '@constants/color';
 import CloseIcon from '@icons/CloseIcon';
+import { googleLogout } from '@react-oauth/google';
 
 import MobileMenu from './mobileMenu/MobileMenu';
 import SearchSuggestion from './SearchSuggestion';
@@ -75,6 +76,7 @@ function Header({upload, setShowSuggestions, showSuggestions}: Props) {
           duration: 3000,
           isClosable: true,
         });
+        googleLogout();
         dispatch(logout());
         router.push('/login');
       }

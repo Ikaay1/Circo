@@ -1,34 +1,34 @@
 import useGetNotifications from 'hooks/useGetNotifications';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { GoSettings } from 'react-icons/go';
-import { MdOutlineNotificationsNone } from 'react-icons/md';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {GoSettings} from 'react-icons/go';
+import {MdOutlineNotificationsNone} from 'react-icons/md';
 import {
-	useGetNotificationQuery,
-	useReadAllMutation,
+  useGetNotificationQuery,
+  useReadAllMutation,
 } from 'redux/services/notification.service';
 import io from 'socket.io-client';
 
 import {
-	Avatar,
-	AvatarBadge,
-	Box,
-	Button,
-	Flex,
-	Icon,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
-	Skeleton,
-	Text,
-	useColorModeValue,
-	useDisclosure,
+  Avatar,
+  AvatarBadge,
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Skeleton,
+  Text,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
-import { scrollBarStyle } from '@constants/utils';
+import {scrollBarStyle} from '@constants/utils';
 
 import AccordionNotification from './AccordionNotification';
 

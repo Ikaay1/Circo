@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { HiOutlineLogout } from 'react-icons/hi';
+import { useAppDispatch } from 'redux/app/hooks';
+import { logout } from 'redux/slices/authSlice';
 
 import {
-  Box,
-  Divider,
-  Flex,
-  Icon,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import Color from "@constants/color";
-import { useAppDispatch } from "redux/app/hooks";
-import { logout } from "redux/slices/authSlice";
-import { HiOutlineLogout } from "react-icons/hi";
+	Box,
+	Divider,
+	Flex,
+	Icon,
+	Text,
+	useColorModeValue,
+} from '@chakra-ui/react';
+import Color from '@constants/color';
+import { googleLogout } from '@react-oauth/google';
 
 export type SideMenu = {
   name: string;
@@ -42,6 +43,7 @@ const SideMenu = ({ click, menuList, create, setShowSideMenu }: Props) => {
   const [state, setState] = useState(currentState);
   const dispatch = useAppDispatch();
   const handleLogout = () => {
+    googleLogout();
     dispatch(logout());
     window.location.href = "/login";
   };
