@@ -1,3 +1,10 @@
+import {useRouter} from 'next/router';
+import React from 'react';
+import {BsBroadcast} from 'react-icons/bs';
+import {HiOutlineLogout} from 'react-icons/hi';
+import {useAppDispatch} from 'redux/app/hooks';
+import {logout} from 'redux/slices/authSlice';
+
 import {
   Accordion,
   AccordionButton,
@@ -14,47 +21,44 @@ import {
   Text,
   useColorMode,
   useColorModeValue,
-} from "@chakra-ui/react";
-import SimpleSwitch from "@components/settings/SimpleSwitch";
-import UploadModal from "@components/upload/UploadModal";
-import Color from "@constants/color";
-import { mobileMenu } from "@constants/utils";
-import { useRouter } from "next/router";
-import React from "react";
-import { BsBroadcast } from "react-icons/bs";
-import { HiOutlineLogout } from "react-icons/hi";
-import { useAppDispatch } from "redux/app/hooks";
-import { logout } from "redux/slices/authSlice";
-import EachMenu from "./EachMenu";
+} from '@chakra-ui/react';
+import SimpleSwitch from '@components/settings/SimpleSwitch';
+import UploadModal from '@components/upload/UploadModal';
+import Color from '@constants/color';
+import {mobileMenu} from '@constants/utils';
+import {googleLogout} from '@react-oauth/google';
 
-function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
+import EachMenu from './EachMenu';
+
+function MobileMenu({isOpen, close}: {isOpen: boolean; close: () => void}) {
   const dispatch = useAppDispatch();
   const handleLogout = () => {
+    googleLogout();
     dispatch(logout());
-    window.location.href = "/login";
+    window.location.href = '/login';
   };
   const router = useRouter();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const {colorMode, toggleColorMode} = useColorMode();
   return (
     <>
       <Box
         //animate when open
-        transition={"all .3s ease"}
+        transition={'all .3s ease'}
         transform={{
-          base: !isOpen ? "translateX(-105%)" : "translateX(0%)",
+          base: !isOpen ? 'translateX(-105%)' : 'translateX(0%)',
         }}
-        pt="20px"
-        pb="100px"
-        position={"fixed"}
-        left="0"
-        top="10vh"
-        minW="100vw"
-        minH={"90vh"}
+        pt='20px'
+        pb='100px'
+        position={'fixed'}
+        left='0'
+        top='10vh'
+        minW='100vw'
+        minH={'90vh'}
         zIndex={1000}
-        pl="0px"
-        pr="30px"
+        pl='0px'
+        pr='30px'
         bg={Color().whiteAndBlack}
-        shadow="md"
+        shadow='md'
       >
         <Accordion allowToggle>
           {mobileMenu.map((item, index) => (
@@ -68,20 +72,20 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
             />
           ))}
         </Accordion>
-        <Box px="50px" py="20px">
+        <Box px='50px' py='20px'>
           <Divider />
         </Box>
 
-        <HStack pl="50px" mb="20px" spacing={"20px"}>
+        <HStack pl='50px' mb='20px' spacing={'20px'}>
           <Button
-            rightIcon={<Icon fontSize={"lg"} as={BsBroadcast} />}
-            variant="ghost"
-            rounded={"full"}
-            bg="clique.base"
-            color="clique.white"
-            fontFamily={"Poppins"}
-            size={"sm"}
-            onClick={() => router.push("/golive")}
+            rightIcon={<Icon fontSize={'lg'} as={BsBroadcast} />}
+            variant='ghost'
+            rounded={'full'}
+            bg='clique.base'
+            color='clique.white'
+            fontFamily={'Poppins'}
+            size={'sm'}
+            onClick={() => router.push('/golive')}
           >
             Go live
           </Button>
@@ -90,32 +94,32 @@ function MobileMenu({ isOpen, close }: { isOpen: boolean; close: () => void }) {
 
         <Flex
           onClick={handleLogout}
-          transition={"all 0.2s ease-in-out"}
+          transition={'all 0.2s ease-in-out'}
           _hover={{
-            color: "clique.base",
+            color: 'clique.base',
           }}
-          cursor={"pointer"}
-          justifyContent={"left"}
-          alignItems="center"
-          pl="50px"
+          cursor={'pointer'}
+          justifyContent={'left'}
+          alignItems='center'
+          pl='50px'
         >
           <Text
-            mr="10px"
-            fontFamily={"Poppins"}
+            mr='10px'
+            fontFamily={'Poppins'}
             fontWeight={400}
-            textTransform={"capitalize"}
-            fontSize={"smSubHead"}
+            textTransform={'capitalize'}
+            fontSize={'smSubHead'}
           >
             logout
           </Text>
-          <Icon fontSize={"head"} as={HiOutlineLogout} />
+          <Icon fontSize={'head'} as={HiOutlineLogout} />
         </Flex>
 
-        <Flex pl="50px" pt={"10px"} justifyContent={"left"}>
+        <Flex pl='50px' pt={'10px'} justifyContent={'left'}>
           <SimpleSwitch
-            text=" "
-            isChecked={colorMode === "light" ? true : false}
-            name="lightOrDark"
+            text=' '
+            isChecked={colorMode === 'light' ? true : false}
+            name='lightOrDark'
             onChange={toggleColorMode}
           />
         </Flex>

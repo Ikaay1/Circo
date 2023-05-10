@@ -23,6 +23,7 @@ import {
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import Lock from '@icons/Lock';
+import {googleLogout} from '@react-oauth/google';
 
 const SignupSchema = Yup.object().shape({
   reason: Yup.string().min(15, 'Too Short!').required('Required'),
@@ -58,7 +59,7 @@ const DeleteAccount = () => {
           duration: 5000,
           isClosable: true,
         });
-
+        googleLogout();
         dispatch(logout());
         window.location.href = '/login';
       }

@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { contentData } from '@constants/utils';
+import {contentData} from '@constants/utils';
 
 const useGetContents = ({
   data,
   isFetching,
   page,
   isLoading,
+  fetchNumber,
   categoryId,
 }: any) => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
   const [contents, setContents] = useState<contentData[]>([]);
 
+  console.log('pages', data);
+  console.log('page', page);
+
   useEffect(() => {
     setHasMore(false);
     setContents([]);
-  }, [categoryId]);
+  }, []);
 
   useEffect(() => {
     if (data && !isFetching) {
@@ -24,13 +28,13 @@ const useGetContents = ({
         ...prevContents,
         ...data?.data?.preference?.videos,
       ]);
-      if (data?.data?.preference?.videos.length === 7) {
-        setHasMore(page < data?.data?.preference.totalPages);
+      if (data?.data?.preference?.videos?.length === fetchNumber) {
+        setHasMore(page < data?.data?.preference?.totalContent);
       } else {
         setHasMore(false);
       }
     }
-  }, [data, page, isFetching]);
+  }, [data, page, fetchNumber]);
 
   useEffect(() => {
     if (!hasMore) return;
