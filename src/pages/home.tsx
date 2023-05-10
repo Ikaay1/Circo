@@ -36,7 +36,7 @@ function Index() {
   // const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const {data, isFetching, isLoading, refetch} = useGetContentsQuery({
     page,
-    limit: 6,
+    limit: 9,
     categoryId,
   });
   const [expiredSub] = useExpiredSubscriptionMutation();
@@ -84,7 +84,7 @@ function Index() {
     page,
     isLoading,
     categoryId,
-    fetchNumber: 6,
+    fetchNumber: 9,
   });
 
   const observerRef: any = useRef();

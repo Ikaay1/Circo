@@ -20,7 +20,7 @@ const useGetContents = ({
   useEffect(() => {
     setHasMore(false);
     setContents([]);
-  }, []);
+  }, [categoryId]);
 
   useEffect(() => {
     if (data && !isFetching) {

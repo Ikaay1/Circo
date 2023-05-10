@@ -1,6 +1,6 @@
 import HomeLayout from 'layouts/HomeLayout';
 import {useRouter} from 'next/router';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useCategoryQuery} from 'redux/services/category.service';
 import {useGetContentsBySearchQuery} from 'redux/services/content.service';
 
@@ -15,43 +15,87 @@ import UserSearchResult from '@components/home/UserSearchResult';
 import VideoGrid from '@components/home/VideoGrid';
 import VideoSkeletonLoader from '@components/home/VideoSkeletonLoader';
 import SideMenu from '@components/widgets/sideMenu';
-import {scrollBarStyle3} from '@constants/utils';
+import {contentData, scrollBarStyle3} from '@constants/utils';
+
+import useGetContents from '../../hooks/useGetContents';
 
 function Search() {
   const [categoryId, setCategoryId] = useState('all');
   const categories = useCategoryQuery('');
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const [contents, setContents] = useState<any[]>([]);
   const search = router.query?.search ? router.query?.search : '';
-  const {data, isFetching} = useGetContentsBySearchQuery({
+
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+  const [contents, setContents] = useState<contentData[]>([]);
+  const {data, isFetching, isLoading} = useGetContentsBySearchQuery({
     page,
     limit: 9,
     search,
     categoryId,
   });
 
+  console.log('pages', data);
+  console.log('page', page);
+
   useEffect(() => {
-    setPage(1);
+    setHasMore(false);
     setContents([]);
+    setPage(1);
     setCategoryId('all');
   }, [search]);
 
   useEffect(() => {
-    setPage(1);
+    setHasMore(false);
     setContents([]);
   }, [categoryId]);
 
   useEffect(() => {
-    if (data?.data?.preference?.videos?.length > 0) {
+    if (data && !isFetching && page !== 1) {
       setContents((prevContents) => [
         ...prevContents,
         ...data?.data?.preference?.videos,
       ]);
+      if (data?.data?.preference?.videos?.length === 9) {
+        setHasMore(page < data?.data?.preference?.totalContent);
+      } else {
+        setHasMore(false);
+      }
     }
-  }, [data]);
+    if (data && !isFetching && page === 1) {
+      setContents(data?.data?.preference?.videos);
+      if (data?.data?.preference?.videos?.length === 9) {
+        setHasMore(page < data?.data?.preference?.totalContent);
+      } else {
+        setHasMore(false);
+      }
+    }
+  }, [data, page, 9]);
 
-  const lastElementRef = useRef();
+  useEffect(() => {
+    if (!hasMore) return;
+    if (data && !isLoading && isFetching && page !== 1) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [data, isFetching, isLoading, page, hasMore, search]);
+
+  const observerRef: any = useRef();
+  const lastElementRef = useCallback(
+    (node: any) => {
+      if (loading) return;
+      if (observerRef.current) observerRef.current.disconnect();
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prevPage: number) => prevPage + 1);
+        }
+      });
+      if (node) observerRef.current.observe(node);
+    },
+    [loading, hasMore],
+  );
 
   return (
     <>
