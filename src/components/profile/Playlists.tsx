@@ -111,7 +111,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                 position={'relative'}
                 cursor={'pointer'}
                 onClick={() =>
-                  router.push(`/channel/1/content/playlist/${each._id}`)
+                  router.push(`/channel/content/playlist/${each._id}`)
                 }
               >
                 {each?.cover ? (

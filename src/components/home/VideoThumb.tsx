@@ -321,7 +321,7 @@ function VideoThumb({
               }}
               onMouseLeave={() => setShow(false)}
             >
-              {router.asPath === '/channel/1/content'
+              {router.asPath === '/channel/content'
                 ? VideoSideMenu.map((each, i) => (
                     <Flex
                       align='center'

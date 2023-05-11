@@ -97,7 +97,7 @@ function EachComment({
             onClick={() =>
               router.push(
                 userProfile?._id === comment?.commenterId?._id
-                  ? '/channel/1/content'
+                  ? '/channel/content'
                   : `/channel/subscribe/${comment?.commenterId?.channel_id?.name}`,
               )
             }

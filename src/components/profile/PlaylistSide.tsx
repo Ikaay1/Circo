@@ -1,22 +1,22 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 import {
-	useDeletePlaylistMutation,
-	useGetPlaylistQuery,
+  useDeletePlaylistMutation,
+  useGetPlaylistQuery,
 } from 'redux/services/playlist.service';
 
 import {
-	Box,
-	Flex,
-	Icon,
-	Image,
-	Skeleton,
-	SkeletonCircle,
-	Text,
-	useDisclosure,
-	useToast,
-	VStack,
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  useDisclosure,
+  useToast,
+  VStack,
 } from '@chakra-ui/react';
 import ProfileDetails from '@components/channel/ProfileDetails';
 import Sure from '@components/channel/Sure';
@@ -163,7 +163,7 @@ const PlaylistSide = ({
                   key={i}
                   cursor='pointer'
                   onClick={() =>
-                    router.push(`/channel/1/content/playlist/${each._id}`)
+                    router.push(`/channel/content/playlist/${each._id}`)
                   }
                   fontSize={'subHead'}
                   mb={{base: '2', lg: '3'}}

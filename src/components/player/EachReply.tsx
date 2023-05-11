@@ -1,23 +1,23 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { BiDislike, BiLike } from 'react-icons/bi';
-import { VscReport } from 'react-icons/vsc';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
+import {BiDislike, BiLike} from 'react-icons/bi';
+import {VscReport} from 'react-icons/vsc';
+import {useAppSelector} from 'redux/app/hooks';
 import {
-	useDeleteReplyMutation,
-	useDislikeReplyMutation,
-	useLikeReplyMutation,
+  useDeleteReplyMutation,
+  useDislikeReplyMutation,
+  useLikeReplyMutation,
 } from 'redux/services/content.service';
 
 import {
-	Box,
-	Flex,
-	Icon,
-	Spinner,
-	Text,
-	useColorModeValue,
-	useDisclosure,
+  Box,
+  Flex,
+  Icon,
+  Spinner,
+  Text,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
@@ -74,7 +74,7 @@ function EachReply({
         onClick={() =>
           router.push(
             userProfile?._id === reply?.replierId?._id
-              ? '/channel/1/content'
+              ? '/channel/content'
               : `/channel/subscribe/${reply?.replierId?.channel_id?.name}`,
           )
         }

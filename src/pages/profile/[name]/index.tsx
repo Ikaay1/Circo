@@ -1,13 +1,13 @@
 import HomeLayout from 'layouts/HomeLayout';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
-import {Box, useColorModeValue, useDisclosure} from '@chakra-ui/react';
+import { Box, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import Index from '@components/profile';
 import SideMenu from '@components/profile/SideMenu';
 import Header from '@components/widgets/Header';
 import Color from '@constants/color';
 
-import {profileMenu} from '../../../../constants/utils';
+import { profileMenu } from '../../../constants/utils';
 
 const Profile = () => {
   const router = useRouter();
@@ -28,4 +28,4 @@ const Profile = () => {
 
 export default Profile;
 
-export {getServerSideProps} from '../../../../components/widgets/Chakara';
+export {getServerSideProps} from '../../../components/widgets/Chakara';

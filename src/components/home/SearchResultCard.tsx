@@ -100,7 +100,7 @@ const SearchResultCard = ({
           mr='1.6rem'
           onClick={
             user?._id === userProfile._id
-              ? () => router.push(`/channel/1/content`)
+              ? () => router.push(`/channel/content`)
               : () =>
                   router.push(`/channel/subscribe/${user?.channel_id?.name}`)
           }
@@ -121,7 +121,7 @@ const SearchResultCard = ({
             noOfLines={1}
             onClick={
               user?._id === userProfile._id
-                ? () => router.push(`/channel/1/content`)
+                ? () => router.push(`/channel/content`)
                 : () =>
                     router.push(`/channel/subscribe/${user?.channel_id?.name}`)
             }

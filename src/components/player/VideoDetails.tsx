@@ -56,7 +56,7 @@ function VideoDetails({
                 cursor='pointer'
                 onClick={
                   video.uploader_id._id === userProfile._id
-                    ? () => router.push('/channel/1/content')
+                    ? () => router.push('/channel/content')
                     : () =>
                         router.push(
                           `/channel/subscribe/${video?.channel_id?.name}`,
@@ -77,7 +77,7 @@ function VideoDetails({
               cursor='pointer'
               onClick={
                 video.uploader_id._id === userProfile._id
-                  ? () => router.push('/channel/1/content')
+                  ? () => router.push('/channel/content')
                   : () =>
                       router.push(
                         `/channel/subscribe/${video?.channel_id?.name}`,
