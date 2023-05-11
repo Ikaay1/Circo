@@ -101,7 +101,8 @@ const SearchResultCard = ({
           onClick={
             user?._id === userProfile._id
               ? () => router.push(`/channel/1/content`)
-              : () => router.push(`/channel/subscribe/${user?._id}`)
+              : () =>
+                  router.push(`/channel/subscribe/${user?.channel_id?.name}`)
           }
         >
           <Avatar
@@ -121,7 +122,8 @@ const SearchResultCard = ({
             onClick={
               user?._id === userProfile._id
                 ? () => router.push(`/channel/1/content`)
-                : () => router.push(`/channel/subscribe/${user?._id}`)
+                : () =>
+                    router.push(`/channel/subscribe/${user?.channel_id?.name}`)
             }
             cursor={'pointer'}
           >

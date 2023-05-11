@@ -59,7 +59,7 @@ function VideoDetails({
                     ? () => router.push('/channel/1/content')
                     : () =>
                         router.push(
-                          `/channel/subscribe/${video.uploader_id._id}`,
+                          `/channel/subscribe/${video?.channel_id?.name}`,
                         )
                 }
               />
@@ -79,7 +79,9 @@ function VideoDetails({
                 video.uploader_id._id === userProfile._id
                   ? () => router.push('/channel/1/content')
                   : () =>
-                      router.push(`/channel/subscribe/${video.uploader_id._id}`)
+                      router.push(
+                        `/channel/subscribe/${video?.channel_id?.name}`,
+                      )
               }
             >
               {`${
@@ -123,7 +125,7 @@ function VideoDetails({
             onClick={
               !subscribers.includes(userProfile._id)
                 ? () =>
-                    router.push(`/channel/subscribe/${video.uploader_id._id}`)
+                    router.push(`/channel/subscribe/${video?.channel_id?.name}`)
                 : () => {}
             }
             cursor={
