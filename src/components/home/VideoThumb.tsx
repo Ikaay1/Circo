@@ -175,7 +175,7 @@ function VideoThumb({
               onClose={onClose}
               isOpen={isOpen}
               onOpen={onOpen}
-              id={video?.uploader_id?._id}
+              id={video?.channel_id?.name}
               userName={video?.channel_id?.name}
             />
             <Box
@@ -226,7 +226,7 @@ function VideoThumb({
               size='sm'
               name={video?.channel_id?.name ?? 'Not Available'}
               src={video?.channel_id?.photo}
-              onClick={() => handleRouting(video?.uploader_id?._id)}
+              onClick={() => handleRouting(video?.channel_id?.name)}
               cursor='pointer'
             />
 
@@ -321,7 +321,7 @@ function VideoThumb({
               }}
               onMouseLeave={() => setShow(false)}
             >
-              {router.asPath === '/channel/1/content'
+              {router.asPath === '/channel/content'
                 ? VideoSideMenu.map((each, i) => (
                     <Flex
                       align='center'

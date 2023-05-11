@@ -82,7 +82,8 @@ const EditProfile = () => {
     myFormData.append('firstName', values.firstName);
     myFormData.append('lastName', values.lastName);
     // myFormData.append("email", values.email);
-    myFormData.append('userName', values.username);
+    userProfile?.userNameChange < 2 &&
+      myFormData.append('userName', values.username);
     // myFormData.append("dateOfBirth", values.dob);
     coverRef.current.files[0] &&
       myFormData.append('cover', coverRef.current.files[0]);
@@ -221,9 +222,9 @@ const EditProfile = () => {
               />
               <CustumField
                 name='Username'
-                // sideContent='(Username can only be changed 2 times a year)'
-                sideContent='Edit'
+                sideContent='(Username can only be changed 2 times a year)'
                 nameValue='username'
+                userNameChange={userProfile?.userNameChange >= 2 ? true : false}
               />
               {/* <CustumField name="Email" sideContent="Edit" nameValue="email" /> */}
 

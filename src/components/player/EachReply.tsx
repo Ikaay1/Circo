@@ -74,8 +74,8 @@ function EachReply({
         onClick={() =>
           router.push(
             userProfile?._id === reply?.replierId?._id
-              ? '/channel/1/content'
-              : `/channel/subscribe/${reply?.replierId?._id}`,
+              ? '/channel/content'
+              : `/channel/subscribe/${reply?.replierId?.channel_id?.name}`,
           )
         }
       >

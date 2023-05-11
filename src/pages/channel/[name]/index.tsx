@@ -53,4 +53,4 @@ const Profile = () => {
 };
 
 export default Profile;
-export {getServerSideProps} from '../../../../components/widgets/Chakara';
+export {getServerSideProps} from '../../../components/widgets/Chakara';

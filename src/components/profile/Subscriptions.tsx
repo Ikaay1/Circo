@@ -122,7 +122,7 @@ const Subscriptions = () => {
                       <Avatar
                         cursor='pointer'
                         onClick={() =>
-                          router.push(`/channel/subscribe/${userId}`)
+                          router.push(`/channel/subscribe/${name}`)
                         }
                         w='57px'
                         h='57px'
@@ -139,9 +139,7 @@ const Subscriptions = () => {
                         textDecoration: 'underline',
                       }}
                       cursor='pointer'
-                      onClick={() =>
-                        router.push(`/channel/subscribe/${userId}`)
-                      }
+                      onClick={() => router.push(`/channel/subscribe/${name}`)}
                     >
                       {name}
                     </Text>

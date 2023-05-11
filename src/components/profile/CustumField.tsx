@@ -20,6 +20,7 @@ type Props = {
   sideContent?: string;
   name: string;
   type?: string;
+  userNameChange?: boolean;
 };
 
 export default function CustumField({
@@ -27,6 +28,7 @@ export default function CustumField({
   sideContent,
   name,
   type,
+  userNameChange,
 }: Props) {
   const [show, setShow] = useState<Boolean>(false);
   const value = useColorModeValue('clique.darkGrey', 'clique.white');
@@ -38,6 +40,7 @@ export default function CustumField({
         <FormControl
           isInvalid={errors[field.name] && touched[field.name]}
           mx='auto'
+          isReadOnly={userNameChange}
         >
           <Box
             position={'relative'}

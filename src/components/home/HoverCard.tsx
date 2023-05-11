@@ -84,7 +84,7 @@ function HoverCard({
           size='sm'
           name={video?.channel_id?.name ?? 'Not Available'}
           src={video?.channel_id?.photo}
-          onClick={() => handleRouting(video?.uploader_id?._id)}
+          onClick={() => handleRouting(video?.channel_id?.name)}
           cursor='pointer'
         />
 
@@ -168,7 +168,7 @@ function HoverCard({
         onClose={onClose}
         isOpen={isOpen}
         onOpen={onOpen}
-        id={video?.uploader_id?._id}
+        id={video?.channel_id?.name}
         userName={video?.uploader_id?.userName}
       />
     </Box>

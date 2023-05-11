@@ -75,7 +75,7 @@ function Account({}: Props) {
             </Link>
           </NextLink> */}
 
-          <NextLink href='/channel/1/edit' passHref>
+          <NextLink href='/channel/edit' passHref>
             <Link
               mb='2'
               color='clique.tertiary'
@@ -102,7 +102,7 @@ function Account({}: Props) {
         their videos and live shows.
       </Text>
 
-      <NextLink href='/profile/1/content' passHref>
+      <NextLink href='/profile/content' passHref>
         <Link color='clique.tertiary' _hover={{textDecoration: 'none'}}>
           View subscriptions
         </Link>

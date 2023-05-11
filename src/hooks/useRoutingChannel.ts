@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 
 export const useRoutingChannel = () => {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
@@ -14,7 +14,7 @@ export const useRoutingChannel = () => {
       return;
     }
     if (id === userProfile?._id) {
-      router.push('/channel/1/content');
+      router.push('/channel/content');
       return;
     }
     router.push(`/channel/subscribe/${id}`);

@@ -22,6 +22,7 @@ function Index() {
   const router = useRouter();
   const {id, userId} = router.query;
   const {data, isLoading, refetch, error} = useGetContentQuery<any>(id);
+  const {data: userData} = useGetUserQuery<any>(userId);
   const [view] = useCreateViewMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [url, setUrl] = React.useState('');
@@ -31,7 +32,7 @@ function Index() {
   };
 
   useEffect(() => {
-    if (error) {
+    if (error && userData) {
       toast({
         title: error?.data?.message,
         status: 'error',
@@ -39,10 +40,10 @@ function Index() {
         isClosable: true,
         position: 'top-right',
       });
-      router.push(`/channel/subscribe/${userId}`);
+      router.push(`/channel/subscribe/${userData?.data?.channel_id?.name}`);
     } else {
     }
-  }, [data, error]);
+  }, [data, error, userData]);
 
   useEffect(() => {
     if (data) {

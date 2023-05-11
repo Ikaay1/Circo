@@ -44,8 +44,8 @@ const SideMenu = ({menu}: {menu: MenuData[]}) => {
           onClick={() =>
             router.push(
               router.asPath.split('/')[1] === 'channel'
-                ? '/channel/1/' + route
-                : '/profile/1/' + route,
+                ? '/channel/' + route
+                : '/profile/' + route,
             )
           }
           ml={router.query.name === route ? '0rem' : '2.475rem'}
