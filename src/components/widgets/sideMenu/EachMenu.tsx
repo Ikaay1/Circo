@@ -22,7 +22,7 @@ function EachMenu({name, icon}: {name: string; icon: any}) {
       cursor={'pointer'}
       onClick={
         name === 'profile'
-          ? () => router.push(`/${name}/1/content`)
+          ? () => router.push(`/${name}/content`)
           : name === 'Your channel'
           ? () => router.push(`/channel/content`)
           : () => router.push(`/${name.replace(/\s/g, '').toLowerCase()}`)
