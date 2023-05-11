@@ -117,6 +117,7 @@ const CopyBox = ({ link }: { link: string }) => {
           onClick={() => {
             handleCopy(`${process.env.NEXT_PUBLIC_FEURL}${link}`);
           }}
+          bg="clique.secondaryGrey1"
         >
           {isCopied ? "Copied" : <Icon as={CopyLinkIcon} />}
         </Box>

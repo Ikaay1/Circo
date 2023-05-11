@@ -1,27 +1,27 @@
-import React from 'react';
-import {useGetSubscriptionsQuery} from 'redux/services/user.service';
+import React from "react";
+import { useGetSubscriptionsQuery } from "redux/services/user.service";
 
-import {Box, Flex, Skeleton, SkeletonCircle, Text} from '@chakra-ui/react';
+import { Box, Flex, Skeleton, SkeletonCircle, Text } from "@chakra-ui/react";
 
-import EachSubscribe from './EachSubscribe';
-import SeeMore from './SeeMore';
+import EachSubscribe from "./EachSubscribe";
+import SeeMore from "./SeeMore";
 
 const Subscriptions = () => {
-  const {data, isFetching} = useGetSubscriptionsQuery({page: 1, limit: 5});
-  const {data: allData, isFetching: allIsFetching} = useGetSubscriptionsQuery({
-    page: 'no',
-    limit: 'no',
-  });
-  console.log('sub', data);
-  console.log('subAll', allData);
+  const { data, isFetching } = useGetSubscriptionsQuery({ page: 1, limit: 5 });
+  const { data: allData, isFetching: allIsFetching } = useGetSubscriptionsQuery(
+    {
+      page: "no",
+      limit: "no",
+    }
+  );
   return (
     <>
       {isFetching || allIsFetching ? (
         <>
           {[1, 2, 3].map((num) => (
-            <Flex pl='50px' key={num} mt='15px' alignItems={'center'}>
-              <SkeletonCircle size='10' mr='10px' />
-              <Skeleton w='60%' height='15px' />
+            <Flex pl="50px" key={num} mt="15px" alignItems={"center"}>
+              <SkeletonCircle size="10" mr="10px" />
+              <Skeleton w="60%" height="15px" />
             </Flex>
           ))}
         </>
@@ -30,10 +30,10 @@ const Subscriptions = () => {
           {data?.data?.user.length > 0 && (
             <>
               <Text
-                pl='60px'
-                fontFamily={'Poppins'}
+                pl="60px"
+                fontFamily={"Poppins"}
                 fontWeight={500}
-                textTransform={'capitalize'}
+                textTransform={"capitalize"}
               >
                 subscriptions
               </Text>
@@ -50,7 +50,7 @@ const Subscriptions = () => {
                     id={item._id}
                     channel_id={item.channel_id}
                   />
-                ),
+                )
               )}
               {allData?.data?.user?.length > 5 && <SeeMore allData={allData} />}
             </>
