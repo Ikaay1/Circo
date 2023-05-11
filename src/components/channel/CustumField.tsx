@@ -57,7 +57,7 @@ export default function CustumField({
                   name={nameValue}
                   id={nameValue}
                   onChange={(e) => {
-                    console.log(field);
+         
                     setCount(e.target.value.length);
                     setFieldValue(field.name, e.target.value);
                   }}
