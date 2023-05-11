@@ -52,23 +52,23 @@ const Index = ({
           sx={scrollBarStyle3}
         >
           {router.query.name !== 'edit' && (
-            <UserDetail
-              data={channelData?.data?.channel}
-              id={channelData?.data?.channel?.userId}
-            />
+            <>
+              <UserDetail
+                data={channelData?.data?.channel}
+                id={channelData?.data?.channel?.userId}
+              />
+              <Bio
+                showSubscribe={router.query.name === 'analytics' ? false : true}
+                bio={channelData?.data?.channel?.bio}
+                id={channelData?.data?.channel?.userId}
+                onClick={onClick as () => void}
+                buttonText={buttonText}
+                isFetching={isFetching}
+                date={date}
+              />
+            </>
           )}
 
-          {router.query.name !== 'edit' && (
-            <Bio
-              showSubscribe={router.query.name === 'analytics' ? false : true}
-              bio={channelData?.data?.channel?.bio}
-              id={channelData?.data?.channel?.userId}
-              onClick={onClick as () => void}
-              buttonText={buttonText}
-              isFetching={isFetching}
-              date={date}
-            />
-          )}
           {des && (
             <Box mt={{base: '1rem', lg: '6rem'}} px='1.35rem'>
               <ChannelContents
