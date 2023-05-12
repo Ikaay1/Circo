@@ -1,7 +1,7 @@
-import {store} from 'redux/app/store';
+import { store } from 'redux/app/store';
 
-import {baseUrl} from '@constants/utils';
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { baseUrl } from '@constants/utils';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const contentApi = createApi({
   reducerPath: 'contentApi',
@@ -239,7 +239,6 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Content'],
     }),
-
     getContentsBySearch: builder.query<any, any>({
       query: ({page, limit, search, categoryId}) => ({
         url: `content/search/${categoryId}?page=${page}&limit=${limit}&search=${search}`,

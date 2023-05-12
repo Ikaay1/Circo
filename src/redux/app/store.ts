@@ -19,6 +19,7 @@ import {liveAPI} from 'redux/services/livestream/live.service';
 import {streamCommentAPI} from 'redux/services/livestream/streamComment.service';
 import {notificationApi} from 'redux/services/notification.service';
 import {playlistApi} from 'redux/services/playlist.service';
+import {reportApi} from 'redux/services/report.service';
 import {settingsApi} from 'redux/services/settings.service';
 import {ticketsApi} from 'redux/services/tickets.service';
 import {userApi} from 'redux/services/user.service';
@@ -67,6 +68,7 @@ export const store: any = configureStore({
     [notificationApi.reducerPath]: notificationApi.reducer,
     [beneficiaryApi.reducerPath]: beneficiaryApi.reducer,
     [ticketsApi.reducerPath]: ticketsApi.reducer,
+    [reportApi.reducerPath]: reportApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -88,6 +90,7 @@ export const store: any = configureStore({
       notificationApi.middleware,
       beneficiaryApi.middleware,
       ticketsApi.middleware,
+      reportApi.middleware,
     ]),
 });
 
