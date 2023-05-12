@@ -62,9 +62,10 @@ function SubcribeOverLay({isHover, user}: {isHover: boolean; user: any}) {
               )}
               <Text
                 fontFamily={'Poppins'}
-                fontSize='head'
+                fontSize='smHead'
                 fontWeight={700}
                 color={Color().blackAndWhite}
+                noOfLines={1}
               >
                 {user.userName}
               </Text>
