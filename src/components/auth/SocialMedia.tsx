@@ -61,7 +61,7 @@ export const SocialMedia = ({
               title: 'Error',
               description: res.error?.data?.message || 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 7000,
               position: 'top-right',
               isClosable: true,
             });
@@ -84,7 +84,7 @@ export const SocialMedia = ({
               title: 'Error',
               description: res.error?.data?.message || 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 7000,
               position: 'top-right',
               isClosable: true,
             });
@@ -120,21 +120,23 @@ export const SocialMedia = ({
               title: 'Error',
               description: res.error?.data?.message || 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 7000,
               position: 'top-right',
               isClosable: true,
             });
           }
         } else {
-          toast({
-            title: 'Error',
-            description:
-              'No email registered to this facebook account. Please use a facebook account that has an email registered to it to signup',
-            status: 'error',
-            duration: 3000,
-            position: 'top-right',
-            isClosable: true,
-          });
+          if (name) {
+            toast({
+              title: 'Error',
+              description:
+                'No email registered to this facebook account. Please use a facebook account that has an email registered to it to signup',
+              status: 'error',
+              duration: 7000,
+              position: 'top-right',
+              isClosable: true,
+            });
+          }
         }
       } else {
         if (email) {
@@ -154,21 +156,23 @@ export const SocialMedia = ({
               title: 'Error',
               description: res.error?.data?.message || 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 7000,
               position: 'top-right',
               isClosable: true,
             });
           }
         } else {
-          toast({
-            title: 'Error',
-            description:
-              'No email registered to this facebook account. Please use a facebook account that has an email registered to it and one you have signed up with to login',
-            status: 'error',
-            duration: 3000,
-            position: 'top-right',
-            isClosable: true,
-          });
+          if (name) {
+            toast({
+              title: 'Error',
+              description:
+                'No email registered to this facebook account. Please use a facebook account that has an email registered to it and one you have signed up with to login',
+              status: 'error',
+              duration: 7000,
+              position: 'top-right',
+              isClosable: true,
+            });
+          }
         }
       }
     }
