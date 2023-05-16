@@ -1,16 +1,16 @@
 import React from 'react';
-import {useAppSelector} from 'redux/app/hooks';
-import {usePostCommentOnStreamMutation} from 'redux/services/livestream/streamComment.service';
+import { useAppSelector } from 'redux/app/hooks';
+import { usePostCommentOnStreamMutation } from 'redux/services/livestream/streamComment.service';
 
 import {
-  Flex,
-  Image,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Spinner,
-  useColorModeValue,
-  useToast,
+	Flex,
+	Image,
+	Input,
+	InputGroup,
+	InputRightElement,
+	Spinner,
+	useColorModeValue,
+	useToast,
 } from '@chakra-ui/react';
 import AvataWithSpace from '@components/widgets/AvataWithSpace';
 import Color from '@constants/color';
@@ -26,8 +26,8 @@ function NewComment({id, profile}: {id: string; profile: any}) {
   return (
     <Flex px='20px' bg={Color().lightAndPrimary} py='20px' w='full'>
       <AvataWithSpace
-        name={userProfile?.channel?.name}
-        url={userProfile?.channel?.photo}
+        name={userProfile?.channel_id?.name}
+        url={userProfile?.channel_id?.photo}
         mr='20px'
         size='40px'
         borderThickness='2px'
