@@ -1,16 +1,17 @@
-import {useRouter} from 'next/router';
-import {useEffect, useState} from 'react';
-import {useAppSelector} from 'redux/app/hooks';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useGetUserQuery } from 'redux/services/user.service';
 
 import {
-  Box,
-  Icon,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  Spinner,
-  Text,
-  useDisclosure,
+	Box,
+	Icon,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	Spinner,
+	Text,
+	useDisclosure,
 } from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
 import Color from '@constants/color';
@@ -150,7 +151,7 @@ const Bio = ({
             <CopyBox
               link={
                 router.asPath === '/channel/content'
-                  ? `channel/subscribe/${userProfile?.channel?.name}`
+                  ? `channel/subscribe/${userProfile?.channel_id?.name}`
                   : `channel/subscribe/${router?.query?.id}`
               }
             />
