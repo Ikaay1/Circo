@@ -12,7 +12,7 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import SubscribeModal from '@components/channel/SubscribeModal';
+import SubscribeModal from '@components/channel/subscribe/SubscribeModal';
 import Color from '@constants/color';
 
 const SearchResultCard = ({
