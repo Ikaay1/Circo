@@ -43,8 +43,8 @@ const SideMenu = ({menu}: {menu: MenuData[]}) => {
           }}
           onClick={() =>
             router.push(
-              router.asPath.split('/')[1] === 'channel'
-                ? '/channel/' + route
+              router.asPath.split('/')[1] === 'myChannel'
+                ? '/myChannel/' + route
                 : '/profile/' + route,
             )
           }

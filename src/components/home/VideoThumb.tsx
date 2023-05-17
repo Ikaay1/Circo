@@ -1,28 +1,28 @@
 import moment from 'moment';
-import {useRouter} from 'next/router';
-import React, {useEffect, useRef, useState} from 'react';
-import {VscReport} from 'react-icons/vsc';
-import {useAppSelector} from 'redux/app/hooks';
-import {useDeleteContentMutation} from 'redux/services/bank.service';
-import {useGetIndividualChannelQuery} from 'redux/services/channel.service';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
+import { VscReport } from 'react-icons/vsc';
+import { useAppSelector } from 'redux/app/hooks';
+import { useDeleteContentMutation } from 'redux/services/bank.service';
+import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
 import {
-  useSaveVideoMutation,
-  useUnSaveVideoMutation,
+	useSaveVideoMutation,
+	useUnSaveVideoMutation,
 } from 'redux/services/report.service';
 
 import {
-  Avatar,
-  Box,
-  Flex,
-  Icon,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  ScaleFade,
-  Skeleton,
-  Text,
-  useDisclosure,
-  useToast,
+	Avatar,
+	Box,
+	Flex,
+	Icon,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	ScaleFade,
+	Skeleton,
+	Text,
+	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 import CopyBox from '@components/channel/CopyBox';
 import Sure from '@components/channel/Sure';
@@ -36,13 +36,13 @@ import TrashIcon from '@icons/TrashIcon';
 import VideoSideIcon from '@icons/VideoSideIcon';
 
 import {
-  API,
-  baseUrl,
-  contentData,
-  createObjectURL,
-  decrypt,
+	API,
+	baseUrl,
+	contentData,
+	createObjectURL,
+	decrypt,
 } from '../../constants/utils';
-import {useRoutingChannel} from '../../hooks/useRoutingChannel';
+import { useRoutingChannel } from '../../hooks/useRoutingChannel';
 import HoverCard from './HoverCard';
 import SubScribeModal from './SubScribeModal';
 
@@ -446,7 +446,7 @@ function VideoThumb({
               }}
               onMouseLeave={() => setShow(false)}
             >
-              {router.asPath === '/channel/content'
+              {router.asPath === '/myChannel/content'
                 ? VideoSideMenu.map((each, i) => (
                     <Flex
                       align='center'

@@ -40,7 +40,7 @@ function Index() {
         isClosable: true,
         position: 'top-right',
       });
-      router.push(`/channel/subscribe/${userData?.data?.channel_id?.name}`);
+      router.push(`/channel/${userData?.data?.channel_id?.name}`);
     } else {
     }
   }, [data, error, userData]);

@@ -35,7 +35,9 @@ const Index = ({
 }) => {
   const router = useRouter();
   const des =
-    router.query.name === 'content' || router.pathname.includes('subscribe');
+    router.query.name === 'content' ||
+    router.pathname.slice(0, 8) === '/channel';
+  console.log('route', router);
 
   return (
     <>

@@ -27,7 +27,7 @@ function EachMenu({name, icon, type, item, close}: any) {
             _before={{
               content: '""',
               display:
-                path.split('/')[1] ===
+                path.split('/')[1].toLowerCase() ===
                 item.route.replace(/\s/g, '').toLowerCase()
                   ? 'block'
                   : 'none',
@@ -50,7 +50,7 @@ function EachMenu({name, icon, type, item, close}: any) {
               alignItems={'center'}
               color={
                 //matches any of the subMenu items
-                path.split('/')[1] ===
+                path.split('/')[1].toLowerCase() ===
                 item.route.replace(/\s/g, '').toLowerCase()
                   ? 'clique.base'
                   : Color().blackAndWhite
@@ -67,7 +67,7 @@ function EachMenu({name, icon, type, item, close}: any) {
             </Flex>
             <AccordionIcon
               color={
-                path.split('/')[1] ===
+                path.split('/')[1].toLowerCase() ===
                 item.route.replace(/\s/g, '').toLowerCase()
                   ? 'clique.base'
                   : Color().blackAndWhite

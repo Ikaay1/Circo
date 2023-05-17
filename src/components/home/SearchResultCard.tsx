@@ -12,7 +12,7 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import SubscribeModal from '@components/channel/subscribe/SubscribeModal';
+import SubscribeModal from '@components/channel/SubscribeModal';
 import Color from '@constants/color';
 
 const SearchResultCard = ({
@@ -100,9 +100,8 @@ const SearchResultCard = ({
           mr='1.6rem'
           onClick={
             user?._id === userProfile._id
-              ? () => router.push(`/channel/content`)
-              : () =>
-                  router.push(`/channel/subscribe/${user?.channel_id?.name}`)
+              ? () => router.push(`/myChannel/content`)
+              : () => router.push(`/channel/${user?.channel_id?.name}`)
           }
         >
           <Avatar
@@ -121,9 +120,8 @@ const SearchResultCard = ({
             noOfLines={1}
             onClick={
               user?._id === userProfile._id
-                ? () => router.push(`/channel/content`)
-                : () =>
-                    router.push(`/channel/subscribe/${user?.channel_id?.name}`)
+                ? () => router.push(`/myChannel/content`)
+                : () => router.push(`/channel/${user?.channel_id?.name}`)
             }
             cursor={'pointer'}
           >
