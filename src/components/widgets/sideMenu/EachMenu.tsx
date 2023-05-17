@@ -1,13 +1,13 @@
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import {
-  Box,
-  Flex,
-  Icon,
-  Text,
-  useColorMode,
-  useColorModeValue,
+	Box,
+	Flex,
+	Icon,
+	Text,
+	useColorMode,
+	useColorModeValue,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
 import HomeIcon from '@icons/HomeIcon';
@@ -24,7 +24,7 @@ function EachMenu({name, icon}: {name: string; icon: any}) {
         name === 'profile'
           ? () => router.push(`/${name}/content`)
           : name === 'Your channel'
-          ? () => router.push(`/channel/content`)
+          ? () => router.push(`/myChannel/content`)
           : () => router.push(`/${name.replace(/\s/g, '').toLowerCase()}`)
       }
       h='40px'

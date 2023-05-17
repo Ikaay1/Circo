@@ -76,7 +76,7 @@ function SubcribeOverLay({isHover, user}: {isHover: boolean; user: any}) {
                 rounded={'full'}
                 fontWeight='400'
                 onClick={() =>
-                  router.push(`/channel/subscribe/${user?.channel_id?.name}`)
+                  router.push(`/channel/${user?.channel_id?.name}`)
                 }
               >
                 Subscribe
