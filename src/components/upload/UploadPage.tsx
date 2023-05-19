@@ -30,19 +30,12 @@ import CopyIcon from '@icons/CopyIcon';
 import DetailCard from './DetailCard';
 import UploadPreview from './UploadPreview';
 
-// const cloudinary = require('cloudinary').v2;
-
 type Props = {
   url: string;
   name: string;
 };
 
 function UploadPage({url, name}: Props) {
-  // const cloud = cloudinary.config({
-  //   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  //   api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-  //   api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
-  // });
   const [state, setState] = useState({
     title: '',
     description: '',
