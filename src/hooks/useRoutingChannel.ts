@@ -14,10 +14,10 @@ export const useRoutingChannel = () => {
       return;
     }
     if (id === userProfile?._id) {
-      router.push('/channel/content');
+      router.push('/myChannel/content');
       return;
     }
-    router.push(`/channel/subscribe/${id}`);
+    router.push(`/channel/${id}`);
   };
   return {handleRouting};
 };

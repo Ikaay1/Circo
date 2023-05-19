@@ -62,9 +62,10 @@ function SubcribeOverLay({isHover, user}: {isHover: boolean; user: any}) {
               )}
               <Text
                 fontFamily={'Poppins'}
-                fontSize='head'
+                fontSize='smHead'
                 fontWeight={700}
                 color={Color().blackAndWhite}
+                noOfLines={1}
               >
                 {user.userName}
               </Text>
@@ -75,7 +76,7 @@ function SubcribeOverLay({isHover, user}: {isHover: boolean; user: any}) {
                 rounded={'full'}
                 fontWeight='400'
                 onClick={() =>
-                  router.push(`/channel/subscribe/${user?.channel_id?.name}`)
+                  router.push(`/channel/${user?.channel_id?.name}`)
                 }
               >
                 Subscribe

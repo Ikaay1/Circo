@@ -60,8 +60,8 @@ function EachReply({reply, commentId}: {reply: any; commentId: string}) {
         onClick={() =>
           router.push(
             userProfile?._id === reply?.replierId?._id
-              ? '/channel/content'
-              : `/channel/subscribe/${reply?.name}`,
+              ? '/myChannel/content'
+              : `/channel/${reply?.name}`,
           )
         }
       >

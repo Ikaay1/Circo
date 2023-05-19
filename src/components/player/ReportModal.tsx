@@ -2,6 +2,7 @@ import {Field, Form, Formik} from 'formik';
 import React from 'react';
 import {toast} from 'react-hot-toast';
 import {VscReport} from 'react-icons/vsc';
+import {useAppSelector} from 'redux/app/hooks';
 import {useReportCommentMutation} from 'redux/services/content.service';
 
 import {
@@ -26,6 +27,7 @@ function ReportModal({comment}: {comment: commentInterface}) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [reportComment, reportCommentStatus] = useReportCommentMutation();
   const theToast = useToast();
+  const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
 
   const handleReport = async (values: any) => {
     const reports = [];
@@ -50,13 +52,16 @@ function ReportModal({comment}: {comment: commentInterface}) {
   };
   return (
     <>
-      <Icon
-        onClick={onOpen}
-        cursor={'pointer'}
-        mr='40px'
-        fontSize='18px'
-        as={VscReport}
-      />
+      {comment.commenterId._id !== userProfile?._id && (
+        <Icon
+          onClick={onOpen}
+          cursor={'pointer'}
+          mr='40px'
+          fontSize='18px'
+          as={VscReport}
+        />
+      )}
+
       <Modal
         isCentered
         onClose={onClose}

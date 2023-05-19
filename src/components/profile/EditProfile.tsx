@@ -83,6 +83,7 @@ const EditProfile = () => {
     myFormData.append('lastName', values.lastName);
     // myFormData.append("email", values.email);
     userProfile?.userNameChange < 2 &&
+      userProfile?.userName !== values.username &&
       myFormData.append('userName', values.username);
     // myFormData.append("dateOfBirth", values.dob);
     coverRef.current.files[0] &&
@@ -90,6 +91,7 @@ const EditProfile = () => {
     profileRef.current.files[0] &&
       myFormData.append('photo', profileRef.current.files[0]);
     const res: any = await updateProfile(myFormData);
+    console.log('profileUpdate', res);
     if ('data' in res) {
       dispatch(
         setUser({

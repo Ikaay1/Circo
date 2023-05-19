@@ -51,7 +51,7 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
   const des =
     router.query.name === 'content' ||
     router.query.name === 'analytics' ||
-    router.pathname.includes('subscribe');
+    router.pathname.slice(0, 8) === '/channel';
   const {isOpen, onOpen, onClose} = useDisclosure();
 
   const {
@@ -108,7 +108,7 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
           bottom={
             router.query.name === 'content' ||
             router.query.name === 'analytics' ||
-            router.pathname.includes('subscribe')
+            router.pathname.slice(0, 8) === '/channel'
               ? '-90%'
               : '-52%'
           }

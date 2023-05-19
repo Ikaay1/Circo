@@ -1,6 +1,7 @@
 import {useRouter} from 'next/router';
 import {useEffect, useState} from 'react';
 import {useAppSelector} from 'redux/app/hooks';
+import {useGetUserQuery} from 'redux/services/user.service';
 
 import {
   Box,
@@ -104,7 +105,7 @@ const Bio = ({
                 />
               )}
             </Box>
-            {!router.asPath.includes('/channel') && date && (
+            {router.asPath.includes('/channel') && date && (
               <Text
                 w='190px'
                 textAlign={'center'}
@@ -149,9 +150,9 @@ const Bio = ({
           >
             <CopyBox
               link={
-                router.asPath === '/channel/content'
-                  ? `channel/subscribe/${userProfile?.channel?.name}`
-                  : `channel/subscribe/${router?.query?.id}`
+                router.asPath === '/myChannel/content'
+                  ? `channel/${userProfile?.channel_id?.name}`
+                  : `channel/${router?.query?.id}`
               }
             />
           </Box>

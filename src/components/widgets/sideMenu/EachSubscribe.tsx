@@ -18,10 +18,7 @@ function EachSubscribe({
   const path = router.pathname;
 
   return (
-    <Link
-      href={`/channel/subscribe/${channel_id?.name}`}
-      textDecoration='none '
-    >
+    <Link href={`/channel/${channel_id?.name}`} textDecoration='none '>
       <Flex pl='30px' mt='15px' alignItems={'center'} cursor={'pointer'}>
         {channel_id?.photo ? (
           <Avatar size={'sm'} src={channel_id?.photo} mr='10px' />

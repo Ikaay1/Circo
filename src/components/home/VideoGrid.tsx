@@ -1,6 +1,8 @@
 import {useRouter} from 'next/router';
 import React, {useCallback, useEffect, useRef} from 'react';
-import {useAppSelector} from 'redux/app/hooks';
+import {useAppDispatch, useAppSelector} from 'redux/app/hooks';
+import {useGetUserQuery} from 'redux/services/user.service';
+import {setUser} from 'redux/slices/authSlice';
 
 import {SimpleGrid} from '@chakra-ui/react';
 
@@ -22,6 +24,18 @@ function VideoGrid({
 }) {
   const {userProfile} = useAppSelector((store) => store?.app?.userReducer);
   const router = useRouter();
+  const {data, refetch} = useGetUserQuery(userProfile?._id);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        setUser({
+          payload: data.data,
+        }),
+      );
+    }
+  }, [data]);
 
   return (
     <>
@@ -50,6 +64,7 @@ function VideoGrid({
                   }
                   lastElementRef={lastElementRef}
                   setContents={setContents}
+                  refetch={refetch}
                 />
               </>
             );
@@ -70,6 +85,7 @@ function VideoGrid({
                       : false
                   }
                   setContents={setContents}
+                  refetch={refetch}
                 />
               </>
             );

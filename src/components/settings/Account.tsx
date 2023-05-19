@@ -1,16 +1,16 @@
 import NextLink from 'next/link';
-import {useRouter} from 'next/router';
-import {useEffect} from 'react';
-import {useAppSelector} from 'redux/app/hooks';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
 
 import {
-  Avatar,
-  Box,
-  Divider,
-  Flex,
-  Link,
-  Text,
-  WrapItem,
+	Avatar,
+	Box,
+	Divider,
+	Flex,
+	Link,
+	Text,
+	WrapItem,
 } from '@chakra-ui/react';
 
 type Props = {};
@@ -75,7 +75,7 @@ function Account({}: Props) {
             </Link>
           </NextLink> */}
 
-          <NextLink href='/channel/edit' passHref>
+          <NextLink href='/myChannel/edit' passHref>
             <Link
               mb='2'
               color='clique.tertiary'

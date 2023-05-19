@@ -10,9 +10,7 @@ function CreatorAvatarBox({user}: {user: any}) {
     <Flex
       cursor={'pointer'}
       justifyContent={'center'}
-      onClick={() =>
-        router.push(`/channel/subscribe/${user?.channel_id?.name}`)
-      }
+      onClick={() => router.push(`/channel/${user?.channel_id?.name}`)}
       alignItems='center'
       flexDir={'column'}
     >

@@ -1,23 +1,23 @@
-import { Field, Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
+import {Field, Form, Formik} from 'formik';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import {
-	Box,
-	Button,
-	Checkbox,
-	Flex,
-	FormControl,
-	Icon,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	Text,
-	useDisclosure,
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  Icon,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 import CliqueGiftIcon from '@icons/CliqueGiftIcon';
 
-import { useRoutingChannel } from '../../hooks/useRoutingChannel';
+import {useRoutingChannel} from '../../hooks/useRoutingChannel';
 
 function SubScribeModal({
   isOpen,
@@ -64,7 +64,7 @@ function SubScribeModal({
             <Text as='span' color='clique.base'>
               {' ' + userName}
             </Text>
-            {router.asPath.includes('channel/subscribe')
+            {router.asPath.includes('channel')
               ? '. Please click on the subscribe button above to subscribe.'
               : '. Subscribe to the channel and have access to permium content, videos and exclusive live shows.'}
           </Text>
@@ -80,14 +80,12 @@ function SubScribeModal({
               fontWeight={400}
               colorScheme='purple'
               onClick={
-                router.asPath.includes('channel/subscribe')
+                router.asPath.includes('channel')
                   ? onClose
                   : () => handleRouting(id)
               }
             >
-              {router.asPath.includes('channel/subscribe')
-                ? 'Okay'
-                : 'Go to Channel'}
+              {router.asPath.includes('channel') ? 'Okay' : 'Go to Channel'}
             </Button>
           </Flex>
         </ModalContent>

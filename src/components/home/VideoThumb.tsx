@@ -1,8 +1,14 @@
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
+import { VscReport } from 'react-icons/vsc';
+import { useAppSelector } from 'redux/app/hooks';
 import { useDeleteContentMutation } from 'redux/services/bank.service';
 import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
+import {
+	useSaveVideoMutation,
+	useUnSaveVideoMutation,
+} from 'redux/services/report.service';
 
 import {
 	Avatar,
@@ -20,8 +26,10 @@ import {
 } from '@chakra-ui/react';
 import CopyBox from '@components/channel/CopyBox';
 import Sure from '@components/channel/Sure';
+import ReportVideo from '@components/player/ReportVideo';
 import AddToPlaylistModal from '@components/profile/AddToPlaylistModal';
 import Color from '@constants/color';
+import DownloadIcon2 from '@icons/DownloadIcon2';
 import PlaylistAddIcon from '@icons/PlaylistAddIcon';
 import ShareE from '@icons/ShareE';
 import TrashIcon from '@icons/TrashIcon';
@@ -44,12 +52,14 @@ function VideoThumb({
   isSubscribed,
   lastElementRef,
   setContents,
+  refetch,
 }: {
   video: contentData;
   thumbWidth: {base: string; lg: string; mlg: string; xl: string};
   isSubscribed: boolean;
   lastElementRef?: any;
   setContents?: any;
+  refetch: () => void;
 }) {
   const toast = useToast();
   const {isOpen, onOpen, onClose} = useDisclosure();
@@ -68,6 +78,11 @@ function VideoThumb({
     onOpen: onOpenSure,
     onClose: onCloseSure,
   } = useDisclosure();
+  const {
+    isOpen: isOpenReport,
+    onOpen: onOpenReport,
+    onClose: onCloseReport,
+  } = useDisclosure();
   const [isHover, setIsHover] = React.useState(false);
   const {handleRouting} = useRoutingChannel();
   const [deleteContent, deleteContentStatus] = useDeleteContentMutation();
@@ -77,13 +92,123 @@ function VideoThumb({
   const [videoTime, setVideoTime] = useState('0:00');
   const [loading, setLoading] = useState(true);
   const videoRef = useRef(null);
+  const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
+  const [unSaveVideo, unSaveVideoStatus] = useUnSaveVideoMutation();
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
+  const VideoSideMenu2 =
+    userProfile?._id !== video?.uploader_id?._id
+      ? [
+          {icon: ShareE, text: 'Share'},
+          {icon: PlaylistAddIcon, text: 'Add to playlist'},
+          {icon: VscReport, text: 'Report Video'},
+          {
+            icon: DownloadIcon2,
+            text: !userProfile?.savedVideos.find(
+              (each: contentData) => each._id === video._id,
+            )
+              ? 'Save Video'
+              : 'Unsave Video',
+          },
+        ]
+      : [
+          {icon: ShareE, text: 'Share'},
+          {icon: PlaylistAddIcon, text: 'Add to playlist'},
+          {
+            icon: DownloadIcon2,
+            text: !userProfile?.savedVideos.find(
+              (each: contentData) => each._id === video._id,
+            )
+              ? 'Save Video'
+              : 'Unsave Video',
+          },
+        ];
+
+  const VideoSideMenu =
+    userProfile?._id !== video?.uploader_id?._id
+      ? [
+          {icon: ShareE, text: 'Share'},
+          {icon: PlaylistAddIcon, text: 'Add to playlist'},
+          {icon: TrashIcon, text: 'Delete Video'},
+          {icon: VscReport, text: 'Report Video'},
+          {
+            icon: DownloadIcon2,
+            text: !userProfile?.savedVideos.find(
+              (each: contentData) => each._id === video._id,
+            )
+              ? 'Save Video'
+              : 'Unsave Video',
+          },
+        ]
+      : [
+          {icon: ShareE, text: 'Share'},
+          {icon: PlaylistAddIcon, text: 'Add to playlist'},
+          {icon: TrashIcon, text: 'Delete Video'},
+          {
+            icon: DownloadIcon2,
+            text: !userProfile?.savedVideos.find(
+              (each: contentData) => each._id === video._id,
+            )
+              ? 'Save Video'
+              : 'Unsave Video',
+          },
+        ];
+
+  const handleSaveVideo = async (save: string) => {
+    if (save === 'save') {
+      await saveVideo({videoId: video._id});
+      toast({
+        title: 'You have successfully saved this video',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      refetch();
+    } else {
+      await unSaveVideo(video._id);
+      toast({
+        title: 'You have successfully unsaved this video',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      refetch();
+    }
+  };
+
   const handleClick = async (i: number) => {
     if (i === 0) {
       onOpenCopy();
     } else if (i === 1) {
       onOpenPlay();
-    } else {
+    } else if (i === 2) {
       onOpenSure();
+    } else if (i === 3) {
+      onOpenReport();
+    } else {
+      setShow(false);
+      !userProfile?.savedVideos.find(
+        (each: contentData) => each._id === video._id,
+      )
+        ? handleSaveVideo('save')
+        : handleSaveVideo('unsave');
+    }
+  };
+  const handleClick2 = async (i: number) => {
+    if (i === 0) {
+      onOpenCopy();
+    } else if (i === 1) {
+      onOpenPlay();
+    } else if (i === 2) {
+      onOpenReport();
+    } else {
+      setShow(false);
+      !userProfile?.savedVideos.find(
+        (each: contentData) => each._id === video._id,
+      )
+        ? handleSaveVideo('save')
+        : handleSaveVideo('unsave');
     }
   };
 
@@ -321,7 +446,7 @@ function VideoThumb({
               }}
               onMouseLeave={() => setShow(false)}
             >
-              {router.asPath === '/channel/content'
+              {router.asPath === '/myChannel/content'
                 ? VideoSideMenu.map((each, i) => (
                     <Flex
                       align='center'
@@ -349,7 +474,7 @@ function VideoThumb({
                       mb='2'
                       key={i}
                       cursor='pointer'
-                      onClick={() => handleClick(i)}
+                      onClick={() => handleClick2(i)}
                       color='clique.white'
                     >
                       <Icon
@@ -393,19 +518,30 @@ function VideoThumb({
           </Box>
         </ModalContent>
       </Modal>
+      <Modal
+        isCentered
+        onClose={onCloseReport}
+        isOpen={isOpenReport}
+        motionPreset='slideInRight'
+        scrollBehavior='inside'
+      >
+        <ModalOverlay />
+        <ModalContent
+          maxW='400px'
+          w='400px'
+          bottom='0'
+          minH='100vh'
+          m='0'
+          p='0'
+          position={'absolute'}
+          right={0}
+          bg={Color().whiteAndBlack}
+        >
+          <ReportVideo onClose={onCloseReport} video={video} />
+        </ModalContent>
+      </Modal>
     </>
   );
 }
 
 export default VideoThumb;
-
-const VideoSideMenu2 = [
-  {icon: ShareE, text: 'Share'},
-  {icon: PlaylistAddIcon, text: 'Add to playlist'},
-];
-
-const VideoSideMenu = [
-  {icon: ShareE, text: 'Share'},
-  {icon: PlaylistAddIcon, text: 'Add to playlist'},
-  {icon: TrashIcon, text: 'Delete Video'},
-];
