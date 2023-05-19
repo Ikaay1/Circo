@@ -147,7 +147,7 @@ function ControlMobile({
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'} flexDirection={'column'}>
+            {/* <Flex alignItems={'center'} flexDirection={'column'}>
               {dislikeInfo.isLoading ? (
                 <Spinner size={'sm'} bg='clique.base' />
               ) : (
@@ -172,7 +172,7 @@ function ControlMobile({
               >
                 {video.dislikesCount}
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
       </GridItem>

@@ -8,12 +8,7 @@ function SmallAd({
   setIsSmallAd,
 }: {
   setIsSmallAd: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  // React.useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsSmallAd(false);
-  //   }, 5000);
-  // }, []);
+}) { 
 
   return (
     <Box

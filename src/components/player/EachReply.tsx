@@ -152,7 +152,7 @@ function EachReply({
               </Text>
             </Flex>
 
-            <Flex cursor={'pointer'} mx='20px' alignItems={'center'}>
+            {/* <Flex cursor={'pointer'} mx='20px' alignItems={'center'}>
               {dislikeInfo.isLoading ? (
                 <Spinner size={'sm'} mr='5px' bg='clique.base' />
               ) : (
@@ -177,7 +177,7 @@ function EachReply({
               >
                 {reply.dislikes.length}
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
           {/* <ReportModal comment={comment} /> */}
           {reply.replierId._id === userProfile?._id && (
