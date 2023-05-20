@@ -46,6 +46,8 @@ function Control({
   isLoop,
   setIsLoop,
   Bref,
+  setUrl,
+  url,
 }: any) {
   const router = useRouter();
   const [like, likeInfo] = useLikeContentMutation();
@@ -412,6 +414,8 @@ function Control({
                       setIsLoop={setIsLoop}
                       player={playerRef}
                       video={video}
+                      setUrl={setUrl}
+                      url={url}
                     />
                   </Flex>
                 </Tooltip>

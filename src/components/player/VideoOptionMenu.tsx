@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import {
   useSaveVideoMutation,
@@ -7,6 +7,7 @@ import {
 } from "redux/services/content.service";
 import { useGetUserQuery } from "redux/services/user.service";
 import { setUser } from "redux/slices/authSlice";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
@@ -32,7 +33,14 @@ import { API, baseUrl, contentData } from "../../constants/utils";
 import VideoQualityIcon from "@icons/VideoQualityIcon";
 import { MdArrowBackIosNew } from "react-icons/md";
 
-function VideoOptionMenu({ player, video, isLoop, setIsLoop }: any) {
+function VideoOptionMenu({
+  player,
+  video,
+  isLoop,
+  setIsLoop,
+  setUrl,
+  url,
+}: any) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
@@ -89,6 +97,36 @@ function VideoOptionMenu({ player, video, isLoop, setIsLoop }: any) {
   const [videoQuality, setVideoQuality] = React.useState("auto");
   const [showVideoQuality, setShowVideoQuality] = React.useState(false);
 
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dwaflsglz",
+      // cloudName: "wenotch",
+    },
+    url: {
+      secure: true,
+    },
+  });
+
+  useEffect(() => {
+    const videoUrl = cld.video(url);
+
+    console.log(
+      `${videoUrl.toURL().substring(0, videoUrl.toURL().length - 12)}.mp4`,
+      "old Url"
+    );
+
+    videoUrl.quality(videoQuality);
+
+    videoUrl.format("mp4");
+
+    const newUrl = videoUrl.toURL();
+
+    console.log(newUrl, "nnew Url");
+
+    console.log(`${newUrl.substring(0, newUrl.length - 12)}.mp4`);
+
+    // setUrl(`${newUrl.substring(0, newUrl.length - 12)}.mp4`);
+  }, [videoQuality]);
   return (
     <Menu closeOnSelect={false} placement="top">
       <MenuButton aria-label="Options">
@@ -132,7 +170,6 @@ function VideoOptionMenu({ player, video, isLoop, setIsLoop }: any) {
             icon={<Icon fontSize={"24px"} as={DownloadIcon} />}
             aria-label="Download"
             onClick={() => {
-              //downloaf video
               !userProfile?.savedVideos.find(
                 (each: contentData) => each._id === video._id
               )
@@ -151,31 +188,23 @@ function VideoOptionMenu({ player, video, isLoop, setIsLoop }: any) {
 
         {showVideoQuality && (
           <MenuOptionGroup
-            defaultValue="auto"
+            defaultValue={videoQuality}
             type="radio"
             onChange={(value) => {
-              // setVideoQuality(value as string);
-              // setShowVideoQuality(false);
-              // player.current.setPlaybackQuality(value as string);
+              setVideoQuality(value as string);
             }}
           >
-            {["auto", "240p", "360p", "480p", "720p"].map((each) => (
-              <MenuItemOption
-                bg="none"
-                key={each}
-                value={each}
-                // onClick={() => {
-                //   setVideoQuality(each);
-                //   setShowVideoQuality(false);
-                // }}
-              >
-                {each}
-              </MenuItemOption>
-            ))}
+            {["auto", "1080p", "720p", "540p", "360p", "270p", "120p"].map(
+              (each) => (
+                <MenuItemOption bg="none" key={each} value={each}>
+                  {each}
+                </MenuItemOption>
+              )
+            )}
           </MenuOptionGroup>
         )}
 
-        {!showVideoQuality && (
+        {showVideoQuality && (
           <MenuItem
             bg="none"
             icon={<Icon fontSize={"24px"} as={VideoQualityIcon} />}
