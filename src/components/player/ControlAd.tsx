@@ -203,7 +203,7 @@ function ControlAd({
                 </Text>
               </Flex>
 
-              <Flex
+              {/* <Flex
                 minW='40px'
                 flexDir='column'
                 justify={'center'}
@@ -250,7 +250,7 @@ function ControlAd({
                 >
                   {video.dislikesCount}
                 </Text>
-              </Flex>
+              </Flex> */}
             </Flex>
           </Flex>
         </GridItem>

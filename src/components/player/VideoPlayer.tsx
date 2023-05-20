@@ -1,7 +1,7 @@
-import moment from 'moment';
-import {useRouter} from 'next/router';
-import Script from 'next/script';
-import React, {useEffect} from 'react';
+import moment from "moment";
+import { useRouter } from "next/router";
+import Script from "next/script";
+import React, { useEffect } from "react";
 
 import {
   Box,
@@ -9,41 +9,43 @@ import {
   Slider,
   SliderFilledTrack,
   SliderTrack,
-} from '@chakra-ui/react';
-import {contentData, createObjectURL, decrypt} from '@constants/utils';
+} from "@chakra-ui/react";
+import { contentData, createObjectURL, decrypt } from "@constants/utils";
 
-import Control from './Control';
-import ControlMobile from './ControlMobile';
-import SmallAd from './SmallAd';
+import Control from "./Control";
+import ControlMobile from "./ControlMobile";
+import SmallAd from "./SmallAd";
 
-const {Player, ControlBar, BigPlayButton} = require('video-react');
+const { Player, ControlBar, BigPlayButton } = require("video-react");
 
 function VideoPlayer({
   video,
   videoIdsList,
   url,
+  setUrl,
 }: {
   video: contentData;
   videoIdsList: {
     _id: string;
   }[];
   url: string;
+  setUrl: any;
 }) {
   const router = useRouter();
   const currentVideoIndex = videoIdsList.findIndex(
-    (videoId) => videoId?._id === video._id,
+    (videoId) => videoId?._id === video._id
   );
 
   const [nextVideoIndex, setNextVideoIndex] = React.useState<number | null>(
-    null,
+    null
   );
 
   const [prevVideoIndex, setPrevVideoIndex] = React.useState<number | null>(
-    null,
+    null
   );
 
   const [isLoop, setIsLoop] = React.useState<any>(
-    localStorage.getItem('loop') === 'true' ? true : false,
+    localStorage.getItem("loop") === "true" ? true : false
   );
 
   useEffect(() => {
@@ -89,10 +91,10 @@ function VideoPlayer({
       setIsFullScreen(Boolean(document.fullscreenElement));
     }
 
-    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener("fullscreenchange", onFullscreenChange);
 
     return () =>
-      document.removeEventListener('fullscreenchange', onFullscreenChange);
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
   }, []);
 
   const [isAd, setIsAd] = React.useState(false);
@@ -109,33 +111,33 @@ function VideoPlayer({
   const ref = React.useRef(null);
   return (
     <Flex
-      pos={'relative'}
-      h={{lg: '580px'}}
-      maxH={{lg: '580px'}}
-      minH={{base: '400px', lg: ''}}
-      borderRadius='20px'
-      id='video'
+      pos={"relative"}
+      h={{ lg: "580px" }}
+      maxH={{ lg: "580px" }}
+      minH={{ base: "400px", lg: "" }}
+      borderRadius="20px"
+      id="video"
       ref={ref}
       // overflow={'hidden'}
-      bg='black'
-      flexDir={'column'}
+      bg="black"
+      flexDir={"column"}
     >
       <Box
-        h={{base: '400px', lg: ''}}
-        minH={{base: '400px', lg: 'calc(100% - 80px)'}}
-        borderTopRadius={'20px'}
+        h={{ base: "400px", lg: "" }}
+        minH={{ base: "400px", lg: "calc(100% - 80px)" }}
+        borderTopRadius={"20px"}
       >
         <Player
           controls={false}
           playing={isPlay}
           ref={playerRef}
-          id='video-player'
+          id="video-player"
           muted={isMuted}
           autoPlay={true}
           fluid={false}
-          width='100%'
+          width="100%"
           src={url}
-          height='100%'
+          height="100%"
           // onEnded={() => {
           //   if (isLoop) {
           //     playerRef.current.seek(0);
@@ -151,29 +153,29 @@ function VideoPlayer({
           // }}
         >
           <ControlBar
-            className='my-class'
+            className="my-class"
             autoHide={false}
             disableDefaultControls={true}
           ></ControlBar>
-          <BigPlayButton position='center' />
+          <BigPlayButton position="center" />
         </Player>
       </Box>
 
       <Flex
-        bg='clique.blackGrey'
-        overflow={'hidden'}
-        mt='auto'
-        borderBottomRadius={'20px'}
-        flexDir={'column'}
-        minH={{lg: '80px'}}
-        h={{lg: '80px'}}
-        maxH={{lg: '80px'}}
+        bg="clique.blackGrey"
+        overflow={"hidden"}
+        mt="auto"
+        borderBottomRadius={"20px"}
+        flexDir={"column"}
+        minH={{ lg: "80px" }}
+        h={{ lg: "80px" }}
+        maxH={{ lg: "80px" }}
         // alignItems={'center'}
         // justifyContent={'flex-start'}
       >
         {/* progress */}
         <Slider
-          aria-label='slider-ex-1'
+          aria-label="slider-ex-1"
           defaultValue={0}
           value={
             totalDuration !== 0 ? (currentTimestamp / totalDuration) * 100 : 0
@@ -183,13 +185,13 @@ function VideoPlayer({
             playerRef.current.seek(timestamp);
           }}
         >
-          <SliderTrack h='10px' rounded='0' bg='clique.grey'>
-            <SliderFilledTrack rounded='0' bg='clique.base' />
+          <SliderTrack h="10px" rounded="0" bg="clique.grey">
+            <SliderFilledTrack rounded="0" bg="clique.base" />
           </SliderTrack>
         </Slider>
 
         {/* control */}
-        <Box display={{base: 'none', lg: 'block'}}>
+        <Box display={{ base: "none", lg: "block" }}>
           <Control
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
@@ -208,10 +210,12 @@ function VideoPlayer({
             isLoop={isLoop}
             setIsLoop={setIsLoop}
             Bref={ref}
+            setUrl={setUrl}
+            url={url}
           />
         </Box>
 
-        <Box display={{lg: 'none'}} w='100%'>
+        <Box display={{ lg: "none" }} w="100%">
           <ControlMobile
             currentTimestamp={currentTimestamp}
             totalDuration={totalDuration}
@@ -230,6 +234,8 @@ function VideoPlayer({
             isLoop={isLoop}
             setIsLoop={setIsLoop}
             Bref={ref}
+            setUrl={setUrl}
+            url={url}
           />
         </Box>
       </Flex>

@@ -24,13 +24,6 @@ function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
 
   const { data, isLoading, isFetching, refetch } =
     useGetStreamCommentsQuery(id);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
 
   useEffect(() => {
     io(process.env.NEXT_PUBLIC_BASEURL!, {

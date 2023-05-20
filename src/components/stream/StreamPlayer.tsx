@@ -115,7 +115,7 @@ function StreamPlayer({ stream }: any) {
                 </Flex>
               )}
 
-              {info2.isLoading ? (
+              {/* {info2.isLoading ? (
                 <Spinner size={"sm"} mr="5px" bg="clique.base" />
               ) : (
                 <Flex
@@ -154,7 +154,7 @@ function StreamPlayer({ stream }: any) {
                     {stream?.dislikesCount}
                   </Text>
                 </Flex>
-              )}
+              )} */}
             </Flex>
           </Flex>
         </GridItem>
