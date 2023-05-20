@@ -61,15 +61,11 @@ function UploadPage({url, name}: Props) {
     formData.append('file', file);
     formData.append('upload_preset', 'videouploads');
     formData.append('public_id', id);
-    // formData.append('resource_type', 'video');
-    // formData.append('folder', 'videos');
 
     const formData2 = new FormData();
     formData2.append('file', thumbNail);
     formData2.append('upload_preset', 'circo_image');
     formData2.append('public_id', id);
-    // formData2.append('folder', 'thumbnails');
-    // formData2.append('resource_type', 'image');
 
     axios
       .post(
@@ -159,7 +155,7 @@ function UploadPage({url, name}: Props) {
           position: 'top-right',
         });
         router.push('/home');
-      }, 2000);
+      }, 1000);
     } else {
       toast({
         title: 'Upload failed',
