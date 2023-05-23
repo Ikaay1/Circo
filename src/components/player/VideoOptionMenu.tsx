@@ -110,20 +110,11 @@ function VideoOptionMenu({
   useEffect(() => {
     const videoUrl = cld.video(url);
 
-    console.log(
-      `${videoUrl.toURL().substring(0, videoUrl.toURL().length - 12)}.mp4`,
-      "old Url"
-    );
-
     videoUrl.quality(videoQuality);
 
     videoUrl.format("mp4");
 
     const newUrl = videoUrl.toURL();
-
-    console.log(newUrl, "nnew Url");
-
-    console.log(`${newUrl.substring(0, newUrl.length - 12)}.mp4`);
 
     // setUrl(`${newUrl.substring(0, newUrl.length - 12)}.mp4`);
   }, [videoQuality]);
@@ -204,7 +195,7 @@ function VideoOptionMenu({
           </MenuOptionGroup>
         )}
 
-        {showVideoQuality && (
+        {!showVideoQuality && (
           <MenuItem
             bg="none"
             icon={<Icon fontSize={"24px"} as={VideoQualityIcon} />}
