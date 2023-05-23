@@ -1,28 +1,29 @@
-import { useRouter } from 'next/router';
-import { FormEvent, useEffect, useState } from 'react';
-import { useCategoryQuery } from 'redux/services/category.service';
-import { useCreateContentMutation } from 'redux/services/content.service';
+import axios from 'axios';
+import {useRouter} from 'next/router';
+import {FormEvent, useEffect, useState} from 'react';
+import {useCategoryQuery} from 'redux/services/category.service';
+import {useCreateContentMutation} from 'redux/services/content.service';
 
 import {
-	Box,
-	Checkbox,
-	Divider,
-	Flex,
-	Grid,
-	GridItem,
-	Icon,
-	Image,
-	Input,
-	Link,
-	Select,
-	Text,
-	useColorModeValue,
-	useToast,
-	VStack,
+  Box,
+  Checkbox,
+  Divider,
+  Flex,
+  Grid,
+  GridItem,
+  Icon,
+  Image,
+  Input,
+  Link,
+  Select,
+  Text,
+  useColorModeValue,
+  useToast,
+  VStack,
 } from '@chakra-ui/react';
 import Btn from '@components/Button/Btn';
-import { CategoriesInterface } from '@constants/interface';
-import { age, API, selectArr, videoDetails } from '@constants/utils';
+import {CategoriesInterface} from '@constants/interface';
+import {age, API, selectArr, videoDetails} from '@constants/utils';
 import AddIcon from '@icons/AddIcon';
 import CopyIcon from '@icons/CopyIcon';
 
@@ -33,6 +34,7 @@ type Props = {
   url: string;
   name: string;
 };
+
 function UploadPage({url, name}: Props) {
   const [state, setState] = useState({
     title: '',
@@ -49,6 +51,45 @@ function UploadPage({url, name}: Props) {
   const [imageError, setImageError] = useState<string>('');
   const [createContent, createContentStatus] = useCreateContentMutation();
   const [isFree, setIsFree] = useState<boolean>(false);
+
+  const uploadVideo = async (id: string) => {
+    let file = await fetch(url)
+      .then((r) => r.blob())
+      .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'videouploads');
+    formData.append('public_id', id);
+
+    const formData2 = new FormData();
+    formData2.append('file', thumbNail);
+    formData2.append('upload_preset', 'circo_image');
+    formData2.append('public_id', id);
+
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
+        formData,
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        formData2,
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,42 +126,46 @@ function UploadPage({url, name}: Props) {
       });
       return;
     }
-    let file = await fetch(url)
-      .then((r) => r.blob())
-      .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
-    const formData = new FormData();
-    formData.append('title', state.title);
-    formData.append('description', state.description);
-    formData.append('category', state.category);
-    formData.append('ageRange', state.ageRange);
-    formData.append('file', file);
-    formData.append('thumbNail', thumbNail);
-    formData.append('isFree', isFree.toString());
-    const res: any = createContent(formData);
-    // if ('data' in res) {
-    setTimeout(() => {
+    // const formData = new FormData();
+    // formData.append('title', state.title);
+    // formData.append('description', state.description);
+    // formData.append('category', state.category);
+    // formData.append('ageRange', state.ageRange);
+    // formData.append('file', file);
+    // formData.append('thumbNail', thumbNail);
+    // formData.append('isFree', isFree.toString());
+    const values = {
+      title: state.title,
+      description: state.description,
+      category: state.category,
+      ageRange: state.ageRange,
+      isFree: isFree.toString(),
+    };
+    // const res: any = createContent(formData);
+    const res: any = await createContent(values);
+    if ('data' in res) {
+      uploadVideo(res?.data?.data?._id);
+      setTimeout(() => {
+        toast({
+          title: 'Your video is being uploaded',
+          description: "You'll get a notification when it completes uploading",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        router.push('/home');
+      }, 1000);
+    } else {
       toast({
-        title: 'Your video is being uploaded',
-        description: "You'll get a notification when it completes uploading",
-        status: 'success',
-        duration: 9000,
+        title: 'Upload failed',
+        description: res.error?.data?.message || 'Something went wrong',
+        status: 'error',
+        duration: 3000,
         isClosable: true,
         position: 'top-right',
       });
-      router.push('/home');
-    }, 2000);
-
-    // }
-    // else {
-    //   toast({
-    //     title: 'Upload failed',
-    //     description: res.error?.data?.message || 'Something went wrong',
-    //     status: 'error',
-    //     duration: 3000,
-    //     isClosable: true,
-    //     position: 'top-right',
-    //   });
-    // }
+    }
   };
 
   useEffect(() => {
@@ -362,5 +407,3 @@ function UploadPage({url, name}: Props) {
 }
 
 export default UploadPage;
-
-
