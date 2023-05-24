@@ -108,6 +108,7 @@ function VideoOptionMenu({
   });
 
   useEffect(() => {
+    console.log(url);
     const videoUrl = cld.video(url);
 
     videoUrl.quality(videoQuality);
