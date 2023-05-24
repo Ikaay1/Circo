@@ -43,7 +43,7 @@ function Wallet({}: Props) {
 
   const handleClick = (info: ReceiptInfo) => {
     setModalInfo(info);
-    isReceiptOnOpen();
+    // isReceiptOnOpen();
   };
 
   useEffect(() => {
@@ -96,6 +96,7 @@ function Wallet({}: Props) {
                   data?.data?.beneficiary?.accountNumber ? true : false
                 }
                 walletData={data?.data}
+                info={modalInfo as ReceiptInfo}
               />
             </Box>
           </>

@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
 import {useAppSelector} from 'redux/app/hooks';
-import {useGetUserQuery} from 'redux/services/user.service';
+import {useGetUserQuery} from 'redux/services/content.service';
 
 import {
   Avatar,
