@@ -43,6 +43,8 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
   const toast = useToast();
   const router = useRouter();
 
+  // console.log('url', url);
+
   useEffect(() => {
     if (player.current) {
       player.current.subscribeToStateChange((state: any) => {
@@ -113,16 +115,24 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
 
     const newUrl = videoUrl.toURL();
 
+    console.log('newUrl', newUrl);
+
     const arr = newUrl.split('/');
 
     setUrl(
-      arr.slice(0, 7).join('/') +
-        '/' +
-        arr
-          .splice(arr.length - 3)
-          .join('/')
-          .split('?')[0],
+      arr.slice(0, 7).join('/') + '/' + arr.splice(14).join('/').split('?')[0],
     );
+    // setUrl(
+    //   arr.slice(0, 7).join('/') +
+    //     '/' +
+    //     arr
+    //       .splice(arr.length - 3)
+    //       .join('/')
+    //       .split('?')[0],
+    // );
+    // setUrl(
+    //   arr.slice(0, 7).join('/') + '/' + arr.slice(15).join('/').split('?')[0],
+    // );
   }, [videoQuality]);
   return (
     <Menu closeOnSelect={false} placement='top'>
