@@ -20,6 +20,7 @@ import {
   Icon,
   Spinner,
   Text,
+  Tooltip,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -76,16 +77,27 @@ function EachReply({reply, commentId}: {reply: any; commentId: string}) {
 
       <Box>
         <Flex alignItems={'center'}>
-          <Text
-            noOfLines={1}
-            fontFamily={'Poppins'}
-            fontWeight={400}
-            fontSize={'subHead'}
-            lineHeight={'1.2'}
-            mr='20px'
+          <Tooltip
+            label={`${reply?.name}`}
+            bg='none'
+            hasArrow
+            color={useColorModeValue('clique.black', 'clique.white')}
+            fontSize='sm'
+            p='0'
+            mt='0'
+            placement='top'
           >
-            {`${reply?.name}`}
-          </Text>
+            <Text
+              noOfLines={1}
+              fontFamily={'Poppins'}
+              fontWeight={400}
+              fontSize={'subHead'}
+              lineHeight={'1.2'}
+              mr='20px'
+            >
+              {`${reply?.name}`}
+            </Text>
+          </Tooltip>
           <Text
             noOfLines={2}
             color={'clique.darkGrey'}

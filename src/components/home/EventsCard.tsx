@@ -7,8 +7,8 @@ function EventsCard({ onOpen, event }: any) {
     <Box
       onClick={onOpen}
       cursor="pointer"
-      maxH={"298px"}
-      minH={"298px"}
+      maxH={"250px"}
+      minH={"250px"}
       bg={`url(${event?.eventId?.thumbNails[0]})`}
       bgSize="cover"
       bgPos="center"
@@ -17,7 +17,7 @@ function EventsCard({ onOpen, event }: any) {
       position={"relative"}
       mt="10px"
     >
-      <Flex
+      <Box
         position={"absolute"}
         bottom={0}
         w={"100%"}
@@ -25,69 +25,59 @@ function EventsCard({ onOpen, event }: any) {
         py="10px"
         alignItems={"center"}
         justifyContent={"space-between"}
-        rounded={"10px"}
-        backdropFilter={"blur(8.62963px)"}
-        bg="linear-gradient(151.47deg, rgba(0, 0, 0, 0.71) -17.86%, rgba(186, 159, 0, 0.56) 217.73%)"
+        rounded={"17px"}
+        backdropFilter={"blur(15px)"}
+        bg="linear-gradient(180deg, #892CDC 0%, rgba(0, 0, 0, 0) 172.12%);"
       >
         <Text
-          maxW={"35%"}
+          maxW={"100%"}
           noOfLines={1}
           color={"clique.white"}
           fontFamily={"Poppins"}
           fontWeight={400}
           fontSize={"smSubHead"}
-          lineHeight={"1.2"}
-          mr="5px"
+          lineHeight={"1.5"}
         >
           {event?.eventId?.title}
         </Text>
-        <Text
-          pos={"relative"}
-          _before={{
-            content: '""',
-            position: "absolute",
-            top: "50%",
-            transform: "translateY(-50%)",
-            left: 0,
-            width: "4px",
-            background: "clique.base",
-            height: "4px",
-            rounded: "full",
-          }}
-          _after={{
-            content: '""',
-            position: "absolute",
-            top: "50%",
-            transform: "translateY(-50%)",
-            right: 0,
-            width: "4px",
-            background: "clique.base",
-            height: "4px",
-            rounded: "full",
-          }}
-          px="10px"
-          noOfLines={2}
-          color={"clique.white"}
-          fontFamily={"Poppins"}
-          fontWeight={400}
-          fontSize={"smSubHead"}
-          lineHeight={"1.2"}
-        >
-          {moment(event?.eventId?.schedule).format("MMM Do ")}
-        </Text>{" "}
-        <Text
-          pos={"relative"}
-          pl="10px"
-          noOfLines={2}
-          color={"clique.white"}
-          fontFamily={"Poppins"}
-          fontWeight={400}
-          fontSize={"smSubHead"}
-          lineHeight={"1.2"}
-        >
-          {moment(event?.eventId?.schedule).format("h a")}
-        </Text>
-      </Flex>
+        <Flex>
+          <Text
+            pos={"relative"}
+            _after={{
+              content: '""',
+              position: "absolute",
+              top: "50%",
+              transform: "translateY(-50%)",
+              right: 0,
+              width: "4px",
+              background: "clique.base",
+              height: "4px",
+              rounded: "full",
+            }}
+            pr="10px"
+            noOfLines={2}
+            color={"clique.white"}
+            fontFamily={"Poppins"}
+            fontWeight={400}
+            fontSize={"smSubHead"}
+            lineHeight={"1.2"}
+          >
+            {moment(event?.eventId?.schedule).format("MMMM D ")}
+          </Text>
+          <Text
+            pos={"relative"}
+            pl="10px"
+            noOfLines={2}
+            color={"clique.white"}
+            fontFamily={"Poppins"}
+            fontWeight={400}
+            fontSize={"smSubHead"}
+            lineHeight={"1.2"}
+          >
+            {moment(event?.eventId?.schedule).format("h a")}
+          </Text>
+        </Flex>
+      </Box>
     </Box>
   );
 }

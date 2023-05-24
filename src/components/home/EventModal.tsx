@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 
 import EventsCard from "./EventsCard";
+import Trailer from "./Trailer";
 
 const NProgress = require("nprogress");
 
@@ -31,12 +32,6 @@ function EventModal({ event }: any) {
 
   const [payForLive, payInfor] = usePayForLiveMutation();
   const toast = useToast();
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
 
   return (
     <>
@@ -61,13 +56,13 @@ function EventModal({ event }: any) {
           bg="none"
         >
           <Box px="10px">
-            <Image
-              w="100%"
-              borderTopRadius={"10px"}
-              src={event?.eventId?.thumbNails[0]}
-              alt="burnaboys event"
-            />
-            <Box bg="clique.lightGrey" rounded={"10px"} p="20px">
+            <Trailer />
+            <Box
+              minH="300px"
+              bg="clique.lightGrey"
+              roundedBottom={"10px"}
+              p="20px"
+            >
               <Text
                 color={"clique.white"}
                 fontFamily={"Poppins"}
