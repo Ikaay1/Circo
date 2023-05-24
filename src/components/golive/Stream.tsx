@@ -55,6 +55,7 @@ function Stream({
         category: streamDetails?.eventId?.categoryId || "",
         fee: streamDetails?.eventId?.fee || 0,
         ageRange: streamDetails?.eventId?.ageRange || "",
+        trailer: streamDetails?.eventId?.trailer || null,
       }}
       validationSchema={streamSchema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -75,6 +76,9 @@ function Stream({
         formData.append("paidToWatch", values.fee > 0 ? "true" : "false");
         formData.append("category", state === "stream" ? "LIVE" : "SCHEDULE");
         formData.append("categoryId", values.category);
+        if (values.trailer) {
+          formData.append("trailer", values.trailer);
+        }
 
         //check if the stream is being created or updated
         if (streamDetails?.eventId?._id) {
