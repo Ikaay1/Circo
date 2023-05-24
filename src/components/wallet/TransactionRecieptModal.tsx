@@ -1,14 +1,16 @@
 import {
-	Flex,
-	Icon,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalHeader,
-	Spacer,
-	Text,
+  Flex,
+  Icon,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  Spacer,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
-import { ReceiptInfo } from '@constants/interface';
+import Color from '@constants/color';
+import {ReceiptInfo} from '@constants/interface';
 import DownwardIcon from '@icons/DownwardIcon';
 import UpwardIcon from '@icons/UpwardIcon';
 
@@ -22,7 +24,7 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size={'md'}>
       <ModalContent
-        bg='clique.black'
+        bg={Color().whiteAndBlack}
         borderColor='clique.black'
         borderRadius='xl'
         pt='3'
@@ -40,8 +42,8 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
             px='2'
             pt='3'
             borderRadius={'xl'}
-            backgroundSize={'cover'}
-            backgroundImage="'/assets/transactionbg.svg'"
+            // backgroundSize={'cover'}
+            // backgroundImage="'/assets/transactionbg.svg'"
           >
             <Flex
               justifyContent={'space-between'}
@@ -55,7 +57,7 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
                 fontSize='5xl'
               />
               <Spacer />
-              <Text fontSize={'xsl'} fontWeight='400' color={'clique.white'}>
+              <Text fontSize={'xsl'} fontWeight='400'>
                 {info?.duration}
               </Text>
             </Flex>
@@ -66,14 +68,9 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
                 fontSize='xsl'
               >
                 {info?.from}
-                
               </Text>
 
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.white'}
-              >
+              <Text fontSize={'smSubHead'} fontWeight='400'>
                 {info?.name}
               </Text>
             </Flex>
@@ -85,12 +82,7 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
               >
                 Description
               </Text>
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.white'}
-                textAlign={'right'}
-              >
+              <Text fontSize={'smSubHead'} fontWeight='400' textAlign={'right'}>
                 {info?.description}
               </Text>
             </Flex>
@@ -102,11 +94,7 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
               >
                 Date
               </Text>
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.white'}
-              >
+              <Text fontSize={'smSubHead'} fontWeight='400'>
                 {info?.date}
               </Text>
             </Flex>
@@ -118,11 +106,7 @@ function TransactionRecieptModal({isOpen, onClose, info}: Props) {
               >
                 Reference
               </Text>
-              <Text
-                fontSize={'smSubHead'}
-                fontWeight='400'
-                color={'clique.white'}
-              >
+              <Text fontSize={'smSubHead'} fontWeight='400'>
                 {info?.reference}
               </Text>
             </Flex>
