@@ -45,13 +45,13 @@ export default function WalletCard({onClick, walletData}: Props) {
         py='10px'
       >
         <Text fontSize={'smHead'}>Wallet</Text>
-        <Text
+        {/* <Text
           fontSize={{base: 'sm3', lg: 'sm'}}
           w={{base: '200px', lg: 'auto'}}
           textAlign='center'
         >
           A commission fee of 20% will be applied to all subscriptions
-        </Text>
+        </Text> */}
       </Flex>
       <Divider bg='clique.blackGrey' mb='3'></Divider>
       <SimpleGrid columns={{base: 2, lg: 3}} gap={10}>
