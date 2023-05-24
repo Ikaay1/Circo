@@ -101,6 +101,7 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
   });
 
   useEffect(() => {
+    console.log(url);
     const videoUrl = cld.video(url);
 
     if (videoQuality === 'auto') {
