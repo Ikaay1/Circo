@@ -16,6 +16,7 @@ import { scrollBarStyle } from "@constants/utils";
 import BodyOne from "./BodyOne";
 import BodyTwo from "./BodyTwo";
 import EventCard from "./EventCard";
+import Trailer from "@components/home/Trailer";
 
 function EventModal({ event }: { event: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,12 +53,8 @@ function EventModal({ event }: { event: any }) {
           bg="clique.black"
         >
           <Box px={{ base: "10px", lg: "50px" }}>
-            <Image
-              w="full"
-              alt="event flyer"
-              src={event?.eventId?.thumbNails[0]}
-              rounded={"10px"}
-            />
+           
+            <Trailer />
             <Text
               pt="10px"
               textAlign={"center"}
