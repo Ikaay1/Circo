@@ -39,6 +39,7 @@ import WebCamIcon from "@icons/WebCamIcon";
 
 import DetailCard from "./DetailCard";
 import SelectField from "./SelectField";
+import PreviewIcon from "@icons/PreviewIcon";
 
 function WebCamModal({ setState }: { setState: any }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -203,6 +204,7 @@ function WebCamModal({ setState }: { setState: any }) {
                 title: "",
                 description: "",
                 thumbNail: "" as any,
+                trailer: null as any,
                 category: "",
                 fee: 0,
                 ageRange: "",
@@ -237,6 +239,9 @@ function WebCamModal({ setState }: { setState: any }) {
                 );
                 formData.append("category", "LIVE");
                 formData.append("categoryId", values.category);
+                if (values.trailer) {
+                  formData.append("trailer", values.trailer);
+                }
 
                 const res: any = await createEvent(formData);
                 if (res.data) {
@@ -329,6 +334,28 @@ function WebCamModal({ setState }: { setState: any }) {
                             props.setFieldValue("thumbNail", e.target.files[0]);
                           }}
                           id={"thumbNail"}
+                          accept="image/*"
+                        />
+                        <Input
+                          type={"file"}
+                          visibility={"hidden"}
+                          onChange={(e: any) => {
+                            //if video duration is greater than 10 min
+                            if (e.target.files[0].duration > 60) {
+                              toast({
+                                title: "File Cant be longer than 1 min",
+                                status: "error",
+                                duration: 3000,
+                                isClosable: true,
+                                position: "top-right",
+                              });
+                              return;
+                            }
+                            props.setFieldValue("trailer", e.target.files[0]);
+                          }}
+                          id={"trailer"}
+                          //only video
+                          accept="video/*"
                         />
                         <Text fontSize="smSubHead">Thumbnail</Text>
                         <Text
@@ -380,9 +407,79 @@ function WebCamModal({ setState }: { setState: any }) {
                                       borderColor="clique.secondaryGrey2"
                                       borderStyle="dashed"
                                     >
-                                      <Icon as={AddIcon} />
+                                      <Icon as={PreviewIcon} />
                                       <Text fontSize="smSubHead">
                                         Upload Thumbnail
+                                      </Text>
+                                    </Flex>
+                                  </Flex>
+                                )}
+                              </label>
+                              {/* <FormErrorMessage>
+                                {form.errors.thumbNail}
+                              </FormErrorMessage> */}
+                            </FormControl>
+                          )}
+                        </Field>{" "}
+                        <Text fontSize="smSubHead">Preview Video</Text>
+                        <Text
+                          fontSize="xsl"
+                          color="clique.secondaryGrey2"
+                          mb="2"
+                        >
+                          Select or upload a preview video fro your live show
+                          (Max. 1min)
+                        </Text>
+                        <Field>
+                          {({ field, form }: any) => (
+                            <FormControl>
+                              <label htmlFor={"trailer"}>
+                                {props.values.trailer ? (
+                                  <Box mt="7" mb="4">
+                                    <Box
+                                      rounded="10px"
+                                      h="250px"
+                                      w="250px"
+                                      maxH="250px"
+                                      bgRepeat={"no-repeat"}
+                                      bgSize={"cover"}
+                                      bgPosition={"center"}
+                                    >
+                                      <video
+                                        src={
+                                          props.values.trailer?.name
+                                            ? URL.createObjectURL(
+                                                props.values.trailer
+                                              )
+                                            : props.values.trailer
+                                        }
+                                        width="100%"
+                                        height="100%"
+                                        style={{
+                                          maxHeight: "250px",
+                                        }}
+                                        controls={false}
+                                      ></video>
+                                    </Box>
+                                  </Box>
+                                ) : (
+                                  <Flex gap="2" mb="4" cursor={"pointer"}>
+                                    <Flex
+                                      flexDirection={"column"}
+                                      alignItems={"center"}
+                                      justifyContent="center"
+                                      gap="2"
+                                      py={4}
+                                      border="1px"
+                                      h="250px"
+                                      w="250px"
+                                      borderRadius={"10px"}
+                                      borderColor="clique.secondaryGrey2"
+                                      borderStyle="dashed"
+                                    >
+                                      <Icon as={AddIcon} />
+                                      <Text fontSize="smSubHead">
+                                        Upload Video
                                       </Text>
                                     </Flex>
                                   </Flex>
@@ -440,7 +537,7 @@ function WebCamModal({ setState }: { setState: any }) {
                             h="60px"
                             fontSize="subHead"
                             status={{ isLoading: loading }}
-                            disabled={disabled}
+                            // disabled={disabled}
                           />
                           {disabled && (
                             <Text

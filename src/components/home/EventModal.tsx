@@ -56,7 +56,19 @@ function EventModal({ event }: any) {
           bg="none"
         >
           <Box px="10px">
-            <Trailer />
+            {event?.eventId?.trailer && event?.eventId?.trailer?.length > 0 && (
+              <Trailer url={event?.eventId?.trailer} />
+            )}
+
+            {(!event?.eventId?.trailer ||
+              event?.eventId?.trailer?.length === 0) && (
+              <Image
+                w="100%"
+                borderTopRadius={"10px"}
+                src={event?.eventId?.thumbNails[0]}
+                alt=" event"
+              />
+            )}
             <Box
               minH="300px"
               bg="clique.lightGrey"
