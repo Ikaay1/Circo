@@ -13,7 +13,7 @@ function EventsCard({ onOpen, event }: any) {
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
-      borderRadius={"10px"}
+      borderRadius={"17px"}
       position={"relative"}
       mt="10px"
     >

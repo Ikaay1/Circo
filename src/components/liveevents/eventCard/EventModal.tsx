@@ -53,8 +53,19 @@ function EventModal({ event }: { event: any }) {
           bg="clique.black"
         >
           <Box px={{ base: "10px", lg: "50px" }}>
-           
-            <Trailer />
+            {event?.eventId?.trailer && event?.eventId?.trailer?.length > 0 && (
+              <Trailer url={event?.eventId?.trailer} rounded="10px" />
+            )}
+
+            {(!event?.eventId?.trailer ||
+              event?.eventId?.trailer?.length === 0) && (
+              <Image
+                w="100%"
+                borderTopRadius={"10px"}
+                src={event?.eventId?.thumbNails[0]}
+                alt=" event"
+              />
+            )}
             <Text
               pt="10px"
               textAlign={"center"}
@@ -62,6 +73,7 @@ function EventModal({ event }: { event: any }) {
               fontWeight={500}
               textTransform={"capitalize"}
               fontSize="smHead"
+              color={"white"}
             >
               N{event?.eventId?.fee ?? "0"}
             </Text>
@@ -71,6 +83,7 @@ function EventModal({ event }: { event: any }) {
               fontWeight={500}
               textTransform={"capitalize"}
               fontSize="smSubHead"
+              color={"white"}
             >
               per Ticket
             </Text>
