@@ -269,9 +269,9 @@ function Stream({
                     </FormControl>
                   )}
                 </Field>
-                <Text fontSize="smSubHead">Preview Video</Text>
+                <Text fontSize="smSubHead">Trailer</Text>
                 <Text fontSize="xsl" color="clique.secondaryGrey2" mb="2">
-                  Select or upload a preview video fro your live show (Max.
+                  Select or upload a Trailer video for your live show (Max.
                   1min)
                 </Text>
                 <Field>
@@ -320,7 +320,7 @@ function Stream({
                               borderStyle="dashed"
                             >
                               <Icon as={PreviewIcon} />
-                              <Text fontSize="smSubHead">Upload Video</Text>
+                              <Text fontSize="smSubHead">Upload Trailer</Text>
                             </Flex>
                           </Flex>
                         )}
