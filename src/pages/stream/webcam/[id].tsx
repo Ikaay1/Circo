@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Icon, SlideFade, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  SlideFade,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import CamCommentSection from "@components/stream/CamCommentSection";
 import CommentSection from "@components/stream/CommentSection";
 import End from "@components/stream/End";
@@ -27,6 +35,7 @@ function Index() {
   const spaceRef: any = useRef(null);
   const [localParticipant, setLocalParticipant] = useState<any>(null);
   const joined = !!localParticipant;
+  const title = router.query.title as string;
 
   useEffect(() => {
     if (!spaceId || !token) return;
@@ -136,6 +145,19 @@ function Index() {
             />
           )}
         </Flex>
+
+        <Box pos={"absolute"} top={"calc(10vh + 20px)"} left={"20px"}>
+          <Text
+            color={"clique.white"}
+            textAlign={"left"}
+            fontFamily={"Poppins"}
+            fontWeight={500}
+            textTransform={"capitalize"}
+            fontSize="smHead"
+          >
+            {title}
+          </Text>
+        </Box>
 
         {close ? (
           <Button
