@@ -36,6 +36,8 @@ function End({
 
           // dispatch(clearWebCamStream());
           setEndStreamDetails(endRes?.data?.data);
+
+          //close camera acces
         } else {
           toast({
             title: "Error",

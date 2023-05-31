@@ -103,13 +103,13 @@ function Index() {
 
   useEffect(() => {
     if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
-      toast({
-        title: "Stream ended",
-        description: "Nobody would see this stream anymore",
-        isClosable: false,
-        position: "top",
-        duration: 1000 * 60 * 20,
-      });
+      // toast({
+      //   title: "Stream ended",
+      //   description: "Nobody would see this stream anymore",
+      //   isClosable: false,
+      //   position: "top",
+      //   duration: 1000 * 60 * 20,
+      // });
       // return;
     }
   }, [data]);
