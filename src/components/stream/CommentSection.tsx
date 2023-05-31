@@ -17,6 +17,7 @@ import { scrollBarStyle } from "@constants/utils";
 import EachComment from "./EachComment";
 import NewComment from "./NewComment";
 import Color from "@constants/color";
+import { socket } from "@constants/socket";
 
 function CommentSection({}: {}) {
   const router = useRouter();
@@ -27,12 +28,10 @@ function CommentSection({}: {}) {
   const value = useColorModeValue("clique.white", "clique.blackGrey");
 
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, {
-      forceNew: false,
-    }).on("commentchange", (data: any) => {
+    socket.on("commentchange", (data: any) => {
       refetch();
     });
-  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
+  }, [socket]);
   return (
     <Box
       pos={"relative"}

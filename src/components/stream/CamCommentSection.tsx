@@ -18,6 +18,7 @@ import { scrollBarStyle } from "@constants/utils";
 import EachChatComment from "./EachChatComment";
 import NewChatComment from "./NewChatComment";
 import Color from "@constants/color";
+import { socket } from "@constants/socket";
 
 function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
@@ -26,12 +27,10 @@ function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
     useGetStreamCommentsQuery(id);
 
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, {
-      forceNew: false,
-    }).on("commentchange", (data: any) => {
+    socket.on("commentchange", (data: any) => {
       refetch();
     });
-  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
+  }, [socket]);
 
   return (
     <Box

@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { io } from "socket.io-client";
 
 import {
   Button,
@@ -64,8 +63,6 @@ function MyApp({ Component, pageProps }: any) {
   if (typeof window === "undefined") {
     return <></>;
   }
-
-  const socket = io(process.env.NEXT_PUBLIC_BASEURL!);
 
   return (
     <>
