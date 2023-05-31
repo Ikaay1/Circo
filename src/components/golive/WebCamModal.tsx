@@ -415,82 +415,12 @@ function WebCamModal({ setState }: { setState: any }) {
                                   </Flex>
                                 )}
                               </label>
-                              {/* <FormErrorMessage>
-                                {form.errors.thumbNail}
-                              </FormErrorMessage> */}
-                            </FormControl>
-                          )}
-                        </Field>{" "}
-                        <Text fontSize="smSubHead">Preview Video</Text>
-                        <Text
-                          fontSize="xsl"
-                          color="clique.secondaryGrey2"
-                          mb="2"
-                        >
-                          Select or upload a preview video fro your live show
-                          (Max. 1min)
-                        </Text>
-                        <Field>
-                          {({ field, form }: any) => (
-                            <FormControl>
-                              <label htmlFor={"trailer"}>
-                                {props.values.trailer ? (
-                                  <Box mt="7" mb="4">
-                                    <Box
-                                      rounded="10px"
-                                      h="250px"
-                                      w="250px"
-                                      maxH="250px"
-                                      bgRepeat={"no-repeat"}
-                                      bgSize={"cover"}
-                                      bgPosition={"center"}
-                                    >
-                                      <video
-                                        src={
-                                          props.values.trailer?.name
-                                            ? URL.createObjectURL(
-                                                props.values.trailer
-                                              )
-                                            : props.values.trailer
-                                        }
-                                        width="100%"
-                                        height="100%"
-                                        style={{
-                                          maxHeight: "250px",
-                                        }}
-                                        controls={false}
-                                      ></video>
-                                    </Box>
-                                  </Box>
-                                ) : (
-                                  <Flex gap="2" mb="4" cursor={"pointer"}>
-                                    <Flex
-                                      flexDirection={"column"}
-                                      alignItems={"center"}
-                                      justifyContent="center"
-                                      gap="2"
-                                      py={4}
-                                      border="1px"
-                                      h="250px"
-                                      w="250px"
-                                      borderRadius={"10px"}
-                                      borderColor="clique.secondaryGrey2"
-                                      borderStyle="dashed"
-                                    >
-                                      <Icon as={AddIcon} />
-                                      <Text fontSize="smSubHead">
-                                        Upload Video
-                                      </Text>
-                                    </Flex>
-                                  </Flex>
-                                )}
-                              </label>
                               <FormErrorMessage>
                                 {form.errors.thumbNail}
                               </FormErrorMessage>
                             </FormControl>
                           )}
-                        </Field>
+                        </Field>{" "}
                       </Box>
 
                       <Text fontSize={"subHead"} mb="4">
