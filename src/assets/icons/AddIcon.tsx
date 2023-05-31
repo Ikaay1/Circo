@@ -1,8 +1,9 @@
-import { Icon } from "@chakra-ui/react";
-import React from "react";
+import React from 'react';
 
-const AddIcon = () => (
-  <Icon viewBox="0 0 40 40" width={"2em"} height={"2em"}>
+import { Icon } from '@chakra-ui/react';
+
+const AddIcon = (props: any) => (
+  <Icon {...props} viewBox="0 0 40 40" >
     <svg
       width="40"
       height="40"

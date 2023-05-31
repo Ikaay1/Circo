@@ -8,16 +8,19 @@ const UploadPreview = ({
   thumbNail,
   title,
   isFree,
+  url,
 }: {
   thumbNail: any;
   title: string;
   isFree: boolean;
+  url: string;
 }) => {
   const {
     data: channelData,
     isError,
     isLoading: channelLoading,
   } = useGetChannelQuery('');
+  console.log('urlll', url);
   return (
     <>
       {channelLoading ? (
@@ -57,15 +60,10 @@ const UploadPreview = ({
               />
             </Box>
           ) : (
-            <Box w='full'>
-              <Box
-                h={{base: '200px', lg: '130px', mlg: '180px'}}
-                bgImage={``}
-                bgSize='cover'
-                bgPosition='center'
-                rounded={'10px'}
-              />
-            </Box>
+            <video width='100%' height='130px' style={{borderRadius: '10px'}}>
+              <source src={url} />
+              Your browser does not support the video tag.
+            </video>
           )}
 
           <Flex mt='15px'>
