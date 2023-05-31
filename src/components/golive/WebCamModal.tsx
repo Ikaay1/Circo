@@ -282,7 +282,7 @@ function WebCamModal({ setState }: { setState: any }) {
                       })
                     );
                     router.push(
-                      `/stream/webcam/${res.data?.data?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}`
+                      `/stream/webcam/${res.data?.data?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}&title=${values.title}`
                     );
                   } else {
                     toast({
@@ -467,7 +467,7 @@ function WebCamModal({ setState }: { setState: any }) {
                             h="60px"
                             fontSize="subHead"
                             status={{ isLoading: loading }}
-                            // disabled={disabled}
+                            disabled={disabled}
                           />
                           {disabled && (
                             <Text
