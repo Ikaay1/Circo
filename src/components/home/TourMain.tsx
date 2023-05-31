@@ -52,7 +52,6 @@ const TourMain = ({
           pt='3'
           pb='4'
           w={{base: '100%'}}
-          border='1px solid red'
         >
           <ModalHeader alignSelf='center' fontSize={'smHead'} fontWeight='500'>
             {header}
