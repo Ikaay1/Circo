@@ -1,11 +1,18 @@
 import { Button, useToast } from "@chakra-ui/react";
+import Color from "@constants/color";
 import { useRouter } from "next/router";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import { useEndStreamMutation } from "redux/services/livestream/live.service";
 import { clearWebCamStream } from "redux/slices/streamSlice";
 
-function End({ id }: { id: string }) {
+function End({
+  id,
+  setEndStreamDetails,
+}: {
+  id: string;
+  setEndStreamDetails: any;
+}) {
   const [endStream, endInfo] = useEndStreamMutation();
   const streamDetails = useAppSelector(
     (state) => state?.app?.stream?.webCamStream
@@ -16,12 +23,6 @@ function End({ id }: { id: string }) {
 
   return (
     <Button
-      pos={"absolute"}
-      bottom={"30px"}
-      left={"50%"}
-      transform={"translateX(-50%)"}
-      mt="80px"
-      rounded="full"
       onClick={async () => {
         const endRes: any = await endStream(id);
         if (endRes?.data?.data) {
@@ -33,11 +34,8 @@ function End({ id }: { id: string }) {
             position: "top-right",
           });
 
-          dispatch(clearWebCamStream());
-
-          router.push("/golive");
-
-          //turn of user  camera
+          // dispatch(clearWebCamStream());
+          setEndStreamDetails(endRes?.data?.data);
         } else {
           toast({
             title: "Error",
@@ -51,11 +49,18 @@ function End({ id }: { id: string }) {
       }}
       isLoading={endInfo.isLoading}
       bg={"clique.dangerRed"}
-      color="white"
-      colorScheme={"red"}
       fontFamily={"Poppins"}
+      mt={"30px"}
+      w="120px"
+      size="md"
+      color={Color().blackAndWhite}
+      border={"1px solid "}
+      borderColor="clique.red"
+      rounded={"full"}
+      fontWeight={400}
+      colorScheme="red"
     >
-      End Live Stream
+      End
     </Button>
   );
 }
