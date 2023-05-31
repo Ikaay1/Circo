@@ -11,6 +11,7 @@ import {
 import CommentSection from "@components/stream/CommentSection";
 import VideoDetails from "@components/stream/VideoDetails";
 import io from "socket.io-client";
+import { socket } from "@constants/socket";
 
 function Index() {
   const router = useRouter();
@@ -51,12 +52,10 @@ function Index() {
   }, [data]);
 
   useEffect(() => {
-    io(process.env.NEXT_PUBLIC_BASEURL!, {
-      forceNew: false,
-    }).on("newviewer", (data: any) => {
+    socket.on("newviewer", (data: any) => {
       refetch();
     });
-  }, [io(process.env.NEXT_PUBLIC_BASEURL!)]);
+  }, [socket]);
   return (
     <HomeLayout>
       <Flex

@@ -407,7 +407,7 @@ function WebCamModal({ setState }: { setState: any }) {
                                       borderColor="clique.secondaryGrey2"
                                       borderStyle="dashed"
                                     >
-                                      <Icon as={PreviewIcon} />
+                                      <Icon as={AddIcon} />
                                       <Text fontSize="smSubHead">
                                         Upload Thumbnail
                                       </Text>
