@@ -62,11 +62,6 @@ function UploadPage({url, name}: Props) {
     formData.append('upload_preset', 'videouploads');
     formData.append('public_id', id);
 
-    const formData2 = new FormData();
-    formData2.append('file', thumbNail);
-    formData2.append('upload_preset', 'circo_image');
-    formData2.append('public_id', id);
-
     axios
       .post(
         `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
@@ -78,17 +73,24 @@ function UploadPage({url, name}: Props) {
       .catch((error) => {
         console.log(error);
       });
-    axios
-      .post(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-        formData2,
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+    if (thumbNail && typeof thumbNail !== 'string') {
+      const formData2 = new FormData();
+      formData2.append('file', thumbNail);
+      formData2.append('upload_preset', 'circo_image');
+      formData2.append('public_id', id);
+      axios
+        .post(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          formData2,
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -115,16 +117,33 @@ function UploadPage({url, name}: Props) {
       });
       return;
     }
+    let values;
     if (!thumbNail) {
-      toast({
-        title: 'Error',
-        description: 'Please upload a thumbnail',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
-      return;
+      // toast({
+      //   title: 'Error',
+      //   description: 'Please upload a thumbnail',
+      //   status: 'error',
+      //   duration: 3000,
+      //   isClosable: true,
+      //   position: 'top-right',
+      // });
+      // return;
+      values = {
+        title: state.title,
+        description: state.description,
+        category: state.category,
+        ageRange: state.ageRange,
+        isFree: isFree.toString(),
+        noThumb: true,
+      };
+    } else {
+      values = {
+        title: state.title,
+        description: state.description,
+        category: state.category,
+        ageRange: state.ageRange,
+        isFree: isFree.toString(),
+      };
     }
     // const formData = new FormData();
     // formData.append('title', state.title);
@@ -134,13 +153,7 @@ function UploadPage({url, name}: Props) {
     // formData.append('file', file);
     // formData.append('thumbNail', thumbNail);
     // formData.append('isFree', isFree.toString());
-    const values = {
-      title: state.title,
-      description: state.description,
-      category: state.category,
-      ageRange: state.ageRange,
-      isFree: isFree.toString(),
-    };
+
     // const res: any = createContent(formData);
     const res: any = await createContent(values);
     if ('data' in res) {
@@ -205,6 +218,7 @@ function UploadPage({url, name}: Props) {
               URL.createObjectURL(thumbNail as Blob)
             }
             isFree={isFree}
+            url={url}
           />
         </Box>
 
@@ -262,23 +276,41 @@ function UploadPage({url, name}: Props) {
                     ></Box>
                   </Box>
                 ) : (
-                  <Flex gap='2' mb='4' cursor={'pointer'}>
-                    <Flex
-                      flexDirection={'column'}
-                      alignItems={'center'}
-                      justifyContent='center'
-                      gap='2'
-                      py={4}
-                      border='1px'
-                      width='40%'
-                      borderRadius={'10px'}
-                      borderColor='clique.secondaryGrey2'
-                      borderStyle='dashed'
+                  // <Flex gap='2' mb='4' cursor={'pointer'}>
+                  //   <Flex
+                  //     flexDirection={'column'}
+                  //     alignItems={'center'}
+                  //     justifyContent='center'
+                  //     gap='2'
+                  //     py={4}
+                  //     border='1px'
+                  //     width='40%'
+                  //     borderRadius={'10px'}
+                  //     borderColor='clique.secondaryGrey2'
+                  //     borderStyle='dashed'
+                  //   >
+                  //     <Icon as={AddIcon} />
+                  //     <Text fontSize='smSubHead'>Upload Thumbnail</Text>
+                  //   </Flex>
+                  // </Flex>
+                  <Box position='relative' width='45%'>
+                    <Icon
+                      as={AddIcon}
+                      position='absolute'
+                      top='45%'
+                      left='45%'
+                      width={'2em'}
+                      height={'2em'}
+                    />
+                    <video
+                      width='100%'
+                      height='110px'
+                      style={{borderRadius: '10px', cursor: 'pointer'}}
                     >
-                      <Icon as={AddIcon} />
-                      <Text fontSize='smSubHead'>Upload Thumbnail</Text>
-                    </Flex>
-                  </Flex>
+                      <source src={url} />
+                      Your browser does not support the video tag.
+                    </video>
+                  </Box>
                 )}
               </label>
               <Text color='red' fontSize='18px'>

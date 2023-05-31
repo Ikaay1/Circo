@@ -83,7 +83,7 @@ const Interests = () => {
             payload: res.data,
           }),
         );
-        router.push('/home');
+        router.push('/home?signup=true');
         localStorage.removeItem('userData');
       } else {
         console.log(res.error);
@@ -115,7 +115,7 @@ const Interests = () => {
             payload: res.data,
           }),
         );
-        router.push('/home');
+        router.push('/home?signup=true');
         localStorage.removeItem('userData');
       } else {
         localStorage.removeItem('userData');
