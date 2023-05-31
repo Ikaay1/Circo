@@ -51,8 +51,8 @@ function NewComment({id, profile}: {id: string; profile: any}) {
       w='400px'
     >
       <AvataWithSpace
-        name={userProfile?.channel_id?.name}
-        url={userProfile?.channel_id?.photo}
+        name={userProfile?.channel?.name}
+        url={userProfile?.channel?.photo}
         mr='20px'
         size='40px'
         borderThickness='2px'

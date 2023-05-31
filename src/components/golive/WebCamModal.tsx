@@ -282,7 +282,7 @@ function WebCamModal({ setState }: { setState: any }) {
                       })
                     );
                     router.push(
-                      `/stream/webcam/${res.data?.data?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}`
+                      `/stream/webcam/${res.data?.data?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}&title=${values.title}`
                     );
                   } else {
                     toast({
@@ -407,79 +407,9 @@ function WebCamModal({ setState }: { setState: any }) {
                                       borderColor="clique.secondaryGrey2"
                                       borderStyle="dashed"
                                     >
-                                      <Icon as={PreviewIcon} />
-                                      <Text fontSize="smSubHead">
-                                        Upload Thumbnail
-                                      </Text>
-                                    </Flex>
-                                  </Flex>
-                                )}
-                              </label>
-                              {/* <FormErrorMessage>
-                                {form.errors.thumbNail}
-                              </FormErrorMessage> */}
-                            </FormControl>
-                          )}
-                        </Field>{" "}
-                        <Text fontSize="smSubHead">Preview Video</Text>
-                        <Text
-                          fontSize="xsl"
-                          color="clique.secondaryGrey2"
-                          mb="2"
-                        >
-                          Select or upload a preview video fro your live show
-                          (Max. 1min)
-                        </Text>
-                        <Field>
-                          {({ field, form }: any) => (
-                            <FormControl>
-                              <label htmlFor={"trailer"}>
-                                {props.values.trailer ? (
-                                  <Box mt="7" mb="4">
-                                    <Box
-                                      rounded="10px"
-                                      h="250px"
-                                      w="250px"
-                                      maxH="250px"
-                                      bgRepeat={"no-repeat"}
-                                      bgSize={"cover"}
-                                      bgPosition={"center"}
-                                    >
-                                      <video
-                                        src={
-                                          props.values.trailer?.name
-                                            ? URL.createObjectURL(
-                                                props.values.trailer
-                                              )
-                                            : props.values.trailer
-                                        }
-                                        width="100%"
-                                        height="100%"
-                                        style={{
-                                          maxHeight: "250px",
-                                        }}
-                                        controls={false}
-                                      ></video>
-                                    </Box>
-                                  </Box>
-                                ) : (
-                                  <Flex gap="2" mb="4" cursor={"pointer"}>
-                                    <Flex
-                                      flexDirection={"column"}
-                                      alignItems={"center"}
-                                      justifyContent="center"
-                                      gap="2"
-                                      py={4}
-                                      border="1px"
-                                      h="250px"
-                                      w="250px"
-                                      borderRadius={"10px"}
-                                      borderColor="clique.secondaryGrey2"
-                                      borderStyle="dashed"
-                                    >
                                       <Icon as={AddIcon} />
                                       <Text fontSize="smSubHead">
-                                        Upload Video
+                                        Upload Thumbnail
                                       </Text>
                                     </Flex>
                                   </Flex>
@@ -490,7 +420,7 @@ function WebCamModal({ setState }: { setState: any }) {
                               </FormErrorMessage>
                             </FormControl>
                           )}
-                        </Field>
+                        </Field>{" "}
                       </Box>
 
                       <Text fontSize={"subHead"} mb="4">
@@ -537,7 +467,7 @@ function WebCamModal({ setState }: { setState: any }) {
                             h="60px"
                             fontSize="subHead"
                             status={{ isLoading: loading }}
-                            // disabled={disabled}
+                            disabled={disabled}
                           />
                           {disabled && (
                             <Text
