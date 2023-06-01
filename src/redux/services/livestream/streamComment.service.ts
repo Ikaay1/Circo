@@ -24,7 +24,6 @@ export const streamCommentAPI = createApi({
           "Content-Type": "application/json",
         },
       }),
-      providesTags: ["Live"],
     }),
 
     postCommentOnStream: builder.mutation<any, any>({
@@ -36,7 +35,6 @@ export const streamCommentAPI = createApi({
         },
         body: body,
       }),
-      invalidatesTags: ["Live"],
     }),
 
     likeStreamComment: builder.mutation<any, any>({
