@@ -58,7 +58,7 @@ function Index() {
     });
 
     socket.on("streamended", (data: any) => {
-      //check if any open toast
+      if (data?.eventId !== livestreamId) return;
       toast({
         title: "Stream Ended",
         status: "info",
@@ -69,7 +69,6 @@ function Index() {
       });
       window.location.href = "/liveevents";
     });
-    4;
   }, [socket]);
   return (
     <HomeLayout>
