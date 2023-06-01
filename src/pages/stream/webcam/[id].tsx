@@ -25,6 +25,7 @@ import {
 } from "redux/services/livestream/live.service";
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import { clearWebCamStream } from "redux/slices/streamSlice";
+import EndWebLiveModal from "@components/golive/EndWebLiveModal";
 
 function Index() {
   const router = useRouter();
@@ -102,9 +103,14 @@ function Index() {
 
   useEffect(() => {
     if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
-      router.push("/golive");
-
-      return;
+      // toast({
+      //   title: "Stream ended",
+      //   description: "Nobody would see this stream anymore",
+      //   isClosable: false,
+      //   position: "top",
+      //   duration: 1000 * 60 * 20,
+      // });
+      // return;
     }
   }, [data]);
   // endstream if user leaves the page
@@ -117,6 +123,7 @@ function Index() {
       console.log("error ending stream");
     }
   };
+
   useEffect(() => {
     window.addEventListener("beforeunload", async (e) => {
       e.preventDefault();
@@ -180,7 +187,7 @@ function Index() {
           <CamCommentSection id={id as string} setClose={setClose} />
         )}
 
-        <End id={id as string} />
+        <EndWebLiveModal id={id as string} />
       </Box>
     </HomeLayout>
   );

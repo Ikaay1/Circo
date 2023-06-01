@@ -467,7 +467,7 @@ function WebCamModal({ setState }: { setState: any }) {
                             h="60px"
                             fontSize="subHead"
                             status={{ isLoading: loading }}
-                            disabled={disabled}
+                            // disabled={disabled}
                           />
                           {disabled && (
                             <Text

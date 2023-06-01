@@ -55,6 +55,19 @@ function Index() {
     socket.on("newviewer", (data: any) => {
       refetch();
     });
+
+    socket.on("streamended", (data: any) => {
+      //check if any open toast
+      toast({
+        title: "Stream Ended",
+        status: "info",
+        duration: 5000,
+        isClosable: false,
+        description: "You will be redirected to the home page now",
+        position: "top-right",
+      });
+      window.location.href = "/liveevents";
+    });
   }, [socket]);
   return (
     <HomeLayout>
