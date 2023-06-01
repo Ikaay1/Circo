@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { Router, useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
 import io from "socket.io-client";
@@ -22,16 +22,64 @@ import { socket } from "@constants/socket";
 function CommentSection({}: {}) {
   const router = useRouter();
   const { id } = router.query;
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const { data, isLoading, isFetching, refetch } =
-    useGetStreamCommentsQuery(id);
+  const dummy: any = useRef(null);
+  const commentsRef = useRef<string[]>([]);
+  const { userProfile, channel } = useAppSelector(
+    (store) => store.app.userReducer
+  );
+  const [comments, setComments] = useState<any[]>([]);
+  const { data, isLoading, isFetching } = useGetStreamCommentsQuery(id);
   const value = useColorModeValue("clique.white", "clique.blackGrey");
+  useEffect(() => {
+    if (data?.data) {
+      setComments(data?.data);
+    }
+  }, [data]);
+  useEffect(() => {
+    socket.on("commentchange", async (data: any) => {
+      const index = comments.findIndex((comment) => {
+        return comment._id.toString() === data._id.toString();
+      });
+      if (index !== -1) {
+        setComments((prev) => {
+          const newComments = [...prev];
+          newComments[index] = data;
+          return newComments;
+        });
+        console.log("found");
+      } else if (!commentsRef.current.includes(data._id.toString())) {
+        setComments((prev) => [...prev, data]);
+        commentsRef.current.push(data._id.toString());
+      }
+    });
+  }, []);
 
   useEffect(() => {
-    socket.on("commentchange", (data: any) => {
-      refetch();
+    socket.emit("joinedStream", {
+      streamId: id,
+      userId: channel?._id,
     });
-  }, [socket]);
+
+    return () => {
+      window.addEventListener("beforeunload", () => {
+        socket.emit("leaveStream", {
+          streamId: id,
+          userId: channel?._id,
+        });
+      });
+
+      Router.events.on("routeChangeStart", () => {
+        socket.emit("leaveStream", {
+          streamId: id,
+          userId: channel?._id,
+        });
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: "smooth" });
+  }, [comments.length]);
   return (
     <Box
       pos={"relative"}
@@ -76,9 +124,10 @@ function CommentSection({}: {}) {
         ))}
 
       {data &&
-        data?.data?.map((comment: any, i: number) => (
+        comments.map((comment: any, i: number) => (
           <EachComment key={comment._id} comment={comment} />
         ))}
+      <div ref={dummy} />
 
       <NewComment profile={userProfile} id={id as string} />
     </Box>

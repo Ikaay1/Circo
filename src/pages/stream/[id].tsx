@@ -43,6 +43,7 @@ function Index() {
       toast({
         title: "Stream " + data?.data?.stream?.status,
         status: "info",
+        position: "top",
         duration: 5000,
         isClosable: true,
       });
@@ -68,6 +69,7 @@ function Index() {
       });
       window.location.href = "/liveevents";
     });
+    4;
   }, [socket]);
   return (
     <HomeLayout>
