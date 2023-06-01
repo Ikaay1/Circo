@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
 
@@ -17,6 +17,7 @@ import { scrollBarStyle } from "@constants/utils";
 
 import NewComment from "./NewComment";
 import Color from "@constants/color";
+import { socket } from "@constants/socket";
 
 function CommentSection({ streamDetails }: any) {
   const router = useRouter();
@@ -24,13 +25,36 @@ function CommentSection({ streamDetails }: any) {
   const { data, isLoading, isFetching } = useGetStreamCommentsQuery(
     streamDetails?.eventId?._id
   );
+  const dummy: any = useRef(null);
+  const commentsRef = useRef<string[]>([]);
+  const [comments, setComments] = useState<any[]>([]);
   const value = useColorModeValue("clique.white", "clique.blackGrey");
   useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
+    if (data?.data) {
+      setComments(data?.data);
     }
-  }, [userProfile?._id, router]);
-
+  }, [data]);
+  useEffect(() => {
+    socket.on("commentchange", async (data: any) => {
+      const index = comments.findIndex((comment) => {
+        return comment._id.toString() === data._id.toString();
+      });
+      if (index !== -1) {
+        setComments((prev) => {
+          const newComments = [...prev];
+          newComments[index] = data;
+          return newComments;
+        });
+        console.log("found");
+      } else if (!commentsRef.current.includes(data._id.toString())) {
+        setComments((prev) => [...prev, data]);
+        commentsRef.current.push(data._id.toString());
+      }
+    });
+  }, []);
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: "smooth" });
+  }, [comments.length]);
   return (
     <Box
       w={{ base: "full", lg: "450px" }}
@@ -72,7 +96,8 @@ function CommentSection({ streamDetails }: any) {
             {data &&
               data?.data?.map((comment: any, i: number) => (
                 <EachComment key={comment._id} comment={comment} />
-              ))}
+              ))}{" "}
+            <div ref={dummy} />
           </Box>
 
           {!data || (data && data?.data?.length === 0 && <Box></Box>)}

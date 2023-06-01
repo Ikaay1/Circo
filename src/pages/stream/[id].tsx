@@ -43,6 +43,7 @@ function Index() {
       toast({
         title: "Stream " + data?.data?.stream?.status,
         status: "info",
+        position: "top",
         duration: 5000,
         isClosable: true,
       });
@@ -57,7 +58,7 @@ function Index() {
     });
 
     socket.on("streamended", (data: any) => {
-      //check if any open toast
+      if (data?.eventId !== livestreamId) return;
       toast({
         title: "Stream Ended",
         status: "info",

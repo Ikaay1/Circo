@@ -8,11 +8,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import CamCommentSection from "@components/stream/CamCommentSection";
-import CommentSection from "@components/stream/CommentSection";
-import End from "@components/stream/End";
+
 import HomeLayout from "layouts/HomeLayout";
 import Router, { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Space, SpaceEvent, getUserMedia } from "@mux/spaces-web";
 import { AiFillWechat } from "react-icons/ai";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
@@ -26,12 +25,16 @@ import {
 import { useAppDispatch, useAppSelector } from "redux/app/hooks";
 import { clearWebCamStream } from "redux/slices/streamSlice";
 import EndWebLiveModal from "@components/golive/EndWebLiveModal";
+import { socket } from "@constants/socket";
+import { set } from "video.js/dist/types/tech/middleware";
 
 function Index() {
   const router = useRouter();
   const [startBroadCast, startInfo] = useStartBroadCastMutation();
   const { streamKey, token, spaceId, id, broadcastId }: any = router.query;
   const [close, setClose] = useState(true);
+
+  const ref = React.useRef();
 
   const spaceRef: any = useRef(null);
   const [localParticipant, setLocalParticipant] = useState<any>(null);
@@ -123,7 +126,7 @@ function Index() {
       console.log("error ending stream");
     }
   };
-
+  const [currentViewers, setCurrentViewers] = useState(0);
   useEffect(() => {
     window.addEventListener("beforeunload", async (e) => {
       e.preventDefault();
@@ -135,6 +138,13 @@ function Index() {
     });
   }, [Router, livestreamId]);
 
+  useEffect(() => {
+    socket.on("userJoinLeave", async (data: any) => {
+      if (data?.streamId === livestreamId) {
+        setCurrentViewers(data?.count);
+      }
+    });
+  }, [livestreamId]);
   return (
     <HomeLayout>
       <Box maxH="90vh" overflow="hidden" w="100%" className={styles.container}>
@@ -154,6 +164,15 @@ function Index() {
         </Flex>
 
         <Box pos={"absolute"} top={"calc(10vh + 20px)"} left={"20px"}>
+          <Button
+            size={"sm"}
+            rounded="full"
+            bg="clique.close"
+            color="clique.white"
+            fontWeight={"400"}
+          >
+            {currentViewers} viewer{currentViewers > 1 ? "s" : ""}
+          </Button>{" "}
           <Text
             color={"clique.white"}
             textAlign={"left"}

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useAppSelector } from "redux/app/hooks";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
@@ -23,15 +23,38 @@ import { socket } from "@constants/socket";
 function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
-  const { data, isLoading, isFetching, refetch } =
-    useGetStreamCommentsQuery(id);
+  const [comments, setComments] = useState<any[]>([]);
+  const commentsRef = useRef<string[]>([]);
+  const { data, isLoading, isFetching } = useGetStreamCommentsQuery(id);
+  const dummy: any = useRef(null);
+  useEffect(() => {
+    if (data?.data) {
+      setComments(data?.data);
+    }
+  }, [data]);
 
   useEffect(() => {
-    socket.on("commentchange", (data: any) => {
-      refetch();
+    socket.on("commentchange", async (data: any) => {
+      const index = comments.findIndex((comment) => {
+        return comment._id.toString() === data._id.toString();
+      });
+      if (index !== -1) {
+        setComments((prev) => {
+          const newComments = [...prev];
+          newComments[index] = data;
+          return newComments;
+        });
+        console.log("found");
+      } else if (!commentsRef.current.includes(data._id.toString())) {
+        setComments((prev) => [...prev, data]);
+        commentsRef.current.push(data._id.toString());
+      }
     });
-  }, [socket]);
+  }, []);
 
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: "smooth" });
+  }, [comments.length]);
   return (
     <Box
       pos={"absolute"}
@@ -51,7 +74,13 @@ function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
       overflowY="scroll"
       sx={scrollBarStyle}
     >
-      <Flex w="full" alignItems={"center"} justifyContent="space-between">
+      <Flex
+        w="full"
+        alignItems={"center"}
+        top="0"
+        position="sticky"
+        justifyContent="space-between"
+      >
         <Text
           textAlign={"left"}
           fontFamily={"Poppins"}
@@ -77,10 +106,12 @@ function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
           Close chat
         </Button>
       </Flex>
-
-      {data?.data?.map((comment: any, i: number) => (
-        <EachChatComment key={comment._id} comment={comment} />
-      ))}
+      <Box>
+        {comments.map((comment: any, i: number) => (
+          <EachChatComment key={comment._id} comment={comment} />
+        ))}
+        <div ref={dummy} />
+      </Box>
 
       <NewChatComment profile={userProfile} id={id as string} />
     </Box>
