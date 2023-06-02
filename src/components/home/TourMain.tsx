@@ -9,6 +9,7 @@ import {
   ModalBody,
   ModalContent,
   ModalHeader,
+  ModalOverlay,
   Text,
   useColorMode,
   useColorModeValue,
@@ -35,7 +36,7 @@ const TourMain = ({
   return (
     <>
       <Modal isOpen={isOpen} onClose={() => {}} isCentered>
-        {/* <ModalOverlay /> */}
+        <ModalOverlay />
         <Icon
           display={{base: 'none', lg: 'block', mlg: 'none'}}
           as={ArrowTour}
