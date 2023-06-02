@@ -9,6 +9,7 @@ import {
   ModalBody,
   ModalContent,
   ModalHeader,
+  ModalOverlay,
   Text,
   useColorMode,
   useColorModeValue,
@@ -34,17 +35,49 @@ const TourMain = ({
   const {colorMode, toggleColorMode} = useColorMode();
   return (
     <>
-      {/* <Icon
-        as={ArrowTour}
-        position={'fixed'}
-        top={number === '1' ? '10%' : 0}
-        left={number === '1' ? '10%' : 0}
-        width='70px'
-        height='118px'
-        border='1px solid red'
-      /> */}
       <Modal isOpen={isOpen} onClose={() => {}} isCentered>
-        {/* <ModalOverlay /> */}
+        <ModalOverlay />
+        <Icon
+          display={{base: 'none', lg: 'block', mlg: 'none'}}
+          as={ArrowTour}
+          position={'fixed'}
+          top={
+            number === '1'
+              ? 'calc(10vh + 175px)'
+              : number === '2'
+              ? '5vh'
+              : number === '3'
+              ? '5vh'
+              : number === '4'
+              ? '5vh'
+              : number === '5'
+              ? '5vh'
+              : number === '6'
+              ? 'calc(10vh + 40px)'
+              : number === '7'
+              ? 'calc(10vh + 80px)'
+              : number === '8'
+              ? 'calc(10vh + 216px)'
+              : 'calc(10vh + 353px)'
+          }
+          left={
+            number === '1'
+              ? '90px'
+              : number === '2'
+              ? '65.2%'
+              : number === '3'
+              ? '21%'
+              : number === '4'
+              ? '76.5%'
+              : number === '5'
+              ? '85%'
+              : '90px'
+          }
+          width='70px'
+          height='118px'
+          className='tourArrow'
+          // border='1px solid red'
+        />
         <ModalContent
           bg={Color().whiteAndBlack}
           borderColor={Color().whiteAndBlack}
@@ -52,7 +85,6 @@ const TourMain = ({
           pt='3'
           pb='4'
           w={{base: '100%'}}
-          border='1px solid red'
         >
           <ModalHeader alignSelf='center' fontSize={'smHead'} fontWeight='500'>
             {header}

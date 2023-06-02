@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {resolve} from 'path';
 import {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 import {useGetBanksQuery} from 'redux/services/bank.service';
 import {
   useConfirmAccountMutation,
@@ -61,6 +62,7 @@ function BeneficiaryModal({
     accountName: '',
     accountNumber: '',
   });
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
   const [confirmAccount, confirmAccountStatus] = useConfirmAccountMutation();
   const [loading2, setLoading2] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -179,7 +181,7 @@ function BeneficiaryModal({
         !beneficiaryData.accountName ||
         !beneficiaryData.accountNumber ||
         !beneficiaryData.otp_code ||
-        !beneficiaryData.password
+        (!beneficiaryData.password && userProfile?.social === 'NULL')
       ) {
         toast({
           title: 'Please fill every field',
@@ -422,7 +424,11 @@ function BeneficiaryModal({
                 </Box>
                 {loading2 && (
                   <Box display='flex' alignItems={'center'}>
-                    <Spinner color={'clique.white'} />
+                    <Spinner
+                      color={
+                        colorMode === 'dark' ? 'clique.white' : 'clique.dark'
+                      }
+                    />
                   </Box>
                 )}
               </Box>
@@ -476,56 +482,61 @@ function BeneficiaryModal({
                   autoComplete='off'
                 />
               </Box>
-              <Box
-                bg={useColorModeValue(
-                  'clique.lightPrimaryBg',
-                  'clique.ashGrey',
-                )}
-                px='2'
-                pt='1'
-                borderRadius={'10px'}
-                width='full'
-                mb='4'
-              >
-                <Text
-                  fontSize={'smSubHead'}
-                  fontWeight='400'
-                  color={'clique.secondaryGrey2'}
+              {userProfile.social === 'NULL' && (
+                <Box
+                  bg={
+                    colorMode === 'dark'
+                      ? 'clique.ashGrey'
+                      : 'clique.lightPrimaryBg'
+                  }
+                  px='2'
+                  pt='1'
+                  borderRadius={'10px'}
+                  width='full'
+                  mb='4'
                 >
-                  Password
-                </Text>
-                <Input
-                  _placeholder={{
-                    color: useColorModeValue(
-                      'clique.ashGrey',
-                      'clique.lightPrimaryBg',
-                    ),
-                    fontFamily: 'Poppins',
-                  }}
-                  color={useColorModeValue(
-                    'clique.ashGrey',
-                    'clique.lightPrimaryBg',
-                  )}
-                  variant='filled'
-                  size='sm'
-                  bg={useColorModeValue(
-                    'clique.lightPrimaryBg',
-                    'clique.ashGrey',
-                  )}
-                  type='password'
-                  name='password'
-                  required={true}
-                  value={beneficiaryData.password}
-                  onChange={(e) => handleChange(e)}
-                  outline='none'
-                  border='none'
-                  // color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
-                  _hover={{
-                    backgroundColor: 'transparent',
-                  }}
-                  autoComplete='off'
-                />
-              </Box>
+                  <Text
+                    fontSize={'smSubHead'}
+                    fontWeight='400'
+                    color={'clique.secondaryGrey2'}
+                  >
+                    Password
+                  </Text>
+                  <Input
+                    _placeholder={{
+                      color:
+                        colorMode === 'dark'
+                          ? 'clique.lightPrimaryBg'
+                          : 'clique.ashGrey',
+                      fontFamily: 'Poppins',
+                    }}
+                    color={
+                      colorMode === 'dark'
+                        ? 'clique.lightPrimaryBg'
+                        : 'clique.ashGrey'
+                    }
+                    variant='filled'
+                    size='sm'
+                    bg={
+                      colorMode === 'dark'
+                        ? 'clique.ashGrey'
+                        : 'clique.lightPrimaryBg'
+                    }
+                    type='password'
+                    name='password'
+                    required={true}
+                    value={beneficiaryData.password}
+                    onChange={(e) => handleChange(e)}
+                    outline='none'
+                    border='none'
+                    // color={colorMode !== 'dark' ? Color().whiteAndBlack : ''}
+                    _hover={{
+                      backgroundColor: 'transparent',
+                    }}
+                    autoComplete='off'
+                  />
+                </Box>
+              )}
               <Box px='7'>
                 <Btn
                   text={
