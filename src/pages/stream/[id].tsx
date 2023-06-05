@@ -69,6 +69,11 @@ function Index() {
       });
       window.location.href = "/liveevents";
     });
+
+    return () => {
+      socket.off("newviewer");
+      socket.off("streamended");
+    };
   }, [socket]);
   return (
     <HomeLayout>

@@ -51,6 +51,10 @@ function CommentSection({ streamDetails }: any) {
         commentsRef.current.push(data._id.toString());
       }
     });
+
+    return () => {
+      socket.off("commentchange");
+    };
   }, []);
   useEffect(() => {
     dummy.current.scrollIntoView({ behavior: "smooth" });

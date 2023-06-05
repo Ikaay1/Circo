@@ -50,6 +50,10 @@ function CamCommentSection({ setClose, id }: { setClose: any; id: string }) {
         commentsRef.current.push(data._id.toString());
       }
     });
+
+    return () => {
+      socket.off("commentchange");
+    };
   }, []);
 
   useEffect(() => {
