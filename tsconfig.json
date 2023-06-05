@@ -28,6 +28,6 @@
     "**/*.tsx",
     "src/constants/fiirebase.js",
     "src/components/createChannel/Testd.tss"
-, "src/redux/services/livestream/streamComment.service.ts", "src/components/player/HlSource.jsx", ],
+, "src/redux/services/livestream/streamComment.service.ts", "src/components/player/HlSource.jsx", "server.js", ],
   "exclude": ["node_modules"]
 }
