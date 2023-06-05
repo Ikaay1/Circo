@@ -166,6 +166,11 @@ pre {
   /* display: none; */
   /* opacity: 1; */
 }
+.tourArrow {
+  animation: clique 1.4s linear infinite;
+  /* display: none; */
+  /* opacity: 1; */
+}
 
 .flutter-div {
   display: flex;
