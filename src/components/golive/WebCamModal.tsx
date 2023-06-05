@@ -257,32 +257,35 @@ function WebCamModal({ setState }: { setState: any }) {
                       position: "top-right",
                     });
 
-                    const createSpaceRes: any = await createSpace({
-                      muxStreamId:
-                        createLive.data?.data?.livestream?.muxStreamId,
-                    });
-                    if (!createSpaceRes?.data?.data) {
-                      toast({
-                        title: "Space Creation Failed",
-                        status: "error",
-                        duration: 3000,
-                        isClosable: true,
-                        position: "top-right",
-                      });
-                      setLoading(false);
-                      return;
-                    }
+                    // const createSpaceRes: any = await createSpace({
+                    //   muxStreamId:
+                    //     createLive.data?.data?.livestream?.muxStreamId,
+                    // });
+                    // if (!createSpaceRes?.data?.data) {
+                    //   toast({
+                    //     title: "Space Creation Failed",
+                    //     status: "error",
+                    //     duration: 3000,
+                    //     isClosable: true,
+                    //     position: "top-right",
+                    //   });
+                    //   setLoading(false);
+                    //   return;
+                    // }
 
                     dispatch(
                       setWebCamStream({
                         payload: {
                           ...createLive?.data?.data?.livestream,
-                          ...createSpaceRes?.data?.data,
+                          // ...createSpaceRes?.data?.data,
                         },
                       })
                     );
+                    // router.push(
+                    //   `/stream/webcam/${res.data?.data?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}&title=${values.title}`
+                    // );
                     router.push(
-                      `/stream/webcam/${res.data?.data?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&spaceId=${createSpaceRes?.data?.data?.space?.id}&token=${createSpaceRes.data?.data?.token}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&broadcastId=${createSpaceRes?.data?.data?.broadcast?.id}&title=${values.title}`
+                      `/stream/webcam/${res.data?.data?._id}/?streamKey=${createLive.data?.data?.livestream?.streamKey}&muxStreamId=${createLive.data?.data?.livestream?.muxStreamId}&title=${values.title}`
                     );
                   } else {
                     toast({

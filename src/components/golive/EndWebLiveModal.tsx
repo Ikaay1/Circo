@@ -20,7 +20,6 @@ function EndWebLiveModal({ id }: { id: string }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [endStreamDetails, setEndStreamDetails] = React.useState(null as any);
   const router = useRouter();
-  console.log(endStreamDetails);
   return (
     <>
       <Button
