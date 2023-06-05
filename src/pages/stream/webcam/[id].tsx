@@ -289,6 +289,7 @@ function Index() {
         </Box>
         {close ? (
           <Button
+            zIndex={50000}
             pos={"absolute"}
             top={"calc(10vh + 20px)"}
             right={"20px"}
