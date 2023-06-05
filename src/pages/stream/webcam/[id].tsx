@@ -111,6 +111,10 @@ function Index() {
         setCurrentViewers(data?.count);
       }
     });
+
+    return () => {
+      socket.off("userJoinLeave");
+    };
   }, [livestreamId]);
 
   const [connected, setConnected] = useState(false);
