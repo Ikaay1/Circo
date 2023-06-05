@@ -43,7 +43,7 @@ const TourMain = ({
           position={'fixed'}
           top={
             number === '1'
-              ? 'calc(10vh + 175px)'
+              ? 'calc(10vh + 120px)'
               : number === '2'
               ? '5vh'
               : number === '3'
@@ -53,29 +53,38 @@ const TourMain = ({
               : number === '5'
               ? '5vh'
               : number === '6'
-              ? 'calc(10vh + 40px)'
+              ? 'calc(8vh)'
               : number === '7'
-              ? 'calc(10vh + 80px)'
+              ? 'calc(10vh + 31px)'
               : number === '8'
-              ? 'calc(10vh + 216px)'
-              : 'calc(10vh + 353px)'
+              ? 'calc(10vh + 167px)'
+              : 'calc(10vh + 304px)'
           }
           left={
             number === '1'
-              ? '90px'
+              ? '180px'
               : number === '2'
-              ? '65.2%'
+              ? '65.5%'
               : number === '3'
               ? '21%'
               : number === '4'
               ? '76.5%'
               : number === '5'
               ? '85%'
-              : '90px'
+              : '180px'
           }
           width='70px'
           height='118px'
           className='tourArrow'
+          transform={
+            header.toLowerCase() === 'profile' ||
+            header.toLowerCase() === 'home' ||
+            header.toLowerCase() === 'discover' ||
+            header.toLowerCase() === 'wallet' ||
+            header.toLowerCase() === 'settings'
+              ? 'rotate(-90deg)'
+              : undefined
+          }
           // border='1px solid red'
         />
         <ModalContent
