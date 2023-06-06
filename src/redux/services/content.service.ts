@@ -1,7 +1,7 @@
-import { store } from 'redux/app/store';
+import {store} from 'redux/app/store';
 
-import { baseUrl } from '@constants/utils';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {baseUrl} from '@constants/utils';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const contentApi = createApi({
   reducerPath: 'contentApi',
@@ -21,7 +21,9 @@ export const contentApi = createApi({
       query: (body) => ({
         url: `content/upload-video`,
         method: 'POST',
-        headers: {},
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: body,
       }),
       invalidatesTags: ['Content'],
