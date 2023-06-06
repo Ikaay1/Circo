@@ -88,7 +88,7 @@ function HoverCard({
           cursor='pointer'
         />
 
-        <Box maxWidth={'70%'}>
+        <Box w={{base: 'calc(100%)', lg: '70%'}}>
           <Text
             noOfLines={1}
             color={Color().blackAndPureWhite}
