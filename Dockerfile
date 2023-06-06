@@ -1,6 +1,11 @@
 # Common build stage
 FROM node:16.16.0 as common-build-stage
 
+# Install ffmpeg
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY . ./app
 
 WORKDIR /app
