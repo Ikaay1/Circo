@@ -168,7 +168,7 @@ function UploadPage({url, name}: Props) {
           position: 'top-right',
         });
         router.push('/home');
-      }, 1000);
+      }, 1500);
     } else {
       toast({
         title: 'Upload failed',
