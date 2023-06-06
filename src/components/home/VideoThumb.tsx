@@ -1,28 +1,28 @@
 import moment from 'moment';
-import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
-import { VscReport } from 'react-icons/vsc';
-import { useAppSelector } from 'redux/app/hooks';
-import { useDeleteContentMutation } from 'redux/services/bank.service';
-import { useGetIndividualChannelQuery } from 'redux/services/channel.service';
+import {useRouter} from 'next/router';
+import React, {useEffect, useRef, useState} from 'react';
+import {VscReport} from 'react-icons/vsc';
+import {useAppSelector} from 'redux/app/hooks';
+import {useDeleteContentMutation} from 'redux/services/bank.service';
+import {useGetIndividualChannelQuery} from 'redux/services/channel.service';
 import {
-	useSaveVideoMutation,
-	useUnSaveVideoMutation,
+  useSaveVideoMutation,
+  useUnSaveVideoMutation,
 } from 'redux/services/report.service';
 
 import {
-	Avatar,
-	Box,
-	Flex,
-	Icon,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	ScaleFade,
-	Skeleton,
-	Text,
-	useDisclosure,
-	useToast,
+  Avatar,
+  Box,
+  Flex,
+  Icon,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  ScaleFade,
+  Skeleton,
+  Text,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import CopyBox from '@components/channel/CopyBox';
 import Sure from '@components/channel/Sure';
@@ -36,13 +36,13 @@ import TrashIcon from '@icons/TrashIcon';
 import VideoSideIcon from '@icons/VideoSideIcon';
 
 import {
-	API,
-	baseUrl,
-	contentData,
-	createObjectURL,
-	decrypt,
+  API,
+  baseUrl,
+  contentData,
+  createObjectURL,
+  decrypt,
 } from '../../constants/utils';
-import { useRoutingChannel } from '../../hooks/useRoutingChannel';
+import {useRoutingChannel} from '../../hooks/useRoutingChannel';
 import HoverCard from './HoverCard';
 import SubScribeModal from './SubScribeModal';
 
@@ -355,7 +355,7 @@ function VideoThumb({
               cursor='pointer'
             />
 
-            <Box w='calc(100%)'>
+            <Box maxWidth={'70%'}>
               <Text
                 noOfLines={1}
                 color={Color().blackAndPureWhite}
@@ -369,7 +369,7 @@ function VideoThumb({
 
               <Text
                 mt='5px'
-                noOfLines={2}
+                noOfLines={1}
                 color={'clique.darkGrey'}
                 fontFamily={'Poppins'}
                 fontWeight={400}
