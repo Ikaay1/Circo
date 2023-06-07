@@ -175,7 +175,7 @@ function UploadPage({url, name}: Props) {
         isClosable: true,
         position: 'top-right',
       });
-      // router.push('/home');
+      router.push('/home');
       // }, 1500);
     } else {
       toast({
