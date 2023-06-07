@@ -125,7 +125,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
                 fontSize={{lg: 'sm3', xl: 'smSubHead'}}
                 lineHeight={'1.2'}
               >
-                {moment(video?.createdAt).fromNow()}
+                {moment(video?.updatedAt).fromNow()}
               </Text>
             </Flex>
           </Box>

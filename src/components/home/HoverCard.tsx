@@ -144,7 +144,7 @@ function HoverCard({
               fontSize={'sm'}
               lineHeight={'1.2'}
             >
-              {moment(video?.createdAt).fromNow()}
+              {moment(video?.updatedAt).fromNow()}
             </Text>
           </Flex>
         </Box>
