@@ -119,13 +119,13 @@ export default function CustumField({
             >
               {sideContent ? (
                 sideContent
-              ) : (
+              ) : type === 'password' ? (
                 <Icon
                   as={PasswordIcon}
                   cursor='pointer'
                   onClick={() => setShow(!show)}
                 />
-              )}
+              ) : null}
             </Text>
           </Box>
           <Flex mx='auto' justify={'center'}>

@@ -138,7 +138,7 @@ function Search() {
                         mt={{base: '8px', lg: '20px'}}
                         height={{base: '40vh', lg: '65%'}}
                       >
-                        <EmptyState msg='Oops!. No video here' />
+                        <EmptyState msg='Oops!. No search video result here' />
                       </Box>
                     ) : (
                       <>

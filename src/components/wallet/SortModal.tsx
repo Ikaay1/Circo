@@ -1,19 +1,19 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 
 import {
-	Box,
-	Checkbox,
-	Flex,
-	Icon,
-	Input,
-	InputGroup,
-	InputLeftElement,
-	Modal,
-	ModalBody,
-	ModalContent,
-	Stack,
-	Text,
-	useColorModeValue,
+  Box,
+  Checkbox,
+  Flex,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Modal,
+  ModalBody,
+  ModalContent,
+  Stack,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
 import CalenderIcon from '@icons/CalenderIcon';
@@ -77,7 +77,23 @@ function SortModal({
         setTransactionHistory(filteredHistory);
       }
     } else {
-      setTransactionHistory(walletTransaction);
+      if (all) {
+        setTransactionHistory(walletTransaction);
+      } else if (credit && !debit) {
+        setTransactionHistory(
+          walletTransaction.filter(
+            (each) => each?.type === 'deposit' || each?.type === 'transferIn',
+          ),
+        );
+      } else if (debit && !credit) {
+        setTransactionHistory(
+          walletTransaction.filter(
+            (each) => each?.type !== 'deposit' && each?.type !== 'transferIn',
+          ),
+        );
+      } else {
+        setTransactionHistory(walletTransaction);
+      }
     }
   }, [startDate, endDate, all, credit, debit]);
 
