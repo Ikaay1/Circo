@@ -21,9 +21,9 @@ export const contentApi = createApi({
       query: (body) => ({
         url: `content/upload-video`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: {},
+        credentials: 'include',
+        formData: true,
         body: body,
       }),
       invalidatesTags: ['Content'],

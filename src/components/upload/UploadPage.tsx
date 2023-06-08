@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {useRouter} from 'next/router';
-import {FormEvent, useEffect, useState} from 'react';
+import {FormEvent, useEffect, useRef, useState} from 'react';
 import {useCategoryQuery} from 'redux/services/category.service';
 import {useCreateContentMutation} from 'redux/services/content.service';
 
@@ -49,49 +49,51 @@ function UploadPage({url, name}: Props) {
   const {data, isLoading} = useCategoryQuery('');
   const [thumbNail, setThumbNail] = useState<string | Blob>('');
   const [imageError, setImageError] = useState<string>('');
+  const [videoDuration, setVideoDuration] = useState<number>(0);
   const [createContent, createContentStatus] = useCreateContentMutation();
   const [isFree, setIsFree] = useState<boolean>(false);
+  const videoEl = useRef(null);
 
-  const uploadVideo = async (id: string) => {
-    let file = await fetch(url)
-      .then((r) => r.blob())
-      .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
+  // const uploadVideo = async (id: string) => {
+  //   let file = await fetch(url)
+  //     .then((r) => r.blob())
+  //     .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'videouploads');
-    formData.append('public_id', id);
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   formData.append('upload_preset', 'videouploads');
+  //   formData.append('public_id', id);
 
-    axios
-      .post(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
-        formData,
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  //   axios
+  //     .post(
+  //       `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
+  //       formData,
+  //     )
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
 
-    if (thumbNail && typeof thumbNail !== 'string') {
-      const formData2 = new FormData();
-      formData2.append('file', thumbNail);
-      formData2.append('upload_preset', 'circo_image');
-      formData2.append('public_id', id);
-      axios
-        .post(
-          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-          formData2,
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+  //   if (thumbNail && typeof thumbNail !== 'string') {
+  //     const formData2 = new FormData();
+  //     formData2.append('file', thumbNail);
+  //     formData2.append('upload_preset', 'circo_image');
+  //     formData2.append('public_id', id);
+  //     axios
+  //       .post(
+  //         `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+  //         formData2,
+  //       )
+  //       .then((response) => {
+  //         console.log(response);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -117,58 +119,64 @@ function UploadPage({url, name}: Props) {
       });
       return;
     }
-    let values;
+    // let values;
+    const formData = new FormData();
+    let file = await fetch(url)
+      .then((r) => r.blob())
+      .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
     if (!thumbNail) {
-      // toast({
-      //   title: 'Error',
-      //   description: 'Please upload a thumbnail',
-      //   status: 'error',
-      //   duration: 3000,
-      //   isClosable: true,
-      //   position: 'top-right',
-      // });
-      // return;
-      values = {
-        title: state.title,
-        description: state.description,
-        category: state.category,
-        ageRange: state.ageRange,
-        isFree: isFree.toString(),
-        noThumb: true,
-      };
+      // values = {
+      //   title: state.title,
+      //   description: state.description,
+      //   category: state.category,
+      //   ageRange: state.ageRange,
+      //   isFree: isFree.toString(),
+      //   noThumb: true,
+      // };
+      formData.append('title', state.title);
+      formData.append('description', state.description);
+      formData.append('category', state.category);
+      formData.append('ageRange', state.ageRange);
+      formData.append('duration', `${videoDuration}`);
+      formData.append('noThumb', 'true');
+      formData.append('size', `${file?.size / 1024}`);
+      formData.append('file', file);
+      formData.append('isFree', isFree.toString());
     } else {
-      values = {
-        title: state.title,
-        description: state.description,
-        category: state.category,
-        ageRange: state.ageRange,
-        isFree: isFree.toString(),
-      };
+      // values = {
+      //   title: state.title,
+      //   description: state.description,
+      //   category: state.category,
+      //   ageRange: state.ageRange,
+      //   isFree: isFree.toString(),
+      // };
+      formData.append('title', state.title);
+      formData.append('description', state.description);
+      formData.append('category', state.category);
+      formData.append('ageRange', state.ageRange);
+      formData.append('duration', `${videoDuration}`);
+      formData.append('size', `${file?.size / 1024}`);
+      formData.append('file', file);
+      formData.append('thumbNail', thumbNail);
+      formData.append('isFree', isFree.toString());
     }
-    // const formData = new FormData();
-    // formData.append('title', state.title);
-    // formData.append('description', state.description);
-    // formData.append('category', state.category);
-    // formData.append('ageRange', state.ageRange);
-    // formData.append('file', file);
-    // formData.append('thumbNail', thumbNail);
-    // formData.append('isFree', isFree.toString());
 
     // const res: any = createContent(formData);
-    const res: any = await createContent(values);
+    const res: any = await createContent(formData);
+    console.log('res', res);
     if ('data' in res) {
-      uploadVideo(res?.data?.data?._id);
-      setTimeout(() => {
-        toast({
-          title: 'Your video is being uploaded',
-          description: "You'll get a notification when it completes uploading",
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-          position: 'top-right',
-        });
-        router.push('/home');
-      }, 1000);
+      // uploadVideo(res?.data?.data?._id);
+      // setTimeout(() => {
+      toast({
+        title: 'Your video is being uploaded',
+        description: "You'll get a notification when it completes uploading",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      router.push('/home');
+      // }, 1500);
     } else {
       toast({
         title: 'Upload failed',
@@ -188,6 +196,13 @@ function UploadPage({url, name}: Props) {
       }, 3000);
     }
   }, [imageError]);
+
+  const handleLoadedMetadata = () => {
+    const video: any = videoEl.current;
+    if (!video) return;
+    setVideoDuration(video.duration);
+    console.log(typeof video.duration);
+  };
 
   const valueC = useColorModeValue('clique.white', 'clique.secondaryGrey1');
   return (
@@ -306,6 +321,8 @@ function UploadPage({url, name}: Props) {
                       width='100%'
                       height='110px'
                       style={{borderRadius: '10px', cursor: 'pointer'}}
+                      ref={videoEl}
+                      onLoadedMetadata={handleLoadedMetadata}
                     >
                       <source src={url} />
                       Your browser does not support the video tag.
@@ -429,6 +446,7 @@ function UploadPage({url, name}: Props) {
               text='Upload'
               submit={true}
               isLoading={createContentStatus.isLoading}
+              disabled={!videoDuration ? true : false}
               w='300px'
             />
           </Flex>

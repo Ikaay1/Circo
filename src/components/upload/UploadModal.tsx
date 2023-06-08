@@ -40,6 +40,17 @@ function UploadModal() {
       setIsDragging(false);
       return;
     }
+    // if (event.target.files[0]?.size / 1024 > 71680) {
+    //   toast({
+    //     title: 'Please select a video less than or equal to 70mb',
+    //     status: 'error',
+    //     duration: 3000,
+    //     isClosable: true,
+    //     position: 'top-right',
+    //   });
+    //   setIsDragging(false);
+    //   return;
+    // }
     const file = event.target.files[0];
     const name = file?.name;
     const url = URL?.createObjectURL(file);
@@ -102,6 +113,17 @@ function UploadModal() {
                     setIsDragging(false);
                     return;
                   }
+                  // if (acceptedFiles[0]?.size / 1024 > 71680) {
+                  //   toast({
+                  //     title: 'Please select a video less than or equal to 70mb',
+                  //     status: 'error',
+                  //     duration: 3000,
+                  //     isClosable: true,
+                  //     position: 'top-right',
+                  //   });
+                  //   setIsDragging(false);
+                  //   return;
+                  // }
                   const file = acceptedFiles[0];
                   const name = file?.name;
                   const url = URL?.createObjectURL(file);

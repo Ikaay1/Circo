@@ -67,6 +67,7 @@ function EachComment({comment}: {comment: any}) {
                   fontWeight={400}
                   fontSize={'subHead'}
                   lineHeight={'1.2'}
+                  maxW={'200px'}
                 >
                   {comment?.commentUser?.name ?? ' NA '}
                 </Text>

@@ -110,7 +110,7 @@ function DiscoverCard({video}: {video: contentData}) {
                 fontSize={'subHead'}
                 lineHeight={'1.2'}
               >
-                {moment(video?.createdAt).fromNow()}
+                {moment(video?.updatedAt).fromNow()}
               </Text>
             </Flex>
           </Box>

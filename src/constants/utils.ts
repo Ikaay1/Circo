@@ -846,6 +846,7 @@ export interface contentData {
   _id: string;
   dislikesCount: number;
   likesCount: number;
+  duration: number;
   thumbNail: string;
   video: string;
   uploader_id: uploaderId;
@@ -853,6 +854,7 @@ export interface contentData {
   description: string;
   view: number;
   createdAt: any;
+  updatedAt: any;
   category_id: string;
   uploader_userName: string;
   channel_id?: any;

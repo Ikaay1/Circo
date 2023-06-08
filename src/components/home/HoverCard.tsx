@@ -88,7 +88,7 @@ function HoverCard({
           cursor='pointer'
         />
 
-        <Box maxWidth={'70%'}>
+        <Box w={{base: 'calc(100%)', lg: '70%'}}>
           <Text
             noOfLines={1}
             color={Color().blackAndPureWhite}
@@ -144,7 +144,7 @@ function HoverCard({
               fontSize={'sm'}
               lineHeight={'1.2'}
             >
-              {moment(video?.createdAt).fromNow()}
+              {moment(video?.updatedAt).fromNow()}
             </Text>
           </Flex>
         </Box>

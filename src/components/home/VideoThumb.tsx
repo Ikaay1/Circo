@@ -89,9 +89,6 @@ function VideoThumb({
   const router = useRouter();
   const [show, setShow] = React.useState(false);
   const [url, setUrl] = React.useState('');
-  const [videoTime, setVideoTime] = useState('0:00');
-  const [loading, setLoading] = useState(true);
-  const videoRef = useRef(null);
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
   const [unSaveVideo, unSaveVideoStatus] = useUnSaveVideoMutation();
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
@@ -239,18 +236,6 @@ function VideoThumb({
     display(decrypt(video?.video));
   }, []);
 
-  const handleLoadedMetadata = () => {
-    let vid: any = videoRef.current;
-    console.log('vid', vid);
-    if (!vid) return;
-    let minutes = parseInt(`${vid.duration / 60}`, 10);
-    let seconds = Math.round(vid.duration % 60);
-    seconds.toString().length === 1
-      ? setVideoTime(`${minutes}:0${seconds}`)
-      : setVideoTime(`${minutes}:${seconds}`);
-    setLoading(false);
-  };
-
   return (
     <>
       <Box position={'relative'} ref={lastElementRef}>
@@ -267,12 +252,7 @@ function VideoThumb({
         />
 
         <Box display={isHover && !isOpen && url ? 'none' : 'block'}>
-          <video
-            style={{display: 'none'}}
-            ref={videoRef}
-            onLoadedMetadata={handleLoadedMetadata}
-            src={url}
-          />
+          <video style={{display: 'none'}} src={url} />
 
           <Box
             onMouseOver={() => {
@@ -340,7 +320,9 @@ function VideoThumb({
               fontSize='sm4'
               color='clique.white'
             >
-              {loading ? '--:--' : videoTime}
+              {video?.duration
+                ? new Date(video?.duration * 1000).toISOString().slice(11, 19)
+                : '0:10:00'}
             </Text>
           </Box>
 
@@ -355,7 +337,7 @@ function VideoThumb({
               cursor='pointer'
             />
 
-            <Box maxWidth={'70%'}>
+            <Box w={{base: 'calc(100%)', lg: '70%'}}>
               <Text
                 noOfLines={1}
                 color={Color().blackAndPureWhite}
@@ -411,7 +393,7 @@ function VideoThumb({
                   fontSize={'sm'}
                   lineHeight={'1.2'}
                 >
-                  {moment(video?.createdAt).fromNow()}
+                  {moment(video?.updatedAt).fromNow()}
                 </Text>
               </Flex>
             </Box>
