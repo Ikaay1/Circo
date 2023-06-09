@@ -143,7 +143,7 @@ function WebCamModal({ setState }: { setState: any }) {
   return (
     <>
       <Flex
-        display={{ base: "none", lg: "flex" }}
+        display={{ base: "none", lg: "none" }}
         mt="5px"
         cursor={"pointer"}
         onClick={() => {
@@ -174,7 +174,7 @@ function WebCamModal({ setState }: { setState: any }) {
       </Flex>
 
       <Button
-        display={{ base: "flex", lg: "none" }}
+        display={{ base: "none", lg: "none" }}
         size={"sm"}
         onClick={() => {
           onOpen();

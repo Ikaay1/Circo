@@ -68,7 +68,6 @@ function Control({
     }
   }, [userProfile?._id, router]);
 
-  const qualityChanged = function quality() {};
   return (
     <Box h="100%" mt="5px">
       <Grid
@@ -368,7 +367,6 @@ function Control({
                       video={video}
                       setUrl={setUrl}
                       url={url}
-                      qualityChanged={qualityChanged}
                     />
                   </Flex>
                 </Tooltip>
