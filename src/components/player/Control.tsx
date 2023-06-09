@@ -68,9 +68,7 @@ function Control({
     }
   }, [userProfile?._id, router]);
 
-  const qualityChanged = function quality() {
-    playerRef.current.seek(currentTimestamp);
-  };
+  const qualityChanged = function quality() {};
   return (
     <Box h="100%" mt="5px">
       <Grid
