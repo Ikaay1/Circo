@@ -46,12 +46,13 @@ function UploadPage({url, name}: Props) {
   const toast = useToast();
 
   const router = useRouter();
-  const {data, isLoading} = useCategoryQuery('');
+  const {data} = useCategoryQuery('');
   const [thumbNail, setThumbNail] = useState<string | Blob>('');
   const [imageError, setImageError] = useState<string>('');
   const [videoDuration, setVideoDuration] = useState<number>(0);
   const [createContent, createContentStatus] = useCreateContentMutation();
   const [isFree, setIsFree] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const videoEl = useRef(null);
 
   // const uploadVideo = async (id: string) => {
@@ -119,74 +120,79 @@ function UploadPage({url, name}: Props) {
       });
       return;
     }
-    // let values;
-    const formData = new FormData();
-    let file = await fetch(url)
-      .then((r) => r.blob())
-      .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
-    if (!thumbNail) {
-      // values = {
-      //   title: state.title,
-      //   description: state.description,
-      //   category: state.category,
-      //   ageRange: state.ageRange,
-      //   isFree: isFree.toString(),
-      //   noThumb: true,
-      // };
-      formData.append('title', state.title);
-      formData.append('description', state.description);
-      formData.append('category', state.category);
-      formData.append('ageRange', state.ageRange);
-      formData.append('duration', `${videoDuration}`);
-      formData.append('noThumb', 'true');
-      formData.append('size', `${file?.size / 1024}`);
-      formData.append('file', file);
-      formData.append('isFree', isFree.toString());
-    } else {
-      // values = {
-      //   title: state.title,
-      //   description: state.description,
-      //   category: state.category,
-      //   ageRange: state.ageRange,
-      //   isFree: isFree.toString(),
-      // };
-      formData.append('title', state.title);
-      formData.append('description', state.description);
-      formData.append('category', state.category);
-      formData.append('ageRange', state.ageRange);
-      formData.append('duration', `${videoDuration}`);
-      formData.append('size', `${file?.size / 1024}`);
-      formData.append('file', file);
-      formData.append('thumbNail', thumbNail);
-      formData.append('isFree', isFree.toString());
-    }
+    setIsLoading(true);
+    const upload = async () => {
+      // let values;
+      const formData = new FormData();
+      let file = await fetch(url)
+        .then((r) => r.blob())
+        .then((blobFile) => new File([blobFile], name, {type: 'video/mp4'}));
+      if (!thumbNail) {
+        // values = {
+        //   title: state.title,
+        //   description: state.description,
+        //   category: state.category,
+        //   ageRange: state.ageRange,
+        //   isFree: isFree.toString(),
+        //   noThumb: true,
+        // };
+        formData.append('title', state.title);
+        formData.append('description', state.description);
+        formData.append('category', state.category);
+        formData.append('ageRange', state.ageRange);
+        formData.append('duration', `${videoDuration}`);
+        formData.append('noThumb', 'true');
+        formData.append('size', `${file?.size / 1024}`);
+        formData.append('file', file);
+        formData.append('isFree', isFree.toString());
+      } else {
+        // values = {
+        //   title: state.title,
+        //   description: state.description,
+        //   category: state.category,
+        //   ageRange: state.ageRange,
+        //   isFree: isFree.toString(),
+        // };
+        formData.append('title', state.title);
+        formData.append('description', state.description);
+        formData.append('category', state.category);
+        formData.append('ageRange', state.ageRange);
+        formData.append('duration', `${videoDuration}`);
+        formData.append('size', `${file?.size / 1024}`);
+        formData.append('file', file);
+        formData.append('thumbNail', thumbNail);
+        formData.append('isFree', isFree.toString());
+      }
 
-    // const res: any = createContent(formData);
-    const res: any = await createContent(formData);
-    console.log('res', res);
-    if ('data' in res) {
-      // uploadVideo(res?.data?.data?._id);
-      // setTimeout(() => {
-      toast({
-        title: 'Your video is being uploaded',
-        description: "You'll get a notification when it completes uploading",
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-        position: 'top-right',
-      });
-      router.push('/home');
-      // }, 1500);
-    } else {
-      toast({
-        title: 'Upload failed',
-        description: res.error?.data?.message || 'Something went wrong',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
-    }
+      // const res: any = createContent(formData);
+      const res: any = await createContent(formData);
+      console.log('res', res);
+      setIsLoading(false);
+      if ('data' in res) {
+        // uploadVideo(res?.data?.data?._id);
+        // setTimeout(() => {
+        toast({
+          title: 'Your video is being uploaded',
+          description: "You'll get a notification when it completes uploading",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        router.push('/home');
+        // }, 1500);
+      } else {
+        toast({
+          title: 'Upload failed',
+          description: res.error?.data?.message || 'Something went wrong',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      }
+    };
+    upload();
   };
 
   useEffect(() => {
@@ -445,7 +451,7 @@ function UploadPage({url, name}: Props) {
             <Btn
               text='Upload'
               submit={true}
-              isLoading={createContentStatus.isLoading}
+              isLoading={isLoading}
               disabled={!videoDuration ? true : false}
               w='300px'
             />

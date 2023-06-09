@@ -367,6 +367,7 @@ function Control({
                       video={video}
                       setUrl={setUrl}
                       url={url}
+                      currentTimestamp={currentTimestamp}
                     />
                   </Flex>
                 </Tooltip>
