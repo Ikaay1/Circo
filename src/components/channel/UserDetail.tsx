@@ -135,17 +135,25 @@ const UserDetail = ({data, id}: {data?: Channel; id: string}) => {
                     color='white'
                     zIndex={'-1'}
                     mx='auto'
-                  ></Circle>
-                  <Box top='15%' left='17%' position={'absolute'}>
-                    <Icon as={EmptyProfile} fontSize='81px' />
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                  >
                     <Box
-                      top='55%'
-                      left='43%'
-                      zIndex='1'
+                      // top='15%'
+                      // left='17%'
                       position={'absolute'}
-                      cursor='pointer'
-                    ></Box>
-                  </Box>
+                    >
+                      <Icon as={EmptyProfile} fontSize='81px' />
+                      <Box
+                        top='55%'
+                        left='43%'
+                        zIndex='1'
+                        position={'absolute'}
+                        cursor='pointer'
+                      ></Box>
+                    </Box>
+                  </Circle>
                 </>
               )}
             </Box>

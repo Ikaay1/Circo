@@ -61,6 +61,9 @@ function EachComment({
       setReply('');
       setForReply(true);
       await replyComment({commentId: comment._id, reply: reply.trim()});
+      setTimeout(() => {
+        setShow(false);
+      }, 1000);
     }
   };
   const handleLikeComment = async (id: string) => {

@@ -33,7 +33,15 @@ import VideoQualityIcon from '@icons/VideoQualityIcon';
 
 import {API, baseUrl, contentData} from '../../constants/utils';
 
-function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
+function VideoOptionMenu({
+  player,
+  video,
+  isLoop,
+  setIsLoop,
+  setUrl,
+  url,
+  currentTimestamp,
+}: any) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
@@ -90,6 +98,7 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
   };
 
   const [videoQuality, setVideoQuality] = React.useState('auto');
+  const [timestamp, setTimestamp] = React.useState(0);
   const [showVideoQuality, setShowVideoQuality] = React.useState(false);
 
   const cld = new Cloudinary({
@@ -123,18 +132,8 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
     setUrl(
       arr.slice(0, 7).join('/') + '/' + arr.splice(14).join('/').split('?')[0],
     );
-    // setUrl(
-    //   arr.slice(0, 7).join('/') +
-    //     '/' +
-    //     arr
-    //       .splice(arr.length - 3)
-    //       .join('/')
-    //       .split('?')[0],
-    // );
-    // setUrl(
-    //   arr.slice(0, 7).join('/') + '/' + arr.slice(15).join('/').split('?')[0],
-    // );
   }, [videoQuality]);
+
   return (
     <Menu closeOnSelect={false} placement='top'>
       <MenuButton aria-label='Options'>

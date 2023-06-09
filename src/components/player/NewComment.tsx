@@ -152,7 +152,7 @@ function NewComment({
         // motionPreset='slideInRight'
         scrollBehavior='inside'
       >
-        <ModalOverlay />
+        {/* <ModalOverlay /> */}
         <ModalContent
           position={'absolute'}
           right={0}

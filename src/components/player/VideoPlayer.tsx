@@ -140,7 +140,6 @@ function VideoPlayer({
           width='100%'
           src={url}
           height='100%'
-          startTime={currentTimestamp}
           // onEnded={() => {
           //   if (isLoop) {
           //     playerRef.current.seek(0);
