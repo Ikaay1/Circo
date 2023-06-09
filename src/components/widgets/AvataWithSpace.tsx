@@ -10,6 +10,7 @@ function AvataWithSpace({
   borderColor,
   borderThickness,
   avatarSize,
+  onClick,
 }: {
   url: string;
   name: string;
@@ -19,6 +20,7 @@ function AvataWithSpace({
   borderColor?: string;
   borderThickness: string;
   avatarSize?: string;
+  onClick?: any;
 }) {
   return (
     <Flex
@@ -34,6 +36,7 @@ function AvataWithSpace({
       border={`${borderThickness} solid`}
       borderColor={borderColor}
       rounded="full"
+      onClick={onClick}
     >
       <Avatar
         p="0"

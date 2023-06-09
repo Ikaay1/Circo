@@ -37,6 +37,7 @@ function CommentSection({}: {}) {
   }, [data]);
   useEffect(() => {
     socket.on("commentchange", async (data: any) => {
+      if (data?.streamId !== id) return;
       const index = comments.findIndex((comment) => {
         return comment._id.toString() === data._id.toString();
       });
