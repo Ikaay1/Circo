@@ -1,22 +1,23 @@
-import moment from "moment";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { BiDislike, BiLike } from "react-icons/bi";
-import { useAppSelector } from "redux/app/hooks";
+import moment from 'moment';
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
+import {BiDislike, BiLike} from 'react-icons/bi';
+import {useAppSelector} from 'redux/app/hooks';
 import {
   useDislikeStreamCommentMutation,
   useLikeStreamCommentMutation,
-} from "redux/services/livestream/streamComment.service";
+} from 'redux/services/livestream/streamComment.service';
 
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
-import AvataWithSpace from "@components/widgets/AvataWithSpace";
-import NewReplyComment from "./NewReplyComment";
-import EachReply from "./EachReply";
+import {Box, Flex, Icon, Text} from '@chakra-ui/react';
+import AvataWithSpace from '@components/widgets/AvataWithSpace';
 
-function EachChatComment({ comment }: { comment: any }) {
+import EachReply from './EachReply';
+import NewReplyComment from './NewReplyComment';
+
+function EachChatComment({comment}: {comment: any}) {
   const router = useRouter();
-  const { id } = router.query;
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
+  const {id} = router.query;
+  const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   const [likeStreamComment, commentInfo] = useLikeStreamCommentMutation();
   const [dislikeStreamComment, commentInfo2] =
@@ -24,49 +25,50 @@ function EachChatComment({ comment }: { comment: any }) {
 
   const [show, setShow] = useState(false);
   return (
-    <Box position={"relative"}>
-      <Box mt="5px" rounded="10px" px="20px" pt="20px">
+    <Box position={'relative'}>
+      <Box mt='5px' rounded='10px' px='20px' pt='20px'>
         <Flex>
           <AvataWithSpace
-            name={comment?.commentUser?.name ?? "NA"}
+            name={comment?.commentUser?.name ?? 'NA'}
             url={comment?.commentUser?.photo}
-            mr="20px"
-            size="40px"
-            borderThickness="2px"
-            borderColor="clique.base"
+            mr='20px'
+            size='40px'
+            borderThickness='2px'
+            borderColor='clique.base'
           />
           <Box>
-            <Flex alignItems={"center"} justifyContent={"space-between"}>
+            <Flex alignItems={'center'} justifyContent={'space-between'}>
               <Text
-                mr="10px"
+                mr='10px'
                 noOfLines={2}
-                color={"clique.white"}
-                fontFamily={"Poppins"}
+                color={'clique.white'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"subHead"}
-                lineHeight={"1.2"}
+                fontSize={'subHead'}
+                lineHeight={'1.2'}
+                maxW={'200px'}
               >
-                {comment?.commentUser?.name ?? " NA "}
+                {comment?.commentUser?.name ?? ' NA '}
               </Text>
               <Text
                 noOfLines={2}
-                color={"clique.darkGrey"}
-                fontFamily={"Poppins"}
+                color={'clique.darkGrey'}
+                fontFamily={'Poppins'}
                 fontWeight={400}
-                fontSize={"smSubHead"}
-                lineHeight={"1.2"}
+                fontSize={'smSubHead'}
+                lineHeight={'1.2'}
               >
                 {moment(comment.createdAt).fromNow()}
               </Text>
             </Flex>
 
             <Text
-              mt="5px"
-              color={"clique.white"}
-              fontFamily={"Poppins"}
+              mt='5px'
+              color={'clique.white'}
+              fontFamily={'Poppins'}
               fontWeight={400}
-              fontSize={"smSubHead"}
-              lineHeight={"1.3"}
+              fontSize={'smSubHead'}
+              lineHeight={'1.3'}
             >
               {comment?.commentBody}
             </Text>
@@ -169,9 +171,9 @@ function EachChatComment({ comment }: { comment: any }) {
             Reply
           </Text>
         </Flex> */}
-      </Box>{" "}
+      </Box>{' '}
       {show && (
-        <Box mt=".5rem">
+        <Box mt='.5rem'>
           <NewReplyComment id={comment._id} />
         </Box>
       )}
