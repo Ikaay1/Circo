@@ -108,6 +108,7 @@ function EachReply({
               fontSize={'subHead'}
               lineHeight={'1.2'}
               mr='20px'
+              maxW={'120px'}
             >
               {`${reply?.replierId?.channel_id?.name}`}
             </Text>

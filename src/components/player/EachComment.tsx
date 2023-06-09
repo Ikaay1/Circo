@@ -135,6 +135,7 @@ function EachComment({
                   lineHeight={'1.2'}
                   mr='20px'
                   textTransform={'capitalize'}
+                  maxW={'200px'}
                 >
                   {`${comment.commenterId?.channel_id?.name}  `}
                 </Text>
