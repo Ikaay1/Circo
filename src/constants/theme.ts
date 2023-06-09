@@ -1,8 +1,8 @@
-import { switchAnatomy } from '@chakra-ui/anatomy';
+import {switchAnatomy} from '@chakra-ui/anatomy';
 import {
-	createMultiStyleConfigHelpers,
-	extendTheme,
-	ThemeConfig,
+  createMultiStyleConfigHelpers,
+  extendTheme,
+  ThemeConfig,
 } from '@chakra-ui/react';
 
 const {definePartsStyle, defineMultiStyleConfig} =
@@ -87,6 +87,7 @@ const breakpoints = {
   sm: '400px',
   md: '700px',
   lg: '1100px',
+  mdlg: '1350px',
   mlg: '1430px',
   xl: '1700px',
 };

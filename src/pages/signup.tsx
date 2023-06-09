@@ -2,7 +2,10 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';
 import {useAppSelector} from 'redux/app/hooks';
-import {usePreSignupMutation} from 'redux/services/auth.service';
+import {
+  usePreSignupMutation,
+  useValidateMutation,
+} from 'redux/services/auth.service';
 
 import {Box, Input, Text, useToast} from '@chakra-ui/react';
 import AuthButton from '@components/auth/AuthButton';
@@ -20,6 +23,7 @@ const Signup = () => {
   const token = useAppSelector((state) => state.app.userReducer.token);
   const toast = useToast();
   const [preSignup, preSignupStatus] = usePreSignupMutation();
+  const [validate, validateStatus] = useValidateMutation();
   const router = useRouter();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -105,6 +109,18 @@ const Signup = () => {
 
   const [isFirstNameFocused, setIsFirstNameFocused] = useState(false);
   const [isLastNameFocused, setIsLastNameFocused] = useState(false);
+  const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  useEffect(() => {
+    const specialChars = /[`!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
+    if (specialChars.test(userName)) {
+      setUsernameError('Username cannot contain special characters');
+    } else {
+      setUsernameError('');
+    }
+  }, [userName]);
+
   return (
     <Box
       display={'flex'}
@@ -269,8 +285,51 @@ const Signup = () => {
                     showPassword={showPassword}
                     email={inputName === 'email'}
                     referral={inputName === 'referralCode'}
+                    onBlur={
+                      name === 'Username'
+                        ? async () => {
+                            if (!usernameError) {
+                              const res: any = await validate({userName});
+                              if (res?.error) {
+                                setUsernameError(
+                                  res?.error?.data?.message ||
+                                    'Something went wrong',
+                                );
+                              }
+                            }
+                          }
+                        : name === 'Email'
+                        ? async () => {
+                            if (
+                              email
+                                .toLowerCase()
+                                .match(
+                                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                )
+                            ) {
+                              const res: any = await validate({email});
+                              if (res?.error) {
+                                setEmailError(
+                                  res?.error?.data?.message ||
+                                    'Something went wrong',
+                                );
+                              }
+                            }
+                          }
+                        : undefined
+                    }
                   />
                 </Box>
+                {name === 'Username' && usernameError && (
+                  <Text color='clique.red' fontSize='12px' mt='.3rem'>
+                    {usernameError}
+                  </Text>
+                )}
+                {name === 'Email' && emailError && (
+                  <Text color='clique.red' fontSize='12px' mt='.3rem'>
+                    {emailError}
+                  </Text>
+                )}
               </div>
             ))}
 
@@ -319,6 +378,7 @@ const Signup = () => {
               status={preSignupStatus}
               {...{marginTop: '1.2rem'}}
               name='Sign Up'
+              disabled={usernameError || emailError ? true : false}
             />
           </form>
           <SocialMedia

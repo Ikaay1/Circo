@@ -223,8 +223,9 @@ function Index() {
           onClose1();
           onOpen2();
         }}
-        text='Showcase your unique style and personality with your profile or channel. Share your best videos, connect with your audience, and build a loyal community.'
-        header='Profile'
+        text='Welcome to your personalized hub! The home screen is where you’ll find a
+        curated selection of videos tailored to your interest.'
+        header='Home'
         isOpen={isOpen1}
       />
       <TourMain
@@ -237,8 +238,9 @@ function Index() {
           onClose2();
           onOpen3();
         }}
-        text='Stay up-to-date with important updates and never miss a beat. Receive instant notifications about new video uploads, live events, comments, and likes.'
-        header='Notification'
+        text='Explore new genres, discover emerging creators, and find hidden gems
+        that align with your interest.'
+        header='Discover'
         isOpen={isOpen2}
       />
       <TourMain
@@ -251,9 +253,9 @@ function Index() {
           onClose3();
           onOpen4();
         }}
-        text='Looking for specific videos or creators? Our powerful search feature allows
-        you to find exactly what you’re looking for.'
-        header='Search'
+        text='Seamlessly manage your finances within the platform. Support your favorite
+        creators by contributing, or earn from your own content.'
+        header='Wallet'
         isOpen={isOpen3}
       />
       <TourMain
@@ -266,9 +268,9 @@ function Index() {
           onClose4();
           onOpen5();
         }}
-        text='Experience the thrill of live content creation! Join or host live events to
-        engage with your audience in real-time'
-        header='Live'
+        text='Customize your experience and tailor the platform to your preferences with
+        our comprehensive settings menu.'
+        header='Settings'
         isOpen={isOpen4}
       />
       <TourMain
@@ -281,9 +283,9 @@ function Index() {
           onClose5();
           onOpen6();
         }}
-        text='Ignite your creativity and start creating amazing videos with our
-        easy-to-use creation tools.'
-        header='Upload'
+        text='Looking for specific videos or creators? Our powerful search feature allows
+        you to find exactly what you’re looking for.'
+        header='Search'
         isOpen={isOpen5}
       />
       <TourMain
@@ -296,9 +298,8 @@ function Index() {
           onClose6();
           onOpen7();
         }}
-        text='Welcome to your personalized hub! The home screen is where you’ll find a
-        curated selection of videos tailored to your interest.'
-        header='Home'
+        text='Stay up-to-date with important updates and never miss a beat. Receive instant notifications about new video uploads, live events, comments, and likes.'
+        header='Notification'
         isOpen={isOpen6}
       />
       <TourMain
@@ -311,9 +312,8 @@ function Index() {
           onClose7();
           onOpen8();
         }}
-        text='Explore new genres, discover emerging creators, and find hidden gems
-        that align with your interest.'
-        header='Discover'
+        text='Showcase your unique style and personality with your profile or channel. Share your best videos, connect with your audience, and build a loyal community.'
+        header='Profile'
         isOpen={isOpen7}
       />
       <TourMain
@@ -326,9 +326,9 @@ function Index() {
           onClose8();
           onOpen9();
         }}
-        text='Seamlessly manage your finances within the platform. Support your favorite
-        creators by contributing, or earn from your own content.'
-        header='Wallet'
+        text='Experience the thrill of live content creation! Join or host live events to
+        engage with your audience in real-time'
+        header='Live'
         isOpen={isOpen8}
       />
       <TourMain
@@ -338,9 +338,9 @@ function Index() {
           onOpen8();
         }}
         next={onClose9}
-        text='Customize your experience and tailor the platform to your preferences with
-        our comprehensive settings menu.'
-        header='Settings'
+        text='Ignite your creativity and start creating amazing videos with our
+        easy-to-use creation tools.'
+        header='Upload'
         isOpen={isOpen9}
       />
     </>
