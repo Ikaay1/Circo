@@ -33,15 +33,7 @@ import VideoQualityIcon from '@icons/VideoQualityIcon';
 
 import {API, baseUrl, contentData} from '../../constants/utils';
 
-function VideoOptionMenu({
-  player,
-  video,
-  isLoop,
-  setIsLoop,
-  setUrl,
-  url,
-  currentTimestamp,
-}: any) {
+function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
@@ -98,13 +90,11 @@ function VideoOptionMenu({
   };
 
   const [videoQuality, setVideoQuality] = React.useState('auto');
-  const [timestamp, setTimestamp] = React.useState(0);
   const [showVideoQuality, setShowVideoQuality] = React.useState(false);
 
   const cld = new Cloudinary({
     cloud: {
       cloudName: 'dwaflsglz',
-      // cloudName: "wenotch",
     },
     url: {
       secure: true,

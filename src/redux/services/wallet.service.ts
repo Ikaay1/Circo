@@ -30,8 +30,8 @@ export const walletApi = createApi({
     }),
 
     getUserWallet: builder.query<any, any>({
-      query: () => ({
-        url: `wallet`,
+      query: (fiter) => ({
+        url: `wallet?${fiter}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json",

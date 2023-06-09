@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useRef } from "react";
 import { useAppDispatch } from "redux/app/hooks";
 import { useCategoryQuery } from "redux/services/category.service";
 import {
@@ -46,6 +46,25 @@ function Stream({
   const [updateEvent, updateInfo] = useUpdateEventMutation();
   const [createLiveStream, createLiveInfo] = useCreateLiveStreamMutation();
   const dispatch = useAppDispatch();
+  const [videoDurationError, setVideoDurationError] = React.useState("");
+  const [isVideoDurationValid, setIsVideoDurationValid] = React.useState(true);
+  const [videoDuration, setVideoDuration] = React.useState(0);
+
+  const videoEl = useRef(null);
+
+  const handleLoadedMetadata = () => {
+    const video: any = videoEl.current;
+    if (!video) return;
+    console.log(`The video is ${video.duration} seconds long.`);
+    setVideoDuration(video.duration);
+    if (video.duration > 30) {
+      setVideoDurationError("Video duration should be less than 30 seconds");
+      setIsVideoDurationValid(false);
+    } else {
+      setVideoDurationError("");
+      setIsVideoDurationValid(true);
+    }
+  };
   return (
     <Formik
       enableReinitialize
@@ -269,25 +288,31 @@ function Stream({
                     </FormControl>
                   )}
                 </Field>
-                <Text fontSize="smSubHead">Trailer</Text>
+                <Text mt="20px" fontSize="smSubHead">
+                  Trailer
+                </Text>
                 <Text fontSize="xsl" color="clique.secondaryGrey2" mb="2">
                   Select or upload a Trailer video for your live show (Max.
                   1min)
                 </Text>
                 <Field>
                   {({ field, form }: any) => (
-                    <FormControl>
+                    <FormControl
+                      mb="20px"
+                      isInvalid={props.values.trailer && !isVideoDurationValid}
+                    >
                       <label htmlFor={"trailer"}>
                         {props.values.trailer ? (
                           <Box mt="7" mb="4">
                             <Box
                               rounded="10px"
-                              h="250px"
+                              h="max-content"
                               w="250px"
                               maxH="250px"
                               bgRepeat={"no-repeat"}
                               bgSize={"cover"}
                               bgPosition={"center"}
+                              pos={"relative"}
                             >
                               <video
                                 src={
@@ -301,7 +326,26 @@ function Stream({
                                   maxHeight: "250px",
                                 }}
                                 controls={false}
+                                ref={videoEl}
+                                onLoadedMetadata={handleLoadedMetadata}
                               ></video>
+                              <Text
+                                position="absolute"
+                                bottom={"0"}
+                                right="0"
+                                bg="clique.black"
+                                borderTopLeftRadius="5px"
+                                borderBottomLeftRadius="5px"
+                                px="3px"
+                                fontSize="sm4"
+                                color="clique.white"
+                              >
+                                {videoDuration
+                                  ? new Date(videoDuration * 1000)
+                                      .toISOString()
+                                      .slice(11, 19)
+                                  : ""}
+                              </Text>
                             </Box>
                           </Box>
                         ) : (
@@ -325,9 +369,7 @@ function Stream({
                           </Flex>
                         )}
                       </label>
-                      {/* <FormErrorMessage>
-                        {form.errors.thumbNail}
-                      </FormErrorMessage> */}
+                      <FormErrorMessage>{videoDurationError}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -409,6 +451,7 @@ function Stream({
               <Box w="100%" pt="20px">
                 <AuthButton
                   name={"Save"}
+                  disabled={!props.isValid || !isVideoDurationValid}
                   h="60px"
                   fontSize="subHead"
                   status={{ isLoading: props.isSubmitting }}

@@ -101,15 +101,9 @@ function VideoPlayer({
   const [isSmallAd, setIsSmallAd] = React.useState(false);
   const [isReady, setIsReady] = React.useState(false);
 
-  // React.useEffect(() => {
-  //   if (moment(currentTimestamp * 1000).format('mm:ss') === '00:00' && isPlay) {
-  //     setIsAd(true);
-  //     setTimeout(() => {
-  //       setIsSmallAd(true);
-  //     }, 5000);
-  //   }
-  // }, [currentTimestamp]);
   const ref = React.useRef(null);
+
+  //define a function called qualityChange that seeks to currentTImestamp
 
   return (
     <Flex
