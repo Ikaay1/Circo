@@ -40,7 +40,6 @@ function VideoOptionMenu({
   setIsLoop,
   setUrl,
   url,
-  qualityChanged,
 }: any) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
@@ -103,7 +102,6 @@ function VideoOptionMenu({
   const cld = new Cloudinary({
     cloud: {
       cloudName: "dwaflsglz",
-      // cloudName: "wenotch",
     },
     url: {
       secure: true,
@@ -128,7 +126,6 @@ function VideoOptionMenu({
 
     const arr = newUrl.split("/");
 
-    qualityChanged();
     setUrl(
       arr.slice(0, 7).join("/") + "/" + arr.splice(14).join("/").split("?")[0]
     );
