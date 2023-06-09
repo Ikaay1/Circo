@@ -33,7 +33,15 @@ import VideoQualityIcon from '@icons/VideoQualityIcon';
 
 import {API, baseUrl, contentData} from '../../constants/utils';
 
-function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
+function VideoOptionMenu({
+  player,
+  video,
+  isLoop,
+  setIsLoop,
+  setUrl,
+  url,
+  qualityFunc,
+}: any) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
@@ -122,6 +130,8 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
     setUrl(
       arr.slice(0, 7).join('/') + '/' + arr.splice(14).join('/').split('?')[0],
     );
+
+    qualityFunc();
   }, [videoQuality]);
 
   return (

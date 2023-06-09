@@ -59,6 +59,8 @@ function ControlMobile({
     }
   }, [userProfile?._id, router]);
 
+  const qualityFunc = () => {};
+
   return (
     <Flex
       // templateColumns='repeat(7, 1fr)'
@@ -276,6 +278,7 @@ function ControlMobile({
             setUrl={setUrl}
             url={url}
             currentTimestamp={currentTimestamp}
+            qualityFunc={qualityFunc}
           />
           {!isFullScreen ? (
             <Icon
