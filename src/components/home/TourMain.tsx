@@ -38,46 +38,38 @@ const TourMain = ({
       <Modal isOpen={isOpen} onClose={() => {}} isCentered>
         <ModalOverlay />
         <Icon
-          display={{base: 'none', lg: 'block', mlg: 'none'}}
+          display={{base: 'none', mdlg: 'block', mlg: 'none'}}
           as={ArrowTour}
           position={'fixed'}
           top={
             number === '1'
-              ? 'calc(10vh + 120px)'
-              : number === '2'
-              ? '5vh'
-              : number === '3'
-              ? '5vh'
-              : number === '4'
-              ? '5vh'
-              : number === '5'
-              ? '5vh'
-              : number === '6'
               ? 'calc(8vh)'
-              : number === '7'
+              : number === '2'
               ? 'calc(10vh + 31px)'
-              : number === '8'
+              : number === '3'
               ? 'calc(10vh + 167px)'
-              : 'calc(10vh + 304px)'
+              : number === '4'
+              ? 'calc(10vh + 304px)'
+              : '5vh'
           }
           left={
-            number === '1'
-              ? '180px'
-              : number === '2'
-              ? '65.5%'
-              : number === '3'
+            number === '5'
               ? '21%'
-              : number === '4'
-              ? '76.5%'
-              : number === '5'
-              ? '85%'
+              : number === '6'
+              ? 'calc(100vw - 447px)'
+              : number === '7'
+              ? 'calc(100vw - 392px)'
+              : number === '8'
+              ? 'calc(100vw - 320px)'
+              : number === '9'
+              ? 'calc(100vw - 210px)'
               : '180px'
           }
           width='70px'
           height='118px'
           className='tourArrow'
           transform={
-            header.toLowerCase() === 'profile' ||
+            // header.toLowerCase() === 'profile' ||
             header.toLowerCase() === 'home' ||
             header.toLowerCase() === 'discover' ||
             header.toLowerCase() === 'wallet' ||

@@ -106,6 +106,7 @@ const EditProfile = () => {
         position: 'top-right',
       });
       setSubmitting(false);
+      router.push('/profile/content');
     } else if (res.error) {
       toast({
         title: res.error.data.message,
@@ -214,12 +215,12 @@ const EditProfile = () => {
             >
               <CustumField
                 name='First name'
-                sideContent='Edit'
+                // sideContent='Edit'
                 nameValue='firstName'
               />
               <CustumField
                 name='Last name'
-                sideContent='Edit'
+                // sideContent='Edit'
                 nameValue='lastName'
               />
               <CustumField
