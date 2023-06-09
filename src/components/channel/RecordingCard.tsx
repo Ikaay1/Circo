@@ -1,14 +1,14 @@
-import moment from 'moment';
-import { useRouter } from 'next/router';
-import React from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import moment from "moment";
+import { useRouter } from "next/router";
+import React from "react";
+import { useAppSelector } from "redux/app/hooks";
 
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 
-import SmallMenu from './SmallMenu';
-import Color from '@constants/color';
+import SmallMenu from "./SmallMenu";
+import Color from "@constants/color";
 
-function RecordingCard({event}: {event: any}) {
+function RecordingCard({ event }: { event: any }) {
   const router = useRouter();
   const profile = useAppSelector((store) => store.app.userReducer.userProfile);
   return (
@@ -63,13 +63,18 @@ function RecordingCard({event}: {event: any}) {
             >
               @{profile?.userName}
             </Text>
-            <Flex alignItems={"center"} mt="5px">
+            <Flex
+              alignItems={"center"}
+              mt="5px"
+              justifyContent={"space-between"}
+              w="full"
+            >
               <Text
                 noOfLines={2}
                 color={"clique.darkGrey"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"14px"}
+                fontSize={"12px"}
                 lineHeight={"1.2"}
                 mr="10px"
               >
@@ -93,7 +98,7 @@ function RecordingCard({event}: {event: any}) {
                 color={"clique.darkGrey"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
-                fontSize={"14px"}
+                fontSize={"12px"}
                 lineHeight={"1.2"}
               >
                 {moment(event?.createdAt).fromNow()}
