@@ -59,7 +59,9 @@ function ControlMobile({
     }
   }, [userProfile?._id, router]);
 
-  const qualityFunc = () => {};
+  const qualityFunc = () => {
+    playerRef.current.seek(currentTimestamp);
+  };
 
   return (
     <Flex

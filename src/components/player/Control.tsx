@@ -1,26 +1,26 @@
 // @ts-nocheck
 import moment from 'moment';
-import {useRouter} from 'next/router';
-import React, {useEffect} from 'react';
-import {BiDislike, BiLike} from 'react-icons/bi';
-import {BsFillPlayFill, BsFullscreen, BsPauseFill} from 'react-icons/bs';
-import {GoMute, GoUnmute} from 'react-icons/go';
-import {MdFullscreenExit} from 'react-icons/md';
-import {useAppSelector} from 'redux/app/hooks';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { BiDislike, BiLike } from 'react-icons/bi';
+import { BsFillPlayFill, BsFullscreen, BsPauseFill } from 'react-icons/bs';
+import { GoMute, GoUnmute } from 'react-icons/go';
+import { MdFullscreenExit } from 'react-icons/md';
+import { useAppSelector } from 'redux/app/hooks';
 import {
-  useDislikeContentMutation,
-  useLikeContentMutation,
+	useDislikeContentMutation,
+	useLikeContentMutation,
 } from 'redux/services/content.service';
 
 import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Icon,
-  Spinner,
-  Text,
-  Tooltip,
+	Box,
+	Flex,
+	Grid,
+	GridItem,
+	Icon,
+	Spinner,
+	Text,
+	Tooltip,
 } from '@chakra-ui/react';
 import NextIcon from '@icons/NextIcon';
 import PrevIcon from '@icons/PrevIcon';
@@ -68,7 +68,9 @@ function Control({
     }
   }, [userProfile?._id, router]);
 
-  const qualityFunc = () => {};
+  const qualityFunc = () => {
+    playerRef.current.seek(currentTimestamp);
+  };
 
   return (
     <Box h='100%' mt='5px'>
