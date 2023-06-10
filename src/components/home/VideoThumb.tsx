@@ -393,7 +393,9 @@ function VideoThumb({
                   fontSize={'sm'}
                   lineHeight={'1.2'}
                 >
-                  {moment(video?.updatedAt).fromNow()}
+                  {moment(
+                    video?.uploadTime ? video?.uploadTime : video?.createdAt,
+                  ).fromNow()}
                 </Text>
               </Flex>
             </Box>
