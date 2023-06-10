@@ -110,7 +110,6 @@ function VideoOptionMenu({
   });
 
   useEffect(() => {
-    console.log(url);
     const videoUrl = cld.video(url);
 
     if (videoQuality === 'auto') {
@@ -123,15 +122,15 @@ function VideoOptionMenu({
 
     const newUrl = videoUrl.toURL();
 
-    console.log('newUrl', newUrl);
-
     const arr = newUrl.split('/');
 
     setUrl(
-      arr.slice(0, 7).join('/') + '/' + arr.splice(14).join('/').split('?')[0],
+      arr.slice(0, 7).join('/') +
+        '/' +
+        arr.slice(15).join('/').split('.')[0] +
+        '.mp4',
     );
-
-    qualityFunc();
+    // qualityFunc();
   }, [videoQuality]);
 
   return (
