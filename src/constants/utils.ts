@@ -859,6 +859,7 @@ export interface contentData {
   uploader_userName: string;
   channel_id?: any;
   isFree: boolean;
+  uploadTime?: string;
 }
 
 export interface uploaderId {

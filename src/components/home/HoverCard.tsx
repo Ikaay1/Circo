@@ -1,23 +1,23 @@
 import moment from 'moment';
-import {useRouter} from 'next/router';
-import React, {useEffect} from 'react';
-import {useAppSelector} from 'redux/app/hooks';
-import {useSubscribeMutation} from 'redux/services/user.service';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useAppSelector } from 'redux/app/hooks';
+import { useSubscribeMutation } from 'redux/services/user.service';
 
 import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Text,
-  useColorModeValue,
-  useDisclosure,
+	Avatar,
+	Box,
+	Button,
+	Flex,
+	Icon,
+	Text,
+	useColorModeValue,
+	useDisclosure,
 } from '@chakra-ui/react';
 import Color from '@constants/color';
 
-import {contentData} from '../../constants/utils';
-import {useRoutingChannel} from '../../hooks/useRoutingChannel';
+import { contentData } from '../../constants/utils';
+import { useRoutingChannel } from '../../hooks/useRoutingChannel';
 import SmallPlayer from './SmallPlayer';
 import SubScribeModal from './SubScribeModal';
 
@@ -144,7 +144,7 @@ function HoverCard({
               fontSize={'sm'}
               lineHeight={'1.2'}
             >
-              {moment(video?.updatedAt).fromNow()}
+              {moment(video?.uploadTime ? video?.uploadTime : video?.createdAt).fromNow()}
             </Text>
           </Flex>
         </Box>
