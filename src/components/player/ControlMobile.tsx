@@ -110,8 +110,13 @@ function ControlMobile({
               fontSize={"sm"}
               lineHeight={"1"}
             >
-              {moment(currentTimestamp * 1000).format("mm:ss")}/{" "}
-              {moment(totalDuration * 1000).format("mm:ss")}
+              {moment
+                .utc(currentTimestamp * 1000)
+                .format(currentTimestamp < 3600 ? "mm:ss" : "HH:mm:ss")}{" "}
+              /{" "}
+              {moment
+                .utc(totalDuration * 1000)
+                .format(totalDuration < 3600 ? "mm:ss" : "HH:mm:ss")}
             </Text>
           )}
           {!isMuted ? (
