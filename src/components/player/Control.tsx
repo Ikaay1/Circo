@@ -62,12 +62,6 @@ function Control({
 
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
-
   return (
     <Box h="100%" mt="5px">
       <Grid
