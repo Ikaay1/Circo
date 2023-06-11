@@ -66,7 +66,6 @@ function Control({
 
   const qualityFunc = (time) => {
     if (playerRef.current && playerRef.current.seek) {
-      console.log("seeking");
       setTimeout(() => {
         playerRef.current.seek(time);
       }, 500);
