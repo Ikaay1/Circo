@@ -213,7 +213,7 @@ function VideoOptionMenu({
           >
             {[
               { name: "auto", value: "auto" },
-              { name: "1080p", value: "80" },
+              // { name: "1080p", value: "80" },
               { name: "720p", value: "60" },
               { name: "480p", value: "40" },
               { name: "240p", value: "20" },
