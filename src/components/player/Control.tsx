@@ -64,15 +64,7 @@ function Control({
 
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
 
-  useEffect(() => {
-    if (playerRef.current && playerRef.current.seekTo) {
-      playerRef.current.seekTo(timeAsAtUrlChange);
-    }
-  }, [url, playerRef]);
-
   const qualityFunc = (time) => {
-    console.log("time", time);
-
     if (playerRef.current && playerRef.current.seek) {
       console.log("seeking");
       setTimeout(() => {
@@ -111,8 +103,13 @@ function Control({
                 fontSize={"smSubHead"}
                 mr="30px"
               >
-                {moment(currentTimestamp * 1000).format("mm:ss")} /{" "}
-                {moment(totalDuration * 1000).format("mm:ss")}
+                {moment
+                  .utc(currentTimestamp * 1000)
+                  .format(currentTimestamp < 3600 ? "mm:ss" : "HH:mm:ss")}{" "}
+                /{" "}
+                {moment
+                  .utc(totalDuration * 1000)
+                  .format(totalDuration < 3600 ? "mm:ss" : "HH:mm:ss")}
               </Text>
             )}
             {!isMuted ? (
