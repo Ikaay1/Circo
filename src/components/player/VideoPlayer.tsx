@@ -80,7 +80,6 @@ function VideoPlayer({
     if (playerRef.current) {
       playerRef.current.subscribeToStateChange((state: any) => {
         setCurrentTimestamp(state.currentTime);
-        setTotalDuration(state.duration);
         setIsPlay(state.paused);
       });
     }
@@ -135,7 +134,7 @@ function VideoPlayer({
           src={url}
           height="100%"
           onLoadedMetadata={(e: any) => {
-            setIsReady(true);
+            console.log(e.target.duration);
             setTotalDuration(e.target.duration);
           }}
 

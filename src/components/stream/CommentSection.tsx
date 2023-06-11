@@ -85,6 +85,10 @@ function CommentSection({}: {}) {
   useEffect(() => {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   }, [comments.length]);
+
+  //reverse comments array on mobile view
+  const reversedComments = [...comments].reverse();
+
   return (
     <Box
       pos={"relative"}
@@ -127,12 +131,19 @@ function CommentSection({}: {}) {
             </Box>
           </Flex>
         ))}
-
-      {data &&
-        comments.map((comment: any, i: number) => (
-          <EachComment key={comment._id} comment={comment} />
-        ))}
-      <div ref={dummy} />
+      <Box display={{ base: "none", md: "block" }}>
+        {data &&
+          comments.map((comment: any, i: number) => (
+            <EachComment key={comment._id} comment={comment} />
+          ))}
+      </Box>
+      <Box display={{ base: " block", md: "none" }}>
+        {data &&
+          reversedComments.map((comment: any, i: number) => (
+            <EachComment key={comment._id} comment={comment} />
+          ))}
+      </Box>
+      <Box display={{ base: "none", md: "block" }} ref={dummy} />
 
       <NewComment profile={userProfile} id={id as string} />
     </Box>
