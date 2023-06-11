@@ -33,7 +33,15 @@ import VideoQualityIcon from '@icons/VideoQualityIcon';
 
 import {API, baseUrl, contentData} from '../../constants/utils';
 
-function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
+function VideoOptionMenu({
+  player,
+  video,
+  isLoop,
+  setIsLoop,
+  setUrl,
+  url,
+  qualityFunc,
+}: any) {
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
 
   const [saveVideo, saveVideoStatus] = useSaveVideoMutation();
@@ -102,7 +110,6 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
   });
 
   useEffect(() => {
-    console.log(url);
     const videoUrl = cld.video(url);
 
     if (videoQuality === 'auto') {
@@ -115,13 +122,15 @@ function VideoOptionMenu({player, video, isLoop, setIsLoop, setUrl, url}: any) {
 
     const newUrl = videoUrl.toURL();
 
-    console.log('newUrl', newUrl);
-
     const arr = newUrl.split('/');
 
     setUrl(
-      arr.slice(0, 7).join('/') + '/' + arr.splice(14).join('/').split('?')[0],
+      arr.slice(0, 7).join('/') +
+        '/' +
+        arr.slice(15).join('/').split('.')[0] +
+        '.mp4',
     );
+    // qualityFunc();
   }, [videoQuality]);
 
   return (
