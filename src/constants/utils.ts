@@ -295,7 +295,7 @@ export const menu: {
     icon: DiscoverIcon,
   },
   {
-    name: 'trending',
+    name: 'For You',
     icon: TrendingIcon,
   },
   {
