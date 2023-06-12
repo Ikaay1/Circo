@@ -1,15 +1,15 @@
-import React from 'react';
-import { useGetTrendingQuery } from 'redux/services/content.service';
+import React from "react";
+import { useGetTrendingQuery } from "redux/services/content.service";
 
-import { Box, Flex, Skeleton, Text } from '@chakra-ui/react';
-import { purpleBoxStyle } from '@constants/utils';
+import { Box, Flex, Skeleton, Text } from "@chakra-ui/react";
+import { purpleBoxStyle } from "@constants/utils";
 
-import { contentData } from '../../constants/utils';
-import TrendCard from './TrendCard';
-import Color from '@constants/color';
+import { contentData } from "../../constants/utils";
+import TrendCard from "./TrendCard";
+import Color from "@constants/color";
 
 function TrendingBox() {
-  const {data, isFetching} = useGetTrendingQuery({page: 1, limit: 4});
+  const { data, isFetching } = useGetTrendingQuery({ page: 1, limit: 4 });
   return (
     <Box
       minW={{ base: "100%", lg: "70%" }}
@@ -28,7 +28,7 @@ function TrendingBox() {
         fontSize="head"
         lineHeight={"1"}
       >
-        Trending
+        For You
       </Text>
       {isFetching ? (
         <>
