@@ -28,7 +28,7 @@ function TrendingBox() {
         fontSize='head'
         lineHeight={'1'}
       >
-        Trending
+        For You
       </Text>
       {isFetching ? (
         <>

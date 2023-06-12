@@ -295,7 +295,7 @@ export const menu: {
     icon: DiscoverIcon,
   },
   {
-    name: 'trending',
+    name: 'For You',
     icon: TrendingIcon,
   },
   {
@@ -345,10 +345,10 @@ export const mobileMenu: {
     route: 'discover',
   },
   {
-    name: 'trending',
+    name: 'For You',
     icon: TrendingIcon,
     type: 'menu',
-    route: 'trending',
+    route: 'foryou',
   },
   {
     name: 'profile',
