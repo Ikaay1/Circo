@@ -28,14 +28,14 @@ import {googleLogout} from '@react-oauth/google';
 const SignupSchema = Yup.object().shape({
   reason: Yup.string().min(15, 'Too Short!').required('Required'),
   email: Yup.string().email('Invalid email address').required('Required'),
-  password: Yup.string().required('Required'),
+  // password: Yup.string().required('Required'),
 });
 const DeleteAccount = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     reason: '',
     email: '',
-    password: '',
+    // password: '',
   });
   const router = useRouter();
   const toast = useToast();
@@ -67,7 +67,7 @@ const DeleteAccount = () => {
   }, []);
 
   const handlePostTicket = async () => {
-    if (values.reason && values.email && values.password) {
+    if (values.reason && values.email) {
       const res: any = await postTicket(values);
       if ('data' in res) {
         onClose();
@@ -124,7 +124,7 @@ const DeleteAccount = () => {
             initialValues={{
               reason: '',
               email: '',
-              password: '',
+              // password: '',
             }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
@@ -202,7 +202,7 @@ const DeleteAccount = () => {
                   </Field>
                 </Box>
 
-                <Box position='relative' mt='1rem'>
+                {/* <Box position='relative' mt='1rem'>
                   <Field name={'password'}>
                     {({field, form: {touched, errors}}: any) => (
                       <FormControl
@@ -245,7 +245,7 @@ const DeleteAccount = () => {
                       </FormControl>
                     )}
                   </Field>
-                </Box>
+                </Box> */}
                 <Text
                   mt='3rem'
                   fontFamily='Poppins'
