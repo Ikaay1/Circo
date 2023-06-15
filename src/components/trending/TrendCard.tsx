@@ -128,6 +128,7 @@ function TrendCard({position, video}: {position: string; video: contentData}) {
               fontSize='smSubHead'
               color={'clique.lightGrey'}
               noOfLines={1}
+              maxW='127px'
             >
               {video?.channel_id?.name}
             </Text>
