@@ -34,6 +34,9 @@ export interface Videos {
     uploader_firstName: string;
     uploader_lastName: string;
     uploader_id: string;
+    channel_id: {
+      name: string;
+    };
   };
 }
 
