@@ -51,4 +51,4 @@ const Playlist = () => {
 
 export default Playlist;
 
-export {getServerSideProps} from '../../../../components/widgets/Chakara';
+export {getServerSideProps} from '../../components/widgets/Chakara';
