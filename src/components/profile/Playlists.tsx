@@ -110,9 +110,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                 maxH={{lg: '200px'}}
                 position={'relative'}
                 cursor={'pointer'}
-                onClick={() =>
-                  router.push(`/myChannel/content/playlist/${each._id}`)
-                }
+                onClick={() => router.push(`/playlist/${each._id}`)}
               >
                 {each?.cover ? (
                   <Image
