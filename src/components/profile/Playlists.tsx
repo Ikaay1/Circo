@@ -1,41 +1,41 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'redux/app/hooks';
+import {useRouter} from 'next/router';
+import {useEffect, useState} from 'react';
+import {useAppSelector} from 'redux/app/hooks';
 import {
-	useDeletePlaylistMutation,
-	useGetPlaylistQuery,
+  useDeletePlaylistMutation,
+  useGetPlaylistQuery,
 } from 'redux/services/playlist.service';
 
 import {
-	Avatar,
-	Box,
-	Circle,
-	Flex,
-	HStack,
-	Icon,
-	Image,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	SimpleGrid,
-	Skeleton,
-	SkeletonCircle,
-	SkeletonText,
-	Text,
-	useColorMode,
-	useColorModeValue,
-	useDisclosure,
-	useToast,
+  Avatar,
+  Box,
+  Circle,
+  Flex,
+  HStack,
+  Icon,
+  Image,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  SimpleGrid,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import Sure from '@components/channel/Sure';
 import EmptyState from '@components/emptyState/EmptyState';
-import { scrollBarStyle3 } from '@constants/utils';
+import {scrollBarStyle3} from '@constants/utils';
 import AddPlaylistIcon from '@icons/AddPlaylistIcon';
 import TrashIcon from '@icons/TrashIcon';
 
 import VideoIcon from '../../assets/icons/VideoIcon';
 import NewPlaylist from './NewPlaylist';
-import { Playlist } from './PlaylistDetails';
+import {Playlist} from './PlaylistDetails';
 
 const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
   const {data, isLoading, isFetching} = useGetPlaylistQuery(id);
@@ -196,12 +196,10 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                   </>
                 ) : (
                   <Avatar
-                    src={each?.userId?.photo}
+                    src={each?.userId?.channel_id?.photo}
                     marginRight={'.7rem'}
                     size='sm'
-                    name={
-                      each?.userId?.firstName + ' ' + each?.userId?.lastName
-                    }
+                    name={each?.userId?.channel_id?.name}
                   />
                 )}
 

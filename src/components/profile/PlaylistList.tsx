@@ -111,8 +111,7 @@ const PlaylistList = ({item, i, playlist, videoId}: Props) => {
                 lineHeight='24px'
                 color='clique.secondaryGrey2'
               >
-                {item?.video?.uploader_firstName}{' '}
-                {item?.video?.uploader_lastName}
+                {item?.video?.channel_id?.name}
               </Text>
             </Box>
           </Box>
