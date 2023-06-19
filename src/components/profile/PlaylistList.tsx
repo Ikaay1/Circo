@@ -151,15 +151,11 @@ const PlaylistList = ({item, i, playlist, videoId}: Props) => {
             </Box>
           ) : null}
           {playlist.userId._id === userProfile?._id && (
-            <Box
+            <Icon
               cursor={'pointer'}
               onClick={() => setShow((prevShow) => !prevShow)}
-              bg='clique.black'
-              p='3px'
-              borderRadius={'5px'}
-            >
-              <Icon as={MoreIcon} />
-            </Box>
+              as={MoreIcon}
+            />
           )}
         </Box>
       }
