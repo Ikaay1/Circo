@@ -41,10 +41,19 @@ export const userSlice = createSlice({
     ) => {
       state.channel = payload.data.channel;
     },
+    setPhoto: (
+      state,
+      { payload: { payload } }: PayloadAction<{ payload: any }>
+    ) => {
+      state.channel = {
+        ...state.channel,
+        photo: payload.photo,
+      };
+    },
   },
 });
 
-export const { setCredentials, setUser, logout, setChannel } =
+export const { setCredentials, setUser, logout, setChannel, setPhoto } =
   userSlice.actions;
 
 export default userSlice.reducer;
