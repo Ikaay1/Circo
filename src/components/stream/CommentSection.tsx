@@ -60,6 +60,9 @@ function CommentSection({}: {}) {
   }, []);
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
     socket.emit("joinedStream", {
       streamId: id,
       userId: channel?._id,
