@@ -38,7 +38,7 @@ function Index() {
 
   useEffect(() => {
     if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
-      // router.push(`/liveevents`);
+      router.push(`/liveevents`);
 
       toast({
         title: "Stream " + data?.data?.stream?.status,
