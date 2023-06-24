@@ -1,8 +1,10 @@
 import React from "react";
 import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
 import Color from "@constants/color";
+import { useAppSelector } from "redux/app/hooks";
 
 function VideoDetails({ stream }: { stream: any }) {
+  const { token } = useAppSelector((store) => store.app.userReducer);
   return (
     <Box mt="20px">
       <Text
@@ -56,15 +58,17 @@ function VideoDetails({ stream }: { stream: any }) {
             ></Text>
           </Box>
         </Flex>
-        <Button
-          rounded="full"
-          fontWeight={400}
-          bg={"clique.purple"}
-          cursor="pointer"
-          onClick={() => console.log("clicked")}
-        >
-          Subscribed
-        </Button>
+        {token && (
+          <Button
+            rounded="full"
+            fontWeight={400}
+            bg={"clique.purple"}
+            cursor="pointer"
+            onClick={() => console.log("clicked")}
+          >
+            Subscribed
+          </Button>
+        )}
       </Flex>
       <Text
         mt="5px"

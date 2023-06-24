@@ -1,17 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import HomeLayout from "layouts/HomeLayout";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Skeleton, useToast } from "@chakra-ui/react";
 import StreamPlayer from "@components/stream/StreamPlayer";
-import {
-  useCreateViewMutation,
-  useGetStreamQuery,
-} from "redux/services/livestream/live.service";
+import { useGetStreamQuery } from "redux/services/livestream/live.service";
 import CommentSection from "@components/stream/CommentSection";
 import VideoDetails from "@components/stream/VideoDetails";
-import io from "socket.io-client";
 import { socket } from "@constants/socket";
+import OpenLayout from "layouts/OpenLayout";
+import { useAppSelector } from "redux/app/hooks";
 
 function Index() {
   const router = useRouter();
@@ -24,22 +21,33 @@ function Index() {
       setLivestreamId(id as string);
     }
   }, [id]);
-  const { data, isFetching, isLoading, refetch } =
+  const { data, isFetching, isLoading, refetch, isError, error } =
     useGetStreamQuery(livestreamId);
 
   const toast = useToast();
-  const [createView, info] = useCreateViewMutation();
+  const { token } = useAppSelector((store) => store.app.userReducer);
+
+  if (token) {
+    router.push(`/stream/${livestreamId}`);
+  }
 
   useEffect(() => {
-    if (data?.data) {
-      createView({ streamId: data?.data?.stream?._id });
+    const errorDetails: any = error;
+    if (errorDetails?.data?.status === "failed") {
+      toast({
+        title: "Error",
+        description: errorDetails?.data?.message,
+        status: "error",
+        position: "top",
+        duration: 5000,
+        isClosable: true,
+      });
     }
-  }, [data]);
 
-  useEffect(() => {
     if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
       router.push(`/liveevents`);
 
+      console.log(data);
       toast({
         title: "Stream " + data?.data?.stream?.status,
         status: "info",
@@ -50,7 +58,7 @@ function Index() {
 
       return;
     }
-  }, [data]);
+  }, [data, error]);
 
   useEffect(() => {
     socket.on("newviewer", (data: any) => {
@@ -76,7 +84,7 @@ function Index() {
     };
   }, [socket]);
   return (
-    <HomeLayout>
+    <OpenLayout>
       <Flex
         pb={{ base: "20px", lg: "0px" }}
         w="full"
@@ -126,9 +134,9 @@ function Index() {
 
         <CommentSection />
       </Flex>
-    </HomeLayout>
+    </OpenLayout>
   );
 }
 
 export default Index;
-export { getServerSideProps } from "../../components/widgets/Chakara";
+export { getServerSideProps } from "../../../components/widgets/Chakara";

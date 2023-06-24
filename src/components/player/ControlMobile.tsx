@@ -60,12 +60,7 @@ function ControlMobile({
   };
 
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
+  const { token } = useAppSelector((store) => store.app.userReducer);
 
   const qualityFunc = (time) => {
     if (playerRef.current && playerRef.current.seek) {
@@ -170,33 +165,6 @@ function ControlMobile({
                 {video.likesCount}
               </Text>
             </Flex>
-
-            {/* <Flex alignItems={'center'} flexDirection={'column'}>
-              {dislikeInfo.isLoading ? (
-                <Spinner size={'sm'} bg='clique.base' />
-              ) : (
-                <Box onClick={handleDislike}>
-                  <Icon
-                    color={
-                      video.dislikes.includes(userProfile?._id)
-                        ? 'clique.base'
-                        : 'clique.white'
-                    }
-                    fontSize=' head'
-                    as={BiDislike}
-                  />
-                </Box>
-              )}
-              <Text
-                color={'clique.white'}
-                fontFamily={'Poppins'}
-                fontWeight={400}
-                fontSize={'smSubHead'}
-                lineHeight={'1.2'}
-              >
-                {video.dislikesCount}
-              </Text>
-            </Flex> */}
           </Flex>
         </Flex>
       </GridItem>
@@ -222,8 +190,13 @@ function ControlMobile({
             fontSize="bigHead"
             cursor="pointer"
             as={PrevIcon}
-            color={prevVideoIndex !== null ? "clique.white" : "gray.500"}
+            color={
+              prevVideoIndex !== null && token ? "clique.white" : "gray.500"
+            }
             onClick={() => {
+              if (!token) {
+                return;
+              }
               if (prevVideoIndex !== null) {
                 router.push(
                   `/player/${videoIdsList[prevVideoIndex]?._id}/${video.uploader_id._id}`
@@ -269,6 +242,9 @@ function ControlMobile({
             as={NextIcon}
             color={nextVideoIndex !== null ? "clique.white" : "gray.500"}
             onClick={() => {
+              if (!token) {
+                return;
+              }
               if (nextVideoIndex !== null) {
                 router.push(
                   `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`
@@ -282,14 +258,20 @@ function ControlMobile({
         <Flex
           alignItems="center"
           justifyContent={
-            video.uploader_id._id !== userProfile._id && !isFullScreen
+            token && video.uploader_id._id !== userProfile._id && !isFullScreen
               ? "space-between"
               : "space-evenly"
           }
         >
-          {video.uploader_id._id !== userProfile._id && !isFullScreen && (
-            <GiftModal isFullScreen={isFullScreen} video={video} Bref={Bref} />
-          )}
+          {token &&
+            video.uploader_id._id !== userProfile._id &&
+            !isFullScreen && (
+              <GiftModal
+                isFullScreen={isFullScreen}
+                video={video}
+                Bref={Bref}
+              />
+            )}
           <VideoOptionMenu
             isLoop={isLoop}
             setIsLoop={setIsLoop}
