@@ -38,12 +38,13 @@ function Index() {
     if (!isLoading && !data?.data?.preference) {
       toast({
         title: "Error",
-        description: "Video not found",
+        description: error?.data?.message || "Something went wrong",
         status: "error",
         position: "top",
         duration: 5000,
         isClosable: true,
       });
+      router.push("/");
     }
   }, [isLoading]);
 
