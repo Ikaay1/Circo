@@ -20,15 +20,8 @@ import MuxPlayer from "@mux/mux-player-react";
 
 function StreamPlayer({ stream }: any) {
   const { userProfile } = useAppSelector((store) => store.app.userReducer);
-  const router = useRouter();
-  const [likeStream, info] = useLikeStreamMutation();
-  const [dislikeStream, info2] = useDislikeStreamMutation();
 
-  useEffect(() => {
-    if (!userProfile?._id) {
-      window.location.replace("/login");
-    }
-  }, [userProfile?._id, router]);
+  const [likeStream, info] = useLikeStreamMutation();
 
   return (
     <Flex

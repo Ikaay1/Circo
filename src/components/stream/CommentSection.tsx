@@ -2,7 +2,6 @@ import { Router, useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "redux/app/hooks";
 import { useGetStreamCommentsQuery } from "redux/services/livestream/streamComment.service";
-import io from "socket.io-client";
 
 import {
   Box,
@@ -20,6 +19,7 @@ import Color from "@constants/color";
 import { socket } from "@constants/socket";
 
 function CommentSection({}: {}) {
+  const { token } = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
   const { id } = router.query;
   const dummy: any = useRef(null);
@@ -60,6 +60,9 @@ function CommentSection({}: {}) {
   }, []);
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
     socket.emit("joinedStream", {
       streamId: id,
       userId: channel?._id,
@@ -145,7 +148,7 @@ function CommentSection({}: {}) {
       </Box>
       <Box display={{ base: "none", md: "block" }} ref={dummy} />
 
-      <NewComment profile={userProfile} id={id as string} />
+      {token && <NewComment profile={userProfile} id={id as string} />}
     </Box>
   );
 }

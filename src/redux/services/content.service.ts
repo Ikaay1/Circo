@@ -1,54 +1,54 @@
-import {store} from 'redux/app/store';
+import { store } from "redux/app/store";
 
-import {baseUrl} from '@constants/utils';
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { baseUrl } from "@constants/utils";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const contentApi = createApi({
-  reducerPath: 'contentApi',
+  reducerPath: "contentApi",
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
     prepareHeaders: (headers) => {
-      headers.set(
-        'Authorization',
-        `Bearer ${store.getState().app.userReducer.token}`,
-      );
+      const token = store.getState()?.app?.userReducer.token;
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
       return headers;
     },
   }),
-  tagTypes: ['Content'],
+  tagTypes: ["Content"],
   endpoints: (builder) => ({
     createContent: builder.mutation<any, any>({
       query: (body) => ({
         url: `content/upload-video`,
-        method: 'POST',
+        method: "POST",
         headers: {},
-        credentials: 'include',
+        credentials: "include",
         formData: true,
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     getContents: builder.query<any, any>({
-      query: ({page, limit, categoryId}) => ({
+      query: ({ page, limit, categoryId }) => ({
         url: `content/upload-video/category/${categoryId}?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     getContent: builder.query<any, any>({
       query: (id) => ({
         url: `content/upload-video/${id}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     getContentComments: builder.query<any, any>({
@@ -62,315 +62,315 @@ export const contentApi = createApi({
         limit: number;
       }) => ({
         url: `comment/${id}?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     postCommentOnContent: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     replyComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment/reply`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     getUserContents: builder.query<any, any>({
-      query: ({page, limit}) => ({
+      query: ({ page, limit }) => ({
         url: `content/channel/?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     getSingleUserContent: builder.query<any, any>({
-      query: ({id, page, limit}) => ({
+      query: ({ id, page, limit }) => ({
         url: `content/channel/${id}/?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
     getSearchSuggestion: builder.query<any, any>({
       query: (search) => ({
         url: `content/searchSuggestions?search=${search}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     createView: builder.mutation<any, any>({
       query: (body) => ({
         url: `content/view`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     likeContent: builder.mutation<any, any>({
       query: (body) => ({
         url: `content/like`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     dislikeContent: builder.mutation<any, any>({
       query: (body) => ({
         url: `content/dislike`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
     likeContentComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment/like`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     likeReply: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment/reply/like`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     dislikeContentComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment/dislike`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     dislikeReply: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment/reply/dislike`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     saveVideo: builder.mutation<any, any>({
       query: (body) => ({
         url: `save`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     unSaveVideo: builder.mutation({
       query: (id) => ({
         url: `unsave/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         // credentials: 'include',
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     reportComment: builder.mutation<any, any>({
       query: (body) => ({
         url: `report`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
     getContentsBySearch: builder.query<any, any>({
-      query: ({page, limit, search, categoryId}) => ({
+      query: ({ page, limit, search, categoryId }) => ({
         url: `content/search/${categoryId}?page=${page}&limit=${limit}&search=${search}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
     getUsersBySearch: builder.query<any, any>({
       query: (search) => {
         return {
           url: `content/searchUser?search=${search}`,
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         };
       },
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
     getUsersSearch: builder.query<any, any>({
       query: (search) => ({
         url: `content/userSearch?search=${search}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     getDiscover: builder.query<any, any>({
-      query: ({page, limit}) => ({
+      query: ({ page, limit }) => ({
         url: `content/discover?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     getTrending: builder.query<any, any>({
-      query: ({page, limit}) => ({
+      query: ({ page, limit }) => ({
         url: `content/most-watched?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     getSearchHistory: builder.query<any, any>({
-      query: ({page, limit}) => ({
+      query: ({ page, limit }) => ({
         url: `content/search-history?page=${page}&limit=${limit}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     expiredSubscription: builder.mutation<any, any>({
       query: (body) => ({
         url: `subscribe/reset`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     subscribeToUserChannel: builder.mutation<any, any>({
       query: (body) => ({
         url: `wallet/transfer/subscribe`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     getCounts: builder.query<any, any>({
       query: () => ({
         url: `like/likesCount`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
 
     deleteContentComment: builder.mutation({
       query: (id) => ({
         url: `comment/delete/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         // credentials: 'include',
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
 
     deleteReply: builder.mutation<any, any>({
       query: (body) => ({
         url: `comment/reply/delete`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: body,
       }),
-      invalidatesTags: ['Content'],
+      invalidatesTags: ["Content"],
     }),
     getUser: builder.query<any, any>({
       query: (id) => ({
         url: `users/${id}`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }),
-      providesTags: ['Content'],
+      providesTags: ["Content"],
     }),
   }),
 });

@@ -1,8 +1,28 @@
 import React from "react";
-import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Color from "@constants/color";
+import { useAppSelector } from "redux/app/hooks";
+import ShareIcon from "@icons/ShareIcon";
+import CopyBox from "@components/player/CopyBox";
 
 function VideoDetails({ stream }: { stream: any }) {
+  const { token } = useAppSelector((store) => store.app.userReducer);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const blackAndWhite = Color().blackAndWhite2;
+
   return (
     <Box mt="20px">
       <Text
@@ -56,16 +76,68 @@ function VideoDetails({ stream }: { stream: any }) {
             ></Text>
           </Box>
         </Flex>
-        <Button
-          rounded="full"
-          fontWeight={400}
-          bg={"clique.purple"}
-          cursor="pointer"
-          onClick={() => console.log("clicked")}
-        >
-          Subscribed
-        </Button>
+        {token && (
+          <Flex alignItems={"center"}>
+            <Box
+              mr="1rem"
+              cursor="pointer"
+              onClick={() => {
+                onOpen();
+              }}
+            >
+              <Icon as={ShareIcon} color={blackAndWhite} />
+            </Box>
+            {/* <Box
+              p=".6rem 1.2rem"
+              rounded="full"
+              fontWeight={400}
+              bg={
+                subscribers.includes(userProfile._id)
+                  ? "clique.grey"
+                  : "clique.base"
+              }
+              color="clique.white"
+              onClick={
+                !subscribers.includes(userProfile._id)
+                  ? () => router.push(`/channel/${video?.channel_id?.name}`)
+                  : () => {}
+              }
+              cursor={
+                !subscribers.includes(userProfile._id) ? "pointer" : "default"
+              }
+            >
+              {subscribers.includes(userProfile._id)
+                ? "Subscribed"
+                : "Subscribe"}
+            </Box> */}
+            <Button
+              rounded="full"
+              fontWeight={400}
+              bg={"clique.purple"}
+              cursor="pointer"
+              onClick={() => console.log("clicked")}
+            >
+              Subscribed
+            </Button>
+          </Flex>
+        )}
       </Flex>
+      <Modal onClose={onClose} isOpen={isOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <Box
+            position="absolute"
+            left={"50%"}
+            transform={"translate(-50%, 60%)"}
+            w={{ base: "100%", lg: "auto" }}
+          >
+            <CopyBox
+              link={`${stream?.streamerId?.name}/stream/${stream?.eventId?._id}`}
+              type="stream"
+            />
+          </Box>
+        </ModalContent>
+      </Modal>
       <Text
         mt="5px"
         noOfLines={2}
