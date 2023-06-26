@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "test": "cross-env NODE_ENV=test node server.js",
-    "start": "npm run build && nodemon server.js"
+    "start": "npm run build && nodemon server.js",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "nodemonConfig": {
     "ignore": [

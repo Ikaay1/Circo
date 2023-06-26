@@ -145,10 +145,10 @@ function NotificationModal() {
           >
             <Box w="120px"></Box>
             <Flex alignItems="center">
-              Notification{" "}
+              Notification
               <Icon
                 ml="5px"
-                as={GoSettings}
+                // as={GoSettings}
                 bg="clique.base"
                 color="clique.primaryBg"
                 p="2px"
