@@ -32,6 +32,7 @@ import { scrollBarStyle } from "@constants/utils";
 
 import AccordionNotification from "./AccordionNotification";
 import { socket } from "@constants/socket";
+import NotificationIcon from "@icons/NotificationIcon";
 
 function NotificationModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -146,15 +147,15 @@ function NotificationModal() {
             <Box w="120px"></Box>
             <Flex alignItems="center">
               Notification
-              <Icon
+              {/* <Icon
                 ml="5px"
-                // as={GoSettings}
+                // as={NotificationIcon}
                 bg="clique.base"
                 color="clique.primaryBg"
                 p="2px"
                 fontSize={"smHead"}
                 rounded={"5px"}
-              />
+              /> */}
             </Flex>
             <Flex w="120px" justifyContent={"right"}>
               {" "}
