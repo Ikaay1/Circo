@@ -100,12 +100,21 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
                   onClick={() => handleAdd(data?.data?.playlists[0]?._id)}
                 >
                   <Image
-                    src={data?.data?.playlists[0]?.cover}
+                    src={
+                      data?.data?.playlists[0]?.cover
+                        ? data?.data?.playlists[0]?.cover
+                        : '/assets/playlist-default.png'
+                    }
                     alt='playlist cover'
                     objectFit={'cover'}
                     h='80px'
                     w='80px'
                     borderRadius='10px'
+                    border={
+                      !data?.data?.playlists[0]?.cover
+                        ? '1px solid rgba(225,225,225, 0.4)'
+                        : undefined
+                    }
                   />
                   <Text alignSelf={'end'} ml='7' color={'clique.white'}>
                     {data?.data?.playlists[0]?.name}
@@ -126,12 +135,19 @@ const AddToPlaylistModal = ({isOpen, onClose, videoId}: Props) => {
                   onClick={() => handleAdd(each?._id)}
                 >
                   <Image
-                    src={each.cover}
+                    src={
+                      each.cover ? each.cover : '/assets/playlist-default.png'
+                    }
                     alt='playlist cover'
                     objectFit={'cover'}
                     h='80px'
                     w='80px'
                     borderRadius='10px'
+                    border={
+                      !each.cover
+                        ? '1px solid rgba(225,225,225, 0.4)'
+                        : undefined
+                    }
                   />
                   <Text
                     alignSelf={'end'}

@@ -122,12 +122,26 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
                     borderRadius='10px'
                   />
                 ) : (
+                  // <Flex
+                  //   w='100%'
+                  //   h='100%'
+                  //   borderRadius='10px'
+                  //   bg='linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323'
+                  // ></Flex>
                   <Flex
-                    w='100%'
-                    h='100%'
-                    borderRadius='10px'
-                    bg='linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323'
-                  ></Flex>
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    h={{base: '150px', lg: '130px', mlg: '180px'}}
+                  >
+                    <Image
+                      w='35%'
+                      h='70%'
+                      src={'/assets/playlist-default.png'}
+                      alt=''
+                      objectFit={'cover'}
+                      borderRadius='10px'
+                    />
+                  </Flex>
                 )}
 
                 <Box
@@ -203,7 +217,7 @@ const Playlists = ({newPlaylist, id}: {newPlaylist?: boolean; id: string}) => {
 
                 {each?.name}
               </Text>
-              {each?.userId?._id === userProfile._id && (
+              {each?.userId?._id === userProfile?._id && (
                 <Box
                   position={'absolute'}
                   bottom='0'

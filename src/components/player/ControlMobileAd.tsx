@@ -254,12 +254,12 @@ function ControlMobileAd({
         <Flex
           alignItems='center'
           justifyContent={
-            video.uploader_id._id !== userProfile._id && !isFullScreen
+            video.uploader_id._id !== userProfile?._id && !isFullScreen
               ? 'space-between'
               : 'space-evenly'
           }
         >
-          {video.uploader_id._id !== userProfile._id && !isFullScreen && (
+          {video.uploader_id._id !== userProfile?._id && !isFullScreen && (
             <GiftModal isFullScreen={isFullScreen} video={video} Bref={Bref} />
           )}
           <Box display={{base: 'none', lg: 'block'}}>

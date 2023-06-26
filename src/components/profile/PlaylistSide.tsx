@@ -90,12 +90,22 @@ const PlaylistSide = ({
               alt=''
             />
           ) : (
-            <Flex
-              w='100%'
-              h='150px'
-              borderRadius='10px'
-              bg='linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323'
-            ></Flex>
+            // <Flex
+            //   w='100%'
+            //   h='150px'
+            //   borderRadius='10px'
+            //   bg='linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), #232323'
+            // ></Flex>
+            <Flex justifyContent={'center'} alignItems={'center'}>
+              <Image
+                w='30%'
+                h='30%'
+                src={'/assets/playlist-default.png'}
+                alt=''
+                objectFit={'cover'}
+                borderRadius='10px'
+              />
+            </Flex>
           )}
 
           <Text

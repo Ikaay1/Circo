@@ -386,7 +386,7 @@ function ControlAd({
         </GridItem>
         <GridItem colSpan={2} justifySelf='end' h='70px' alignItems='center'>
           <Flex alignItems='center' h='100%'>
-            {video.uploader_id._id !== userProfile._id && !isFullScreen && (
+            {video.uploader_id._id !== userProfile?._id && !isFullScreen && (
               <GiftModal
                 isFullScreen={isFullScreen}
                 video={video}

@@ -99,7 +99,7 @@ const SearchResultCard = ({
           rounded='full'
           mr='1.6rem'
           onClick={
-            user?._id === userProfile._id
+            user?._id === userProfile?._id
               ? () => router.push(`/myChannel/content`)
               : () => router.push(`/channel/${user?.channel_id?.name}`)
           }
@@ -119,7 +119,7 @@ const SearchResultCard = ({
             lineHeight='34px'
             noOfLines={1}
             onClick={
-              user?._id === userProfile._id
+              user?._id === userProfile?._id
                 ? () => router.push(`/myChannel/content`)
                 : () => router.push(`/channel/${user?.channel_id?.name}`)
             }
@@ -156,8 +156,8 @@ const SearchResultCard = ({
         width={{base: '90px', lg: '118.8px'}}
         height={{base: '31px', lg: '39.2px'}}
         background={
-          user?.subscribers?.includes(userProfile._id) ||
-          user?._id === userProfile._id
+          user?.subscribers?.includes(userProfile?._id) ||
+          user?._id === userProfile?._id
             ? 'clique.grey'
             : 'clique.base'
         }
@@ -168,20 +168,20 @@ const SearchResultCard = ({
         lineHeight='28px'
         color={'clique.white'}
         cursor={
-          user?.subscribers?.includes(userProfile._id) ||
-          user?._id === userProfile._id
+          user?.subscribers?.includes(userProfile?._id) ||
+          user?._id === userProfile?._id
             ? 'default'
             : 'pointer'
         }
         onClick={
-          user?.subscribers?.includes(userProfile._id) ||
-          user?._id === userProfile._id
+          user?.subscribers?.includes(userProfile?._id) ||
+          user?._id === userProfile?._id
             ? () => {}
             : onOpen
         }
       >
-        {user?.subscribers?.includes(userProfile._id) ||
-        user?._id === userProfile._id
+        {user?.subscribers?.includes(userProfile?._id) ||
+        user?._id === userProfile?._id
           ? 'SUBSCRIBED'
           : 'SUBSCRIBE'}
       </Button>

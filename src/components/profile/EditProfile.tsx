@@ -241,7 +241,7 @@ const EditProfile = () => {
         )}
       </Formik>
 
-      {userProfile.social === 'NULL' && (
+      {userProfile?.social === 'NULL' && (
         <Formik
           initialValues={passWordInitialValues}
           onSubmit={submitPassword}

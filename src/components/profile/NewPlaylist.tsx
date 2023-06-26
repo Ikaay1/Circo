@@ -1,7 +1,16 @@
-import { ChangeEvent, useRef, useState } from 'react';
-import { useCreatePlaylistMutation } from 'redux/services/playlist.service';
+import {ChangeEvent, useRef, useState} from 'react';
+import {useCreatePlaylistMutation} from 'redux/services/playlist.service';
 
-import { Box, Button, Icon, Image, Text, useToast } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Icon,
+  Image,
+  Text,
+  useColorMode,
+  useColorModeValue,
+  useToast,
+} from '@chakra-ui/react';
 import TextArea from '@components/channel/TextArea';
 import UploadPlaylistIcon from '@icons/UploadPlaylistIcon';
 
@@ -11,6 +20,7 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
   const [nameValue, setNameValue] = useState('');
   const toast = useToast();
   const [createPlaylist, createPlaylistStatus] = useCreatePlaylistMutation();
+  const {colorMode, toggleColorMode} = useColorMode();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) {
       return;
@@ -27,16 +37,16 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
   const coverRef = useRef<HTMLInputElement | any>();
 
   const onSubmit = async () => {
-    if (!coverRef.current.files[0]) {
-      toast({
-        title: 'Please upload a thumbNail',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
-      return;
-    }
+    // if (!coverRef.current.files[0]) {
+    //   toast({
+    //     title: 'Please upload a thumbNail',
+    //     status: 'error',
+    //     duration: 3000,
+    //     isClosable: true,
+    //     position: 'top-right',
+    //   });
+    //   return;
+    // }
     if (!nameValue) {
       toast({
         title: 'Please input a Playlist Name',
@@ -123,7 +133,9 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
             <Box
               width='100%'
               height='341px'
-              background='clique.blackGrey'
+              background={
+                colorMode === 'dark' ? 'clique.blackGrey' : 'clique.whiteGrey'
+              }
               borderRadius='10px'
               position='relative'
             >
@@ -135,7 +147,7 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
                 onClick={handleChooseProfile}
               >
                 <Box cursor={'pointer'}>
-                  <Icon as={UploadPlaylistIcon} />
+                  <Icon as={UploadPlaylistIcon} width='40px' height='40px' />
                 </Box>
               </Box>
             </Box>
@@ -158,7 +170,9 @@ const NewPlaylist = ({onClose}: {onClose: any}) => {
               placeholder='Playlist name'
               width='100%'
               height='195px'
-              background='#232323'
+              background={
+                colorMode === 'dark' ? 'clique.blackGrey' : 'clique.whiteGrey'
+              }
               borderRadius='10px'
               paddingLeft='1.4rem'
               paddingTop='0.9rem'

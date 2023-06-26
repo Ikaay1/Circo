@@ -482,7 +482,7 @@ function BeneficiaryModal({
                   autoComplete='off'
                 />
               </Box>
-              {userProfile.social === 'NULL' && (
+              {userProfile?.social === 'NULL' && (
                 <Box
                   bg={
                     colorMode === 'dark'

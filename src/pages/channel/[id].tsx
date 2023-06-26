@@ -65,13 +65,13 @@ const SubscribeChannel = () => {
     if (!userLoading && userData) {
       const buttonText = userData?.data?.subscribers?.find(
         (each: Subcribers) => {
-          return each._id === userProfile._id;
+          return each._id === userProfile?._id;
         },
       );
       if (buttonText) {
         setState('Subscribed');
         const dateText = userData?.data?.subscribeTime?.find(
-          (one: any) => one.id === userProfile._id,
+          (one: any) => one.id === userProfile?._id,
         );
         // setDate(moment(dateText?.expiresIn).fromNow());
         const difference =

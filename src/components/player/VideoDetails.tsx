@@ -55,7 +55,7 @@ function VideoDetails({
                 src={video?.channel_id?.photo}
                 cursor='pointer'
                 onClick={
-                  video.uploader_id._id === userProfile._id
+                  video.uploader_id._id === userProfile?._id
                     ? () => router.push('/myChannel/content')
                     : () => router.push(`/channel/${video?.channel_id?.name}`)
                 }
@@ -73,7 +73,7 @@ function VideoDetails({
               lineHeight={'1.2'}
               cursor='pointer'
               onClick={
-                video.uploader_id._id === userProfile._id
+                video.uploader_id._id === userProfile?._id
                   ? () => router.push('/myChannel/content')
                   : () => router.push(`/channel/${video?.channel_id?.name}`)
               }
@@ -105,27 +105,29 @@ function VideoDetails({
             </Text>
           </Box>
         </Flex>
-        {video.uploader_id._id !== userProfile._id && (
+        {video.uploader_id._id !== userProfile?._id && (
           <Box
             p='.6rem 1.2rem'
             rounded='full'
             fontWeight={400}
             bg={
-              subscribers.includes(userProfile._id)
+              subscribers.includes(userProfile?._id)
                 ? 'clique.grey'
                 : 'clique.base'
             }
             color='clique.white'
             onClick={
-              !subscribers.includes(userProfile._id)
+              !subscribers.includes(userProfile?._id)
                 ? () => router.push(`/channel/${video?.channel_id?.name}`)
                 : () => {}
             }
             cursor={
-              !subscribers.includes(userProfile._id) ? 'pointer' : 'default'
+              !subscribers.includes(userProfile?._id) ? 'pointer' : 'default'
             }
           >
-            {subscribers.includes(userProfile._id) ? 'Subscribed' : 'Subscribe'}
+            {subscribers.includes(userProfile?._id)
+              ? 'Subscribed'
+              : 'Subscribe'}
           </Box>
         )}
       </Flex>
