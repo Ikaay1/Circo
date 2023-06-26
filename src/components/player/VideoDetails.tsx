@@ -29,15 +29,12 @@ function VideoDetails({
   video: contentData;
   subscribers: string[];
 }) {
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
   const router = useRouter();
-
-  const { token } = useAppSelector((store) => store.app.userReducer);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const blackAndWhite = Color().blackAndWhite2;
-  console.log(video);
+
   return (
     <Box mt="20px">
       <Text
@@ -68,14 +65,6 @@ function VideoDetails({
                 }
                 src={video?.channel_id?.photo}
                 cursor="pointer"
-                onClick={() => {
-                  if (token) {
-                    video.uploader_id._id === userProfile._id
-                      ? () => router.push("/myChannel/content")
-                      : () =>
-                          router.push(`/channel/${video?.channel_id?.name}`);
-                  }
-                }}
               />
             </WrapItem>
           </Flex>
@@ -89,13 +78,7 @@ function VideoDetails({
               fontSize="subHead"
               lineHeight={"1.2"}
               cursor="pointer"
-              onClick={() => {
-                if (token) {
-                  video.uploader_id._id === userProfile._id
-                    ? () => router.push("/myChannel/content")
-                    : () => router.push(`/channel/${video?.channel_id?.name}`);
-                }
-              }}
+              onClick={() => {}}
             >
               {`${
                 video.uploader_id.firstName[0].toUpperCase() +
@@ -124,42 +107,28 @@ function VideoDetails({
             </Text>
           </Box>
         </Flex>
-        {token && video.uploader_id._id !== userProfile._id && (
-          <Flex alignItems={"center"}>
-            <Box
-              mr="1rem"
-              cursor="pointer"
-              onClick={() => {
-                onOpen();
-              }}
-            >
-              <Icon as={ShareIcon} color={blackAndWhite} />
-            </Box>{" "}
-            <Box
-              p=".6rem 1.2rem"
-              rounded="full"
-              fontWeight={400}
-              bg={
-                subscribers.includes(userProfile._id)
-                  ? "clique.grey"
-                  : "clique.base"
-              }
-              color="clique.white"
-              onClick={
-                !subscribers.includes(userProfile._id)
-                  ? () => router.push(`/channel/${video?.channel_id?.name}`)
-                  : () => {}
-              }
-              cursor={
-                !subscribers.includes(userProfile._id) ? "pointer" : "default"
-              }
-            >
-              {subscribers.includes(userProfile._id)
-                ? "Subscribed"
-                : "Subscribe"}
-            </Box>
-          </Flex>
-        )}
+
+        <Flex alignItems={"center"}>
+          <Box
+            mr="1rem"
+            cursor="pointer"
+            onClick={() => {
+              onOpen();
+            }}
+          >
+            <Icon as={ShareIcon} color={blackAndWhite} />
+          </Box>{" "}
+          <Box
+            p=".6rem 1.2rem"
+            rounded="full"
+            fontWeight={400}
+            bg={"clique.base"}
+            color="clique.white"
+            cursor={"default"}
+          >
+            Subscribe
+          </Box>
+        </Flex>
       </Flex>
       <Modal onClose={onClose} isOpen={isOpen}>
         <ModalOverlay />

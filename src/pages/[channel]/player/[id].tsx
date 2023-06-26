@@ -16,14 +16,14 @@ import VideoDetails from "@components/player/VideoDetails";
 import VideoPlayer from "@components/player/VideoPlayer";
 import { decrypt, scrollBarStyle3 } from "@constants/utils";
 import OpenLayout from "layouts/OpenLayout";
+import axios from "axios";
 
-function Index() {
+function Index({ data }: { data: any }) {
   const toast = useToast();
   const router = useRouter();
   const { id } = router.query;
-  const { data, isLoading, refetch, error } = useGetContentQuery<any>(id);
+  // const { data, isLoading, refetch, error } = useGetContentQuery<any>(id);
   const [url, setUrl] = React.useState("");
-  const { token } = useAppSelector((store) => store.app.userReducer);
 
   useEffect(() => {
     async function display(videoStream: string) {
@@ -34,31 +34,16 @@ function Index() {
     }
   }, [data?.data?.preference?.video?.video]);
 
-  useEffect(() => {
-    if (!isLoading && !data?.data?.preference) {
-      toast({
-        title: "Error",
-        description: error?.data?.message || "Something went wrong",
-        status: "error",
-        position: "top",
-        duration: 5000,
-        isClosable: true,
-      });
-      router.push("/");
-    }
-  }, [isLoading]);
-
   return (
     <>
-      {isLoading ||
-        !data?.data ||
+      {!data?.data ||
         (!url && (
           <Box h="90vh" w="100%">
             <CliqueLoader />
           </Box>
         ))}
 
-      {!isLoading && data?.data && url && (
+      {data?.data && url && (
         <OpenLayout>
           <Box display={{ lg: "flex" }}>
             <Box
@@ -98,4 +83,15 @@ function Index() {
 
 export default Index;
 
-export { getServerSideProps } from "../../../components/widgets/Chakara";
+export async function getServerSideProps(context: any) {
+  const { id } = context.query;
+  const { data } = await axios.get(
+    `https://api.circo.africa/content/upload-video/${id}`
+  );
+
+  return {
+    props: {
+      data,
+    },
+  };
+}

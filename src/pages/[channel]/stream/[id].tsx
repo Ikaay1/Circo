@@ -9,8 +9,9 @@ import VideoDetails from "@components/stream/VideoDetails";
 import { socket } from "@constants/socket";
 import OpenLayout from "layouts/OpenLayout";
 import { useAppSelector } from "redux/app/hooks";
+import axios from "axios";
 
-function Index() {
+function Index({ data }: { data: any }) {
   const router = useRouter();
   const { id } = router.query;
   const [livestreamId, setLivestreamId] = useState<string | undefined>(
@@ -21,8 +22,6 @@ function Index() {
       setLivestreamId(id as string);
     }
   }, [id]);
-  const { data, isFetching, isLoading, refetch, isError, error } =
-    useGetStreamQuery(livestreamId);
 
   const toast = useToast();
   const { token } = useAppSelector((store) => store.app.userReducer);
@@ -31,58 +30,6 @@ function Index() {
     router.push(`/stream/${livestreamId}`);
   }
 
-  useEffect(() => {
-    const errorDetails: any = error;
-    if (errorDetails?.data?.status === "failed") {
-      toast({
-        title: "Error",
-        description: errorDetails?.data?.message,
-        status: "error",
-        position: "top",
-        duration: 5000,
-        isClosable: true,
-      });
-    }
-
-    if (data?.data?.stream && data?.data?.stream?.status !== "ongoing") {
-      router.push(`/liveevents`);
-
-      console.log(data);
-      toast({
-        title: "Stream " + data?.data?.stream?.status,
-        status: "info",
-        position: "top",
-        duration: 5000,
-        isClosable: true,
-      });
-
-      return;
-    }
-  }, [data, error]);
-
-  useEffect(() => {
-    socket.on("newviewer", (data: any) => {
-      refetch();
-    });
-
-    socket.on("streamended", (data: any) => {
-      if (data?.eventId !== livestreamId) return;
-      toast({
-        title: "Stream Ended",
-        status: "info",
-        duration: 5000,
-        isClosable: false,
-        description: "You will be redirected to the home page now",
-        position: "top-right",
-      });
-      window.location.href = "/liveevents";
-    });
-
-    return () => {
-      socket.off("newviewer");
-      socket.off("streamended");
-    };
-  }, [socket]);
   return (
     <OpenLayout>
       <Flex
@@ -113,30 +60,25 @@ function Index() {
             },
           }}
         >
-          {isLoading ? (
-            <Flex w="100%" justify={"space-between"}>
-              <Skeleton
-                h={{ base: "400px", lg: "580px" }}
-                rounded="20px"
-                w="100%"
-              />
-            </Flex>
-          ) : (
-            <StreamPlayer stream={data?.data?.stream} />
-          )}
-
-          {isLoading ? (
-            <Skeleton h="40px" mt="10px" rounded="20px" w="100%" />
-          ) : (
-            <VideoDetails stream={data?.data?.stream} />
-          )}
+          <StreamPlayer stream={data?.data?.stream} />
+          <VideoDetails stream={data?.data?.stream} />
         </Box>
 
-        <CommentSection />
+        {/* <CommentSection /> */}
       </Flex>
     </OpenLayout>
   );
 }
 
 export default Index;
-export { getServerSideProps } from "../../../components/widgets/Chakara";
+
+export async function getServerSideProps(context: any) {
+  const { id } = context.query;
+  const { data } = await axios.get(`https://api.circo.africa/livestream/${id}`);
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
