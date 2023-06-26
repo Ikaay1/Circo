@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { BsCameraVideoFill, BsCameraVideo } from "react-icons/bs";
 
 function EventCard({ onOpen, event }: { onOpen: () => void; event: any }) {
@@ -41,10 +41,42 @@ function EventCard({ onOpen, event }: { onOpen: () => void; event: any }) {
         roundedBottom={"10px"}
         backdropFilter=" blur(10px)"
         px="20px"
-        py="10px"
+        pb="10px"
         w="full"
-        h={"55px"}
+        // h={"55px"}
       >
+        <Flex alignItems={"center"} mb="3px" mt="10px">
+          <Flex
+            flexShrink={0}
+            onClick={() => {}}
+            cursor="pointer"
+            alignItems={"center"}
+            justifyContent="center"
+            p="2px"
+            mr="5px"
+            rounded="full"
+            background="linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)"
+          >
+            <Avatar
+              p="0"
+              size="xs"
+              w={"20px"}
+              h={"20px"}
+              name={event?.streamerId?.name}
+              src={event?.streamerId?.photo}
+            />
+          </Flex>
+          <Text
+            noOfLines={1}
+            color={"clique.white"}
+            fontFamily={"Poppins"}
+            fontWeight={400}
+            fontSize={"12px"}
+            lineHeight={"1.5"}
+          >
+            {event?.streamerId?.name}
+          </Text>
+        </Flex>
         <Text
           noOfLines={1}
           color={"clique.white"}

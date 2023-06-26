@@ -8,10 +8,10 @@ import devtools from "devtools-detect";
 import Layout from "layouts/Layout";
 import Router, { useRouter } from "next/router";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+import { PersistGate as PersistGateClient } from "redux-persist/integration/react";
 
 import {
   Button,
@@ -28,11 +28,17 @@ import { persistor, store } from "../redux/app/store";
 import type { AppProps } from "next/app";
 const NProgress = require("nprogress");
 
+class PersistGateServer extends React.Component {
+  render() {
+    return (this.props as any).children;
+  }
+}
 function MyApp({ Component, pageProps }: any) {
-  const [showChild, setShowChild] = useState(false);
-  const toast = useToast();
-  const router = useRouter();
-  // const consoleOpen = useConsoleOpen();
+  let runtime = process.env.RUNTIME;
+  let PersistGate: any = PersistGateServer;
+  if (runtime === "browser") {
+    PersistGate = PersistGateClient;
+  }
 
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
@@ -47,22 +53,6 @@ function MyApp({ Component, pageProps }: any) {
       NProgress.done();
     });
   }, [Router]);
-
-  useEffect(() => {
-    setShowChild(true);
-  }, []);
-
-  useEffect(() => {
-    console.log("Is DevTools open:", devtools.isOpen);
-  }, [devtools.isOpen]);
-
-  if (!showChild) {
-    return null;
-  }
-
-  if (typeof window === "undefined") {
-    return <></>;
-  }
 
   return (
     <>

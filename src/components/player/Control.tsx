@@ -63,7 +63,7 @@ function Control({
   };
 
   const {userProfile} = useAppSelector((store) => store.app.userReducer);
-
+  const {token} = useAppSelector((store) => store.app.userReducer);
   const qualityFunc = (time) => {
     if (playerRef.current && playerRef.current.seek) {
       setTimeout(() => {
@@ -227,6 +227,9 @@ function Control({
                   as={PrevIcon}
                   color={prevVideoIndex !== null ? 'clique.white' : 'gray.500'}
                   onClick={() => {
+                    if (!token) {
+                      return;
+                    }
                     if (prevVideoIndex !== null) {
                       router.push(
                         `/player/${videoIdsList[prevVideoIndex]?._id}/${video.uploader_id._id}`,
@@ -334,6 +337,9 @@ function Control({
                   as={NextIcon}
                   color={nextVideoIndex !== null ? 'clique.white' : 'gray.500'}
                   onClick={() => {
+                    if (!token) {
+                      return;
+                    }
                     if (nextVideoIndex !== null) {
                       router.push(
                         `/player/${videoIdsList[nextVideoIndex]?._id}/${video.uploader_id._id}`,
@@ -347,13 +353,15 @@ function Control({
         </GridItem>
         <GridItem colSpan={2} justifySelf='end' h='70px' alignItems='center'>
           <Flex alignItems='center' h='100%'>
-            {video.uploader_id._id !== userProfile?._id && !isFullScreen && (
-              <GiftModal
-                isFullScreen={isFullScreen}
-                video={video}
-                Bref={Bref}
-              />
-            )}
+            {token &&
+              video.uploader_id._id !== userProfile._id &&
+              !isFullScreen && (
+                <GiftModal
+                  isFullScreen={isFullScreen}
+                  video={video}
+                  Bref={Bref}
+                />
+              )}
             {!isFullScreen && (
               <Flex mx={{base: '10px', lg: '30px'}}>
                 <Tooltip

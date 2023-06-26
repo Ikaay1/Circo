@@ -6,7 +6,7 @@ import {
   useChangePasswordMutation,
   useUpdateProfileMutation,
 } from 'redux/services/user.service';
-import {setUser} from 'redux/slices/authSlice';
+import {setPhoto, setUser} from 'redux/slices/authSlice';
 import {changePasswordSchema} from 'schemas/changePassword.schema';
 import {editProfileSchema} from 'schemas/editProfile.schema';
 
@@ -91,22 +91,29 @@ const EditProfile = () => {
     profileRef.current.files[0] &&
       myFormData.append('photo', profileRef.current.files[0]);
     const res: any = await updateProfile(myFormData);
-    console.log('profileUpdate', res);
+
     if ('data' in res) {
       dispatch(
         setUser({
           payload: res?.data?.data?.user,
         }),
       );
-      toast({
-        title: 'Profile successfully updated',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      dispatch(
+        setPhoto({
+          payload: res?.data?.data?.user,
+        }),
+      );
+
+      console.log(res?.data?.data?.user),
+        toast({
+          title: 'Profile successfully updated',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
       setSubmitting(false);
-      router.push('/profile/content');
+      // router.push("/profile/content");
     } else if (res.error) {
       toast({
         title: res.error.data.message,

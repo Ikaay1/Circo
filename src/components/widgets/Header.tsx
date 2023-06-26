@@ -80,7 +80,7 @@ function Header({upload, setShowSuggestions, showSuggestions}: Props) {
         dispatch(logout());
         router.push('/login');
       }
-      if (data?.data?.active !== undefined && !data?.data?.active) {
+      if (data?.data?.requestedDeletion) {
         toast({
           title: 'Error',
           description:

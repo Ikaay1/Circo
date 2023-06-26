@@ -5,6 +5,7 @@ import { useAppSelector } from "redux/app/hooks";
 import { usePayForLiveMutation } from "redux/services/livestream/live.service";
 
 import {
+  Avatar,
   Box,
   Button,
   Flex,
@@ -95,8 +96,39 @@ function EventModal({ event }: any) {
               >
                 {moment(event?.eventId?.schedule).format("MMM Do YYYY h:mm a")}
               </Text>
+
+              <Flex alignItems={"center"} mb="3px" mt="10px">
+                <Flex
+                  flexShrink={0}
+                  onClick={() => {}}
+                  cursor="pointer"
+                  alignItems={"center"}
+                  justifyContent="center"
+                  p="2px"
+                  mr="10px"
+                  rounded="full"
+                  background="linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)"
+                >
+                  <Avatar
+                    p="0"
+                    size="xs"
+                    name={event?.streamerId?.name}
+                    src={event?.streamerId?.photo}
+                  />
+                </Flex>
+                <Text
+                  noOfLines={1}
+                  color={"clique.white"}
+                  fontFamily={"Poppins"}
+                  fontWeight={400}
+                  fontSize={"smSubHead"}
+                  lineHeight={"1.5"}
+                >
+                  {event?.streamerId?.name}
+                </Text>
+              </Flex>
               <Text
-                mt="20px"
+                mt="10px"
                 color={"clique.white"}
                 fontFamily={"Poppins"}
                 fontWeight={400}
@@ -109,7 +141,6 @@ function EventModal({ event }: any) {
                 </Text>
                 {event?.eventId?.description}
               </Text>
-
               <Flex
                 mt="20px"
                 alignItems={"center"}
