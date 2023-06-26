@@ -45,14 +45,6 @@ function Index({ data }: { data: any }) {
   return (
     <>
       <OpenLayout>
-        <noscript>
-          <VideoDetails
-            video={data?.data?.preference?.video}
-            subscribers={
-              data?.data?.preference?.video?.uploader_id?.subscribers
-            }
-          />
-        </noscript>
         <Box display={{ lg: "flex" }}>
           <Box
             maxH={"90vh"}
@@ -64,13 +56,29 @@ function Index({ data }: { data: any }) {
             overflowX={"hidden"}
             sx={scrollBarStyle3}
           >
-            {javascriptEnabled && data?.data?.preference?.video?.isFree && (
-              <VideoPlayer
+            <noscript>
+              <VideoDetails
                 video={data?.data?.preference?.video}
-                videoIdsList={data?.data?.preference?.allVideos}
-                url={url}
-                setUrl={setUrl}
+                subscribers={
+                  data?.data?.preference?.video?.uploader_id?.subscribers
+                }
               />
+            </noscript>
+            {javascriptEnabled && data?.data?.preference?.video?.isFree && (
+              <>
+                <VideoPlayer
+                  video={data?.data?.preference?.video}
+                  videoIdsList={data?.data?.preference?.allVideos}
+                  url={url}
+                  setUrl={setUrl}
+                />
+                <VideoDetails
+                  video={data?.data?.preference?.video}
+                  subscribers={
+                    data?.data?.preference?.video?.uploader_id?.subscribers
+                  }
+                />
+              </>
             )}
           </Box>
 
