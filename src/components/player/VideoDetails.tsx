@@ -37,7 +37,7 @@ function VideoDetails({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const blackAndWhite = Color().blackAndWhite2;
-  console.log(video);
+
   return (
     <Box mt="20px">
       <Text

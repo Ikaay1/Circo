@@ -45,38 +45,6 @@ import MobileMenu from "./mobileMenu/MobileMenu";
 import SearchSuggestion from "./SearchSuggestion";
 
 function OpenHeader() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const profile = useAppSelector((store) => store.app.userReducer.channel);
-  const { userProfile } = useAppSelector((store) => store.app.userReducer);
-
-  const [searchWidth, setSearchWidth] = useState({
-    base: "150px",
-    lg: "300px",
-  });
-  const router = useRouter();
-  const [search, setSearch] = useState("");
-  const dispatch = useAppDispatch();
-  const { data } = useGetUserQuery(userProfile?._id);
-  const toast = useToast();
-
-  useEffect(() => {
-    if (data) {
-      if (data?.data?.suspended) {
-        toast({
-          title: "Error",
-          description: "Your account has been suspended for two weeks",
-          status: "error",
-          position: "top-right",
-          duration: 3000,
-          isClosable: true,
-        });
-        googleLogout();
-        dispatch(logout());
-        router.push("/login");
-      }
-    }
-  }, [data]);
-
   const [showMenu, setShowMenu] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -96,7 +64,7 @@ function OpenHeader() {
       <Box
         w={{ base: "70px", lg: "200px" }}
         cursor={"pointer"}
-        onClick={() => router.push("/home")}
+        // onClick={() => router.push("/home")}
         maxW={{ base: "70px", lg: "200px" }}
         minW={{ base: "70px", lg: "200px" }}
       >
@@ -122,7 +90,7 @@ function OpenHeader() {
           fontFamily={"Poppins"}
           size={"sm"}
           px="30px"
-          onClick={() => router.push("/login")}
+          // onClick={() => router.push("/login")}
         >
           Login
         </Button>
@@ -135,7 +103,7 @@ function OpenHeader() {
           fontFamily={"Poppins"}
           px="20px"
           size={"sm"}
-          onClick={() => router.push("/signup")}
+          // onClick={() => router.push("/signup")}
         >
           Signup
         </Button>
