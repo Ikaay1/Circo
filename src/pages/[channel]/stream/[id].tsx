@@ -30,6 +30,14 @@ function Index({ data }: { data: any }) {
     router.push(`/stream/${livestreamId}`);
   }
 
+  const [javascriptEnabled, setJavascriptEnabled] = React.useState(false);
+
+  //check if javascript is enabled
+
+  useEffect(() => {
+    setJavascriptEnabled(true);
+  }, []);
+
   return (
     <OpenLayout>
       <Flex

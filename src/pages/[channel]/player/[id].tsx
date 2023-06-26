@@ -9,7 +9,7 @@ import {
 } from "redux/services/content.service";
 import { useGetUserQuery } from "redux/services/user.service";
 
-import { Box, useToast } from "@chakra-ui/react";
+import { Box, Text, useToast } from "@chakra-ui/react";
 import CliqueLoader from "@components/home/CliqueLoader";
 import CommentSection from "@components/player/CommentSection";
 import VideoDetails from "@components/player/VideoDetails";
@@ -34,49 +34,49 @@ function Index({ data }: { data: any }) {
     }
   }, [data?.data?.preference?.video?.video]);
 
+  const [javascriptEnabled, setJavascriptEnabled] = React.useState(false);
+
+  //check if javascript is enabled
+
+  useEffect(() => {
+    setJavascriptEnabled(true);
+  }, []);
+
   return (
     <>
-      {!data?.data ||
-        (!url && (
-          <Box h="90vh" w="100%">
-            <CliqueLoader />
-          </Box>
-        ))}
-
-      {data?.data && url && (
-        <OpenLayout>
-          <Box display={{ lg: "flex" }}>
-            <Box
-              maxH={"90vh"}
-              pb={{ base: "30px", lg: "50px" }}
-              px={{ base: "10px", lg: "30px" }}
-              maxW={{ base: "100%", lg: "calc(100vw - 400px)" }}
-              w={{ base: "100%", lg: "calc(100vw - 400px)" }}
-              overflowY={"scroll"}
-              overflowX={"hidden"}
-              sx={scrollBarStyle3}
-            >
-              {data?.data?.preference?.video?.isFree && (
-                <VideoPlayer
-                  video={data?.data?.preference?.video}
-                  videoIdsList={data?.data?.preference?.allVideos}
-                  url={url}
-                  setUrl={setUrl}
-                />
-              )}
-
-              <VideoDetails
+      <OpenLayout>
+        <noscript>
+          <VideoDetails
+            video={data?.data?.preference?.video}
+            subscribers={
+              data?.data?.preference?.video?.uploader_id?.subscribers
+            }
+          />
+        </noscript>
+        <Box display={{ lg: "flex" }}>
+          <Box
+            maxH={"90vh"}
+            pb={{ base: "30px", lg: "50px" }}
+            px={{ base: "10px", lg: "30px" }}
+            maxW={{ base: "100%", lg: "calc(100vw - 400px)" }}
+            w={{ base: "100%", lg: "calc(100vw - 400px)" }}
+            overflowY={"scroll"}
+            overflowX={"hidden"}
+            sx={scrollBarStyle3}
+          >
+            {javascriptEnabled && data?.data?.preference?.video?.isFree && (
+              <VideoPlayer
                 video={data?.data?.preference?.video}
-                subscribers={
-                  data?.data?.preference?.video?.uploader_id?.subscribers
-                }
+                videoIdsList={data?.data?.preference?.allVideos}
+                url={url}
+                setUrl={setUrl}
               />
-            </Box>
-
-            <CommentSection id={id} />
+            )}
           </Box>
-        </OpenLayout>
-      )}
+
+          <CommentSection id={id} />
+        </Box>
+      </OpenLayout>
     </>
   );
 }
