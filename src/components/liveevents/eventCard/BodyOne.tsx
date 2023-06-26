@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAppSelector } from "redux/app/hooks";
 import { usePayForLiveMutation } from "redux/services/livestream/live.service";
 
-import { Button, Text, useToast } from "@chakra-ui/react";
+import { Avatar, Button, Flex, Text, useToast } from "@chakra-ui/react";
 
 const NProgress = require("nprogress");
 
@@ -46,8 +46,39 @@ function BodyOne({
             : event?.eventId?.schedule
         ).format("MMM Do YYYY h:mm a")}
       </Text>
+
+      <Flex alignItems={"center"} mt="10px">
+        <Flex
+          flexShrink={0}
+          onClick={() => {}}
+          cursor="pointer"
+          alignItems={"center"}
+          justifyContent="center"
+          p="4px"
+          mr="10px"
+          rounded="full"
+          background="linear-gradient(144.09deg, #892CDC 12.14%, #6E93F1 89.06%)"
+        >
+          <Avatar
+            p="0"
+            size="sm"
+            name={event?.streamerId?.name}
+            src={event?.streamerId?.photo}
+          />
+        </Flex>
+        <Text
+          noOfLines={1}
+          color={"clique.white"}
+          fontFamily={"Poppins"}
+          fontWeight={400}
+          fontSize={"smSubHead"}
+          lineHeight={"1.5"}
+        >
+          {event?.streamerId?.name}
+        </Text>
+      </Flex>
       <Text
-        mt="20px"
+        mt="10px"
         color={"clique.white"}
         fontFamily={"Poppins"}
         fontWeight={400}
