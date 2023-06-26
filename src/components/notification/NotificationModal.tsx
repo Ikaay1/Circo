@@ -1,6 +1,6 @@
 import useGetNotifications from "hooks/useGetNotifications";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { GoSettings } from "react-icons/go";
+// import { GoSettings } from "react-icons/go";
 import { MdOutlineNotificationsNone } from "react-icons/md";
 import {
   useGetNotificationQuery,
